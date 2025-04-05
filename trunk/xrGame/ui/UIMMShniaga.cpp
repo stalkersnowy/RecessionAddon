@@ -21,8 +21,6 @@ CUIMMShniaga::CUIMMShniaga(){
 	m_view				= xr_new<CUIScrollView>();	AttachChild(m_view);
 	m_shniaga			= xr_new<CUIStatic>();	AttachChild(m_shniaga);
 	m_magnifier			= xr_new<CUIStatic>();	m_shniaga->AttachChild(m_magnifier);	m_magnifier->SetPPMode();
-	m_backs_wheel[0]	= xr_new<CUIStatic>();	m_shniaga->AttachChild(m_backs_wheel[0]);
-	m_backs_wheel[1]	= xr_new<CUIStatic>();	m_shniaga->AttachChild(m_backs_wheel[1]);
 	m_anims[0]			= xr_new<CUIStatic>();	m_shniaga->AttachChild(m_anims[0]);
 	m_anims[1]			= xr_new<CUIStatic>();	m_shniaga->AttachChild(m_anims[1]);
 	m_gratings[0]		= xr_new<CUIStatic>();	m_shniaga->AttachChild(m_gratings[0]);
@@ -71,10 +69,6 @@ void CUIMMShniaga::Init(CUIXml& xml_doc, LPCSTR path)
 	CUIXmlInit::InitStatic(xml_doc, _path,0,m_gratings[0]);
 	strconcat				(sizeof(_path),_path,path,":shniaga:right_grating");
 	CUIXmlInit::InitStatic(xml_doc, _path,0,m_gratings[1]);
-	strconcat				(sizeof(_path),_path,path,":shniaga:left_back_wheel");
-	CUIXmlInit::InitStatic(xml_doc, _path,0, m_backs_wheel[0]);
-	strconcat				(sizeof(_path),_path,path,":shniaga:right_back_wheel");
-	CUIXmlInit::InitStatic(xml_doc, _path,0, m_backs_wheel[1]);
 	strconcat				(sizeof(_path),_path,path,":shniaga:left_anim");
 	CUIXmlInit::InitStatic(xml_doc, _path,0,m_anims[0]);
 	strconcat				(sizeof(_path),_path,path,":shniaga:right_anim");

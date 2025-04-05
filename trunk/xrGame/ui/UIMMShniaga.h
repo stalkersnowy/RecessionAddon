@@ -51,7 +51,6 @@ protected:
 	CUIStatic*			m_magnifier;
 	CUIStatic*			m_anims[2];
 	CUIStatic*			m_gratings[2];
-	CUIStatic*			m_backs_wheel[2];
 	CUIScrollView*		m_view;
 
 	u32					m_start_time;

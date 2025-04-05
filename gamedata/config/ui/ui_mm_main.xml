@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<window>
+<w>
 	<background x="0" y="0" width="1024" height="768">
 		<texture>ui_menu_backgraund</texture>
 	</background>
 	
-	<back_movie x="148" y="0" width="876" height="400">
+	<back_movie x="160" y="0" width="876" height="400">
 		<texture x="0" y="0" width="876" height="400">ui\ui_mm_main_back_crop</texture>
 	</back_movie>
 	
@@ -12,37 +11,32 @@
 		<texture>ui\ui_mm_fire</texture>
 	</fire_movie>
 
-	<shniaga_wnd x="590" y="417" width="392" height="280">
+	<shniaga_wnd x="590" y="419" width="392" height="280">
 		<buttons_region	x="110" y="0" width="164" height="280" always_show_scroll="false"/>
 		
-		<shniaga x="9" y="2" width="240" height="73" stretch="1">
-			<texture>ui_menu_move</texture>
-			<texture_offset x="70" y="0"/>
-			<magnifire x="66" y="22" width="248" height="36" stretch="1">
+		<shniaga x="9" y="0" width="392" height="73">
+			<texture>ui_menu_move</texture>			
+			<magnifire x="76" y="22" width="232" height="36" stretch="1">
 				<texture>ui\ui_magnifier</texture>
         <y_offset>0</y_offset>
 			</magnifire>
 			
-			<left_back_wheel x="14" y="0" width="57" height="73" stretch="1">
-				<texture>ui_menu_move_l</texture>
-			</left_back_wheel>
-			<right_back_wheel x="310" y="0" width="57" height="73" stretch="1">
-				<texture>ui_menu_move_r</texture>
-			</right_back_wheel>
 			<left_anim x="43" y="37" width="55" height="55" stretch="1" heading="1" alignment="c">
 				<texture>ui_menu_bigroll_l</texture>
 			</left_anim>			
-			<right_anim x="338" y="37" width="55" height="55" stretch="1" heading="1" alignment="c">
+			<right_anim x="340" y="37" width="55" height="55" stretch="1" heading="1" alignment="c">
 				<texture>ui_menu_bigroll_r</texture>
 			</right_anim>
-			<left_grating x="0" y="4" width="45" height="69" stretch="1">
+			<left_grating x="0" y="4" width="55" height="67">
 				<texture>ui_menu_grating_l</texture>
 			</left_grating>
-			<right_grating x="337" y="4" width="45" height="69" stretch="1">
+			<right_grating x="337" y="4" width="55" height="67">
 				<texture>ui_menu_grating_r</texture>
 			</right_grating>
 		</shniaga>		
 	</shniaga_wnd>
+
+  <button h="30"/>
 	
 	<menu_main btn_height="30" font="graffiti22" a="255" r="0" g="0" b="0">
 		<btn name="btn_new_game"	caption="ui_mm_newgame" />
@@ -100,6 +94,15 @@
 		<btn name="btn_quit"		caption="ui_mm_quit2windows" />
 	</menu_main_mm>
 	
+	<menu_bonus btn_height="30" font="graffiti22" a="255" r="0" g="0" b="0">
+		<btn name="btn_arena"		caption="arena_alt" />
+		<btn name="btn_generator"	caption="generator" />
+		<btn name="btn_katacomb"	caption="katacomb" />
+		<btn name="btn_jupiter"		caption="jupiter_short" />
+		<btn name="btn_bench"		caption="benchmark" />
+		<btn name="btn_new_back"	caption="ui_mm_back" />
+	</menu_bonus>
+	
 	<menu_sound random="0" >
 		<!--whell_sound>car\apc_run</whell_sound>
 		<whell_click>car\test_car_stop</whell_click-->
@@ -116,4 +119,4 @@
 		<text align="l" font="graffiti19" r="135" g="123" b="116" complex_mode="0"/>
 	</static_version>
 	
-</window>
+</w>
