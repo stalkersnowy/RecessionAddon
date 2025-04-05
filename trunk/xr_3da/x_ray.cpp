@@ -610,6 +610,11 @@ int APIENTRY WinMain_impl(HINSTANCE hInstance,
 
 	// Title window
 	logoWindow					= CreateDialog(GetModuleHandle(NULL),	MAKEINTRESOURCE(IDD_STARTUP), 0, logDlgProc );
+	
+	HWND logoPicture			= GetDlgItem(logoWindow, IDC_STATIC_LOGO);
+	RECT logoRect;
+	GetWindowRect(logoPicture, &logoRect);
+
 	SetWindowPos				(
 		logoWindow,
 #ifndef DEBUG
@@ -619,9 +624,9 @@ int APIENTRY WinMain_impl(HINSTANCE hInstance,
 #endif // NDEBUG
 		0,
 		0,
-		0,
-		0,
-		SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW
+		logoRect.right - logoRect.left,
+		logoRect.bottom - logoRect.top,
+		SWP_NOMOVE | SWP_SHOWWINDOW// | SWP_NOSIZE
 	);
 
 	// AVI
