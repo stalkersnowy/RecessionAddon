@@ -327,7 +327,7 @@ void CMapLocation::UpdateSpot(CUICustomMap* map, CMapSpot* sp )
 		//update spot position
 		Fvector2 position = Position();
 
-		m_position_on_map =	map->ConvertRealToLocal(position);
+		m_position_on_map =	map->ConvertRealToLocal(position, (map->Heading()) ? false : true);
 
 		sp->SetWndPos(m_position_on_map);
 		Frect wnd_rect = sp->GetWndRect();
@@ -346,6 +346,13 @@ void CMapLocation::UpdateSpot(CUICustomMap* map, CMapSpot* sp )
 			sp->SetClipRect( clip_rect );
 			map->AttachChild(sp);
 		}
+		if (map->Heading())
+		{
+			Fvector2 tmp = m_position_on_map;
+			m_position_on_map = map->ConvertRealToLocal(position, true);
+			sp->SetWndPos(m_position_on_map);
+			m_position_on_map = tmp;
+		}
 		if( GameID() == GAME_SINGLE && GetSpotPointer(sp) ){
 			CMapSpot* s = GetSpotBorder(sp);
 			if(s){
@@ -354,7 +361,7 @@ void CMapLocation::UpdateSpot(CUICustomMap* map, CMapSpot* sp )
 			}
 		}
 		if( GetSpotPointer(sp) && map->NeedShowPointer(wnd_rect)){
-			UpdateSpotPointer( map, GetSpotPointer(sp) );
+			UpdateSpotPointer( map, GetSpotPointer(sp), position);
 		}
 	}else
 	if(Level().name()==map->MapName() && GetSpotPointer(sp)){
@@ -424,8 +431,8 @@ void CMapLocation::UpdateSpot(CUICustomMap* map, CMapSpot* sp )
 			if(bDone){
 				Fvector2 position;
 				position.set			((*lit)->Position().x, (*lit)->Position().z);
-				m_position_on_map		= map->ConvertRealToLocal(position);
-				UpdateSpotPointer		(map, GetSpotPointer(sp));
+				m_position_on_map		= map->ConvertRealToLocal(position, false);
+				UpdateSpotPointer		(map, GetSpotPointer(sp), position);
 			}
 		}
 	}
@@ -433,12 +440,13 @@ void CMapLocation::UpdateSpot(CUICustomMap* map, CMapSpot* sp )
 
 }
 
-void CMapLocation::UpdateSpotPointer(CUICustomMap* map, CMapSpotPointer* sp )
+void CMapLocation::UpdateSpotPointer(CUICustomMap* map, CMapSpotPointer* sp, const Fvector2& real )
 {
 	if(sp->GetParent()) return ;// already is child
 	float		heading;
 	Fvector2	pointer_pos;
-	if( map->GetPointerTo(m_position_on_map, sp->GetWidth()/2, pointer_pos, heading) )
+	Fvector2	tmp = map->Heading()? map->ConvertRealToLocal(real, true) : m_position_on_map;
+	if( map->GetPointerTo(tmp, sp->GetWidth()/2, pointer_pos, heading) )
 	{
 		sp->SetWndPos(pointer_pos);
 		sp->SetHeading(heading);
@@ -447,7 +455,7 @@ void CMapLocation::UpdateSpotPointer(CUICustomMap* map, CMapSpotPointer* sp )
 		sp->SetClipRect( clip_rect );
 		map->AttachChild(sp);
 
-		Fvector2 tt = map->ConvertLocalToReal(m_position_on_map);
+		Fvector2 tt = map->ConvertLocalToReal(m_position_on_map, map->BoundRect());
 		Fvector ttt;
 		ttt.set		(tt.x, 0.0f, tt.y);
 		float dist_to_target = Level().CurrentEntity()->Position().distance_to(ttt);
