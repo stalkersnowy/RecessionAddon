@@ -24,7 +24,7 @@ private:
 	ref_geom				ll_hGeom2;
 
 	ref_shader				sh_progress;
-//	ref_shader				sh_progress2;
+	ref_shader				sh_progress2;
 	int						load_stage;
 
 	u32						ll_dwReference;

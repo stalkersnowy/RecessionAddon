@@ -950,6 +950,7 @@ void CApplication::LoadBegin	()
 
 		ll_hGeom.create		(FVF::F_TL, RCache.Vertex.Buffer(), RCache.QuadIB);
 		sh_progress.create	("hud\\default","ui\\ui_load");
+		sh_progress2.create	("hud\\default","ui\\ui_load_add");
 		ll_hGeom2.create		(FVF::F_TL, RCache.Vertex.Buffer(),NULL);
 #endif
 		phase_timer.Start	();
@@ -975,6 +976,7 @@ void CApplication::destroy_loading_shaders()
 {
 	hLevelLogo.destroy		();
 	sh_progress.destroy		();
+	sh_progress2.destroy();
 //.	::Sound->mute			(false);
 }
 
@@ -1009,7 +1011,7 @@ void CApplication::LoadTitleInt(LPCSTR str)
 //.	Console->Execute			("stat_memory");
 	Log							(app_title);
 	
-	if (g_pGamePersistent->GameType()==1 && strstr(Core.Params,"alife"))
+	if (g_pGamePersistent->GameType() == 1 && !xr_strcmp(g_pGamePersistent->m_game_params.m_alife, "alife"))
 		max_load_stage			= 17;
 	else
 		max_load_stage			= 14;
@@ -1203,15 +1205,19 @@ void doBenchmark(LPCSTR name)
 #pragma optimize("g", off)
 void CApplication::load_draw_internal()
 {
-	if(!sh_progress){
+	if(!sh_progress || !sh_progress2){
 		CHK_DX			(HW.pDevice->Clear(0,0,D3DCLEAR_TARGET,D3DCOLOR_ARGB(0,0,0,0),1,0));
 		return;
 	}
 		// Draw logo
 		u32	Offset;
 		u32	C						= 0xffffffff;
-		u32	_w						= Device.dwWidth;
-		u32	_h						= Device.dwHeight;
+		float	_w					= (float)Device.dwWidth;
+		float	_h					= (float)Device.dwHeight;
+		bool	b_ws				= (_w/_h) > 1.34f;
+		bool	b_16x9				= b_ws && ((_w/_h)>1.77f);
+		float	ws_k				= (b_16x9) ? 0.75f : 0.8333f;	//16:9 or 16:10
+		float	ws_w				= b_ws ? (b_16x9?171.0f:102.6f) : 0.0f;
 		FVF::TL* pv					= NULL;
 
 //progress
@@ -1226,15 +1232,28 @@ void CApplication::load_draw_internal()
 		Frect						back_text_coords;
 		Frect						back_coords;
 		Fvector2					back_size;
+		Fvector2					back_tex_size;
 
 //progress background
 		static float offs			= -0.5f;
 
+		Fvector2					back_offset;
+		if (b_ws)
+			back_offset.set(ws_w * ws_k, 0.0f); //ws_w == 171
+		else
+			back_offset.set(0.0f, 0.0f);
+
+		back_tex_size.set			(UI_BASE_WIDTH, UI_BASE_HEIGHT);
 		back_size.set				(UI_BASE_WIDTH, UI_BASE_HEIGHT);
+		if (b_ws)
+			back_size.x *= ws_k; //ws
 		//back_text_coords.lt.set		(0,0);back_text_coords.rb.add(back_text_coords.lt,back_size);
 		//back_coords.lt.set			(offs, offs); back_coords.rb.add(back_coords.lt,back_size);
-		back_text_coords.lt.set		(0,0);back_text_coords.rb.add(back_text_coords.lt, Fvector2().set(1024.f, 768.f)); // in vanilla we have background's size 1024x768
-		back_coords.lt.set			(offs, offs); back_coords.rb.add(back_coords.lt, Fvector2().set(1024.f, 768.f));
+		back_text_coords.lt.set		(0,0);
+		back_text_coords.rb.add(back_text_coords.lt, back_tex_size); // in vanilla we have background's size 1024x768
+		back_coords.lt.set			(offs, offs); 
+		back_coords.lt.add			(back_offset);
+		back_coords.rb.add			(back_coords.lt, back_size);
 
 		back_coords.lt.mul			(k);back_coords.rb.mul(k);
 
@@ -1249,12 +1268,84 @@ void CApplication::load_draw_internal()
 		RCache.set_Geometry			(ll_hGeom);
 		RCache.Render				(D3DPT_TRIANGLELIST,Offset,0,4,0,2);
 
-//progress bar
-		back_size.set				(268,37);
-		back_text_coords.lt.set		(0,768);back_text_coords.rb.add(back_text_coords.lt,back_size);
-		back_coords.lt.set			(379 ,726);back_coords.rb.add(back_coords.lt,back_size);
+		if (b_ws) //draw additional frames (left&right)
+		{
+			//left
+			back_size.set(ws_w * ws_k, 768.0f);
 
-		back_coords.lt.mul			(k);back_coords.rb.mul(k);
+			if (b_16x9)
+			{
+				back_text_coords.lt.set(682, 0);
+				back_text_coords.rb.set(850, 768);
+			}
+			else
+			{
+				back_text_coords.lt.set(748, 0);
+				back_text_coords.rb.set(850, 768);
+			}
+			back_coords.lt.set(offs, offs);
+			back_coords.rb.add(back_coords.lt, back_size);
+			back_coords.lt.mul(k);
+			back_coords.rb.mul(k);
+
+			RCache.set_Shader(sh_progress2);
+			back_text_coords.lt.x /= tsz.x; back_text_coords.lt.y /= tsz.y; back_text_coords.rb.x /= tsz.x; back_text_coords.rb.y /= tsz.y;
+			pv = (FVF::TL*)RCache.Vertex.Lock(4, ll_hGeom.stride(), Offset);
+			pv->set(back_coords.lt.x, back_coords.rb.y, C, back_text_coords.lt.x, back_text_coords.rb.y);	pv++;
+			pv->set(back_coords.lt.x, back_coords.lt.y, C, back_text_coords.lt.x, back_text_coords.lt.y);	pv++;
+			pv->set(back_coords.rb.x, back_coords.rb.y, C, back_text_coords.rb.x, back_text_coords.rb.y);	pv++;
+			pv->set(back_coords.rb.x, back_coords.lt.y, C, back_text_coords.rb.x, back_text_coords.lt.y);	pv++;
+			RCache.Vertex.Unlock(4, ll_hGeom.stride());
+
+			RCache.set_Geometry(ll_hGeom);
+			RCache.Render(D3DPT_TRIANGLELIST, Offset, 0, 4, 0, 2);
+
+			//right
+			if (b_16x9)
+			{
+				back_text_coords.lt.set(850, 0);
+				back_text_coords.rb.set(1018, 768);
+			}
+			else
+			{
+				back_text_coords.lt.set(850, 0);
+				back_text_coords.rb.set(952, 768);
+			}
+
+			back_coords.lt.set(1024.0f - back_size.x + offs, offs);
+			back_coords.rb.add(back_coords.lt, back_size);
+			back_coords.lt.mul(k);
+			back_coords.rb.mul(k);
+
+			back_text_coords.lt.x /= tsz.x; back_text_coords.lt.y /= tsz.y; back_text_coords.rb.x /= tsz.x; back_text_coords.rb.y /= tsz.y;
+			pv = (FVF::TL*)RCache.Vertex.Lock(4, ll_hGeom.stride(), Offset);
+			pv->set(back_coords.lt.x, back_coords.rb.y, C, back_text_coords.lt.x, back_text_coords.rb.y);	pv++;
+			pv->set(back_coords.lt.x, back_coords.lt.y, C, back_text_coords.lt.x, back_text_coords.lt.y);	pv++;
+			pv->set(back_coords.rb.x, back_coords.rb.y, C, back_text_coords.rb.x, back_text_coords.rb.y);	pv++;
+			pv->set(back_coords.rb.x, back_coords.lt.y, C, back_text_coords.rb.x, back_text_coords.lt.y);	pv++;
+			RCache.Vertex.Unlock(4, ll_hGeom.stride());
+
+			RCache.set_Geometry(ll_hGeom);
+			RCache.Render(D3DPT_TRIANGLELIST, Offset, 0, 4, 0, 2);
+
+			RCache.set_Shader(sh_progress);
+		}
+
+//progress bar
+		back_tex_size.set			(268,37);
+		back_size.set				(268,37);
+		if (b_ws)
+			back_size.x *= ws_k; //ws
+		back_text_coords.lt.set		(0,768);
+		back_text_coords.rb.add		(back_text_coords.lt,back_tex_size);
+		back_coords.lt.set			(379 ,726);
+		if (b_ws)
+			back_coords.lt.x *= ws_k;
+		back_coords.lt.add			(back_offset);
+		back_coords.rb.add			(back_coords.lt,back_size);
+
+		back_coords.lt.mul			(k);
+		back_coords.rb.mul			(k);
 
 		back_text_coords.lt.x/=tsz.x; back_text_coords.lt.y/=tsz.y; back_text_coords.rb.x/=tsz.x; back_text_coords.rb.y/=tsz.y;
 
@@ -1292,9 +1383,15 @@ void CApplication::load_draw_internal()
 		if(hLevelLogo){
 			Frect						r;
 			r.lt.set					(257,369);
+			if(b_ws)
+				r.lt.x					*= ws_k;
+			r.lt.add					(back_offset);
 			r.lt.x						+= offs;
 			r.lt.y						+= offs;
-			r.rb.add					(r.lt,Fvector2().set(512,256));
+			back_size.set				(512, 256);
+			if (b_ws)
+				back_size.x *= ws_k; //ws 0.625
+			r.rb.add					(r.lt, back_size);
 			r.lt.mul					(k);						
 			r.rb.mul					(k);						
 			pv							= (FVF::TL*) RCache.Vertex.Lock(4,ll_hGeom.stride(),Offset);
