@@ -819,6 +819,9 @@ bool CUIXmlInit::InitFrameLine(CUIXml& xml_doc, LPCSTR path, int index, CUIFrame
 
 	string256 buf;
 
+	bool stretch_flag = xml_doc.ReadAttribInt(path, index, "stretch") ? true : false;
+	pWnd->SetStretchTexture( stretch_flag );
+
 	float x			= xml_doc.ReadAttribFlt(path, index, "x");
 	float y			= xml_doc.ReadAttribFlt(path, index, "y");
 
@@ -845,6 +848,9 @@ bool CUIXmlInit::InitFrameLine(CUIXml& xml_doc, LPCSTR path, int index, CUIFrame
 	strconcat(sizeof(buf), buf, path, ":title");
 	if (xml_doc.NavigateToNode(buf, index))
 		InitStatic(xml_doc, buf, index, &pWnd->UITitleText);
+
+	//SNW: вообще тут в ЧН InitWindow вызывается, но класс там сильно другой, так что пусть будет здесь
+	InitAutoStaticGroup(xml_doc, path, index, pWnd);
 
 	return true;
 }
