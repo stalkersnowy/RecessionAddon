@@ -74,6 +74,7 @@ public:
 			void		TextureOff					()							{ m_bTextureEnable = false; }
 	virtual void		TextureAvailable			(bool value)				{ m_bAvailableTexture = value; }
 	virtual bool		TextureAvailable			()							{ return m_bAvailableTexture;}
+	const	Frect*		GetOriginalRect_script		()							{return &m_UIStaticItem.GetOriginalRect();}
 
 
 	// own

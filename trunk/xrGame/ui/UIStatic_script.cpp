@@ -36,6 +36,7 @@ void CUIStatic::script_register(lua_State *L)
 
 
 		.def("SetOriginalRect",			(void(CUIStatic::*)(float,float,float,float))&CUIStatic::SetOriginalRect)
+		.def("GetOriginalRect",			&CUIStatic::GetOriginalRect_script)
 		.def("SetStretchTexture",		&CUIStatic::SetStretchTexture)
 		.def("GetStretchTexture",		&CUIStatic::GetStretchTexture)
 
@@ -48,5 +49,6 @@ void CUIStatic::script_register(lua_State *L)
 		.def("ClipperOn",				&CUIStatic::ClipperOn)
 		.def("ClipperOff",				(void(CUIStatic::*)(void))&CUIStatic::ClipperOff )
 		.def("GetClipperState",			&CUIStatic::GetClipperState)
+		.def("SetElipsis",				&CUIStatic::SetElipsis)
 	];
 }
