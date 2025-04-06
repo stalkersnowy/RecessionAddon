@@ -258,11 +258,7 @@ void CUIMainIngameWnd::Init()
 	}
 
 	AttachChild								(&UIStaticDiskIO);
-	UIStaticDiskIO.SetWndRect				(1000,750,16,16);
-	UIStaticDiskIO.GetUIStaticItem().SetRect(0,0,16,16);
-	UIStaticDiskIO.InitTexture				("ui\\ui_disk_io");
-	UIStaticDiskIO.SetOriginalRect			(0,0,32,32);
-	UIStaticDiskIO.SetStretchTexture		(TRUE);
+	xml_init.InitStatic						(uiXml, "disk_io", 0, &UIStaticDiskIO);
 
 
 	HUD_SOUND::LoadSound					("maingame_ui", "snd_new_contact"		, m_contactSnd		, SOUND_TYPE_IDLE);
@@ -339,25 +335,16 @@ void CUIMainIngameWnd::SetAmmoIcon (const shared_str& sect_name)
 
 	// now perform only width scale for ammo, which (W)size >2
 	// all others ammo (1x1, 1x2) will be not scaled (original picture)
-	float w = ((iGridWidth>2)?1.6f:iGridWidth)*INV_GRID_WIDTH*0.9f;
+	float w = ((iGridWidth>2.01f)?1.6f:iGridWidth)*INV_GRID_WIDTH*0.9f;
 	float h = INV_GRID_HEIGHT*0.9f;//1 cell
 
 	float x = UIWeaponIcon_rect.x1;
-	float posx_16 = 8.0f;
-	float posx = 10.0f;
+	if (iGridWidth < 2.01f)
+		x += (UIWeaponIcon_rect.width() - w) / 2.0f;
 
-	if (iGridWidth == iGridHeight == 1)
-	{
-		posx_16 = 28.0f;
-		posx = 30.0f;
-	}
-
-	UIWeaponIcon.SetWndPos(x + UI()->is_16_9_mode() ? posx_16 : posx, UIWeaponIcon_rect.y1);
+	UIWeaponIcon.SetWndPos(x, UIWeaponIcon_rect.y1);
 	
-	if (UI()->is_16_9_mode())
-		UIWeaponIcon.SetWidth(w * UI()->get_current_kx() * 1.05f);
-	else
-		UIWeaponIcon.SetWidth(w);
+	UIWeaponIcon.SetWidth	(w * UI()->get_current_kx());
 	UIWeaponIcon.SetHeight	(h * 0.9f);
 };
 

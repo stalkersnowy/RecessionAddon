@@ -656,8 +656,18 @@ bool CUIXmlInit::InitProgressShape(CUIXml& xml_doc, LPCSTR path, int index, CUIP
 
 	string256 _path;
 
-	if (xml_doc.NavigateToNode(strconcat(sizeof(_path), _path, path, ":back"), index))
+	if (xml_doc.NavigateToNode(strconcat(sizeof(_path), _path, path, ":back"), index)) {
 		InitStatic(xml_doc, _path, index, pWnd->m_pBackground);
+
+		if (UI()->is_16_9_mode()) {
+			pWnd->m_pBackground->SetStretchTexture(true);
+			float old_h = pWnd->m_pBackground->GetHeight();
+			float new_h = old_h / UI()->get_current_kx();
+			Fvector2 old_pos = pWnd->m_pBackground->GetWndPos();
+			pWnd->m_pBackground->SetHeight(new_h);
+			pWnd->m_pBackground->SetWndPos(Fvector2().set(old_pos.x, old_pos.y - (new_h - old_h) / 2));
+		}
+	}
 
 	InitStatic(xml_doc, strconcat(sizeof(_path), _path, path, ":front"), index, pWnd->m_pTexture);
 
