@@ -3,6 +3,7 @@
 #include "UIMessageBox.h"
 #include "UIMessageBoxEx.h"
 #include "../UIDialogHolder.h"
+#include <dinput.h>
 
 CUIMessageBoxEx::CUIMessageBoxEx(
 ){
@@ -65,4 +66,19 @@ LPCSTR CUIMessageBoxEx::GetHost()
 LPCSTR CUIMessageBoxEx::GetPassword()
 {
 	return m_pMessageBox->GetPassword();
+}
+
+bool CUIMessageBoxEx::IR_OnKeyboardPress( int dik )
+{
+	if ( dik == DIK_NUMPADENTER || dik == DIK_RETURN || dik == DIK_SPACE)
+	{
+		m_pMessageBox->OnYesOk();
+		return true;
+	}else
+	if ( dik == DIK_ESCAPE)
+	{
+		GetHolder()->StartStopMenu(this, true);
+		return true;
+	}else
+		return CUIDialogWnd::IR_OnKeyboardPress(dik);
 }
