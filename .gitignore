@@ -18,3 +18,4 @@ gamedata.db*
 *.obj
 *.pdb
 /.vs
+/trunk/xr_3da/.vs/
