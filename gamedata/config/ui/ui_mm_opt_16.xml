@@ -14,7 +14,7 @@
 			<texture>ui_inGame2_back_01w10_l</texture>
 		</auto_static>
 
-		<auto_static x="939" y="0" width="85" height="768" stretch="1">
+		<auto_static x="939" y="0" width="86" height="768" stretch="1">
 			<texture>ui_inGame2_back_01w10_r</texture>
 		</auto_static>
 
