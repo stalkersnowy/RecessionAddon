@@ -144,7 +144,8 @@ void CUIItemInfo::InitItem(CInventoryItem* pInvItem)
 	}
 	if(UIWeight)
 	{
-		sprintf_s				(str, "%3.2f kg", pInvItem->Weight());
+		LPCSTR  kg_str = CStringTable().translate( "st_kg" ).c_str();
+		sprintf_s				(str, "%3.2f %s", pInvItem->Weight(), kg_str);
 		UIWeight->SetText	(str);
 	}
 	if( UICost && IsGameTypeSingle() )
