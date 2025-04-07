@@ -46,6 +46,7 @@ CUIInventoryWnd::CUIInventoryWnd()
 	m_iCurrentActiveSlot				= NO_ACTIVE_SLOT;
 	UIRank								= NULL;
 	Init								();
+	m_pCurrentCellItem					= NULL;
 	SetCurrentItem						(NULL);
 
 	g_pInvWnd							= this;	

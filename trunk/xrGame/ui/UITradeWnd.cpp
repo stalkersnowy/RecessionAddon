@@ -41,6 +41,7 @@ CUITradeWnd::CUITradeWnd()
 {
 	Init();
 	Hide();
+	m_pCurrentCellItem		= NULL;
 	SetCurrentItem			(NULL);
 }
 

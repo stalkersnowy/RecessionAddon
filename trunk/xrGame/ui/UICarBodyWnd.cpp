@@ -38,6 +38,7 @@ CUICarBodyWnd::CUICarBodyWnd()
 	Init				();
 	Hide				();
 	m_b_need_update		= false;
+	m_pCurrentCellItem	= NULL;
 }
 
 CUICarBodyWnd::~CUICarBodyWnd()
