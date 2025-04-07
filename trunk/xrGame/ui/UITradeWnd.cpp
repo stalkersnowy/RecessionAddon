@@ -64,6 +64,8 @@ void CUITradeWnd::Init()
 	//статические элементы интерфейса
 	AttachChild							(&UIStaticTop);
 	xml_init.InitStatic					(uiXml, "top_background", 0, &UIStaticTop);
+	AttachChild							(&UIStaticMain);
+	xml_init.InitStatic					(uiXml, "back", 0, &UIStaticMain);
 	AttachChild							(&UIStaticBottom);
 	xml_init.InitStatic					(uiXml, "bottom_background", 0, &UIStaticBottom);
 
@@ -78,46 +80,34 @@ void CUITradeWnd::Init()
 	UICharacterInfoRight.Init			(0,0, UIOthersIcon.GetWidth(), UIOthersIcon.GetHeight(), TRADE_CHARACTER_XML);
 
 
-	//Списки торговли
-	AttachChild							(&UIOurBagWnd);
-	xml_init.InitStatic					(uiXml, "our_bag_static", 0, &UIOurBagWnd);
-	AttachChild							(&UIOthersBagWnd);
-	xml_init.InitStatic					(uiXml, "others_bag_static", 0, &UIOthersBagWnd);
-
-	UIOurBagWnd.AttachChild				(&UIOurMoneyStatic);
+	AttachChild							(&UIOurMoneyStatic);
 	xml_init.InitStatic					(uiXml, "our_money_static", 0, &UIOurMoneyStatic);
 
-	UIOthersBagWnd.AttachChild			(&UIOtherMoneyStatic);
+	AttachChild							(&UIOtherMoneyStatic);
 	xml_init.InitStatic					(uiXml, "other_money_static", 0, &UIOtherMoneyStatic);
 
-	AttachChild							(&UIOurTradeWnd);
-	xml_init.InitStatic					(uiXml, "static", 0, &UIOurTradeWnd);
-	AttachChild							(&UIOthersTradeWnd);
-	xml_init.InitStatic					(uiXml, "static", 1, &UIOthersTradeWnd);
-
-	UIOurTradeWnd.AttachChild			(&UIOurPriceCaption);
+	AttachChild							(&UIOurPriceCaption);
 	xml_init.InitMultiTextStatic		(uiXml, "price_mt_static", 0, &UIOurPriceCaption);
 
-	UIOthersTradeWnd.AttachChild		(&UIOthersPriceCaption);
-	xml_init.InitMultiTextStatic		(uiXml, "price_mt_static", 0, &UIOthersPriceCaption);
+	AttachChild							(&UIOthersPriceCaption);
+	xml_init.InitMultiTextStatic		(uiXml, "price_mt_static", 1, &UIOthersPriceCaption);
 
 	//Списки Drag&Drop
-	UIOurBagWnd.AttachChild				(&UIOurBagList);
+	AttachChild							(&UIOurBagList);
 	xml_init.InitDragDropListEx			(uiXml, "dragdrop_list", 0, &UIOurBagList);
 
-	UIOthersBagWnd.AttachChild			(&UIOthersBagList);	
+	AttachChild							(&UIOthersBagList);	
 	xml_init.InitDragDropListEx			(uiXml, "dragdrop_list", 1, &UIOthersBagList);
 
-	UIOurTradeWnd.AttachChild			(&UIOurTradeList);	
+	AttachChild							(&UIOurTradeList);	
 	xml_init.InitDragDropListEx			(uiXml, "dragdrop_list", 2, &UIOurTradeList);
 
-	UIOthersTradeWnd.AttachChild		(&UIOthersTradeList);	
+	AttachChild							(&UIOthersTradeList);	
 	xml_init.InitDragDropListEx			(uiXml, "dragdrop_list", 3, &UIOthersTradeList);
 
 	
 	AttachChild							(&UIDescWnd);
 	xml_init.InitStatic					(uiXml, "desc_static", 0, &UIDescWnd);
-	xml_init.InitAutoStatic				(uiXml, "auto_static_hack", &UIDescWnd);
 	UIDescWnd.AttachChild				(&UIItemInfo);
 	UIItemInfo.Init						(0,0, UIDescWnd.GetWidth(), UIDescWnd.GetHeight(), TRADE_ITEM_XML);
 
@@ -146,7 +136,6 @@ void CUITradeWnd::InitTrade(CInventoryOwner* pOur, CInventoryOwner* pOthers)
 
 	m_pInvOwner							= pOur;
 	m_pOthersInvOwner					= pOthers;
-	UIOthersPriceCaption.GetPhraseByIndex(0)->SetText(*CStringTable().translate("ui_st_opponent_items"));
 
 	UICharacterInfoLeft.InitCharacter	(m_pInvOwner->object_id());
 	UICharacterInfoRight.InitCharacter	(m_pOthersInvOwner->object_id());
@@ -407,18 +396,18 @@ void CUITradeWnd::PerformTrade()
 
 void CUITradeWnd::DisableAll()
 {
-	UIOurBagWnd.Enable				(false);
-	UIOthersBagWnd.Enable			(false);
-	UIOurTradeWnd.Enable			(false);
-	UIOthersTradeWnd.Enable			(false);
+	UIOurBagList.Enable				(false);
+	UIOthersBagList.Enable			(false);
+	UIOurTradeList.Enable			(false);
+	UIOthersTradeList.Enable		(false);
 }
 
 void CUITradeWnd::EnableAll()
 {
-	UIOurBagWnd.Enable				(true);
-	UIOthersBagWnd.Enable			(true);
-	UIOurTradeWnd.Enable			(true);
-	UIOthersTradeWnd.Enable			(true);
+	UIOurBagList.Enable				(true);
+	UIOthersBagList.Enable			(true);
+	UIOurTradeList.Enable			(true);
+	UIOthersTradeList.Enable		(true);
 }
 
 void CUITradeWnd::UpdatePrices()

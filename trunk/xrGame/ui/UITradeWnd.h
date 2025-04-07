@@ -89,17 +89,14 @@ protected:
 	CUICellItem*		m_pCurrentCellItem;
 	TIItemContainer		ruck_list;
 	CUIStatic			UIStaticTop;
+	CUIStatic			UIStaticMain;
 	CUIStatic			UIStaticBottom;
 
-	CUIStatic			UIOurBagWnd;
 	CUIStatic			UIOurMoneyStatic;
-	CUIStatic			UIOthersBagWnd;
 	CUIStatic			UIOtherMoneyStatic;
 	CUIDragDropListEx	UIOurBagList;
 	CUIDragDropListEx	UIOthersBagList;
 
-	CUIStatic			UIOurTradeWnd;
-	CUIStatic			UIOthersTradeWnd;
 	CUIMultiTextStatic	UIOurPriceCaption;
 	CUIMultiTextStatic	UIOthersPriceCaption;
 	CUIDragDropListEx	UIOurTradeList;
