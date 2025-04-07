@@ -114,6 +114,7 @@ bool CUIGameSP::IR_OnKeyboardPress(int dik)
 	case kSCORES:
 		{
 			SDrawStaticStruct* ss	= AddCustomStatic("main_task", true);
+			ss->m_endTime			= -1.f;
 			CGameTask* t			= pActor->GameTaskManager().ActiveTask();
 			if(t){
 				ss->m_static->SetTextST(t->m_Title.c_str());
