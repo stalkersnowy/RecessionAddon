@@ -287,14 +287,16 @@ void CUICharacterInfo::Update()
 
 		if(m_icons[eUIIcon]){
 			CSE_ALifeCreatureAbstract*		pCreature = smart_cast<CSE_ALifeCreatureAbstract*>(T);
-			if(pCreature && !pCreature->g_Alive())
-				m_icons[eUIIcon]->SetTextureColor	(color_argb(255,255,160,160));
+			if(pCreature){
+				m_icons[eUIIcon]->SetTextureColor	(pCreature->g_Alive()?color_argb(255,255,255,255):color_argb(255,255,160,160));
+			}
 		}
 	}
 }
 
 void CUICharacterInfo::ClearInfo()
 {
+	m_ownerID = u16(-1);
 	ResetAllStrings	();
 	
 	if (m_icons[eUIIcon]) {
