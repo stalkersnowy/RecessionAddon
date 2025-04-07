@@ -17,7 +17,7 @@
 
 class CUIListBoxItem;
 
-class CUIComboBox : public CUIWindow, public CUIOptionsItem {
+class CUIComboBox : public CUIWindow, public CUIOptionsItem, public pureRender {
 	friend class CUIXmlInit;
 	typedef enum{
 		LIST_EXPANDED, 
@@ -33,6 +33,8 @@ public:
 	virtual bool		IsChanged				();
 	virtual void 		SaveBackUpValue			();
 	virtual void 		Undo					();
+
+	virtual void	OnRender					(); // only for list-box
 
 			LPCSTR		GetText					();
 
@@ -57,6 +59,7 @@ protected:
 			void		ShowList				(bool bShow);
 			void		OnListItemSelect		();
 	virtual void		Update();
+	virtual void		Draw();
 
 protected:
 	bool				m_bInited;

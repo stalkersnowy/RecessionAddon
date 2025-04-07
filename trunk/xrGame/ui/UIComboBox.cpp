@@ -76,8 +76,9 @@ void CUIComboBox::Init(float x, float y, float width){
 	m_frameWnd.Init						(0,  CB_HEIGHT, width, m_list.GetItemHeight()*m_iListHeight);
 	m_frameWnd.InitTexture				("ui_cb_listbox");
 
-	m_list.Show							(false);
+	m_list.Show							(true);
 	m_frameWnd.Show						(false);
+	m_list.SetMessageTarget				(this);
 }
 
 void CUIComboBox::Init(float x, float y, float width, float height)
@@ -172,7 +173,7 @@ void CUIComboBox::SetItem(int idx)
 }
 void CUIComboBox::OnBtnClicked()
 {
-	ShowList				(!m_list.IsShown());
+	ShowList				(!m_frameWnd.IsShown());
 }
 
 void CUIComboBox::ShowList(bool bShow)
@@ -181,7 +182,7 @@ void CUIComboBox::ShowList(bool bShow)
 	{
 		SetHeight			(m_text.GetHeight() + m_list.GetHeight());
 
-		m_list.Show			(true);
+//		m_list.Show			(true);
 		m_frameWnd.Show		(true);
 
 		m_eState			= LIST_EXPANDED;
@@ -190,7 +191,7 @@ void CUIComboBox::ShowList(bool bShow)
 	}
 	else
 	{
-		m_list.Show			(false);
+//		m_list.Show			(false);
 		m_frameWnd.Show		(false);
 		SetHeight			(m_frameLine.GetHeight());
 		GetParent()->SetCapture(this, false);
@@ -212,7 +213,15 @@ void CUIComboBox::Update()
 		m_text.SetTextColor(m_textColor[1]);
 	}
 	else
+	{
 		m_text.SetTextColor(m_textColor[0]);
+		
+		if(m_frameWnd.IsShown())
+		{
+			Device.seqRender.Remove		(this);
+			Device.seqRender.Add		(this, 3);
+		}
+	}
 
 }
 
@@ -301,3 +310,21 @@ void CUIComboBox::Undo()
 	SetCurrentValue		();
 }
 
+void CUIComboBox::OnRender()
+{
+	if(IsShown())
+	{
+		if(m_frameWnd.IsShown())
+		{
+			UI()->PushScissor			(UI()->ScreenRect(),true);
+			m_frameWnd.Draw			();
+			UI()->PopScissor			();
+			Device.seqRender.Remove		(this);
+		}
+	}
+}
+
+void CUIComboBox::Draw()
+{
+	CUIWindow::Draw			();
+}
