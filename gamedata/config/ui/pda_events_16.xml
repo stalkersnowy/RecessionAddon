@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+    <main_wnd x="92" y="90" width="634" height="475">
+        <left_frame x="0" y="0" width="283" height="475" a="90" stretch="1">
+            <texture>ui_pda_frame_sub</texture>
+            <auto_static x="7" y="48" width="3" height="417" stretch="1">
+                <texture>ui\ui_pda_vertical_line_r_l</texture>
+            </auto_static>
+            <auto_static x="258" y="48" width="3" height="417" stretch="1">
+                <texture>ui\ui_pda_vertical_line_r_r</texture>
+            </auto_static>
+            <auto_static x="7" y="430" width="257" height="2" stretch="1">
+                <texture>ui\ui_pda_horizontal_line</texture>
+            </auto_static>
+            <primary_or_all x="15" y="430" width="225" height="19" check_mode="1" hint="pda_show_general_or_all_tasks" stretch="1">
+                <texture>ui_PDA_checker</texture>
+                <text align="l" x="17" y="0" font="letterica16" r="255" g="255" b="255">show_only_general_tasks</text>
+                <text_color_>
+                    <t r="231" g="168" b="12"/>
+                    <d r="181" g="170" b="148"/>
+                    <e r="127" g="127" b="127"/>
+                    <h r="255" g="255" b="255"/>
+                </text_color_>
+            </primary_or_all>
+            <filter_tab x="12" y="450" width="244" height="18">
+                <button x="4" y="0" width="58" height="18" hint="pda_btn_active_hint">
+                    <text align="l" x="0" y="0" font="letterica18" r="255" g="255" b="255" complex_mode="0">pda_btn_active</text>
+                    <text_color>
+                        <t r="231" g="168" b="12"/>
+                        <d r="181" g="170" b="148"/>
+                        <e r="127" g="127" b="127"/>
+                        <h r="255" g="255" b="255"/>
+                    </text_color>
+                </button>
+                <button x="67" y="0" width="83" height="18" hint="pda_btn_accomplished_hint">
+                    <text align="l" x="0" y="0" font="letterica18" r="255" g="255" b="255" complex_mode="0">pda_btn_accomplished</text>
+                    <text_color>
+                        <t r="231" g="168" b="12"/>
+                        <d r="181" g="170" b="148"/>
+                        <e r="127" g="127" b="127"/>
+                        <h r="255" g="255" b="255"/>
+                    </text_color>
+                </button>
+                <button x="154" y="0" width="50" height="18" hint="pda_btn_failed_hint">
+                    <text align="l" x="0" y="0" font="letterica18" r="255" g="255" b="255" complex_mode="0">pda_btn_failed</text>
+                    <text_color>
+                        <t r="231" g="168" b="12"/>
+                        <d r="181" g="170" b="148"/>
+                        <e r="127" g="127" b="127"/>
+                        <h r="255" g="255" b="255"/>
+                    </text_color>
+                </button>
+                <notused_button x="204" y="0" width="39" height="18" hint="pda_btn_own_hint">
+                    <text align="l" x="0" y="0" font="letterica18" r="255" g="255" b="255" complex_mode="0">pda_btn_own</text>
+                    <text_color>
+                        <t r="231" g="168" b="12"/>
+                        <d r="181" g="170" b="148"/>
+                        <e r="127" g="127" b="127"/>
+                        <h r="255" g="255" b="255"/>
+                    </text_color>
+                </notused_button>
+            </filter_tab>
+            <left_frame_header x="7" y="17" width="271" height="32" stretch="1">
+                <title x="12" y="1" width="233" height="27">
+                    <text font="letterica25" r="225" g="225" b="250" complex_mode="0">Tasks</text>
+                </title>
+                <texture>ui_string_02</texture>
+                <anim_static x="242" y="-6" width="27" height="32" frames="16" duration="1000" columns="8" frame_width="32" frame_height="32" cyclic="1" autoplay="1" stretch="1">
+                    <texture>ui\ui_pda_anims_01</texture>
+                </anim_static>
+            </left_frame_header>
+            <list x="0" y="48" width="278" height="421" right_ident="10" bottom_indent="42" scroll_profile="pda"/>
+        </left_frame>
+        <right_frame x="293" y="0" width="341" height="475">
+            <task_descr_view x="0" y="0" width="341" height="475">
+                <main_frame x="0" y="0" width="341" height="475" a="90" stretch="1">
+                    <texture>ui_pda_frame_sub</texture>
+                    <auto_static x="7" y="44" width="3" height="460" stretch="1">
+                        <texture>ui\ui_pda_vertical_line_r_l</texture>
+                    </auto_static>
+                    <auto_static x="317" y="44" width="3" height="460" stretch="1">
+                        <texture>ui\ui_pda_vertical_line_r_r</texture>
+                    </auto_static>
+                    <auto_static x="7" y="44" width="310" height="2" stretch="1">
+                        <texture>ui\ui_pda_horizontal_line</texture>
+                    </auto_static>
+                    <header_frame_line x="7" y="17" width="329" height="21" stretch="1">
+                        <texture>ui_string_03</texture>
+                        <title x="8" y="1" width="362" height="18">
+                            <text font="letterica16" r="255" g="255" b="255" complex_mode="0">st_pda_task_detail_information</text>
+                        </title>
+                    </header_frame_line>
+                    <scroll_view x="7" y="45" width="328" height="425" right_ident="10" scroll_profile="pda">
+                        <objective_item x="0" y="0" width="322" height="10">
+                            <image x="142" y="0" width="75" height="90" stretch="1"/>
+                            <text_cont x="4" y="90" width="322" height="10">
+                                <text font="letterica18" r="255" g="255" b="255"/>
+                            </text_cont>
+                        </objective_item>
+                    </scroll_view>
+                </main_frame>
+            </task_descr_view>
+            <map_wnd>
+                <main_wnd x="0" y="0" width="341" height="475">
+                    <text_hint x="612" y="450" width="83" height="22" complex_mode="1">
+                        <text font="graffiti22"/>
+                    </text_hint>
+                    <map_header_frame_line x="7" y="17" width="329" height="32" stretch="1">
+                        <texture>ui_string_03</texture>
+                        <tool_bar>
+                            <global_map_btn x="0" y="1" width="17" height="15" check_mode="0" hint="global_map_btn_hint" stretch="1">
+                                <window_name>global_map_btn</window_name>
+                                <texture>ui_icons_newPDA_compas</texture>
+                            </global_map_btn>
+                            <actor_btn x="18" y="1" width="17" height="15" check_mode="0" hint="actor_btn_hint" stretch="1">
+                                <window_name>actor_btn</window_name>
+                                <texture>ui_icons_newPDA_showpers</texture>
+                            </actor_btn>
+                            <notused_highlight_spot_btn x="229" y="1" width="17" height="15" check_mode="1" hint="pda_show_pointer_btn_hint" stretch="1">
+                                <window_name>highlight_spot_btn</window_name>
+                                <texture>ui_icons_newPDA_mark</texture>
+                            </notused_highlight_spot_btn>
+                            <zoom_in_btn x="247" y="2" width="17" height="15" check_mode="1" hint="zoom_in_btn_hint" stretch="1">
+                                <window_name>zoom_in_btn</window_name>
+                                <texture>ui_icons_newPDA_zoom</texture>
+                            </zoom_in_btn>
+                            <zoom_out_btn x="265" y="2" width="17" height="15" check_mode="1" hint="zoom_out_btn_hint" stretch="1">
+                                <window_name>zoom_out_btn</window_name>
+                                <texture>ui_icons_newPDA_ZoomMin</texture>
+                            </zoom_out_btn>
+                            <notused_add_spot_btn x="283" y="1" width="17" height="15" check_mode="1" hint="add_spot_btn_hint" stretch="1">
+                                <window_name>add_spot_btn</window_name>
+                                <texture>ui_icons_newPDA_perssign</texture>
+                            </notused_add_spot_btn>
+                            <notused_remove_spot_btn x="302" y="1" width="17" height="15" check_mode="1" hint="remove_spot_btn_hint" stretch="1">
+                                <window_name>remove_spot_btn</window_name>
+                                <texture>ui_icons_newPDA_perssigndel</texture>
+                            </notused_remove_spot_btn>
+                        </tool_bar>
+                    </map_header_frame_line>
+                    <main_map_frame x="0" y="0" width="341" height="475" a="90" stretch="1">
+                        <texture>ui_pda_frame_sub</texture>
+                        <level_frame x="7" y="41" width="311" height="406">
+						</level_frame>
+                    </main_map_frame>
+                </main_wnd>
+            </map_wnd>
+        </right_frame>
+    </main_wnd>
+</window>

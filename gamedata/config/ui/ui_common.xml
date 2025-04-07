@@ -481,6 +481,6 @@
     <texture id="ui_listline3_b" x="986" y="108" width="4" height="16" />
     <texture id="ui_listline3_back" x="990" y="108" width="28" height="16" />
     <texture id="ui_listline3_e" x="1008" y="108" width="4" height="16" />
-	<texture id="ui_scroll_back_16" x="124" y="189" width="13" height="13" />
-	<texture id="ui_scroll_box_16" x="124" y="206" width="13" height="13" />
+	<texture id="ui_scroll_back_16" x="950" y="700" width="13" height="13" />
+	<texture id="ui_scroll_box_16" x="950" y="717" width="13" height="13" />
 </ui_texture>

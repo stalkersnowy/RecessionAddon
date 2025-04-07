@@ -115,7 +115,7 @@ void CEncyclopediaArticle::load_shared	(LPCSTR)
 			data()->image.SetBaseTextureOffset(data()->image.GetBaseTextureOffset()[0], dy / 2);
 		}
 
-		data()->image.SetWndRect(0, 0, r.width(), r.height());
+		data()->image.SetWndRect(0, 0, r.width()*UI()->get_current_kx(), r.height());
 	};
 
 	// Тип статьи
