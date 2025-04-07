@@ -25,8 +25,13 @@ PIItem CUIInventoryWnd::CurrentIItem()
 
 void CUIInventoryWnd::SetCurrentItem(CUICellItem* itm)
 {
-	if(m_pCurrentCellItem == itm) return;
+	if(m_pCurrentCellItem){
+		if(m_pCurrentCellItem == itm) return;
+		m_pCurrentCellItem->m_selected = false;
+	}
 	m_pCurrentCellItem				= itm;
+	if(m_pCurrentCellItem)
+		m_pCurrentCellItem->m_selected	= true;
 	UIItemInfo.InitItem			(CurrentIItem());
 }
 

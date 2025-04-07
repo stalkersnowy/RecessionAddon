@@ -536,12 +536,9 @@ bool CUICellContainer::IsRoomFree(const Ivector2& pos, const Ivector2& size)
 	return true;
 }
 
-void CUICellContainer::GetTexUVLT(Fvector2& uv, u32 col, u32 row)
+void CUICellContainer::GetTexUVLT(Fvector2& uv, u32 col, u32 row, bool selected)
 {
-	uv.set(0.0f,0.0f);
-
-//.	if( (col%2==1 && row%2==1)||(col%2==0 && row%2==0) )
-//.		uv.set(0.5f,0.0f);
+	uv.set(selected?0.5f:0.0f,0.0f);
 }
 
 
@@ -705,7 +702,12 @@ void CUICellContainer::Draw()
 	for (int x=0; x<=tgt_cells.width(); ++x){
 		for (int y=0; y<=tgt_cells.height(); ++y){
 			Fvector2			tp;
-			GetTexUVLT			(tp,tgt_cells.x1+x,tgt_cells.y1+y);
+			Ivector2 cpos;
+			cpos.set( x, y );
+			cpos.add( TopVisibleCell() );
+			CUICell& ui_cell = GetCellAt( cpos );
+			bool selected = ui_cell.Empty() ? false : ui_cell.m_item->m_selected;
+			GetTexUVLT			(tp,tgt_cells.x1+x,tgt_cells.y1+y,selected);
 			for (u32 k=0; k<6; ++k,++pv){
 				const Fvector2& p	= pts[k];
 				const Fvector2& uv	= uvs[k];

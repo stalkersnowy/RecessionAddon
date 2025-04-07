@@ -128,7 +128,7 @@ protected:
 	Ivector2					m_cellSize;					//pixels	(width, height)
 	UI_CELLS_VEC				m_cells;
 
-	void						GetTexUVLT			(Fvector2& uv, u32 col, u32 row);
+	void						GetTexUVLT			(Fvector2& uv, u32 col, u32 row, bool selected);
 	void						ReinitSize			();
 	u32							GetCellsInRange		(const Irect& rect, UI_CELLS_VEC& res);
 

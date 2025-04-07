@@ -389,8 +389,13 @@ PIItem CUICarBodyWnd::CurrentIItem()
 
 void CUICarBodyWnd::SetCurrentItem(CUICellItem* itm)
 {
-	if(m_pCurrentCellItem == itm) return;
+	if (m_pCurrentCellItem) {
+		if(m_pCurrentCellItem == itm) return;
+		m_pCurrentCellItem->m_selected = false;
+	}
 	m_pCurrentCellItem		= itm;
+	if (m_pCurrentCellItem)
+		m_pCurrentCellItem->m_selected = true;
 	m_pUIItemInfo->InitItem(CurrentIItem());
 }
 
@@ -736,7 +741,7 @@ void CUICarBodyWnd::ColorizeItem(CUICellItem* itm)
 {
 	CInventoryItem* jitem = (CInventoryItem*)itm->m_pData;
 	if (jitem->m_eItemPlace == eItemPlaceBelt || jitem->m_eItemPlace == eItemPlaceSlot)
-		itm->SetTextureColor(color_rgba(180, 255, 180, 255));
+		itm->SetTextureColor(color_rgba(100, 255, 100, 255));
 }
 
 void CUICarBodyWnd::DetachAddon(const char* addon_name)

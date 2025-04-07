@@ -14,6 +14,7 @@ CUICellItem::CUICellItem()
 	m_b_already_drawn	= false;
 	SetAccelerator		(0);
 	m_b_destroy_childs	= true;
+	m_selected			= false;
 }
 
 CUICellItem::~CUICellItem()

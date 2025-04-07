@@ -578,9 +578,14 @@ PIItem CUITradeWnd::CurrentIItem()
 
 void CUITradeWnd::SetCurrentItem(CUICellItem* itm)
 {
-	if (m_pCurrentCellItem == itm)
-		return;
+	if (m_pCurrentCellItem){
+		if (m_pCurrentCellItem == itm)
+			return;
+		m_pCurrentCellItem->m_selected = false;
+	}
 	m_pCurrentCellItem				= itm;
+	if (m_pCurrentCellItem)
+		m_pCurrentCellItem->m_selected	= true;
 	UIItemInfo.InitItem	(CurrentIItem());
 	
 	if (!m_pCurrentCellItem)
@@ -616,17 +621,13 @@ void CUITradeWnd::ColorizeItem(CUICellItem* itm, bool b)
 {
 	CInventoryItem*	jitem = (CInventoryItem*)itm->m_pData;
 	PIItem piitem = (PIItem)itm->m_pData;
-	if ((jitem->m_eItemPlace == eItemPlaceBelt || jitem->m_eItemPlace == eItemPlaceSlot) && b && piitem->m_pCurrentInventory->GetOwner() == m_pInvOwner)
-	{
-		itm->SetTextureColor(color_rgba(180, 255, 180, 255));
-	}
-	else if ((jitem->m_eItemPlace == eItemPlaceBelt || jitem->m_eItemPlace == eItemPlaceSlot) && !b)
-	{
-		itm->SetTextureColor(color_rgba(225, 155, 130, 255));
-	}
-	else if (jitem->m_eItemPlace == eItemPlaceRuck && !b)
+	if (!b)
 	{
 		itm->SetTextureColor(color_rgba(255, 100, 100, 255));
+	}
+	else if ((jitem->m_eItemPlace == eItemPlaceBelt || jitem->m_eItemPlace == eItemPlaceSlot) && piitem->m_pCurrentInventory->GetOwner() == m_pInvOwner)
+	{
+		itm->SetTextureColor(color_rgba(100, 255, 100, 255));
 	}
 }
 
