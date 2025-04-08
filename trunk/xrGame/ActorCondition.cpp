@@ -377,13 +377,13 @@ void CActorCondition::UpdateTutorialThresholds()
 		b=false;
 		strcpy_s(cb_name,"_G.on_actor_radiation");
 	}
-
+/*
 	if(b && !m_condition_flags.test(ePhyHealthMinReached) && GetPsyHealth()>_cPsyHealthThr){
 //.		m_condition_flags.set			(ePhyHealthMinReached, TRUE);
 		b=false;
 		strcpy_s(cb_name,"_G.on_actor_psy");
 	}
-
+*/
 	if(b && !m_condition_flags.test(eCantWalkWeight)){
 //.		m_condition_flags.set			(eCantWalkWeight, TRUE);
 		b=false;
