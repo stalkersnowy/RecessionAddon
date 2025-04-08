@@ -26,6 +26,7 @@ enum ELocationFlags
 
 protected:
 	flags32					m_flags;
+	bool					m_hint_enable;
 	shared_str				m_hint;
 	CMapSpot*				m_level_spot;
 	CMapSpotPointer*		m_level_spot_pointer;
@@ -63,6 +64,7 @@ public:
 							CMapLocation					(LPCSTR type, u16 object_id);
 	virtual					~CMapLocation					();
 	virtual void			destroy							();
+			bool			get_hint_enable					()					{return m_hint_enable;}
 			LPCSTR			GetHint							();
 	void					SetHint							(const shared_str& hint);
 	bool					PointerEnabled					()					{return SpotEnabled() && !!m_flags.test(ePointerEnabled);};

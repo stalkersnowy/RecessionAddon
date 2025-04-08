@@ -18,6 +18,7 @@ protected:
 
 	CUIStaticItem*	m_StaticBackground;
 
+	float			m_hold_delay;
 	int				m_iScrollPos;
 
 	int				m_iStepSize;
@@ -31,6 +32,8 @@ protected:
 	bool			m_b_enabled;
 	bool			m_bIsHorizontal;
 
+	int				m_mouse_state;
+
 	bool			ScrollInc			();
 	bool			ScrollDec			();
 	void			UpdateScrollBar		();
@@ -39,9 +42,10 @@ protected:
 	void			ClampByViewRect		();
 	void			SetPosScrollFromView(float view_pos, float view_width, float view_offs);
 	int				PosViewFromScroll	(int view_size, int view_offs);
-	void			SetScrollPosClamped	(int iPos) { 
-														m_iScrollPos = iPos; 
-														clamp(m_iScrollPos,m_iMinPos,m_iMaxPos-m_iPageSize+1); }
+	void			SetScrollPosClamped	(int iPos);
+
+	bool			IsRelevant			();
+
 public:
 					CUIScrollBar		(void);
 	virtual			~CUIScrollBar		(void);
@@ -54,6 +58,9 @@ public:
 
 	virtual void	SendMessage			(CUIWindow *pWnd, s16 msg, void *pData);
 	virtual bool	OnMouseAction		(float x, float y, EUIMessages mouse_action);
+	virtual bool 	OnMouseDown			(int mouse_btn);
+			bool	OnMouseDownEx		();
+	virtual void	OnMouseUp			(int mouse_btn);
 	virtual bool	OnKeyboardHold		(int dik);
 
 	virtual void	Draw				();

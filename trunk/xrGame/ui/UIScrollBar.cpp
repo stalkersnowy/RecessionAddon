@@ -9,10 +9,13 @@ CUIScrollBar::CUIScrollBar()
 {
 	m_iMinPos			= 1;
 	m_iMaxPos			= 1;
-	m_iPageSize			= 0;
+	m_iPageSize			= 1;
 	m_iStepSize			= 1;
 	m_iScrollPos		= 0;
+	m_hold_delay		= 50.0f;
 	m_b_enabled			= true;
+	m_mouse_state		= 0;
+
 	m_DecButton			= xr_new<CUI3tButton>();	m_DecButton->SetAutoDelete(true); AttachChild(m_DecButton);
 	m_IncButton			= xr_new<CUI3tButton>();	m_IncButton->SetAutoDelete(true); AttachChild(m_IncButton);
 	m_ScrollBox			= xr_new<CUIScrollBox>();	m_ScrollBox->SetAutoDelete(true); AttachChild(m_ScrollBox);
@@ -31,6 +34,7 @@ void CUIScrollBar::Init(float x, float y, float length, bool bIsHorizontal, LPCS
 	R_ASSERT(xml_doc.Init	(CONFIG_PATH, UI_PATH, "scroll_bar.xml"));
 
 	float height = xml_doc.ReadAttribFlt(profile, 0, (bIsHorizontal)?"height":"height_v", 16);
+	m_hold_delay = xml_doc.ReadAttribFlt(profile, 0, "hold_delay", 50.0f);
 		
 	m_bIsHorizontal = bIsHorizontal;
 	if(m_bIsHorizontal)
@@ -150,6 +154,13 @@ void CUIScrollBar::UpdateScrollBar()
 			m_IncButton->SetWndPos	(0.0f, GetHeight() - m_IncButton->GetHeight());
 		}
 	}
+	if(IsRelevant())
+	{
+		m_ScrollBox->SetTextureColor(color_rgba(255,255,255,255));
+	}else
+	{
+		m_ScrollBox->SetTextureColor(color_rgba(255,255,255,0));
+	}
 
 	ClampByViewRect();
 }
@@ -159,28 +170,15 @@ u32 last_hold_time =0;
 
 bool CUIScrollBar::OnKeyboardHold(int dik)
 {
-	if(dik==MOUSE_1 && (last_hold_time+100)<Device.dwTimeContinual)
+	if(dik==MOUSE_1 && (last_hold_time+m_hold_delay)<Device.dwTimeContinual)
 	{
-		Fvector2 cursor_pos			= GetUICursor()->GetCursorPosition();
-		Frect	dec_rect;
-		Frect	inc_rect;
-
-		m_DecButton->GetAbsoluteRect(dec_rect);
-		m_IncButton->GetAbsoluteRect(inc_rect);
-		if(dec_rect.in(cursor_pos))
+		if ( OnMouseDownEx() )
 		{
-			TryScrollDec			();
-			last_hold_time			= Device.dwTimeContinual;
-			return					true;
-		}else
-		if(inc_rect.in(cursor_pos))
-		{
-			TryScrollInc			();
-			last_hold_time			= Device.dwTimeContinual;
-			return					true;
+			last_hold_time = Device.dwTimeContinual;
+			return true;
 		}
 	}
-	return false;
+	return inherited::OnKeyboardHold(dik);
 }
 
 bool CUIScrollBar::OnMouseAction(float x, float y, EUIMessages mouse_action)
@@ -194,10 +192,78 @@ bool CUIScrollBar::OnMouseAction(float x, float y, EUIMessages mouse_action)
 			TryScrollDec();
 			return true;
 			break;
+		case WINDOW_LBUTTON_UP:
+			m_mouse_state = 0;
+			break;
 	};
 	return inherited::OnMouseAction(x, y, mouse_action);
 }
 
+bool CUIScrollBar::OnMouseDown( int mouse_btn )
+{
+	if ( mouse_btn == MOUSE_1 )
+	{
+		if ( OnMouseDownEx() )
+		{
+			return true;
+		}
+	}
+	return inherited::OnMouseDown(mouse_btn);
+}
+bool CUIScrollBar::OnMouseDownEx()
+{
+	Fvector2 cursor_pos = GetUICursor()->GetCursorPosition();
+	Frect    box_rect, dec_rect, inc_rect;
+	m_ScrollBox->GetAbsoluteRect(box_rect);
+	m_DecButton->GetAbsoluteRect(dec_rect);
+	m_IncButton->GetAbsoluteRect(inc_rect);
+
+	if ( dec_rect.in(cursor_pos) && (m_mouse_state != 2) )
+	{
+		TryScrollDec();
+		m_mouse_state = 1;
+		return true;
+	}
+	
+	if ( inc_rect.in(cursor_pos) && (m_mouse_state != 1) )
+	{
+		TryScrollInc();
+		m_mouse_state = 2;
+		return true;
+	}
+	
+	Frect   dec2_rect, inc2_rect;
+	if ( m_bIsHorizontal )
+	{
+		dec2_rect.set( dec_rect.x2, dec_rect.y1, box_rect.x1, box_rect.y2 );
+		inc2_rect.set( box_rect.x2, box_rect.y1, inc_rect.x1, inc_rect.y2 );
+	}
+	else
+	{
+		dec2_rect.set( dec_rect.x1, dec_rect.y2, box_rect.x2, box_rect.y1 );
+		inc2_rect.set( box_rect.x1, box_rect.y2, inc_rect.x2, inc_rect.y1 );
+	}
+		
+	if ( dec2_rect.in(cursor_pos) && (m_mouse_state != 2) )
+	{
+		TryScrollDec();
+		m_mouse_state = 1;
+		return true;
+	}
+	
+	if ( inc2_rect.in(cursor_pos) && (m_mouse_state != 1) )
+	{
+		TryScrollInc();
+		m_mouse_state = 2;
+		return true;
+	}
+	return false;
+}
+
+void CUIScrollBar::OnMouseUp( int mouse_btn )
+{
+	m_mouse_state = 0;
+}
 
 void CUIScrollBar::ClampByViewRect()
 {
@@ -232,6 +298,12 @@ int CUIScrollBar::PosViewFromScroll(int view_size, int view_offs)
 	int work_size	= m_ScrollWorkArea-view_size;
 	int scroll_size	= ScrollSize();
 	return			scroll_size?(m_iScrollPos*work_size+scroll_size*view_offs-m_iMinPos*work_size)/scroll_size:0;
+}
+
+void CUIScrollBar::SetScrollPosClamped(int iPos)
+{ 
+	m_iScrollPos = iPos; 
+	clamp(m_iScrollPos,m_iMinPos,m_iMaxPos-m_iPageSize+1);
 }
 
 void CUIScrollBar::SendMessage(CUIWindow *pWnd, s16 msg, void *pData)
@@ -303,7 +375,7 @@ bool CUIScrollBar::ScrollDec()
 
 bool CUIScrollBar::ScrollInc()
 {
-	if(m_iScrollPos<=(m_iMaxPos-m_iPageSize)){
+	if(m_iScrollPos<=(m_iMaxPos-m_iPageSize+1)){
 		SetScrollPos	(m_iScrollPos+m_iStepSize);
 		return true;
 	}
@@ -317,6 +389,12 @@ void CUIScrollBar::Reset()
 	inherited::Reset	();
 }
 
+bool CUIScrollBar::IsRelevant()
+{
+	bool b_can_inc = (m_iScrollPos <= (m_iMaxPos - m_iPageSize));
+	bool b_can_dec = (m_iScrollPos > m_iMinPos);
+	return b_can_inc || b_can_dec;
+}
 
 void CUIScrollBar::Draw()
 {

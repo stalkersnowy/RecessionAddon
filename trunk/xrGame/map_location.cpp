@@ -38,6 +38,8 @@ CMapLocation::CMapLocation(LPCSTR type, u16 object_id)
 
 	m_objectID				= object_id;
 	m_actual_time			= 0;
+	
+	m_hint_enable			= true;
 
 	LoadSpot				(type, false);
 	m_refCount				= 1;
@@ -509,13 +511,22 @@ void CMapLocation::load(IReader &stream)
 
 void CMapLocation::SetHint	(const shared_str& hint)		
 {
+	if ( hint == "disable_hint" )
+	{
+		m_hint_enable = false;
+		m_hint._set( "" );
+		return;
+	}
 	m_hint = hint;
 };
 
 LPCSTR CMapLocation::GetHint	()					
 {
-	CStringTable	stbl;
-	return *stbl.translate(m_hint);
+	if ( !m_hint_enable ) 
+	{
+		return NULL;
+	}
+	return CStringTable().translate(m_hint).c_str();
 };
 
 CMapSpotPointer* CMapLocation::GetSpotPointer(CMapSpot* sp)
