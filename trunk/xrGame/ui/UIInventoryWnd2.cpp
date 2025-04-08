@@ -172,6 +172,9 @@ bool CUIInventoryWnd::ToSlot(CUICellItem* itm, bool force_place)
 		SendEvent_Item2Slot					(iitem);
 
 		SendEvent_ActivateSlot				(iitem);
+
+		if(_slot==OUTFIT_SLOT)
+			InventoryUtilities::UpdateWeight(UIBagWnd, m_pInv->GetOwner(), true);
 		
 		return								true;
 	}else
