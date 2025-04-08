@@ -79,6 +79,7 @@ public:
 	virtual void	MarkSelected			(bool b);
 	virtual bool	OnDbClick				();
 };
+
 /*
 class CUIUserTaskEditWnd;
 class CUIUserTaskItem :public CUITaskItem
@@ -100,11 +101,11 @@ public:
 	virtual			~CUIUserTaskItem			();
 	virtual void	Update					();
 	virtual void	SetGameTask				(CGameTask* gt, u16 obj_idx);
-			void	OnShowLocationClicked	();
-			void	OnShowPointerClicked	();
+	void __stdcall	OnShowLocationClicked	(CUIWindow*, void*);
+	void __stdcall	OnShowPointerClicked	(CUIWindow*, void*);
 			void	OnDescriptionChanged	();
-			void	OnEditTextClicked		();
-			void	OnRemoveClicked			();
+	void __stdcall	OnEditTextClicked		(CUIWindow*, void*);
+	void __stdcall	OnRemoveClicked			(CUIWindow*, void*);
 
 	virtual bool	OnDbClick				()	{return true;};
 	virtual void	MarkSelected			(bool b);
@@ -120,8 +121,8 @@ class CUIUserTaskEditWnd : public CUIDialogWnd, public CUIWndCallback
 	CUIEditBox*			m_editCaption;
 	CUIEditBoxEx*			m_editDescription;
 protected:
-			void			OnOk					();
-			void			OnCancel				();
+			void __stdcall	OnOk					(CUIWindow*, void*);
+			void __stdcall	OnCancel				(CUIWindow*, void*);
 			void			Init					();
 public:
 							CUIUserTaskEditWnd		(CUIUserTaskItem* itm);

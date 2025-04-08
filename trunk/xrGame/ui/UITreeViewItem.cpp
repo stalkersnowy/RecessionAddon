@@ -34,9 +34,11 @@ CUITreeViewItem::CUITreeViewItem()
 		m_uReadedColor		(READ_COLOR)
 {
 	AttachChild(&UIBkg);
-	UIBkg.InitTexture(treeItemBackgroundTexture);
+	UIBkg.Init(treeItemBackgroundTexture,0.f,0.f,UI()->is_16_9_mode?207.f:249.f,19.f);
+	UIBkg.SetStretchTexture(true);
+	UIBkg.GetStaticItem()->SetOriginalRect(0.f, 0.f, 249.f, 19.f);
 	UIBkg.TextureOff();
-	UIBkg.SetBaseTextureOffset(-20, 0);
+	UIBkg.SetBaseTextureOffset(UI()->is_16_9_mode?-16:-20, 0);
 	EnableTextHighlighting(false);
 
 	m_bManualSetColor = false;

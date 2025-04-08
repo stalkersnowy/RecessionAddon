@@ -84,7 +84,7 @@
                     <auto_static x="7" y="44" width="310" height="2" stretch="1">
                         <texture>ui\ui_pda_horizontal_line</texture>
                     </auto_static>
-                    <header_frame_line x="7" y="17" width="329" height="21" stretch="1">
+                    <header_frame_line x="7" y="17" width="329" height="32" stretch="1">
                         <texture>ui_string_03</texture>
                         <title x="8" y="1" width="362" height="18">
                             <text font="letterica16" r="255" g="255" b="255" complex_mode="0">st_pda_task_detail_information</text>
@@ -116,26 +116,26 @@
                                 <window_name>actor_btn</window_name>
                                 <texture>ui_icons_newPDA_showpers</texture>
                             </actor_btn>
-                            <notused_highlight_spot_btn x="229" y="1" width="17" height="15" check_mode="1" hint="pda_show_pointer_btn_hint" stretch="1">
+                            <highlight_spot_btn x="229" y="1" width="17" height="15" check_mode="1" hint="pda_show_pointer_btn_hint" stretch="1">
                                 <window_name>highlight_spot_btn</window_name>
                                 <texture>ui_icons_newPDA_mark</texture>
-                            </notused_highlight_spot_btn>
-                            <zoom_in_btn x="247" y="2" width="17" height="15" check_mode="1" hint="zoom_in_btn_hint" stretch="1">
+                            </highlight_spot_btn>
+                            <zoom_in_btn x="247" y="1" width="17" height="15" check_mode="1" hint="zoom_in_btn_hint" stretch="1">
                                 <window_name>zoom_in_btn</window_name>
                                 <texture>ui_icons_newPDA_zoom</texture>
                             </zoom_in_btn>
-                            <zoom_out_btn x="265" y="2" width="17" height="15" check_mode="1" hint="zoom_out_btn_hint" stretch="1">
+                            <zoom_out_btn x="265" y="1" width="17" height="15" check_mode="1" hint="zoom_out_btn_hint" stretch="1">
                                 <window_name>zoom_out_btn</window_name>
                                 <texture>ui_icons_newPDA_ZoomMin</texture>
                             </zoom_out_btn>
-                            <notused_add_spot_btn x="283" y="1" width="17" height="15" check_mode="1" hint="add_spot_btn_hint" stretch="1">
+                            <add_spot_btn x="283" y="1" width="17" height="15" check_mode="1" hint="add_spot_btn_hint" stretch="1">
                                 <window_name>add_spot_btn</window_name>
                                 <texture>ui_icons_newPDA_perssign</texture>
-                            </notused_add_spot_btn>
-                            <notused_remove_spot_btn x="302" y="1" width="17" height="15" check_mode="1" hint="remove_spot_btn_hint" stretch="1">
+                            </add_spot_btn>
+                            <remove_spot_btn x="302" y="1" width="17" height="15" check_mode="1" hint="remove_spot_btn_hint" stretch="1">
                                 <window_name>remove_spot_btn</window_name>
                                 <texture>ui_icons_newPDA_perssigndel</texture>
-                            </notused_remove_spot_btn>
+                            </remove_spot_btn>
                         </tool_bar>
                     </map_header_frame_line>
                     <main_map_frame x="0" y="0" width="341" height="475" a="90" stretch="1">

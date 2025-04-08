@@ -478,7 +478,7 @@ bool CUILevelMap::OnMouseAction(float x, float y, EUIMessages mouse_action)
 		return true;
 	if (MapWnd()->GlobalMap()->Locked())
 		return true;
-/*
+
 	if (MapWnd()->m_flags.is_any(CUIMapWnd::lmZoomIn+CUIMapWnd::lmZoomOut))	return false;
 
 	if (mouse_action == WINDOW_LBUTTON_DOWN)
@@ -490,7 +490,7 @@ bool CUILevelMap::OnMouseAction(float x, float y, EUIMessages mouse_action)
 			MapWnd()->SetTargetMap( this, true );
 		return true;
 	};
-*/
+
 	if(mouse_action==WINDOW_MOUSE_MOVE && (FALSE==pInput->iGetAsyncBtnState(0)) )
 	{
 		if( MapWnd() )
@@ -514,13 +514,11 @@ void	CUILevelMap::SendMessage			(CUIWindow* pWnd, s16 msg, void* pData)
 	if(msg==MAP_HIDE_HINT){
 		MapWnd()->HideHint(pWnd);
 	}
-	/*
 	else
 	if(msg==MAP_SELECT_SPOT){
 		CMapSpot* sp =smart_cast<CMapSpot*>(pWnd);VERIFY(sp);
 		MapWnd()->Select(sp->MapLocation());
-	}	
-*/
+	}
 }
 
 void CUILevelMap::OnFocusLost			()

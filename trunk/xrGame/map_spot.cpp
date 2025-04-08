@@ -47,13 +47,10 @@ void CMapSpot::Update()
 
 bool CMapSpot::OnMouseDown		(int mouse_btn)
 {
-/*
-	if(left_button){
+	if(mouse_btn==MOUSE_1){
 		GetMessageTarget()->SendMessage(this, MAP_SELECT_SPOT);
 		return true;
 	}else
-		return false;
-*/
 		return false;
 }
 

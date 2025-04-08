@@ -35,7 +35,7 @@ CUIMapWnd::CUIMapWnd()
 	m_flags.zero			();
 	m_currentZoom			= 1.0f;
 	m_hint					= NULL;
-//.	m_selected_location		= NULL;
+	m_selected_location		= NULL;
 	m_text_hint				= NULL;
 }
 
@@ -141,7 +141,7 @@ void CUIMapWnd::Init(LPCSTR xml_name, LPCSTR start_from)
 		Register						(m_ToolBar[btnIndex]);
 		AddCallback						(*m_ToolBar[btnIndex]->WindowName(),BUTTON_CLICKED,CUIWndCallback::void_function(this, &CUIMapWnd::OnToolZoomOutClicked));
 	}
-/*
+
 	btnIndex		= eAddSpot;
 	strconcat(pth, sToolbar.c_str(), ":add_spot_btn");
 	if(uiXml.NavigateToNode(pth,0) && IsGameTypeSingle() ){
@@ -149,7 +149,7 @@ void CUIMapWnd::Init(LPCSTR xml_name, LPCSTR start_from)
 		xml_init.Init3tButton			(uiXml, pth, 0, m_ToolBar[btnIndex]);
 		UIMainMapHeader->AttachChild	(m_ToolBar[btnIndex]);
 		Register						(m_ToolBar[btnIndex]);
-		AddCallback						(*m_ToolBar[btnIndex]->WindowName(),BUTTON_CLICKED,CUIWndCallback::void_function(&CUIMapWnd::OnToolAddSpotClicked,this,_1,_2));
+		AddCallback						(*m_ToolBar[btnIndex]->WindowName(),BUTTON_CLICKED,CUIWndCallback::void_function(this, &CUIMapWnd::OnToolAddSpotClicked));
 	}
 	btnIndex		= eRemoveSpot;
 	strconcat(pth, sToolbar.c_str(), ":remove_spot_btn");
@@ -158,7 +158,7 @@ void CUIMapWnd::Init(LPCSTR xml_name, LPCSTR start_from)
 		xml_init.Init3tButton			(uiXml, pth, 0, m_ToolBar[btnIndex]);
 		UIMainMapHeader->AttachChild	(m_ToolBar[btnIndex]);
 		Register						(m_ToolBar[btnIndex]);
-		AddCallback						(*m_ToolBar[btnIndex]->WindowName(),BUTTON_CLICKED,CUIWndCallback::void_function(&CUIMapWnd::OnToolRemoveSpotClicked,this,_1,_2));
+		AddCallback						(*m_ToolBar[btnIndex]->WindowName(),BUTTON_CLICKED,CUIWndCallback::void_function(this, &CUIMapWnd::OnToolRemoveSpotClicked));
 	}
 
 	btnIndex		= eHighlightSpot;
@@ -168,9 +168,9 @@ void CUIMapWnd::Init(LPCSTR xml_name, LPCSTR start_from)
 		xml_init.Init3tButton			(uiXml, pth, 0, m_ToolBar[btnIndex]);
 		UIMainMapHeader->AttachChild	(m_ToolBar[btnIndex]);
 		Register						(m_ToolBar[btnIndex]);
-		AddCallback						(*m_ToolBar[btnIndex]->WindowName(),BUTTON_CLICKED,CUIWndCallback::void_function(&CUIMapWnd::OnToolHighlightSpotClicked,this,_1,_2));
+		AddCallback						(*m_ToolBar[btnIndex]->WindowName(),BUTTON_CLICKED,CUIWndCallback::void_function(this, &CUIMapWnd::OnToolHighlightSpotClicked));
 	}
-*/
+
 	m_text_hint							= xr_new<CUIStatic>();
 	strconcat							(sizeof(pth),pth,start_from,":main_wnd:text_hint");
 	xml_init.InitStatic					(uiXml, pth, 0, m_text_hint);
@@ -452,14 +452,14 @@ bool CUIMapWnd::OnMouseAction(float x, float y, EUIMessages mouse_action)
 			bool b_zoom_in =	(mouse_action==WINDOW_LBUTTON_DOWN && m_flags.test(lmZoomIn)) || 
 								(mouse_action==WINDOW_MOUSE_WHEEL_DOWN);
 
-			if(mouse_action==WINDOW_MOUSE_WHEEL_UP)
+/*			if(mouse_action==WINDOW_MOUSE_WHEEL_UP)
 			{
 //.				Msg("up");
 			}
 			if(mouse_action==WINDOW_MOUSE_WHEEL_DOWN)
 			{
 //.				Msg("down");
-			}
+			}*/
 			CUIGlobalMap* gm				= GlobalMap();
 			float _prev_zoom				= GetZoom();
 			if(b_zoom_in)					SetZoom(GetZoom()*1.5f);
@@ -594,7 +594,7 @@ void CUIMapWnd::OnToolZoomOutClicked(CUIWindow* w, void*)
 	m_flags.set						(lmZoomOut,bPushed);
 	ValidateToolBar					();
 }
-/*
+
 void CUIMapWnd::OnToolAddSpotClicked	(CUIWindow* w, void*)
 {
 	m_flags.zero		();
@@ -635,11 +635,14 @@ void CUIMapWnd::OnToolHighlightSpotClicked(CUIWindow* w, void*)
 }
 
 
+#include "actor.h"
+#include "../gametaskmanager.h"
 void CUIMapWnd::HighlightSpot			()
 {
 	if(m_selected_location){
 		bool b = m_selected_location->PointerEnabled	();
-		Level().MapManager().DisableAllPointers();
+//		Level().MapManager().DisableAllPointers();
+		Actor()->GameTaskManager().SetActiveTask("", 1);
 		if(b)
 			m_selected_location->DisablePointer();
 		else
@@ -649,7 +652,7 @@ void CUIMapWnd::HighlightSpot			()
 		m_flags.set						(lmHighlightSpot,FALSE);
 	}
 }
-*/
+
 void CUIMapWnd::ValidateToolBar			()
 {
 	CUI3tButton* btn	= NULL;
@@ -660,7 +663,7 @@ void CUIMapWnd::ValidateToolBar			()
 	btn					= m_ToolBar[eZoomOut];
 	if(btn)
 		btn->SetCheck	(!!m_flags.test(lmZoomOut));
-/*
+
 	btn					= m_ToolBar[eAddSpot];
 	if(btn)
 		btn->SetCheck	(!!m_flags.test(lmUserSpotAdd));
@@ -672,7 +675,7 @@ void CUIMapWnd::ValidateToolBar			()
 	btn					= m_ToolBar[eHighlightSpot];
 	if(btn)
 		btn->SetCheck	(!!m_flags.test(lmHighlightSpot));
-*/
+
 }
 
 
@@ -693,28 +696,32 @@ void CUIMapWnd::OnToolActorClicked		(CUIWindow*, void*)
 
 	SetTargetMap				(lm, v2, true);
 }
-/*
+
 void CUIMapWnd::AddUserSpot			(CUILevelMap* lm)
 {
 	VERIFY(m_flags.test(lmUserSpotAdd) );
 
-	Fvector2 cursor_pos = GetUICursor()->GetPos();
-	Fvector2 _p;lm->GetAbsolutePos(_p);
-	cursor_pos.sub					(_p);
-	Fvector2 p =					lm->ConvertLocalToReal(cursor_pos);
+	Fvector2 cursor_pos = GetUICursor()->GetCursorPosition();
+	Frect box_rect; lm->GetAbsoluteRect(box_rect);
+	cursor_pos.sub					(box_rect.lt);
+	Frect bound_rect				= lm->BoundRect();
+	bound_rect.lt.x					/= UI()->get_current_kx();
+	bound_rect.rb.x					/= UI()->get_current_kx();
 	Fvector pos;
-	pos.set							(p.x, 0.0f, p.y);
+	pos.x							= bound_rect.lt.x + cursor_pos.x / (box_rect.width() / bound_rect.width());
+	pos.y							= 0.0f;
+	pos.z							= bound_rect.height() + bound_rect.lt.y - cursor_pos.y / (box_rect.height() / bound_rect.height());
 	shared_str spot					= "user"; 
 	CMapLocation* ml				= Level().MapManager().AddUserLocation(spot, lm->MapName(), pos);
-	CGameTask* t					= Actor()->GameTaskManager().GiveGameTaskToActor("user_task",false);
+/*	CGameTask* t					= Actor()->GameTaskManager().GiveGameTaskToActor("user_task",false);
 	t->m_Objectives[0].object_id	= ml->ObjectID();
 	t->m_Objectives[0].map_location	= spot;
 	ml->SetHint						(t->m_Objectives[0].description);
-	Actor()->GameTaskManager		().SetTaskState(t, 0, eTaskUserDefined);
+	Actor()->GameTaskManager		().SetTaskState(t, 0, eTaskUserDefined); SNW-TMP */
 
 	m_flags.set						(lmUserSpotAdd, FALSE);
 	m_ToolBar[eAddSpot]->SetButtonMode(CUIButton::BUTTON_NORMAL);
-}*/
+}
 
 bool is_in(const Frect& b1, const Frect& b2){
 	return (b1.x1<b2.x1)&&(b1.x2>b2.x2)&&(b1.y1<b2.y1)&&(b1.y2>b2.y2);
@@ -754,7 +761,6 @@ void CUIMapWnd::HideHint					(CUIWindow* parent)
 		m_hint->SetOwner	(NULL);
 }
 
-/*
 void CUIMapWnd::Select				(CMapLocation* ml)
 {
 	m_selected_location		= NULL;
@@ -768,7 +774,7 @@ void CUIMapWnd::Select				(CMapLocation* ml)
 
 	if(	!!m_flags.test(lmHighlightSpot))
 		HighlightSpot	();
-}*/
+}
 
 void CUIMapWnd::Hint					(const shared_str& text)
 {
