@@ -187,6 +187,7 @@ void CUIArtefactParams::SetInfo(const shared_str& af_section)
 		_h						+= _s->GetWndSize().y;
 		AttachChild				(_s);
 	}
+	if (pSettings->line_exist(af_section, "additional_inventory_weight"))
 	{
 		float val	= pSettings->r_float( af_section, "additional_inventory_weight" );
 		if ( !fis_zero(val) )
