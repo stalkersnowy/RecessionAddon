@@ -163,8 +163,8 @@ void CUIArtefactParams::SetInfo(const shared_str& af_section)
 		CUIStatic* _s			= m_info_items_immunity[i1];
 
 		float					_val = 0.f;
-		if (!pSettings->line_exist(af_section, af_item_sect_immunity_names[i]))
-			continue;
+		if (!pSettings->line_exist(af_section, "hit_absorbation_sect"))
+			break;
 		shared_str _sect	= pSettings->r_string(af_section, "hit_absorbation_sect");
 		_val				= pSettings->r_float(_sect, af_item_sect_immunity_names[i1]);
 		if (fsimilar(_val, 1.0f))
