@@ -273,11 +273,9 @@ bool CActorCondition::IsCantWalkWeight()
 
 		if( object().inventory().TotalWeight() > max_w )
 		{
-			m_condition_flags.set			(eCantWalkWeight, TRUE);
 			return true;
 		}
 	}
-	m_condition_flags.set					(eCantWalkWeight, FALSE);
 	return false;
 }
 
@@ -384,8 +382,8 @@ void CActorCondition::UpdateTutorialThresholds()
 		strcpy_s(cb_name,"_G.on_actor_psy");
 	}
 */
-	if(b && !m_condition_flags.test(eCantWalkWeight)){
-//.		m_condition_flags.set			(eCantWalkWeight, TRUE);
+	if(b && !m_condition_flags.test(eCantWalkWeight) && IsCantWalkWeight()){
+		m_condition_flags.set			(eCantWalkWeight, TRUE);
 		b=false;
 		strcpy_s(cb_name,"_G.on_actor_cant_walk_weight");
 	}
