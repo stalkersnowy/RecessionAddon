@@ -23,6 +23,11 @@ CMapSpot::~CMapSpot()
 void CMapSpot::Load(CUIXml* xml, LPCSTR path)
 {
 	CUIXmlInit::InitStatic(*xml,path,0,this);
+	if (!Heading()) {
+		SetWidth(GetWidth() * UI()->get_current_kx());
+
+		SetStretchTexture	(true);
+	}
 	int i = xml->ReadAttribInt(path, 0, "scale", 0);
 	m_bScale			= (i==1);
 
@@ -54,11 +59,18 @@ bool CMapSpot::OnMouseDown		(int mouse_btn)
 		return false;
 }
 
-
 void CMapSpot::OnFocusLost		()
 {
 	inherited::OnFocusLost		();
 	GetMessageTarget()->SendMessage(this, MAP_HIDE_HINT, NULL);
+}
+
+void CMapSpot::EndXformAnimation()
+{
+	inherited::EndXformAnimation();
+	if (!Heading()) {
+		SetWidth(GetWidth() * UI()->get_current_kx());
+	}
 }
 
 
