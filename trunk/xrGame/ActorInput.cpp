@@ -158,7 +158,25 @@ void CActor::IR_OnKeyboardPress(int cmd)
 		{
 			if(IsGameTypeSingle())
 			{
-				PIItem itm = inventory().item((cmd==kUSE_BANDAGE)?  CLSID_IITEM_BANDAGE:CLSID_IITEM_MEDKIT );	
+				PIItem itm = NULL;
+				if(cmd==kUSE_BANDAGE)
+					itm = inventory().item( CLSID_IITEM_BANDAGE );
+				else
+				{
+					LPCSTR medkits[] = {
+						"medkit",
+						"medkit_army",
+						"medkit_scientic"
+					};
+					for(int i=0;i<3;++i)
+					{
+						itm = inventory().GetAny(medkits[i]);
+						if(itm) 
+							break;
+					}
+					if(!itm)
+						itm = inventory().item( CLSID_IITEM_MEDKIT );
+				}
 				if(itm)
 				{
 					inventory().Eat				(itm);
