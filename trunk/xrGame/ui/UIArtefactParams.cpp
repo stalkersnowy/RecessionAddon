@@ -97,11 +97,19 @@ void CUIArtefactParams::InitFromXml(CUIXml& xml_doc)
 		strconcat				(sizeof(_buff),_buff, _base, ":static_", af_item_sect_immunity_names[i1]);
 		CUIXmlInit::InitStatic	(xml_doc, _buff,	0, _s);
 	}
+
+	{
+		m_additional_weight					= xr_new<CUIStatic>();
+		m_additional_weight->SetAutoDelete(false);
+		strconcat				(sizeof(_buff),_buff, _base, ":additional_weight");
+		CUIXmlInit::InitStatic	(xml_doc, _buff,	0, m_additional_weight);
+	}
 }
 
 bool CUIArtefactParams::Check(const shared_str& af_section)
 {
-	return !!pSettings->line_exist(af_section, "af_actor_properties");
+	return pSettings->line_exist(af_section, "af_actor_properties") 
+		|| pSettings->line_exist(af_section, "full_icon_name");
 }
 #include "../string_table.h"
 void CUIArtefactParams::SetInfo(const shared_str& af_section)
@@ -115,6 +123,8 @@ void CUIArtefactParams::SetInfo(const shared_str& af_section)
 		CUIStatic* _s			= m_info_items_restore[i];
 
 		float					_val;
+		if (!pSettings->line_exist(af_section, af_item_sect_restore_names[i]))
+			continue;
 		float _actor_val		= pSettings->r_float	("actor_condition", af_actor_param_names[i]);
 		_val					= pSettings->r_float	(af_section, af_item_sect_restore_names[i]);
 
@@ -153,6 +163,8 @@ void CUIArtefactParams::SetInfo(const shared_str& af_section)
 		CUIStatic* _s			= m_info_items_immunity[i1];
 
 		float					_val = 0.f;
+		if (!pSettings->line_exist(af_section, af_item_sect_immunity_names[i]))
+			continue;
 		shared_str _sect	= pSettings->r_string(af_section, "hit_absorbation_sect");
 		_val				= pSettings->r_float(_sect, af_item_sect_immunity_names[i1]);
 		if (fsimilar(_val, 1.0f))
@@ -174,6 +186,24 @@ void CUIArtefactParams::SetInfo(const shared_str& af_section)
 		_s->SetWndPos			(_s->GetWndPos().x, _h);
 		_h						+= _s->GetWndSize().y;
 		AttachChild				(_s);
+	}
+	{
+		float val	= pSettings->r_float( af_section, "additional_inventory_weight" );
+		if ( !fis_zero(val) )
+		{
+			LPCSTR _color = (val > 0) ? "%c[green]" : "%c[red]";
+			sprintf_s(_buff, "%s %s %+.0f %s",
+				CStringTable().translate("ui_inv_outfit_additional_weight").c_str(),
+				_color,
+				val,
+				CStringTable().translate("st_kg").c_str());
+			m_additional_weight->SetText( _buff );
+
+			m_additional_weight->SetWndPos(m_additional_weight->GetWndPos().x, _h );
+
+			_h += m_additional_weight->GetWndSize().y;
+			AttachChild( m_additional_weight );
+		}
 	}
 	SetHeight					(_h);
 }

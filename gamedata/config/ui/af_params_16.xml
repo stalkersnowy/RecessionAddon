@@ -89,4 +89,11 @@
 			</auto_static>
 			<text font="letterica16" x="15" y="2"/>
 		</static_fire_wound_immunity>
+		
+		<additional_weight width="194" height="20" complex_mode="1">
+			<auto_static width="15" height="18" stretch="1">
+				<texture>ui_inv_icon_additional_weight</texture>
+			</auto_static>
+			<text font="letterica16" x="15" y="2"/>
+		</additional_weight>
 	</af_params>

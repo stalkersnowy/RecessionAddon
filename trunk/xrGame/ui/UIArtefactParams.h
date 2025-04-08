@@ -28,4 +28,5 @@ protected:
 	};
 	CUIStatic*					m_info_items_restore[_max_item_index];
 	CUIStatic*					m_info_items_immunity[ALife::eHitTypeMax];
+	CUIStatic*					m_additional_weight;
 };

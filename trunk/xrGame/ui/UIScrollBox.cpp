@@ -4,7 +4,6 @@
 
 CUIScrollBox::CUIScrollBox()
 {
-	m_bAvailableTexture		= true;
 	m_bIsHorizontal			= true;
 }
 
@@ -20,24 +19,40 @@ void CUIScrollBox::SetVertical()
 
 bool CUIScrollBox::OnMouseAction(float x, float y, EUIMessages mouse_action)
 {
-	bool cursor_over;
-
-	if(x>=-10.0f && x<GetWidth()+10.0f && y>=-10.0f && y<GetHeight()+10.0f)
-		cursor_over = true;
+	Fvector2	border;
+	if ( m_bIsHorizontal )
+	{
+		border.x = 512.0f; // :)
+		border.y = 512.0f;
+	}
 	else
-		cursor_over = false;
+	{
+		border.x = 512.0f;
+		border.y = 512.0f;
+	}
+
+	bool over_x = ( x >= -border.x && x < (GetWidth()  + border.x) );
+	bool over_y = ( y >= -border.y && y < (GetHeight() + border.y) );
+		
+	bool cursor_over = false;
+	if ( over_x && over_y )
+	{
+		cursor_over = true;
+	}
 
 	bool im_capturer = (GetParent()->GetMouseCapturer()==this);
 
 	if(mouse_action == WINDOW_LBUTTON_DOWN)
 	{
 		GetParent()->SetCapture(this, true);
+		return true;
 	}
 	else if(mouse_action == WINDOW_LBUTTON_UP)
 	{		
 		GetParent()->SetCapture(this, false);
+		return true;
 	}
-	else if(im_capturer && mouse_action == WINDOW_MOUSE_MOVE && cursor_over)
+	if(im_capturer && mouse_action == WINDOW_MOUSE_MOVE && cursor_over)
 	{
 		Fvector2	pos		= GetWndPos();
 		Fvector2	delta	= GetUICursor()->GetCursorPositionDelta();
@@ -50,6 +65,11 @@ bool CUIScrollBox::OnMouseAction(float x, float y, EUIMessages mouse_action)
 		SetWndPos			(pos);
 
 		GetMessageTarget()->SendMessage(this, SCROLLBOX_MOVE);
+	}
+
+	if ( !cursor_over )
+	{
+		GetParent()->SetCapture(this, false);
 	}
 	return				true;
 }

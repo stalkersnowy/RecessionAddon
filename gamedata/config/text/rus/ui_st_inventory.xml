@@ -267,4 +267,7 @@
 	<string id="ui_st_err_sb_master_server_conn_fail">
 		<text>Невозможно присоединиться к мастер-серверу</text>
 	</string>
+	<string id="ui_inv_outfit_additional_weight">
+		<text>Макс. вес</text>
+	</string>
 </string_table>
