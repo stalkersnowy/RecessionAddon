@@ -289,7 +289,7 @@ void CAI_Trader::UpdateCL()
 	sound().update			(Device.fTimeDelta);
 
 
-	if (!GetScriptControl() && !bfScriptAnimation()) 
+	if (/*!GetScriptControl() && */!bfScriptAnimation()) 
 		animation().update_frame();
 }
 
