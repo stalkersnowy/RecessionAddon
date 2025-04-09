@@ -93,7 +93,7 @@
     <texture id="ui_frame_rb" x="128" y="192" width="128" height="128" />
     <texture id="ui_pda_frame_sub_rt" x="160" y="96" width="32" height="32" />
     <texture id="ui_pda_frame_sub_lt" x="96" y="96" width="32" height="32" />
-    <texture id="ui_keyboardsetup" x="310" y="257" width="453" height="199" />
     <texture id="ui_frame_01_r" x="960" y="660" width="32" height="32" />
     <texture id="ui_slots_belt_16" x="0" y="695" width="1024" height="170" />
+    <texture id="npc_icon_soldier_outfit" x="260" y="230" width="128" height="320" />
 </ui_texture>
