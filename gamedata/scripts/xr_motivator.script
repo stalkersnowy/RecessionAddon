@@ -192,7 +192,9 @@ function motivator_binder:death_callback(victim, who)
 		local community = self.object:character_community()
 		if community == "zombied" or
 		   community == "monolith" or
-		   community == "arena_enemy"
+		   community == "arena_enemy" or
+		   community == "military" or
+		   community == "killer"
 		then
 			return
 		end
