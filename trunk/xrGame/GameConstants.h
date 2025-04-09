@@ -12,4 +12,5 @@ namespace GameConstants
 	bool GetPartnerWeightInCarBodyShowing	();
 	bool GetTrackBarValuesShowing			();
 	bool GetNumBeforeAnswersShowing			();
+	bool GetSatietyBarInInventoryShowing	();
 };

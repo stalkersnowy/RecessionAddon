@@ -33,6 +33,7 @@ using namespace InventoryUtilities;
 #include "UIDragDropListEx.h"
 #include "UIOutfitSlot.h"
 #include "UI3tButton.h"
+#include "../GameConstants.h"
 
 #define				INVENTORY_ITEM_XML		"inventory_item.xml"
 #define				INVENTORY_XML			"inventory_new.xml"
@@ -91,7 +92,7 @@ void CUIInventoryWnd::Init()
 	AttachChild							(&UIProgressBack);
 	xml_init.InitStatic					(uiXml, "progress_background", 0, &UIProgressBack);
 
-	if (GameID() != GAME_SINGLE){
+	if (GameConstants::GetSatietyBarInInventoryShowing() || GameID() != GAME_SINGLE){
 		AttachChild						(&UIProgressBack_rank);
 		xml_init.InitStatic				(uiXml, "progress_back_rank", 0, &UIProgressBack_rank);
 
@@ -269,6 +270,13 @@ void CUIInventoryWnd::Update()
 			}
 		}else
 		{
+			if(GameConstants::GetSatietyBarInInventoryShowing()){
+				CActor *pActor = smart_cast<CActor*>(Level().CurrentEntity());
+				if(pActor){
+					v = pActor->conditions().GetSatiety()*100.0f;
+					UIProgressBarRank.SetProgressPos(v);
+				}
+			}
 			_money							= pOurInvOwner->get_money();
 		}
 		// update money

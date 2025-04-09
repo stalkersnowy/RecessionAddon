@@ -13,6 +13,7 @@ bool	m_bShowContactBio					= false;
 bool	m_bShowPartnerWeightInCarBody		= false;
 bool	m_bShowTrackBarValues				= false;
 bool	m_bShowNumBeforeAnswers				= false;
+bool	m_bShowSatietyInInventory			= false;
 
 namespace GameConstants
 {
@@ -31,6 +32,7 @@ namespace GameConstants
 		m_bShowPartnerWeightInCarBody		= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_partner_weight_in_carbody", false);
 		m_bShowTrackBarValues				= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_track_bar_values", false);
 		m_bShowNumBeforeAnswers				= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_numbers_before_answers", false);
+		m_bShowSatietyInInventory			= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_satiety_bar_in_inventory", false);
 
 		Msg("# GameConstants are loaded");
 	}
@@ -73,5 +75,10 @@ namespace GameConstants
 	bool GetNumBeforeAnswersShowing()
 	{
 		return m_bShowNumBeforeAnswers;
+	}
+
+	bool GetSatietyBarInInventoryShowing()
+	{
+		return m_bShowSatietyInInventory;
 	}
 }
