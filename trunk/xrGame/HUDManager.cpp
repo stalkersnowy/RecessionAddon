@@ -269,8 +269,10 @@ void CHUDManager::SetHitmarkType		(LPCSTR tex_name)
 	HitMarker.InitShader				(tex_name);
 }
 #include "ui\UIMainInGameWnd.h"
+extern CUIXml*			pWpnScopeXml;
 void CHUDManager::OnScreenResolutionChanged()
 {
+	xr_delete							(pWpnScopeXml);
 	xr_delete							(pUI->UIMainIngameWnd);
 
 	pUI->UIMainIngameWnd				= xr_new<CUIMainIngameWnd>	();

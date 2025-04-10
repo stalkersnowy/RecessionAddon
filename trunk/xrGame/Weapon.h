@@ -147,7 +147,7 @@ protected:
 	
 		float			m_fFactor;
 		float			m_fRTZoomFactor; //run-time zoom factor
-		CUIStaticItem*	m_UIScope;
+		CUIWindow*		m_UIScope;
 	//время удаления оружия
 	ALife::_TIME_ID			m_dwWeaponRemoveTime;
 	ALife::_TIME_ID			m_dwWeaponIndependencyTime;
@@ -283,7 +283,7 @@ public:
 	virtual void			OnZoomIn			();
 	virtual void			OnZoomOut			();
 			bool			IsZoomed			()	const	{return m_zoom_params.m_bIsZoomModeNow;};
-	CUIStaticItem*			ZoomTexture			();	
+	CUIWindow*				ZoomTexture			();	
 			bool			ZoomHideCrosshair	()			{return m_zoom_params.m_bHideCrosshairInZoom || ZoomTexture();}
 
 	IC float				GetZoomFactor		() const		{	return m_zoom_params.m_fCurrentZoomFactor;	}
@@ -292,7 +292,7 @@ public:
 	void					ZoomDynamicMod		(bool bIncrement, bool bForceLimit);
 	virtual	float			CurrentZoomFactor	();
 	//показывает, что оружие находится в соостоянии поворота для приближенного прицеливания
-			bool			IsRotatingToZoom	() const		{	return (m_zoom_params.m_fCurrentZoomFactor <1.f);}
+			bool			IsRotatingToZoom	() const		{	return (m_zoom_params.m_fZoomRotationFactor <1.f);}
 
 			void			LoadZoomOffset		(LPCSTR section, LPCSTR prefix);
 

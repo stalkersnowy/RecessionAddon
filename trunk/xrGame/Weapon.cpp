@@ -27,9 +27,12 @@
 #include "object_broker.h"
 #include "../xr_3da/IGame_Persistent.h"
 #include "ui/UIWindow.h"
+#include "ui/UIXmlInit.h"
 
 #define WEAPON_REMOVE_TIME		60000
 #define ROTATION_TIME			0.25f
+
+CUIXml*				pWpnScopeXml = NULL;
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -1226,25 +1229,36 @@ void CWeapon::InitAddons()
 			m_iScopeX = pSettings->r_s32(cNameSect(), "scope_x");
 			m_iScopeY = pSettings->r_s32(cNameSect(), "scope_y");
 
-			shared_str scope_tex_name;
-			scope_tex_name = pSettings->r_string(*m_sScopeName, "scope_texture");
+			shared_str scope_tex_name = pSettings->r_string(*m_sScopeName, "scope_texture");
 			m_zoom_params.m_fScopeZoomFactor = pSettings->r_float(*m_sScopeName, "scope_zoom_factor");
-
-			if (m_UIScope) xr_delete(m_UIScope);
-			m_UIScope = xr_new<CUIStaticItem>();
-
-			m_UIScope->Init(*scope_tex_name, "hud\\default", 0, 0, alNone);
+			
+			if ( !g_dedicated_server )
+			{
+				m_UIScope				= xr_new<CUIWindow>();
+				if(!pWpnScopeXml)
+				{
+					pWpnScopeXml			= xr_new<CUIXml>();
+					pWpnScopeXml->Init		(CONFIG_PATH, UI_PATH, "scopes.xml");
+				}
+				CUIXmlInit::InitWindow	(*pWpnScopeXml, scope_tex_name.c_str(), 0, m_UIScope);
+			}
 
 		}
 		else if (m_eScopeStatus == ALife::eAddonPermanent)
 		{
 			m_zoom_params.m_fScopeZoomFactor = pSettings->r_float(cNameSect(), "scope_zoom_factor");
-			shared_str scope_tex_name;
-			scope_tex_name = pSettings->r_string(cNameSect(), "scope_texture");
-
-			if (m_UIScope) xr_delete(m_UIScope);
-			m_UIScope = xr_new<CUIStaticItem>();
-			m_UIScope->Init(*scope_tex_name, "hud\\default", 0, 0, alNone);
+			shared_str scope_tex_name = pSettings->r_string(cNameSect(), "scope_texture");
+			
+			if ( !g_dedicated_server )
+			{
+				m_UIScope				= xr_new<CUIWindow>();
+				if(!pWpnScopeXml)
+				{
+					pWpnScopeXml			= xr_new<CUIXml>();
+					pWpnScopeXml->Init		(CONFIG_PATH, UI_PATH, "scopes.xml");
+				}
+				CUIXmlInit::InitWindow	(*pWpnScopeXml, scope_tex_name.c_str(), 0, m_UIScope);
+			}
 
 		}
 	}
@@ -1329,7 +1343,7 @@ void CWeapon::OnZoomOut()
 	StartHudInertion();
 }
 
-CUIStaticItem* CWeapon::ZoomTexture()
+CUIWindow* CWeapon::ZoomTexture()
 {
 	if (UseScopeTexture())
 		return m_UIScope;
@@ -1599,9 +1613,8 @@ void CWeapon::OnDrawUI()
 {
 	if(IsZoomed() && ZoomHideCrosshair()){
 		if(ZoomTexture() && !IsRotatingToZoom()){
-			ZoomTexture()->SetPos	(0,0);
-			ZoomTexture()->SetRect	(0,0,UI_BASE_WIDTH, UI_BASE_HEIGHT);
-			ZoomTexture()->Render	();
+			ZoomTexture()->Update	();
+			ZoomTexture()->Draw		();
 
 			if (m_zoom_params.m_pVision)
 				m_zoom_params.m_pVision->Draw();
