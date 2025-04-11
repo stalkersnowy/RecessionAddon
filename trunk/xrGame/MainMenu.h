@@ -45,6 +45,7 @@ class CMainMenu :
 		flRestoreCursor		= (1<<5),
 		flGameSaveScreenshot= (1<<6),
 		flNeedVidRestart	= (1<<7),
+		flWpnScopeDraw		= (1<<8),
 	};
 	Flags16			m_Flags;
 	string_path		m_screenshot_name;
@@ -106,6 +107,7 @@ public:
 
 	virtual void	Activate						(bool bActive); 
 	virtual	bool	IsActive						(); 
+			void	SetWpnScopeDraw					(bool draw);
 
 	virtual void	IR_OnMousePress					(int btn);
 	virtual void	IR_OnMouseRelease				(int btn);
@@ -119,7 +121,7 @@ public:
 
 	virtual void	IR_OnMouseWheel					(int direction)	;
 
-	bool			OnRenderPPUI_query				();
+	bool			OnRenderPPUI_query				(bool scope_too = true);
 	void			OnRenderPPUI_main				();
 	void			OnRenderPPUI_PP					();
 

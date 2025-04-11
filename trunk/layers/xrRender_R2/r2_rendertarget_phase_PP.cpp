@@ -60,7 +60,7 @@ BOOL CRenderTarget::u_need_PP	()
 	bool	_noise	= (param_noise>0.001f);
 	bool	_dual	= (param_duality_h>0.001f)||(param_duality_v>0.001f);
 
-	// bool	_menu_pp= g_pGamePersistent?g_pGamePersistent->OnRenderPPUI_query():false;
+	// bool	_menu_pp= g_pGamePersistent?g_pGamePersistent->OnRenderPPUI_query(false):false;
 
 	bool	_cbase	= false;
 	{

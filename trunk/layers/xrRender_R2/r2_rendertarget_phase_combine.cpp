@@ -7,7 +7,8 @@
 float	hclip(float v, float dim)		{ return 2.f*v/dim - 1.f; }
 void	CRenderTarget::phase_combine	()
 {
-	bool	_menu_pp	= g_pGamePersistent?g_pGamePersistent->OnRenderPPUI_query():false;
+	bool	_menu_pp	= g_pGamePersistent?g_pGamePersistent->OnRenderPPUI_query(false):false;
+	bool	_scope_pp	= g_pGamePersistent?g_pGamePersistent->OnRenderPPUI_query():false;
 
 	u32			Offset					= 0;
 	Fvector2	p0,p1;
@@ -142,7 +143,7 @@ void	CRenderTarget::phase_combine	()
 	// Distortion filter
 	BOOL	bDistort	= RImplementation.o.distortion_enabled;				// This can be modified
 	{
-		if		((0==RImplementation.mapDistort.size()) && !_menu_pp)		bDistort= FALSE;
+		if		((0==RImplementation.mapDistort.size()) && !_scope_pp)		bDistort= FALSE;
 		if (bDistort)		{
 			u_setrt						(rt_Generic_1,0,0,HW.pBaseZB);		// Now RT is a distortion mask
 			RCache.set_CullMode			(CULL_CCW);

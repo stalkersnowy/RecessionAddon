@@ -148,6 +148,7 @@ protected:
 		float			m_fFactor;
 		float			m_fRTZoomFactor; //run-time zoom factor
 		CUIWindow*		m_UIScope;
+		CUIWindow*		m_UILens;
 	//время удаления оружия
 	ALife::_TIME_ID			m_dwWeaponRemoveTime;
 	ALife::_TIME_ID			m_dwWeaponIndependencyTime;

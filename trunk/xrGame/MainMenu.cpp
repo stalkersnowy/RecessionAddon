@@ -322,9 +322,9 @@ void CMainMenu::IR_OnMouseWheel(int direction)
 }
 
 
-bool CMainMenu::OnRenderPPUI_query()
+bool CMainMenu::OnRenderPPUI_query(bool scope_too)
 {
-	return IsActive() && !m_Flags.test(flGameSaveScreenshot) && b_shniaganeed_pp;
+	return (scope_too && m_Flags.test(flWpnScopeDraw)) || (IsActive() && !m_Flags.test(flGameSaveScreenshot) && b_shniaganeed_pp);
 }
 
 
@@ -346,12 +346,18 @@ void CMainMenu::OnRender	()
 	}
 }
 
+void CMainMenu::SetWpnScopeDraw(bool draw){
+	m_Flags.set(flWpnScopeDraw, draw);
+}
+
 void CMainMenu::OnRenderPPUI_main	()
 {
-	if(!IsActive()) return;
+	if (!m_Flags.test(flWpnScopeDraw)){
+		if(!IsActive()) return;
 
-	if(m_Flags.test(flGameSaveScreenshot))
-		return;
+		if(m_Flags.test(flGameSaveScreenshot))
+			return;
+	}
 
 	UI()->pp_start();
 
@@ -366,7 +372,7 @@ void CMainMenu::OnRenderPPUI_main	()
 
 void CMainMenu::OnRenderPPUI_PP	()
 {
-	if ( !IsActive() ) return;
+	if ( !IsActive() && !m_Flags.test(flWpnScopeDraw) ) return;
 
 	if(m_Flags.test(flGameSaveScreenshot))	return;
 

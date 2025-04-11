@@ -84,12 +84,14 @@ CWeapon::CWeapon(LPCSTR name)
 	m_ef_main_weapon_type	= u32(-1);
 	m_ef_weapon_type		= u32(-1);
 	m_UIScope				= NULL;
+	m_UILens				= NULL;
 	m_set_next_ammoType_on_reload = u32(-1);
 }
 
 CWeapon::~CWeapon		()
 {
 	xr_delete	(m_UIScope);
+	xr_delete	(m_UILens);
 }
 
 //void CWeapon::Hit(float P, Fvector &dir,	
@@ -1241,6 +1243,13 @@ void CWeapon::InitAddons()
 					pWpnScopeXml->Init		(CONFIG_PATH, UI_PATH, "scopes.xml");
 				}
 				CUIXmlInit::InitWindow	(*pWpnScopeXml, scope_tex_name.c_str(), 0, m_UIScope);
+
+				LPCSTR lens_tex_name = pWpnScopeXml->ReadAttrib(scope_tex_name.c_str(), 0, "lens", NULL);
+				if (lens_tex_name)
+				{
+					m_UILens				= xr_new<CUIWindow>();
+					CUIXmlInit::InitWindow	(*pWpnScopeXml, lens_tex_name, 0, m_UILens);
+				}
 			}
 
 		}
@@ -1258,13 +1267,21 @@ void CWeapon::InitAddons()
 					pWpnScopeXml->Init		(CONFIG_PATH, UI_PATH, "scopes.xml");
 				}
 				CUIXmlInit::InitWindow	(*pWpnScopeXml, scope_tex_name.c_str(), 0, m_UIScope);
+				
+				LPCSTR lens_tex_name = pWpnScopeXml->ReadAttrib(scope_tex_name.c_str(), 0, "lens", NULL);
+				if (lens_tex_name)
+				{
+					m_UILens				= xr_new<CUIWindow>();
+					CUIXmlInit::InitWindow	(*pWpnScopeXml, lens_tex_name, 0, m_UILens);
+				}
 			}
 
 		}
 	}
 	else
 	{
-		if (m_UIScope) xr_delete(m_UIScope);
+		if (m_UIScope)	xr_delete(m_UIScope);
+		if (m_UILens)	xr_delete(m_UILens);
 
 		if (IsZoomEnabled())
 			m_zoom_params.m_fIronSightZoomFactor = pSettings->r_float(cNameSect(), "scope_zoom_factor");
@@ -1330,6 +1347,7 @@ void CWeapon::OnZoomIn()
 	if (m_zoom_params.m_sUseBinocularVision.size() && IsScopeAttached() && NULL == m_zoom_params.m_pVision)
 		m_zoom_params.m_pVision = xr_new<CBinocularsVision>(m_zoom_params.m_sUseBinocularVision);
 	StopHudInertion();
+	if (m_UILens) m_UILens->SetPPMode();
 }
 
 void CWeapon::OnZoomOut()
@@ -1345,6 +1363,7 @@ void CWeapon::OnZoomOut()
 
 	xr_delete(m_zoom_params.m_pVision);
 	StartHudInertion();
+	if (m_UILens) m_UILens->ResetPPMode();
 }
 
 CUIWindow* CWeapon::ZoomTexture()
@@ -1613,10 +1632,12 @@ void CWeapon::modify_holder_params		(float &range, float &fov) const
 	fov		*= m_addon_holder_fov_modifier;
 }
 
+#include "mainmenu.h"
 void CWeapon::OnDrawUI()
 {
+	bool zoom = ZoomTexture() && !IsRotatingToZoom();
 	if(IsZoomed() && ZoomHideCrosshair()){
-		if(ZoomTexture() && !IsRotatingToZoom()){
+		if(zoom){
 			ZoomTexture()->Update	();
 			ZoomTexture()->Draw		();
 
@@ -1624,6 +1645,7 @@ void CWeapon::OnDrawUI()
 				m_zoom_params.m_pVision->Draw();
 		}
 	}
+	MainMenu()->SetWpnScopeDraw(zoom);
 }
 
 bool CWeapon::unlimited_ammo() 

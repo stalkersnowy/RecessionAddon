@@ -64,7 +64,7 @@ public:
 	virtual	float		MtlTransparent			(u32 mtl_idx);
 	virtual	void		Statistics				(CGameFont* F);
 
-	virtual bool		OnRenderPPUI_query		();
+	virtual bool		OnRenderPPUI_query		(bool scope_too = true);
 	virtual void		OnRenderPPUI_main		();
 	virtual void		OnRenderPPUI_PP			();
 	virtual	void		LoadTitle				(LPCSTR str);

@@ -498,9 +498,9 @@ void CGamePersistent::OnAppDeactivate	()
 	bEntryFlag = FALSE;
 }
 
-bool CGamePersistent::OnRenderPPUI_query()
+bool CGamePersistent::OnRenderPPUI_query(bool scope_too)
 {
-	return MainMenu()->OnRenderPPUI_query();
+	return MainMenu()->OnRenderPPUI_query(scope_too);
 	// enable PP or not
 }
 
