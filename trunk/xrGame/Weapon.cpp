@@ -1645,7 +1645,7 @@ void CWeapon::OnDrawUI()
 				m_zoom_params.m_pVision->Draw();
 		}
 	}
-	MainMenu()->SetWpnScopeDraw(zoom);
+	MainMenu()->SetWpnScopeDraw(zoom && m_UILens);
 }
 
 bool CWeapon::unlimited_ammo() 
