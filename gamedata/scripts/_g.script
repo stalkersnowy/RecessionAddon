@@ -1088,6 +1088,13 @@ function IsStalker (object, class_id)
     return false
 end
 -------------------------------------------------------------------------------------------
+local artefact_classes = {}
+	
+function isArtefact (object, class_id)
+	local id = class_id or get_clsid (object)
+	return artefact_classes[id] == true
+end
+-------------------------------------------------------------------------------------------
 function level_object_by_sid( sid )
 	local sim = alife()
 
@@ -1236,6 +1243,22 @@ end
 
 function start_game_callback()
 	printf	("start_game_callback called")
+	artefact_classes = {
+		[clsid.art_bast_artefact] 		= true,
+		[clsid.art_black_drops] 		= true,
+		[clsid.art_dummy] 				= true,
+		[clsid.art_electric_ball] 		= true,
+		[clsid.art_faded_ball] 			= true,
+		[clsid.art_galantine] 			= true,
+		[clsid.art_gravi] 				= true,
+		[clsid.art_gravi_black] 		= true,
+		[clsid.art_mercury_ball] 		= true,
+		[clsid.art_needles] 			= true,
+		[clsid.art_rusty_hair] 			= true,
+		[clsid.art_thorn] 				= true,
+		[clsid.art_zuda] 				= true,
+		[clsid.artefact] 				= true,
+		[clsid.artefact_s] 				= true}
 	task_manager.clear_task_manager()
 	treasure_manager.clear_treasure_manager()
 	xr_sound.clear_all_sound_object()

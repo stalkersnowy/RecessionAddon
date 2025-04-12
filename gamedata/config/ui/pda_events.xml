@@ -7,10 +7,10 @@
 		<left_frame x="0" y="0" width="340" height="475" a="90">
 			<texture>ui_pda_frame_sub</texture>
 
-			<auto_static x="8" y="48" width="4" height="417">
+			<auto_static x="8" y="48" width="4" height="417" stretch="1">
 				<texture>ui\ui_pda_vertical_line_r_l</texture>
 			</auto_static>
-			<auto_static x="310" y="48" width="4" height="417">
+			<auto_static x="310" y="48" width="4" height="417" stretch="1">
 				<texture>ui\ui_pda_vertical_line_r_r</texture>
 			</auto_static>
 			<auto_static x="8" y="430" width="308" height="2" stretch="1">
@@ -74,10 +74,10 @@
 				<main_frame x="0" y="0" width="409" height="475" a="90">
 					<texture>ui_pda_frame_sub</texture>
 
-					<auto_static x="8" y="44" width="4" height="460">
+					<auto_static x="8" y="44" width="4" height="460" stretch="1">
 						<texture>ui\ui_pda_vertical_line_r_l</texture>
 					</auto_static>
-					<auto_static x="380" y="44" width="4" height="460">
+					<auto_static x="380" y="44" width="4" height="460" stretch="1">
 						<texture>ui\ui_pda_vertical_line_r_r</texture>
 					</auto_static>
 					<auto_static x="8" y="44" width="372" height="2" stretch="1">

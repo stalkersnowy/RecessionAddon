@@ -48,10 +48,10 @@
 	</a_static>
 
    
-	<right_auto_static x="8" y="52" width="4" height="420">
+	<right_auto_static x="8" y="52" width="4" height="420" stretch="1">
 		<texture>ui\ui_pda_vertical_line_r_l</texture>
 	</right_auto_static>
-	<right_auto_static x="269" y="52" width="4" height="420">
+	<right_auto_static x="269" y="52" width="4" height="420" stretch="1">
 		<texture>ui\ui_pda_vertical_line_r_r</texture>
 	</right_auto_static>
 	<right_auto_static x="8" y="48" width="262" height="2" stretch="1">
@@ -130,7 +130,7 @@
 				</auto_static>
 			</auto>
 		</master_part>
-<!--
+
 		<master_part x="0" y="0" width="250" height="25" id="artefacts">
 			<text_1 x="0" y="0" width="200" height="20" highlight_text="1" hA="255" hR="255" hB="255" hG="255">
 				<text align="l" x="0" y="0" font="letterica18" r="170" g="170" b="170" a="160">st_pda_artefacts</text>
@@ -144,7 +144,7 @@
 				</auto_static>
 			</auto>
 		</master_part>
--->
+
 		<master_part x="0" y="0" width="250" height="45" id="total">
 			<text_1 x="0" y="20" width="200" height="20">
 				<text align="l" x="0" y="0" font="letterica18" r="180" g="180" b="180" a="230">st_pda_total</text>

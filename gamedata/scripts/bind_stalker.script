@@ -179,6 +179,10 @@ end
 function actor_binder:on_item_take (obj)
     level_tasks.proceed(self.object)
     --game_stats.update_take_item (obj, self.object)
+	
+	if isArtefact(obj) then
+		xr_statistic.addArtefactFound(obj)
+	end
 end
 ----------------------------------------------------------------------------------------------------------------------
 function actor_binder:on_item_drop (obj)
@@ -373,6 +377,8 @@ function actor_binder:save(packet)
 
 	task_manager.save(packet)
 	self.actor_detector:save(packet)	
+	
+	xr_statistic.save(packet)
 end
 ----------------------------------------------------------------------------------------------------------------------
 function actor_binder:load(reader)
@@ -413,6 +419,8 @@ function actor_binder:load(reader)
 	
 	task_manager.load(reader)
 	self.actor_detector:load(reader)	
+	
+	xr_statistic.load(reader)
 end
 ----------------------------------------------------------------------------------------------------------------------
 

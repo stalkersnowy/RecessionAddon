@@ -19,10 +19,10 @@
         <texture>ui_string_02</texture>
     </info_frame_line>
     <left_auto>
-        <auto_static x="7" y="52" width="3" height="388" stretch="1">
+        <auto_static x="7" y="52" width="3" height="512" stretch="1">
             <texture>ui\ui_pda_vertical_line_r_l</texture>
         </auto_static>
-        <auto_static x="347" y="52" width="3" height="388" stretch="1">
+        <auto_static x="347" y="52" width="3" height="512" stretch="1">
             <texture>ui\ui_pda_vertical_line_r_r</texture>
         </auto_static>
         <auto_static x="12" y="50" width="337" height="2" stretch="1">
@@ -45,10 +45,10 @@
         <texture>ui\ui_pda_anims_03</texture>
     </a_static>
     <right_auto>
-        <auto_static x="7" y="52" width="3" height="420" stretch="1">
+        <auto_static x="7" y="52" width="3" height="512" stretch="1">
             <texture>ui\ui_pda_vertical_line_r_l</texture>
         </auto_static>
-        <auto_static x="224" y="52" width="3" height="420" stretch="1">
+        <auto_static x="224" y="52" width="3" height="512" stretch="1">
             <texture>ui\ui_pda_vertical_line_r_r</texture>
         </auto_static>
         <auto_static x="7" y="48" width="218" height="2" stretch="1">

@@ -205,7 +205,7 @@ void CUIActorInfoWnd::FillPointsDetail(const shared_str& id)
 	vStatDetailData::const_iterator it		= section.data.begin();
 	vStatDetailData::const_iterator it_e	= section.data.end();
 
-	int _cntr = 0;
+	int _cntr = 1;
 	string64 buff;
 	for(;it!=it_e;++it,++_cntr)
 	{

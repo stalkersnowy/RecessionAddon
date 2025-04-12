@@ -144,6 +144,7 @@ public:
 	_DECLARE_FUNCTION10	(story_id	,	ALife::_STORY_ID);
 	
 			LPCSTR				Name				() const;
+			LPCSTR				NameItem			() const;
 			shared_str			cName				() const;
 			LPCSTR				Section				() const;
 	// CInventoryItem

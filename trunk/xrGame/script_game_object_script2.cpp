@@ -83,6 +83,7 @@ class_<CScriptGameObject> &script_register_game_object1(class_<CScriptGameObject
 		.def("story_id",					&CScriptGameObject::story_id)
 		.def("section",						&CScriptGameObject::Section)
 		.def("name",						&CScriptGameObject::Name)
+		.def("name_item",					&CScriptGameObject::NameItem)
 		.def("parent",						&CScriptGameObject::Parent)
 		.def("mass",						&CScriptGameObject::Mass)
 		.def("cost",						&CScriptGameObject::Cost)

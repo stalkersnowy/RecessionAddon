@@ -18,6 +18,7 @@
 #include "PHScriptCall.h"
 #include "PHSimpleCalls.h"
 #include "phworld.h"
+#include "inventory_item.h"
 void CScriptGameObject::SetTipText (LPCSTR tip_text)
 {
 	CUsableScriptObject	*l_tpUseableScriptObject = smart_cast<CUsableScriptObject*>(&object());
@@ -79,6 +80,15 @@ int	CScriptGameObject::clsid				() const
 
 LPCSTR CScriptGameObject::Name				() const
 {
+	return			(*object().cName());
+}
+
+LPCSTR CScriptGameObject::NameItem			() const
+{
+	CInventoryItem	*inventory_item = smart_cast<CInventoryItem*>(&object());
+	if (inventory_item) {
+		return		(inventory_item->Name());
+	}
 	return			(*object().cName());
 }
 
