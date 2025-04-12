@@ -142,7 +142,7 @@ function save(package)
 	for k,v in pairs(taken_artefacts) do
 		i = i + 1
 	end
-	package:w_u8(i)
+	package:w_u16(i)
 	for k,v in pairs(taken_artefacts) do
 		package:w_u32(k)
 	end
@@ -150,7 +150,7 @@ end
 
 function load(package)
 	taken_artefacts = {}
-	n = package:r_u8()
+	n = package:r_u16()
 	for i = 1,n do
 		local k = package:r_u32()
 		taken_artefacts[k] = k
