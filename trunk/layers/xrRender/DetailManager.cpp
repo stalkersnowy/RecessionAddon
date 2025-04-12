@@ -181,6 +181,13 @@ extern ECORE_API float r_ssaDISCARD;
 
 void CDetailManager::UpdateVisibleM()
 {
+	//clear 'vis'
+	for (int i = 0; i != 3; i++) {
+		vis_list& list = m_visibles[i];
+		for (u32 j = 0; j != list.size(); j++)
+			list[j].clear_not_free();
+	}
+
 	Fvector		EYE				= Device.vCameraPosition;
 	
 	CFrustum	View;
