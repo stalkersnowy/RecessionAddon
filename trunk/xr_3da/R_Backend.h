@@ -46,6 +46,7 @@ public:
 	_IndexStream					Index;
 	IDirect3DIndexBuffer9*			QuadIB;
 	IDirect3DIndexBuffer9*			old_QuadIB;
+	IDirect3DIndexBuffer9*			CuboidIB;
 	R_xforms						xforms;
 private:
 	// Render-targets
