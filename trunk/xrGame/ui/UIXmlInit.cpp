@@ -372,6 +372,18 @@ bool CUIXmlInit::Init3tButton(CUIXml& xml_doc, LPCSTR path, int index, CUI3tButt
 	if (text_hint)
 		pWnd->m_hint_text	= CStringTable().translate(text_hint);
 
+	bool flag_highlight_txt		= (xml_doc.ReadAttribInt(path, index, "highlight_text", 0) == 1);
+	if (flag_highlight_txt)
+	{
+		pWnd->HighlightText(true);
+
+		u32 hA = static_cast<u32>(xml_doc.ReadAttribInt(path, index, "hA", 255));
+		u32 hR = static_cast<u32>(xml_doc.ReadAttribInt(path, index, "hR", 255));
+		u32 hG = static_cast<u32>(xml_doc.ReadAttribInt(path, index, "hG", 255));
+		u32 hB = static_cast<u32>(xml_doc.ReadAttribInt(path, index, "hB", 255));
+		pWnd->SetHighlightColor(color_argb(hA, hR, hG, hB));
+	}
+
 	return true;
 }
 

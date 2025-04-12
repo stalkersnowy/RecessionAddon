@@ -56,8 +56,8 @@ void CUISequenceSimpleItem::Load(CUIXml* xml, int idx)
 		VERIFY				(m_sound._handle());
 	}
 	m_time_length			= xml->ReadFlt			("length_sec",0,0		);
-	m_desired_cursor_pos.x	= xml->ReadAttribFlt	("cursor_pos",0,"x", UI_BASE_WIDTH);
-	m_desired_cursor_pos.y	= xml->ReadAttribFlt	("cursor_pos",0,"y", UI_BASE_HEIGHT);
+	m_desired_cursor_pos.x	= xml->ReadAttribFlt	("cursor_pos",0,"x", 0);
+	m_desired_cursor_pos.y	= xml->ReadAttribFlt	("cursor_pos",0,"y", 0);
 	strcpy					(m_pda_section, xml->Read("pda_section",0,"")	);
 
 	LPCSTR str				= xml->Read				("pause_state",0,"ignore");
@@ -173,7 +173,8 @@ void CUISequenceSimpleItem::Start()
 	if(m_flags.test(etiNeedPauseSound))
 		Device.Pause			(TRUE, FALSE, TRUE, "simpleitem_start");
 
-	GetUICursor()->SetUICursorPosition		(m_desired_cursor_pos);
+	if(m_desired_cursor_pos.x && m_desired_cursor_pos.y)
+		GetUICursor()->SetUICursorPosition		(m_desired_cursor_pos);
 	m_time_start							= float(Device.dwTimeContinual)/1000.0f;
 	m_owner->MainWnd()->AttachChild	(m_UIWindow);
 

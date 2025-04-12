@@ -1304,12 +1304,12 @@ void CApplication::load_draw_internal()
 			if (b_16x9)
 			{
 				back_text_coords.lt.set(850, 0);
-				back_text_coords.rb.set(1018, 768);
+				back_text_coords.rb.set(1019, 768);
 			}
 			else
 			{
 				back_text_coords.lt.set(850, 0);
-				back_text_coords.rb.set(952, 768);
+				back_text_coords.rb.set(953, 768);
 			}
 
 			back_coords.lt.set(1024.0f - back_size.x + offs, offs);
