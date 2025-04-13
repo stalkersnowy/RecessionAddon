@@ -191,6 +191,8 @@ CActor::CActor() : CEntityAlive()
 	m_dwILastUpdateTime		= 0;
 
 	m_location_manager		= xr_new<CLocationManager>(this);
+	
+	m_loaded_ph_box_id		= 0;
 }
 
 

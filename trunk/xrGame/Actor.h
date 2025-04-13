@@ -252,6 +252,7 @@ protected:
 	//разрешения на удаление трупа актера 
 	//после того как контролирующий его игрок зареспавнился заново. 
 	//устанавливается в game
+	u8						m_loaded_ph_box_id;
 private:
 	void					SwitchOutBorder(bool new_border_state);
 public:
