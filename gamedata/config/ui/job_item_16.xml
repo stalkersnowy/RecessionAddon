@@ -20,7 +20,7 @@
         </location_btn>
     </task_root_item>
     <task_sub_item x="0" y="0" width="267" height="38">
-        <state_image x="7" y="10" width="9" height="11"/>
+        <state_image x="7" y="10" width="9" height="11" stretch="1"/>
         <description x="21" y="8" width="183" height="16" complex_mode="1">
             <text align="l" x="0" y="0" font="letterica16" r="255" g="255" b="255" a="255"/>
             <text_colors>
