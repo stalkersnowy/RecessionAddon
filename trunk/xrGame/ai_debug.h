@@ -36,7 +36,6 @@
 #endif // DEBUG
 
 #ifndef MASTER_GOLD
-#	define aiIgnoreActor				(1<<24)
 	extern Flags32						psAI_Flags;
 #endif // MASTER_GOLD
 

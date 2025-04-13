@@ -170,7 +170,6 @@ void CLevel::IR_OnKeyboardPress	(int key)
 		return;
 	}
 
-#ifndef MASTER_GOLD
 	switch (key) {
 	case DIK_NUMPAD5: 
 		{
@@ -183,7 +182,6 @@ void CLevel::IR_OnKeyboardPress	(int key)
 			Console->Execute("demo_record 1");
 		}
 		break;
-#endif // MASTER_GOLD
 #ifdef DEBUG
 	case DIK_RETURN:
 			bDebug	= !bDebug;
@@ -341,9 +339,7 @@ void CLevel::IR_OnKeyboardPress	(int key)
 //		}
 //		return;
 #endif // DEBUG
-#ifndef MASTER_GOLD
 	}
-#endif // MASTER_GOLD
 
 	if (bindConsoleCmds.execute(key))
 		return;

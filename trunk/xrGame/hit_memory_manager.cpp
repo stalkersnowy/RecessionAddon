@@ -23,10 +23,8 @@
 #include "memory_manager.h"
 #include "../xr_3da/IGame_Persistent.h"
 
-#ifndef MASTER_GOLD
-#	include "clsid_game.h"
-#	include "ai_debug.h"
-#endif // MASTER_GOLD
+#include "clsid_game.h"
+#include "actor_flags.h"
 
 struct CHitObjectPredicate {
 	const CObject *m_object;
@@ -92,10 +90,8 @@ void CHitMemoryManager::reload				(LPCSTR section)
 
 void CHitMemoryManager::add					(float amount, const Fvector &vLocalDir, const CObject *who, s16 element)
 {
-#ifndef MASTER_GOLD
-	if (who && (who->CLS_ID == CLSID_OBJECT_ACTOR) && psAI_Flags.test(aiIgnoreActor))
+	if (who && (who->CLS_ID == CLSID_OBJECT_ACTOR) && psActorFlags.test(AF_IGNORE_ACTOR))
 		return;
-#endif // MASTER_GOLD
 
 	VERIFY						(m_hits);
 	if (!object().g_Alive())
@@ -152,10 +148,8 @@ void CHitMemoryManager::add					(float amount, const Fvector &vLocalDir, const C
 
 void CHitMemoryManager::add					(const CHitObject &_hit_object)
 {
-#ifndef MASTER_GOLD
-	if (_hit_object.m_object && (_hit_object.m_object->CLS_ID == CLSID_OBJECT_ACTOR) && psAI_Flags.test(aiIgnoreActor))
+	if (_hit_object.m_object && (_hit_object.m_object->CLS_ID == CLSID_OBJECT_ACTOR) && psActorFlags.test(AF_IGNORE_ACTOR))
 		return;
-#endif // MASTER_GOLD
 
 	VERIFY						(m_hits);
 	if (!object().g_Alive())

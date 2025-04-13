@@ -25,10 +25,8 @@
 #include "memory_manager.h"
 #include "../xr_3da/IGame_Persistent.h"
 
-#ifndef MASTER_GOLD
-#	include "clsid_game.h"
-#	include "ai_debug.h"
-#endif // MASTER_GOLD
+#include "clsid_game.h"
+#include "actor_flags.h"
 
 #define SILENCE
 //#define SAVE_OWN_SOUNDS
@@ -127,10 +125,8 @@ IC	bool is_sound_type(int s, const ESoundTypes &t)
 
 void CSoundMemoryManager::feel_sound_new(CObject *object, int sound_type, CSound_UserDataPtr user_data, const Fvector &position, float sound_power)
 {
-#ifndef MASTER_GOLD
-	if (object && (object->CLS_ID == CLSID_OBJECT_ACTOR) && psAI_Flags.test(aiIgnoreActor))
+	if (object && (object->CLS_ID == CLSID_OBJECT_ACTOR) && psActorFlags.test(AF_IGNORE_ACTOR))
 		return;
-#endif // MASTER_GOLD
 
 	VERIFY					(_valid(sound_power));
 	if (!m_sounds)

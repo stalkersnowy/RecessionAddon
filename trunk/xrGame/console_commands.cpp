@@ -1746,9 +1746,7 @@ void CCC_RegisterCommands()
 	CMD1(CCC_ShowAnimationStats,"ai_show_animation_stats");
 #endif // DEBUG
 	
-#ifndef MASTER_GOLD
-	CMD3(CCC_Mask,				"ai_ignore_actor",		&psAI_Flags,	aiIgnoreActor);
-#endif // MASTER_GOLD
+	CMD3(CCC_Mask,				"ai_ignore_actor",		&psActorFlags,	AF_IGNORE_ACTOR);
 
 	// Physics
 	CMD1(CCC_PHFps,				"ph_frequency"																					);
