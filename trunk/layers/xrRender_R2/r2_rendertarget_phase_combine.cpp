@@ -19,10 +19,11 @@ void	CRenderTarget::phase_combine	()
 		t_LUM_src->surface_set		(rt_LUM_pool[gpu_id*2+0]->pSurface);
 		t_LUM_dest->surface_set		(rt_LUM_pool[gpu_id*2+1]->pSurface);
 	}
+	
+	RCache.set_CullMode	( CULL_NONE );
 
 	// low/hi RTs
 	u_setrt				( rt_Generic_0,rt_Generic_1,0,HW.pBaseZB );
-	RCache.set_CullMode	( CULL_NONE );
 	RCache.set_Stencil	( FALSE		);
 
 	BOOL	split_the_scene_to_minimize_wait			= FALSE;
@@ -34,6 +35,9 @@ void	CRenderTarget::phase_combine	()
 		RCache.set_ColorWriteEnable					();
 		CHK_DX(HW.pDevice->SetRenderState			( D3DRS_ZENABLE,	FALSE				));
 		g_pGamePersistent->Environment().RenderSky	();
+		//	Igor: Render clouds before compine without Z-test
+		//	to avoid siluets. HOwever, it's a bit slower process.
+		g_pGamePersistent->Environment().RenderClouds	();
 		CHK_DX(HW.pDevice->SetRenderState			( D3DRS_ZENABLE,	TRUE				));
 	}
 
@@ -131,7 +135,7 @@ void	CRenderTarget::phase_combine	()
 		RCache.set_CullMode				(CULL_CCW);
 		RCache.set_Stencil				(FALSE);
 		RCache.set_ColorWriteEnable		();
-		g_pGamePersistent->Environment().RenderClouds	();
+		//g_pGamePersistent->Environment().RenderClouds	();
 		RImplementation.render_forward	();
 		if (g_pGamePersistent)	g_pGamePersistent->OnRenderPPUI_main()	;	// PP-UI
 	}
