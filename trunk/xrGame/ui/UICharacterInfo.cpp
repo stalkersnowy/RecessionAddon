@@ -219,7 +219,7 @@ void CUICharacterInfo::InitCharacter(u16 id)
 	}
 
 	m_bForceUpdate	= true;
-	for(int i = eUIName; i<eMaxCaption; ++i)
+	for(int i = eUIIcon; i<eMaxCaption; ++i)
 		if(m_icons[i])m_icons[i]->Show(true);
 }
 
@@ -298,14 +298,8 @@ void CUICharacterInfo::ClearInfo()
 {
 	m_ownerID = u16(-1);
 	ResetAllStrings	();
-	
-	if (m_icons[eUIIcon]) {
-		m_icons[eUIIcon]->GetUIStaticItem().SetOriginalRect(	8*ICON_GRID_WIDTH,0,
-			float(CHAR_ICON_WIDTH*ICON_GRID_WIDTH),
-			float(CHAR_ICON_HEIGHT*ICON_GRID_HEIGHT));
-	}
 
-	for(int i = eUIName; i<eMaxCaption; ++i)
+	for(int i = eUIIcon; i<eMaxCaption; ++i)
 		if(m_icons[i])m_icons[i]->Show(false);
 }
 

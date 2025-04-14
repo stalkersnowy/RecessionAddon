@@ -1090,3 +1090,33 @@ void CAI_Stalker::on_after_change_team			()
 		
 	agent_manager().member().register_in_combat	(this);
 }
+
+#include "date_time.h"
+LPCSTR CAI_Stalker::visual_name	(CSE_Abstract *server_entity) 
+{
+	if (m_already_dead)
+		return					(pSettings->r_string(cNameSect(),"corpse_visual"));
+
+	CSE_ALifeCreatureAbstract	*creature = smart_cast<CSE_ALifeCreatureAbstract*>(server_entity);
+	VERIFY						(creature);
+
+	if (creature->g_Alive())
+		return					(inherited::visual_name(server_entity));
+
+	if (creature->m_story_id != INVALID_STORY_ID)
+		return					(inherited::visual_name(server_entity));
+
+	if (!creature->m_game_death_time)
+		return					(inherited::visual_name(server_entity));
+
+	ALife::_TIME_ID				game_death_time = creature->m_game_death_time;
+	ALife::_TIME_ID				time_interval	= generate_time(1,1,1,pSettings->r_u32("monsters_common","corpse_remove_game_time_interval"),0,0);
+	ALife::_TIME_ID				game_time		= Level().GetGameTime();
+
+	if	((game_death_time + time_interval) >= game_time)
+		return					(inherited::visual_name(server_entity));
+
+	m_already_dead				= true;
+
+	return						(pSettings->r_string(cNameSect(),"corpse_visual"));
+}

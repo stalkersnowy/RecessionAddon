@@ -545,6 +545,8 @@ private:
 public:
 	virtual	void						create_anim_mov_ctrl						(CBlend *b);
 	virtual	void						destroy_anim_mov_ctrl						();
+	
+	virtual	LPCSTR						visual_name									(CSE_Abstract *server_entity);
 
 private:
 	bool	m_can_select_items;

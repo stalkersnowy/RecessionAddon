@@ -254,9 +254,8 @@ public:
 public:
 			void __stdcall			update_sound_player		();
 	virtual	void					on_restrictions_change	();
-	virtual	LPCSTR					visual_name				(CSE_Abstract *server_entity);
 
-private:
+protected:
 	bool							m_already_dead;
 
 public:
