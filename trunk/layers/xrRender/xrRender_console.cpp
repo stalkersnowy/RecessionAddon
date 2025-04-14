@@ -61,7 +61,17 @@ float		ps_r2_ssaLOD_B				= 32.f	;
 float		ps_r2_tf_Mipbias			= 0.0f	;
 
 // R2-specific
-Flags32		ps_r2_ls_flags				= { R2FLAG_SUN | R2FLAG_SUN_IGNORE_PORTALS | R2FLAG_EXP_DONT_TEST_UNSHADOWED | R2FLAG_USE_NVSTENCIL | R2FLAG_EXP_SPLIT_SCENE | R2FLAG_EXP_MT_CALC};	// r2-only
+Flags32		ps_r2_ls_flags				= { R2FLAG_SUN 
+	| R2FLAG_SUN_IGNORE_PORTALS 
+	| R2FLAG_EXP_DONT_TEST_UNSHADOWED 
+	| R2FLAG_USE_NVSTENCIL 
+	| R2FLAG_EXP_SPLIT_SCENE 
+	| R2FLAG_EXP_MT_CALC
+	| R2FLAG_SOFT_PARTICLES
+	| R2FLAG_SOFT_WATER
+	| R2FLAG_SSAO
+	| R2FLAG_STEEP_PARALLAX
+	};	// r2-only
 float		ps_r2_df_parallax_h			= 0.02f;
 float		ps_r2_df_parallax_range		= 75.f;
 float		ps_r2_tonemap_middlegray	= 0.25f;			// r2-only
@@ -383,6 +393,12 @@ void		xrRender_initconsole	()
 
 	tw_min.set			(0,0,0);	tw_max.set	(1,1,1);
 	CMD4(CCC_Vector3,	"r2_aa_weight",			&ps_r2_aa_weight,			tw_min, tw_max	);
+
+	//	Igor: need restart
+	CMD3(CCC_Mask,		"r2_soft_water",				&ps_r2_ls_flags,			R2FLAG_SOFT_WATER);
+	CMD3(CCC_Mask,		"r2_soft_particles",			&ps_r2_ls_flags,			R2FLAG_SOFT_PARTICLES);
+	CMD3(CCC_Mask,		"r2_ssao",						&ps_r2_ls_flags,			R2FLAG_SSAO);
+	CMD3(CCC_Mask,		"r2_steep_parallax",			&ps_r2_ls_flags,			R2FLAG_STEEP_PARALLAX);
 }
 
 void	xrRender_apply_tf		()

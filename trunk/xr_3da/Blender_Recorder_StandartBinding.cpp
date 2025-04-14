@@ -24,6 +24,55 @@ BIND_DECLARE(wv);
 BIND_DECLARE(vp);
 BIND_DECLARE(wvp);
 
+class cl_texgen : public R_constant_setup
+{
+	virtual void setup(R_constant* C)
+	{
+		Fmatrix mTexgen;
+		float	_w						= float(Device.dwWidth);
+		float	_h						= float(Device.dwHeight);
+		float	o_w						= (.5f / _w);
+		float	o_h						= (.5f / _h);
+		Fmatrix			mTexelAdjust		= 
+		{
+			0.5f,				0.0f,				0.0f,			0.0f,
+			0.0f,				-0.5f,				0.0f,			0.0f,
+			0.0f,				0.0f,				1.0f,			0.0f,
+			0.5f + o_w,			0.5f + o_h,			0.0f,			1.0f
+		};
+
+		mTexgen.mul	(mTexelAdjust,RCache.xforms.m_wvp);
+
+		RCache.set_c( C, mTexgen);
+	}
+};
+static cl_texgen		binder_texgen;
+
+class cl_VPtexgen : public R_constant_setup
+{
+	virtual void setup(R_constant* C)
+	{
+		Fmatrix mTexgen;
+
+		float	_w						= float(Device.dwWidth);
+		float	_h						= float(Device.dwHeight);
+		float	o_w						= (.5f / _w);
+		float	o_h						= (.5f / _h);
+		Fmatrix			mTexelAdjust		= 
+		{
+			0.5f,				0.0f,				0.0f,			0.0f,
+			0.0f,				-0.5f,				0.0f,			0.0f,
+			0.0f,				0.0f,				1.0f,			0.0f,
+			0.5f + o_w,			0.5f + o_h,			0.0f,			1.0f
+		};
+
+		mTexgen.mul	(mTexelAdjust,RCache.xforms.m_vp);
+
+		RCache.set_c( C, mTexgen);
+	}
+};
+static cl_VPtexgen		binder_VPtexgen;
+
 // fog
 class cl_fog_plane	: public R_constant_setup {
 	u32			marker;
@@ -197,6 +246,10 @@ void	CBlender_Compile::SetMapping	()
 	r_Constant				("m_WV",			&binder_wv);
 	r_Constant				("m_VP",			&binder_vp);
 	r_Constant				("m_WVP",			&binder_wvp);
+
+	//	Igor	temp solution for the texgen functionality in the shader
+	r_Constant				("m_texgen",		&binder_texgen);
+	r_Constant				("mVPTexgen",		&binder_VPtexgen);
 
 	// fog-params
 	r_Constant				("fog_plane",		&binder_fog_plane);

@@ -55,6 +55,7 @@ static class cl_parallax		: public R_constant_setup		{	virtual void setup	(R_con
 }}	binder_parallax;
 
 extern ENGINE_API BOOL r2_sun_static;
+extern ENGINE_API BOOL r2_advanced_pp;
 //////////////////////////////////////////////////////////////////////////
 // Just two static storage
 void					CRender::create					()
@@ -193,6 +194,7 @@ void					CRender::create					()
 	o.sunfilter			= (strstr(Core.Params,"-sunfilter"))?	TRUE	:FALSE	;
 	//.	o.sunstatic			= (strstr(Core.Params,"-sunstatic"))?	TRUE	:FALSE	;
 	o.sunstatic			= r2_sun_static;
+	o.advancedpp		= r2_advanced_pp;
 	o.sjitter			= (strstr(Core.Params,"-sjitter"))?		TRUE	:FALSE	;
 	o.depth16			= (strstr(Core.Params,"-depth16"))?		TRUE	:FALSE	;
 	o.noshadows			= (strstr(Core.Params,"-noshadows"))?	TRUE	:FALSE	;
@@ -558,6 +560,37 @@ HRESULT	CRender::shader_compile			(
 		defines[def_it].Name		=	"SKIN_COLOR";
 		defines[def_it].Definition	=	"1";
 		def_it						++;
+	}
+	
+	//	Igor: need restart options
+	if (RImplementation.o.advancedpp){
+		if (ps_r2_ls_flags.test(R2FLAG_SOFT_WATER))
+		{
+			defines[def_it].Name		=	"USE_SOFT_WATER";
+			defines[def_it].Definition	=	"1";
+			def_it						++;
+		}
+
+		if (ps_r2_ls_flags.test(R2FLAG_SOFT_PARTICLES))
+		{
+			defines[def_it].Name		=	"USE_SOFT_PARTICLES";
+			defines[def_it].Definition	=	"1";
+			def_it						++;
+		}
+
+		if (ps_r2_ls_flags.test(R2FLAG_SSAO))
+		{
+			defines[def_it].Name		=	"USE_SSAO";
+			defines[def_it].Definition	=	"1";
+			def_it						++;
+		}
+
+		if (ps_r2_ls_flags.test(R2FLAG_STEEP_PARALLAX))
+		{
+			defines[def_it].Name		=	"ALLOW_STEEPPARALLAX";
+			defines[def_it].Definition	=	"1";
+			def_it						++;
+		}
 	}
 
 	// skinning
