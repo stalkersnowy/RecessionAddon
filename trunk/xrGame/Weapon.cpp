@@ -1123,11 +1123,10 @@ void CWeapon::UpdateHUDAddonsVisibility()
 
 
 	bone_id = pHudVisual->LL_BoneID(wpn_grenade_launcher);
+	if(bone_id==BI_NONE)
+		bone_id = pHudVisual->LL_BoneID(wpn_launcher);
 	if(GrenadeLauncherAttachable())
 	{
-		if(bone_id==BI_NONE)
-			bone_id = pHudVisual->LL_BoneID(wpn_launcher);
-
 		VERIFY2(bone_id!=BI_NONE,"there are no grenade launcher bone.");
 		if(IsGrenadeLauncherAttached())
 		{
