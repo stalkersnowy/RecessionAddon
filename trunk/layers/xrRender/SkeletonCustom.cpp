@@ -652,7 +652,7 @@ void CKinematics::AddWallmark(const Fmatrix* parent_xform, const Fvector3& start
 	intrusive_ptr<CSkeletonWallmark>		wm = xr_new<CSkeletonWallmark>(this,parent_xform, _shader,cp,Device.fTimeGlobal);
 	wm->m_LocalBounds.set		(cp,size*2.f);
 	wm->XFORM()->transform_tiny	(wm->m_Bounds.P,cp);
-	wm->m_Bounds.R				= wm->m_Bounds.R; 
+	wm->m_Bounds.R				= wm->m_LocalBounds.R; 
 
 	Fvector tmp; tmp.invert		(D);
 	normal.add(tmp).normalize	();
