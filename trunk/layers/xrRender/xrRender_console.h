@@ -126,6 +126,8 @@ enum
 	R2FLAG_SOFT_PARTICLES		= (1<<19),	//	Igor: need restart
 	R2FLAG_SSAO					= (1<<20),
 	R2FLAG_STEEP_PARALLAX		= (1<<21),
+
+	R2FLAG_MBLUR				= (1<<22),
 };
 
 extern void						xrRender_initconsole	();

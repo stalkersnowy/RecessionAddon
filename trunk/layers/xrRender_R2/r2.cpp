@@ -535,7 +535,7 @@ HRESULT	CRender::shader_compile			(
 		defines[def_it].Definition	=	"1";
 		def_it						++	;
 	}
-	if (o.mblur)			{
+	if (o.mblur || ps_r2_ls_flags.test(R2FLAG_MBLUR))			{
 		defines[def_it].Name		=	"USE_MBLUR";
 		defines[def_it].Definition	=	"1";
 		def_it						++	;
