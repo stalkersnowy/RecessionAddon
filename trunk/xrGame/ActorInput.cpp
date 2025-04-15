@@ -27,7 +27,7 @@
 #include "Bolt.h"
 #include "Grenade.h"
 #include "GameConstants.h"
-#include "Weapon.h"
+#include "WeaponKnife.h"
 
 bool g_bAutoClearCrouch = true;
 
@@ -49,7 +49,6 @@ void CActor::IR_OnKeyboardPress(int cmd)
 			CBolt* pBolt = smart_cast<CBolt*>(inventory().ActiveItem());
 			CGrenade* pGrenade = smart_cast<CGrenade*>(inventory().ActiveItem());
 			CWeapon* pWpn = smart_cast<CWeapon*>(inventory().ActiveItem());
-			u32 slot = inventory().GetActiveSlot();
 			if ((!disable_stopping_bolt && pBolt || !disable_stopping_gr && pGrenade) || !disable_stopping && !inventory().ActiveItem() || pWpn)
 				mstate_wishful &=~mcSprint;
 			//-----------------------------
@@ -60,6 +59,11 @@ void CActor::IR_OnKeyboardPress(int cmd)
 				P.w_u16(ID());
 				u_EventSend(P);
 			}
+		}break;
+	case kWPN_ZOOM:
+		{
+			if (inventory().GetActiveSlot() == KNIFE_SLOT)
+				mstate_wishful &=~mcSprint;
 		}break;
 	default:
 		{
