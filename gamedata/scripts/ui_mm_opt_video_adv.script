@@ -21,6 +21,12 @@ function only_12_mode(ctrl, _id)
 	ctrl:Enable		(bEnabled)
 end
 
+function only_0_mode(ctrl, _id)
+	local bEnabled	= _id==0
+	ctrl:Enable		(bEnabled)
+end
+
+
 function opt_video_adv:InitControls(x, y, xml, handler)
 	local ctl
 	self:Init									(x,y, 738, 416)
@@ -51,7 +57,8 @@ function opt_video_adv:InitControls(x, y, xml, handler)
 
 	_st				= xml:InitStatic			("video_adv:templ_item",				self.scroll_v)
 	xml:InitStatic								("video_adv:cap_ssample",				_st)
-	xml:InitTrackBar							("video_adv:track_ssample",				_st)
+	ctl			= xml:InitTrackBar				("video_adv:track_ssample",				_st)
+	handler.m_preconditions[ctl]		= only_0_mode
 
 
 	_st				= xml:InitStatic			("video_adv:templ_item",				self.scroll_v)

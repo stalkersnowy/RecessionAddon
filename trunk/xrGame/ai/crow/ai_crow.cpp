@@ -12,6 +12,7 @@
 #include "../../hudmanager.h"
 #include "../../level.h"
 #include "../layers/xrRender/SkeletonAnimated.h"
+#include "../../actor.h"
 
 void CAI_Crow::SAnim::Load	(CKinematicsAnimated* visual, LPCSTR prefix)
 {
@@ -303,8 +304,8 @@ void CAI_Crow::shedule_Update		(u32 DT)
 		// At random times, change the direction (goal) of the plane
 		if(fGoalChangeTime<=0)	{
 			fGoalChangeTime += fGoalChangeDelta+fGoalChangeDelta*Random.randF(-0.5f,0.5f);
-			Fvector vP;
-			vP.set(Device.vCameraPosition.x,Device.vCameraPosition.y+fMinHeight,Device.vCameraPosition.z);
+			Fvector			vP = Actor()->Position();
+			vP.y			+= +fMinHeight;
 			vGoalDir.x		= vP.x+vVarGoal.x*Random.randF(-0.5f,0.5f); 
 			vGoalDir.y		= vP.y+vVarGoal.y*Random.randF(-0.5f,0.5f);
 			vGoalDir.z		= vP.z+vVarGoal.z*Random.randF(-0.5f,0.5f);
@@ -334,12 +335,10 @@ void CAI_Crow::net_Export	(NET_Packet& P)					// export to server
 	u8					flags = 0;
 	P.w_float			(GetfHealth());
 
-	P.w_float			(0);
-	P.w_u32				(0);
-	P.w_u32				(0);
-
 	P.w_u32				(Level().timeServer());
 	P.w_u8				(flags);
+
+	P.w_vec3			(Position());
 	
 	float				yaw, pitch, bank;
 	XFORM().getHPB		(yaw,pitch,bank);
@@ -356,21 +355,15 @@ void CAI_Crow::net_Import	(NET_Packet& P)
 {
 	// import
 	R_ASSERT			(Remote());
-
-	u8					flags;
 	
 	float health;
 	P.r_float			(health);
 	SetfHealth			(health);
 
-	float fDummy;
-	u32 dwDummy;
-	P.r_float			(fDummy);
-	P.r_u32				(dwDummy);
-	P.r_u32				(dwDummy);
+	P.r_u32				();
+	P.r_u8				();
 
-	P.r_u32				(dwDummy);
-	P.r_u8				(flags);
+	P.r_vec3			(Position());
 	
 	float				yaw, pitch, bank = 0, roll = 0;
 	
