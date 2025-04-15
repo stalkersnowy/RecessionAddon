@@ -13,6 +13,16 @@ xr_token							qpreset_token							[ ]={
 	{ 0,							0											}
 };
 
+u32			ps_Smapsize				=	1	;
+xr_token							qsmapsize_token							[ ]={
+	{ "1536",						0											},
+	{ "2048",						1											},
+	{ "2560",						2											},
+	{ "3072",						3											},
+	{ "4096",						4											},
+	{ 0,							0											}
+};
+
 // Common
 //int		ps_r__Supersample			= 1		;
 int			ps_r__LightSleepFrames		= 10	;
@@ -400,6 +410,8 @@ void		xrRender_initconsole	()
 	CMD3(CCC_Mask,		"r2_soft_particles",			&ps_r2_ls_flags,			R2FLAG_SOFT_PARTICLES);
 	CMD3(CCC_Mask,		"r2_ssao",						&ps_r2_ls_flags,			R2FLAG_SSAO);
 	CMD3(CCC_Mask,		"r2_steep_parallax",			&ps_r2_ls_flags,			R2FLAG_STEEP_PARALLAX);
+	
+	CMD3(CCC_Token,		"r__smapsize",					&ps_Smapsize,				qsmapsize_token );
 }
 
 void	xrRender_apply_tf		()

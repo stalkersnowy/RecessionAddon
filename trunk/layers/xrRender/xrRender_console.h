@@ -97,6 +97,8 @@ extern ECORE_API int			ps_r2_dhemi_count;			// 5
 extern ECORE_API float			ps_r2_slight_fade;			// 1.f
 extern ECORE_API int			ps_r2_wait_sleep;
 
+extern ECORE_API u32			ps_Smapsize;
+
 enum
 {
 	R2FLAG_SUN					= (1<<0),
