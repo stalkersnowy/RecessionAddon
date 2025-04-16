@@ -127,6 +127,14 @@ function drop_manager:create_release_item()
     if ini and ini:section_exist("dont_spawn_loot") then
         return
     end
+	
+	-- SNW: спавним предметы, специально заданные для лута в кастом дате (как у ящиков)
+    if ini and ini:section_exist("spawn_drop") then
+		local items = xr_box.r_items(ini, "spawn_drop", "items")
+		for k,v in pairs(items) do
+			create_items(self.npc, v.section, v.count, 1001, false)
+		end
+	end
 
     --' Доспавниваем необходимое количество итемов:
     --' Необходимо составить список объектов которые могут быть заспавнены для персонажа
@@ -138,7 +146,7 @@ function drop_manager:create_release_item()
             --' По каждому объекту необходимо получить количество
             local number = math.ceil(math.random(count_by_level[k].min, count_by_level[k].max))
             --' Необходимо заспавнить нужное количество.
-            create_items(self.npc, k, number, v)
+            create_items(self.npc, k, number, v, true)
         end
     end
 end
@@ -178,9 +186,9 @@ function keep_item(npc, item)
 end
 
 --' Функция спавнит необходимое число предметов
-function create_items(npc, section, number, rnd)
+function create_items(npc, section, number, rnd, check_for_ammo)
     --'printf("create %s of %s", tostring(number), tostring(section))
-    if ammo_sections[section] == true then
+    if check_for_ammo and ammo_sections[section] == true then
         if number > 0 then
             se_respawn.create_ammo(section, 
             npc:position(),
