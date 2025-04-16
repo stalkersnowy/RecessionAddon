@@ -1040,6 +1040,10 @@ function bar_arena_weapon_slot ()
 	end
 end
 
+local function release_object_item(release_item)
+	 alife():release(alife():object(release_item:id()), true)
+end
+
 function bar_arena_teleport_2 ( actor, npc)
 
 	  level.add_pp_effector ("blink.ppe", 234, false)				
@@ -1048,11 +1052,14 @@ function bar_arena_teleport_2 ( actor, npc)
 		local dir = patrol("t_look_2"):point(0):sub(patrol("t_walk_2"):point(0))
 		db.actor:set_actor_direction(-dir:getH())
 	
-	inv_box_2 = level_object_by_sid (574)
+--	inv_box_2 = level_object_by_sid (574)
 
-	out_object = actor
-    in_object  = inv_box_2
-		actor:inventory_for_each(transfer_object_item) 
+--	out_object = actor
+--    in_object  = inv_box_2
+--		actor:inventory_for_each(transfer_object_item) 
+
+	-- SNW: а зачем складывать предметы арены в ящик, если они после этого вообще никак не будут задействованы? лучше будем их удалять как на арене из чн, чтобы айдишники не занимали
+	actor:inventory_for_each(release_object_item) 
 end
 
 function barman_give_extra_task (actor, npc)
