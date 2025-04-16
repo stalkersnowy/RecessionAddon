@@ -8,10 +8,10 @@
     <background_static x="2" y="20" width="850" height="702" stretch="1">
         <texture>ui_PDA</texture>
     </background_static>
-    <mbbackground_frame_line x="92" y="574" width="492" height="32" stretch="1">
+    <mbbackground_frame_line x="92" y="574" width="490" height="32" stretch="1">
         <texture>ui_string_01</texture>
     </mbbackground_frame_line>
-    <timer_frame_line x="592" y="573" width="134" height="32" stretch="1">
+    <timer_frame_line x="592" y="573" width="132" height="32" stretch="1">
         <texture>ui_string_01</texture>
         <title x="8" y="7" width="117" height="18">
             <text font="letterica18" r="255" g="255" b="255" complex_mode="0"/>

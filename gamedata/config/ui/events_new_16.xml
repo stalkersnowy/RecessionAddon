@@ -12,7 +12,7 @@
             <auto_static x="12" y="48" width="221" height="2" stretch="1">
                 <texture>ui\ui_pda_horizontal_line</texture>
             </auto_static>
-            <left_frame_header x="7" y="17" width="236" height="32" stretch="1">
+            <left_frame_header x="7" y="17" width="234" height="32" stretch="1">
                 <texture>ui_string_02</texture>
                 <anim_static x="208" y="-3" width="27" height="32" frames="16" duration="1000" columns="8" frame_width="32" frame_height="32" cyclic="1" autoplay="1" stretch="1">
                     <texture>ui\ui_pda_anims_01</texture>
@@ -63,7 +63,7 @@
             <auto_static x="347" y="45" width="3" height="460" stretch="1">
                 <texture>ui\ui_pda_vertical_line_r_r</texture>
             </auto_static>
-            <right_frame_header x="7" y="17" width="362" height="32" stretch="1">
+            <right_frame_header x="7" y="17" width="359" height="32" stretch="1">
                 <texture>ui_string_03</texture>
             </right_frame_header>
             <work_area x="7" y="33" width="371" height="485">

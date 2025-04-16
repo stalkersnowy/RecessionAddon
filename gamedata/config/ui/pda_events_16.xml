@@ -60,7 +60,7 @@
                     </text_color>
                 </notused_button>
             </filter_tab>
-            <left_frame_header x="7" y="17" width="271" height="32" stretch="1">
+            <left_frame_header x="7" y="17" width="269" height="32" stretch="1">
                 <title x="12" y="1" width="233" height="27">
                     <text font="letterica25" r="225" g="225" b="250" complex_mode="0">Tasks</text>
                 </title>
@@ -84,7 +84,7 @@
                     <auto_static x="7" y="44" width="310" height="2" stretch="1">
                         <texture>ui\ui_pda_horizontal_line</texture>
                     </auto_static>
-                    <header_frame_line x="7" y="17" width="329" height="32" stretch="1">
+                    <header_frame_line x="7" y="17" width="327" height="32" stretch="1">
                         <texture>ui_string_03</texture>
                         <title x="8" y="1" width="362" height="18">
                             <text font="letterica16" r="255" g="255" b="255" complex_mode="0">st_pda_task_detail_information</text>
@@ -105,7 +105,7 @@
                     <text_hint x="612" y="450" width="83" height="22" complex_mode="1">
                         <text font="graffiti22"/>
                     </text_hint>
-                    <map_header_frame_line x="7" y="17" width="329" height="32" stretch="1">
+                    <map_header_frame_line x="7" y="17" width="327" height="32" stretch="1">
                         <texture>ui_string_03</texture>
                         <tool_bar>
                             <global_map_btn x="0" y="1" width="17" height="15" check_mode="0" hint="global_map_btn_hint" stretch="1">

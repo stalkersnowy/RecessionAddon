@@ -5,7 +5,7 @@
             <text_hint x="612" y="450" width="83" height="22" complex_mode="1">
                 <text font="graffiti22"/>
             </text_hint>
-            <map_header_frame_line x="7" y="17" width="622" height="32" stretch="1">
+            <map_header_frame_line x="7" y="17" width="620" height="32" stretch="1">
                 <title x="8" y="1" width="362" height="18">
                     <text font="letterica16" r="255" g="255" b="255"/>
                 </title>

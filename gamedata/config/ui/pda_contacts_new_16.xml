@@ -4,7 +4,7 @@
     <left_frame_window x="0" y="0" width="373" height="475" a="80" stretch="1">
         <texture>ui_pda_frame_sub</texture>
     </left_frame_window>
-    <left_frame_line x="7" y="17" width="362" height="32" stretch="1">
+    <left_frame_line x="7" y="17" width="360" height="32" stretch="1">
         <title x="8" y="1" width="362" height="18">
             <text font="letterica25" r="255" g="255" b="250">Contacts</text>
         </title>
@@ -13,7 +13,7 @@
     <right_frame_window x="386" y="0" width="248" height="475" a="80" stretch="1">
         <texture>ui_pda_frame_sub</texture>
     </right_frame_window>
-    <right_frame_line x="7" y="17" width="237" height="32" stretch="1">
+    <right_frame_line x="7" y="17" width="234" height="32" stretch="1">
         <texture>ui_string_03</texture>
     </right_frame_line>
     <list x="17" y="53" width="352" height="416" always_show_scroll="1" can_select="1" scroll_profile="pda"/>
