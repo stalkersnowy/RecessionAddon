@@ -1182,6 +1182,9 @@ function on_actor_bleeding()
 end
 
 function on_actor_satiety()
+	if has_alife_info("esc_trader_newbie") then
+		game.start_tutorial("part_16_satiety")
+	end
 end
 
 --' Радиация

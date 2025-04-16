@@ -167,6 +167,7 @@
 			wpn_wincheaster1300 \n
 			ammo_12x76_zhekan = 1 \n
 			device_torch \n
+			hand_radio \n
 #include "gameplay\character_items.xml" \n
 #include "gameplay\character_drugs.xml" \n
 #include "gameplay\character_food.xml"	
