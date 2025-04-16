@@ -268,7 +268,11 @@ void CEntityCondition::UpdateCondition()
 
 	UpdateEntityMorale			();
 
-	health()					+= m_fDeltaHealth;
+//	health()					+= m_fDeltaHealth;
+	if (m_fDeltaHealth<=0)
+		health()				+= m_fDeltaHealth;
+	else if (health()<max_health())
+		health()				= _min(health()+m_fDeltaHealth, max_health());
 	m_fPower					+= m_fDeltaPower;
 	m_fPsyHealth				+= m_fDeltaPsyHealth;
 	m_fEntityMorale				+= m_fDeltaEntityMorale;
@@ -281,7 +285,7 @@ void CEntityCondition::UpdateCondition()
 	m_fDeltaCircumspection		= 0;
 	m_fDeltaEntityMorale		= 0;
 
-	clamp						(health(),			MIN_HEALTH, max_health());
+	clamp						(health(),			MIN_HEALTH, 2.0f);//max_health());
 	clamp						(m_fPower,			0.0f,		m_fPowerMax);
 	clamp						(m_fRadiation,		0.0f,		m_fRadiationMax);
 	clamp						(m_fEntityMorale,	0.0f,		m_fEntityMoraleMax);
