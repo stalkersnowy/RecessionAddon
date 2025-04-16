@@ -102,6 +102,7 @@ protected:
 		eIdleLight				=(1<<6),
 		eSpawnBlowoutArtefacts	=(1<<7),
 		eUseOnOffTime			=(1<<8),
+		eIgnoreStalker			=(1<<9),
 	};
 	u32					m_owner_id;		//if created from artefact
 	u32					m_ttl;

@@ -16,6 +16,7 @@
 #include "../layers/xrRender/SkeletonCustom.h"
 #include "zone_effector.h"
 #include "breakableobject.h"
+#include "ai/stalker/ai_stalker.h"
 
 //////////////////////////////////////////////////////////////////////////
 #define PREFETCHED_ARTEFACTS_NUM 1	//количество предварительно проспавненых артефактов
@@ -85,6 +86,7 @@ void CCustomZone::Load(LPCSTR section)
 	m_zone_flags.set(eIgnoreNonAlive,	pSettings->r_bool(section,	"ignore_nonalive"));
 	m_zone_flags.set(eIgnoreSmall,		pSettings->r_bool(section,	"ignore_small"));
 	m_zone_flags.set(eIgnoreArtefact,	pSettings->r_bool(section,	"ignore_artefacts"));
+	m_zone_flags.set(eIgnoreStalker,	READ_IF_EXISTS(pSettings,r_bool,section,"ignore_stalkers",false));
 	m_zone_flags.set(eVisibleByDetector,pSettings->r_bool(section,	"visible_by_detector"));
 	
 
@@ -591,6 +593,7 @@ void CCustomZone::feel_touch_new	(CObject* O)
 	CGameObject*	pGameObject		= smart_cast<CGameObject*>(O);
 	CEntityAlive*	pEntityAlive	= smart_cast<CEntityAlive*>(pGameObject);
 	CArtefact*		pArtefact		= smart_cast<CArtefact*>(pGameObject);
+	CAI_Stalker*	pStalker		= smart_cast<CAI_Stalker*>(pGameObject);
 	
 	SZoneObjectInfo object_info		;
 	object_info.object = pGameObject;
@@ -607,7 +610,8 @@ void CCustomZone::feel_touch_new	(CObject* O)
 
 	if((object_info.small_object && m_zone_flags.test(eIgnoreSmall)) ||
 		(object_info.nonalive_object && m_zone_flags.test(eIgnoreNonAlive)) || 
-		(pArtefact && m_zone_flags.test(eIgnoreArtefact)))
+		(pArtefact && m_zone_flags.test(eIgnoreArtefact)) || 
+		(pStalker && m_zone_flags.test(eIgnoreStalker)))
 		object_info.zone_ignore = true;
 	else
 		object_info.zone_ignore = false;
