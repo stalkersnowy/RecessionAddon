@@ -214,6 +214,8 @@ void CUIMapWnd::Init(LPCSTR xml_name, LPCSTR start_from)
 			l->Init(map_name, gameLtx, "hud\\default");
 
 			l->OptimalFit( m_UILevelFrame->GetWndRect() );
+    
+			m_GameMapsOrder.push_back( map_name );
 		}
 	}
 #ifdef DEBUG
@@ -248,11 +250,16 @@ void CUIMapWnd::Show(bool status)
 	{
 		m_GlobalMap->Show			(true);
 		m_GlobalMap->SetClipRect	(ActiveMapRect());
-		GameMaps::iterator	it		= m_GameMaps.begin();
-		for(;it!=m_GameMaps.end();++it){
-			m_GlobalMap->AttachChild(it->second);
-			it->second->Show		(true);
-			it->second->SetClipRect	(ActiveMapRect());
+		for(const shared_str& map_name : m_GameMapsOrder)
+		{
+			GameMaps::iterator it = m_GameMaps.find(map_name);
+			if (it!=m_GameMaps.end()) 
+			{
+				CUICustomMap* pMap = it->second;
+				m_GlobalMap->AttachChild(pMap);
+				pMap->Show				(true);
+				pMap->SetClipRect		(ActiveMapRect());
+			}
 		}
 
 		if(	m_flags.test(lmFirst)){

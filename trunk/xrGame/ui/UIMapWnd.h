@@ -44,6 +44,7 @@ private:
 	float						m_currentZoom;
 	CUIGlobalMap*				m_GlobalMap;
 	GameMaps					m_GameMaps;
+	xr_vector<shared_str>		m_GameMapsOrder;
 	
 	CUIFrameWindow*				m_UIMainFrame;
 	CUIScrollBar*				m_UIMainScrollV;

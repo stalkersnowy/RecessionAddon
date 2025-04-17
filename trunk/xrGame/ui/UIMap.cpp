@@ -348,6 +348,7 @@ CUILevelMap::CUILevelMap(CUIMapWnd* p)
 {
 	m_mapWnd			= p;
 //	m_anomalies_map		= NULL;
+	m_bUnderground		= false;
 	Show				(false);
 }
 
@@ -369,7 +370,10 @@ void CUILevelMap::Draw()
 			}
 		}
 	}
-	inherited::Draw();
+	if(m_bUnderground)
+		CUIWindow::Draw();
+	else
+		inherited::Draw();
 
 }
 
@@ -380,6 +384,8 @@ void CUILevelMap::Init	(shared_str name, CInifile& gameLtx, LPCSTR sh_name)
 	tmp.x *= UI()->get_current_kx();
 	tmp.z *= UI()->get_current_kx();
 	m_GlobalRect.set(tmp.x, tmp.y, tmp.z, tmp.w);
+
+	m_bUnderground = gameLtx.line_exist(MapName(),"underground");
 
 #ifdef DEBUG
 	float kw = m_GlobalRect.width	()	/	BoundRect().width		();
@@ -458,7 +464,7 @@ void CUILevelMap::Update()
 
 	inherited::Update				();
 
-	if(m_bCursorOverWindow){
+	if(m_bCursorOverWindow && !m_bUnderground){
 		VERIFY(m_dwFocusReceiveTime>=0);
 		if( Device.dwTimeGlobal>(m_dwFocusReceiveTime+500) ){
 
@@ -479,7 +485,7 @@ bool CUILevelMap::OnMouseAction(float x, float y, EUIMessages mouse_action)
 	if (MapWnd()->GlobalMap()->Locked())
 		return true;
 
-	if (MapWnd()->m_flags.is_any(CUIMapWnd::lmZoomIn+CUIMapWnd::lmZoomOut))	return false;
+	if (MapWnd()->m_flags.is_any(CUIMapWnd::lmZoomIn+CUIMapWnd::lmZoomOut) || m_bUnderground)	return false;
 
 	if (mouse_action == WINDOW_LBUTTON_DOWN)
 	{
