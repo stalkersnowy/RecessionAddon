@@ -191,7 +191,8 @@ bool CUIXmlInit::InitStatic(CUIXml& xml_doc, LPCSTR path, int index, CUIStatic* 
 	pWnd->EnableHeading	(flag);
 
 	LPCSTR str_flag				= xml_doc.ReadAttrib		(path, index, "light_anim",		"");
-	bool flag_cyclic			= (xml_doc.ReadAttribInt	(path, index, "la_cyclic",		1) == 1);
+	bool flag_cyclic			= (xml_doc.ReadAttribInt	(path, index, "la_cyclic",		1) == 1 ||
+									xml_doc.ReadAttribInt	(path, index, "light_anim_cyclic", 0) == 1);
 	bool flag_text				= (xml_doc.ReadAttribInt	(path, index, "la_text",		1) == 1);
 	bool flag_texture			= (xml_doc.ReadAttribInt	(path, index, "la_texture",		1) == 1);
 	bool flag_alpha				= (xml_doc.ReadAttribInt	(path, index, "la_alpha",		0) == 1);

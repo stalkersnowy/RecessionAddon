@@ -137,14 +137,14 @@
 			<pda_section>pda_quests</pda_section>
 			<main_wnd>
 				<auto_static start_time="1" length_sec="4" x="819" y="135" width="30" height="30" alignment="c" stretch="1"
-							light_anim="ui_pda_contacts" la_cyclic="1" la_texture="1" la_alpha="1">
+							light_anim="tutor_rad_sign_clr" xform_anim="tutor_rad_sign_xform" la_cyclic="1" la_texture="1" la_alpha="0">
 					<window_name>w1</window_name>
-					<texture>ui_icons_newPDA_CrclMiddle_h</texture>
+					<texture>ui_highlight</texture>
 				</auto_static>
 				<auto_static start_time="1" length_sec="4" x="839" y="135" width="30" height="30" alignment="c" stretch="1"
-							light_anim="ui_pda_contacts" la_cyclic="1" la_texture="1" la_alpha="1">
+							light_anim="tutor_rad_sign_clr" xform_anim="tutor_rad_sign_xform" la_cyclic="1" la_texture="1" la_alpha="0">
 					<window_name>w2</window_name>
-					<texture>ui_icons_newPDA_CrclMiddle_h</texture>
+					<texture>ui_highlight</texture>
 				</auto_static>
 			</main_wnd>
 		</item>
@@ -282,6 +282,8 @@
 			<guard_key/>
 			<disabled_key>use</disabled_key>
 			<disabled_key>inventory</disabled_key>
+			<function_on_start>mob_trader.on_start_tutorial_item_2</function_on_start>
+			<function_on_stop>mob_trader.on_stop_tutorial_item</function_on_stop>
 			<sound>characters_voice\scenario\trader\trader_tutorial_pda_15_1</sound>
 			<cursor_pos/>
 			<grab_input>0</grab_input>

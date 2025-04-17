@@ -19,7 +19,7 @@
 			<pause_state>on</pause_state>
 			<sound>characters_voice\scenario\video\intro_gsc_wp</sound>
 			<video_wnd x="0" y="0" width="1024" height="768" stretch="1">
-				<texture x="1" y="1" width="638" height="286">intro\intro_gsc-wp</texture>
+				<texture x="1" y="1" width="798" height="358">intro\intro_gsc-wp</texture>
 			</video_wnd>
 		</item>
 
