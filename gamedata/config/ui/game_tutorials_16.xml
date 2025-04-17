@@ -104,7 +104,7 @@
             </auto_static>
         </main_wnd>
     </item>
-    <delme_item>
+    <item>
         <length_sec>6</length_sec>
         <pause_state>off</pause_state>
         <guard_key/>
@@ -122,7 +122,7 @@
                 <texture>ui_icons_newPDA_CrclMiddle_h</texture>
             </auto_static>
         </main_wnd>
-    </delme_item>
+    </item>
     <item>
         <length_sec>8</length_sec>
         <pause_state>off</pause_state>

@@ -127,7 +127,7 @@
 			</main_wnd>
 		</item>
 
-		<delme_item><!--…Еще сможешь добавлять или убирать собственные пометки на карте... -->
+		<item><!--…Еще сможешь добавлять или убирать собственные пометки на карте... -->
 			<length_sec>6</length_sec>
 			<pause_state>off</pause_state>
 			<guard_key/>
@@ -147,7 +147,7 @@
 					<texture>ui_icons_newPDA_CrclMiddle_h</texture>
 				</auto_static>
 			</main_wnd>
-		</delme_item>
+		</item>
 
 		<item><!--вобщем разберешься…там не сложно…В ПДА есть раздел Контакты -->
 			<length_sec>8</length_sec>
