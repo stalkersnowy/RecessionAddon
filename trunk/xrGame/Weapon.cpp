@@ -1817,7 +1817,7 @@ BOOL CWeapon::ParentIsActor	()
 const float &CWeapon::hit_probability	() const
 {
 	VERIFY					((g_SingleGameDifficulty >= egdNovice) && (g_SingleGameDifficulty <= egdMaster)); 
-	return					(m_hit_probability[egdNovice]);
+	return					(m_hit_probability[g_SingleGameDifficulty]);
 }
 
 void CWeapon::ApplySilencerKoeffs	()
