@@ -15,6 +15,7 @@
 
 #include "game_cl_base.h"
 #include "Level.h"
+#include "GameConstants.h"
 
 #define PICKUP_INFO_COLOR 0xFFDDDDDD
 //AAAAAA
@@ -76,9 +77,9 @@ ICF static BOOL info_trace_callback(collide::rq_result& result, LPVOID params)
 {
 	BOOL& bOverlaped	= *(BOOL*)params;
 	if(result.O){
-		if (Level().CurrentEntity()!=result.O){	
-//			bOverlaped		= TRUE;
-			return			TRUE;//FALSE;
+		if (GameConstants::GetCheckOverlapForPickup() && Level().CurrentEntity()!=result.O){
+			bOverlaped		= TRUE;
+			return			FALSE;
 		}else{
 			return			TRUE;
 		}
