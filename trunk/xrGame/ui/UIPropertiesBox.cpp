@@ -130,6 +130,12 @@ bool CUIPropertiesBox::OnMouseAction(float x, float y, EUIMessages mouse_action)
 		Hide();
 		return true;
 	}
+	if ( mouse_action == WINDOW_RBUTTON_DOWN && !cursor_on_box )
+	{
+		Hide();
+	}
+	if ( mouse_action == WINDOW_MOUSE_WHEEL_DOWN || mouse_action == WINDOW_MOUSE_WHEEL_UP )
+		return true;
 
 	return inherited::OnMouseAction(x, y, mouse_action);
 }

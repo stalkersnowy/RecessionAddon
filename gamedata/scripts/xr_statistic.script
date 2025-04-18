@@ -138,13 +138,15 @@ function addArtefactFound(obj)
 end
 
 function save(package)
-	i = 0
+	local afs = {}
 	for k,v in pairs(taken_artefacts) do
-		i = i + 1
+		if alife():object(k) then
+			table.insert(afs, k)
+		end
 	end
-	package:w_u16(i)
-	for k,v in pairs(taken_artefacts) do
-		package:w_u32(k)
+	package:w_u16(table.getn(afs))
+	for k,v in pairs(afs) do
+		package:w_u32(v)
 	end
 end
 
