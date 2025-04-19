@@ -7,6 +7,7 @@
 #include "UIMap.h"
 #include "UIMapWnd.h"
 #include "../xr_3da/xr_input.h"		//remove me !!!
+#include "../HUDManager.h"
 
 const u32			activeLocalMapColor			= 0xffffffff;//0xffc80000;
 const u32			inactiveLocalMapColor		= 0xffffffff;//0xff438cd1;
@@ -348,7 +349,9 @@ CUILevelMap::CUILevelMap(CUIMapWnd* p)
 {
 	m_mapWnd			= p;
 //	m_anomalies_map		= NULL;
-	m_bUnderground		= false;
+	m_bHideMap			= false;
+	m_bHideHint			= false;
+	m_bUseHintRect		= false;
 	Show				(false);
 }
 
@@ -370,7 +373,7 @@ void CUILevelMap::Draw()
 			}
 		}
 	}
-	if(m_bUnderground)
+	if(m_bHideMap)
 		CUIWindow::Draw();
 	else
 		inherited::Draw();
@@ -385,7 +388,19 @@ void CUILevelMap::Init	(shared_str name, CInifile& gameLtx, LPCSTR sh_name)
 	tmp.z *= UI()->get_current_kx();
 	m_GlobalRect.set(tmp.x, tmp.y, tmp.z, tmp.w);
 
-	m_bUnderground = gameLtx.line_exist(MapName(),"underground");
+	if(gameLtx.line_exist(MapName(),"underground")){
+		m_bHideMap = m_bHideHint = true;
+	}else if(gameLtx.line_exist(MapName(),"hide_map")){
+		m_bHideMap = true;
+	}
+	
+	if(gameLtx.line_exist(MapName(),"hint_rect")){
+		tmp = gameLtx.r_fvector4(MapName(),"hint_rect");
+		tmp.x *= UI()->get_current_kx();
+		tmp.z *= UI()->get_current_kx();
+		m_HintRect.set(tmp.x, tmp.y, tmp.z, tmp.w);
+		m_bUseHintRect = true;
+	}
 
 #ifdef DEBUG
 	float kw = m_GlobalRect.width	()	/	BoundRect().width		();
@@ -444,9 +459,28 @@ Frect CUILevelMap::CalcWndRectOnGlobal	()
 
 	res.lt							= globalMap->ConvertRealToLocal(GlobalRect().lt, false);
 	res.rb							= globalMap->ConvertRealToLocal(GlobalRect().rb, false);
-	res.add							(globalMap->GetWndPos().x, globalMap->GetWndPos().y);
+//	res.add							(globalMap->GetWndPos().x, globalMap->GetWndPos().y); SNW: это не глобальная позиция
+	Fvector2 pos;
+	globalMap->GetAbsolutePos		(pos);
+	res.add							(pos.x, pos.y);
 
 	return res;
+}
+
+bool CUILevelMap::IsCursorInHintRect()
+{
+	if(!m_bUseHintRect) return true;
+
+	Frect res;
+	CUIGlobalMap* globalMap			= MapWnd()->GlobalMap();
+
+	res.lt							= globalMap->ConvertRealToLocal(m_HintRect.lt, false);
+	res.rb							= globalMap->ConvertRealToLocal(m_HintRect.rb, false);
+	Fvector2 pos;
+	globalMap->GetAbsolutePos		(pos);
+	res.add							(pos.x, pos.y);
+
+	return res.in(GetUICursor()->GetCursorPosition());
 }
 
 void CUILevelMap::Update()
@@ -464,11 +498,11 @@ void CUILevelMap::Update()
 
 	inherited::Update				();
 
-	if(m_bCursorOverWindow && !m_bUnderground){
+	if(m_bCursorOverWindow && !m_bHideHint){
 		VERIFY(m_dwFocusReceiveTime>=0);
 		if( Device.dwTimeGlobal>(m_dwFocusReceiveTime+500) ){
 
-			if(fsimilar(MapWnd()->GlobalMap()->GetCurrentZoom(), MapWnd()->GlobalMap()->GetMinZoom(),EPS_L ))
+			if(fsimilar(MapWnd()->GlobalMap()->GetCurrentZoom(), MapWnd()->GlobalMap()->GetMinZoom(),EPS_L ) && IsCursorInHintRect())
 				MapWnd()->ShowHint(this, *MapName());
 			else
 				MapWnd()->HideHint(this);
@@ -485,7 +519,7 @@ bool CUILevelMap::OnMouseAction(float x, float y, EUIMessages mouse_action)
 	if (MapWnd()->GlobalMap()->Locked())
 		return true;
 
-	if (MapWnd()->m_flags.is_any(CUIMapWnd::lmZoomIn+CUIMapWnd::lmZoomOut) || m_bUnderground)	return false;
+	if (MapWnd()->m_flags.is_any(CUIMapWnd::lmZoomIn+CUIMapWnd::lmZoomOut) || !IsCursorInHintRect())	return false;
 
 	if (mouse_action == WINDOW_LBUTTON_DOWN)
 	{
@@ -497,7 +531,7 @@ bool CUILevelMap::OnMouseAction(float x, float y, EUIMessages mouse_action)
 		return true;
 	};
 
-	if(mouse_action==WINDOW_MOUSE_MOVE && (FALSE==pInput->iGetAsyncBtnState(0)) )
+	if(mouse_action==WINDOW_MOUSE_MOVE && (FALSE==pInput->iGetAsyncBtnState(0)) && !m_bHideHint)
 	{
 		if( MapWnd() )
 		{

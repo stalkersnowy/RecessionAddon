@@ -177,6 +177,10 @@ function add_lchanger_location()
 		if obj then
 			level.map_add_object_spot(obj.id, "level_changer", "to_yantar")
 		end
+		obj = sim:story_object(591)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer_rostok", "disable_hint")
+		end
 		
 		-- bar
 		obj = sim:story_object(592)

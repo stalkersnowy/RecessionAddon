@@ -43,8 +43,6 @@ public:
 			void	SetLocked						(bool b)		{m_flags.set(eLocked,b);}
 			void	SetPointerDistance				(float d)		{m_pointer_dist=d;};
 			float	GetPointerDistance				()				{return m_pointer_dist;};
-
-	virtual bool	IsUnderground					()				{return false;}
 protected:
 	virtual void	UpdateSpots						() {};
 };
@@ -86,8 +84,11 @@ class CUILevelMap: public CUICustomMap{
 	typedef  CUICustomMap inherited;
 	CUIMapWnd*					m_mapWnd;
 	Frect						m_GlobalRect;			// virtual map size (meters)
+	Frect						m_HintRect;
 //	CUIStatic*					m_anomalies_map;
-	bool						m_bUnderground;
+	bool						m_bHideMap;
+	bool						m_bHideHint;
+	bool						m_bUseHintRect;
 private:
 								CUILevelMap			(const CUILevelMap &obj) {}
 			CUILevelMap			&operator=			(const CUILevelMap &obj) {}
@@ -103,11 +104,10 @@ public:
 	virtual void				SendMessage			(CUIWindow* pWnd, s16 msg, void* pData);
 	
 	Frect						CalcWndRectOnGlobal	();
+	bool						IsCursorInHintRect	();
 	CUIMapWnd*					MapWnd				() {return m_mapWnd;}
 
 	virtual		void			OnFocusLost			();
-
-	virtual		bool			IsUnderground		() {return m_bUnderground;}
 
 protected:
 	virtual void				UpdateSpots			();
