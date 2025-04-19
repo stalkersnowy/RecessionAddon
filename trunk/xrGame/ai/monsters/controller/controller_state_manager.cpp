@@ -33,7 +33,8 @@ CStateManagerController::CStateManagerController(CController *obj) : inherited(o
 	add_state(eStateHearDangerousSound,		xr_new<CStateMonsterHearDangerousSound<CController> >	(obj));
 	add_state(eStateHitted,					xr_new<CStateMonsterHitted<CController> >				(obj));
 	
-	add_state(eStateAttack,					xr_new<CStateMonsterAttackRun<CController> >			(obj));
+	add_state(eStateAttack_Run,				xr_new<CStateMonsterAttackRun<CController> >			(obj));
+	add_state(eStateAttack_Melee,			xr_new<CStateMonsterAttackMelee<CController> >			(obj));
 
 	//add_state(
 	//	eStateAttack, 
@@ -67,11 +68,39 @@ void CStateManagerController::execute()
 		
 	const CEntityAlive* enemy	= object->EnemyMan.get_enemy();
 
+	// Lain: changed logic
 	if (enemy) {
-		switch (object->EnemyMan.get_danger_type()) {
-			case eStrong:	state_id = eStatePanic; break;
-			case eWeak:		state_id = eStateAttack; break;
+
+		if ( object->EnemyMan.get_danger_type() == eStrong )
+		{
+			state_id = eStatePanic; 
 		}
+		else
+		{
+			if ( current_substate == eStateAttack_Melee )
+			{
+				if ( get_state(eStateAttack_Melee)->check_completion() )
+				{
+					state_id = eStateAttack_Run;
+				}
+				else
+				{
+					state_id = eStateAttack_Melee;
+				}
+			}
+			else
+			{
+				if ( get_state(eStateAttack_Melee)->check_start_conditions() )
+				{
+					state_id = eStateAttack_Melee;
+				}
+				else
+				{
+					state_id = eStateAttack_Run;
+				}
+			}
+		}		
+
 	} else if (object->HitMemory.is_hit()) {
 		state_id = eStateHitted;
 	} else if (object->hear_dangerous_sound) {

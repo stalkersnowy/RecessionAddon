@@ -573,14 +573,10 @@ void CController::set_psy_fire_delay_default()
 
 #define SEE_ENEMY_DURATION	1000
 #define MIN_DELAY			10000
-#define TUBE_PROBABILITY	20
 
 void CController::tube_fire()
 {
 	m_time_last_tube	= time();
-
-	// missed
-	if (!m_tube_at_once && (Random.randI(100) > TUBE_PROBABILITY)) return;
 
 	control().activate	(ControlCom::eComCustom1);
 }

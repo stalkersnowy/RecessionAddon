@@ -50,23 +50,29 @@ void CControllerAnimation::on_stop_control	(ControlCom::EControlType type)
 
 void CControllerAnimation::on_event(ControlCom::EEventType type, ControlCom::IEventData *data)
 {
-	switch (type) {
-	case ControlCom::eventAnimationEnd:			select_animation();			break;
-	case ControlCom::eventTorsoAnimationEnd:	
-		m_wait_torso_anim_end	= false;
-		select_torso_animation	();
-		break;
-	case ControlCom::eventLegsAnimationEnd:		select_legs_animation();	break;
-	case ControlCom::eventAnimationSignal:	
+	switch (type) 
+	{
+		case ControlCom::eventAnimationEnd:			
 		{
-			SAnimationSignalEventData *event_data = (SAnimationSignalEventData *)data;
-			if (event_data->event_id == CControlAnimation::eAnimationHit) {
-				if (event_data->motion == m_torso[eTorsoPsyAttack])
-					m_controller->psy_fire();
-				else
-					check_hit(event_data->motion,event_data->time_perc);	break;
-			}
+			 select_animation(true);
+			 m_state_attack = false;
+			 break;
 		}
+		case ControlCom::eventTorsoAnimationEnd:	
+			m_wait_torso_anim_end	= false;
+			select_torso_animation	();
+			break;
+		case ControlCom::eventLegsAnimationEnd:		select_legs_animation();	break;
+		case ControlCom::eventAnimationSignal:	
+			{
+				SAnimationSignalEventData *event_data = (SAnimationSignalEventData *)data;
+				if (event_data->event_id == CControlAnimation::eAnimationHit) {
+					if (event_data->motion == m_torso[eTorsoPsyAttack])
+						m_controller->psy_fire();
+					else
+						check_hit(event_data->motion,event_data->time_perc);	break;
+				}
+			}
 	}
 }
 
@@ -353,7 +359,7 @@ void CControllerAnimation::on_switch_controller()
 		select_torso_animation	();
 		select_legs_animation	();
 	} else {
-		select_animation		();
+		select_animation		(true);
 	}
 }
 

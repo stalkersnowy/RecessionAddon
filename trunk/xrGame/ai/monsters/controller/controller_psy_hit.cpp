@@ -39,8 +39,8 @@ bool CControllerPsyHit::check_start_conditions()
 	if (Actor()->Cameras().GetCamEffector(eCEControllerPsyHit))	
 									return false;
 
-	if (m_object->Position().distance_to(Actor()->Position()) < m_min_tube_dist) 
-									return false;
+ 	if (m_object->Position().distance_to(Actor()->Position()) < m_min_tube_dist) 
+ 									return false;
 
 	return true;
 }
@@ -114,6 +114,33 @@ void CControllerPsyHit::play_anim()
 	ctrl_anim->global.actual	= false;
 }
 
+namespace detail
+{
+
+bool check_actor_visibility (const Fvector trace_from, 
+							 const Fvector trace_to,
+							 CObject* object)
+{
+	const float dist = trace_from.distance_to(trace_to);
+	Fvector trace_dir;
+	trace_dir.sub(trace_to, trace_from);
+
+	//DBG().level_info(this).add_item	(trace_from,trace_to,D3DCOLOR_XRGB(0,150,150));
+
+
+	collide::rq_result l_rq;
+	l_rq.O = NULL;
+	Level().ObjectSpace.RayPick(trace_from,
+								trace_dir, 
+								dist, 
+								collide::rqtBoth, 
+								l_rq, 
+								object);
+	return l_rq.O == Actor();
+}
+
+} // namespace detail
+
 bool CControllerPsyHit::check_conditions_final()
 {
 	if (!m_object->g_Alive())						return false;
@@ -121,77 +148,20 @@ bool CControllerPsyHit::check_conditions_final()
 	if (m_object->EnemyMan.get_enemy() != Actor())	return false;
 	if (!Actor()->g_Alive())						return false;
 	
-	if (!m_object->EnemyMan.see_enemy_now())		return false;
-	if (m_object->Position().distance_to(Actor()->Position()) < m_min_tube_dist) 
-												return false;
+	if ( !m_blocked && !m_object->EnemyMan.see_enemy_now() ) 
+	{
+		using namespace detail;
+		const Fvector self_head = get_head_position(m_object);
+		Fvector actor_center;
+		Actor()->Center(actor_center);
 
-	//// trace enemy (extended check visibility)
-	//
-	//DBG().level_info(this).clear		();
-
-	//// 1. head-2-head
-	//Fvector trace_from, trace_to;
-	//trace_from	= get_head_position(m_object);
-	//trace_to	= get_head_position(Actor());
-
-	//float dist = trace_from.distance_to(trace_to);
-	//Fvector trace_dir;
-	//trace_dir.sub(trace_to,trace_from);
-
-	//collide::rq_result	l_rq;
-	//if (Level().ObjectSpace.RayPick(trace_from, trace_dir, dist, collide::rqtBoth, l_rq, m_object)) {
-	//	if (l_rq.O == Actor()) 
-	//		return true;
-	//}
-
-	//trace_to.mad(trace_from,trace_dir,l_rq.range);
-	//DBG().level_info(this).add_item	(trace_from,trace_to,COLOR_BLUE);	
-	//
-	//// 2. head 2 center
-	//trace_from	= get_head_position(m_object);
-	//Actor()->Center(trace_to);
-
-	//
-
-	//dist = trace_from.distance_to(trace_to);
-	//trace_dir.sub(trace_to,trace_from);
-
-	//if (Level().ObjectSpace.RayPick(trace_from, trace_dir, dist, collide::rqtBoth, l_rq, m_object)) 
-	//	if (l_rq.O == Actor()) 
-	//		return true;
-
-	//trace_to.mad(trace_from,trace_dir,l_rq.range);
-	//DBG().level_info(this).add_item	(trace_from,trace_to,COLOR_RED);
-
-	//
-	//
-	//// 3. center 2 head
-	//m_object->Center(trace_from);
-	//trace_to	= get_head_position(Actor());
-
-	//dist = trace_from.distance_to(trace_to);
-	//trace_dir.sub(trace_to,trace_from);
-
-	//if (Level().ObjectSpace.RayPick(trace_from, trace_dir, dist, collide::rqtBoth, l_rq, m_object)) 
-	//	if (l_rq.O == Actor()) return true;
-
-	//
-	//trace_to.mad(trace_from,trace_dir,l_rq.range);
-	//DBG().level_info(this).add_item	(trace_from,trace_to,COLOR_GREEN);
-	//
-	//// 4. center 2 center
-	//m_object->Center(trace_from);
-	//Actor()->Center	(trace_to);
-
-	//dist = trace_from.distance_to(trace_to);
-	//trace_dir.sub(trace_to,trace_from);
-
-	//if (Level().ObjectSpace.RayPick(trace_from, trace_dir, dist, collide::rqtBoth, l_rq, m_object)) 
-	//	if (l_rq.O == Actor()) return true;
-
-	//
-	//trace_to.mad(trace_from,trace_dir,l_rq.range);
-	//DBG().level_info(this).add_item	(trace_from,trace_to,D3DCOLOR_XRGB(0,150,150));
+		if ( !check_actor_visibility(self_head, get_head_position(Actor()), m_object) 
+									&&
+			 !check_actor_visibility(self_head, actor_center, m_object) )
+		{
+			return false;
+		}
+	}
 
 	return true;
 }
