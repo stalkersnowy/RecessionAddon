@@ -119,7 +119,7 @@ protected:
 	{
 		bool			m_bZoomEnabled;			//разрешение режима приближения
 		bool			m_bHideCrosshairInZoom;
-//		bool			m_bZoomDofEnabled;
+		bool			m_bZoomDofEnabled;
 
 		bool			m_bIsZoomModeNow;		//когда режим приближения включен
 		float			m_fCurrentZoomFactor;	//текущий фактор приближения
@@ -134,7 +134,7 @@ protected:
 
 //		float           m_fSecondVP_FovFactor;
 		
-//		Fvector			m_ZoomDof;
+		Fvector			m_ZoomDof;
 		Fvector4		m_ReloadDof;
 		Fvector4		m_ReloadEmptyDof;
 		BOOL			m_bUseDynamicZoom;
@@ -521,6 +521,8 @@ protected:
 	// therefore we should hold them by ourself :-((
 	float					m_addon_holder_range_modifier;
 	float					m_addon_holder_fov_modifier;
+	
+	virtual void			OnStateSwitch			(u32 S);
 public:
 	virtual	void			modify_holder_params		(float &range, float &fov) const;
 	virtual bool			use_crosshair				()	const {return true;}

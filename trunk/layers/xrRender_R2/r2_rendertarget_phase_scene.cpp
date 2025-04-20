@@ -10,7 +10,7 @@ void	CRenderTarget::phase_scene_prepare	()
 
 	if ( RImplementation.o.advancedpp &&
 			(
-				ps_r2_ls_flags.test(R2FLAG_SOFT_PARTICLES)
+				ps_r2_ls_flags.test(R2FLAG_SOFT_PARTICLES|R2FLAG_DOF)
 			)
 		)
 	{

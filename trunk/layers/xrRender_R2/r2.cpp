@@ -591,6 +591,14 @@ HRESULT	CRender::shader_compile			(
 			defines[def_it].Definition	=	"1";
 			def_it						++;
 		}
+		
+
+		if (ps_r2_ls_flags.test(R2FLAG_DOF))
+		{
+			defines[def_it].Name		=	"USE_DOF";
+			defines[def_it].Definition	=	"1";
+			def_it						++;
+		}
 	}
 
 	// skinning

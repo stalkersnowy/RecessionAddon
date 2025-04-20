@@ -159,6 +159,9 @@
 	<string id="ui_mm_disconnect_message">
 		<text>Действительно ли вы желаете отсоединиться?</text>
 	</string>
+	<string id="ui_mm_dof">
+		<text>Глубина резкости</text>
+	</string>
 	<string id="ui_mm_dyn_crosshair">
 		<text>Динамический прицел</text>
 	</string>

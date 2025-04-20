@@ -25,7 +25,8 @@
 #include "clsid_game.h"
 #include "mathutils.h"
 #include "object_broker.h"
-#include "../xr_3da/IGame_Persistent.h"
+#include "GamePersistent.h"
+#include "effectorFall.h"
 #include "ui/UIWindow.h"
 #include "ui/UIXmlInit.h"
 
@@ -422,6 +423,13 @@ void CWeapon::Load		(LPCSTR section)
 
 	if(pSettings->line_exist(hud_sect, "zoom_hide_crosshair"))
 		m_zoom_params.m_bHideCrosshairInZoom = !!pSettings->r_bool(hud_sect, "zoom_hide_crosshair");	
+
+	Fvector			def_dof;
+	def_dof.set		(-1,-1,-1);
+	m_zoom_params.m_ZoomDof		= READ_IF_EXISTS(pSettings, r_fvector3, section, "zoom_dof", Fvector().set(-1,-1,-1));
+	m_zoom_params.m_bZoomDofEnabled	= !def_dof.similar(m_zoom_params.m_ZoomDof);
+
+	m_zoom_params.m_ReloadDof	= READ_IF_EXISTS(pSettings, r_fvector4, section, "reload_dof", Fvector4().set(-1,-1,-1,-1));
 
 	//////////////////////////////////////////////////////////
 
@@ -1347,6 +1355,10 @@ void CWeapon::OnZoomIn()
 		m_zoom_params.m_pVision = xr_new<CBinocularsVision>(m_zoom_params.m_sUseBinocularVision);
 	StopHudInertion();
 	if (m_UILens) m_UILens->SetPPMode();
+
+	
+	if(m_zoom_params.m_bZoomDofEnabled && !IsScopeAttached())
+		GamePersistent().SetEffectorDOF	(m_zoom_params.m_ZoomDof);
 }
 
 void CWeapon::OnZoomOut()
@@ -1363,6 +1375,8 @@ void CWeapon::OnZoomOut()
 	xr_delete(m_zoom_params.m_pVision);
 	StartHudInertion();
 	if (m_UILens) m_UILens->ResetPPMode();
+
+ 	GamePersistent().RestoreEffectorDOF	();
 }
 
 CUIWindow* CWeapon::ZoomTexture()
@@ -1889,4 +1903,20 @@ int CWeapon::GetAmmoCount_forType(shared_str const& ammo_type) const
 		}
 	}
 	return res;
+}
+
+void CWeapon::OnStateSwitch	(u32 S)
+{
+	inherited::OnStateSwitch(S);
+	m_dwAmmoCurrentCalcFrame = 0;
+
+	if(GetState()==eReload)
+	{
+		if(H_Parent()==Level().CurrentEntity() && !fsimilar(m_zoom_params.m_ReloadDof.w,-1.0f))
+		{
+			CActor* current_actor	= smart_cast<CActor*>(H_Parent());
+			if (current_actor)
+				current_actor->Cameras().AddCamEffector(xr_new<CEffectorDOF>(m_zoom_params.m_ReloadDof) );
+		}
+	}
 }

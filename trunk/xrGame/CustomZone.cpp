@@ -17,6 +17,7 @@
 #include "zone_effector.h"
 #include "breakableobject.h"
 #include "ai/stalker/ai_stalker.h"
+#include "GamePersistent.h"
 
 //////////////////////////////////////////////////////////////////////////
 #define PREFETCHED_ARTEFACTS_NUM 1	//количество предварительно проспавненых артефактов
@@ -311,6 +312,8 @@ void CCustomZone::Load(LPCSTR section)
 
 	m_ef_anomaly_type			= pSettings->r_u32(section,"ef_anomaly_type");
 	m_ef_weapon_type			= pSettings->r_u32(section,"ef_weapon_type");
+	
+//	m_zone_flags.set			(eAffectPickDOF, READ_IF_EXISTS(pSettings, r_bool, section, "pick_dof_effector", true));
 }
 
 BOOL CCustomZone::net_Spawn(CSE_Abstract* DC) 
@@ -1354,9 +1357,24 @@ void CCustomZone::net_Relcase(CObject* O)
 	inherited::net_Relcase(O);
 }
 
+void CCustomZone::enter_Zone(SZoneObjectInfo& io)
+{
+	if(/*m_zone_flags.test(eAffectPickDOF) && */Level().CurrentEntity())
+	{
+		if(io.object->ID()==Level().CurrentEntity()->ID())
+			GamePersistent().SetPickableEffectorDOF(true);
+	}
+}
+
 void CCustomZone::exit_Zone	(SZoneObjectInfo& io)
 {
 	StopObjectIdleParticles(io.object);
+
+	if(/*m_zone_flags.test(eAffectPickDOF) && */Level().CurrentEntity())
+	{
+		if(io.object->ID()==Level().CurrentEntity()->ID())
+			GamePersistent().SetPickableEffectorDOF(false);
+	}
 }
 
 void CCustomZone::PlayAccumParticles()
