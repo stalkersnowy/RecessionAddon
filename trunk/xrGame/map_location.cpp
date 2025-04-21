@@ -511,13 +511,11 @@ void CMapLocation::load(IReader &stream)
 
 void CMapLocation::SetHint	(const shared_str& hint)		
 {
-	if ( hint == "disable_hint" )
-	{
-		m_hint_enable = false;
-		m_hint._set( "" );
-		return;
-	}
-	m_hint = hint;
+	m_hint_enable = (hint != "disable_hint" && hint != "no hint");
+	if ( m_hint_enable )
+		m_hint = hint;
+	else
+		m_hint._set("");
 };
 
 LPCSTR CMapLocation::GetHint	()					

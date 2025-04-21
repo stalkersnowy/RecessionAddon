@@ -142,7 +142,7 @@ void CUIActorInfoWnd::FillPointsInfo			()
 	}
 	FillMasterPart						(&uiXml, "total");
 #endif
-	UIMasterList->SetSelected(UIMasterList->GetItem(1) );
+	UIMasterList->SetSelected(UIMasterList->GetItem(0) );
 }
 
 void CUIActorInfoWnd::FillMasterPart(CUIXml* xml, const shared_str& key_name)

@@ -171,6 +171,22 @@ void CLevel::IR_OnKeyboardPress	(int key)
 	}
 
 	switch (key) {
+	case DIK_DIVIDE: {
+		if (!Server)
+			break;
+
+		SetGameTimeFactor			(g_fTimeFactor);
+		SetEnvironmentGameTimeFactor(GetEnvironmentGameTime(), g_fTimeFactor);
+		break;	
+	}
+	case DIK_MULTIPLY: {
+		if (!Server)
+			break;
+
+		SetGameTimeFactor			(1000.f);
+		SetEnvironmentGameTimeFactor(GetEnvironmentGameTime(), 1000.f);
+		break;
+	}
 	case DIK_NUMPAD5: 
 		{
 			if (GameID() != GAME_SINGLE) 

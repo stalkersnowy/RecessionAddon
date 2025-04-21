@@ -1434,6 +1434,12 @@ void CActor::OnItemDrop			(CInventoryItem *inventory_item, bool just_before_dest
 	CArtefact* artefact = smart_cast<CArtefact*>(inventory_item);
 	if(artefact && artefact->m_eItemPlace == eItemPlaceBelt)
 		MoveArtefactBelt(artefact, false);
+
+	CCustomOutfit* outfit		= smart_cast<CCustomOutfit*>(inventory_item);
+	if(outfit && inventory_item->m_eItemPlace==eItemPlaceSlot)
+	{
+		outfit->ApplySkinModel	(this, false, false);
+	}
 }
 
 
@@ -1664,7 +1670,7 @@ DLL_Pure *CActor::_construct			()
 
 bool CActor::use_center_to_aim			() const
 {
-	return							(!(mstate_real&mcCrouch));
+	return							(!!(mstate_real&mcCrouch));
 }
 
 
