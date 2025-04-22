@@ -122,25 +122,25 @@ def_state_moving3 = yan_professor_walk
 meet_state 		= 2 | yan_professor_wait@yantar_professor_talk_1
 meet_state_wpn 	= 2 | yan_professor_wait@yantar_professor_talk_1
 victim 			= 2 | actor
-victim_wpn 		= nil
+victim_wpn 		= 2 | actor
 use             = true
 use_wpn         = false
 
 [meet@yan_general_scientist_1]
-meet_state 		= 1 | yan_professor_wait@yantar_professor_talk_1
-meet_state_wpn 	= 1 | yan_professor_wait@yantar_professor_talk_1
-victim 			= 1 | actor
-victim_wpn 		= nil
+meet_state 		= 2 | yan_professor_wait@yantar_professor_talk_1
+meet_state_wpn 	= 2 | yan_professor_wait@yantar_professor_talk_1
+victim 			= 2 | actor
+victim_wpn 		= 2 | actor
 use             = true
 use_wpn         = false
 abuse = false
-precond = usability
+;precond = usability
 
 [meet@no_talk]
-meet_state 		= 1 | yan_professor_wait@yantar_professor_talk_1
-meet_state_wpn 	= 1 | yan_professor_wait@yantar_professor_talk_1
-victim 			= 1 | actor
-victim_wpn 		= nil
+meet_state 		= 2 | yan_professor_wait@yantar_professor_talk_1
+meet_state_wpn 	= 2 | yan_professor_wait@yantar_professor_talk_1
+victim 			= 2 | actor
+victim_wpn 		= 2 | actor
 use             = false
 use_wpn         = false
 abuse = false
