@@ -533,7 +533,7 @@ function gar_dm_bandits_fight(actor, npc)
 		if not ignore_actor then
 			bandit3:set_relation(game_object.enemy, actor)
 		end
-		bandit1:set_relation(game_object.enemy, novice)
+		bandit3:set_relation(game_object.enemy, novice)
 	end
 end
 
@@ -603,7 +603,7 @@ function esc_direction_fire(actor, npc)
 end
 
 function esc_fanat_victory(actor, npc)
-	if has_alife_info("escape_lager_killers_die") and not has_alife_info("esc_fanat_die") then
+	if has_alife_info("escape_lager_help") and has_alife_info("escape_lager_killers_die") and not has_alife_info("esc_fanat_die") then -- SNW: фикс из зрп, но там на кой-то фиг проверка отдельная
 		news_manager.send_tip(actor, "esc_fanat_victory", 0, "stalker", 10000)
 	end
 end
@@ -966,7 +966,7 @@ local function transfer_object_item(item)
 end
 function bar_arena_teleport ( actor, npc)
 
-	inv_box_1 = level_object_by_sid (573)
+	local inv_box_1 = level_object_by_sid (573)
 
 	out_object = actor
     in_object  = inv_box_1

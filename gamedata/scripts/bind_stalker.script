@@ -40,6 +40,11 @@ function actor_binder:net_spawn(data)
 	end
 
 	db.add_actor(self.object)
+	-- nv100217 permanent radiation cure
+	if self.actor_detector.init_time ~= -1 then
+		self.actor_detector:actor_enter()
+		dbglog("Permanent radiation bug fix applied")
+	end
 	
 	if self.st.disable_input_time == nil then
 		level.enable_input()
