@@ -476,6 +476,7 @@ HRESULT	CRender::shader_compile			(
 	CONST D3DXMACRO*                pDefines		= (CONST D3DXMACRO*)	_pDefines;
 	char							c_smapsize		[32];
 	char							c_gloss			[32];
+	char							c_bloommode		[32];
 	if (pDefines)	{
 		// transfer existing defines
 		for (;;def_it++)	{
@@ -599,6 +600,14 @@ HRESULT	CRender::shader_compile			(
 			defines[def_it].Definition	=	"1";
 			def_it						++;
 		}
+	}
+
+	if (ps_BloomMode)
+	{
+		xr_sprintf					(c_bloommode,"%d",ps_BloomMode);
+		defines[def_it].Name		=	"BLOOM_MODE";
+		defines[def_it].Definition	=	c_bloommode;
+		def_it						++;
 	}
 
 	// skinning

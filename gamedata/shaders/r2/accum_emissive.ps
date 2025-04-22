@@ -1,0 +1,10 @@
+#include "common.h"
+
+half4  main  ( p_flat I )  : COLOR
+{
+#if BLOOM_MODE > 3
+  return   half4    (1,1,1,0)*8.0h;
+#else
+  return   half4    (1,1,1,1)*8.0h;
+#endif
+}

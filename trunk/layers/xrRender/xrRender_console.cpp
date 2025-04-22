@@ -23,6 +23,16 @@ xr_token							qsmapsize_token							[ ]={
 	{ 0,							0											}
 };
 
+u32			ps_BloomMode			=	1	;
+xr_token							qbloommode_token						[ ]={
+	{ "3120",						0											},
+	{ "SoC",						1											},
+	{ "2588",						2											},
+	{ "2559",						3											},
+	{ "2571",						4											},
+	{ 0,							0											}
+};
+
 // Common
 //int		ps_r__Supersample			= 1		;
 int			ps_r__LightSleepFrames		= 10	;
@@ -253,6 +263,28 @@ public:
 		Console->Execute		(cmd);
 	}
 };
+//-----------------------------------------------------------------------
+class	CCC_Bloom		: public CCC_Token
+{
+public:
+	CCC_Bloom(LPCSTR N, u32* V, xr_token* T) : CCC_Token(N,V,T)	{}	;
+
+	virtual void	Execute	(LPCSTR args)	{
+		CCC_Token::Execute	(args);
+		string_path		_cfg;
+		string_path		cmd;
+		
+		if (*value==0)
+			strcpy(_cfg, "bloom_3120.ltx");
+		else if (*value == 1)
+			strcpy(_cfg, "bloom_soc.ltx");
+		else
+			strcpy(_cfg, "bloom_2588.ltx");
+		FS.update_path			(_cfg,"$game_config$",_cfg);
+		strconcat				(sizeof(cmd),cmd,"cfg_load", " ", _cfg);
+		Console->Execute		(cmd);
+	}
+};
 
 #if RENDER==R_R2
 #include "r__pixel_calculator.h"
@@ -403,6 +435,8 @@ public:
 void		xrRender_initconsole	()
 {
 	CMD3(CCC_Preset,	"_preset",				&ps_Preset,	qpreset_token	);
+	
+	CMD3(CCC_Bloom,		"r2_bloom_mode",		&ps_BloomMode, qbloommode_token );
 
 // Common
 	CMD1(CCC_Screenshot,"screenshot"			);

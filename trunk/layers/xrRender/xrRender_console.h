@@ -103,6 +103,7 @@ extern ECORE_API float			ps_r2_dof_sky;				//	distance to sky
 extern ECORE_API float			ps_r2_dof_kernel_size;		//	7.0f
 
 extern ECORE_API u32			ps_Smapsize;
+extern ECORE_API u32			ps_BloomMode;
 
 enum
 {

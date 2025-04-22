@@ -56,10 +56,17 @@ _out         main                ( _input I )
 #ifdef USE_SSAO
 	//  Calculate SSAO
 	half occ = calc_ssao(P, N, I.tc0);
+	occ = saturate(occ);
+#if BLOOM_MODE < 1
+	occ = Contrast(occ,2);
+#endif
 #endif
 
         hmodel		(hdiffuse, hspecular, mtl, N.w, D.w, P.xyz, N.xyz);
 		//			hdiffuse*=hdiffuse;			//. high contrast hemi
+#if BLOOM_MODE < 1
+	hdiffuse*=(D.rgb*0.95 + 0.05h);	// rise texture contrast for diffuse lighting
+#endif
 #ifdef USE_SSAO
 	hdiffuse *= occ;
 	hspecular *= occ;
@@ -67,6 +74,9 @@ _out         main                ( _input I )
 
         half4         light       = half4         (L.rgb + hdiffuse, L.w)        ;
         half4         C           = D*light       ;                                                        // rgb.gloss * light(diffuse.specular)
+#if BLOOM_MODE > 1 && BLOOM_MODE < 4
+					  hspecular	  *= 1.5;
+#endif
         half3         spec        = C.www         + hspecular;        // replicated specular
 #ifdef         USE_SUPER_SPECULAR
                       spec      = (C.rgb*.5h + .5h)*C.w + hspecular        ;
@@ -91,7 +101,6 @@ _out         main                ( _input I )
         float         	distance		= length		(pos);
         float         	fog				= saturate		(distance*fog_params.w + fog_params.x); //
                       	color			= lerp     		(color,fog_color,fog);        			//
-        half        	skyblend		= saturate		(fog*fog);
 
 #ifdef         DBG_TMAPPING
         color                        	= D.xyz;
@@ -110,8 +119,13 @@ _out         main                ( _input I )
 
         _out        	o;
         tonemap        	(o.low, o.high, color, tm_scale )	;
+//#if BLOOM_MODE < 4
+        half        	skyblend		= saturate		(fog*fog);
                         o.low.a         = skyblend	;
+#if BLOOM_MODE < 2
 						o.high.a		= skyblend	;
+#endif
+//#endif
 
 //		o.low	= skyblend;
 //		o.hight	= 0;
