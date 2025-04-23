@@ -537,3 +537,11 @@ void CScriptGameObject::invulnerable		(bool invulnerable)
 
 	monster->invulnerable	(invulnerable);
 }
+
+void CScriptGameObject::set_visual_name						(LPCSTR visual)
+{
+	object().cNameVisual_set(visual);
+}
+LPCSTR CScriptGameObject::get_visual_name				() const {
+	return object().cNameVisual().c_str();
+}

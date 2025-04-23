@@ -557,6 +557,8 @@ public:
 
 			bool				invulnerable						() const;
 			void				invulnerable						(bool invulnerable);
+			void				set_visual_name						(LPCSTR visual);
+			LPCSTR				get_visual_name						() const;
 
 	DECLARE_SCRIPT_REGISTER_FUNCTION
 };

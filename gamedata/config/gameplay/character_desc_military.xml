@@ -366,7 +366,7 @@
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
 		<money min="100000" max="110000" infinitive="1"></money>
 
-        <snd_config>characters_voice\human_03\freedom\</snd_config>
+        <snd_config>characters_voice\human_02\freedom\</snd_config>
 		<crouch_type>0</crouch_type>
 		
 		<rank>930</rank>
@@ -626,7 +626,7 @@
 		<rank>904</rank>
 		<reputation>-149</reputation>
 
-        <snd_config>characters_voice\human_02\\</snd_config>
+        <snd_config>characters_voice\human_02\killer\</snd_config>
   		<crouch_type>-1</crouch_type>
 
 		<visual>actors\killer\stalker_ki_informator</visual>
@@ -688,7 +688,7 @@
 
 		<team>Killer_sniper</team>
 
-        <snd_config>characters_voice\human_03\killer\</snd_config>
+        <snd_config>characters_voice\human_01\killer\</snd_config>
   		<crouch_type>-1</crouch_type>
 		
 		<class>mil_killer_sniper</class>

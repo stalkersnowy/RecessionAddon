@@ -84,6 +84,25 @@ void SMusicTrack::Load(LPCSTR fn, LPCSTR params)
 	m_PauseTime.mul		(1000);			// convert sec to ms
 }
 
+BOOL SMusicTrack::in(u32 game_time)
+{
+	// game_time -ms 
+	if(m_ActiveTime.x==0 && m_ActiveTime.y)
+		return TRUE;
+	
+	bool b_cross_midnight	= (m_ActiveTime.y < m_ActiveTime.x);
+	BOOL res				= FALSE;
+
+	if(!b_cross_midnight)
+	{
+		res					= ( (int(game_time) >= m_ActiveTime.x) && (int(game_time) < m_ActiveTime.y) );
+	}else
+	{
+		res					= ( (int(game_time) >= m_ActiveTime.x) || (int(game_time) <= m_ActiveTime.y) );
+	}
+	return res;
+}
+
 void	SMusicTrack::Play()
 {
 	m_SourceLeft.play_at_pos	(0,Fvector().set(-0.5f,0.f,0.3f),sm_2D);
@@ -176,8 +195,8 @@ void CLevelSoundManager::Update()
 			for (u32 k=0; k<m_MusicTracks.size(); ++k){
 				SMusicTrack& T	= m_MusicTracks[k];
 				if (T.IsPlaying()) T.Stop();
-				if ((0==T.m_ActiveTime.x)&&(0==T.m_ActiveTime.y)||
-					((int(game_time)>=T.m_ActiveTime.x)&&(int(game_time)<T.m_ActiveTime.y)))
+				if ((0==T.m_ActiveTime.x)&&(0==T.m_ActiveTime.y)||T.in(game_time))
+//					((int(game_time)>=T.m_ActiveTime.x)&&(int(game_time)<T.m_ActiveTime.y)))
 					indices.push_back(k);
 			}
 			if (!indices.empty()){
