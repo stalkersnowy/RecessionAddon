@@ -122,6 +122,8 @@ public:
 	int					tb_id;
     
 	CEnvAmbient*		env_ambient;
+	
+	bool				outdoor;
 
 #ifdef DEBUG
 	shared_str			sect_name;

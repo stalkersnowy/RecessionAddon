@@ -138,6 +138,8 @@ enum
 	R2FLAG_MBLUR				= (1<<22),
 
 	R2FLAG_DOF					= (1<<23),
+
+	R2FLAG_INDOOR				= (1<<24),
 };
 
 extern void						xrRender_initconsole	();

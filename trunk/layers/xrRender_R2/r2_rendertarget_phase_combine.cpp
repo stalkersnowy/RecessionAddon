@@ -115,7 +115,7 @@ void	CRenderTarget::phase_combine	()
 		t_envmap_1->surface_set		(e1);	_RELEASE(e1);
 	
 		// Draw
-		RCache.set_Element			(s_combine->E[0]	);
+		RCache.set_Element			(s_combine->E[envdesc.outdoor?0:1]	);
 		RCache.set_Geometry			(g_combine_VP		);
 
 		RCache.set_c				("m_v2w",			m_v2w	);
@@ -204,8 +204,8 @@ void	CRenderTarget::phase_combine	()
 		vDofKernel.mul(ps_r2_dof_kernel_size);
 
 		// Draw COLOR
-		if (ps_r2_ls_flags.test(R2FLAG_AA))			RCache.set_Element	(s_combine->E[bDistort?3:1]);	// look at blender_combine.cpp
-		else										RCache.set_Element	(s_combine->E[bDistort?4:2]);	// look at blender_combine.cpp
+		if (ps_r2_ls_flags.test(R2FLAG_AA))			RCache.set_Element	(s_combine->E[bDistort?4:2]);	// look at blender_combine.cpp
+		else										RCache.set_Element	(s_combine->E[bDistort?5:3]);	// look at blender_combine.cpp
 		RCache.set_c				("e_barrier",	ps_r2_aa_barier.x,	ps_r2_aa_barier.y,	ps_r2_aa_barier.z,	0);
 		RCache.set_c				("e_weights",	ps_r2_aa_weight.x,	ps_r2_aa_weight.y,	ps_r2_aa_weight.z,	0);
 		RCache.set_c				("e_kernel",	ps_r2_aa_kernel,	ps_r2_aa_kernel,	ps_r2_aa_kernel,	0);

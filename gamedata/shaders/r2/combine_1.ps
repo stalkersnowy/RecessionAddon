@@ -72,6 +72,13 @@ _out         main                ( _input I )
 	hspecular *= occ;
 #endif
 
+#ifdef INDOOR
+	half	hfactor		= 	D.w				;	//* N.w		;							// hemi*gloss
+			D.rgb		=	lerp			(D.rgb, hspecular, hfactor);
+  	half4 	light 		= 	half4 			(L.rgb + hdiffuse, L.w*N.w);
+  	half4 	C			= 	D*light			;					// rgb.gloss * light(diffuse.specular)
+  	half3 	color 		= 	C.rgb + C.www 	;					// replicated specular
+#else //outdoor
         half4         light       = half4         (L.rgb + hdiffuse, L.w)        ;
         half4         C           = D*light       ;                                                        // rgb.gloss * light(diffuse.specular)
 #if BLOOM_MODE > 1 && BLOOM_MODE < 4
@@ -83,24 +90,12 @@ _out         main                ( _input I )
 #endif
 		half3       color     = C.rgb + spec     ;
 
-        //. color + hemi + sun + lighting + specular
-		//			color 	= 	hdiffuse+hspecular+L.rgb+spec+C.rgb;
-        //. hemi + sun + lighting + specular
-		//			color 	= 	hdiffuse+hspecular+L.rgb+spec;
-		//. hemi + sun + lighting no specular
-		//			color 	= 	hdiffuse+hspecular+L.rgb;
-		//. hemi + sun no specular
-		//			color 	= 	hdiffuse+hspecular+L.rgb;
-		//. sun + lighting + specular
-		//			color 	= 	hspecular+L.rgb+spec;
-		//. only lighting and specular
-		// color 		= light.rgb + spec;
-
         // here should be distance fog
         float3        	pos        		= P.xyz;
         float         	distance		= length		(pos);
         float         	fog				= saturate		(distance*fog_params.w + fog_params.x); //
                       	color			= lerp     		(color,fog_color,fog);        			//
+#endif //noor
 
 #ifdef         DBG_TMAPPING
         color                        	= D.xyz;
@@ -119,13 +114,13 @@ _out         main                ( _input I )
 
         _out        	o;
         tonemap        	(o.low, o.high, color, tm_scale )	;
-//#if BLOOM_MODE < 4
+#ifndef INDOOR
         half        	skyblend		= saturate		(fog*fog);
                         o.low.a         = skyblend	;
 #if BLOOM_MODE < 2
 						o.high.a		= skyblend	;
 #endif
-//#endif
+#endif
 
 //		o.low	= skyblend;
 //		o.hight	= 0;

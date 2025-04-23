@@ -21,7 +21,7 @@ uniform        samplerCUBE                s_env1;
 
 #if defined(USE_SOFT_WATER) && defined(NEED_SOFT_WATER)
 //half3	water_intensity; SNW-TMP
-#define water_intensity half3(1.0f, 0.0, 0.0)
+#define water_intensity 1.0f
 #endif	//	defined(USE_SOFT_WATER) && defined(NEED_SOFT_WATER)
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -97,7 +97,7 @@ half4   main_ps_2_0  ( vf I )          : COLOR
 	//	water fog
 	half  fog_exp_intens = -4.0h;
 	float fog	= 1-exp(fog_exp_intens*waterDepth);
-	half3 Fc  	= half3( 0.1h, 0.1h, 0.1h) * water_intensity.r;
+	half3 Fc  	= half3( 0.1h, 0.1h, 0.1h) * water_intensity;//.r;
 //	half3 Fc  	= lerp(half3( 1.0h, 0.0h, 0.0h), half3( 0.0h, 1.0h, 0.0h), water_intensity.r);
 //	half3 Fc  	= half3( 0.1h, 0.1h, 0.2h);
 //	half3 Fc  	= half3( 1.0h, 0.0h, 0.0h);

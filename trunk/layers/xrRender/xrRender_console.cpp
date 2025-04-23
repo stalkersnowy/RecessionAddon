@@ -599,6 +599,8 @@ void		xrRender_initconsole	()
 	CMD3(CCC_Mask,		"r2_steep_parallax",			&ps_r2_ls_flags,			R2FLAG_STEEP_PARALLAX);
 	
 	CMD3(CCC_Token,		"r__smapsize",					&ps_Smapsize,				qsmapsize_token );
+
+	CMD3(CCC_Mask,		"r2_indoor_lighting",			&ps_r2_ls_flags,			R2FLAG_INDOOR);
 }
 
 void	xrRender_apply_tf		()

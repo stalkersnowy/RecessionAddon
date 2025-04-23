@@ -160,6 +160,8 @@ void CEnvDescriptor::load	(LPCSTR exec_tm, LPCSTR S, CEnvironment* parent)
 	bolt_duration			= (tb_id>=0)?pSettings->r_float	(S,"bolt_duration"):0.f;
 	env_ambient				= pSettings->line_exist(S,"env_ambient")?parent->AppendEnvAmb	(pSettings->r_string(S,"env_ambient")):0;
 
+	outdoor					= pSettings->line_exist(S,"outdoor")?pSettings->r_bool(S,"outdoor"):true;
+
 	C_CHECK					(clouds_color);
 	C_CHECK					(sky_color	);
 	C_CHECK					(fog_color	);
@@ -267,6 +269,7 @@ void CEnvDescriptorMixer::lerp	(CEnvironment* , CEnvDescriptor& A, CEnvDescripto
 	sun_color.lerp			(A.sun_color,B.sun_color,f);
 	sun_dir.lerp			(A.sun_dir,B.sun_dir,f).normalize();
 	VERIFY2					(sun_dir.y<0,"Invalid sun direction settings while lerp");
+	outdoor					= A.outdoor && B.outdoor;
 
 }
 
