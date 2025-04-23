@@ -124,6 +124,8 @@ CUIOptConCom g_OptConCom;
 	extern		u32 game_lua_memory_usage	();
 #endif // SEVERAL_ALLOCATORS
 
+extern BOOL g_bUseIK;
+
 class CCC_MemStats : public IConsole_Command
 {
 public:
@@ -1857,6 +1859,8 @@ void CCC_RegisterCommands()
 	g_uCommonFlags.set(flAiUseTorchDynamicLights, TRUE);
 
 	CMD3(CCC_Mask,		"ai_use_torch_dynamic_lights",	&g_uCommonFlags, flAiUseTorchDynamicLights);
+
+	CMD4(CCC_Integer,		"g_use_ik",	&g_bUseIK, 0,1);
 
 
 #ifndef MASTER_GOLD
