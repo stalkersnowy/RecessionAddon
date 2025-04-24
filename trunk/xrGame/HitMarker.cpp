@@ -9,11 +9,25 @@ static Fvector2			as_PC[5];
 static Fvector2			as_TC[5];
 const static u32		as_id[4*3] = {0,1,4,  1,2,4,  2,3,4,  3,0,4};
 
+int						m_HitMarkIndex = 0;
+int						m_CurHitMarkIndex = 0;
 
 //--------------------------------------------------------------------
 CHitMarker::CHitMarker()
 {
-	InitShader		(pSettings->r_string("hud_hitmark","hit_mark_texture"));
+	InitShader		();
+}
+
+void CHitMarker::InitShader	()
+{
+	m_CurHitMarkIndex = m_HitMarkIndex;
+	if(m_CurHitMarkIndex){
+		string32		buf;
+		xr_sprintf		(buf,"ui\\ui_hud_hit_mark_%02d",m_CurHitMarkIndex);
+		hShader2.create	("hud\\default", buf);
+	}else{
+		hShader2.create	("hud\\default", "ui\\ui_hud_hit_mark");
+	}
 }
 
 void CHitMarker::InitShader	(LPCSTR tex_name)
@@ -51,6 +65,7 @@ void CHitMarker::Render()
 
 void CHitMarker::Hit(int id, const Fvector& dir){
 
+	if(m_CurHitMarkIndex!=m_HitMarkIndex) InitShader();
 	Fvector hit_dir = dir;
 	hit_dir.mul(-1.0f);
 	m_HitMarks.push_back	(xr_new<SHitMark>(hShader2,hit_dir));

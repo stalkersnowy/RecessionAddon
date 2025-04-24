@@ -37,6 +37,7 @@ public:
 
 	void					Render		();
 	void					Hit			(int id, const Fvector& dir);
+	void					InitShader	();
 	void					InitShader	(LPCSTR tex_name);
 };
 

@@ -82,6 +82,8 @@ extern	BOOL	g_show_wnd_rect2			;
 //-----------------------------------------------------------
 extern	float	g_fTimeFactor;
 
+extern	int		m_HitMarkIndex;
+
 
 void register_mp_console_commands();
 //-----------------------------------------------------------
@@ -1880,5 +1882,7 @@ void CCC_RegisterCommands()
 #endif
 	*g_last_saved_game	= 0;
 
-	register_mp_console_commands					();
+	CMD4(CCC_Integer,	"g_hit_mark_index",	&m_HitMarkIndex,	0, 18);
+
+//	register_mp_console_commands					();
 }
