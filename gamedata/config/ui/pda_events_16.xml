@@ -50,7 +50,7 @@
                         <h r="255" g="255" b="255"/>
                     </text_color>
                 </button>
-                <notused_button x="204" y="0" width="39" height="18" hint="pda_btn_own_hint">
+                <button x="204" y="0" width="39" height="18" hint="pda_btn_own_hint">
                     <text align="l" x="0" y="0" font="letterica18" r="255" g="255" b="255" complex_mode="0">pda_btn_own</text>
                     <text_color>
                         <t r="231" g="168" b="12"/>
@@ -58,7 +58,7 @@
                         <e r="127" g="127" b="127"/>
                         <h r="255" g="255" b="255"/>
                     </text_color>
-                </notused_button>
+                </button>
             </filter_tab>
             <left_frame_header x="7" y="17" width="269" height="32" stretch="1">
                 <title x="12" y="1" width="233" height="27">

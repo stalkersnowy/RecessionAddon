@@ -6186,7 +6186,10 @@
     <ClCompile Include="ui\map_hint.cpp" />
     <ClCompile Include="map_spot.cpp" />
     <ClCompile Include="ui\UIMap.cpp" />
-    <ClCompile Include="ui\UIMapWnd.cpp" />
+    <ClCompile Include="ui\UIMapWnd.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch_script.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
     <ClCompile Include="ui\UIMapWndActions.cpp" />
     <ClCompile Include="ui\UITalkDialogWnd.cpp" />
     <ClCompile Include="ui\UITalkWnd.cpp" />

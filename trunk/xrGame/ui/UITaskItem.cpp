@@ -69,13 +69,18 @@ void CUITaskRootItem::Init			()
 
 	m_taskImage					= xr_new<CUIStatic>();		m_taskImage->SetAutoDelete(true);			AttachChild(m_taskImage);
 	m_captionStatic				= xr_new<CUIStatic>();		m_captionStatic->SetAutoDelete(true);		AttachChild(m_captionStatic);
+	m_showLocationBtn			= xr_new<CUI3tButton>();	m_showLocationBtn->SetAutoDelete(true);		AttachChild(m_showLocationBtn);
 	m_remTimeStatic				= xr_new<CUIStatic>();		m_remTimeStatic->SetAutoDelete(true);		AttachChild(m_remTimeStatic);
 
 	m_switchDescriptionBtn		= xr_new<CUI3tButton>();	m_switchDescriptionBtn->SetAutoDelete(true); AttachChild(m_switchDescriptionBtn);
+	m_switchDescriptionBtn		->SetAlwaysHighlight(true);
 	m_captionTime				= xr_new<CUI3tButton>();	m_captionTime->SetAutoDelete(true);			AttachChild(m_captionTime);
 	
+	m_showLocationBtn->SetWindowName("m_showLocationBtn");
+	Register					(m_showLocationBtn);
 	m_switchDescriptionBtn->SetWindowName("m_switchDescriptionBtn");
 	Register					(m_switchDescriptionBtn);
+	AddCallback					("m_showLocationBtn",BUTTON_CLICKED,CUIWndCallback::void_function(this, &CUITaskRootItem::OnShowLocationClicked));
 	AddCallback					("m_switchDescriptionBtn",BUTTON_CLICKED,CUIWndCallback::void_function(this, &CUITaskRootItem::OnSwitchDescriptionClicked));
 
 	CUIXmlInit xml_init;
@@ -87,7 +92,9 @@ void CUITaskRootItem::Init			()
 	xml_init.InitStatic			(uiXml,	"task_root_item:caption_time",	0,	m_captionTime);
 	xml_init.InitStatic			(uiXml,	"task_root_item:rem_time",		0,	m_remTimeStatic);
 	
+	xml_init.Init3tButton		(uiXml,"task_root_item:location_btn",0,m_showLocationBtn);
 	xml_init.Init3tButton		(uiXml,"task_root_item:switch_description_btn",0,m_switchDescriptionBtn);
+	m_showLocationBtn->SetAlwaysHighlight(true);
 }
 
 
@@ -118,6 +125,7 @@ void CUITaskRootItem::SetGameTask(CGameTask* gt, u16 obj_idx)
 
 	float h = _max	(m_taskImage->GetWndPos().y+m_taskImage->GetHeight(),m_captionTime->GetWndPos().y+m_captionTime->GetHeight());
 	h	= _max(h,m_switchDescriptionBtn->GetWndPos().y+m_switchDescriptionBtn->GetHeight());
+	h	= _max(h,m_showLocationBtn->GetWndPos().y+m_showLocationBtn->GetHeight());
 	SetHeight						(h);
 	
 	
@@ -148,6 +156,14 @@ void CUITaskRootItem::Update		()
 {
 	inherited::Update				();
 
+	bool bHasLocation				= m_GameTask->HasLinkedMapLocations();
+	m_showLocationBtn->Show			(bHasLocation);
+
+	if(bHasLocation){
+		bool bShown						= m_GameTask->ShownLocations();
+		m_showLocationBtn->SetButtonMode(bShown ? CUIButton::BUTTON_PUSHED : CUIButton::BUTTON_NORMAL);
+	}
+
 	if( m_curr_descr_mode	!= m_EventsWnd->GetDescriptionMode() ){
 		m_curr_descr_mode				= m_EventsWnd->GetDescriptionMode();
 		if(m_curr_descr_mode)
@@ -171,6 +187,12 @@ void CUITaskRootItem::Update		()
 bool CUITaskRootItem::OnDbClick	()
 {
 	return true;
+}
+
+void CUITaskRootItem::OnShowLocationClicked	(CUIWindow*, void*)
+{
+	bool bPushed = m_showLocationBtn->GetCheck	();
+	m_GameTask->ShowLocations					(bPushed);
 }
 
 void CUITaskRootItem::OnSwitchDescriptionClicked	(CUIWindow*, void*)
@@ -238,7 +260,7 @@ void CUITaskSubItem::SetGameTask	(CGameTask* gt, u16 obj_idx)
 	SetHeight									(h);
 	switch (obj->TaskState())
 	{
-//.		case eTaskUserDefined:
+		case eTaskUserDefined:
 		case eTaskStateInProgress:
 			m_stateStatic->InitTexture				("ui_icons_PDA_subtask_active");
 			m_descriptionStatic->SetTextColor		(m_active_color);
@@ -291,7 +313,7 @@ void CUITaskSubItem::MarkSelected (bool b)
 	m_showDescriptionBtn->SetButtonMode		(b ? CUIButton::BUTTON_PUSHED : CUIButton::BUTTON_NORMAL);
 }
 
-/*
+
 CUIUserTaskItem::CUIUserTaskItem(CUIEventsWnd* w)
 :inherited(w)
 {
@@ -345,6 +367,7 @@ void  CUIUserTaskItem::Init					()
 	xml_init.InitStatic				(uiXml,"task_user_item:description",0,m_descriptionStatic);
 	xml_init.InitStatic				(uiXml,"task_user_item:caption",0,m_captionStatic);
 	xml_init.Init3tButton			(uiXml,"task_user_item:location_btn",0,m_showLocationBtn);
+	m_showLocationBtn->SetAlwaysHighlight(true);
 	xml_init.Init3tButton			(uiXml,"task_user_item:show_pointer_btn",0,m_showPointerBtn);
 	xml_init.Init3tButton			(uiXml,"task_user_item:edit_text_btn",0,m_editTextBtn);
 	xml_init.Init3tButton			(uiXml,"task_user_item:remove_btn",0,m_removeBtn);
@@ -362,8 +385,7 @@ void CUIUserTaskItem::Update					()
 	{
 		bool bPointer						= (Actor()->GameTaskManager().ActiveObjective() == obj);
 		m_showPointerBtn->SetButtonMode		(bPointer ? CUIButton::BUTTON_PUSHED : CUIButton::BUTTON_NORMAL);
-//.		bool bShown							= m_GameTask->ShownLocations();
-		bool bShown							= true;
+		bool bShown							= m_GameTask->ShownLocations();
 		m_showLocationBtn->SetButtonMode	(bShown ? CUIButton::BUTTON_PUSHED : CUIButton::BUTTON_NORMAL);
 	}
 }
@@ -398,16 +420,26 @@ void CUIUserTaskItem::SetGameTask				(CGameTask* gt, u16 obj_idx)
 
 void CUIUserTaskItem::OnShowPointerClicked	(CUIWindow*, void*)
 {
-	bool bPushed = m_showPointerBtn->GetCheck();
+/*	bool bPushed = m_showPointerBtn->GetCheck();
 	if(bPushed)
-		Actor()->GameTaskManager().SetActiveTask((bPushed)?m_GameTask->m_ID:"", m_TaskObjectiveIdx);
+		Actor()->GameTaskManager().SetActiveTask((bPushed)?m_GameTask->m_ID:"", m_TaskObjectiveIdx);*/
 //.	m_GameTask->HighlightSpotOnMap			(m_TaskObjectiveIdx,bPushed);
+	CMapLocation* ml = Objective()->LinkedMapLocation();
+	if(ml){
+		bool b = ml->PointerEnabled	();
+//		Level().MapManager().DisableAllPointers();
+		Actor()->GameTaskManager().SetActiveTask("", 1);
+		if(b)
+			ml->DisablePointer();
+		else
+			ml->EnablePointer();
+	}
 }
 
 void CUIUserTaskItem::OnShowLocationClicked	(CUIWindow*, void*)
 {
-//.	bool bPushed = m_showLocationBtn->GetCheck	();
-//.	m_GameTask->ShowLocations					(bPushed);
+	bool bPushed = m_showLocationBtn->GetCheck	();
+	m_GameTask->ShowLocations					(bPushed);
 }
 
 void CUIUserTaskItem::MarkSelected				(bool b)
@@ -500,4 +532,3 @@ void CUIUserTaskEditWnd::Init					()
 	xml_init.InitEditBoxEx			(uiXml,"edit_user_item:background:edit_description",0,	m_editDescription);
 
 }
-*/

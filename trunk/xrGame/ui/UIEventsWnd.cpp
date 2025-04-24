@@ -142,7 +142,6 @@ void CUIEventsWnd::ReloadList(bool bClearOnly)
 
 		if( !Filter(task) )		continue;
 		CUITaskItem* pTaskItem	= NULL;
-/*
 		if(task->m_Objectives[0].TaskState()==eTaskUserDefined)
 		{
 			VERIFY				(task->m_Objectives.size()==1);
@@ -150,7 +149,6 @@ void CUIEventsWnd::ReloadList(bool bClearOnly)
 			pTaskItem->SetGameTask			(task, 0);
 			m_ListWnd->AddWindow			(pTaskItem,true);
 		}else
-*/
 		for (u16 i = 0; i < task->m_Objectives.size(); ++i)
 		{
 			if(i==0){
@@ -181,7 +179,7 @@ bool CUIEventsWnd::Filter(CGameTask* t)
 	ETaskState task_state		= t->m_Objectives[0].TaskState();
 //	bool bprimary_only			= m_primary_or_all_filter_btn->GetCheck();
 
-	return (false/*m_currFilter==eOwnTask && task_state==eTaskUserDefined*/ )		||
+	return (m_currFilter==eOwnTask && task_state==eTaskUserDefined)		||
 			( 
 			  ( true/*!bprimary_only || (bprimary_only && t->m_is_task_general)*/ )	&&
 				(

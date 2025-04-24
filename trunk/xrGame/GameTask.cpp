@@ -255,6 +255,30 @@ bool CGameTask::HasInProgressObjective()
 	return false;
 }
 
+void CGameTask::ShowLocations			(bool bShow)
+{
+	for(u32 i=0; i<m_Objectives.size(); ++i){
+		SGameTaskObjective& obj = 	m_Objectives[i];
+		CMapLocation* ml		= obj.LinkedMapLocation		();
+		if(NULL!=ml){
+			if(bShow)
+				ml->EnableSpot();
+			else
+				ml->DisableSpot();
+		}
+	}
+}
+
+bool CGameTask::ShownLocations			()
+{
+	for(u32 i=0; i<m_Objectives.size(); ++i){
+		SGameTaskObjective& obj						= m_Objectives[i];
+		CMapLocation* ml  = obj.LinkedMapLocation	();
+		if(ml) return ml->SpotEnabled				();
+	}
+	return false;
+}
+
 SGameTaskObjective::SGameTaskObjective		(CGameTask* parent, int _idx)
 :description		(NULL),
 article_id			(NULL),

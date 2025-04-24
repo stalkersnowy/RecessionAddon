@@ -28,6 +28,7 @@ CUI3tButton::CUI3tButton()
 
 	m_bEnableTextHighlighting				= false;
 	m_bCheckMode							= false;
+	m_bAlwaysHighlight						= false;
 	m_bWasAppliedBaseTexScaleUsing			= false;
 	SetPushOffset							(Fvector2().set(0.0f,0.0f));
 
@@ -292,9 +293,15 @@ void CUI3tButton::Update()
 		}
 		else if (CUIButton::BUTTON_PUSHED == m_eButtonState)
 		{
-			if (m_BtnStatic && m_BtnStaticParams.m_bNeedClrChanging)
-				m_BtnStatic->SetTextColor(m_BtnStaticParams.m_ClrStateT);
-			m_background.SetState(S_Touched);
+			if (m_bAlwaysHighlight && m_bCursorOverWindow){
+				if (m_BtnStatic && m_BtnStaticParams.m_bNeedClrChanging)
+					m_BtnStatic->SetTextColor(m_BtnStaticParams.m_ClrStateH);
+				m_background.SetState(S_Highlighted);
+			}else{
+				if (m_BtnStatic && m_BtnStaticParams.m_bNeedClrChanging)
+					m_BtnStatic->SetTextColor(m_BtnStaticParams.m_ClrStateT);
+				m_background.SetState(S_Touched);
+			}
 		}
 		else if (m_bCursorOverWindow)
 		{

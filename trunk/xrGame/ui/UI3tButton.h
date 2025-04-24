@@ -64,13 +64,15 @@ public:
 	//virtual void Enable(bool bEnable);	
 	virtual bool 	OnMouseAction				(float x, float y, EUIMessages mouse_action);
 	virtual bool 	OnMouseDown					(int mouse_btn);
-			void 	SetCheckMode				(bool mode) {m_bCheckMode = mode;}
+			void 	SetCheckMode				(bool mode)		{m_bCheckMode = mode;}
+			void 	SetAlwaysHighlight			(bool status)	{m_bAlwaysHighlight = status;}
 
 	CUIStatic			m_hint;
 	CUIIBStatic			m_background;
 protected:
 	bool				m_bCheckMode;
 	bool				m_bWasAppliedBaseTexScaleUsing;
+	bool				m_bAlwaysHighlight;
 	struct sBtnStaticParams
 	{
 		bool			m_bNeedClrChanging;

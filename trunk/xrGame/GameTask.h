@@ -110,6 +110,8 @@ public:
 							CGameTask				();
 
 	bool					HasLinkedMapLocations	();
+	void					ShowLocations			(bool bShow);
+	bool					ShownLocations			();
 	bool					HasInProgressObjective	();
 
 	SGameTaskObjective&		Objective				(int objectice_id)	{return m_Objectives[objectice_id];};

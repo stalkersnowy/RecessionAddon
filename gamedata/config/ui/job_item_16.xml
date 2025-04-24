@@ -39,7 +39,7 @@
             <texture>ui_icons_newPDA_gomark</texture>
         </show_descr_btn>
     </task_sub_item>
-    <notused_task_user_item x="0" y="0" width="267" height="32">
+    <task_user_item x="0" y="0" width="267" height="32">
         <image x="7" y="4" width="27" height="32"/>
         <caption x="42" y="5" width="117" height="16">
             <text x="0" y="0" font="letterica18"/>
@@ -50,7 +50,7 @@
         <location_btn x="225" y="5" width="17" height="20" check_mode="1" hint="pda_show_location_btn_hint" stretch="1">
             <texture>ui_icons_newPDA_showMarkonmap</texture>
         </location_btn>
-        <show_pointer_btn x="204" y="5" width="15" height="18" check_mode="1" hint="pda_show_pointer_btn_hint" stretch="1">
+        <show_pointer_btn x="204" y="5" width="17" height="20" check_mode="1" hint="pda_show_pointer_btn_hint" stretch="1">
             <texture>ui_icons_newPDA_setSelect</texture>
         </show_pointer_btn>
         <remove_btn x="183" y="5" width="17" height="20" check_mode="0" hint="pda_remove_btn_hint" stretch="1">
@@ -59,8 +59,8 @@
         <edit_text_btn x="162" y="5" width="17" height="20" check_mode="0" hint="pda_edit_user_task_btn_hint" stretch="1">
             <texture>ui_icons_newPDA_editUserSpot</texture>
         </edit_text_btn>
-    </notused_task_user_item>
-    <notused_edit_user_item x="0" y="0" width="853" height="768">
+    </task_user_item>
+    <edit_user_item x="0" y="0" width="853" height="768">
         <background x="343" y="284" width="250" height="200" stretch="1">
             <texture>ui_icons_PDA_dialog</texture>
             <edit_caption x="8" y="10" width="229" height="20" stretch="1">
@@ -92,5 +92,5 @@
                 </text_color>
             </cancel_btn>
         </background>
-    </notused_edit_user_item>
+    </edit_user_item>
 </window>

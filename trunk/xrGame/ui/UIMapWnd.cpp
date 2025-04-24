@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "pch_script.h"
 #include "UIMapWnd.h"
 #include "UIMap.h"
 #include "UIXmlInit.h"
@@ -704,6 +704,7 @@ void CUIMapWnd::OnToolActorClicked		(CUIWindow*, void*)
 	SetTargetMap				(lm, v2, true);
 }
 
+#include "gametask.h"
 void CUIMapWnd::AddUserSpot			(CUILevelMap* lm)
 {
 	VERIFY(m_flags.test(lmUserSpotAdd) );
@@ -720,11 +721,11 @@ void CUIMapWnd::AddUserSpot			(CUILevelMap* lm)
 	pos.z							= bound_rect.height() + bound_rect.lt.y - cursor_pos.y / (box_rect.height() / bound_rect.height());
 	shared_str spot					= "user"; 
 	CMapLocation* ml				= Level().MapManager().AddUserLocation(spot, lm->MapName(), pos);
-/*	CGameTask* t					= Actor()->GameTaskManager().GiveGameTaskToActor("user_task",false);
+	CGameTask* t					= Actor()->GameTaskManager().GiveGameTaskToActor("user_task",0,false);
 	t->m_Objectives[0].object_id	= ml->ObjectID();
 	t->m_Objectives[0].map_location	= spot;
 	ml->SetHint						(t->m_Objectives[0].description);
-	Actor()->GameTaskManager		().SetTaskState(t, 0, eTaskUserDefined); SNW-TMP */
+	Actor()->GameTaskManager		().SetTaskState(t, 0, eTaskUserDefined);
 
 	m_flags.set						(lmUserSpotAdd, FALSE);
 	m_ToolBar[eAddSpot]->SetButtonMode(CUIButton::BUTTON_NORMAL);

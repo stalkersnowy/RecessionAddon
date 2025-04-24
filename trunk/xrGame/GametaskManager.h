@@ -29,7 +29,7 @@ public:
 	void					SetTaskState					(CGameTask* t, u16 objective_num, ETaskState state);
 
 	void					UpdateTasks						();
-//.	void					RemoveUserTask					(CMapLocation* ml);
+	void					RemoveUserTask					(CMapLocation* ml);
 
 	CGameTask*				ActiveTask						();
 	SGameTaskObjective*		ActiveObjective					();

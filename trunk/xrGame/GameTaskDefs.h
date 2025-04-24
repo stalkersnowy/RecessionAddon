@@ -4,7 +4,7 @@ enum ETaskState {
 	eTaskStateFail			= 0,
 	eTaskStateInProgress,
 	eTaskStateCompleted,
-//.	eTaskUserDefined,
+	eTaskUserDefined,
 	eTaskStateDummy			= u32(-1)
 };
 

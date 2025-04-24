@@ -123,7 +123,7 @@ CGameTask*	CGameTaskManager::GiveGameTaskToActor(CGameTask* t, u32 timeToComplet
 		if(pGameSP) 
 			pGameSP->PdaMenu->PdaContentsChanged	(pda_section::quests);
 	}
-	if(true /*t->m_ID!="user_task"*/)
+	if(t->m_ID!="user_task")
 		t->Objective(0).ChangeStateCallback();
 
 	return t;
@@ -316,4 +316,27 @@ SGameTaskObjective* CGameTaskManager::ActiveObjective()
 	CGameTask*		t			= ActiveTask();
 	
 	return (t)?&t->Objective(g_active_task_objective_id):NULL;
+}
+
+void CGameTaskManager::RemoveUserTask					(CMapLocation* ml)
+{
+	GameTasks_it it			= GameTasks().begin();
+	GameTasks_it it_e		= GameTasks().end();
+
+	for( ;it!=it_e; ++it ){
+		CGameTask* t		= (*it).game_task;
+		SGameTaskObjective& obj = t->Objective(0);
+		if(obj.TaskState()!=eTaskUserDefined) continue;
+		if(obj.object_id == ml->ObjectID()){
+			if(ActiveTask()==t)
+				SetActiveTask("", 0);
+
+			GameTasks().erase		(it);
+			m_flags.set				(eChanged, TRUE);
+			CUIGameSP* pGameSP = smart_cast<CUIGameSP*>(HUD().GetUI()->UIGame());
+			if(pGameSP) 
+				pGameSP->PdaMenu->UIEventsWnd->Reload();
+			return;
+		}
+	}
 }
