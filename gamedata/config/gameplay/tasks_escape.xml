@@ -39,7 +39,8 @@
 	<game_task id="esc_help_wounded_from_raid" prio="485">
 		<title>esc_help_wounded_from_raid</title>
 		<objective>
-			<text>esc_help_wounded_from_raid_0</text>
+			<!--text>esc_help_wounded_from_raid_0</text-->
+			<article>esc_help_wounded_from_raid_descr</article>
 			<icon>ui_iconsTotal_esc_help_wounded_from_raid</icon>
 			<function_complete>escape_tasks.task_fox_complete</function_complete>
 			<infoportion_set_complete>garbage_meetstalker_start</infoportion_set_complete>			
@@ -64,7 +65,8 @@
 	<game_task id="esc_blockpost_case_to_trader" prio="390">
 		<title>esc_blockpost_case_to_trader</title>
 		<objective>
-			<text>esc_blockpost_case_to_trader_0</text>
+			<!--text>esc_blockpost_case_to_trader_0</text-->		
+			<article>esc_blockpost_case_to_trader_descr</article>
 			<icon>ui_iconsTotal_esc_blockpost_case_to_trader</icon>
 			<infoportion_complete>escape_blockpost_case_done</infoportion_complete>
 		</objective>
@@ -115,7 +117,8 @@
 	<game_task id="esc_defend_lager" prio="385">
 		<title>esc_defend_lager</title>
 		<objective>
-			<text>esc_defend_lager_from_killers_0</text>
+			<!--text>esc_defend_lager_from_killers_0</text-->
+			<article>esc_defend_lager_descr</article>
 			<icon>ui_iconsTotal_esc_defend_lager</icon>
 			<function_complete>escape_tasks.task_lager_complete</function_complete>
 			<infoportion_fail>esc_lager_destroyed</infoportion_fail>

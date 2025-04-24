@@ -177,6 +177,7 @@
         </phrase_list>
     </dialog>
     <dialog id="esc_stalker_talk_level" priority="2">
+        <precondition>dialogs.level_escape</precondition>
         <phrase_list>
             <phrase id="1">
                 <text>esc_stalker_talk_level_1</text>
@@ -689,7 +690,8 @@
             </phrase>
             <phrase id="6">
                 <text>escape_trader_talk_info_6</text>
-                <has_info>agroprom_find_stalker_phantom</has_info>
+                <!--has_info>agroprom_find_stalker_phantom</has_info-->
+                <has_info>agr_find_ghost_start</has_info>
                 <next>61</next>
             </phrase>
             <phrase id="2">

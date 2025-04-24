@@ -69,7 +69,7 @@ function add_location(sid, location, hint)
 	if sim then
 		local obj = sim:story_object(sid)
 		
-		if obj then
+		if obj and level.map_has_object_spot(obj.id, location) == 0 then
 			if hint then
 				level.map_add_object_spot_ser(obj.id, location, hint)
 			else

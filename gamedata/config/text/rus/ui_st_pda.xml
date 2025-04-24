@@ -52,7 +52,7 @@
 		<text>Показать энциклопедию по Зоне</text>
 	</string>
 	<string id="pda_btn_failed">
-		<text>Проваленные</text>
+		<text>Провал.</text>
 	</string>
 	<string id="pda_btn_failed_hint">
 		<text>Показать проваленные задания</text>

@@ -35,8 +35,8 @@ function bandits_die(actor,npc)
 end
 
 function trader_need_extra_job(trader, actor)
-	if not has_alife_info("escape_blockpost_case") and 
-	    has_alife_info("esc_return")
+	if not has_alife_info("escape_blockpost_case") --and 
+--	    has_alife_info("esc_return")
 	then
 		return true
 	end

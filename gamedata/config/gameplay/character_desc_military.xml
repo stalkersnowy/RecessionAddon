@@ -36,6 +36,39 @@
 #include "gameplay\character_criticals_5.xml"
 #include "gameplay\character_dialogs.xml"
 	</specific_character>
+	
+	<specific_character id="mil_Svoboda_specnaz_0" team_default = "1">
+		<name>GENERATE_NAME_stalker</name>
+		<icon>ui_npc_u_stalker_sv_hood_91</icon>
+		<map_icon x="5" y="0"></map_icon>
+		<bio>mil_Svoboda_specnaz_bio</bio>
+
+		<team>Svoboda_specnaz</team>
+
+        <snd_config>characters_voice\human_03\freedom\</snd_config>
+		<crouch_type>-1</crouch_type>
+
+		<class>mil_Svoboda_specnaz</class>
+		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+
+		<rank>679</rank>
+		<reputation>110</reputation>
+
+		<visual>actors\svoboda\stalker_sv_hood_91</visual>
+		<supplies>
+			[spawn] \n
+			wpn_usp  \n
+			ammo_11.43x23_hydro = 1 \n
+			wpn_sig550 = 1 \n
+			ammo_5.56x45_ap = 1 \n
+#include "gameplay\character_items.xml" \n
+#include "gameplay\character_drugs.xml" \n
+#include "gameplay\character_food.xml"			
+		</supplies>
+		
+#include "gameplay\character_criticals_5.xml"
+#include "gameplay\character_dialogs.xml"
+	</specific_character>
 
 <!---------------------------SVOBODA ENGINEER----------------------->
 	<specific_character id="mil_Svoboda_engineer" team_default = "1">
@@ -93,6 +126,40 @@
 		<reputation>74</reputation>
 
 		<visual>actors\svoboda\stalker_sv_rukzak_1_1</visual>
+		<supplies>
+			[spawn] \n
+			wpn_walther \n
+			ammo_9x19_fmj \n
+			wpn_lr300 \n
+			ammo_5.56x45_ss190 = 1 \n
+			device_torch \n
+#include "gameplay\character_items.xml" \n
+#include "gameplay\character_drugs.xml" \n
+#include "gameplay\character_food.xml"			
+		</supplies>
+		
+#include "gameplay\character_criticals_5.xml"
+#include "gameplay\character_dialogs.xml"
+	</specific_character>
+	
+	<specific_character id="mil_Svoboda_regular_0" team_default = "1">
+		<name>GENERATE_NAME_stalker</name>
+		<icon>ui_npc_u_stalker_sv_rukzak_2</icon>
+		<map_icon x="5" y="0"></map_icon>
+		<bio>mil_Svoboda_regular_bio</bio>
+
+		<team>Svoboda_regular</team>
+
+        <snd_config>characters_voice\human_01\freedom\</snd_config>
+		<crouch_type>-1</crouch_type>
+		
+		<class>mil_Svoboda_regular</class>
+		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		
+		<rank>368</rank>
+		<reputation>74</reputation>
+
+		<visual>actors\svoboda\stalker_sv_rukzak_2</visual>
 		<supplies>
 			[spawn] \n
 			wpn_walther \n
@@ -295,6 +362,7 @@
 		
 		<class>mil_Svoboda_trader</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="100000" max="110000" infinitive="1"></money>
 
         <snd_config>characters_voice\human_02\freedom\</snd_config>
 		<crouch_type>-1</crouch_type>
@@ -364,7 +432,6 @@
 		
 		<class>mil_Svoboda_master</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
-		<money min="100000" max="110000" infinitive="1"></money>
 
         <snd_config>characters_voice\human_02\freedom\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -916,7 +983,7 @@
 #include "gameplay\character_criticals_1.xml"
 	
 		<start_dialog>hello_dialog</start_dialog>
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
   </specific_character>
 	
 </xml>

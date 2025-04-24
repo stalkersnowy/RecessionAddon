@@ -36,7 +36,7 @@
 #include "gameplay\character_criticals_1.xml"
 					
 		<start_dialog>hello_dialog</start_dialog>
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
 	</specific_character>
 
 <!---------------------------MONOLIT SPECNAZ---------------------->
@@ -70,7 +70,7 @@
 #include "gameplay\character_criticals_1.xml"
 					
 		<start_dialog>hello_dialog</start_dialog>
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
   </specific_character>
 
 <!---------------------------MONOLIT SPECNAZ RG6---------------------->
@@ -99,7 +99,7 @@
 #include "gameplay\character_criticals_1.xml"
 					
 		<start_dialog>hello_dialog</start_dialog>
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
   </specific_character>
   
 <!---------------------------MONOLIT SNIPER---------------------->
@@ -133,7 +133,7 @@
 #include "gameplay\character_criticals_1.xml"
 					
 		<start_dialog>hello_dialog</start_dialog>
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
   </specific_character>
 <!---------------------------MONOLIT SNIPER GAUSS---------------------->
   <specific_character id="aes_Monolit_sniper_gauss" team_default = "1">
@@ -166,7 +166,7 @@
 #include "gameplay\character_criticals_1.xml"	
 
 		<start_dialog>hello_dialog</start_dialog>
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
   </specific_character>
 <!---------------------------MONOLIT MASTER----------------------->
   <specific_character id="aes_Monolit_master" team_default = "1">
@@ -202,7 +202,7 @@
 #include "gameplay\character_criticals_1.xml"
 
 		<start_dialog>hello_dialog</start_dialog>
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
   </specific_character>
 	
 <!---------------------------SOLDIERS PROFILES----------------------->
@@ -239,7 +239,7 @@
 #include "gameplay\character_criticals_5.xml"
 					
 		<start_dialog>hello_dialog</start_dialog>
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
 	</specific_character>
 <!---------------------------SOLDIER MASTER----------------------->
 	<specific_character id="aes_Soldier_military" team_default = "1">
@@ -276,7 +276,44 @@
 #include "gameplay\character_criticals_6.xml"
 					
 		<start_dialog>hello_dialog</start_dialog>
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
+	</specific_character>
+	
+	<specific_character id="aes_Soldier_military_0" team_default = "1">
+		<name>GENERATE_NAME_lieutenant</name>
+		<icon>ui_npc_u_stalker_militari_antigas_1</icon>
+		<map_icon x="2" y="2"></map_icon>
+		<bio>aes_Soldier_military_bio</bio>
+
+		<team>Soldier_military</team>
+		
+		<class>aes_Soldier_military</class>
+		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+
+        <snd_config>characters_voice\human_03\military\</snd_config>
+		<crouch_type>0</crouch_type>
+
+		<rank>900</rank>
+		<reputation>0</reputation>
+
+    	<panic_threshold>0.0</panic_threshold>
+
+		<visual>actors\militari\stalker_militari_antigas_1</visual>		
+		<supplies>
+			[spawn] \n
+			wpn_usp  \n
+			ammo_11.43x23_hydro = 1 \n
+			wpn_val \n
+			ammo_9x39_sp5 = 1 \n
+#include "gameplay\character_items.xml"\n
+#include "gameplay\character_food.xml" \n
+#include "gameplay\character_drugs.xml"
+		</supplies>		
+
+#include "gameplay\character_criticals_6.xml"
+					
+		<start_dialog>hello_dialog</start_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
 	</specific_character>
 <!---------------------------SOLDIER SPECNAZ---------------------->
 	<specific_character id="aes_Soldier_specnaz" team_default = "1">
@@ -313,7 +350,7 @@
 #include "gameplay\character_criticals_6.xml"
 											
 		<start_dialog>hello_dialog</start_dialog>
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
 	</specific_character>
 <!---------------------------SOLDIER SPECNAZ AES---------------------->
 	<specific_character id="aes_Soldier_specnaz_aes" team_default = "1">
@@ -387,7 +424,45 @@
 					
 		<start_dialog>hello_dialog</start_dialog>
 		
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
+	</specific_character>
+
+	<specific_character id="aes_Soldier_sniper_0" team_default = "1">
+		<name>GENERATE_NAME_private</name>
+		<icon>ui_npc_u_stalker_militari_2</icon>
+		<map_icon x="1" y="2"></map_icon>
+		<bio>aes_Soldier_sniper_bio</bio>
+
+		<team>Soldier_sniper</team>
+		
+		<class>aes_Soldier_sniper</class>
+		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+		
+		<rank>660</rank>
+		<reputation>-13</reputation>
+
+        <snd_config>characters_voice\human_03\military\</snd_config>
+		<crouch_type>-1</crouch_type>
+
+    	<panic_threshold>0.0</panic_threshold>
+
+		<visual>actors\militari\stalker_militari_2</visual>		
+		<supplies>
+			[spawn] \n
+			wpn_walther \n
+			ammo_9x19_fmj \n
+			wpn_svu \n
+			ammo_7.62x54_ap = 1 \n
+#include "gameplay\character_items.xml"\n
+#include "gameplay\character_food.xml" \n
+#include "gameplay\character_drugs.xml"
+		</supplies>		
+
+#include "gameplay\character_criticals_6.xml"
+					
+		<start_dialog>hello_dialog</start_dialog>
+		
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
 	</specific_character>
 
 <!---------------------------SOLDIER SNIPER---------------------->
@@ -425,7 +500,7 @@
 					
 		<start_dialog>hello_dialog</start_dialog>
 		
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
 	</specific_character>
 <!---------------------------SOLDIER SNIPER---------------------->
 	<specific_character id="aes_x_2" team_default = "1">
@@ -463,7 +538,7 @@
 					
 		<start_dialog>hello_dialog</start_dialog>
 		
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
 	</specific_character>
 
 	

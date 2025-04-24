@@ -512,7 +512,7 @@
 
 		<start_dialog>hello_dialog</start_dialog>
 		
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
 		<actor_dialog>bar_dolg_base_guard_acces</actor_dialog>	
 #include "gameplay\character_dialogs.xml"		
 	</specific_character>
@@ -548,7 +548,7 @@
 
 		<start_dialog>hello_dialog</start_dialog>
 		
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
 		<actor_dialog>bar_dolg_base_guard_acces</actor_dialog>
 #include "gameplay\character_dialogs.xml"		
 	</specific_character>
@@ -584,14 +584,14 @@
 
 		<start_dialog>hello_dialog</start_dialog>
 		
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
 		<actor_dialog>bar_dolg_base_guard_acces</actor_dialog>	
 #include "gameplay\character_dialogs.xml"		
 	</specific_character>
 	<!------------------------- PRISONER ----------------------->
 	<specific_character id="val_dolg_prisoner" team_default="1">
 		<name>val_prisoner_name</name>
-		<icon>ui_npc_u_stalker_do_mask_1</icon>
+		<icon>ui_npc_u_stalker_do_balon_7</icon>
 		<map_icon x="4" y="0"></map_icon>
 		<bio>val_prisoner_bio</bio>
 
@@ -615,7 +615,7 @@
 
 		<start_dialog>hello_dialog</start_dialog>
 		
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
 		<actor_dialog>bar_dolg_base_guard_acces</actor_dialog>	
 #include "gameplay\character_dialogs.xml"		
 	</specific_character>
@@ -651,14 +651,14 @@
 
 		<start_dialog>hello_dialog</start_dialog>
 		
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
 		<actor_dialog>bar_dolg_base_guard_acces</actor_dialog>	
 #include "gameplay\character_dialogs.xml"		
 	</specific_character>
 	<!---------------------------- CAPTIVE -------------------------->
 	<specific_character id="val_escort_captive" team_default="1">
 		<name>GENERATE_NAME_stalker</name>
-		<icon>ui_npc_u_stalker_do_mask_1</icon>
+		<icon>ui_npc_u_stalker_do_balon_6</icon>
 		<map_icon x="4" y="0"></map_icon>
 		<bio>val_dolg_common_bio</bio>
 
@@ -682,7 +682,7 @@
 
 		<start_dialog>hello_dialog</start_dialog>
 		
-		<actor_dialog>esc_stalker_talk_level</actor_dialog>
+		<!--actor_dialog>esc_stalker_talk_level</actor_dialog-->
 		<actor_dialog>bar_dolg_base_guard_acces</actor_dialog>	
 #include "gameplay\character_dialogs.xml"		
 	</specific_character>

@@ -79,7 +79,11 @@ local info_by_community = {
 					"encyclopedy_social_stalker-clans_killers",
 					"encyclopedy_social_stalker-clans_loners",
 					"stalker_story_10",
-					"stalker_story_14"},
+					"stalker_story_14",
+					"stalker_story_4",
+					"stalker_story_8",
+					"stalker_story_12",
+					"stalker_story_15"},
 
 		monolith = {"encyclopedy_zone_artifact_af-medusa",
 					"encyclopedy_zone_artifact_af-cristall-flower",
@@ -233,7 +237,8 @@ local info_by_community = {
 					"encyclopedy_social_stalker-clans_bandits",
 					"encyclopedy_social_stalker-clans_killers",
 					"encyclopedy_social_stalker-clans_loners",
-					"stalker_story_10"},
+					"stalker_story_10",
+					"stalker_story_1"},
 
 		killer = {	"encyclopedy_zone_artifact_af-medusa",
 					"encyclopedy_zone_artifact_af-cristall-flower",
@@ -308,7 +313,8 @@ local info_by_community = {
 					"encyclopedy_social_stalker-clans_bandits",
 					"encyclopedy_social_stalker-clans_killers",
 					"encyclopedy_social_stalker-clans_loners",
-					"stalker_story_7"},
+					"stalker_story_7",
+					"stalker_story_1"},
 
 		ecolog = {	"encyclopedy_zone_artifact_af-medusa",
 					"encyclopedy_zone_artifact_af-cristall-flower",
@@ -460,7 +466,9 @@ local info_by_community = {
 					"stalker_story_2",
 					"stalker_story_6",
 					"stalker_story_10",
-					"stalker_story_13"},
+					"stalker_story_13",
+					"stalker_story_1",
+					"stalker_story_15"},
 
 		freedom = {	"encyclopedy_zone_artifact_af-medusa",
 					"encyclopedy_zone_artifact_af-cristall-flower",
@@ -537,7 +545,10 @@ local info_by_community = {
 					"encyclopedy_social_stalker-clans_loners",
 					"stalker_story_3",
 					"stalker_story_9",
-					"stalker_story_10"},
+					"stalker_story_10",
+					"stalker_story_4",
+					"stalker_story_5",
+					"stalker_story_12"},
 
 		bandit = {	"encyclopedy_zone_artifact_af-medusa",
 					"encyclopedy_zone_artifact_af-cristall-flower",
@@ -686,7 +697,10 @@ local info_by_rank = {
 					"stalker_story_17",
 					"stalker_story_18",
 					"stalker_story_19",
-					"stalker_story_20"
+					"stalker_story_20",
+					"stalker_story_1",
+					"stalker_story_4",
+					"stalker_story_15"
 					},
 
 		veteran = {	"encyclopedy_zone_artifact_af-electra-sparkler",
@@ -741,7 +755,11 @@ local info_by_rank = {
 					"stalker_story_17",
 					"stalker_story_18",
 					"stalker_story_19",
-					"stalker_story_20"
+					"stalker_story_20",
+					"stalker_story_1",
+					"stalker_story_4",
+					"stalker_story_5",
+					"stalker_story_15"
 					},
 
 		master = {	"encyclopedy_zone_artifact_af-electra-sparkler",
@@ -776,7 +794,9 @@ local info_by_rank = {
 					"stalker_story_17",
 					"stalker_story_18",
 					"stalker_story_19",
-					"stalker_story_20"
+					"stalker_story_20",
+					"stalker_story_5",
+					"stalker_story_8"
 					}
 		}
 
