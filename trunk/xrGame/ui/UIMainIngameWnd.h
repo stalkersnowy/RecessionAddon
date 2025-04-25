@@ -76,7 +76,7 @@ protected:
 	CUIStatic			UIStarvationIcon;
 	CUIStatic			UIPsyHealthIcon;
 	CUIStatic			UIInvincibleIcon;
-//	CUIStatic			UISleepIcon;
+	CUIStatic			UISleepIcon;
 	CUIStatic			UIArtefactIcon;
 
 	CUIScrollView*		m_UIIcons;
@@ -97,7 +97,7 @@ public:
 		ewiStarvation,
 		ewiPsyHealth,
 		ewiInvincible,
-//		ewiSleep,
+		ewiSleep,
 		ewiArtefact,
 	};
 

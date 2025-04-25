@@ -35,11 +35,31 @@ void CUIInventoryWnd::SetCurrentItem(CUICellItem* itm)
 	UIItemInfo.InitItem			(CurrentIItem());
 }
 
+#include "string_table.h"
 void CUIInventoryWnd::SendMessage(CUIWindow *pWnd, s16 msg, void *pData)
 {
 	if(pWnd == &UIPropertiesBox &&	msg==PROPERTY_CLICKED)
 	{
 		ProcessPropertiesBoxClicked	();
+	}else if(pWnd==UISleepWnd && msg==SLEEP_WND_PERFORM_BUTTON_CLICKED){
+		CActor *pActor = smart_cast<CActor*>(Level().CurrentEntity());
+		if(!pActor) return;
+		
+		if(!IsGameTypeSingle())			return;
+
+		bool b							= pActor->conditions().AllowSleep();
+		ACTOR_DEFS::EActorSleep result	= pActor->conditions().GoSleep(*reinterpret_cast<u32*>(pData));
+		LPCSTR sleep_msg				= NULL;
+		sleep_msg						= *CStringTable().translate(result);
+
+		if(sleep_msg&& !b)				HUD().GetUI()->AddInfoMessage(sleep_msg);
+
+		GetHolder()->StartStopMenu			(this,true);
+
+	}else 
+	if (UIDropButton == pWnd && BUTTON_CLICKED == msg)
+	{
+		DropCurrentItem						(false);
 	}else 
 	if (UIExitButton == pWnd && BUTTON_CLICKED == msg)
 	{

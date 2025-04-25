@@ -1190,7 +1190,7 @@ void CActor::shedule_Update	(u32 DT)
 		m_pInvBoxWeLookingAt	= NULL;
 	}
 
-//	UpdateSleep									();
+	UpdateSleep									();
 
 	//для свойст артефактов, находящихся на поясе
 	UpdateArtefactsOnBeltAndOutfit				();

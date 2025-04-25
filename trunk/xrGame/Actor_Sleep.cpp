@@ -1,5 +1,4 @@
 #include "stdafx.h"
-/*
 #include "actor.h"
 #include "SleepEffector.h"
 #include "game_sv_single.h"
@@ -58,4 +57,4 @@ void CActor::UpdateSleep()
 		if( !conditions().m_actor_sleep_wnd->IsPlaying())
 			conditions().Awoke();
 	}
-}*/
+}

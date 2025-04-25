@@ -35,7 +35,7 @@ void CActor::IR_OnKeyboardPress(int cmd)
 {
 	if (Remote())		return;
 
-//	if (conditions().IsSleeping())	return;
+	if (conditions().IsSleeping())	return;
 	if (IsTalking())	return;
 	if (m_input_external_handler && !m_input_external_handler->authorized(cmd))	return;
 	
@@ -208,7 +208,7 @@ void CActor::IR_OnKeyboardRelease(int cmd)
 {
 	if (Remote())		return;
 
-//	if (conditions().IsSleeping())	return;
+	if (conditions().IsSleeping())	return;
 	if (m_input_external_handler && !m_input_external_handler->authorized(cmd))	return;
 
 	if (g_Alive())	
@@ -239,7 +239,7 @@ void CActor::IR_OnKeyboardRelease(int cmd)
 void CActor::IR_OnKeyboardHold(int cmd)
 {
 	if (Remote() || !g_Alive())					return;
-//	if (conditions().IsSleeping())				return;
+	if (conditions().IsSleeping())				return;
 	if (m_input_external_handler && !m_input_external_handler->authorized(cmd))	return;
 	if (IsTalking())							return;
 
@@ -278,7 +278,7 @@ void CActor::IR_OnKeyboardHold(int cmd)
 void CActor::IR_OnMouseMove(int dx, int dy)
 {
 	if (Remote())		return;
-//	if (conditions().IsSleeping())	return;
+	if (conditions().IsSleeping())	return;
 
 	if(m_holder) 
 	{

@@ -111,6 +111,12 @@
 	<string id="ui_inv_heavy_weapons">
 		<text>Тяжелое</text>
 	</string>
+    <string id="st_cant_sleep_near_enemies">
+		<text>Нельзя спать возле врагов</text>
+    </string>
+    <string id="st_cant_sleep_not_on_solid_ground">
+		<text>Нельзя спать на твердой земле</text>
+    </string>
 	<string id="ui_inv_items_list">
 		<text>Список вещей</text>
 	</string>

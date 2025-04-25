@@ -86,6 +86,11 @@ void CUIInventoryWnd::Init()
 	UIDescrWnd.AttachChild				(&UIItemInfo);
 	UIItemInfo.Init						(0, 0, UIDescrWnd.GetWidth(), UIDescrWnd.GetHeight(), INVENTORY_ITEM_XML);
 
+	UIDropButton						= xr_new<CUIButton>();UIDropButton->SetAutoDelete(true);
+	UIDescrWnd.AttachChild				(UIDropButton);
+	xml_init.InitButton					(uiXml, "drop_button", 0, UIDropButton);
+	UIDropButton->SetMessageTarget		(this);
+
 	AttachChild							(&UIPersonalWnd);
 	xml_init.InitFrameWindow			(uiXml, "character_frame_window", 0, &UIPersonalWnd);
 
@@ -124,7 +129,12 @@ void CUIInventoryWnd::Init()
 	xml_init.InitAutoStatic				(uiXml, "auto_static", this);
 
 
-	if (GameID() != GAME_SINGLE){
+	if (GameID() == GAME_SINGLE){
+		UISleepWnd						= xr_new<CUISleepWnd>();UISleepWnd->SetAutoDelete(true);
+		UISleepWnd->Init				();
+		xml_init.InitStatic				(uiXml, "sleep_window", 0, UISleepWnd);
+		AttachChild						(UISleepWnd);
+	}else{
 		UIRankFrame = xr_new<CUIStatic> (); UIRankFrame->SetAutoDelete(true);
 		UIRank = xr_new<CUIStatic> (); UIRank->SetAutoDelete(true);
 

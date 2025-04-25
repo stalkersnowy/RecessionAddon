@@ -17,6 +17,8 @@
 #include "object_broker.h"
 #include "weapon.h"
 
+#define ENEMIES_RADIUS				20.f
+
 #define MAX_SATIETY					1.0f
 #define START_SATIETY				0.5f
 
@@ -49,12 +51,18 @@ CActorCondition::CActorCondition(CActor *object) :
 
 	VERIFY						(object);
 	m_object					= object;
+	m_actor_sleep_wnd			= NULL;
+	m_can_sleep_callback		= NULL;
+	m_get_sleep_video_name_callback	= NULL;
 	m_condition_flags.zero		();
 
 }
 
 CActorCondition::~CActorCondition(void)
 {
+	xr_delete					(m_actor_sleep_wnd);
+	xr_delete					(m_can_sleep_callback);
+	xr_delete					(m_get_sleep_video_name_callback);
 }
 
 void CActorCondition::LoadCondition(LPCSTR entity_section)
@@ -62,6 +70,8 @@ void CActorCondition::LoadCondition(LPCSTR entity_section)
 	inherited::LoadCondition(entity_section);
 
 	LPCSTR						section = READ_IF_EXISTS(pSettings,r_string,entity_section,"condition_sect",entity_section);
+	if(IsGameTypeSingle())
+		m_change_v_sleep.load		(section,"_sleep");
 
 	m_fJumpPower				= pSettings->r_float(section,"jump_power");
 	m_fStandPower				= pSettings->r_float(section,"stand_power");
@@ -91,6 +101,8 @@ void CActorCondition::LoadCondition(LPCSTR entity_section)
 	R_ASSERT					(m_fCantSprintPowerBegin<=m_fCantSprintPowerEnd);
 
 	m_fPowerLeakSpeed			= pSettings->r_float(section,"max_power_leak_speed");
+	if(IsGameTypeSingle())
+		m_fK_SleepMaxPower		= pSettings->r_float(section,"max_power_leak_speed_sleep");
 	
 	m_fV_Alcohol				= pSettings->r_float(section,"alcohol_v");
 
@@ -100,6 +112,23 @@ void CActorCondition::LoadCondition(LPCSTR entity_section)
 	m_fV_SatietyHealth			= pSettings->r_float(section,"satiety_health_v");
 	
 	m_MaxWalkWeight					= pSettings->r_float(section,"max_walk_weight");
+
+	LPCSTR cb_name			= READ_IF_EXISTS(pSettings,r_string,section,"can_sleep_callback","");
+
+	if(cb_name && xr_strlen(cb_name)){
+		m_can_sleep_callback		= xr_new<CScriptCallbackEx<LPCSTR> >();
+		luabind::functor<LPCSTR>		f;
+		R_ASSERT					(ai().script_engine().functor<LPCSTR>(cb_name,f));
+		m_can_sleep_callback->set	(f);
+	}
+	cb_name					= READ_IF_EXISTS(pSettings,r_string,section,"sleep_video_name_callback","");
+
+	if(cb_name && xr_strlen(cb_name)){
+		m_get_sleep_video_name_callback		= xr_new<CScriptCallbackEx<LPCSTR> >();
+		luabind::functor<LPCSTR>			fl;
+		R_ASSERT							(ai().script_engine().functor<LPCSTR>(cb_name,fl));
+		m_get_sleep_video_name_callback->set(fl);
+	}
 }
 
 
@@ -130,7 +159,7 @@ void CActorCondition::UpdateCondition()
 	if( IsGameTypeSingle() )
 	{
 		float k_max_power = 1.0f;
-		if( true )
+		if( !IsSleeping() )
 		{
 			k_max_power = 1.0f + _min(cur_weight, base_weight) / base_weight
 				+ _max(0.0f, (cur_weight - base_weight) / 10.0f);
@@ -298,6 +327,130 @@ bool CActorCondition::IsLimping() const
 }
 extern bool g_bShowHudInfo;
 
+bool CActorCondition::AllowSleep ()
+{
+	EActorSleep result		= CanSleepHere		();
+	return( !stricmp(ACTOR_DEFS::easCanSleepResult, result)  );
+}
+
+EActorSleep CActorCondition::GoSleep(ALife::_TIME_ID sleep_time, bool without_check)
+{
+	if (IsSleeping()) return ACTOR_DEFS::easCanSleepResult;
+
+	EActorSleep result = without_check?ACTOR_DEFS::easCanSleepResult : CanSleepHere();
+	if( 0 != stricmp(ACTOR_DEFS::easCanSleepResult, result)  ) 
+			return result;
+
+	g_bShowHudInfo				= false;
+	m_bIsSleeping				= true;
+
+//.	ProcessSleep				(sleep_time);// change conditions
+
+	std::swap					(m_change_v_sleep,		m_change_v);
+	std::swap					(m_fK_SleepMaxPower,	m_fPowerLeakSpeed);
+
+	
+
+	object().mstate_wishful	&=		~mcAnyMove;
+	object().mstate_real	&=		~mcAnyMove;
+
+
+	//ïîñòàâèòü áóäèëüíèê
+	object().m_dwWakeUpTime = Level().GetGameTime() + sleep_time;
+
+	VERIFY	(m_object == smart_cast<CActor*>(Level().CurrentEntity()));
+
+	m_object->Cameras().RemovePPEffector(EEffectorPPType(SLEEP_EFFECTOR_TYPE_ID));
+	object().m_pSleepEffectorPP = xr_new<CSleepEffectorPP>(object().m_pSleepEffector->ppi,
+													object().m_pSleepEffector->time,
+													object().m_pSleepEffector->time_attack,
+													object().m_pSleepEffector->time_release);
+
+	m_object->Cameras().AddPPEffector(object().m_pSleepEffectorPP);
+
+	m_object->callback(GameObject::eActorSleep)( m_object->lua_game_object() );
+
+
+	m_actor_sleep_wnd			= xr_new<CUIActorSleepVideoPlayer>();
+	m_actor_sleep_wnd->Init		( (*m_get_sleep_video_name_callback)() );
+
+	return ACTOR_DEFS::easCanSleepResult;
+}
+
+void CActorCondition::Awoke()
+{
+	if(!IsSleeping())		return;
+
+	m_bIsSleeping			= false;
+
+	std::swap				(m_change_v_sleep,		m_change_v);
+	std::swap				(m_fK_SleepMaxPower,	m_fPowerLeakSpeed);
+
+	if ( ai().get_alife() ) {
+		NET_Packet		P;
+		P.w_begin		(M_SWITCH_DISTANCE);
+		P.w_float		(object().m_fOldOnlineRadius);
+		Level().Send	(P,net_flags(TRUE,TRUE));
+	}
+
+	m_actor_sleep_wnd->DeActivate	();
+	xr_delete						(m_actor_sleep_wnd);
+
+	VERIFY(m_object == smart_cast<CActor*>(Level().CurrentEntity()));
+	VERIFY(object().m_pSleepEffectorPP);
+
+	object().m_pSleepEffectorPP->m_eSleepState = CSleepEffectorPP::AWAKING;
+	object().m_pSleepEffectorPP = NULL;
+
+	g_bShowHudInfo			= true;
+	
+}
+
+//ïðîâåðêà ìîæåì ëè ìû ñïàòü íà ýòîì ìåñòå
+EActorSleep CActorCondition::CanSleepHere()
+{
+	if( m_can_sleep_callback && *m_can_sleep_callback)
+		return (*m_can_sleep_callback)();
+	
+	R_ASSERT		(0);
+	if(0 != object().mstate_real) return "cant_sleep_not_on_solid_ground";
+
+	collide::rq_result RQ;
+
+	Fvector pos, dir;
+	pos.set(object().Position());
+	pos.y += 0.1f;
+	dir.set(0, -1.f, 0);
+	BOOL				result = 
+		Level().ObjectSpace.RayPick(
+			pos,
+			dir,
+			0.3f, 
+			collide::rqtBoth,
+			RQ,
+			&object()
+		);
+	
+	//àêòåð ñòîèò íà äèíàìè÷åñêîì îáúåêòå èëè âîîáùå ïàäàåò - 
+	//ñïàòü íåëüçÿ
+	if(!result || RQ.O)	
+		return "cant_sleep_not_on_solid_ground";
+
+	xr_vector<CObject*> NearestList;	// = Level().ObjectSpace.q_nearest; 
+	Level().ObjectSpace.GetNearest	(NearestList, pos, ENEMIES_RADIUS, &object()); 
+
+	for(xr_vector<CObject*>::iterator it = NearestList.begin();
+									NearestList.end() != it;
+									it++)
+	{
+		CEntityAlive* entity = smart_cast<CEntityAlive*>(*it);
+		if(entity && entity->g_Alive() && entity->is_relation_enemy(m_object))
+			return "cant_sleep_near_enemies";
+	}
+
+	return easCanSleepResult;
+}
+
 void CActorCondition::save(NET_Packet &output_packet)
 {
 	inherited::save		(output_packet);
@@ -318,6 +471,7 @@ void CActorCondition::reinit	()
 {
 	inherited::reinit	();
 	m_bLimping					= false;
+	m_bIsSleeping				= false;
 	m_fSatiety					= 1.f;
 }
 

@@ -63,6 +63,7 @@ using namespace InventoryUtilities;
 //	hud adjust mode
 int			g_bHudAdjustMode			= 0;
 float		g_fHudAdjustValue			= 0.0f;
+bool		g_bShowHudInfo				= true;
 
 const u32	g_clWhite					= 0xffffffff;
 
@@ -89,6 +90,8 @@ CUIMainIngameWnd::CUIMainIngameWnd()
 	m_artefactPanel				= xr_new<CUIArtefactPanel>();
 	m_pMPChatWnd				= NULL;
 	m_pMPLogWnd					= NULL;	
+
+	g_bShowHudInfo				= true;
 }
 
 #include "UIProgressShape.h"
@@ -187,6 +190,9 @@ void CUIMainIngameWnd::Init()
 
 		xml_init.InitStatic		(uiXml, "psy_health_static", 0, &UIPsyHealthIcon);
 		UIPsyHealthIcon.Show	(false);
+
+		xml_init.InitStatic		(uiXml, "can_sleep_static", 0, &UISleepIcon);
+		UISleepIcon.Show		(false);
 	}
 
 	xml_init.InitStatic			(uiXml, "weapon_jammed_static", 0, &UIWeaponJammedIcon);
@@ -295,8 +301,11 @@ void CUIMainIngameWnd::Draw()
 	if(!m_pActor) return;
 
 	UIMotionIcon.SetNoise		((s16)(0xffff&iFloor(m_pActor->m_snd_noise*100.0f)));
-	CUIWindow::Draw				();
-	UIZoneMap->Render			();			
+	if(g_bShowHudInfo)
+	{
+		CUIWindow::Draw				();
+		UIZoneMap->Render			();			
+	}
 
 	RenderQuickInfos			();		
 
@@ -370,6 +379,9 @@ void CUIMainIngameWnd::Update()
 		return;
 	}
 
+	if(!g_bShowHudInfo) 
+		return;
+
 	if( !(Device.dwFrame%30) && IsGameTypeSingle() )
 	{
 			string256				text_str;
@@ -384,6 +396,10 @@ void CUIMainIngameWnd::Update()
 			{
 				UIPdaOnline.SetText("");
 			}
+			if(m_pActor->conditions().AllowSleep())
+				SetWarningIconColor	(ewiSleep,0xffffffff);
+			else
+				SetWarningIconColor	(ewiSleep,0x00ffffff);
 	};
 
 	if( !(Device.dwFrame%5) )
@@ -976,6 +992,9 @@ void CUIMainIngameWnd::SetWarningIconColor(EWarningIcons icon, const u32 cl)
 	case ewiInvincible:
 		SetWarningIconColor		(&UIInvincibleIcon, cl);
 		if (bMagicFlag) break;
+		break;
+	case ewiSleep:
+		SetWarningIconColor		(&UISleepIcon, cl);
 		break;
 	case ewiArtefact:
 		SetWarningIconColor		(&UIArtefactIcon, cl);

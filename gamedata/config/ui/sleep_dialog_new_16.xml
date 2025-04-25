@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<window>
+    <rest_amount_static x="43" y="16" width="54" height="18">
+        <text x="0" y="0" font="letterica18" r="240" g="217" b="182"/>
+    </rest_amount_static>
+    <plus_button x="84" y="11" width="26" height="31" hR="0" hB="0" hG="0" shadow_offset_x="1" shadow_offset_y="1" push_off_x="1" push_off_y="1">
+        <text align="c" font="graffiti22" r="238" g="155" b="23">+</text>
+    </plus_button>
+    <minus_button x="9" y="11" width="24" height="31" hR="0" hB="0" hG="0" shadow_offset_x="1" shadow_offset_y="1" push_off_x="1" push_off_y="1">
+        <text align="c" font="graffiti22" r="238" g="155" b="23">-</text>
+    </minus_button>
+    <rest_button x="114" y="10" width="75" height="33" hR="0" hB="0" hG="0" shadow_offset_x="1" shadow_offset_y="1" push_off_x="1" push_off_y="1">
+        <text align="c" font="graffiti22" r="238" g="155" b="23">ui_inv_rest</text>
+    </rest_button>
+</window>

@@ -53,6 +53,19 @@
 		<text font="graffiti22" r="238" g="153" b="26" align="c" vert_align="c"></text>
     </money_static>
 
+    <!-- SLEEP PARAMS WINDOW -->
+    <!--sleep_window x="378" y="717" width="260" height="53"-->
+    <sleep_window x="370" y="672" width="260" height="53">
+        <texture>ui\ui_dg_sleep</texture>
+        <text>ui_inv_rest</text>
+    </sleep_window>
+
+	<!-- Drop button -->
+    <drop_button x="230" y="420" width="110" height="60" hR="255" hB="83" hG="179" highlight_text="1">
+        <texture>ui\ui_cm_drop</texture>
+        <text x="0" y="0" font="graffiti22" r="238" g="153" b="26">ui_inv_drop</text>
+    </drop_button>
+
    
     <descr_static x="370" y="253" width="335" height="475">
         <text x="25" y="0" font="graffiti22" r="238" g="155" b="23">ui_inv_description</text>

@@ -15,6 +15,7 @@ class CInventory;
 #include "../inventory_space.h"
 
 class CArtefact;
+class CUISleepWnd;
 class CUI3tButton;
 class CUIDragDropListEx;
 class CUICellItem;
@@ -74,7 +75,10 @@ protected:
 	CUIStatic					UIMoneyWnd;
 	CUIStatic					UIDescrWnd;
 	CUIFrameWindow				UIPersonalWnd;
+	
+	CUISleepWnd*				UISleepWnd;
 
+	CUIButton*					UIDropButton;
 	CUI3tButton*				UIExitButton;
 
 	CUIStatic					UIStaticBottom;

@@ -12,7 +12,7 @@ class CScriptCallbackEx;
 
 
 class CActor;
-//class CUIActorSleepVideoPlayer;
+class CUIActorSleepVideoPlayer;
 
 class CActorCondition: public CEntityCondition {
 private:
@@ -29,6 +29,10 @@ private:
 	Flags16											m_condition_flags;
 private:
 	CActor*											m_object;
+
+	CScriptCallbackEx<LPCSTR>*						m_can_sleep_callback;
+	CScriptCallbackEx<LPCSTR>*						m_get_sleep_video_name_callback;
+
 	void				UpdateTutorialThresholds	();
 	void 				UpdateSatiety				();
 public:
@@ -43,6 +47,15 @@ public:
 
 	virtual void 		ChangeAlcohol				(float value);
 	virtual void 		ChangeSatiety				(float value);
+
+
+	bool				IsSleeping					() {return m_bIsSleeping;}
+
+	// sleeping
+	bool						AllowSleep			();
+	ACTOR_DEFS::EActorSleep		CanSleepHere		();
+	ACTOR_DEFS::EActorSleep		GoSleep				(ALife::_TIME_ID sleep_time, bool without_check = false);
+			void				Awoke				();
 
 	// хромание при потере сил и здоровья
 	virtual	bool		IsLimping					() const;
@@ -68,6 +81,8 @@ public:
 	virtual void			save					(NET_Packet &output_packet);
 	virtual void			load					(IReader &input_packet);
 
+	CUIActorSleepVideoPlayer*	m_actor_sleep_wnd;
+
 protected:
 	float m_fAlcohol;
 	float m_fV_Alcohol;
@@ -90,7 +105,12 @@ protected:
 	float m_fSprintK;
 	
 	float	m_MaxWalkWeight;
+	
+	//ñîñòîÿíèå ñíà
+	bool m_bIsSleeping;
+	SConditionChangeV m_change_v_sleep;
 
+	float m_fK_SleepMaxPower;
 	mutable bool m_bLimping;
 	mutable bool m_bCantWalk;
 	mutable bool m_bCantSprint;
