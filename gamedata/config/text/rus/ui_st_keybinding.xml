@@ -193,10 +193,10 @@
 		<text>Оружие 6</text>
 	</string>
 	<string id="kb_wpn_next">
-		<text>Сменить тип патронов</text>
+		<text>След. тип патронов</text>
 	</string>
 	<string id="kb_wpn_prev">
-		<text>Предыдущее оружие этого типа</text>
+		<text>Пред. тип патронов</text>
 	</string>
 	<string id="kb_zoom">
 		<text>Приблизить</text>
