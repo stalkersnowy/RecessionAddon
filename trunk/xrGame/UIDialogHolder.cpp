@@ -87,6 +87,7 @@ void CDialogHolder::StartMenu (CUIDialogWnd* pDialog, bool bDoHideIndicators)
 		{	
 			A->IR_OnKeyboardRelease		(kWPN_ZOOM);
 			A->IR_OnKeyboardRelease		(kWPN_FIRE);
+			A->IR_OnKeyboardRelease		(kWPN_FIRE2);
 		}
 	}
 }

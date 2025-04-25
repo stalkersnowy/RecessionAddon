@@ -7,6 +7,7 @@
 #include "inventory.h"
 #include "level.h"
 #include "actor.h"
+#include "hudmanager.h"
 
 CWeaponShotgun::CWeaponShotgun(void) : CWeaponCustomPistol("TOZ34")
 {
@@ -69,29 +70,34 @@ void CWeaponShotgun::Fire2Start ()
 	if(m_bPending) return;
 
 	inherited::Fire2Start();
-
-	if (IsValid())
+	
+	if (!IsMisfire())
 	{
-		if (!IsWorking())
+		if (IsValid())
 		{
-			if (GetState()==eReload)		return;
-			if (GetState()==eShowing)		return;
-			if (GetState()==eHiding)		return;
+			if (!IsWorking() || AllowFireWhileWorking())
+			{
+				if (GetState()==eReload)		return;
+				if (GetState()==eShowing)		return;
+				if (GetState()==eHiding)		return;
+				if (GetState()==eMisfire)		return;
 
-			if (!iAmmoElapsed)	
-			{
-				CWeapon::FireStart			();
-				SwitchState					(eMagEmpty);
+				inherited::FireStart();
+			
+				if (iAmmoElapsed == 0) 
+					OnMagazineEmpty();
+				else
+					SwitchState((iAmmoElapsed < iMagazineSize)?eFire:eFire2);
 			}
-			else					
-			{
-				CWeapon::FireStart			();
-				SwitchState					((iAmmoElapsed < iMagazineSize)?eFire:eFire2);
-			}
+		}else{
+			if(eReload!=GetState() && eMisfire!=GetState()) OnMagazineEmpty();
 		}
-	}else{
-		if (!iAmmoElapsed)	
-			SwitchState						(eMagEmpty);
+	}else
+	{//misfire
+		if(smart_cast<CActor*>(this->H_Parent()) && (Level().CurrentViewEntity()==H_Parent()) )
+			HUD().GetUI()->AddInfoMessage("gun_jammed");
+
+		OnEmptyClick();
 	}
 }
 
@@ -99,6 +105,10 @@ void CWeaponShotgun::Fire2End ()
 {
 	inherited::Fire2End();
 	FireEnd();
+
+	CActor	*actor = smart_cast<CActor*>(H_Parent());
+	if(!iAmmoElapsed && actor && GetState()!=eReload) 
+		Reload();
 }
 
 
@@ -200,11 +210,11 @@ bool CWeaponShotgun::Action			(s32 cmd, u32 flags)
 		return true;
 	}
 	//если оружие чем-то занято, то ничего не делать
-	if(IsPending()) return false;
+	if(IsPending() || m_bTriStateReload) return false;
 
 	switch(cmd) 
 	{
-		case kWPN_ZOOM : 
+		case kWPN_FIRE2 : 
 			{
 				if(flags&CMD_START) Fire2Start();
 				else Fire2End();

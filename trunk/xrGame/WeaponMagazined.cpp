@@ -138,26 +138,35 @@ void CWeaponMagazined::Load	(LPCSTR section)
 
 void CWeaponMagazined::FireStart		()
 {
-	if(IsValid() && !IsMisfire()) 
+	if(!IsMisfire()) 
 	{
-		if(!IsWorking() || AllowFireWhileWorking())
+		if(IsValid()) 
 		{
-			if(GetState()==eReload) return;
-			if(GetState()==eShowing) return;
-			if(GetState()==eHiding) return;
-			if(GetState()==eMisfire) return;
+			if(!IsWorking() || AllowFireWhileWorking())
+			{
+				if(GetState()==eReload) return;
+				if(GetState()==eShowing) return;
+				if(GetState()==eHiding) return;
+				if(GetState()==eMisfire) return;
 
-			inherited::FireStart();
+				inherited::FireStart();
 			
-			if (iAmmoElapsed == 0) 
-				OnMagazineEmpty();
-			else
-				SwitchState(eFire);
+				if (iAmmoElapsed == 0) 
+					OnMagazineEmpty();
+				else
+					SwitchState(eFire);
+			}
+		} 
+		else 
+		{
+			if(eReload!=GetState() && eMisfire!=GetState()) OnMagazineEmpty();
 		}
-	} 
-	else 
-	{
-		if(eReload!=GetState() && eMisfire!=GetState()) OnMagazineEmpty();
+	}else
+	{//misfire
+		if(smart_cast<CActor*>(this->H_Parent()) && (Level().CurrentViewEntity()==H_Parent()) )
+			HUD().GetUI()->AddInfoMessage("gun_jammed");
+
+		OnEmptyClick();
 	}
 }
 

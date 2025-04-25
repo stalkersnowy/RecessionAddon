@@ -571,6 +571,7 @@ bool CInventory::Action(s32 cmd, u32 flags)
 		switch(cmd)
 		{
 			case kWPN_FIRE:
+			case kWPN_FIRE2:
 			{
 				pActor->SetShotRndSeed();
 			}break;
