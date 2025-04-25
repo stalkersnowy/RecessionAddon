@@ -596,6 +596,7 @@ bool CInventory::Action(s32 cmd, u32 flags)
 				return true;
 			}break;
 
+		case kWPN_PREV:
 		case kWPN_NEXT:
 		case kWPN_RELOAD:
 		case kWPN_FIRE:

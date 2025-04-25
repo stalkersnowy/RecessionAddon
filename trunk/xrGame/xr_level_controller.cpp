@@ -46,6 +46,7 @@ _action  actions[]		= {
 	{ "wpn_5",				kWPN_5					,_both},	
 	{ "wpn_6",				kWPN_6					,_both},	
 	{ "artefact",			kARTEFACT				,_both},
+	{ "wpn_prev",			kWPN_PREV				,_both},
 	{ "wpn_next",			kWPN_NEXT				,_both},	
 	{ "wpn_fire",			kWPN_FIRE				,_both},	
 	{ "wpn_fire2",			kWPN_FIRE2				,_both},	

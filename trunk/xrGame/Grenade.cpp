@@ -225,6 +225,7 @@ bool CGrenade::Action(s32 cmd, u32 flags)
 	switch(cmd) 
 	{
 	//переключение типа гранаты
+	case kWPN_PREV:
 	case kWPN_NEXT:
 		{
             if(flags&CMD_START) 
