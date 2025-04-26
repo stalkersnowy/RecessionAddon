@@ -30,6 +30,7 @@ xr_token							qbloommode_token						[ ]={
 	{ "2588",						2											},
 	{ "2559",						3											},
 	{ "2571",						4											},
+	{ "2232",						5											},
 	{ 0,							0											}
 };
 
@@ -278,8 +279,12 @@ public:
 			strcpy(_cfg, "bloom_3120.ltx");
 		else if (*value == 1)
 			strcpy(_cfg, "bloom_soc.ltx");
-		else
+		else if (*value < 5)
 			strcpy(_cfg, "bloom_2588.ltx");
+		else if (*value < 6)
+			strcpy(_cfg, "bloom_2232.ltx");
+		else
+			strcpy(_cfg, "bloom_2218.ltx");
 		FS.update_path			(_cfg,"$game_config$",_cfg);
 		strconcat				(sizeof(cmd),cmd,"cfg_load", " ", _cfg);
 		Console->Execute		(cmd);

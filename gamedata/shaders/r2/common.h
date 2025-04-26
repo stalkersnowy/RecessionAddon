@@ -230,24 +230,33 @@ uniform sampler         s_image;                // used in various post-processi
 uniform sampler2D       s_tonemap;              // actually MidleGray / exp(Lw + eps)
 //////////////////////////////////////////////////////////////////////////////////////////
 // Defines                                		//
-#if BLOOM_MODE > 1
-#define def_gloss       half(8.f /255.f)
-#else
-#define def_gloss       half(2.f /255.f)
-#endif
-#define def_aref        half(200.f/255.f)
 #define def_dbumph      half(0.333f)
 #define def_virtualh    half(.05f)              // 5cm
 #define def_distort     half(0.05f)             // we get -0.5 .. 0.5 range, this is -512 .. 512 for 1024, so scale it
 #define def_hdr_clip	half(0.75h)        		//
 
 //////////////////////////////////////////////////////////////////////////////////////////
-#if BLOOM_MODE < 1
-#define def_hdr         half(9.h)         		// hight luminance range half(3.h)
-#define	LUMINANCE_VECTOR                 half3(0.3f, 0.38f, 0.22f)
+#if BLOOM_MODE > 0
+ #if BLOOM_MODE > 1
+  #if BLOOM_MODE > 4
+   #define def_aref        half(128.f/255.f)
+   #define def_hdr		   half(4.h)	// hight luminance range
+  #else
+   #define def_aref        half(200.f/255.f)
+   #define def_hdr         half(8.h)         		// hight luminance range half(3.h)
+  #endif
+  #define def_gloss       half(8.f /255.f)
+ #else
+  #define def_aref        half(200.f/255.f)
+  #define def_gloss       half(2.f /255.f)
+  #define def_hdr         half(8.h)         		// hight luminance range half(3.h)
+ #endif
+ #define	LUMINANCE_VECTOR                 half3(0.3f, 0.48f, 0.22f)
 #else
-#define def_hdr         half(8.h)         		// hight luminance range half(3.h)
-#define	LUMINANCE_VECTOR                 half3(0.3f, 0.48f, 0.22f)
+ #define def_aref        half(200.f/255.f)
+ #define def_gloss       half(2.f /255.f)
+ #define def_hdr         half(9.h)         		// hight luminance range half(3.h)
+ #define	LUMINANCE_VECTOR                 half3(0.3f, 0.38f, 0.22f)
 #endif
 void        tonemap              (out half4 low, out half4 high, half3 rgb, half scale)
 {
