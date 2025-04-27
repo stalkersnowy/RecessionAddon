@@ -107,6 +107,7 @@ public:
 public:
 	// feature level
 	virtual	GenerationLevel			get_generation			()	{ return IRender_interface::GENERATION_R1; }
+	virtual bool					supports_vtf			()	{ return true; }
 
 	// Loading / Unloading
 	virtual	void					create					();

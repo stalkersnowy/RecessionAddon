@@ -67,11 +67,16 @@ surface_bumped                sload_i         ( p_bumped I)
 #if BLOOM_MODE > 1
 		float4 		 detail  = 		tex2D(s_bumpD,vTexCoord * dt_params).wzyx;
 	    S.normal			= 		Nu.wzyx + (NuE.xyz - (1.0h + 0.5h*def_dbumph)) + detail.xyz * def_dbumph ;
+#if BLOOM_MODE > 5
+		S.gloss 			+= 		detail.w							;
+#else
+        S.gloss             =  		S.gloss * detail.w * 2				;
+#endif
 #else
         float4       detail  =		tex2D(s_detail,vTexCoord * dt_params )        	;
         S.base.rgb          =		S.base.rgb     * detail.rgb*2		;
-#endif
         S.gloss             =  		S.gloss * detail.w * 2				;
+#endif
 		#endif
 
         return                S;
@@ -101,11 +106,16 @@ surface_bumped                sload_i         ( p_bumped I)        // + texld, m
 #if BLOOM_MODE > 1
 		half4 		detail 	= 		tex2D(s_bumpD,I.tcdbump).wzyx;
 	   S.normal 		   = 		Nu.wzyx + (NuE.xyz - (1.0h + 0.5h*def_dbumph)) + detail.xyz * def_dbumph ;
+#if BLOOM_MODE > 5
+		S.gloss 			+= 		detail.w							;
+#else
+        S.gloss             =  		S.gloss * detail.w * 2				;
+#endif
 #else
         half4       detail  =		tex2D(s_detail,I.tcdbump)        	;
        S.base.rgb          =		S.base.rgb     * detail.rgb*2		;
-#endif
         S.gloss             =  		S.gloss * detail.w * 2				;
+#endif
 #endif
 
         return                S;
@@ -130,11 +140,16 @@ surface_bumped                sload_i         ( p_bumped I)
 #if BLOOM_MODE > 1
 		half4  detail 		= 		 tex2D(s_bumpD,I.tcdbump).wzyx;
 		S.normal 			= 		Nu.wzyx + (NuE.xyz - (1.0h + 0.5h*def_dbumph)) + detail.xyz * def_dbumph ;
+#if BLOOM_MODE > 5
+		S.gloss 			+= 		detail.w;
+#else
+        S.gloss             =  		S.gloss * detail.w * 2			;
+#endif
 #else
         half4 detail		=        tex2D(s_detail,I.tcdbump)    ;
         S.base.rgb          =      	S.base.rgb*detail.rgb        	*2      ;
-#endif
         S.gloss             =  		S.gloss * detail.w * 2			;
+#endif
 #endif
         return              S;
 }

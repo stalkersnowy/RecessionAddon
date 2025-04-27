@@ -240,7 +240,13 @@ uniform sampler2D       s_tonemap;              // actually MidleGray / exp(Lw +
  #if BLOOM_MODE > 1
   #if BLOOM_MODE > 4
    #define def_aref        half(128.f/255.f)
-   #define def_hdr		   half(4.h)	// hight luminance range
+   #if BLOOM_MODE > 5
+	#undef USE_VTF
+    #define def_hdr		   half(1.h)	// hight luminance range
+    #define def_lum_hrange half(0.55h)	// hight luminance range
+   #else
+    #define def_hdr		   half(4.h)	// hight luminance range
+   #endif
   #else
    #define def_aref        half(200.f/255.f)
    #define def_hdr         half(8.h)         		// hight luminance range half(3.h)
@@ -266,7 +272,11 @@ void        tonemap              (out half4 low, out half4 high, half3 rgb, half
         high	=		low/def_hdr		;        // 8x dynamic range
 #else
         low		=       half4           (rgb,           0 )	;
+ #if BLOOM_MODE > 5
+		high	= 		half4			(rgb-def_lum_hrange, dot( min(rgb,def_lum_hrange), LUMINANCE_VECTOR ) );
+ #else
         high	=       half4       	(rgb/def_hdr,   0 )	;		// 8x dynamic range
+ #endif
 #endif
 
 //		low		= 	half4	(rgb, 0);

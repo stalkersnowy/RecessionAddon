@@ -156,6 +156,7 @@ public:
 public:
 	// feature level
 	virtual	GenerationLevel			get_generation			()											= 0;
+	virtual bool					supports_vtf			()											= 0;
 
 	// Loading / Unloading
 	virtual	void					create					()											= 0;

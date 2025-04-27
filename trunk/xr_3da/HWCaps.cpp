@@ -4,6 +4,8 @@
 #include "hwcaps.h"
 #include "hw.h"
 
+#include "render.h"
+
 void CHWCaps::Update()
 {
 	D3DCAPS9					caps;
@@ -20,7 +22,7 @@ void CHWCaps::Update()
 	geometry.dwRegisters		= cnt;
 	geometry.dwInstructions		= 256;
 	geometry.dwClipPlanes		= _min(caps.MaxUserClipPlanes,15);
-	geometry.bVTF				= (geometry_major>=3) && HW.support(D3DFMT_R32F,D3DRTYPE_TEXTURE,D3DUSAGE_QUERY_VERTEXTEXTURE);
+	geometry.bVTF				= ::Render->supports_vtf() && (geometry_major>=3) && HW.support(D3DFMT_R32F,D3DRTYPE_TEXTURE,D3DUSAGE_QUERY_VERTEXTEXTURE);
 
 	// ***************** PIXEL processing
 	raster_major				= u16 ( u32(u32(caps.PixelShaderVersion)&u32(0xf << 8ul))>>8 );
