@@ -57,26 +57,31 @@ end
 
 function action_sleep:switch_state(actor)
 	local state = self.state
+	local need_zone = (dream.active_sleep_zone == nil)
+	local is_active = (dream.active_sleep_zone == self.object:id())
 	
-	if self.object:inside(actor:position()) then
+	if (need_zone or is_active) and self.object:inside(actor:position()) then
+		local can_sleep = true
 	    if self.cond then
 	        local cs = xr_logic.pick_section_from_condlist(db.actor, self.object, self.cond.condlist)
-	        dream.can_sleep = (cs == "true" or cs == "")
-	    else
-	        dream.can_sleep = true
+	        can_sleep = (cs == "true" or cs == "")
 	    end
-		if not has_alife_info("tutorial_part_17_sleep") and dream.can_sleep == true
-		then
-			game.start_tutorial("part_17_sleep")
-			db.actor:give_info_portion("tutorial_part_17_sleep")
+		if can_sleep then
+			dream.active_sleep_zone = self.object:id()
+			if not has_alife_info("tutorial_part_17_sleep") then
+				game.start_tutorial("part_17_sleep")
+				db.actor:give_info_portion("tutorial_part_17_sleep")
+			end
 		end
-	else
-	    dream.can_sleep = false
+	elseif is_active then
+		dream.active_sleep_zone = nil
 	end
 end
 
 function action_sleep:deactivate()
-    dream.can_sleep = false
+    if dream.active_sleep_zone == self.object:id() then
+		dream.active_sleep_zone = nil
+	end
 end
 
 ---------------------------------------------------------------------------------------------------------------------

@@ -16,6 +16,8 @@
     <texture id="ui_iconsTotal_technique" x="0" y="611" width="83" height="47" />
     <texture id="ui_iconsTotal_grouping" x="0" y="658" width="83" height="47" />
     <texture id="ui_iconsTotal_locations" x="0" y="705" width="83" height="47" />
+	
+    <texture id="ui_iconsTotal_locations_small" x="15" y="760" width="49" height="29" />
 
 
     <texture id="ui_iconsTotal_toHelpFree_lancer" x="0" y="799" width="83" height="47"/>

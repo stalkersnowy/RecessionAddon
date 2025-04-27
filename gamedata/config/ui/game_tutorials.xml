@@ -64,10 +64,21 @@
 		</item>
 		
 		<item><!--Запомни - каждое новое задание автоматически переключает целеуказание на мини-карте на себя-->
-			<length_sec>9</length_sec>
+			<length_sec>8.4</length_sec>
 			<pause_state>off</pause_state>
 			<guard_key/>
 			<sound>characters_voice\scenario\trader\trader_tutorial_pda_4</sound>
+			<cursor_pos/>
+			<grab_input>1</grab_input>
+			<pda_section>pda_quests</pda_section>
+			<main_wnd/>
+		</item>
+		
+		<item>
+			<length_sec>12</length_sec>
+			<pause_state>off</pause_state>
+			<guard_key/>
+			<sound>characters_voice\scenario\trader\trader_tutorial_pda_4_1</sound>
 			<cursor_pos/>
 			<grab_input>1</grab_input>
 			<pda_section>pda_quests</pda_section>
@@ -781,7 +792,7 @@
 		<global_wnd/>
 
 		<item>
-			<length_sec>5</length_sec>
+			<length_sec>10</length_sec>
 			<pause_state/>
 			<guard_key/>
 			<sound/>
@@ -789,7 +800,7 @@
 			<pda_section/>
 			<grab_input>0</grab_input>
 			<main_wnd>
-				<auto_static start_time="0" length_sec="5000" x="500" y="600" width="600" height="150" alignment="c" stretch="1"
+				<auto_static start_time="0" length_sec="10000" x="500" y="600" width="600" height="150" alignment="c" stretch="1"
 							light_anim="" la_cyclic="1" la_texture="1" la_alpha="1">
 					<window_name>w1</window_name>
 					<text font="graffiti22" r="225" g="225" b="250" a="255">starvation_tutorial</text>
@@ -802,7 +813,7 @@
 		<global_wnd/>
 
 		<item>
-			<length_sec>5</length_sec>
+			<length_sec>10</length_sec>
 			<pause_state/>
 			<guard_key/>
 			<sound/>
@@ -810,7 +821,7 @@
 			<pda_section/>
 			<grab_input>0</grab_input>
 			<main_wnd>
-				<auto_static start_time="0" length_sec="5000" x="500" y="600" width="600" height="150" alignment="c" stretch="1"
+				<auto_static start_time="0" length_sec="10000" x="500" y="600" width="600" height="150" alignment="c" stretch="1"
 							light_anim="" la_cyclic="1" la_texture="1" la_alpha="1">
 					<window_name>w1</window_name>
 					<text font="graffiti22" r="225" g="225" b="250" a="255">sleep_tutorial</text>

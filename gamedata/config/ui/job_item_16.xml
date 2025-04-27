@@ -2,7 +2,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
     <task_root_item x="0" y="0" width="267" height="40">
-        <image x="7" y="16" width="69" height="47"/>
+        <image x="7" y="16" width="69" height="47" stretch="1"/>
         <caption x="77" y="16" width="150" height="18" complex_mode="1">
             <text align="l" x="0" y="0" font="letterica18"/>
         </caption>
@@ -40,8 +40,8 @@
         </show_descr_btn>
     </task_sub_item>
     <task_user_item x="0" y="0" width="267" height="32">
-        <image x="7" y="4" width="27" height="32"/>
-        <caption x="42" y="5" width="117" height="16">
+        <image x="7" y="4" width="27" height="19" stretch="1"/>
+        <caption x="42" y="5" width="117" height="6">
             <text x="0" y="0" font="letterica18"/>
         </caption>
         <description x="7" y="38" width="242" height="16">
