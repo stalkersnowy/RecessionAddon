@@ -1303,6 +1303,7 @@
             </phrase>
             <phrase id="211111">
                 <text>escape_lager_volk_info_211111</text>
+				<give_info>sl_wishmaster_legend_info</give_info>
                 <next>11</next>
             </phrase>
             <phrase id="2121">

@@ -146,14 +146,12 @@
             </phrase>
             <phrase id="40">
                 <text>agr_stalker_talk_about_ratcatcher_40</text>
-                <give_info>agr_sold_about_ratcatcher</give_info>
                 <next>140</next>
             </phrase>
             <phrase id="130">
                 <text>agr_stalker_talk_about_ratcatcher_130</text>
                 <precondition>agroprom_dialog.has_30_money</precondition>
                 <action>agroprom_dialog.give_30_money_to_stalker_for_info_about_ratcatcher</action>
-                <dont_has_info>agr_sold_about_ratcatcher</dont_has_info>
                 <give_info>agr_sold_about_ratcatcher</give_info>
                 <next>40</next>
             </phrase>
@@ -168,14 +166,17 @@
             </phrase>
             <phrase id="20">
                 <text>agr_stalker_talk_about_ratcatcher_20</text>
+                <dont_has_info>agr_sold_about_ratcatcher</dont_has_info>
                 <next>120</next>
             </phrase>
             <phrase id="1000">
                 <text>agr_stalker_talk_about_ratcatcher_1000</text>
+                <next>20</next>
                 <next>21</next>
             </phrase>
             <phrase id="21">
                 <text>agr_stalker_talk_about_ratcatcher_21</text>
+                <has_info>agr_sold_about_ratcatcher</has_info>
             </phrase>
             <phrase id="9999">
                 <text>agr_stalker_talk_about_ratcatcher_9999</text>

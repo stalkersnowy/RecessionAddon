@@ -2093,3 +2093,18 @@ function gar_boars_counter_inc(actor, npc)
     local gar_boars_counter = xr_logic.pstor_retrieve(actor, "gar_boars_counter", 0) + 1
     xr_logic.pstor_store(actor, "gar_boars_counter", gar_boars_counter)
 end
+
+-- DARK VALLEY
+-- ѕри смерти кровососа дать ему небольшой пинок в сторону вейпоинта, чтобы он упал
+-- с обрыва
+function val_bs_victim_dead(actor, npc)
+	printf("_bp: val_bs_victim_dead: npc='%s'", npc:name())
+	local h = hit()
+	h.power = 100
+	h.direction = utils.vector_copy_by_val(patrol("val_bs_hit_direction"):point(0)):sub(npc:position())
+	h.bone = "bip01_spine1"
+	h.draftsman = npc 
+	h.impulse = 2000
+	h.type = hit.wound
+	npc:hit(h)
+end
