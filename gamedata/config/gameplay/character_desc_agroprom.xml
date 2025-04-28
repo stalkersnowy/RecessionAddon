@@ -36,6 +36,7 @@
 #include "gameplay\character_criticals_4.xml"
 
 		<start_dialog>agr_krot_help</start_dialog>
+		<actor_dialog>agr_krot_about_agroprom</actor_dialog>
 #include "gameplay\character_dialogs.xml"		
 	</specific_character>
 
@@ -74,7 +75,7 @@
 	</specific_character>
 	
 	<specific_character id="agr_nii_commander" team_default = "1">
-		<name>GENERATE_NAME_captain</name>
+		<name>tips_captain_name</name>
 		<icon>ui_npc_u_soldier_beret</icon>
 		<map_icon x="2" y="0"></map_icon>
 		<bio>sim_soldier_commander_bio</bio>
@@ -139,7 +140,12 @@
 #include "gameplay\character_items.xml"
 		</supplies>
 
-#include "gameplay\character_criticals_4.xml"				
+#include "gameplay\character_criticals_4.xml"		
+		
+		<start_dialog>hello_dialog</start_dialog>
+		<actor_dialog>agr_stalker_talk_level</actor_dialog>
+		<actor_dialog>agr_stalker_talk_about_ratcatcher</actor_dialog>
+		<actor_dialog>agr_factory_stalker_about</actor_dialog>
 #include "gameplay\character_dialogs.xml"
 	</specific_character>
 
@@ -173,6 +179,11 @@
 		</supplies>
 
 #include "gameplay\character_criticals_4.xml"				
+		
+		<start_dialog>hello_dialog</start_dialog>
+		<actor_dialog>agr_stalker_talk_level</actor_dialog>
+		<actor_dialog>agr_stalker_talk_about_ratcatcher</actor_dialog>
+		<actor_dialog>agr_factory_stalker_about</actor_dialog>
 #include "gameplay\character_dialogs.xml"		
 </specific_character>
 
@@ -206,6 +217,11 @@
 		</supplies>
 
 #include "gameplay\character_criticals_4.xml"
+		
+		<start_dialog>hello_dialog</start_dialog>
+		<actor_dialog>agr_stalker_talk_level</actor_dialog>
+		<actor_dialog>agr_stalker_talk_about_ratcatcher</actor_dialog>
+		<actor_dialog>agr_factory_stalker_about</actor_dialog>
 #include "gameplay\character_dialogs.xml"
 </specific_character>
 
@@ -239,6 +255,11 @@
 		</supplies>
 
 #include "gameplay\character_criticals_4.xml"
+		
+		<start_dialog>hello_dialog</start_dialog>
+		<actor_dialog>agr_stalker_talk_level</actor_dialog>
+		<actor_dialog>agr_stalker_talk_about_ratcatcher</actor_dialog>
+		<actor_dialog>agr_factory_stalker_about</actor_dialog>
 #include "gameplay\character_dialogs.xml"
 	</specific_character>
 	
@@ -272,6 +293,11 @@
 		</supplies>
 
 #include "gameplay\character_criticals_4.xml"
+		
+		<start_dialog>hello_dialog</start_dialog>
+		<actor_dialog>agr_stalker_talk_level</actor_dialog>
+		<actor_dialog>agr_stalker_talk_about_ratcatcher</actor_dialog>
+		<actor_dialog>agr_factory_stalker_about</actor_dialog>
 #include "gameplay\character_dialogs.xml"
 	</specific_character>
 
@@ -305,6 +331,11 @@
 		</supplies>
 
 #include "gameplay\character_criticals_4.xml"
+		
+		<start_dialog>hello_dialog</start_dialog>
+		<actor_dialog>agr_stalker_talk_level</actor_dialog>
+		<actor_dialog>agr_stalker_talk_about_ratcatcher</actor_dialog>
+		<actor_dialog>agr_factory_stalker_about</actor_dialog>
 #include "gameplay\character_dialogs.xml"
 	</specific_character>
 	

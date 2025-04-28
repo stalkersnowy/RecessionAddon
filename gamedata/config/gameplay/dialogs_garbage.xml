@@ -65,7 +65,7 @@
             </phrase>
             <phrase id="3">
                 <text>gar_dramm_novice_start_3</text>
-                <dont_has_info>gar_add_fake_spot3</dont_has_info>
+                <dont_has_info>gar_add_fake_spot2</dont_has_info>
                 <next>31</next>
             </phrase>
             <phrase id="0">
@@ -78,6 +78,7 @@
     </dialog>
     <dialog id="gar_stalker_about_level">
         <precondition>dialogs.level_garbage</precondition>
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="1">
                 <text>gar_stalker_about_level_1</text>

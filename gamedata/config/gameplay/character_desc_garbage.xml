@@ -388,6 +388,9 @@
 		</supplies>
 				
 #include "gameplay\character_criticals_4.xml"
+		
+		<start_dialog>hello_dialog</start_dialog>
+		<actor_dialog>gar_stalker_about_level</actor_dialog>
 #include "gameplay\character_dialogs.xml"
 	</specific_character>
 
@@ -421,6 +424,9 @@
 		</supplies>
 				
 #include "gameplay\character_criticals_4.xml"
+		
+		<start_dialog>hello_dialog</start_dialog>
+		<actor_dialog>gar_stalker_about_level</actor_dialog>
 #include "gameplay\character_dialogs.xml"
 	</specific_character>
 
@@ -454,6 +460,9 @@
 		</supplies>
 
 #include "gameplay\character_criticals_4.xml"
+		
+		<start_dialog>hello_dialog</start_dialog>
+		<actor_dialog>gar_stalker_about_level</actor_dialog>
 #include "gameplay\character_dialogs.xml"
 	</specific_character>
 
@@ -487,6 +496,9 @@
 		</supplies>
 
 #include "gameplay\character_criticals_4.xml"
+		
+		<start_dialog>hello_dialog</start_dialog>
+		<actor_dialog>gar_stalker_about_level</actor_dialog>
 #include "gameplay\character_dialogs.xml"
 	</specific_character>
 	
@@ -521,6 +533,9 @@
 		</supplies>
 
 #include "gameplay\character_criticals_4.xml"
+		
+		<start_dialog>hello_dialog</start_dialog>
+		<actor_dialog>gar_stalker_about_level</actor_dialog>
 #include "gameplay\character_dialogs.xml"
 	</specific_character>
 	
