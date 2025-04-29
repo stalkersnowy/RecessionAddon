@@ -1670,7 +1670,7 @@ DLL_Pure *CActor::_construct			()
 
 bool CActor::use_center_to_aim			() const
 {
-	return							(!!(mstate_real&mcCrouch));
+	return							(!(mstate_real&mcCrouch));
 }
 
 
