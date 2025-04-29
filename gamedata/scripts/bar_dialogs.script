@@ -342,6 +342,16 @@ function locate_bar_dolg(actor,npc)
 	if sim == nil then
 		return
 	end
+	local obj = sim:story_object(572)
+	if obj then
+		level.map_add_object_spot(obj.id, "crlc_small", "bar_dolg_locator")
+	end
+end
+function locate_bar_voronin(actor,npc)
+	local sim = alife()
+	if sim == nil then
+		return
+	end
 	local obj = sim:story_object(507)
 	if obj then
 		level.map_add_object_spot(obj.id, "green_location", "bar_voronin_name")

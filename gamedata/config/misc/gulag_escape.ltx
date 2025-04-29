@@ -1404,7 +1404,16 @@ target = actor
 danger = danger_condition@tolik
 meet = meet@friend
 abuse = false
-on_timer = 60000| walker@to_lager_esc_corps_wounded %+tutorial_wounded_heal%
+on_timer = 60000| {=talking} remark@wait_esc_corps_wounded_wait, walker@to_lager_esc_corps_wounded %+tutorial_wounded_heal%
+
+[remark@wait_esc_corps_wounded_wait]
+anim = wait
+target = actor
+;wounded = wounded@esc_corps_wounded
+danger = danger_condition@tolik
+meet = meet@friend
+abuse = false
+on_info = {!talking} walker@to_lager_esc_corps_wounded %+tutorial_wounded_heal%
 
 [walker@to_lager_esc_corps_wounded]
 path_walk = esc_vagon_wounded_to_lager

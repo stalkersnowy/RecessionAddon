@@ -1144,7 +1144,7 @@
             </phrase>
             <phrase id="21111">
                 <text>escape_fox_hello_dialog_21111</text>
-                <next>1</next>
+                <!--next>1</next-->
             </phrase>
             <phrase id="2113">
                 <text>escape_fox_hello_dialog_2113</text>

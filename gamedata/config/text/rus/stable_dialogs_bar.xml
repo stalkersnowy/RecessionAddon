@@ -1138,7 +1138,7 @@
 		<text>Спасибо за информацию</text>
 	</string>
 	<string id="bar_dolg_zastava_talk_212">
-		<text>Ты сказал здесь база Долг. Подскажи, как туда пройти.</text>
+		<text>Ты сказал здесь база Долга. Подскажи, как туда пройти.</text>
 	</string>
 	<string id="bar_dolg_zastava_talk_2121">
 		<text>Недалеко от Арены, я отметил тебе на карте.</text>
@@ -1329,4 +1329,7 @@
 	<string id="bar_ecolog_dialog_21">
 		<text>Все пропало, Круглова убили!!!</text>
 	</string>
+    <string id="bar_bar_barmen_talk_info_5">
+        <text>Что ты знаешь о Докторе?</text>
+    </string>
 </string_table>

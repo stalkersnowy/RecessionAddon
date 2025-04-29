@@ -1814,4 +1814,9 @@
 	<character id="sim_test_114">
 		<class>sim_test_114</class>
 	</character>
+	
+
+	<character id="rad_monolith_master">
+		<class>rad_monolith_master</class>
+	</character>
 </xml>
