@@ -1313,8 +1313,9 @@
             </phrase>
             <phrase id="105">
                 <text>mil_dolg_skull_dialog_105</text>
-                <give_info>mil_sniper_get_job</give_info>
-                <next>1051</next>
+                <!--give_info>mil_sniper_get_job</give_info>
+                <next>1051</next-->
+                <next>106</next>
             </phrase>
             <phrase id="300">
                 <text>mil_dolg_skull_dialog_300</text>
@@ -1713,6 +1714,14 @@
             <phrase id="80">
                 <text>mil_hunter_dialog_80</text>
             </phrase>
+            <phrase id="5">
+                <text>mil_hunter_dialog_5</text>
+                <next>6</next>
+            </phrase>
+            <phrase id="6">
+                <text>mil_hunter_dialog_6</text>
+                <next>7</next>
+            </phrase>
             <phrase id="7">
                 <text>mil_hunter_dialog_7</text>
                 <action>dialogs.break_dialog</action>
@@ -1754,7 +1763,7 @@
             <phrase id="600">
                 <text />
                 <dont_has_info>mil_miser_task</dont_has_info>
-                <dont_has_info>mil_go_to_miser</dont_has_info>
+                <!--dont_has_info>mil_go_to_miser</dont_has_info-->
                 <dont_has_info>mil_controller_ready</dont_has_info>
                 <has_info>mil_controller_dead</has_info>
                 <next>601</next>
@@ -1900,11 +1909,11 @@
                 <next>508</next>
             </phrase>
             <phrase id="503">
-                <text />
+                <text>mil_hunter_dialog_503</text>
                 <next>504</next>
             </phrase>
             <phrase id="502">
-                <text />
+                <text>mil_hunter_dialog_502</text>
                 <next>503</next>
             </phrase>
             <phrase id="504">
@@ -1958,11 +1967,6 @@
             <phrase id="4">
                 <text>mil_hunter_dialog_4</text>
                 <next>5</next>
-            </phrase>
-            <phrase id="5">
-                <text>mil_hunter_dialog_5</text>
-                <action>dialogs.break_dialog</action>
-                <give_info>mil_hunt_ready</give_info>
             </phrase>
             <phrase id="0">
                 <text />
@@ -2041,7 +2045,7 @@
                 <text />
                 <dont_has_info>mil_lukash_delay</dont_has_info>
                 <give_info>mil_freedom_quests_end</give_info>
-                <has_info>mil_fblockpost_quest_fail</has_info>
+                <has_info>mil_fblockpost_commander_dead</has_info>
                 <has_info>mil_lukash_blockpost</has_info>
                 <has_info>mil_leader_quest2_failed</has_info>
                 <next>11001</next>
@@ -2051,7 +2055,7 @@
                 <dont_has_info>mil_lukash_blockpost</dont_has_info>
                 <dont_has_info>mil_lukash_delay</dont_has_info>
                 <give_info>mil_freedom_quests_end</give_info>
-                <has_info>mil_fblockpost_quest_fail</has_info>
+                <has_info>mil_fblockpost_commander_dead</has_info>
                 <has_info>mil_leader_quest2_failed</has_info>
                 <next>12001</next>
             </phrase>
