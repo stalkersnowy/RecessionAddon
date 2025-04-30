@@ -2079,7 +2079,7 @@
             </phrase>
             <phrase id="8004">
                 <text>mil_leader_start_dialog_8004</text>
-                <action>dialogs_military.actor_set_freedom</action>
+                <!--action>dialogs_military.actor_set_freedom</action-->
                 <next>8005</next>
             </phrase>
             <phrase id="8005">
