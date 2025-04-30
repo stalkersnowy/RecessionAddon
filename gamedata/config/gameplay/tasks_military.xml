@@ -165,7 +165,6 @@
     <infoportion_complete>mil_actor_in_khutor_zone</infoportion_complete>
     <infoportion_fail>mil_courier_see_actor</infoportion_fail>
     <infoportion_set_fail>mil_leader_quest2_failed</infoportion_set_fail>
-    <map_location_hidden>1</map_location_hidden>
   </objective>
   <objective>
     <text>mil_courier_phase2</text>
@@ -175,6 +174,7 @@
     <infoportion_complete>mil_courier_call</infoportion_complete>
     <infoportion_fail>mil_courier_dead</infoportion_fail>
     <infoportion_set_fail>mil_leader_quest2_failed</infoportion_set_fail>
+    <map_location_hidden>1</map_location_hidden>
   </objective>
   <objective>
     <text>mil_courier_phase3</text>

@@ -148,7 +148,7 @@
 		</objective>
 		<objective>
 			<text>yan_find_vasilyev_task</text>
-			<map_location_type hint="yan_find_vasilyev_task">green_location</map_location_type>
+			<map_location_type hint="yan_zombie_zone">green_location</map_location_type>
 			<object_story_id>yan_mapspot_from_vasilyev</object_story_id>
 			<map_location_hidden>1</map_location_hidden>
 			<infoportion_complete>yan_find_laboratory_end</infoportion_complete>
@@ -165,7 +165,7 @@
 		</objective>
 		<objective>
 			<text>yan_find_labX16</text>
-			<map_location_type hint="yan_find_labX16">green_location</map_location_type>
+			<map_location_type hint="yan_zombie_zone">green_location</map_location_type>
 			<object_story_id>yan_mapspot_from_vasilyev</object_story_id>
 			<infoportion_complete>labx16_find</infoportion_complete>
 		</objective>

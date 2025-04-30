@@ -2163,7 +2163,7 @@
 
 <!---------------------------ZOMBIED NOVICE----------------------->
 	<specific_character id="sim_zombied_novice_default1" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_stalker_zombie1</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_zombied_novice_bio</bio>
@@ -2188,7 +2188,7 @@
 	</specific_character>
 
 	<specific_character id="sim_zombied_novice_default2" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_stalker_zombie2</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_zombied_novice_bio</bio>
@@ -2213,7 +2213,7 @@
 	</specific_character>
 
 	<specific_character id="sim_zombied_novice_default3" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_stalker_zombie3</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_zombied_novice_bio</bio>
@@ -2238,7 +2238,7 @@
 	</specific_character>
 
 	<specific_character id="sim_zombied_novice_default4" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_stalker_zombie4</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_zombied_novice_bio</bio>
@@ -2263,7 +2263,7 @@
 	</specific_character>
 
 	<specific_character id="sim_zombied_novice_default5" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_stalker_zombie5</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_zombied_novice_bio</bio>
@@ -2288,7 +2288,7 @@
 	</specific_character>
 
 	<specific_character id="sim_zombied_novice_default6" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_stalker_zombie7</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_zombied_novice_bio</bio>
@@ -2313,7 +2313,7 @@
 	</specific_character>
 
 	<specific_character id="sim_zombied_novice_default7" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_stalker_zombie8</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_zombied_novice_bio</bio>
@@ -2339,7 +2339,7 @@
 
 <!---------------------------ZOMBIED VETERANS----------------------->
 	<specific_character id="sim_zombied_veteran_default1" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_stalker_zombie2</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_zombied_veteran_bio</bio>
@@ -2365,7 +2365,7 @@
 	</specific_character>
 
 	<specific_character id="sim_zombied_veteran_default2" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_stalker_zombie3</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_zombied_veteran_bio</bio>
@@ -2390,7 +2390,7 @@
 	</specific_character>
 
 	<specific_character id="sim_zombied_veteran_default3" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_stalker_zombie4</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_zombied_veteran_bio</bio>
@@ -2416,7 +2416,7 @@
 	</specific_character>
 
 	<specific_character id="sim_zombied_veteran_default4" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_stalker_zombie5</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_zombied_veteran_bio</bio>
@@ -2442,7 +2442,7 @@
 	</specific_character>
 
 	<specific_character id="sim_zombied_veteran_default5" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_stalker_zombie6</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_zombied_veteran_bio</bio>
@@ -2469,7 +2469,7 @@
 
 <!---------------------------ZOMBIED MASTER----------------------->
 	<specific_character id="sim_zombied_master_1" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_zombie_exoskeleton</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_zombied_master_bio</bio>
@@ -2495,7 +2495,7 @@
 
 <!---------------------------FRESH ZOMBIED STALKERS----------------------->
 	<specific_character id="sim_fresh_Zombied_stalker_1" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_zombie_fresh_0</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_fresh_Zombied_bio</bio>
@@ -2521,7 +2521,7 @@
 
 
 	<specific_character id="sim_fresh_Zombied_stalker_2" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_zombie_fresh_0</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_fresh_Zombied_bio</bio>
@@ -2547,7 +2547,7 @@
 
 
 	<specific_character id="sim_fresh_Zombied_stalker_3" team_default = "1">
-		<name>zombie_name</name>
+		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_zombie_fresh_2</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>sim_fresh_Zombied_bio</bio>
