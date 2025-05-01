@@ -1881,9 +1881,8 @@
             </phrase>
             <phrase id="2">
                 <text />
-                <dont_has_info>bar_rescue_research_reward</dont_has_info>
-                <has_info>bar_rescue_research_start</has_info>
-                <dont_has_info>bar_rescue_research_follow</dont_has_info>
+                <dont_has_info>bar_rescue_research_chasing_end</dont_has_info>
+                <has_info>bar_rescue_research_chasing_start</has_info>
                 <next>21</next>
             </phrase>
         </phrase_list>
@@ -2207,6 +2206,7 @@
     <dialog id="bar_bar_barmen_jobs">
         <has_info>agroprom_military_case_done</has_info>
         <dont_has_info>bar_kill_veteran_start</dont_has_info>
+        <dont_has_info>bar_kill_svoboda_ambush_done</dont_has_info>
         <dont_has_info>bar_kill_svoboda_ambush_start</dont_has_info>
         <phrase_list>
             <phrase id="41">
@@ -2233,7 +2233,7 @@
                 <next>26121</next>
             </phrase>
             <phrase id="61">
-                <text />
+                <text></text>
                 <precondition>bar_dialogs.barman_has_job</precondition>
                 <precondition>bar_dialogs.barman_dont_has_room_job</precondition>
                 <has_info>bar_kill_svoboda_ambush_start</has_info>
@@ -2246,7 +2246,7 @@
                 <text>bar_bar_barmen_jobs_72</text>
             </phrase>
             <phrase id="71">
-                <text />
+                <text></text>
                 <precondition>bar_dialogs.barman_has_job</precondition>
                 <precondition>bar_dialogs.barman_dont_has_room_job</precondition>
                 <dont_has_info>bar_kill_veteran_done</dont_has_info>
@@ -2254,7 +2254,7 @@
                 <next>72</next>
             </phrase>
             <phrase id="44">
-                <text />
+                <text></text>
                 <precondition>bar_dialogs.barman_has_job</precondition>
                 <precondition>bar_dialogs.barman_dont_has_room_job</precondition>
                 <dont_has_info>bar_kill_svoboda_ambush_start</dont_has_info>
@@ -2294,7 +2294,7 @@
                 <next>44311</next>
             </phrase>
             <phrase id="54">
-                <text />
+                <text></text>
                 <dont_has_info>bar_kill_veteran_done</dont_has_info>
                 <dont_has_info>bar_kill_svoboda_ambush_start</dont_has_info>
                 <next>541</next>
@@ -2315,12 +2315,12 @@
                 <text>bar_bar_barmen_jobs_541</text>
             </phrase>
             <phrase id="53">
-                <text />
+                <text></text>
                 <has_info>bar_kill_svoboda_ambush_start</has_info>
                 <next>531</next>
             </phrase>
             <phrase id="51">
-                <text />
+                <text></text>
                 <has_info>bar_heli_scene_stay_online</has_info>
                 <next>52</next>
             </phrase>
@@ -2362,7 +2362,7 @@
                 <text>bar_bar_barmen_jobs_111</text>
             </phrase>
             <phrase id="11">
-                <text />
+                <text></text>
                 <dont_has_info>bar_kill_veteran_done</dont_has_info>
                 <next>111</next>
             </phrase>
@@ -2379,11 +2379,11 @@
                 <next>23</next>
             </phrase>
             <phrase id="23">
-                <text />
+                <text></text>
                 <next>27</next>
             </phrase>
             <phrase id="27">
-                <text />
+                <text></text>
                 <dont_has_info>bar_kill_veteran_done</dont_has_info>
                 <has_info>bar_kill_veteran_start</has_info>
                 <next>271</next>
@@ -2413,17 +2413,27 @@
             <phrase id="371">
                 <text>bar_bar_barmen_jobs_371</text>
             </phrase>
+            <phrase id="33131">
+                <text>bar_bar_barmen_jobs_33131</text>
+            </phrase>
             <phrase id="321121">
                 <text>bar_bar_barmen_jobs_321121</text>
+            </phrase>
+            <phrase id="32113">
+                <text>bar_bar_barmen_jobs_32113</text>
+                <next>321131</next>
             </phrase>
             <phrase id="321131">
                 <text>bar_bar_barmen_jobs_321131</text>
             </phrase>
-            <phrase id="33121">
-                <text>bar_bar_barmen_jobs_33121</text>
+            <phrase id="32112">
+                <text>bar_bar_barmen_jobs_32112</text>
+                <give_info>bar_kill_veteran_start</give_info>
+                <next>321121</next>
             </phrase>
-            <phrase id="33131">
-                <text>bar_bar_barmen_jobs_33131</text>
+            <phrase id="321">
+                <text>bar_bar_barmen_jobs_321</text>
+                <next>3211</next>
             </phrase>
             <phrase id="3211">
                 <text>bar_bar_barmen_jobs_3211</text>
@@ -2434,32 +2444,6 @@
                 <next>32112</next>
                 <next>32113</next>
             </phrase>
-            <phrase id="32112">
-                <text>bar_bar_barmen_jobs_32112</text>
-                <give_info>bar_kill_veteran_start</give_info>
-                <next>321121</next>
-            </phrase>
-            <phrase id="32113">
-                <text>bar_bar_barmen_jobs_32113</text>
-                <next>321131</next>
-            </phrase>
-            <phrase id="321">
-                <text>bar_bar_barmen_jobs_321</text>
-                <next>3211</next>
-            </phrase>
-            <phrase id="32">
-                <text />
-                <dont_has_info>bar_heli_scene_stay_online</dont_has_info>
-                <dont_has_info>bar_kill_veteran_start</dont_has_info>
-                <dont_has_info>bar_kill_veteran_done</dont_has_info>
-                <has_info>bar_rescue_research_start</has_info>
-                <next>321</next>
-            </phrase>
-            <phrase id="3312">
-                <text>bar_bar_barmen_jobs_3312</text>
-                <give_info>bar_kill_svoboda_ambush_start</give_info>
-                <next>33121</next>
-            </phrase>
             <phrase id="3313">
                 <text>bar_bar_barmen_jobs_3313</text>
                 <next>33131</next>
@@ -2467,60 +2451,55 @@
             <phrase id="351">
                 <text>bar_bar_barmen_jobs_351</text>
             </phrase>
+            <phrase id="361">
+                <text>bar_bar_barmen_jobs_361</text>
+            </phrase>
+            <phrase id="341">
+                <text>bar_bar_barmen_jobs_341</text>
+            </phrase>
+            <phrase id="32">
+                <text></text>
+                <dont_has_info>bar_kill_veteran_start</dont_has_info>
+                <dont_has_info>bar_kill_veteran_done</dont_has_info>
+                <has_info>bar_rescue_research_start</has_info>
+                <next>321</next>
+            </phrase>
             <phrase id="33">
-                <text />
+                <text></text>
                 <dont_has_info>bar_kill_svoboda_ambush_start</dont_has_info>
                 <has_info>bar_kill_veteran_done</has_info>
                 <next>331</next>
+            </phrase>
+            <phrase id="3">
+                <text></text>
+                <next>31</next>
+                <next>32</next>
+                <next>33</next>
+            </phrase>
+            <phrase id="31">
+                <text></text>
+                <dont_has_info>bar_rescue_research_start</dont_has_info>
+                <next>311</next>
+            </phrase>
+            <phrase id="311">
+                <text>bar_bar_barmen_jobs_311</text>
             </phrase>
             <phrase id="331">
                 <text>bar_bar_barmen_jobs_331</text>
                 <next>3312</next>
                 <next>3313</next>
             </phrase>
-            <phrase id="341">
-                <text>bar_bar_barmen_jobs_341</text>
-            </phrase>
-            <phrase id="311">
-                <text>bar_bar_barmen_jobs_311</text>
-            </phrase>
-            <phrase id="361">
-                <text>bar_bar_barmen_jobs_361</text>
-            </phrase>
-            <phrase id="35">
-                <text />
-                <has_info>bar_kill_svoboda_ambush_start</has_info>
-                <next>351</next>
-            </phrase>
-            <phrase id="34">
-                <text />
-                <has_info>bar_heli_scene_stay_online</has_info>
-                <next>341</next>
-            </phrase>
-            <phrase id="36">
-                <text />
-                <dont_has_info>bar_kill_veteran_done</dont_has_info>
-                <dont_has_info>bar_kill_svoboda_ambush_start</dont_has_info>
-                <has_info>bar_heli_scene_stay_online</has_info>
-                <next>361</next>
-            </phrase>
-            <phrase id="31">
-                <text />
-                <dont_has_info>bar_kill_veteran_done</dont_has_info>
-                <next>311</next>
+            <phrase id="33121">
+                <text>bar_bar_barmen_jobs_33121</text>
             </phrase>
             <phrase id="0">
                 <text>bar_bar_barmen_jobs_0</text>
                 <next>3</next>
             </phrase>
-            <phrase id="3">
-                <text />
-                <next>31</next>
-                <next>32</next>
-                <next>33</next>
-                <next>34</next>
-                <next>35</next>
-                <next>36</next>
+            <phrase id="3312">
+                <text>bar_bar_barmen_jobs_3312</text>
+                <give_info>bar_kill_svoboda_ambush_start</give_info>
+                <next>33121</next>
             </phrase>
         </phrase_list>
     </dialog>

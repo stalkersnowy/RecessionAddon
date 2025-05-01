@@ -41,7 +41,7 @@
 		</objective>	
 		<objective>
 			<text>yan_secret_tonnel</text>
-			<map_location_type>green_location</map_location_type>
+			<map_location_type hint="yan_secret_tonnel">green_location</map_location_type>
 			<object_story_id>yan_secret_exit</object_story_id>
 			<infoportion_complete>yantar_tunnel_finish</infoportion_complete>
 		</objective>

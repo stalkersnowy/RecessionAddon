@@ -89,7 +89,7 @@
 			<text>bar_kill_crazy_veterans</text>
 			<map_location_type hint="bar_kill_crazy_veterans">green_location</map_location_type>
 			<object_story_id>bar_crazy_veterans_leader</object_story_id>			
-			<function_complete>bar_rostok_tasks.has_lucky_pda</function_complete>
+			<infoportion_complete>sar2_death_45</infoportion_complete>
 			<infoportion_set_complete>bar_dolg_veteran_gain</infoportion_set_complete>
 		</objective>
 		<objective>
@@ -97,6 +97,7 @@
 			<map_location_type hint="bar_kill_crazy_veterans">green_location</map_location_type>
 			<object_story_id>bar_crazy_veterans_leader</object_story_id>			
 			<function_complete>bar_rostok_tasks.has_lucky_pda</function_complete>
+			<map_location_hidden>1</map_location_hidden>
 		</objective>
 		<objective>
 			<text>bar_bring_pda_lucky</text>
@@ -179,7 +180,7 @@
 			<text>bar_dolg_kill_tiran</text>
 			<map_location_type>green_location</map_location_type>
 			<object_story_id>bar_svoboda_ambush_tiran</object_story_id>
-			<function_complete>bar_rostok_tasks.has_tiran_pda</function_complete>
+			<infoportion_complete>sar2_death_56</infoportion_complete>
 			<infoportion_set_complete>bar_kill_svoboda_ambush_killed</infoportion_set_complete>			
 		</objective>
 		<objective>
@@ -187,6 +188,7 @@
 			<map_location_type>green_location</map_location_type>
 			<object_story_id>bar_svoboda_ambush_tiran</object_story_id>
 			<function_complete>bar_rostok_tasks.has_tiran_pda</function_complete>
+			<map_location_hidden>1</map_location_hidden>
 		</objective>
 		<objective>
 			<text>bar_dolg_svoboda_ambush_return</text>

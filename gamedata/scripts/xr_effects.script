@@ -1897,7 +1897,7 @@ function yan_ghost_pda (actor, npc)
     if has_alife_info("agr_gunslinger_flash_have") then 
         db.actor:give_info_portion("yan_provodnik_spawn")
     end
-    news_manager.send_tip(db.actor, "storyline_ghost_tip", nil, "wolf")
+    news_manager.send_tip(db.actor, "storyline_ghost_tip", nil, "prizrak")
 end
 
 function start_yantar_dream(actor, npc)

@@ -357,3 +357,43 @@ function locate_bar_voronin(actor,npc)
 		level.map_add_object_spot(obj.id, "green_location", "bar_voronin_name")
 	end
 end
+
+
+function barman_need_kill_veterans(actor,npc)
+	if dont_has_info("bar_kill_veteran_start") then
+		return true
+	end
+	return false
+end
+
+
+--PDA Счастливчика
+function have_lucky_pda(actor,npc)
+	if db.actor:object("bar_lucky_pda") then
+		return true
+	end
+	return false
+end
+function give_lucky_pda(first_speaker, second_speaker)
+	local lucky_pda = first_speaker:object("bar_lucky_pda")
+	if lucky_pda then
+		dialogs.relocate_item(second_speaker, lucky_pda, "out")
+		dialogs.relocate_money(second_speaker, 6000, "in")
+	end
+end
+
+
+-- PDA Тирана
+function have_bar_tiran_pda(first_speaker, second_speaker)
+  	return first_speaker:object("bar_tiran_pda") ~= nil
+end
+function give_bar_tiran_pda(first_speaker, second_speaker)
+	local bar_tiran_pda = first_speaker:object("bar_tiran_pda")
+	if bar_tiran_pda then
+		dialogs.relocate_item(second_speaker, bar_tiran_pda, "out")
+		dialogs.relocate_money(second_speaker, 7000, "in")
+	end
+end
+function have_tiran_reward(first_speaker, second_speaker)
+	dialogs.relocate_money(second_speaker, 7000, "in")
+end
