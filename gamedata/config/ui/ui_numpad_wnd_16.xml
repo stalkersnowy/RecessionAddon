@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<numpad>
+    <background x="0" y="0" width="282" height="369" stretch="1">
+        <texture>ui_numpad_lockframe</texture>
+    </background>
+    <edit_box x="34" y="28" width="204" height="31">
+        <text font="letterica25" a="150" r="180" g="183" b="200" align="r"/>
+    </edit_box>
+    <btn_0 x="21" y="244" width="60" height="45" stretch="1">
+        <texture_e>ui_numpad_void</texture_e>
+        <texture_t>ui_numpad_key00</texture_t>
+    </btn_0>
+    <btn_1 x="21" y="194" width="60" height="45" stretch="1">
+        <texture_e>ui_numpad_void</texture_e>
+        <texture_t>ui_numpad_key01</texture_t>
+    </btn_1>
+    <btn_2 x="85" y="194" width="60" height="45" stretch="1">
+        <texture_e>ui_numpad_void</texture_e>
+        <texture_t>ui_numpad_key02</texture_t>
+    </btn_2>
+    <btn_3 x="149" y="194" width="60" height="45" stretch="1">
+        <texture_e>ui_numpad_void</texture_e>
+        <texture_t>ui_numpad_key03</texture_t>
+    </btn_3>
+    <btn_4 x="21" y="144" width="60" height="45" stretch="1">
+        <texture_e>ui_numpad_void</texture_e>
+        <texture_t>ui_numpad_key04</texture_t>
+    </btn_4>
+    <btn_5 x="85" y="144" width="60" height="45" stretch="1">
+        <texture_e>ui_numpad_void</texture_e>
+        <texture_t>ui_numpad_key05</texture_t>
+    </btn_5>
+    <btn_6 x="149" y="144" width="60" height="45" stretch="1">
+        <texture_e>ui_numpad_void</texture_e>
+        <texture_t>ui_numpad_key06</texture_t>
+    </btn_6>
+    <btn_7 x="21" y="94" width="60" height="45" stretch="1">
+        <texture_e>ui_numpad_void</texture_e>
+        <texture_t>ui_numpad_key07</texture_t>
+    </btn_7>
+    <btn_8 x="85" y="94" width="60" height="45" stretch="1">
+        <texture_e>ui_numpad_void</texture_e>
+        <texture_t>ui_numpad_key08</texture_t>
+    </btn_8>
+    <btn_9 x="149" y="94" width="60" height="45" stretch="1">
+        <texture_e>ui_numpad_void</texture_e>
+        <texture_t>ui_numpad_key09</texture_t>
+    </btn_9>
+    <btn_c x="85" y="244" width="60" height="45" stretch="1">
+        <texture_e>ui_numpad_void</texture_e>
+        <texture_t>ui_numpad_key0c</texture_t>
+    </btn_c>
+    <btn_backspase x="149" y="244" width="60" height="45" stretch="1">
+        <texture_e>ui_numpad_void</texture_e>
+        <texture_t>ui_numpad_key0b</texture_t>
+    </btn_backspase>
+    <btn_enter x="21" y="302" width="92" height="45" stretch="1">
+        <texture_e>ui_numpad_void</texture_e>
+        <texture_t>ui_numpad_keyEnter</texture_t>
+    </btn_enter>
+    <btn_cancel x="117" y="302" width="92" height="45" stretch="1">
+        <texture_e>ui_numpad_void</texture_e>
+        <texture_t>ui_numpad_keyCancel</texture_t>
+    </btn_cancel>
+</numpad>
