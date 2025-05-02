@@ -48,7 +48,7 @@ private:
 	void		RecordKey				();
 	void		MakeCubemap				();
 	void		MakeScreenshot			();
-	void		MakeLevelMapScreenshot	();
+	void		MakeLevelMapScreenshot	(BOOL bHQ);
 public:
 				CDemoRecord				(const char *name, float life_time = 60 * 60 * 1000);
 	virtual		~CDemoRecord();

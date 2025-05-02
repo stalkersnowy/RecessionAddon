@@ -17,12 +17,53 @@
 CDemoRecord * xrDemoRecord = 0;
 CDemoRecord::force_position CDemoRecord::g_position = { false, { 0, 0, 0 } };
 
+Fbox curr_lm_fbox;
+void setup_lm_screenshot_matrices()
+{
+	psHUD_Flags.assign	(0);
+
+	// build camera matrix
+	Fbox bb								= curr_lm_fbox;
+	bb.getcenter						(Device.vCameraPosition);
+
+	Device.vCameraDirection.set			( 0.f,-1.f,0.f	);
+	Device.vCameraTop.set				( 0.f,0.f,1.f	);
+	Device.vCameraRight.set				( 1.f,0.f,0.f	);
+	Device.mView.build_camera_dir		(Device.vCameraPosition,Device.vCameraDirection,Device.vCameraTop);
+
+	bb.xform					(Device.mView);
+	// build project matrix
+	Device.mProject.build_projection_ortho(	bb.max.x-bb.min.x,
+											bb.max.y-bb.min.y,
+											bb.min.z,
+											bb.max.z);
+}
+
+Fbox get_level_screenshot_bound()
+{
+	Fbox res			=  g_pGameLevel->ObjectSpace.GetBoundingVolume();
+	CInifile& gameLtx = *pGameIni;
+	shared_str lname = g_pGameLevel->name();
+	if(gameLtx.section_exist(lname))
+	{
+		Fvector4 res2d = gameLtx.r_fvector4(lname,"bound_rect");
+		res.min.x = res2d.x;
+		res.min.z = res2d.y;
+
+		res.max.x = res2d.z;
+		res.max.z = res2d.w;
+	}
+
+	return res;
+}
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
 CDemoRecord::CDemoRecord(const char *name,float life_time) : CEffectorCam(cefDemo,life_time/*,FALSE*/)
 {
+	m_iLMScreenshotFragment = -1;
 	m_b_redirect_input_to_level = false;
 	_unlink	(name);
 	file	= FS.w_open	(name);
@@ -141,63 +182,57 @@ void GetLM_BBox(Fbox &bb, INT Step)
 
 void CDemoRecord::MakeLevelMapProcess()
 {
-	switch (m_Stage){
-	case 0: 
-		s_dev_flags			= psDeviceFlags;
-		psDeviceFlags.zero	();
-		psDeviceFlags.set	(rsClearBB|rsFullscreen|rsDrawStatic,TRUE);
-		if (!psDeviceFlags.equal(s_dev_flags,rsFullscreen))Device.Reset();
-		break;
-	case DEVICE_RESET_PRECACHE_FRAME_COUNT+1:{
-		s_hud_flag.assign	(psHUD_Flags);
-		psHUD_Flags.assign	(0);
-
-		Fbox bb								= g_pGameLevel->ObjectSpace.GetBoundingVolume();
-
-
-		if (g_bDR_LM_UsePointsBBox)
+	switch (m_Stage)
+	{
+	case 0:
 		{
-			bb.max.x = g_DR_LM_Max.x;
-			bb.max.z = g_DR_LM_Max.z;
-
-			bb.min.x = g_DR_LM_Min.x;
-			bb.min.z = g_DR_LM_Min.z;			
-		}
-		if (g_bDR_LM_4Steps) GetLM_BBox(bb, g_iDR_LM_Step);
-		// build camera matrix
-		bb.getcenter						(Device.vCameraPosition);
-
-		Device.vCameraDirection.set			( 0.f,-1.f,0.f	);
-		Device.vCameraTop.set				( 0.f,0.f,1.f	);
-		Device.vCameraRight.set				( 1.f,0.f,0.f	);
-		Device.mView.build_camera_dir		(Device.vCameraPosition,Device.vCameraDirection,Device.vCameraTop);
-
-		bb.xform							(Device.mView);
-		// build project matrix
-		Device.mProject.build_projection_ortho(bb.max.x-bb.min.x,bb.max.y-bb.min.y,bb.min.z,bb.max.z);
+			s_dev_flags			= psDeviceFlags;
+			s_hud_flag.assign	(psHUD_Flags);
+			psDeviceFlags.zero	();
+			psDeviceFlags.set	(rsClearBB|rsFullscreen|rsDrawStatic,TRUE);
+			if (!psDeviceFlags.equal(s_dev_flags,rsFullscreen))
+				Device.Reset();
 
 		}break;
-	case DEVICE_RESET_PRECACHE_FRAME_COUNT+2:{
-		string_path tmp;
-		Fbox bb						= g_pGameLevel->ObjectSpace.GetBoundingVolume();
 
-		if (g_bDR_LM_UsePointsBBox)
+	case DEVICE_RESET_PRECACHE_FRAME_COUNT+30:
 		{
-			bb.max.x = g_DR_LM_Max.x;
-			bb.max.z = g_DR_LM_Max.z;
+			setup_lm_screenshot_matrices		();
 
-			bb.min.x = g_DR_LM_Min.x;
-			bb.min.z = g_DR_LM_Min.z;			
-		}
-		if (g_bDR_LM_4Steps) GetLM_BBox(bb, g_iDR_LM_Step);
+			string_path					tmp;
+			if(m_iLMScreenshotFragment==-1)
+				xr_sprintf				(tmp, sizeof(tmp),"map_%s", *g_pGameLevel->name());
+			else
+				xr_sprintf				(tmp, sizeof(tmp),"map_%s#%d", *g_pGameLevel->name(), m_iLMScreenshotFragment);
 
-		sprintf_s					(tmp,sizeof(tmp),"%s_[%3.3f, %3.3f]-[%3.3f, %3.3f]",*g_pGameLevel->name(),bb.min.x,bb.min.z,bb.max.x,bb.max.z);
-		Render->Screenshot			(IRender_interface::SM_FOR_LEVELMAP,tmp);
-		psHUD_Flags.assign			(s_hud_flag);
-		BOOL bDevReset				= !psDeviceFlags.equal(s_dev_flags,rsFullscreen);
-		psDeviceFlags				= s_dev_flags;
-		if (bDevReset)				Device.Reset();
-		m_bMakeLevelMap				= FALSE;
+			if(m_iLMScreenshotFragment!=-1)
+			{
+				++m_iLMScreenshotFragment;
+				
+				if(m_iLMScreenshotFragment!=4)
+				{
+					curr_lm_fbox		= get_level_screenshot_bound();
+					GetLM_BBox			(curr_lm_fbox, m_iLMScreenshotFragment);
+					m_Stage				-= 20;
+				}
+			}
+
+			Render->Screenshot			(IRender_interface::SM_FOR_LEVELMAP,tmp);
+
+			if(m_iLMScreenshotFragment==-1 || m_iLMScreenshotFragment==4)
+			{
+				psHUD_Flags.assign			(s_hud_flag);
+
+				BOOL bDevReset				= !psDeviceFlags.equal(s_dev_flags,rsFullscreen);
+				psDeviceFlags				= s_dev_flags;
+				if (bDevReset)				Device.Reset();
+				m_bMakeLevelMap				= FALSE;
+				m_iLMScreenshotFragment		= -1;
+			}
+		}break;
+	default:
+		{
+			setup_lm_screenshot_matrices		();
 		}break;
 	}
 	m_Stage++;
@@ -278,6 +313,7 @@ BOOL CDemoRecord::ProcessCam(SCamEffectorInfo& info)
 				pApp->pFontSystem->OutNext	("BACK");
 				pApp->pFontSystem->OutNext	("ESC");
 				pApp->pFontSystem->OutNext	("F11");
+				pApp->pFontSystem->OutNext	("LCONTROL+F11");
 				pApp->pFontSystem->OutNext	("F12");
 				pApp->pFontSystem->SetAligment(CGameFont::alLeft);
 				pApp->pFontSystem->OutSetI	(0,+.05f);
@@ -285,6 +321,7 @@ BOOL CDemoRecord::ProcessCam(SCamEffectorInfo& info)
 				pApp->pFontSystem->OutNext	("= Cube Map");
 				pApp->pFontSystem->OutNext	("= Quit");
 				pApp->pFontSystem->OutNext	("= Level Map ScreenShot");
+				pApp->pFontSystem->OutNext	("= Level Map ScreenShot(High Quality)");
 				pApp->pFontSystem->OutNext	("= ScreenShot");
 			}
 		}
@@ -369,7 +406,7 @@ void CDemoRecord::IR_OnKeyboardPress	(int dik)
 
 	if (dik == DIK_SPACE)	RecordKey				();
 	if (dik == DIK_BACK)	MakeCubemap				();
-	if (dik == DIK_F11)		MakeLevelMapScreenshot	();
+	if (dik == DIK_F11)		MakeLevelMapScreenshot	(IR_GetKeyState(DIK_LCONTROL));
 	if (dik == DIK_F12)		MakeScreenshot			();
 	if (dik == DIK_ESCAPE)	fLifeTime				= -1;
 	if (dik == DIK_RETURN)
@@ -386,32 +423,46 @@ void CDemoRecord::IR_OnKeyboardPress	(int dik)
 		Device.Pause(!Device.Paused(), TRUE, TRUE, "demo_record");
 }
 
+static void update_whith_timescale( Fvector &v, const Fvector &v_delta )
+{
+	VERIFY(!fis_zero(Device.time_factor()));
+	float scale = 1.f/Device.time_factor();
+	v.mad( v, v_delta, scale );
+}
+
 void CDemoRecord::IR_OnKeyboardHold	(int dik)
 {
-	if (m_b_redirect_input_to_level)
+	if(m_b_redirect_input_to_level)
 	{
 		g_pGameLevel->IR_OnKeyboardHold(dik);
 		return;
 	}
+	Fvector		vT_delta = Fvector().set(0,0,0);
+	Fvector		vR_delta = Fvector().set(0,0,0);
+
 	switch(dik){
 	case DIK_A:
 	case DIK_NUMPAD1:
-	case DIK_LEFT:		m_vT.x -= 1.0f; break; // Slide Left
+	case DIK_LEFT:		vT_delta.x -= 1.0f; break; // Slide Left
 	case DIK_D:
 	case DIK_NUMPAD3:
-	case DIK_RIGHT:		m_vT.x += 1.0f; break; // Slide Right
-	case DIK_S:			m_vT.y -= 1.0f; break; // Slide Down
-	case DIK_W:			m_vT.y += 1.0f; break; // Slide Up
+	case DIK_RIGHT:		vT_delta.x += 1.0f; break; // Slide Right
+	case DIK_S:			vT_delta.y -= 1.0f; break; // Slide Down
+	case DIK_W:			vT_delta.y += 1.0f; break; // Slide Up
 	// rotate	
-	case DIK_NUMPAD2:	m_vR.x -= 1.0f; break; // Pitch Down
-	case DIK_NUMPAD8:	m_vR.x += 1.0f; break; // Pitch Up
+	case DIK_NUMPAD2:	vR_delta.x -= 1.0f; break; // Pitch Down
+	case DIK_NUMPAD8:	vR_delta.x += 1.0f; break; // Pitch Up
 	case DIK_E:	
-	case DIK_NUMPAD6:	m_vR.y += 1.0f; break; // Turn Left
+	case DIK_NUMPAD6:	vR_delta.y += 1.0f; break; // Turn Left
 	case DIK_Q:	
-	case DIK_NUMPAD4:	m_vR.y -= 1.0f; break; // Turn Right
-	case DIK_NUMPAD9:	m_vR.z -= 2.0f; break; // Turn Right
-	case DIK_NUMPAD7:	m_vR.z += 2.0f; break; // Turn Right
+	case DIK_NUMPAD4:	vR_delta.y -= 1.0f; break; // Turn Right
+	case DIK_NUMPAD9:	vR_delta.z -= 2.0f; break; // Turn Right
+	case DIK_NUMPAD7:	vR_delta.z += 2.0f; break; // Turn Right
 	}
+
+	update_whith_timescale( m_vT, vT_delta );
+	update_whith_timescale( m_vR, vR_delta );
+
 }
 
 void CDemoRecord::IR_OnMouseMove		(int dx, int dy)
@@ -462,8 +513,16 @@ void CDemoRecord::MakeScreenshot	()
 	m_Stage = 0;
 }
 
-void CDemoRecord::MakeLevelMapScreenshot()
+void CDemoRecord::MakeLevelMapScreenshot(BOOL bHQ)
 {
+	if(!bHQ)
+		m_iLMScreenshotFragment = -1;
+	else
+		m_iLMScreenshotFragment	= 0;
+	
+	curr_lm_fbox		= get_level_screenshot_bound();
+	GetLM_BBox			(curr_lm_fbox, m_iLMScreenshotFragment);
+
 	m_bMakeLevelMap	= TRUE;
 	m_Stage = 0;
 }
