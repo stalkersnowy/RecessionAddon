@@ -397,3 +397,11 @@ end
 function have_tiran_reward(first_speaker, second_speaker)
 	dialogs.relocate_money(second_speaker, 7000, "in")
 end
+
+function bar_drunk_gun_returned(first_speaker, second_speaker)
+	return second_speaker:object("wpn_abakan_m2") ~= nil
+end
+
+function bar_drunk_gun_lost(first_speaker, second_speaker)
+	return second_speaker:object("wpn_abakan_m2") == nil
+end

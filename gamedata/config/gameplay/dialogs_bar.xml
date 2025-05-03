@@ -1165,7 +1165,7 @@
             </phrase>
             <phrase id="811111112">
                 <text>bar_bar_barmen_talk_info_811111112</text>
-				<give_info>sl_wishmaster_legend_info</give_info>
+				<!--give_info>sl_wishmaster_legend_info</give_info-->
                 <next>11</next>
             </phrase>
             <phrase id="811111111">
@@ -3293,29 +3293,19 @@
             <phrase id="0">
                 <text />
                 <next>1</next>
-                <next>2</next>
                 <next>3</next>
-            </phrase>
-            <phrase id="2">
-                <text />
-                <dont_has_info>bar_bar_drunk_dolg_quest_finish</dont_has_info>
-                <has_info>bar_bar_drunk_dolg_quest_start</has_info>
-                <next>21</next>
             </phrase>
             <phrase id="3">
                 <text />
-                <has_info>bar_bar_drunk_dolg_quest_finish</has_info>
+                <precondition>bar_dialogs.bar_drunk_gun_returned</precondition>
                 <next>31</next>
             </phrase>
             <phrase id="31">
                 <text>bar_bar_drunk_dolg_start_31</text>
             </phrase>
-            <phrase id="21">
-                <text>bar_bar_drunk_dolg_start_21</text>
-            </phrase>
             <phrase id="1">
                 <text />
-                <dont_has_info>bar_bar_drunk_dolg_quest_start</dont_has_info>
+                <precondition>bar_dialogs.bar_drunk_gun_lost</precondition>
                 <next>11</next>
             </phrase>
             <phrase id="11">

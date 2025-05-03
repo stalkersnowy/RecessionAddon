@@ -5,10 +5,10 @@
 
 	<!-- Tutorial artefact -->
 	<info_portion id="tutorial_artefact_start">
-	<!-- 	<task>esc_flash_task</task>
+		<task>tutorial_find_artefact</task>
 		<article>zone_anomalies_meat</article>
 		<article>zone_artifact_af-blood</article>
-		<article>tutorial_artefact</article> -->
+		<article>tutorial_artefact</article>
 	</info_portion>
 	<info_portion id="tutorial_artefact_gain"></info_portion>
 	<info_portion id="tutorial_artefact_done"></info_portion>

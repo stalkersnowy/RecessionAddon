@@ -880,6 +880,7 @@
             </phrase>
             <phrase id="51111">
                 <text />
+                <next>11</next>
             </phrase>
             <phrase id="6">
                 <text>escape_trader_start_dialog_6</text>
@@ -901,7 +902,6 @@
             <phrase id="199">
                 <text>escape_trader_start_dialog_199</text>
                 <action>escape_dialog.give_weapon_to_actor</action>
-                <action>escape_dialog.give_knife_to_actor</action>
                 <give_info>esc_trader_direct</give_info>
                 <give_info>tutorial_wounded_start</give_info>
                 <next>1999</next>
@@ -924,14 +924,16 @@
             <phrase id="14">
                 <text />
                 <precondition>escape_dialog.trader_alredy_give_job</precondition>
+                <precondition>escape_dialog.is_not_tutorial_art</precondition>
                 <dont_has_info>esc_return</dont_has_info>
                 <dont_has_info>esc_trader_direct</dont_has_info>
                 <dont_has_info>agroprom_military_case</dont_has_info>
-                <has_info>tutorial_wounded_give_info</has_info>
+                <!--has_info>tutorial_wounded_give_info</has_info-->
                 <next>5</next>
             </phrase>
             <phrase id="5">
                 <text>escape_trader_start_dialog_5</text>
+                <next>51</next>
                 <next>52</next>
                 <next>56</next>
             </phrase>
@@ -1063,7 +1065,7 @@
             <phrase id="32111">
                 <text>escape_trader_start_dialog_32111</text>
                 <give_info>esc_trader_can_leave</give_info>
-                <give_info>tutorial_wounded_start</give_info>
+                <give_info>tutorial_artefact_start</give_info>
                 <next>321111</next>
             </phrase>
             <phrase id="3211">
@@ -1078,9 +1080,11 @@
                 <next>15</next>
                 <next>18</next>
                 <next>19</next>
+                <next>11</next>
                 <next>17</next>
                 <next>20</next>
                 <next>30</next>
+                <next>57</next>
                 <next>66</next>
             </phrase>
             <phrase id="321">
@@ -1120,6 +1124,25 @@
                 <text>escape_trader_start_dialog_19111</text>
                 <action>escape_dialog.give_documents_reward</action>
                 <disable_info>esc_return</disable_info>
+            </phrase>
+            <phrase id="51">
+                <text>escape_trader_start_dialog_51</text>
+                <precondition>escape_dialog.tutorial_artefact_end</precondition>
+                <action>escape_dialog.give_tutorial_artefact</action>
+                <give_info>tutorial_artefact_done</give_info>
+                <next>511</next>
+            </phrase>
+            <phrase id="57">
+                <text></text>
+                <precondition>escape_dialog.is_tutorial</precondition>
+                <precondition>escape_dialog.tutorial_artefact_have_not</precondition>
+                <next>571</next>
+            </phrase>
+            <phrase id="11">
+                <text></text>
+                <dont_has_info>tutorial_wounded_start</dont_has_info>
+                <has_info>tutorial_artefact_done</has_info>
+                <next>111</next>
             </phrase>
         </phrase_list>
     </dialog>
@@ -1411,7 +1434,7 @@
             </phrase>
             <phrase id="1111111111">
                 <text>escape_lager_volk_talk_1111111111</text>
-                <action>escape_dialog.give_weapon_to_actor</action>
+                <!--action>escape_dialog.give_weapon_to_actor</action-->
             </phrase>
             <phrase id="21211">
                 <text>escape_lager_volk_talk_21211</text>
