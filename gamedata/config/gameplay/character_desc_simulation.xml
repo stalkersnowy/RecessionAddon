@@ -114,8 +114,8 @@
 			[spawn] \n
 			wpn_pm \n
 			ammo_9x18_pmm = 1 \n
-			wpn_mp5 \n
-			ammo_9x19_fmj \n
+			wpn_toz34 \n
+			ammo_12x76_dart = 1 \n
 			device_torch \n
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
@@ -143,8 +143,8 @@
 		<crouch_type>1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_pm \n
-			ammo_9x18_fmj \n
+			wpn_hpsa \n
+			ammo_9x19_pbp = 1 \n
 			wpn_ak74u = 1, 0, 1, 0 \n
 			ammo_5.45x39_fmj = 1 \n
 			device_torch \n
@@ -173,8 +173,8 @@
 		<crouch_type>1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_pm \n
-			ammo_9x18_fmj \n
+			wpn_hpsa \n
+			ammo_9x19_pbp = 1 \n
 			wpn_ak74u = 1, 0, 1, 0 \n
 			ammo_5.45x39_fmj = 1 \n
 			device_torch \n
@@ -234,8 +234,8 @@
 		<crouch_type>1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_walther \n
-			ammo_9x19_fmj \n
+			wpn_hpsa \n
+			ammo_9x19_pbp = 2 \n
 			wpn_ak74 \n
 			ammo_5.45x39_fmj = 1 \n
 			device_torch \n
@@ -268,8 +268,8 @@
 		<crouch_type>1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_walther \n
-			ammo_9x19_fmj \n
+			wpn_beretta \n
+			ammo_9x19_pbp = 1 \n	
 			wpn_ak74 \n
 			ammo_5.45x39_fmj = 1 \n
 			device_torch \n
@@ -298,8 +298,8 @@
 		<crouch_type>1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_walther \n
-			ammo_9x19_fmj \n
+			wpn_beretta \n
+			ammo_9x19_pbp = 1 \n
 			wpn_l85 \n
 			ammo_5.56x45_ss190 = 1 \n
 			device_torch \n
@@ -331,8 +331,8 @@
 		<visual>actors\bandit\stalker_bandit_master</visual>
 		<supplies>
 			[spawn] \n
-			wpn_walther \n
-			ammo_9x19_fmj \n		
+			wpn_beretta \n
+			ammo_9x19_pbp = 1 \n		
 			wpn_ak74 = 1, 1, 1, 0 \n
 			ammo_5.45x39_fmj = 1 \n
 			device_torch \n
@@ -661,7 +661,7 @@
 				[spawn] \n
 				wpn_pm \n
 				ammo_9x18_pmm = 1 \n
-				wpn_bm16 \n
+				wpn_toz34 \n
 				ammo_12x70_buck = 1\n
 				device_torch \n
 	#include "gameplay\character_drugs.xml"
@@ -847,8 +847,8 @@
 		<crouch_type>-1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_walther \n
-			ammo_9x19_fmj \n
+			wpn_hpsa \n
+			ammo_9x19_pbp = 1 \n
 			wpn_lr300 \n
 			ammo_5.56x45_ap = 1 \n
 			device_torch \n
@@ -1324,8 +1324,8 @@
 		<crouch_type>0</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_walther \n
-			ammo_9x19_fmj \n		
+			wpn_beretta \n
+			ammo_9x19_pbp = 1 \n		
 			wpn_val \n
 			ammo_9x39_sp5 = 1 \n
 #include "gameplay\character_items.xml" \n
@@ -1624,8 +1624,8 @@
 		<visual>actors\killer\stalker_ki_head_1</visual>
 		<supplies>
 			[spawn] \n
-			wpn_walther \n
-			ammo_9x19_fmj \n
+			wpn_beretta \n
+			ammo_9x19_fmj = 1 \n
 			wpn_lr300 \n
 			ammo_5.56x45_ss190 \n
 #include "gameplay\character_items.xml"
@@ -1685,8 +1685,8 @@
 		<visual>actors\killer\stalker_ki_head_1</visual>
 		<supplies>
 			[spawn] \n
-			wpn_sig220 \n
-			ammo_11.43x23_hydro \n
+			wpn_beretta \n
+			ammo_9x19_fmj = 1 \n
 			wpn_sig550 \n
 			ammo_5.56x45_ss190 = 1 \n
 #include "gameplay\character_items.xml"
@@ -1776,8 +1776,8 @@
 		<visual>actors\killer\stalker_ki_exoskeleton</visual>
 		<supplies>
 			[spawn] \n
-			wpn_sig220 \n
-			ammo_11.43x23_hydro \n
+			wpn_beretta \n
+			ammo_9x19_pbp = 3 \n
 			wpn_sig550 \n
 			ammo_5.56x45_ss190 = 2 \n
 			ammo_5.56x45_ap = 1 \n
@@ -1872,8 +1872,8 @@
 		<crouch_type>-1</crouch_type>
         <supplies>
             [spawn] \n
-			wpn_walther \n
-			ammo_9x19_fmj \n
+            wpn_hpsa \n
+            ammo_9x19_fmj = 1 \n
 			wpn_lr300 \n
 			ammo_5.56x45_ap = 1 \n
 #include "gameplay\character_drugs.xml"
@@ -1930,8 +1930,8 @@
 		<crouch_type>-1</crouch_type>
         <supplies>
             [spawn] \n
-			wpn_walther \n
-			ammo_9x19_fmj \n
+            wpn_hpsa \n
+            ammo_9x19_fmj = 1 \n
             wpn_l85 \n
             ammo_5.56x45_ap = 1 \n
 #include "gameplay\character_drugs.xml"
@@ -2146,8 +2146,8 @@
 		<crouch_type>1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_sig220 \n
-			ammo_11.43x23_hydro \n
+			wpn_hpsa \n
+			ammo_9x19_fmj = 1 \n
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
 		</supplies>
@@ -3290,8 +3290,8 @@
 		<visual>actors\bandit\stalker_bandit_master</visual>
 		<supplies>
 			[spawn] \n
-			wpn_walther \n
-			ammo_9x19_fmj \n		
+			wpn_beretta \n
+			ammo_9x19_pbp = 1 \n			
 			wpn_spas12_m1 \n
 			ammo_12x76_zhekan = 1 \n
 			ammo_12x70_buck = 1 \n
@@ -3524,8 +3524,8 @@
 		<visual>actors\bandit\stalker_bandit_master</visual>
 		<supplies>
 			[spawn] \n
-			wpn_walther \n
-			ammo_9x19_fmj \n
+			wpn_beretta \n
+			ammo_9x19_pbp = 1 \n		
 			wpn_abakan_m2 \n		
 			ammo_5.45x39_ap = 1 \n
 			device_torch \n

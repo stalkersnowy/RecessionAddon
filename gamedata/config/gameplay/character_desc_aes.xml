@@ -62,6 +62,8 @@
       [spawn] \n
       wpn_sig550 = 1 \n
       ammo_5.56x45_ap = 1 \n
+	  wpn_beretta \n
+      ammo_9x19_pbp = 1 \n
       #include "gameplay\character_items.xml"\n
 #include "gameplay\character_food.xml" \n
 #include "gameplay\character_drugs.xml"
@@ -123,6 +125,8 @@
     <visual>actors\monolit\stalker_mo_head_1</visual>
     <supplies>
       [spawn] \n
+      wpn_hpsa \n
+      ammo_9x19_fmj = 1 \n
       wpn_svd \n
       ammo_7.62x54_ap = 1 \n
       #include "gameplay\character_items.xml"\n
@@ -156,6 +160,8 @@
     <visual>actors\monolit\stalker_mo_mask</visual>
     <supplies>
       [spawn] \n
+      wpn_hpsa \n
+      ammo_9x19_fmj = 1 \n
       wpn_gauss \n
       ammo_gauss = 1 \n
       #include "gameplay\character_items.xml"\n
