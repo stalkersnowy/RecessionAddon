@@ -41,6 +41,15 @@ function task_hellcar_fail2()
 	end
 end
 
+function task_kill_boars_fail()
+	if has_alife_info("sar2_death_18") or has_alife_info("gar_free_pass")
+	then
+		return true
+	else
+		return false
+	end
+end
+
 
 function process_info_portion(info_id)
 	-- garbage

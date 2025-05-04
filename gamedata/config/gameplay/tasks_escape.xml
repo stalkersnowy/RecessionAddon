@@ -15,7 +15,7 @@
 		</objective>
 	</game_task>
 
-	<game_task id="tutorial_find_artefact">
+	<game_task id="tutorial_find_artefact" prio="494">
 		<title>tutorial_find_artefact</title>
 		<objective>
 			<text>tutorial_find_artefact_0</text>

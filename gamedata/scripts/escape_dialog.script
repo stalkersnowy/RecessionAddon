@@ -272,9 +272,9 @@ end
 function give_wounded_flash(first_speaker, second_speaker)
 	dialogs.relocate_item_section(second_speaker, "esc_wounded_flash", "out")
 	dialogs.relocate_money(second_speaker, 1500, "in")
-	if not has_alife_info("esc_kill_bandits_quest_have") then -- SNW: если нам не дали нож до этого
-		dialogs.relocate_item_section(first_speaker, "wpn_knife", "in")
-	end
+--	if not has_alife_info("esc_kill_bandits_quest_have") then -- SNW: если нам не дали нож до этого
+--		dialogs.relocate_item_section(first_speaker, "wpn_knife", "in")
+--	end
 end
 
 function give_knife_to_actor(first_speaker, second_speaker)

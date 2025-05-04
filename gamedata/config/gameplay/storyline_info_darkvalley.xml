@@ -89,3 +89,6 @@
     <article id="val_come_to_trader_descr" name="val_come_to_trader" article_type="task" group="val_come_to_trader/0">
         <text>val_come_to_trader_2</text>
     </article> 
+    <article id="val_sos_help_descr" name="val_sos_help" article_type="task" group="val_sos_help/0">
+        <text>val_sos_help_0</text>
+    </article> 

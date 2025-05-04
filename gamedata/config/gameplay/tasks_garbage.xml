@@ -26,6 +26,7 @@
 			<text>gar_kill_boars_main</text>
 			<icon>ui_iconsTotal_gar_kill_boars</icon>
 			<infoportion_complete>gar_kill_boars_request</infoportion_complete>
+			<function_fail>garbage_tasks.task_kill_boars_fail</function_fail>
 			<article>gar_kill_boars_descr</article>
 		</objective>
 		<objective>

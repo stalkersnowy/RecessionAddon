@@ -160,3 +160,17 @@
         <object_story_id>dar_codedoor_2</object_story_id>
     </objective>
 </game_task>
+<game_task id="val_sos_help">
+    <title>val_sos_help</title>
+    <objective key="0">
+        <icon>ui_iconsTotal_val_sos_help</icon>
+        <infoportion_complete>val_sos_got_medkit</infoportion_complete>
+        <infoportion_fail>val_sos_dead</infoportion_fail>
+		<article>val_sos_help_descr</article>
+    </objective>
+    <objective key="1">
+        <text>val_sos_help_main</text>
+        <map_location_type hint="val_sos_help_main_hint">green_location</map_location_type>
+        <object_story_id>val_sos_stalker</object_story_id>
+    </objective>
+</game_task>
