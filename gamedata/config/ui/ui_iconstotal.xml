@@ -149,4 +149,6 @@
 	<texture id="ui_npc_u_izgoy" x="859" y="216" width="165" height="108"/>
 
     <texture id="ui_npc_u_ucheniy_1_strong" x="859" y="324" width="165" height="108" />
+
+    <texture id="ui_npc_u_stranger" x="858" y="915" width="165" height="108" />
 </ui_texture>

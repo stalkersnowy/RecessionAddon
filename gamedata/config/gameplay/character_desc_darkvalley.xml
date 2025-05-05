@@ -1437,7 +1437,7 @@
 	</specific_character>
 	<specific_character id="dar_corpse_kalugin1" team_default="1">
 		<name>dar_kalugin_name</name>
-		<icon>ui_npc_u_stalker_ecolog</icon>
+		<icon>ui_npc_u_stranger</icon>
 		<map_icon x="0" y="0"></map_icon>
 		<bio>dar_corpse_bio</bio>
 
@@ -1447,7 +1447,7 @@
 		<rank>300</rank>
 		<reputation>0</reputation>
  
-		<visual>actors\ecolog\stalker_ecolog</visual>
+		<visual>actors\ucheniy\ucheniy_3</visual>
 		<supplies>
 			[spawn] \n
 		</supplies>
