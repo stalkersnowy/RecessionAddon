@@ -153,8 +153,8 @@
 		<visual>actors\bandit\stalker_bandit_master</visual>
 		<supplies>
 			[spawn] \n
-			wpn_hpsa \n
-			ammo_9x19_pbp = 1 \n
+			wpn_pm \n
+			ammo_9x18_fmj \n
 			wpn_mp5 \n
 			ammo_9x19_fmj \n
 			device_torch \n
@@ -310,8 +310,8 @@
 		<visual>actors\bandit\stalker_bandit_4</visual>
 		<supplies>
 			[spawn] \n
-			wpn_hpsa \n
-			ammo_9x19_pbp = 1 \n
+			wpn_pm \n
+			ammo_9x18_fmj \n
 			wpn_mp5 = 1 \n
 			ammo_9x19_fmj = 1 \n
 			device_torch \n
@@ -625,8 +625,8 @@
 		<visual>actors\dolg\stalker_do_balon_8</visual>
 		<supplies>
 			[spawn] \n
-            wpn_hpsa \n
-			ammo_9x19_pbp = 1 \n
+			wpn_pm \n
+			ammo_9x18_fmj \n
 			wpn_ak74u \n
 			ammo_5.45x39_ap \n
 			device_torch \n
@@ -659,8 +659,8 @@
 		<visual>actors\dolg\stalker_do_balon_8</visual>
 		<supplies>
 			[spawn] \n
-            wpn_hpsa \n
-			ammo_9x19_pbp = 1 \n
+			wpn_pm \n
+			ammo_9x18_fmj \n
             wpn_ak74u \n
 			ammo_5.45x39_ap \n
 			device_torch \n

@@ -112,4 +112,8 @@ function escort_task_fail(task, objective)
            not has_alife_info("val_escort_actor_helped")
 end
 
+function reached_escape(task, objective)
+    return has_alife_info("val_actor_behind_gate") or
+           level.name() == "l01_escape"
+end
 

@@ -21,8 +21,8 @@
 
         <supplies>
             [spawn] \n
-            wpn_beretta \n
-            ammo_9x19_fmj = 1 \n
+			wpn_sig220 \n
+			ammo_11.43x23_fmj \n
 			wpn_lr300 \n
 			ammo_5.56x45_ap = 1 \n
             device_torch \n
@@ -83,8 +83,8 @@
   		<crouch_type>-1</crouch_type>
         <supplies>
             [spawn] \n
-            wpn_beretta \n
-            ammo_9x19_fmj = 1 \n
+			wpn_sig220 \n
+			ammo_11.43x23_hydro \n
             wpn_groza \n
             ammo_9x39_ap = 1 \n
             device_torch \n
@@ -145,8 +145,8 @@
   		<crouch_type>0</crouch_type>
         <supplies>
             [spawn] \n
-            wpn_beretta \n
-            ammo_9x19_fmj = 1 \n
+			wpn_sig220 \n
+			ammo_11.43x23_hydro \n
             wpn_groza \n
             ammo_9x39_ap = 1 \n
             grenade_f1 = 2 \n
@@ -238,8 +238,8 @@
   		<crouch_type>-1</crouch_type>
         <supplies>
             [spawn] \n
-            wpn_hpsa \n
-            ammo_9x19_fmj = 1 \n
+			wpn_sig220 \n
+			ammo_11.43x23_hydro \n
 			wpn_lr300 \n
 			ammo_5.56x45_ap = 1 \n
 #include "gameplay\character_drugs.xml"
@@ -298,8 +298,8 @@
   		<crouch_type>-1</crouch_type>
         <supplies>
             [spawn] \n
-            wpn_hpsa \n
-            ammo_9x19_fmj = 1 \n
+			wpn_sig220 \n
+			ammo_11.43x23_hydro \n
             wpn_l85 \n
             ammo_5.56x45_ap = 1 \n
 #include "gameplay\character_drugs.xml"
@@ -787,7 +787,7 @@
 	</specific_character>
 
 	<specific_character id="pri_zombied_default1" team_default = "1">
-		<name>pri_zombied_stalker_name</name>
+		<name>GENERATE_NAME_sergeant</name>
 		<icon>ui_npc_u_stalker_zombie_specnaz</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>pri_zombied_stalker_bio</bio>
@@ -817,7 +817,7 @@
 
 <!--------------------------- VETERANS----------------------->
 	<specific_character id="pri_zombied_veteran_default1" team_default = "1">
-		<name>pri_zombied_stalker_name</name>
+		<name>GENERATE_NAME_sergeant</name>
 		<icon>ui_npc_u_stalker_zombie_specnaz</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>pri_zombied_stalker_bio</bio>
@@ -846,7 +846,7 @@
 	</specific_character>
 
 	<specific_character id="pri_zombied_veteran_default2" team_default = "1">
-		<name>pri_zombied_stalker_name</name>
+		<name>GENERATE_NAME_lieutenant</name>
 		<icon>ui_npc_u_stalker_zombie_specnaz</icon>
 		<map_icon x="7" y="0"></map_icon>
 		<bio>pri_zombied_stalker_bio</bio>

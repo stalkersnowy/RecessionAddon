@@ -114,8 +114,8 @@
 			[spawn] \n
 			wpn_pm \n
 			ammo_9x18_pmm = 1 \n
-			wpn_toz34 \n
-			ammo_12x76_dart = 1 \n
+			wpn_mp5 \n
+			ammo_9x19_fmj \n
 			device_torch \n
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
@@ -143,8 +143,8 @@
 		<crouch_type>1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_hpsa \n
-			ammo_9x19_pbp = 1 \n
+			wpn_pm \n
+			ammo_9x18_fmj \n
 			wpn_ak74u = 1, 0, 1, 0 \n
 			ammo_5.45x39_fmj = 1 \n
 			device_torch \n
@@ -173,8 +173,8 @@
 		<crouch_type>1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_hpsa \n
-			ammo_9x19_pbp = 1 \n
+			wpn_pm \n
+			ammo_9x18_fmj \n
 			wpn_ak74u = 1, 0, 1, 0 \n
 			ammo_5.45x39_fmj = 1 \n
 			device_torch \n
@@ -1685,8 +1685,8 @@
 		<visual>actors\killer\stalker_ki_head_1</visual>
 		<supplies>
 			[spawn] \n
-			wpn_beretta \n
-			ammo_9x19_fmj = 1 \n
+			wpn_sig220 \n
+			ammo_11.43x23_hydro \n
 			wpn_sig550 \n
 			ammo_5.56x45_ss190 = 1 \n
 #include "gameplay\character_items.xml"
@@ -1776,8 +1776,8 @@
 		<visual>actors\killer\stalker_ki_exoskeleton</visual>
 		<supplies>
 			[spawn] \n
-			wpn_beretta \n
-			ammo_9x19_pbp = 3 \n
+			wpn_sig220 \n
+			ammo_11.43x23_hydro \n
 			wpn_sig550 \n
 			ammo_5.56x45_ss190 = 2 \n
 			ammo_5.56x45_ap = 1 \n
@@ -2146,8 +2146,8 @@
 		<crouch_type>1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_hpsa \n
-			ammo_9x19_fmj = 1 \n
+			wpn_sig220 \n
+			ammo_11.43x23_hydro \n
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
 		</supplies>

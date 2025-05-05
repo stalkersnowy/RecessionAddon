@@ -996,8 +996,8 @@
 		<visual>actors\killer\stalker_ki_antigas</visual>
 		<supplies>
 			[spawn] \n
-			wpn_hpsa \n
-			ammo_9x19_pbp = 1 \n
+			wpn_pm \n
+			ammo_9x18_fmj = 1 \n
 			wpn_ak74u \n
 			ammo_5.45x39_fmj = 1 \n
 			device_torch \n

@@ -1089,6 +1089,7 @@
             </phrase>
             <phrase id="321">
                 <text>escape_trader_start_dialog_321</text>
+				<snd>none</snd>
                 <next>3211</next>
             </phrase>
             <phrase id="300">

@@ -113,8 +113,8 @@
 			wpn_walther \n
 			ammo_9x19_fmj \n
 			device_torch \n
-			wpn_toz34 \n
-			ammo_12x70_buck = 1 \n
+			wpn_mp5 \n
+			ammo_9x19_fmj \n
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -639,8 +639,8 @@
 		<crouch_type>0</crouch_type>
 		<supplies>
 			[spawn] \n
-            wpn_beretta \n
-            ammo_9x19_pbp = 2\n
+			wpn_pb \n
+			ammo_9x18_fmj \n
 			wpn_abakan = 1, scope \n
             ammo_5.45x39_ap = 1 \n
 

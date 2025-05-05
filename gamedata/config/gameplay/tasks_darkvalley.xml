@@ -10,7 +10,7 @@
         <text>val_come_to_trader</text>
         <map_location_type hint="val_come_to_trader_1_hint">green_location</map_location_type>
         <object_story_id>val_exit_gate</object_story_id>
-        <infoportion_complete>val_actor_behind_gate</infoportion_complete>
+        <function_complete>darkvalley_tasks.reached_escape</function_complete>
     </objective>
     <objective key="2">
         <text>val_come_to_trader_0</text>

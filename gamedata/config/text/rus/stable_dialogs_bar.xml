@@ -306,6 +306,12 @@
 	<string id="bar_bar_barmen_start_1211">
 		<text>Да, вот они.</text>
 	</string>
+    <string id="bar_bar_barmen_start_12111">
+        <text>Хорошо, очень хорошо. Идем, покажу что у меня есть.</text>
+    </string>
+    <string id="bar_bar_barmen_start_121111">
+        <text>Идем.</text>
+    </string>
 	<string id="bar_bar_barmen_start_1212">
 		<text>Нет.</text>
 	</string>
@@ -375,12 +381,12 @@
 	<string id="bar_bar_barmen_start_172">
 		<text>Да, вот они.</text>
 	</string>
-	<string id="bar_bar_barmen_start_1721">
-		<text>Ситуация проясняется. Как я и предполагал, выжигатель мозгов рукотворен. Это – экспериментальный излучатель Кайманова, его части как раз изготавливались в лаборатории Х18. В этих документах есть ссылка на лабораторию Х16, куда отправлялись готовые блоки, она расположена на территории производственного комплекса возле озера Янтарь. Там неподалеку лагерь ученых, они наверняка подскажут точнее.</text>
-	</string>
-	<string id="bar_bar_barmen_start_17211">
-		<text>Продолжай.</text>
-	</string>
+    <string id="bar_bar_barmen_start_1721">
+        <text>Хорошо, очень хорошо. Идем, посмотрим что ты принес.</text>
+    </string>
+    <string id="bar_bar_barmen_start_17211">
+        <text>Идем.</text>
+    </string>
 	<string id="bar_bar_barmen_start_17212">
 		<text>Ситуация непростая: тебе надо пробраться к ученым и узнать, где находится лаборатория Х16, чтобы добыть недостающую часть документов. Ну что, готов?</text>
 	</string>
@@ -1331,5 +1337,86 @@
 	</string>
     <string id="bar_bar_barmen_talk_info_5">
         <text>Что ты знаешь о Докторе?</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_11">
+        <text>Ну что, приступим? Готов?</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_22">
+        <text>Ну, чего ждешь?</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_33">
+		<text>Значит так. По документам, которые ты принес с Агропрома, кое-что начинает проясняться, но данных не хватает. Упоминается некая лаборатория Х-18, по описанию похожая на заброшенные подземные помещения в Темной долине. Придется тебе туда отправиться и добыть недостающую информацию. Лаборатория закрыта, и чтобы открыть ее, понадобятся два электронных ключа. Один я тебе дам, а второй заберешь у Борова в Темной долине.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_331">
+		<text>Продолжай.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_332">
+		<text>Все что нужно сделать - получить второй ключ от лаборатории Х-18, проникнуть в нее и добыть недостающую часть документов. Не забудь достать костюм, защищающий от радиации. Без него ты не пройдешь. Ну что, Меченый, берешься?</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_3321">
+        <text>Я попробую.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_33211">
+        <text>Вот и отлично. Я буду ждать.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_3322">
+        <text>Нет, пока не хочу браться.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_33221">
+		<text>Твое дело, Меченый. Только знай, пока это единственная зацепка, которая поможет нам открыть дорогу на Север.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_41">
+		<text>Значит так, Меченый, защитный прототип у тебя есть, чтобы от выжигателя прикрыться. Координаты бункера я знаю. Не забудь, что прототип не сможет бесконечно защищать тебя от излучения. Ты должен как можно быстрее пробиться в бункер под антеннами и отключить выжигатель. Что будет дальше, я не знаю, но чувствую: оно того стоит. Точно знаю одно: дорога к центру зоны будет открыта.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_411">
+		<text>Продолжай.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_412">
+		<text>Все что нужно сделать - это пробиться в бункер под антеннами и отключить их. Все понятно?</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_4121">
+		<text>Понятно.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_41211">
+		<text>Да, вот еще! Начальнику Долга, я его отметил тебе на карте, нужен доброволец на выполнение какого-то задания на Военных складах, если интересно, можешь зайти к нему. С охраной я договорюсь, они тебя пропустят.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_4122">
+		<text>Нет, я пока не готов.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_41221">
+		<text>Готовься, Меченый. Такое дело не может долго ждать.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_51">
+		<text>Ситуация проясняется. Как я и предполагал, выжигатель мозгов рукотворен. Это – экспериментальный излучатель Кайманова, его части как раз изготавливались в лаборатории Х18. В этих документах есть ссылка на лабораторию Х16, куда отправлялись готовые блоки, она расположена на территории производственного комплекса возле озера Янтарь. Там неподалеку лагерь ученых, они наверняка подскажут точнее.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_511">
+		<text>Продолжай.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_512">
+		<text>Ситуация непростая: тебе надо пробраться к ученым и узнать, где находится лаборатория Х16, чтобы добыть недостающую часть документов. Ну что, готов?</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_5121">
+        <text>Ясно, опять двадцать пять.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_5122">
+        <text>Готов.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_51221">
+        <text>Вот и отлично. Я буду ждать.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_5123">
+        <text>Нет, пока не готов.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_51231">
+        <text>Готовься, Меченый. Такое дело не может долго ждать.</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_61">
+        <text>Ну, чего ждешь?</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_71">
+        <text>Ну, чего ждешь?</text>
+    </string>
+    <string id="bar_bar_barmen_start_room_81">
+        <text>Ну, чего ждешь?</text>
     </string>
 </string_table>

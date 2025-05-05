@@ -1,0 +1,13 @@
+[logic]
+active = sr_idle@work
+
+[sr_idle@work]
+on_info = {+bar_darklab_document_done -bar_x16_documents_start} sr_idle@wait_x18
+on_info2 = {+bar_x16_documents_done -bar_deactivate_radar_start} sr_idle@wait_x16
+on_actor_outside = {+bar_barman_stay_room} %+bar_barman_need_hole%
+
+[sr_idle@wait_x18]
+on_info = {+bar_x16_documents_start} sr_idle@work
+
+[sr_idle@wait_x16]
+on_info = {+bar_deactivate_radar_start} sr_idle@work
