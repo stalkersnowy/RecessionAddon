@@ -7,7 +7,7 @@
     <auto_static x="0" y="0" width="1024" height="768">
       <texture>ui\ui_static_mm_back_04</texture>
     </auto_static>
-    <auto_static x="137" y="512" width="256" height="256">
+    <auto_static x="130" y="512" width="256" height="256">
       <texture x="1" y="1" width="254" height="254">ui\ui_mm_newspaper</texture>
     </auto_static>
   </background>
