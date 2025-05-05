@@ -24,7 +24,7 @@ class CUITalkWnd: public CUIDialogWnd
 private:
 	typedef CUIDialogWnd inherited;
 	ref_sound			m_sound;
-	void				PlaySnd					(LPCSTR text);
+	void				PlaySnd					(LPCSTR snd);
 	void				StopSnd					();
 public:
 						CUITalkWnd				();
@@ -62,7 +62,7 @@ protected:
 	// Функции добавления строк в листы вопросов и ответов
 public:
 	void				AddQuestion				(const shared_str& text, const shared_str& id, int number, SPhraseInfo phInfo);
-	void				AddAnswer				(const shared_str& text, LPCSTR SpeakerName);
+	void				AddAnswer				(const shared_str& text, const shared_str& snd, LPCSTR SpeakerName);
 protected:
 	//для режима торговли
 	CUITradeWnd*			UITradeWnd;

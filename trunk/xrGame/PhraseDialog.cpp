@@ -171,6 +171,15 @@ LPCSTR CPhraseDialog::GetPhraseText(const shared_str& phrase_id, bool current_sp
 	return phrase_vertex->data()->GetText();
 }
 
+LPCSTR CPhraseDialog::GetPhraseSnd(const shared_str& phrase_id)
+{
+	
+	CPhraseGraph::CVertex* phrase_vertex = data()->m_PhraseGraph.vertex(phrase_id);
+	THROW(phrase_vertex);
+
+	return phrase_vertex->data()->GetSnd();
+}
+
 LPCSTR CPhraseDialog::DialogCaption()
 {
 	return data()->m_sCaption.size() ? *data()->m_sCaption : GetPhraseText("0");
@@ -255,7 +264,7 @@ void CPhraseDialog::SetPriority(int val)
 	data()->m_iPriority = val;
 }
 
-CPhrase* CPhraseDialog::AddPhrase	(LPCSTR text, const shared_str& phrase_id, const shared_str& prev_phrase_id, int goodwil_level)
+CPhrase* CPhraseDialog::AddPhrase	(LPCSTR text, LPCSTR snd, const shared_str& phrase_id, const shared_str& prev_phrase_id, int goodwil_level)
 {
 	CPhrase* phrase					= NULL;
 	CPhraseGraph::CVertex* _vertex	= data()->m_PhraseGraph.vertex(phrase_id);
@@ -265,6 +274,7 @@ CPhrase* CPhraseDialog::AddPhrase	(LPCSTR text, const shared_str& phrase_id, con
 		phrase->SetID				(phrase_id);
 
 		phrase->SetText				(text);
+		phrase->SetSnd				(snd);
 		phrase->m_iGoodwillLevel	= goodwil_level;
 
 		data()->m_PhraseGraph.add_vertex	(phrase, phrase_id);
@@ -280,8 +290,9 @@ void CPhraseDialog::AddPhrase	(CUIXml* pXml, XML_NODE* phrase_node, const shared
 {
 
 	LPCSTR sText		= pXml->Read		(phrase_node, "text", 0, "");
+	LPCSTR sSnd			= pXml->Read		(phrase_node, "snd", 0, sText);
 	int		gw			= pXml->ReadInt		(phrase_node, "goodwill", 0, -10000);
-	CPhrase* ph			= AddPhrase			(sText, phrase_id, prev_phrase_id, gw);
+	CPhrase* ph			= AddPhrase			(sText, sSnd, phrase_id, prev_phrase_id, gw);
 	if (!ph)
 		return;
 

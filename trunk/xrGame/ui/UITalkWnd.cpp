@@ -108,7 +108,7 @@ void CUITalkWnd::InitOthersStartDialog()
 		
 		//сказать фразу
 		CStringTable stbl;
-		AddAnswer(m_pCurrentDialog->GetPhraseText("0"), m_pOthersInvOwner->Name());
+		AddAnswer(m_pCurrentDialog->GetPhraseText("0"), m_pCurrentDialog->GetPhraseSnd("0"), m_pOthersInvOwner->Name());
 		m_pOthersDialogManager->SayPhrase(m_pCurrentDialog, "0");
 
 		//если диалог завершился, перейти в режим выбора темы
@@ -338,7 +338,7 @@ void CUITalkWnd::AskQuestion()
 void CUITalkWnd::SayPhrase(const shared_str& phrase_id)
 {
 
-	AddAnswer(m_pCurrentDialog->GetPhraseText(phrase_id), m_pOurInvOwner->Name());
+	AddAnswer(m_pCurrentDialog->GetPhraseText(phrase_id), m_pCurrentDialog->GetPhraseSnd(phrase_id), m_pOurInvOwner->Name());
 	m_pOurDialogManager->SayPhrase(m_pCurrentDialog, phrase_id);
 /*
 	//добавить ответ собеседника в список, если он что-то сказал
@@ -361,12 +361,12 @@ void CUITalkWnd::AddQuestion(const shared_str& text, const shared_str& value, in
 
 //////////////////////////////////////////////////////////////////////////
 
-void CUITalkWnd::AddAnswer(const shared_str& text, LPCSTR SpeakerName)
+void CUITalkWnd::AddAnswer(const shared_str& text, const shared_str& snd, LPCSTR SpeakerName)
 {
 	//для пустой фразы вообще ничего не выводим
 	if (text.size() == 0)
 		return;
-	PlaySnd			(text.c_str());
+	PlaySnd			(snd.c_str());
 
 	bool i_am = (0 == xr_strcmp(SpeakerName, m_pOurInvOwner->Name()));
 	UITalkDialogWnd->AddAnswer(SpeakerName, *CStringTable().translate(text), i_am);
@@ -413,14 +413,14 @@ bool CUITalkWnd::OnKeyboardAction(int dik, EUIMessages keyboard_action)
 	return inherited::OnKeyboardAction(dik,keyboard_action);
 }
 
-void CUITalkWnd::PlaySnd(LPCSTR text)
+void CUITalkWnd::PlaySnd(LPCSTR snd)
 {
-	if (xr_strlen(text) == 0)
+	if (xr_strlen(snd) == 0 || xr_strcmp(snd, "none") == 0)
 		return;
 	StopSnd						();
 	
 	string_path	fn;
-	strconcat(sizeof(fn), fn, "characters_voice\\dialogs\\", text, ".ogg");
+	strconcat(sizeof(fn), fn, "characters_voice\\dialogs\\", snd, ".ogg");
 	if (FS.exist("$game_sounds$", fn))
 	{
 		VERIFY(m_pActor);

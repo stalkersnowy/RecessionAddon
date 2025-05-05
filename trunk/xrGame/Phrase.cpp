@@ -24,6 +24,11 @@ LPCSTR CPhrase::GetText		()	const
 	return m_text.c_str();
 }
 
+LPCSTR CPhrase::GetSnd		()	const			
+{
+	return m_snd.c_str();
+}
+
 bool	CPhrase::IsDummy()		const
 {
 	if( xr_strlen(GetText()) == 0 )

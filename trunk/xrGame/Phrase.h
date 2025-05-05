@@ -27,6 +27,9 @@ public:
 	void				SetText				(LPCSTR text)			{m_text = text; }
 	LPCSTR				GetText				()	const;
 
+	void				SetSnd				(LPCSTR snd)			{m_snd = snd; }
+	LPCSTR				GetSnd				()	const;
+
 	void				SetID				(const shared_str& id)	{ m_ID = id; }
 	const shared_str&	GetID				()	const				{ return m_ID; }
 
@@ -46,6 +49,8 @@ protected:
 	shared_str		m_ID;
 	//текстовое представление фразы
 	xr_string		m_text;
+	//SNW: переназначение звука
+	xr_string		m_snd;
 	
 	shared_str		m_sIconName;
 	bool			m_bUseIconLtx;
