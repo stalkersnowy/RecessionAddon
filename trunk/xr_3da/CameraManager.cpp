@@ -293,12 +293,21 @@ void CCameraManager::Update(const Fvector& P, const Fvector& D, const Fvector& N
 		dbg_upd_frame		= Device.dwFrame;
 	}
 #endif // DEBUG
+
+    bool bHasScriptedEffectors = false;
+    for (const auto& pEffector : m_EffectorsCam) {
+        if (pEffector->Valid() && pEffector->IsScripted()) {
+			bHasScriptedEffectors = true;
+            break;
+        }
+    }
+
 	// camera
-	if (flags&CCameraBase::flPositionRigid)
+	if (flags&CCameraBase::flPositionRigid || bHasScriptedEffectors)
 		m_cam_info.p.set		(P);
 	else
 		m_cam_info.p.inertion	(P,	psCamInert);
-	if (flags&CCameraBase::flDirectionRigid)
+	if (flags&CCameraBase::flDirectionRigid || bHasScriptedEffectors)
 	{
 		m_cam_info.d.set		(D);
 		m_cam_info.n.set		(N);
