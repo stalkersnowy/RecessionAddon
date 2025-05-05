@@ -96,6 +96,8 @@ void CAI_Crow::init		()
 	fIdleSoundDelta		= 10.f;
 	fIdleSoundTime		= fIdleSoundDelta;
 	bPlayDeathIdle		= false;
+    o_workload_frame = 0;
+    o_workload_rframe = 0;
 }
 
 void CAI_Crow::Load( LPCSTR section )
@@ -138,8 +140,24 @@ BOOL CAI_Crow::net_Spawn		(CSE_Abstract* DC)
 	m_Anims.m_fly.Load			(M,"norm_fly_fwd");
 	m_Anims.m_idle.Load			(M,"norm_idle");
 
-	// disable UpdateCL, enable only on HIT
-	processing_deactivate		();
+    o_workload_frame = 0;
+    o_workload_rframe = 0;
+
+    if (GetfHealth() > 0)
+    {
+        st_current = eFlyIdle;
+        st_target = eFlyIdle;
+        // disable UpdateCL, enable only on HIT
+        processing_deactivate();
+    }
+    else
+    {
+        st_current = eDeathFall;
+        st_target = eDeathDead;
+        // Crow is already dead, need to enable physics
+        processing_activate();
+        CreateSkeleton();
+    }
 
 	return		R;
 }
@@ -236,6 +254,8 @@ void CAI_Crow::state_DeathFall()
 		m_pPhysicsShell->get_LinearVel(velocity);
 		if(velocity.y>-0.001f) st_target = eDeathDead;
 	}
+	else
+		st_target = eDeathDead;
 	if (bPlayDeathIdle){
 		smart_cast<CKinematicsAnimated*>(Visual())->PlayCycle	(m_Anims.m_death_idle.GetRandom());
 		bPlayDeathIdle		= false;
@@ -274,7 +294,7 @@ void CAI_Crow::UpdateCL		()
 }
 void CAI_Crow::renderable_Render	()
 {
-	UpdateWorkload					(Device.fTimeDelta);
+    UpdateWorkload(Device.fTimeDelta * (Device.dwFrame - o_workload_frame));
 	inherited::renderable_Render	();
 	o_workload_rframe				= Device.dwFrame	;
 }
@@ -322,7 +342,7 @@ void CAI_Crow::shedule_Update		(u32 DT)
 	m_Sounds.m_idle.SetPosition		(Position());
 
 	// work
-	if (o_workload_rframe	== (Device.dwFrame-1))	;
+	if (o_workload_rframe >= (Device.dwFrame - 2))	;
 	else					UpdateWorkload			(fDT);
 }
 
@@ -399,7 +419,7 @@ void CAI_Crow::HitImpulse	(float	/**amount/**/,		Fvector& /**vWorldDir/**/, Fvec
 //---------------------------------------------------------------------
 void CAI_Crow::CreateSkeleton()
 {
-	m_pPhysicsShell=P_build_SimpleShell(this,0.3f,false);
+	m_pPhysicsShell=P_build_Shell(this,false,(BONE_P_MAP*)0);//P_build_SimpleShell(this,0.3f,false);
 	m_pPhysicsShell->SetMaterial(smart_cast<CKinematics*>(Visual())->LL_GetData(smart_cast<CKinematics*>(Visual())->LL_GetBoneRoot()).game_mtl_idx);
 }
 
