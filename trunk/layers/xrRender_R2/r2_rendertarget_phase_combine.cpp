@@ -81,6 +81,17 @@ void	CRenderTarget::phase_combine	()
 					envclr.z		*= 2*ps_r2_sun_lumscale_hemi;
 		Fvector4	sunclr,sundir;
 
+		float		fSSAONoise = 2.0f;
+		fSSAONoise *= tan(deg2rad(67.5f/2.0f));
+		fSSAONoise /= tan(deg2rad(Device.fFOV/2.0f));
+
+		float		fSSAOKernelSize = 150.0f;
+		fSSAOKernelSize *= tan(deg2rad(67.5f/2.0f));
+		fSSAOKernelSize /= tan(deg2rad(Device.fFOV/2.0f));
+
+		float VertTan =  -1.0f * tanf( deg2rad(Device.fFOV/2.0f ) );
+		float HorzTan =  - VertTan / Device.fASPECT;
+
 		// sun-params
 		{
 			light*		fuckingsun		= (light*)RImplementation.Lights.sun_adapted._get()	;
@@ -126,6 +137,8 @@ void	CRenderTarget::phase_combine	()
 
 		RCache.set_c				("env_color",		envclr	);
 		RCache.set_c				("fog_color",		fogclr	);
+		RCache.set_c				("ssao_params",		fSSAONoise, fSSAOKernelSize, 0.0f, 0.0f);
+		RCache.set_c				("pos_decompression_params", HorzTan, VertTan, ( 2.0f * HorzTan )/(float)Device.dwWidth, ( 2.0f * VertTan ) /(float)Device.dwHeight );
 		RCache.Render				(D3DPT_TRIANGLELIST,Offset,0,4,0,2);
 	}
 

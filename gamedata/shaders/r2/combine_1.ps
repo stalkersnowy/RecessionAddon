@@ -11,6 +11,7 @@ struct         _input      {
 #else
           float2         tc0                : TEXCOORD0        ;        // tc.xy
 #endif
+	float2	tcJ	: TEXCOORD1;	// jitter coords
 };
 
 struct        _out                {
@@ -56,13 +57,10 @@ _out         main                ( _input I )
         // hemisphere
         half3       hdiffuse,hspecular;
 
-#ifdef USE_SSAO
 	//  Calculate SSAO
-	half occ = calc_ssao(P, N, I.tc0);
-	occ = saturate(occ);
+	half occ = calc_ssao(P, N, I.tc0, I.tcJ);
 #if BLOOM_MODE < 1
 	occ = Contrast(occ,2);
-#endif
 #endif
 
         hmodel		(hdiffuse, hspecular, mtl, N.w, D.w, P.xyz, N.xyz);
@@ -70,10 +68,8 @@ _out         main                ( _input I )
 #if BLOOM_MODE < 1
 	hdiffuse*=(D.rgb*0.95 + 0.05h);	// rise texture contrast for diffuse lighting
 #endif
-#ifdef USE_SSAO
 	hdiffuse *= occ;
 	hspecular *= occ;
-#endif
 
 #ifdef INDOOR
 	half	hfactor		= 	D.w				;	//* N.w		;							// hemi*gloss

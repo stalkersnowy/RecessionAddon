@@ -345,4 +345,16 @@
 	<string id="ui_st_sell_all">
 		<text>Продать все</text>
 	</string>
+	<string id="st_opt_off">
+		<text>отключено</text>
+	</string>
+	<string id="st_opt_low">
+		<text>низко</text>
+	</string>
+	<string id="st_opt_medium">
+		<text>средне</text>
+	</string>
+	<string id="st_opt_high">
+		<text>высоко</text>
+	</string>
 </string_table>

@@ -477,6 +477,7 @@ HRESULT	CRender::shader_compile			(
 	char							c_smapsize		[32];
 	char							c_gloss			[32];
 	char							c_bloommode		[32];
+	char							c_ssao			[32];
 	if (pDefines)	{
 		// transfer existing defines
 		for (;;def_it++)	{
@@ -579,10 +580,11 @@ HRESULT	CRender::shader_compile			(
 			def_it						++;
 		}
 
-		if (ps_r2_ls_flags.test(R2FLAG_SSAO))
+		if (ps_r_ssao)
 		{
-			defines[def_it].Name		=	"USE_SSAO";
-			defines[def_it].Definition	=	"1";
+			xr_sprintf					(c_ssao,"%d",ps_r_ssao);
+			defines[def_it].Name		=	"SSAO_QUALITY";
+			defines[def_it].Definition	=	c_ssao;
 			def_it						++;
 		}
 

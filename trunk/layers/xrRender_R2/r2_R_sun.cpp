@@ -6,7 +6,7 @@ const	float	tweak_COP_initial_offs			= 1200.f	;
 const	float	tweak_ortho_xform_initial_offs	= 1000.f	;	//. ?
 const	float	tweak_guaranteed_range			= 20.f		;	//. ?
 
-float			OLES_SUN_LIMIT_27_01_07			= 180.f		;
+float			OLES_SUN_LIMIT_27_01_07			= 100.f		;
 
 const	float	MAP_SIZE_START					= 6.f		;
 const	float	MAP_GROW_FACTOR					= 4.f		;
@@ -607,7 +607,8 @@ Fvector3		wform	(Fmatrix& m, Fvector3& v)
 	r.z			= v.x*m._13 + v.y*m._23 + v.z*m._33 + m._43;
 	r.w			= v.x*m._14 + v.y*m._24 + v.z*m._34 + m._44;
 	// VERIFY		(r.w>0.f);
-	Fvector3	r3 = { r.x/r.w, r.y/r.w, r.z/r.w };
+	float invW = 1.0f/r.w;
+	Fvector3	r3 = { r.x*invW, r.y*invW, r.z*invW };
 	return		r3;
 }
 
@@ -726,7 +727,8 @@ void CRender::render_sun				()
 	Fmatrix	ex_project, ex_full, ex_full_inverse;
 	{
 		float _far_	= min(OLES_SUN_LIMIT_27_01_07, g_pGamePersistent->Environment().CurrentEnv.far_plane);
-		ex_project.build_projection	(deg2rad(Device.fFOV/* *Device.fASPECT*/),Device.fASPECT,ps_r2_sun_near,_far_);
+		//ex_project.build_projection	(deg2rad(Device.fFOV/* *Device.fASPECT*/),Device.fASPECT,ps_r2_sun_near,_far_);
+		ex_project.build_projection	(deg2rad(Device.fFOV/* *Device.fASPECT*/),Device.fASPECT,VIEWPORT_NEAR,_far_);
 		ex_full.mul					(ex_project,Device.mView);
 		D3DXMatrixInverse			((D3DXMATRIX*)&ex_full_inverse,0,(D3DXMATRIX*)&ex_full);
 	}
@@ -1078,7 +1080,8 @@ void CRender::render_sun				()
 		b_receivers		= view_clipper.clipped_AABB	(s_receivers,xform);
 		Fmatrix	x_project, x_full, x_full_inverse;
 		{
-			x_project.build_projection	(deg2rad(Device.fFOV/* *Device.fASPECT*/),Device.fASPECT,ps_r2_sun_near,ps_r2_sun_near+tweak_guaranteed_range);
+			//x_project.build_projection	(deg2rad(Device.fFOV/* *Device.fASPECT*/),Device.fASPECT,ps_r2_sun_near,ps_r2_sun_near+tweak_guaranteed_range);
+			x_project.build_projection	(deg2rad(Device.fFOV/* *Device.fASPECT*/),Device.fASPECT,VIEWPORT_NEAR,ps_r2_sun_near+tweak_guaranteed_range);
 			x_full.mul					(x_project,Device.mView);
 			D3DXMatrixInverse			((D3DXMATRIX*)&x_full_inverse,0,(D3DXMATRIX*)&x_full);
 		}
@@ -1250,6 +1253,8 @@ void CRender::render_sun_near	()
 		mdir_View.build_camera_dir	(L_pos,L_dir,L_up);
 
 		// projection: box
+		/*
+		//	Original
 		float	_D					= ps_r2_sun_near;
 		float	a0					= deg2rad(Device.fFOV*Device.fASPECT)/2.f;
 		float	a1					= deg2rad(Device.fFOV)/2.f;
@@ -1275,6 +1280,19 @@ void CRender::render_sun_near	()
 		frustum_bb.min.y -= diff_y; frustum_bb.max.y += diff_y;
 		Fbox&	bb					= frustum_bb;
 		D3DXMatrixOrthoOffCenterLH	((D3DXMATRIX*)&mdir_Project,bb.min.x,bb.max.x,  bb.min.y,bb.max.y,  bb.min.z-tweak_ortho_xform_initial_offs,bb.max.z);
+		/**/
+
+		//	Simple
+		Fbox	frustum_bb;			frustum_bb.invalidate();
+		for (int it=0; it<8; it++)	{
+			//for (int it=0; it<9; it++)	{
+			Fvector	xf	= wform		(mdir_View,hull.points[it]);
+			frustum_bb.modify		(xf);
+		}
+		Fbox&	bb					= frustum_bb;
+		bb.grow				(EPS);
+		D3DXMatrixOrthoOffCenterLH	((D3DXMATRIX*)&mdir_Project,bb.min.x,bb.max.x,  bb.min.y,bb.max.y,  bb.min.z-tweak_ortho_xform_initial_offs,bb.max.z);
+		/**/
 
 		// build viewport xform
 		float	view_dim			= float(RImplementation.o.smapsize);
