@@ -78,6 +78,9 @@
 	<string id="l08_yantar">
 		<text>Янтарь</text>
 	</string>
+	<string id="l09_deadcity">
+		<text>Мертвый город</text>
+	</string>
 	<string id="l10_radar">
 		<text>Радар</text>
 	</string>
