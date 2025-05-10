@@ -43,6 +43,7 @@ void CLevelChanger::net_Destroy	()
 	if(it != g_lchangers.end())
 		g_lchangers.erase(it);
 }
+#define DEF_INVITATION "level_changer_invitation"
 
 BOOL CLevelChanger::net_Spawn	(CSE_Abstract* DC) 
 {
@@ -60,6 +61,7 @@ BOOL CLevelChanger::net_Spawn	(CSE_Abstract* DC)
 	m_angles					= l_tpALifeLevelChanger->m_tAngles;
 
 	m_bSilentMode				= !!l_tpALifeLevelChanger->m_bSilentMode;
+	m_bEnabled					= !!l_tpALifeLevelChanger->m_bEnabled;
 	if (ai().get_level_graph()) {
 		//. this information should be computed in xrAI
 		ai_location().level_vertex	(ai().level_graph().vertex(u32(-1),Position()));
@@ -127,7 +129,7 @@ void CLevelChanger::feel_touch_new	(CObject *tpObject)
 	bool			b = get_reject_pos(p,r);
 	CUIGameSP		*pGameSP = smart_cast<CUIGameSP*>(HUD().GetUI()->UIGame());
 	if (pGameSP)
-        pGameSP->ChangeLevel	(m_game_vertex_id,m_level_vertex_id,m_position,m_angles,p,r,b);
+        pGameSP->ChangeLevel	(m_game_vertex_id,m_level_vertex_id,m_position,m_angles,p,r,b,m_bEnabled);
 
 	m_entrance_time	= Device.fTimeGlobal;
 }
@@ -161,7 +163,9 @@ bool CLevelChanger::get_reject_pos(Fvector& p, Fvector& r)
 
 BOOL CLevelChanger::feel_touch_contact	(CObject *object)
 {
-	return	(((CCF_Shape*)CFORM())->Contact(object)) && smart_cast<CActor*>(object);
+	BOOL bRes	= (((CCF_Shape*)CFORM())->Contact(object));
+	bRes		= bRes && smart_cast<CActor*>(object) && smart_cast<CActor*>(object)->g_Alive();
+	return		bRes;
 }
 
 void CLevelChanger::update_actor_invitation()
@@ -173,12 +177,15 @@ void CLevelChanger::update_actor_invitation()
 	for(;it!=it_e;++it){
 		CActor*			l_tpActor = smart_cast<CActor*>(*it);
 		VERIFY			(l_tpActor);
+		
+		if(!l_tpActor->g_Alive())
+			continue;
 
 		if(m_entrance_time+5.0f < Device.fTimeGlobal){
 			CUIGameSP* pGameSP = smart_cast<CUIGameSP*>(HUD().GetUI()->UIGame());
 			Fvector p,r;
 			bool b = get_reject_pos(p,r);
-			if(pGameSP)pGameSP->ChangeLevel(m_game_vertex_id,m_level_vertex_id,m_position,m_angles,p,r,b);
+			if(pGameSP)pGameSP->ChangeLevel(m_game_vertex_id,m_level_vertex_id,m_position,m_angles,p,r,b,m_bEnabled);
 			m_entrance_time		= Device.fTimeGlobal;
 		}
 	}

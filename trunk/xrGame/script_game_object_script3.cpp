@@ -264,5 +264,9 @@ class_<CScriptGameObject> &script_register_game_object2(class_<CScriptGameObject
 
 		.def("critically_wounded",			&CScriptGameObject::critically_wounded)
 
+		.def("enable_level_changer",		&CScriptGameObject::enable_level_changer)
+		.def("is_level_changer_enabled",	&CScriptGameObject::is_level_changer_enabled)
+		.def("set_level_changer_invitation",&CScriptGameObject::set_level_changer_invitation)
+
 	;return	(instance);
 }

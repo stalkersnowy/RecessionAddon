@@ -11,6 +11,7 @@
 #include "GameObject.h"
 #include "../xr_3da/feel_touch.h"
 #include "game_graph_space.h"
+//#include "script_export_space.h"
 
 class CLevelChanger : public CGameObject, public Feel::Touch {
 private:
@@ -22,8 +23,11 @@ private:
 	Fvector					m_position;
 	Fvector					m_angles;
 	float					m_entrance_time;
+	shared_str				m_invite_str;
+
 	void					update_actor_invitation	();
 	bool					m_bSilentMode;
+	bool					m_bEnabled;
 	bool					get_reject_pos(Fvector& p, Fvector& r);
 public:
 	virtual				~CLevelChanger		();
@@ -36,4 +40,12 @@ public:
 	virtual BOOL		feel_touch_contact	(CObject* O);
 
 	virtual bool		IsVisibleForZones() { return false;		}
+	void				EnableLevelChanger	(bool b)				{m_bEnabled=b;}
+	bool				IsLevelChangerEnabled() const				{return m_bEnabled;}
+	void				SetLEvelChangerInvitationStr(LPCSTR str)	{m_invite_str = str;}
+
+//	DECLARE_SCRIPT_REGISTER_FUNCTION
 };
+/*add_to_type_list(CLevelChanger)
+#undef script_type_list
+#define script_type_list save_type_list(CLevelChanger)*/

@@ -215,3 +215,25 @@ bool CScriptGameObject::IsInvBoxEmpty()
 	else
 		return			ib->IsEmpty		();
 }
+
+#include "level_changer.h"
+void CScriptGameObject::enable_level_changer(bool b)
+{
+	CLevelChanger* lch = smart_cast<CLevelChanger*>(&object());
+	if(lch)
+		lch->EnableLevelChanger(b);
+}
+bool CScriptGameObject::is_level_changer_enabled()
+{
+	CLevelChanger* lch = smart_cast<CLevelChanger*>(&object());
+	if(lch)
+		return lch->IsLevelChangerEnabled();
+	return false;
+}
+
+void CScriptGameObject::set_level_changer_invitation(LPCSTR str)
+{
+	CLevelChanger* lch = smart_cast<CLevelChanger*>(&object());
+	if(lch)
+		lch->SetLEvelChangerInvitationStr(str);
+}

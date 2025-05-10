@@ -160,4 +160,5 @@
 #	include "ai/trader/ai_trader.h"
 #	include "space_restrictor.h"
 #	include "physicobject.h"
+#	include "level_changer.h"
 #endif

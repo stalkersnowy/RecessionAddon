@@ -188,7 +188,14 @@ void CUIGameSP::ReinitDialogs()
 
 
 extern ENGINE_API BOOL bShowPauseString;
-void CUIGameSP::ChangeLevel				(GameGraph::_GRAPH_ID game_vert_id, u32 level_vert_id, Fvector pos, Fvector ang, Fvector pos2, Fvector ang2, bool b)
+void CUIGameSP::ChangeLevel(	GameGraph::_GRAPH_ID game_vert_id, 
+								u32 level_vert_id, 
+								Fvector pos, 
+								Fvector ang, 
+								Fvector pos2, 
+								Fvector ang2, 
+								bool b_use_position_cancel,
+								bool b_allow_change_level)
 {
 	if( !MainInputReceiver() || MainInputReceiver()!=UIChangeLevelWnd)
 	{
@@ -198,7 +205,9 @@ void CUIGameSP::ChangeLevel				(GameGraph::_GRAPH_ID game_vert_id, u32 level_ver
 		UIChangeLevelWnd->m_angles				= ang;
 		UIChangeLevelWnd->m_position_cancel		= pos2;
 		UIChangeLevelWnd->m_angles_cancel		= ang2;
-		UIChangeLevelWnd->m_b_position_cancel	= b;
+		UIChangeLevelWnd->m_b_position_cancel	= b_use_position_cancel;
+		UIChangeLevelWnd->m_b_allow_change_level= b_allow_change_level;
+
 		m_game->StartStopMenu					(UIChangeLevelWnd,true);
 	}
 }
@@ -217,10 +226,6 @@ CChangeLevelWnd::CChangeLevelWnd		()
 {
 	m_messageBox			= xr_new<CUIMessageBox>();	m_messageBox->SetAutoDelete(true);
 	AttachChild				(m_messageBox);
-	m_messageBox->Init		("message_box_change_level");
-	SetWndPos				(m_messageBox->GetWndPos());
-	m_messageBox->SetWndPos	(0.0f,0.0f);
-	SetWndSize				(m_messageBox->GetWndSize());
 }
 void CChangeLevelWnd::SendMessage(CUIWindow *pWnd, s16 msg, void *pData)
 {
@@ -228,7 +233,7 @@ void CChangeLevelWnd::SendMessage(CUIWindow *pWnd, s16 msg, void *pData)
 		if(msg==MESSAGE_BOX_YES_CLICKED){
 			OnOk									();
 		}else
-		if(msg==MESSAGE_BOX_NO_CLICKED){
+		if(msg==MESSAGE_BOX_NO_CLICKED || msg==MESSAGE_BOX_OK_CLICKED){
 			OnCancel								();
 		}
 	}else
@@ -270,6 +275,11 @@ bool CChangeLevelWnd::OnKeyboardAction(int dik, EUIMessages keyboard_action)
 bool g_block_pause	= false;
 void CChangeLevelWnd::Show()
 {
+	m_messageBox->Init		(m_b_allow_change_level?"message_box_change_level":"message_box_change_level_disabled");
+	SetWndPos				(m_messageBox->GetWndPos());
+	m_messageBox->SetWndPos	(Fvector2().set(0.0f,0.0f));
+	SetWndSize				(m_messageBox->GetWndSize());
+
 	g_block_pause							= true;
 	Device.Pause							(TRUE, TRUE, TRUE, "CChangeLevelWnd_show");
 	bShowPauseString						= FALSE;

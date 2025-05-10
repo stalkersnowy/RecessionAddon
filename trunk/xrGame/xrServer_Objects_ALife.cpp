@@ -763,6 +763,7 @@ CSE_ALifeLevelChanger::CSE_ALifeLevelChanger(LPCSTR caSection) : CSE_ALifeSpaceR
     fp_data.inc					();
 #endif
 	m_bSilentMode				= FALSE;
+	m_bEnabled					= TRUE;
 }
 
 CSE_ALifeLevelChanger::~CSE_ALifeLevelChanger()
@@ -796,6 +797,9 @@ void CSE_ALifeLevelChanger::STATE_Read		(NET_Packet	&tNetPacket, u16 size)
 	if (m_wVersion > 116)
 		m_bSilentMode			= !!tNetPacket.r_u8();
 
+	if (m_wVersion > 118)
+		m_bEnabled				= !!tNetPacket.r_u8();
+
 }
 
 void CSE_ALifeLevelChanger::STATE_Write	(NET_Packet	&tNetPacket)
@@ -810,6 +814,7 @@ void CSE_ALifeLevelChanger::STATE_Write	(NET_Packet	&tNetPacket)
 	tNetPacket.w_stringZ		(m_caLevelToChange);
 	tNetPacket.w_stringZ		(m_caLevelPointToChange);
 	tNetPacket.w_u8				(m_bSilentMode?1:0);
+	tNetPacket.w_u8				(m_bEnabled?1:0);
 }
 
 void CSE_ALifeLevelChanger::UPDATE_Read	(NET_Packet	&tNetPacket)

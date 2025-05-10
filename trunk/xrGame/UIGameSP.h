@@ -37,7 +37,7 @@ public:
 	void				StartCarBody			(CInventoryOwner* pOurInv, CInventoryBox* pBox);
 	virtual void		ReInitShownUI			();
 	virtual void		ReinitDialogs			();
-	void				ChangeLevel				(GameGraph::_GRAPH_ID game_vert_id, u32 level_vert_id, Fvector pos, Fvector ang, Fvector pos2, Fvector ang2, bool b);
+	void				ChangeLevel				(GameGraph::_GRAPH_ID game_vert_id, u32 level_vert_id, Fvector pos, Fvector ang, Fvector pos2, Fvector ang2, bool b, bool b_allow_change_level);
 
 	virtual void		HideShownDialogs		();
 
@@ -63,6 +63,7 @@ public:
 	Fvector					m_position_cancel;
 	Fvector					m_angles_cancel;
 	bool					m_b_position_cancel;
+	bool					m_b_allow_change_level;
 
 						CChangeLevelWnd				();
 	virtual				~CChangeLevelWnd			()									{};

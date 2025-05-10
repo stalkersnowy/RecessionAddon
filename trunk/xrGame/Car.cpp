@@ -836,7 +836,7 @@ void CCar::CreateSkeleton(CSE_Abstract	*po)
 	m_pPhysicsShell->build_FromKinematics(smart_cast<CKinematics*>(Visual()),&bone_map);
 	m_pPhysicsShell->set_PhysicsRefObject(this);
 	m_pPhysicsShell->mXFORM.set(XFORM());
-	m_pPhysicsShell->Activate(true);
+	m_pPhysicsShell->Activate(false);
 	m_pPhysicsShell->SetAirResistance(0.f,0.f);
 	m_pPhysicsShell->SetPrefereExactIntegration();
 
