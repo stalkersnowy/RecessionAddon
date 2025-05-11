@@ -76,9 +76,9 @@ vf main_vs_2_0 (v_vert v)
                 // L_final        = v.N.w        + L_ambient;
 
         o.hpos                 = mul                        (m_VP, P);                        // xform, input in world coords
-		o.fog       = calc_fogging  (v.P);
+		o.fog       = saturate(calc_fogging  (v.P));
 
-		o.c0		= float4		(L_final,1);
+		o.c0		= float4		(L_final,o.fog);
 
 //	Igor: for additional depth dest
 #ifdef	USE_SOFT_WATER

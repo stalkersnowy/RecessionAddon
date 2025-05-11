@@ -273,13 +273,21 @@ ignore_types = corpse
 
 ;------------------------------------- —кр€га --------------------------------------
 [logic@mil_freedom_trader]
-active = walker1@mil_freedom_trader
+active = remark@mil_freedom_trader_hack
 on_combat = combat@mil_freedom_max
 trade = misc\trade_freedom.ltx
 on_death = death@mil_freedom_trader
 
 [death@mil_freedom_trader]
 on_info = %+sar2_death_48%
+
+[remark@mil_freedom_trader_hack]
+anim = wait
+meet = no_meet
+can_select_weapon = false
+on_signal = anim_end | walker1@mil_freedom_trader
+path_walk = trader_walk1
+path_look = trader_look1
 
 [walker1@mil_freedom_trader]
 path_walk = trader_walk1

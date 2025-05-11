@@ -881,3 +881,25 @@ void CScriptGameObject::sound_prefix			(LPCSTR sound_prefix)
 
 	custom_monster->sound().sound_prefix	(sound_prefix);
 }
+
+void CScriptGameObject::can_select_weapon(bool status)
+{
+	CAI_Stalker* stalker = smart_cast<CAI_Stalker*>(&object());
+	if(!stalker) 
+	{
+		ai().script_engine().script_log(ScriptStorage::eLuaMessageTypeError,"CAI_Stalker : cannot access class member can_select_weapon!");
+		return;
+	}
+	stalker->can_select_weapon(status);
+}
+
+bool CScriptGameObject::can_select_weapon() const
+{
+	CAI_Stalker* stalker = smart_cast<CAI_Stalker*>(&object());
+	if(!stalker) 
+	{
+		ai().script_engine().script_log(ScriptStorage::eLuaMessageTypeError,"CAI_Stalker : cannot access class member can_select_weapon!");
+		return(0);
+	}
+	return  stalker->can_select_weapon();
+}

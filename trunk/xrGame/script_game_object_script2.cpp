@@ -186,7 +186,9 @@ class_<CScriptGameObject> &script_register_game_object1(class_<CScriptGameObject
 		// inventory owner
 		.def("get_current_outfit",			&CScriptGameObject::GetCurrentOutfit)
 		.def("get_current_outfit_protection",&CScriptGameObject::GetCurrentOutfitProtection)
-
+			
+		.def("can_select_weapon",			(bool (CScriptGameObject::*)() const)&CScriptGameObject::can_select_weapon)
+		.def("can_select_weapon",			(void (CScriptGameObject::*)(bool))&CScriptGameObject::can_select_weapon)
 
 		// searchlight
 		.def("get_current_direction",		&CScriptGameObject::GetCurrentDirection)

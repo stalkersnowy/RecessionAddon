@@ -108,7 +108,7 @@ half4   main_ps_2_0  ( vf I )          : COLOR
 	alpha 		= max (fog, alpha);
 #endif	//	USE_SOFT_WATER
 
-	return  half4   (final, alpha )                ;
+	return  half4   (final, alpha*I.c0.a*I.c0.a )                ;
 
 #else	//	NEED_SOFT_WATER
 

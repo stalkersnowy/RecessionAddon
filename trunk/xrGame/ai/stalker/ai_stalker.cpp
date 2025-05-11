@@ -252,6 +252,8 @@ void CAI_Stalker::reload			(LPCSTR section)
 	m_disp_stand_stand_zoom			= pSettings->r_float(section,"disp_stand_stand_zoom");
 	m_disp_stand_crouch_zoom		= pSettings->r_float(section,"disp_stand_crouch_zoom");
 
+	m_can_select_weapon				= true;
+
 	m_min_queue_size_far			= pSettings->r_u32(*cNameSect(),"weapon_min_queue_size_far");			// 1;
 	m_max_queue_size_far			= pSettings->r_u32(*cNameSect(),"weapon_max_queue_size_far");			// 6;
 	m_min_queue_interval_far		= pSettings->r_u32(*cNameSect(),"weapon_min_queue_interval_far");		// 500;

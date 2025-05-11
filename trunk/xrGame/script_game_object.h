@@ -567,6 +567,9 @@ public:
 			void				set_visual_name						(LPCSTR visual);
 			LPCSTR				get_visual_name						() const;
 
+			void					can_select_weapon		(bool status);
+			bool					can_select_weapon		() const;
+
 	DECLARE_SCRIPT_REGISTER_FUNCTION
 };
 add_to_type_list(CScriptGameObject)

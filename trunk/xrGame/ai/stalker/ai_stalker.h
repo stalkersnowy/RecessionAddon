@@ -328,6 +328,10 @@ private:
 	xr_vector<CTradeItem>				m_temp_items;
 	u32									m_total_money;
 	bool								m_sell_info_actuality;
+	bool								m_can_select_weapon;
+public:
+	bool								can_select_weapon				() {return m_can_select_weapon;};
+	void								can_select_weapon				(bool can) {m_can_select_weapon = can;};
 
 protected:
 			u32							fill_items						(CInventory &inventory, CGameObject *old_owner, ALife::_OBJECT_ID new_owner_id);

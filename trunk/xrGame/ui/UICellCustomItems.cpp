@@ -2,6 +2,7 @@
 #include "UICellCustomItems.h"
 #include "UIInventoryUtilities.h"
 #include "../Weapon.h"
+#include "../Actor.h"
 
 #define INV_GRID_WIDTHF			50.0f
 #define INV_GRID_HEIGHTF		50.0f
@@ -39,7 +40,7 @@ bool CUIInventoryCellItem::EqualTo(CUICellItem* itm)
 	if (object()->cast_missile() && ci->object()->cast_missile())
 		return true;
 
-	if (object()->m_eItemPlace != ci->object()->m_eItemPlace)
+	if (smart_cast<CActor*>(object()->object().H_Parent()) && object()->m_eItemPlace != ci->object()->m_eItemPlace)
 		return false;
 
 	return true;

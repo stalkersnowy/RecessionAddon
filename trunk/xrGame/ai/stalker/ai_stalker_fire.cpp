@@ -310,6 +310,9 @@ void CAI_Stalker::OnItemDrop			(CInventoryItem *inventory_item, bool just_before
 
 void CAI_Stalker::update_best_item_info	()
 {
+	if(!m_can_select_weapon)
+		return;
+
 	ai().ef_storage().alife_evaluation(false);
 
 	if	(
