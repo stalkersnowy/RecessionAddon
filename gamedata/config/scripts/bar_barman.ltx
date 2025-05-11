@@ -13,7 +13,7 @@ def_state_moving2 = barman_walk_free
 def_state_moving3 = barman_walk_free
 meet = meet@no_talk
 danger = danger_condition@barman
-on_info = {+bar_barman_need_hole -bar_barman_stay_hole} walker@at_hole %+bar_barman_stay_hole%, {+bar_barman_need_room -bar_barman_stay_room} walker@at_room %+bar_barman_stay_room%
+on_info = {+bar_barman_need_hole -bar_barman_stay_hole} walker@at_hole %+bar_barman_stay_hole%, {+bar_barman_need_room -bar_barman_stay_room} walker@at_room %+bar_barman_stay_room%, walker@at_hole
  
 [walker@at_hole]
 path_walk = bar_barman_hole_walk

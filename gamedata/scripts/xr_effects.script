@@ -2108,3 +2108,21 @@ function val_bs_victim_dead(actor, npc)
 	h.type = hit.wound
 	npc:hit(h)
 end
+
+function enable_level_changer(actor, npc, p)
+	if(p[1]~=nil) then
+        local obj = level_object_by_sid(tonumber(p[1]))
+        if(obj) then
+            obj:enable_level_changer(true)
+		end
+	end
+end
+
+function disable_level_changer(actor, npc, p)
+	if(p[1]~=nil) then
+        local obj = level_object_by_sid(tonumber(p[1]))
+        if(obj) then
+            obj:enable_level_changer(false)
+        end
+	end
+end

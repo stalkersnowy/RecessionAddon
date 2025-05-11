@@ -153,6 +153,15 @@ function f_predicate(npc_info)
     return npc_info.profile_name == "pri_followers"
 end
 
+function f_predicate_l(npc_info)
+    local pn = npc_info.profile_name
+	if pn == "pri_followers_leader" then
+		return true
+	elseif pn == "pri_followers" then
+		return has_alife_info("pri_leader_dead")
+	end
+end
+
 function f_predicate_b(npc_info)
     local pn = npc_info.profile_name
     return (pn == "pri_followers_bomber" or pn == "pri_followers") and obj_has_item(npc_info, "wpn_rpg7")
@@ -190,14 +199,9 @@ gulags.pri_followers.job = function(sj, gname, type, squad, groups)
                    "pri_followers_wave6_out_restr", "pri_followers_wave7_out_restr", "pri_followers_wave7_out_restr"}
 
     -- priorities
-    local prior = {{2, 2, 2, 2, 2, 2, 2, 2, 3}, -- leader
-                   {3, 3, 3, 3, 3, 3, 3, 3, 2}, -- bomber
-                   {1, 1, 1, 1, 1, 1, 1, 1, 1}, -- nap1
-                   {1, 1, 1, 1, 1, 1, 1, 1, 1}, -- nap2
-                   {1, 1, 1, 1, 1, 1, 1, 1, 1}  -- nap3
-                  }
-    -- predicates              f_predicate_b
-    local pred = {f_predicate, f_predicate, f_predicate, f_predicate, f_predicate}
+    local prior = {2,1,1,1,1}
+    -- predicates
+    local pred = {f_predicate_l, f_predicate, f_predicate, f_predicate, f_predicate}
 
     local pr, pd
     for i, v in pairs(followers) do
@@ -206,7 +210,7 @@ gulags.pri_followers.job = function(sj, gname, type, squad, groups)
         for j = 1, 9 do
             t = { section = "logic@" .. gname .. "_" .. v .. "_" .. states_str[j],
                 idle = 0,
-                prior = pr[j], state = { states[j] },
+                prior = pr, state = { states[j] },
                 squad = squad, group = groups[1],
                 in_rest = "", out_rest = restr[j],
                 position_threshold = 100,

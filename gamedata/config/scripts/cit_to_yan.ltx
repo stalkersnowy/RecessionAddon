@@ -1,0 +1,8 @@
+[logic]
+active = sr_idle@check
+
+[sr_idle@check]
+on_info = {-yan_labx16_switcher_primary_off} sr_idle@wait %=disable_level_changer(1211)%, nil %=enable_level_changer(1211)%
+
+[sr_idle@wait]
+on_info = {+yan_labx16_switcher_primary_off} nil %=enable_level_changer(1211)%

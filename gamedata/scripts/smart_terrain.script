@@ -413,6 +413,7 @@ local level_groups = {
     l07_military = "group1",
     l08_yantar = "group1",
     l08u_brainlab = "group1",
+    l09_deadcity = "group1",
     l10_radar = "group1",
     l10u_bunker = "group1",
     l11_pripyat = "group1",

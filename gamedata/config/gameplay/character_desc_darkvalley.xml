@@ -20,7 +20,7 @@
 		<crouch_type>1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_walther \n
+			wpn_walther_coll \n
 			ammo_9x19_pbp = 2 \n
 			wpn_ak74 \n
 			ammo_5.45x39_fmj \n
@@ -1390,6 +1390,27 @@
 		</supplies>
 					
 #include "gameplay\character_criticals_4.xml"
+					
+		<start_dialog>hello_dialog</start_dialog>
+	</specific_character>
+	<specific_character id="dar_corpse_default2" team_default="1">
+		<name>GENERATE_NAME_science</name>
+		<icon>ui_npc_u_stranger</icon>
+		<map_icon x="0" y="0"></map_icon>
+		<bio>dar_corpse_bio</bio>
+
+		<class>dar_corpse</class>
+		<community>ecolog</community> <terrain_sect>stalker_terrain</terrain_sect>
+		
+		<rank>900</rank>
+		<reputation>0</reputation>
+ 
+		<visual>actors\ucheniy\ucheniy_4</visual>
+		<supplies>
+			[spawn] \n
+		</supplies>
+		
+#include "gameplay\character_criticals_3.xml"
 					
 		<start_dialog>hello_dialog</start_dialog>
 	</specific_character>

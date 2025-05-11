@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <numpad>
-    <background x="0" y="0" width="282" height="369" stretch="1">
+    <background x="29" y="0" width="282" height="369" stretch="1">
         <texture>ui_numpad_lockframe</texture>
     </background>
     <edit_box x="34" y="28" width="204" height="31">

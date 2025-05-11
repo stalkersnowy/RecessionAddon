@@ -18,6 +18,9 @@
 	<string id="level_changer_invitation">
 		<text>Перейти на другую локацию?</text>
 	</string>
+	<string id="level_changer_disabled">
+		<text>Вы не можете найти дорогу</text>
+	</string>
 	<string id="Name">
 		<text>Имя</text>
 	</string>

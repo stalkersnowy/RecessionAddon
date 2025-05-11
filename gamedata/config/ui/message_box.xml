@@ -75,12 +75,12 @@
 		</picture>
 
 		<message_text x="170" y="40" width="310" height="60" complex_mode="1">
-			<text r="216" g="186" b="140" font="letterica18">level_changer_invitation</text>
+			<text r="216" g="186" b="140" font="letterica18">level_changer_disabled</text>
 		</message_text>
 
 		<button_ok x="250" y="154" width="117" height="29" check_mode="0">
 			<window_name>button_ok</window_name>
-			<text font="letterica16" r="216" g="186" b="140">ui_st_btn_yes</text>
+			<text font="letterica16" r="216" g="186" b="140">ui_st_btn_ok</text>
 			<texture>ui_button_ordinary</texture>
 		</button_ok>
 

@@ -109,14 +109,14 @@ void CWeaponRPG7::switch2_Fire	()
 		CEntity* E = smart_cast<CEntity*>	(H_Parent());
 		if (E){
 			CInventoryOwner* io		= smart_cast<CInventoryOwner*>(H_Parent());
-			if(NULL == io->inventory().ActiveItem())
+/*			if(NULL == io->inventory().ActiveItem())
 			{
 			Log("current_state", GetState() );
 			Log("next_state", GetNextState());
 			Log("state_time", m_dwStateTime);
 			Log("item_sect", cNameSect().c_str());
 			Log("H_Parent", H_Parent()->cNameSect().c_str());
-			}
+			}*/
 			E->g_fireParams				(this, p1,d);
 		}
 
@@ -161,6 +161,8 @@ void CWeaponRPG7::OnEvent(NET_Packet& P, u16 type)
 			bool bLaunch = (type==GE_LAUNCH_ROCKET);
 			P.r_u16(id);
 			CRocketLauncher::DetachRocket(id, bLaunch);
+			if(bLaunch)
+				UpdateMissileVisibility();
 		} break;
 	}
 }

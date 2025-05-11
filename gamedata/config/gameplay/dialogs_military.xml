@@ -2459,6 +2459,7 @@
                 <text>mil_trader_dialog_4005</text>
                 <action>dialogs_military.send_artefact</action>
                 <give_info>mil_miser_task_complete</give_info>
+                <give_info>mil_go_to_miser_end</give_info>
             </phrase>
             <phrase id="3000">
                 <text></text>
@@ -2585,6 +2586,7 @@
             </phrase>
             <phrase id="7000">
                 <text></text>
+                <dont_has_info>mil_miser_task</dont_has_info>
                 <dont_has_info>mil_go_to_miser_end</dont_has_info>
                 <has_info>mil_go_to_miser</has_info>
                 <next>7001</next>
