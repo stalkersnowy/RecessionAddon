@@ -1186,9 +1186,9 @@ function mil_set_alarm (actor, npc)
 end
 
 function sar2_monolith_explode (actor, npc)
-    local monolith = level_object_by_sid (1305)
+    local monolith = level_object_by_sid (1308)
     if monolith == nil then
-       abort ("Object MONOLITH with SID 1305 not found")
+       abort ("Object MONOLITH with SID 1308 not found")
     end    
     local h = hit ();
     h.power = 1000;

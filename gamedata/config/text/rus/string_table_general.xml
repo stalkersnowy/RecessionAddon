@@ -252,4 +252,7 @@
 	<string id="l12u_control_monolith">
 		<text>Управление Монолитом</text>
 	</string>
+	<string id="l23_final_battle">
+		<text>Саркофаг</text>
+	</string>
 </string_table>
