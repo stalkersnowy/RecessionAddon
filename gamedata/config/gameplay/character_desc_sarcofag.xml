@@ -735,7 +735,7 @@
     
     <specific_character id="sar2_stalker_explorer" team_default = "1">
         <name>sar2_explorer_name</name>
-        <icon>ui_npc_u_stalker_neytral_rukzak_5</icon>
+        <!--icon>ui_npc_u_stalker_neytral_rukzak_5</icon-->
 		<map_icon x="0" y="0"></map_icon>
         <bio>sar2_bio</bio>
 
