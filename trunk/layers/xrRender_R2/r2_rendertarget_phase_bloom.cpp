@@ -55,11 +55,13 @@ void	CalcGauss_wave(
 					   float		s_out		=1.f		// resulting magnitude
 					   )
 {
-	Fvector4	t0,t1;
 	CalcGauss_k7(w0,w1,r_base,  s_out);
-	CalcGauss_k7(t0,t1,r_detail,s_out);
-	w0.add		(t0);
-	w1.add		(t1);
+	if(ps_BloomMode<6){
+		Fvector4	t0,t1;
+		CalcGauss_k7(t0,t1,r_detail,s_out);
+		w0.add		(t0);
+		w1.add		(t1);
+	}
 }
 
 void CRenderTarget::phase_bloom	()
