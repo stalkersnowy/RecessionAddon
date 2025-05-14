@@ -54,6 +54,26 @@ static class cl_parallax		: public R_constant_setup		{	virtual void setup	(R_con
 	RCache.set_c	(C,h,-h/2.f,1.f/r_dtex_range,1.f/r_dtex_range);
 }}	binder_parallax;
 
+static class cl_water_intensity : public R_constant_setup
+{
+	virtual void setup(R_constant* C)
+	{
+		CEnvDescriptor& E = g_pGamePersistent->Environment().CurrentEnv;
+		float fValue = E.m_fWaterIntensity;
+		RCache.set_c(C, fValue, fValue, fValue, 0);
+	}
+}	binder_water_intensity;
+
+static class cl_sun_shafts_intensity : public R_constant_setup
+{
+	virtual void setup(R_constant* C)
+	{
+		CEnvDescriptor& E = g_pGamePersistent->Environment().CurrentEnv;
+		float fValue = E.m_fSunShaftsIntensity;
+		RCache.set_c(C, fValue, fValue, fValue, 0);
+	}
+}	binder_sun_shafts_intensity;
+
 extern ENGINE_API BOOL r2_sun_static;
 extern ENGINE_API BOOL r2_advanced_pp;
 //////////////////////////////////////////////////////////////////////////
@@ -207,6 +227,8 @@ void					CRender::create					()
 
 	// constants
 	::Device.Resources->RegisterConstantSetup	("parallax",	&binder_parallax);
+	::Device.Resources->RegisterConstantSetup	("water_intensity",	&binder_water_intensity);
+	::Device.Resources->RegisterConstantSetup	("sun_shafts_intensity",	&binder_sun_shafts_intensity);
 
 	c_lmaterial					= "L_material";
 	c_sbase						= "s_base";
@@ -478,6 +500,7 @@ HRESULT	CRender::shader_compile			(
 	char							c_gloss			[32];
 	char							c_bloommode		[32];
 	char							c_ssao			[32];
+	char							c_sun_shafts	[32];
 	if (pDefines)	{
 		// transfer existing defines
 		for (;;def_it++)	{
@@ -600,6 +623,14 @@ HRESULT	CRender::shader_compile			(
 		{
 			defines[def_it].Name		=	"USE_DOF";
 			defines[def_it].Definition	=	"1";
+			def_it						++;
+		}
+
+		if (ps_r_sun_shafts)
+		{
+			xr_sprintf					(c_sun_shafts,"%d",ps_r_sun_shafts);
+			defines[def_it].Name		=	"SUN_SHAFTS_QUALITY";
+			defines[def_it].Definition	=	c_sun_shafts;
 			def_it						++;
 		}
 	}

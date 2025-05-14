@@ -239,6 +239,11 @@ CRenderTarget::CRenderTarget		()
 		// generic(LDR) RTs
 		rt_Generic_0.create			(r2_RT_generic0,w,h,D3DFMT_A8R8G8B8		);
 		rt_Generic_1.create			(r2_RT_generic1,w,h,D3DFMT_A8R8G8B8		);
+		//	Igor: for volumetric lights
+		//rt_Generic_2.create			(r2_RT_generic2,w,h,D3DFMT_A8R8G8B8		);
+		//	temp: for higher quality blends
+		if (RImplementation.o.advancedpp)
+			rt_Generic_2.create			(r2_RT_generic2,w,h,D3DFMT_A16B16G16R16F);
 	}
 
 	// OCCLUSION
@@ -259,6 +264,10 @@ CRenderTarget::CRenderTarget		()
 		s_accum_mask.create				(b_accum_mask,				"r2\\accum_mask");
 		s_accum_direct.create			(b_accum_direct,			"r2\\accum_direct");
 		s_accum_direct_cascade.create	(b_accum_direct_cascade,	"r2\\accum_direct_cascade");
+		if (RImplementation.o.advancedpp)
+		{
+			s_accum_direct_volumetric_cascade.create("accum_volumetric_sun_cascade");
+		}
 	}
 	else
 	{
@@ -269,6 +278,10 @@ CRenderTarget::CRenderTarget		()
 		s_accum_mask.create				(b_accum_mask,				"r2\\accum_mask");
 		s_accum_direct.create			(b_accum_direct,			"r2\\accum_direct");
 		s_accum_direct_cascade.create	(b_accum_direct_cascade,	"r2\\accum_direct_cascade");
+		if (RImplementation.o.advancedpp)
+		{
+			s_accum_direct_volumetric_cascade.create("accum_volumetric_sun_cascade");
+		}
 	}
 
 	// POINT
@@ -334,9 +347,12 @@ CRenderTarget::CRenderTarget		()
 		static D3DVERTEXELEMENT9 dwDecl[] =
 		{
 			{ 0, 0,  D3DDECLTYPE_FLOAT4,	D3DDECLMETHOD_DEFAULT, 	D3DDECLUSAGE_POSITION,	0 },	// pos+uv
+			{ 0, 16, D3DDECLTYPE_D3DCOLOR,	D3DDECLMETHOD_DEFAULT, 	D3DDECLUSAGE_COLOR,		0 },
+			{ 0, 20, D3DDECLTYPE_FLOAT2,	D3DDECLMETHOD_DEFAULT, 	D3DDECLUSAGE_TEXCOORD,	0 },
 			D3DDECL_END()
 		};
 		s_combine.create					(b_combine,					"r2\\combine");
+		s_combine_volumetric.create			("combine_volumetric");
 		s_combine_dbg_0.create				("effects\\screen_set",		r2_RT_smap_surf		);	
 		s_combine_dbg_1.create				("effects\\screen_set",		r2_RT_luminance_t8	);
 		s_combine_dbg_Accumulator.create	("effects\\screen_set",		r2_RT_accum			);
@@ -514,4 +530,19 @@ CRenderTarget::~CRenderTarget	()
 	xr_delete					(b_accum_direct_cascade	);
 	xr_delete					(b_accum_mask			);
 	xr_delete					(b_occq					);
+}
+
+bool CRenderTarget::need_to_render_sunshafts()
+{
+	if ( ! (RImplementation.o.advancedpp && ps_r_sun_shafts) )
+		return false;
+
+	{
+		CEnvDescriptor&	E = g_pGamePersistent->Environment().CurrentEnv;
+		float fValue = E.m_fSunShaftsIntensity;
+		//	TODO: add multiplication by sun color here
+		if (fValue<0.0001) return false;
+	}
+
+	return true;
 }

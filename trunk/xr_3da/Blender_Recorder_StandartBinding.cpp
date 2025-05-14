@@ -235,6 +235,14 @@ class cl_hemi_color	: public R_constant_setup {
 	}
 };	static cl_hemi_color		binder_hemi_color;
 
+static class cl_screen_res : public R_constant_setup		
+{	
+	virtual void setup	(R_constant* C)
+	{
+		RCache.set_c	(C, (float)Device.dwWidth, (float)Device.dwHeight, 1.0f/(float)Device.dwWidth, 1.0f/(float)Device.dwHeight);
+	}
+}	binder_screen_res;
+
 
 // Standart constant-binding
 void	CBlender_Compile::SetMapping	()
@@ -271,6 +279,7 @@ void	CBlender_Compile::SetMapping	()
 //	r_Constant				("L_lmap_color",	&binder_lm_color);
 	r_Constant				("L_hemi_color",	&binder_hemi_color);
 	r_Constant				("L_ambient",		&binder_amb_color);
+	r_Constant				("screen_res",		&binder_screen_res);
 
 	// detail
 	if (bDetail	&& detail_scaler)

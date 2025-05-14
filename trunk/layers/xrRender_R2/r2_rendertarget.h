@@ -47,6 +47,8 @@ public:
 	ref_rt						rt_Accumulator_temp;// only for HW which doesn't feature fp16 blend
 	ref_rt						rt_Generic_0;		// 32bit		(r,g,b,a)				// post-process, intermidiate results, etc.
 	ref_rt						rt_Generic_1;		// 32bit		(r,g,b,a)				// post-process, intermidiate results, etc.
+	//	Igor: for volumetric lights
+	ref_rt						rt_Generic_2;		// 32bit		(r,g,b,a)				// post-process, intermidiate results, etc.
 	ref_rt						rt_Bloom_1;			// 32bit, dim/4	(r,g,b,?)
 	ref_rt						rt_Bloom_2;			// 32bit, dim/4	(r,g,b,?)
 	ref_rt						rt_LUM_64;			// 64bit, 64x64,	log-average in all components
@@ -79,6 +81,7 @@ private:
 	ref_shader					s_accum_mask	;
 	ref_shader					s_accum_direct	;
 	ref_shader					s_accum_direct_cascade;
+	ref_shader					s_accum_direct_volumetric_cascade;
 	ref_shader					s_accum_point	;
 	ref_shader					s_accum_spot	;
 	ref_shader					s_accum_reflected;
@@ -119,6 +122,7 @@ private:
 	ref_shader					s_combine_dbg_1;
 	ref_shader					s_combine_dbg_Accumulator;
 	ref_shader					s_combine;
+	ref_shader					s_combine_volumetric;
 public:
 	ref_shader					s_postprocess;
 	ref_geom					g_postprocess;
@@ -139,6 +143,9 @@ private:
 	u32							param_color_base;
 	u32							param_color_gray;
 	u32							param_color_add;
+
+	//	Igor: used for volumetric lights
+	bool						m_bHasActiveVolumetric;
 public:
 								CRenderTarget			();
 								~CRenderTarget			();
@@ -171,7 +178,10 @@ public:
 	void						phase_smap_spot			(light* L);
 	void						phase_smap_spot_tsh		(light* L);
 	void						phase_accumulator		();
+	void						phase_vol_accumulator	();
 	void						shadow_direct			(light* L, u32 dls_phase);
+
+	bool						need_to_render_sunshafts();
 	
 	BOOL						enable_scissor			(light* L);		// true if intersects near plane
 	void						enable_dbt_bounds		(light* L);
@@ -184,12 +194,14 @@ public:
 	void						accum_direct_f			(u32	sub_phase);
 	void						accum_direct_lum		();
 	void						accum_direct_blend		();
+	void						accum_direct_volumetric	(u32	sub_phase, const u32 Offset, const Fmatrix &mShadow, const Fvector L_dir);
 	void						accum_point				(light* L);
 	void						accum_spot				(light* L);
 	void						accum_reflected			(light* L);
 	void						phase_bloom				();
 	void						phase_luminance			();
 	void						phase_combine			();
+	void						phase_combine_volumetric();
 	void						phase_pp				();
 
 	virtual void				set_blur				(float	f)		{ param_blur=f;						}

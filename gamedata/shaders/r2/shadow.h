@@ -46,7 +46,13 @@ half 	shadow_sw	(float4 tc)	{
 //////////////////////////////////////////////////////////////////////////////////////////
 half  	sample_hw_pcf	(float4 tc,float4 shift){
 	static const float 	ts = KERNEL / float(SMAP_size);
+#ifndef SUNSHAFTS_DYNAMIC
 	return tex2Dproj	(s_smap,tc + tc.w*shift*ts).x;
+#else	//	SUNSHAFTS_DYNAMIC
+	float4 tc2 = tc / tc.w + shift * ts;
+	tc2.w = 0;
+	return tex2Dlod(s_smap, tc2);
+#endif	//	SUNSHAFTS_DYNAMIC
 }
 half 	shadow_hw	(float4 tc)		{
   half  s0		= sample_hw_pcf	(tc,float4(-1,-1,0,0)); 
@@ -104,13 +110,16 @@ half 	shadow_hw_f4	(float4 tc)		{
 #ifdef	USE_HWSMAP_PCF
 	// D24X8+PCF
 	half 	shadow		(float4	tc)		{ return shadow_hw	(tc);	}
+	half 	shadow_volumetric		(float4	tc)		{ return sample_hw_pcf	( tc, float4(0,0,0,0) ); }
 #else
 	#ifdef USE_FETCH4
 		// DF24+Fetch4
 		half 	shadow 		(float4 tc)		{ return shadow_hw_f4(tc);	}
+		half 	shadow_volumetric 		(float4 tc)		{ return sample_hw_f4	(tc, float4(0,0,0,0)); }
 	#else
 		// FP32
 		half 	shadow		(float4 tc) 	{ return shadow_sw	(tc);	}
+		half 	shadow_volumetric 		(float4 tc) 	{ return sample_sw	(tc.xy / tc.w,float2(0,0),tc.z); }
 	#endif
 #endif
 
