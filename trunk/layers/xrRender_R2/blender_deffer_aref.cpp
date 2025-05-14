@@ -34,7 +34,7 @@ void	CBlender_deffer_aref::Compile(CBlender_Compile& C)
 
 	// oBlend.value	= FALSE	;
 
-	if (oBlend.value)	{
+	if (oBlend.value && !ps_r2_ls_flags.test(R2FLAG_OLD_AREF))	{
 		switch(C.iElement) 
 		{
 		case SE_R2_NORMAL_HQ:

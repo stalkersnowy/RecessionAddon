@@ -241,7 +241,6 @@ uniform sampler2D       s_tonemap;              // actually MidleGray / exp(Lw +
   #if BLOOM_MODE > 4
    #define def_aref        half(128.f/255.f)
    #if BLOOM_MODE > 5
-	#undef USE_VTF
     #define def_hdr		   half(1.h)	// hight luminance range
     #define def_lum_hrange half(0.55h)	// hight luminance range
    #else

@@ -615,6 +615,9 @@ void		xrRender_initconsole	()
 	CMD3(CCC_Token,		"r__smapsize",					&ps_Smapsize,				qsmapsize_token );
 
 	CMD3(CCC_Mask,		"r2_indoor_lighting",			&ps_r2_ls_flags,			R2FLAG_INDOOR);
+
+	CMD3(CCC_Mask,		"r2_old_distort",				&ps_r2_ls_flags,			R2FLAG_OLD_DISTORT);
+	CMD3(CCC_Mask,		"r2_old_aref",					&ps_r2_ls_flags,			R2FLAG_OLD_AREF);
 }
 
 void	xrRender_apply_tf		()

@@ -619,6 +619,13 @@ HRESULT	CRender::shader_compile			(
 		def_it						++;
 	}
 
+	if (ps_r2_ls_flags.test(R2FLAG_OLD_DISTORT))
+	{
+		defines[def_it].Name		=	"OLD_DISTORT";
+		defines[def_it].Definition	=	"1";
+		def_it						++;
+	}
+
 	// skinning
 	if (m_skinning<0)		{
 		defines[def_it].Name		=	"SKIN_NONE";

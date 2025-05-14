@@ -143,6 +143,9 @@ enum
 	R2FLAG_DOF					= (1<<23),
 
 	R2FLAG_INDOOR				= (1<<24),
+
+	R2FLAG_OLD_DISTORT			= (1<<25),
+	R2FLAG_OLD_AREF				= (1<<26),
 };
 
 extern void						xrRender_initconsole	();
