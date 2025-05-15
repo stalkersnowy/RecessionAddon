@@ -114,6 +114,7 @@ Flags32		ps_r2_ls_flags				= { R2FLAG_SUN
 	| R2FLAG_SUN_FOCUS
 	| R2FLAG_SUN_TSM
 	| R2FLAG_TONEMAP
+	| R2FLAG_VOLUMETRIC_LIGHTS
 	};	// r2-only
 float		ps_r2_df_parallax_h			= 0.02f;
 float		ps_r2_df_parallax_range		= 75.f;
@@ -621,6 +622,7 @@ void		xrRender_initconsole	()
 	CMD3(CCC_Token,		"r2_ssao",						&ps_r_ssao,					qssao_token);
 	CMD3(CCC_Mask,		"r2_steep_parallax",			&ps_r2_ls_flags,			R2FLAG_STEEP_PARALLAX);
 	CMD3(CCC_Token,		"r2_sun_shafts",				&ps_r_sun_shafts,			qsun_shafts_token);
+	CMD3(CCC_Mask,		"r2_volumetric_lights",			&ps_r2_ls_flags,			R2FLAG_VOLUMETRIC_LIGHTS);
 	
 	CMD3(CCC_Token,		"r__smapsize",					&ps_Smapsize,				qsmapsize_token );
 

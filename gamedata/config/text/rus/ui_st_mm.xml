@@ -360,4 +360,7 @@
 	<string id="ui_mm_sun_shafts">
 		<text>Солнечные лучи</text>
 	</string>
+	<string id="ui_mm_volumetric_light">
+		<text>Объёмный свет</text>
+	</string>
 </string_table>

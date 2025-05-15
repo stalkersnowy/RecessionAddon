@@ -6,6 +6,8 @@ class light;
 #define DU_SPHERE_NUMFACES	180
 #define DU_CONE_NUMVERTEX	18
 #define DU_CONE_NUMFACES	32
+//	no less than 2
+#define	VOLUMETRIC_SLICES	100
 
 class CRenderTarget		: public IRender_Target
 {
@@ -85,10 +87,12 @@ private:
 	ref_shader					s_accum_point	;
 	ref_shader					s_accum_spot	;
 	ref_shader					s_accum_reflected;
+	ref_shader					s_accum_volume;
 
 	ref_geom					g_accum_point	;
 	ref_geom					g_accum_spot	;
 	ref_geom					g_accum_omnipart;
+	ref_geom					g_accum_volumetric;
 
 	IDirect3DVertexBuffer9*		g_accum_point_vb;
 	IDirect3DIndexBuffer9*		g_accum_point_ib;
@@ -98,6 +102,9 @@ private:
 
 	IDirect3DVertexBuffer9*		g_accum_spot_vb	;
 	IDirect3DIndexBuffer9*		g_accum_spot_ib	;
+
+	IDirect3DVertexBuffer9*		g_accum_volumetric_vb;
+	IDirect3DIndexBuffer9*		g_accum_volumetric_ib;
 
 	// Bloom
 	ref_geom					g_bloom_build;
@@ -155,6 +162,9 @@ public:
 	void						accum_omnip_geom_destroy();
 	void						accum_spot_geom_create	();
 	void						accum_spot_geom_destroy	();
+	//	Igor: used for volumetric lights
+	void						accum_volumetric_geom_create();
+	void						accum_volumetric_geom_destroy();
 
 	void						u_stencil_optimize		(BOOL		common_stencil=TRUE);
 	void						u_compute_texgen_screen	(Fmatrix&	dest);
@@ -198,6 +208,8 @@ public:
 	void						accum_point				(light* L);
 	void						accum_spot				(light* L);
 	void						accum_reflected			(light* L);
+	//	Igor: for volumetric lights
+	void						accum_volumetric		(light* L);
 	void						phase_bloom				();
 	void						phase_luminance			();
 	void						phase_combine			();

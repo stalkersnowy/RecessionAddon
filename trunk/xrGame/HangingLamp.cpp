@@ -100,6 +100,7 @@ BOOL CHangingLamp::net_Spawn(CSE_Abstract* DC)
 
 	light_render			= ::Render->light_create();
 	light_render->set_shadow(!!lamp->flags.is(CSE_ALifeObjectHangingLamp::flCastShadow));
+	light_render->set_volumetric(true); //SNW: только не лезть в сдк, неееет
 	light_render->set_type	(lamp->flags.is(CSE_ALifeObjectHangingLamp::flTypeSpot)?IRender_Light::SPOT:IRender_Light::POINT);
 	light_render->set_range	(lamp->range);
 	light_render->set_color	(clr);

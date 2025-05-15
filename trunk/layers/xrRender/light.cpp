@@ -8,6 +8,7 @@ light::light		(void)	: ISpatial(g_SpatialSpace)
 	flags.bStatic	= false;
 	flags.bActive	= false;
 	flags.bShadow	= false;
+	flags.bVolumetric = false;
 	position.set	(0,-1000,0);
 	direction.set	(0,-1,0);
 	right.set		(0,0,0);
@@ -273,6 +274,7 @@ void	light::export_to		(light_Package& package)
 						L->spatial.sector	= spatial.sector;	//. dangerous?
 						L->s_spot			= s_spot	;
 						L->s_point			= s_point	;
+						L->set_volumetric	(flags.bVolumetric);
 						package.v_shadowed.push_back	(L);
 					}
 				}

@@ -300,6 +300,12 @@ CRenderTarget::CRenderTarget		()
 		g_accum_spot.create			(D3DFVF_XYZ,				g_accum_spot_vb, g_accum_spot_ib);
 	}
 
+	{
+		s_accum_volume.create("accum_volumetric", "lights\\lights_spot01");
+		accum_volumetric_geom_create();
+		g_accum_volumetric.create( D3DFVF_XYZ, g_accum_volumetric_vb, g_accum_volumetric_ib);
+	}
+
 	// REFLECTED
 	{
 		s_accum_reflected.create	(b_accum_reflected,			"r2\\accum_refl");
@@ -518,6 +524,7 @@ CRenderTarget::~CRenderTarget	()
 	accum_spot_geom_destroy		();
 	accum_omnip_geom_destroy	();
 	accum_point_geom_destroy	();
+	accum_volumetric_geom_destroy();
 
 	// Blenders
 	xr_delete					(b_combine				);
