@@ -98,6 +98,7 @@
     <texture id="ui_iconsTotal_esc_flash_task" x="83" y="94" width="83" height="47" />
     <texture id="ui_iconsTotal_mil_hunters_task" x="166" y="141" width="83" height="47" />
     <texture id="ui_iconsTotal_yan_find_ghost_task" x="0" y="705" width="83" height="47" />
+    <texture id="ui_iconsTotal_cit_doctor_task" x="0" y="705" width="83" height="47" />
 	
 	
 	<texture id="ui_iconsNpc_soldier_bandana_6" x="332" y="0" width="83" height="47"/>

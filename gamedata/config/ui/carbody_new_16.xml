@@ -18,7 +18,7 @@
 		<text x="30" y="8" font="graffiti22" r="238" g="153" b="26" complex_mode="1"/>
 	</our_bag_static>
 
-	<dragdrop_list_our x="29" y="35" width="279" height="410"
+	<dragdrop_list_our x="29" y="35" width="295" height="410"
 			cell_width = "31" cell_height="41" rows_num="10" cols_num="9" 
 			unlimited="1" group_similar="1"/>
 
@@ -27,7 +27,7 @@
 		<text x="27" y="8" font="graffiti22" r="255" g="255" b="255" a="128">st_items</text>
 	</others_bag_static>
 
-	<dragdrop_list_other x="29" y="35" width="279" height="410"
+	<dragdrop_list_other x="29" y="35" width="295" height="410"
 			cell_width="31" cell_height="41" rows_num="10" cols_num="9" 
 			unlimited="1" group_similar="1"/>
 
