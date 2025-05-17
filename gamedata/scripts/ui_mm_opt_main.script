@@ -48,6 +48,12 @@ function options_dialog:InitControls()
 	self.dlg_gameplay:Show(false)
 	self.dialog:AttachChild(self.dlg_gameplay)
 	xml:InitWindow				("tab_size", 0, self.dlg_gameplay)
+
+	self.dlg_gameplay_adv = ui_mm_opt_gameplay_adv.opt_gameplay_adv()
+	self.dlg_gameplay_adv:InitControls(0,0, xml, self)
+	self.dlg_gameplay_adv:Show(false)
+	self.dialog:AttachChild(self.dlg_gameplay_adv)
+	xml:InitWindow				("tab_size", 0, self.dlg_gameplay_adv)
 	
 	self.dlg_controls = ui_mm_opt_controls.opt_controls()
 	self.dlg_controls:InitControls(0,0, xml, self)
@@ -143,14 +149,20 @@ function options_dialog:InitCallBacks()
 	self:AddCallback("btn_simply_graphic",	ui_events.BUTTON_CLICKED,	self.OnSimplyGraphic,		self)	
 	self:AddCallback("btn_keyb_default",	ui_events.BUTTON_CLICKED,	self.OnBtnDefault,			self)
 	self:AddCallback("btn_check_updates",	ui_events.BUTTON_CLICKED,	self.OnBtnCheckUpdates,		self)
+	self:AddCallback("btn_simply_gameplay",	ui_events.BUTTON_CLICKED,	self.OnSimplyGameplay,		self)
 
 	self:AddCallback("btn_cancel_download",	ui_events.BUTTON_CLICKED,	self.OnBtn_CancelDownload,	self)
 	
 end
 
 function options_dialog:OnBtnCheckUpdates()
-	local console			= get_console()
-	console:execute			("check_for_updates 1")
+	self.dlg_gameplay:Show		(false)
+	self.dlg_gameplay_adv:Show	(true)
+end
+
+function options_dialog:OnSimplyGameplay()
+	self.dlg_gameplay:Show		(true)
+	self.dlg_gameplay_adv:Show	(false)
 end
 
 function options_dialog:OnBtnDefault()
@@ -228,6 +240,7 @@ function options_dialog:OnTabChange()
 	self.dlg_video:Show		(false)
 	self.dlg_sound:Show		(false)
 	self.dlg_gameplay:Show	(false)
+	self.dlg_gameplay_adv:Show(false)
 	self.dlg_controls:Show	(false)
 	self.dlg_video_adv:Show	(false)
 	
@@ -265,6 +278,9 @@ function options_dialog:OnKeyboard(dik, keyboard_action)
 				if self.dlg_video_adv:IsShown() then
 					self.dlg_video_adv:Show	(false)
 					self.dlg_video:Show		(true)
+				elseif self.dlg_gameplay_adv:IsShown() then
+					self.dlg_gameplay_adv:Show	(false)
+					self.dlg_gameplay:Show		(true)
 				else
 					self:GetHolder():start_stop_menu	(self.owner, true) --new(show main window)
 					self:GetHolder():start_stop_menu	(self,true)

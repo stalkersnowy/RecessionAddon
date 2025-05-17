@@ -282,7 +282,7 @@ function load_job(sj, gname, type, squad, groups)
 		}
 		table.insert(sj, t)
 	end
---[[	if type == "yan_tonnel_snorks" then
+	if type == "yan_tonnel_snorks" then
 		t = { section = "logic@yan_tonnel_snork_home_1",
 			idle = 0,
 			prior = 9, state = {0}, squad = squad, group = groups[2],
@@ -373,7 +373,7 @@ function load_job(sj, gname, type, squad, groups)
 			in_rest = "", out_rest = ""
 		}
 		table.insert(sj, t)
-	end]]
+	end
 
 
 end
@@ -405,11 +405,11 @@ function load_states(gname, type)
 		end
     end
 	
---[[	if type == "yan_tonnel_snorks" then
+	if type == "yan_tonnel_snorks" then
 		return function(gulag)
 			return 0
 		end
-	end]]
+	end
 
 end
 
@@ -435,9 +435,9 @@ end
 
 
 function checkMonster(npc_community, gulag_type)
---[[	if gulag_type == "yan_tonnel_snorks" then 
+	if gulag_type == "yan_tonnel_snorks" then 
 		return npc_community == "snork"
-	end]]
+	end
 
 	return false
 end

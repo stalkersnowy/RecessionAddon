@@ -363,4 +363,40 @@
 	<string id="ui_mm_volumetric_light">
 		<text>Объёмный свет</text>
 	</string>
+	<string id="ui_mm_g_hit_mark_index">
+		<text>Текстура маркера попадания</text>
+	</string>
+	<string id="ui_mm_g_use_ik">
+		<text>Инверсная кинематика (3120)</text>
+	</string>
+	<string id="ui_mm_r2_bloom_mode">
+		<text>Режим графики</text>
+	</string>
+	<string id="SoC">
+		<text>ТЧ</text>
+	</string>
+	<string id="ui_mm_r2_indoor_lighting">
+		<text>Особое освещение подземных локаций</text>
+	</string>
+	<string id="ui_mm_r2_ls_bloom_fast">
+		<text>Упрощённый блум</text>
+	</string>
+	<string id="ui_mm_r2_mblur">
+		<text>Размытие в движении</text>
+	</string>
+	<string id="ui_mm_r2_old_aref">
+		<text>Ранний шейдер прозрачных поверхностей</text>
+	</string>
+	<string id="ui_mm_r2_old_distort">
+		<text>Ранний шейдер искажений</text>
+	</string>
+	<string id="ui_mm_r2_tonemap">
+		<text>Tonemap</text>
+	</string>
+	<string id="ui_mm_r__wallmarks_on_skeleton">
+		<text>Отметки от попаданий на дин. объектах</text>
+	</string>
+	<string id="ui_mm_weapon_bobbing">
+		<text>Раскачка оружия</text>
+	</string>
 </string_table>

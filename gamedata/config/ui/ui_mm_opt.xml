@@ -862,7 +862,7 @@
 			<text font="letterica16" color="ui_6">ui_st_disable_hud</text>
 		</check_hud_draw>
 
-		<btn_check_updates x="342" y="290" width="111" height="29">
+		<btn_check_updates x="342" y="325" width="111" height="29">
 			<text align="c" font="letterica16" r="227" g="199" b="178">ui_mm_advanced</text>
 			<texture>ui_button_ordinary</texture>
 		</btn_check_updates>
@@ -936,6 +936,103 @@
 		</btn_default>
 
 	</tab_controls>
+
+	<gameplay_adv>
+
+		<scroll_v x="0" y="10" width="464" height="313" right_ident="0" left_ident="0" top_indent="0" bottom_indent="5" vert_interval="0" always_show_scroll="0"/>
+
+		<templ_item width="450" height="30"/>
+
+		<cap_g_hit_mark_index x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_g_hit_mark_index</text>
+		</cap_g_hit_mark_index>
+		<spin_g_hit_mark_index x="300" y="10" width="45" height="23" max="18">
+			<options_item entry="g_hit_mark_index" group="mm_opt_gameplay"/>
+		</spin_g_hit_mark_index>
+
+		<cap_g_use_ik x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_g_use_ik</text>
+		</cap_g_use_ik>
+		<check_g_use_ik x="300" y="10" width="30" height="21">
+			<options_item entry="g_use_ik" group="mm_opt_video"/>
+		</check_g_use_ik>
+
+		<cap_r2_bloom_mode x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_bloom_mode</text>
+		</cap_r2_bloom_mode>
+		<combo_r2_bloom_mode x="194" y="10" width="245" height="21" always_show_scroll="0" list_length="7">
+			<options_item entry="r2_bloom_mode" group="mm_opt_video_adv" depend="vid"/>
+			<text_color>
+				<e r="216" g="186" b="140"/>
+				<d color="ui_gray"/>
+			</text_color>
+			<list_font_s r="240" g="217" b="182"/>
+			<list_font r="216" g="186" b="140" font="letterica16"/>
+		</combo_r2_bloom_mode>
+
+		<cap_r2_indoor_lighting x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_indoor_lighting</text>
+		</cap_r2_indoor_lighting>
+		<check_r2_indoor_lighting x="300" y="10" width="30" height="21">
+			<options_item entry="r2_indoor_lighting" group="mm_opt_video"/>
+		</check_r2_indoor_lighting>
+
+		<cap_r2_ls_bloom_fast x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_ls_bloom_fast</text>
+		</cap_r2_ls_bloom_fast>
+		<check_r2_ls_bloom_fast x="300" y="10" width="30" height="21">
+			<options_item entry="r2_ls_bloom_fast" group="mm_opt_video"/>
+		</check_r2_ls_bloom_fast>
+
+		<cap_r2_mblur x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_mblur</text>
+		</cap_r2_mblur>
+		<check_r2_mblur x="300" y="10" width="30" height="21">
+			<options_item entry="r2_mblur" group="mm_opt_video"/>
+		</check_r2_mblur>
+
+		<cap_r2_old_aref x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_old_aref</text>
+		</cap_r2_old_aref>
+		<check_r2_old_aref x="300" y="10" width="30" height="21">
+			<options_item entry="r2_old_aref" group="mm_opt_video"/>
+		</check_r2_old_aref>
+
+		<cap_r2_old_distort x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_old_distort</text>
+		</cap_r2_old_distort>
+		<check_r2_old_distort x="300" y="10" width="30" height="21">
+			<options_item entry="r2_old_distort" group="mm_opt_video"/>
+		</check_r2_old_distort>
+
+		<cap_r2_tonemap x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_tonemap</text>
+		</cap_r2_tonemap>
+		<check_r2_tonemap x="300" y="10" width="30" height="21">
+			<options_item entry="r2_tonemap" group="mm_opt_video"/>
+		</check_r2_tonemap>
+
+		<cap_r__wallmarks_on_skeleton x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r__wallmarks_on_skeleton</text>
+		</cap_r__wallmarks_on_skeleton>
+		<check_r__wallmarks_on_skeleton x="300" y="10" width="30" height="21">
+			<options_item entry="r__wallmarks_on_skeleton" group="mm_opt_video"/>
+		</check_r__wallmarks_on_skeleton>
+
+		<cap_weapon_bobbing x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_weapon_bobbing</text>
+		</cap_weapon_bobbing>
+		<check_weapon_bobbing x="300" y="10" width="30" height="21">
+			<options_item entry="weapon_bobbing" group="mm_opt_video"/>
+		</check_weapon_bobbing>
+
+		<btn_to_simply x="342" y="325" width="111" height="29">
+			<text align="c" font="letterica16" r="227" g="199" b="178">ui_mm_simply</text>
+			<texture>ui_button_ordinary</texture>
+		</btn_to_simply>
+
+	</gameplay_adv>
+
 
 	<frame x="0" y="0" width="470" height="330">
 		<texture>ui_tablist_textbox</texture>

@@ -1,0 +1,64 @@
+class "opt_gameplay_adv" (CUIWindow)
+
+function opt_gameplay_adv:__init() super()
+end
+
+function opt_gameplay_adv:__finalize()
+end
+
+
+function opt_gameplay_adv:InitControls(x, y, xml, handler)
+	local ctl
+	self:Init									(x,y, 738, 416)
+	self:SetAutoDelete							(true)
+	
+	self.bk			= xml:InitFrame				("frame_gameplayadv", self)
+	self.scroll_v	= xml:InitScrollView		("gameplay_adv:scroll_v", self)
+
+	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("gameplay_adv:cap_g_hit_mark_index",			_st)
+	xml:InitSpinNum								("gameplay_adv:spin_g_hit_mark_index",			_st)
+
+	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("gameplay_adv:cap_g_use_ik",					_st)
+	xml:InitCheck								("gameplay_adv:check_g_use_ik",					_st)
+
+	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("gameplay_adv:cap_r2_bloom_mode",				_st)
+	xml:InitComboBox							("gameplay_adv:combo_r2_bloom_mode",			_st)
+
+	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("gameplay_adv:cap_r2_indoor_lighting",			_st)
+	xml:InitCheck								("gameplay_adv:check_r2_indoor_lighting",		_st)
+
+	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("gameplay_adv:cap_r2_ls_bloom_fast",			_st)
+	xml:InitCheck								("gameplay_adv:check_r2_ls_bloom_fast",			_st)
+
+	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("gameplay_adv:cap_r2_mblur",					_st)
+	xml:InitCheck								("gameplay_adv:check_r2_mblur",					_st)
+
+	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("gameplay_adv:cap_r2_old_aref",				_st)
+	xml:InitCheck								("gameplay_adv:check_r2_old_aref",				_st)
+
+	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("gameplay_adv:cap_r2_old_distort",				_st)
+	xml:InitCheck								("gameplay_adv:check_r2_old_distort",			_st)
+
+	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("gameplay_adv:cap_r2_tonemap",					_st)
+	xml:InitCheck								("gameplay_adv:check_r2_tonemap",				_st)
+
+	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("gameplay_adv:cap_r__wallmarks_on_skeleton",	_st)
+	xml:InitCheck								("gameplay_adv:check_r__wallmarks_on_skeleton",	_st)
+
+	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("gameplay_adv:cap_weapon_bobbing",				_st)
+	xml:InitCheck								("gameplay_adv:check_weapon_bobbing",			_st)
+
+	btn		= xml:Init3tButton					("gameplay_adv:btn_to_simply",	self)	
+	handler:Register							(btn, "btn_simply_gameplay")	
+end

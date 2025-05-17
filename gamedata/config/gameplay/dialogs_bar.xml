@@ -4155,7 +4155,7 @@
                 <text></text>
                 <dont_has_info>bar_deactivate_radar_start</dont_has_info>
                 <has_info>bar_barman_stay_room</has_info>
-                <!--has_info>bar_radar_shedule</has_info-->
+                <has_info>bar_x16_documents_done</has_info>
                 <next>41</next>
             </phrase>
             <phrase id="41">
