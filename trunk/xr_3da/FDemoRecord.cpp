@@ -413,9 +413,8 @@ void CDemoRecord::IR_OnKeyboardPress	(int dik)
 	{	
 		if (g_pGameLevel->CurrentEntity())
 		{
-//#ifndef NDEBUG
-			g_pGameLevel->CurrentEntity()->ForceTransform(m_Camera);
-//#endif
+			if (g_pGameLevel->CheatsEnabled())
+				g_pGameLevel->CurrentEntity()->ForceTransform(m_Camera);
 			fLifeTime		= -1; 
 		}
 	}

@@ -9,6 +9,7 @@ namespace GameConstants
 	bool GetDisableStoppingGrenade			();
 	bool GetMergedAmmoLineWithFiremodes		();
 	bool GetCheckOverlapForPickup			();
+	bool GetEnableCheats					();
 	bool GetContactsBioShowing				();
 	bool GetPartnerWeightInCarBodyShowing	();
 	bool GetTrackBarValuesShowing			();

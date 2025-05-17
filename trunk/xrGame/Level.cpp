@@ -1044,6 +1044,12 @@ bool CLevel::TestLoadBEClient()
 
 #endif // BATTLEYE
 
+#include "GameConstants.h"
+bool CLevel::CheatsEnabled()
+{
+	return GameConstants::GetEnableCheats();
+}
+
 GlobalFeelTouch::GlobalFeelTouch()
 {
 }

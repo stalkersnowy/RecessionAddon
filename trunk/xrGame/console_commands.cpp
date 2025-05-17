@@ -52,6 +52,8 @@
 
 #include "hudmanager.h"
 
+#include "GameConstants.h"
+
 string_path		g_last_saved_game;
 
 extern void show_smart_cast_stats		();
@@ -1615,6 +1617,8 @@ public:
 
 void CCC_RegisterCommands()
 {
+	GameConstants::LoadConstants();
+
 	// options
 	g_OptConCom.Init();
 
@@ -1663,11 +1667,6 @@ void CCC_RegisterCommands()
 
 	CMD3(CCC_Mask,				"hud_crosshair",		&psHUD_Flags,	HUD_CROSSHAIR);
 	CMD3(CCC_Mask,				"hud_crosshair_dist",	&psHUD_Flags,	HUD_CROSSHAIR_DIST);
-
-//#ifdef DEBUG
-	CMD4(CCC_Float,				"hud_fov",				&psHUD_FOV,		0.1f,	1.0f);
-	CMD4(CCC_Float,				"fov",					&g_fov,			5.0f,	180.0f);
-//#endif // DEBUG
 
 	// Demo
 	CMD1(CCC_DemoPlay,			"demo_play"				);
@@ -1749,8 +1748,6 @@ void CCC_RegisterCommands()
 
 	CMD1(CCC_ShowAnimationStats,"ai_show_animation_stats");
 #endif // DEBUG
-	
-	CMD3(CCC_Mask,				"ai_ignore_actor",		&psActorFlags,	AF_IGNORE_ACTOR);
 
 	// Physics
 	CMD1(CCC_PHFps,				"ph_frequency"																					);
@@ -1764,18 +1761,23 @@ void CCC_RegisterCommands()
 	CMD4(CCC_Integer,			"ph_tri_clear_disable_count",	&ph_tri_clear_disable_count	,			0,		255				);
 	CMD4(CCC_FloatBlock,		"ph_tri_query_ex_aabb_rate",	&ph_tri_query_ex_aabb_rate	,			1.01f	,3.f			);
 #endif // DEBUG
+	
 
-
-//#ifndef MASTER_GOLD
-	CMD1(CCC_JumpToLevel,	"jump_to_level"		);
-	CMD3(CCC_Mask,			"g_god",			&psActorFlags,	AF_GODMODE	);
-	CMD3(CCC_Mask,			"g_unlimitedammo",	&psActorFlags,	AF_UNLIMITEDAMMO);
-	CMD1(CCC_Script,		"run_script");
-	CMD1(CCC_ScriptCommand,	"run_string");
-	CMD1(CCC_TimeFactor,	"time_factor");
-	CMD1(CCC_Spawn,			"g_spawn");
-	CMD1(CCC_Spawn_to_inv,	"g_spawn_to_inventory");
-//#endif // MASTER_GOLD
+	if(GameConstants::GetEnableCheats()){
+		CMD4(CCC_Float,			"hud_fov",			&psHUD_FOV,		0.1f,	1.0f);
+		CMD4(CCC_Float,			"fov",				&g_fov,			5.0f,	180.0f);
+		CMD3(CCC_Mask,			"ai_ignore_actor",	&psActorFlags,	AF_IGNORE_ACTOR);
+		CMD1(CCC_JumpToLevel,	"jump_to_level"		);
+		CMD3(CCC_Mask,			"g_god",			&psActorFlags,	AF_GODMODE	);
+		CMD3(CCC_Mask,			"g_unlimitedammo",	&psActorFlags,	AF_UNLIMITEDAMMO);
+		CMD1(CCC_Script,		"run_script");
+		CMD1(CCC_ScriptCommand,	"run_string");
+		CMD1(CCC_TimeFactor,	"time_factor");
+		CMD1(CCC_Spawn,			"g_spawn");
+		CMD1(CCC_Spawn_to_inv,	"g_spawn_to_inventory");
+		CMD1(CCC_StartTimeSingle,	"start_time_single");
+		CMD4(CCC_TimeFactorSingle,	"time_factor_single", &g_fTimeFactor, 0.f,flt_max);
+	}
 
 	CMD3(CCC_Mask,		"g_autopickup",			&psActorFlags,	AF_AUTOPICKUP);
 
@@ -1850,12 +1852,6 @@ void CCC_RegisterCommands()
 
 	CMD3(CCC_Mask,			"cl_dynamiccrosshair",	&psHUD_Flags,	HUD_CROSSHAIR_DYNAMIC);
 	CMD1(CCC_MainMenu,		"main_menu"				);
-
-//#ifndef MASTER_GOLD
-	CMD1(CCC_StartTimeSingle,	"start_time_single");
-	CMD4(CCC_TimeFactorSingle,	"time_factor_single", &g_fTimeFactor, 0.f,flt_max);
-//#endif // MASTER_GOLD
-
 
 	g_uCommonFlags.zero();
 	g_uCommonFlags.set(flAiUseTorchDynamicLights, TRUE);

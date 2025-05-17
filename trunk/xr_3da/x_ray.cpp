@@ -779,7 +779,7 @@ LPCSTR _GetFontTexName (LPCSTR section)
 	u32 h = Device.dwHeight;
 
 	if (h <= 600)		idx = 0;
-	else if (h < 1024)	idx = 1;
+	else if (h <= 1024)	idx = 1;
 	else if (h < 1200)	idx = 2;
 	else if (h < 1440)	idx = 3;
 	else				idx = 4;

@@ -275,7 +275,7 @@ void CLevel::IR_OnKeyboardPress	(int key)
 
 #endif
 	case DIK_DIVIDE:
-		if( OnServer() ){
+		if( CheatsEnabled() && OnServer() ){
 //			float NewTimeFactor				= pSettings->r_float("alife","time_factor");
 			
 			if (GameID() == GAME_SINGLE)
@@ -288,7 +288,7 @@ void CLevel::IR_OnKeyboardPress	(int key)
 		}
 		break;	
 	case DIK_MULTIPLY:
-		if( OnServer() ){
+		if( CheatsEnabled() && OnServer() ){
 			float NewTimeFactor				= 1000.f;
 			if (GameID() == GAME_SINGLE)
 				Server->game->SetGameTimeFactor(NewTimeFactor);

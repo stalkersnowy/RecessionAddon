@@ -16,7 +16,6 @@
 #include "WeaponHUD.h"
 #include "stalker_animation_data_storage.h"
 #include "stalker_velocity_holder.h"
-#include "GameConstants.h"
 
 #include "../xr_3da/CameraManager.h"
 
@@ -129,7 +128,6 @@ void CGamePersistent::OnAppStart()
 	__super::OnAppStart			();
 	m_pUI_core					= xr_new<ui_core>();
 	m_pMainMenu					= xr_new<CMainMenu>();
-	GameConstants::LoadConstants();
 }
 
 

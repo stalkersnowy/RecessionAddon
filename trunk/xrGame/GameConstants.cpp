@@ -10,6 +10,8 @@ bool	m_bDisableStoppingBolt				= true;
 bool	m_bDisableStoppingGrenade			= true;
 bool	m_bMergeAmmoLineWithFiremode		= true;
 bool	m_bCheckOverlapForPickup			= false;
+bool	m_bEnableCheats						= false;
+
 bool	m_bShowContactBio					= true;
 bool	m_bShowPartnerWeightInCarBody		= false;
 bool	m_bShowTrackBarValues				= false;
@@ -30,6 +32,8 @@ namespace GameConstants
 		m_bDisableStoppingGrenade			= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "disable_stopping_grenade", true);
 		m_bMergeAmmoLineWithFiremode		= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "merge_ammo_line_with_firemode", true);
 		m_bCheckOverlapForPickup			= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "check_overlap_for_pickup", false);
+		m_bEnableCheats						= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "enable_cheats", false);
+
 		m_bShowContactBio					= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_contact_bio", false);
 		m_bShowPartnerWeightInCarBody		= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_partner_weight_in_carbody", false);
 		m_bShowTrackBarValues				= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_track_bar_values", false);
@@ -62,6 +66,11 @@ namespace GameConstants
 	bool GetCheckOverlapForPickup()
 	{
 		return m_bCheckOverlapForPickup;
+	}
+
+	bool GetEnableCheats()
+	{
+		return m_bEnableCheats;
 	}
 
 	bool GetContactsBioShowing()
