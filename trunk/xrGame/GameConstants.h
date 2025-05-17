@@ -15,4 +15,5 @@ namespace GameConstants
 	bool GetTrackBarValuesShowing			();
 	bool GetNumBeforeAnswersShowing			();
 	bool GetSatietyBarInInventoryShowing	();
+	bool GetOldLuminosityBar				();
 };

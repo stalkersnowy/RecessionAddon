@@ -946,7 +946,7 @@
 		<cap_g_hit_mark_index x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_hit_mark_index</text>
 		</cap_g_hit_mark_index>
-		<spin_g_hit_mark_index x="300" y="10" width="45" height="23" max="18">
+		<spin_g_hit_mark_index x="300" y="10" width="45" height="21" max="18">
 			<options_item entry="g_hit_mark_index" group="mm_opt_gameplay"/>
 		</spin_g_hit_mark_index>
 

@@ -2,6 +2,7 @@
 #include "UIMainIngameWnd.h"
 #include "UIMotionIcon.h"
 #include "UIXmlInit.h"
+#include "GameConstants.h"
 const LPCSTR MOTION_ICON_XML = "motion_icon.xml";
 
 CUIMotionIcon::CUIMotionIcon()
@@ -18,6 +19,7 @@ CUIMotionIcon::~CUIMotionIcon()
 
 void CUIMotionIcon::ResetVisibility()
 {
+	if(GameConstants::GetOldLuminosityBar()) return;
 	m_npc_visibility.clear	();
 	m_bchanged				= true;
 }
@@ -132,6 +134,8 @@ void CUIMotionIcon::Update()
 
 void CUIMotionIcon::SetActorVisibility		(u16 who_id, float value)
 {
+	if(GameConstants::GetOldLuminosityBar()) return;
+
 	float v		= float(m_luminosity_progress.GetRange_max() - m_luminosity_progress.GetRange_min());
 	value		*= v;
 	value		+= m_luminosity_progress.GetRange_min();

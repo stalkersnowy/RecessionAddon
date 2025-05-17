@@ -9,7 +9,7 @@ bool	m_bDisableStopping					= true;
 bool	m_bDisableStoppingBolt				= true;
 bool	m_bDisableStoppingGrenade			= true;
 bool	m_bMergeAmmoLineWithFiremode		= true;
-bool	m_bCheckOverlapForPickup			= false;
+bool	m_bCheckOverlapForPickup			= true;
 bool	m_bEnableCheats						= false;
 
 bool	m_bShowContactBio					= true;
@@ -17,6 +17,7 @@ bool	m_bShowPartnerWeightInCarBody		= false;
 bool	m_bShowTrackBarValues				= false;
 bool	m_bShowNumBeforeAnswers				= true;
 bool	m_bShowSatietyInInventory			= false;
+bool	m_bOldLuminosityBar					= false;
 
 namespace GameConstants
 {
@@ -31,7 +32,7 @@ namespace GameConstants
 		m_bDisableStoppingBolt				= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "disable_stopping_bolt", true);
 		m_bDisableStoppingGrenade			= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "disable_stopping_grenade", true);
 		m_bMergeAmmoLineWithFiremode		= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "merge_ammo_line_with_firemode", true);
-		m_bCheckOverlapForPickup			= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "check_overlap_for_pickup", false);
+		m_bCheckOverlapForPickup			= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "check_overlap_for_pickup", true);
 		m_bEnableCheats						= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "enable_cheats", false);
 
 		m_bShowContactBio					= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_contact_bio", false);
@@ -39,6 +40,7 @@ namespace GameConstants
 		m_bShowTrackBarValues				= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_track_bar_values", false);
 		m_bShowNumBeforeAnswers				= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_numbers_before_answers", false);
 		m_bShowSatietyInInventory			= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_satiety_bar_in_inventory", false);
+		m_bOldLuminosityBar					= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "old_luminosity_bar", false);
 
 		Msg("# GameConstants are loaded");
 	}
@@ -96,5 +98,10 @@ namespace GameConstants
 	bool GetSatietyBarInInventoryShowing()
 	{
 		return m_bShowSatietyInInventory;
+	}
+
+	bool GetOldLuminosityBar()
+	{
+		return m_bOldLuminosityBar;
 	}
 }

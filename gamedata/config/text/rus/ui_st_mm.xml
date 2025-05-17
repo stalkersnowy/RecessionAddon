@@ -367,7 +367,7 @@
 		<text>Текстура маркера попадания</text>
 	</string>
 	<string id="ui_mm_g_use_ik">
-		<text>Инверсная кинематика (3120)</text>
+		<text>Инверсная кинематика</text>
 	</string>
 	<string id="ui_mm_r2_bloom_mode">
 		<text>Режим графики</text>

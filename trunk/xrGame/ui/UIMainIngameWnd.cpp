@@ -48,6 +48,7 @@
 #include "map_hint.h"
 #include "UIColorAnimatorWrapper.h"
 #include "../game_news.h"
+#include "../GameConstants.h"
 
 #ifdef DEBUG
 #	include "../debug_renderer.h"
@@ -288,7 +289,7 @@ void CUIMainIngameWnd::Draw()
 	}
 	FS.dwOpenCounter = 0;
 
-	if(!IsGameTypeSingle())
+	if(!IsGameTypeSingle() || GameConstants::GetOldLuminosityBar())
 	{
 		float		luminocity = smart_cast<CGameObject*>(Level().CurrentEntity())->ROS()->get_luminocity();
 		float		power = log(luminocity > .001f ? luminocity : .001f)*(1.f/*luminocity_factor*/);
