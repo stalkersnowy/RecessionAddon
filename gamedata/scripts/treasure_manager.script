@@ -7,7 +7,7 @@ function parse_spawns(line)
 
 	--' если default-ов больше, чем значений в ini, то забить недостающие последним значением из ini
 	local t = se_respawn.parse_names(line)
-	local n = table.getn(t)
+	local n = #t
 		
 	local ret_table = {}
 	local k = 1

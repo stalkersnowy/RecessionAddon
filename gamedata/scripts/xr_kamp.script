@@ -282,9 +282,9 @@ function CKampManager:selectPosition(npc_id)
 		end
 	end
 	--' затем из доступных позиций выбрать рандомно одну.
-	if table.getn(free) > 0 then
+	if #free > 0 then
 		--printf("KAMP [%s] free node > 0", npc_id)
-		local rr = math.random(table.getn(free))
+		local rr = math.random(#free)
 		self.position[free[rr]].used = npc_id
 		self.npc[npc_id].position = free[rr]
 	end
@@ -434,14 +434,14 @@ function CKampManager:proceedRole(npc, director)
 		
 		-- Если мы решили говорить историю, надо выбрать какую именно говорить.
 		if sound == "play_story" and self.selected_story == nil and db.story_by_id[npc_id] ~= nil then
-			local story_num = table.getn(db.story_by_id[npc_id])
+			local story_num = #db.story_by_id[npc_id]
 			if story_num > 0 then
 				self.selected_story = db.story_by_id[npc_id][math.random(story_num)]
 			end			
 		end
 
 		self.npc[npc_id].begin = time_global()
-		state = temp[math.random(table.getn(temp))]
+		state = temp[math.random(#temp)]
 		self.npc[npc_id].state_selected = state
 		self.npc[npc_id].state_idle = math.random(15000,20000)		
 	else

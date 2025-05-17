@@ -144,7 +144,7 @@ function save(package)
 			table.insert(afs, k)
 		end
 	end
-	package:w_u16(table.getn(afs))
+	package:w_u16(#afs)
 	for k,v in pairs(afs) do
 		package:w_u32(v)
 	end

@@ -268,7 +268,7 @@ function gulag:save_common( packet )
 	packet:w_u8(self.population_comed)
 	packet:w_u8(self.population_non_exclusive)
 
-	packet:w_u8( table.getn( self.Job ) )
+	packet:w_u8( #self.Job )
 
 	for i, job in ipairs( self.Job ) do
 		packet:w_u32( job.begin            or 0 )
@@ -671,7 +671,7 @@ function gulag:calc_distance_table( jobs, objs, prior_block_start )
 	local t
 	local i              = prior_block_start
 
-	while i <= table.getn( jobs ) and jobs[i].prior == block_priority do
+	while i <= #jobs and jobs[i].prior == block_priority do
 		if jobs[i].object == nil then
 			predicate = jobs[i].predicate
 
@@ -709,7 +709,7 @@ end
 -- найти занятых персонажей, которые могут занять заданную работу.
 -- поиск ведётся начиная с самых низкоприоритетных работ
 function gulag:find_obj_on_jobLow_for_jobHigh( Job_avail, job_high )
-	local n = table.getn( Job_avail )
+	local n = #Job_avail
 	local i = n
 
 	local job_low
@@ -768,7 +768,7 @@ function gulag:updateJob()
 	local prior_block_start = 1
 	local prior_block_end
 
-	while prior_block_start <= table.getn( Job_avail ) do
+	while prior_block_start <= #Job_avail do
 		dists, prior_block_end = self:calc_distance_table( Job_avail, obj_avail, prior_block_start )
 
 		table.sort( dists, function(a,b) return a.dist < b.dist end )

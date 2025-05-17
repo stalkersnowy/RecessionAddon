@@ -312,7 +312,7 @@ function CRandomTask:action_give_task(actor, npc, p1, p2)
 	objective:set_description(task_desc.name)
 	--' Выбираем текущую цель квеста
 	if task_desc.target_objects ~= nil then
-		self.task_info[self.task_id_by_yes_phrase_id[p2]].selected_target = task_desc.target_objects[math.random(table.getn(task_desc.target_objects))]
+		self.task_info[self.task_id_by_yes_phrase_id[p2]].selected_target = task_desc.target_objects[math.random(#task_desc.target_objects)]
 		printf("TARGET DEBUG INFO")
 		printf("selected = %s", tostring(self.task_info[self.task_id_by_yes_phrase_id[p2]].selected_target))
 		print_table(task_desc.target_objects)
@@ -650,7 +650,7 @@ function CRandomTask:check_task_props(task_id)
 		self.task_info[task_id].enabled_props = false
 		return
 	elseif self.task_info[task_id].type == "find_item" then
-		if self.task_info[task_id].target_objects == nil or table.getn(self.task_info[task_id].target_objects) == 0 then
+		if self.task_info[task_id].target_objects == nil or #self.task_info[task_id].target_objects == 0 then
 			self.task_info[task_id].enabled_props = false
 			return
 		end
