@@ -35,6 +35,8 @@
 
 CUIXml*				pWpnScopeXml = NULL;
 
+BOOL				g_bUseLens = TRUE;
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -1659,7 +1661,7 @@ void CWeapon::OnDrawUI()
 				m_zoom_params.m_pVision->Draw();
 		}
 	}
-	MainMenu()->SetWpnScopeDraw(zoom && m_UILens);
+	MainMenu()->SetWpnScopeDraw(g_bUseLens && zoom && m_UILens);
 }
 
 bool CWeapon::unlimited_ammo() 

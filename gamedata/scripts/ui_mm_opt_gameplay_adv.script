@@ -24,6 +24,10 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	xml:InitCheck								("gameplay_adv:check_g_use_ik",					_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("gameplay_adv:cap_g_use_lens",					_st)
+	xml:InitCheck								("gameplay_adv:check_g_use_lens",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	xml:InitStatic								("gameplay_adv:cap_r2_bloom_mode",				_st)
 	xml:InitComboBox							("gameplay_adv:combo_r2_bloom_mode",			_st)
 

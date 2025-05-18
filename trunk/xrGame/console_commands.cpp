@@ -86,6 +86,8 @@ extern	float	g_fTimeFactor;
 
 extern	int		m_HitMarkIndex;
 
+extern	BOOL	g_bUseLens;
+
 
 void register_mp_console_commands();
 //-----------------------------------------------------------
@@ -1858,7 +1860,8 @@ void CCC_RegisterCommands()
 
 	CMD3(CCC_Mask,		"ai_use_torch_dynamic_lights",	&g_uCommonFlags, flAiUseTorchDynamicLights);
 
-	CMD4(CCC_Integer,		"g_use_ik",	&g_bUseIK, 0,1);
+	CMD4(CCC_Integer,		"g_use_ik",		&g_bUseIK, 0,1);
+	CMD4(CCC_Integer,		"g_use_lens",	&g_bUseLens, 0,1);
 
 
 #ifndef MASTER_GOLD

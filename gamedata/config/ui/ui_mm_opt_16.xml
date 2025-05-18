@@ -968,6 +968,13 @@
 			<options_item entry="g_use_ik" group="mm_opt_video"/>
 		</check_g_use_ik>
 
+		<cap_g_use_lens x="17" y="10" width="119" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_g_use_lens</text>
+		</cap_g_use_lens>
+		<check_g_use_lens x="225" y="10" width="27" height="21" stretch="1">
+			<options_item entry="g_use_lens" group="mm_opt_video"/>
+		</check_g_use_lens>
+
 		<cap_r2_bloom_mode x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_bloom_mode</text>
 		</cap_r2_bloom_mode>
