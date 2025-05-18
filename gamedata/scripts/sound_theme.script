@@ -711,7 +711,7 @@ function load_sound(obj)
 			local s = select_sound_from_ltx(obj, name.."_rnd", snd_ini)			
 			if s then
 				local flag, path = check_prefix(s)
-				if flag == "0" then
+				if flag == "0" or flag == "2" then
 					character_prefix = obj:sound_prefix()
 					obj:sound_prefix(default_prefix)
 				end
@@ -719,8 +719,14 @@ function load_sound(obj)
 				--printf("NPC[%s] flag[%s] prefix[%s] path[%s]", obj:name(), flag, obj:sound_prefix(), path)
 				tbl.max_ids[obj:id()].rnd_max = obj:add_sound(path, nstl, snd_type.talk, 2, 1, tbl.rnd_id)
 
-				if flag == "0" then
+				if flag == "0" or flag == "2" then
 					obj:sound_prefix(character_prefix)
+				end
+				
+				if flag == "2" then
+					tbl.max_ids[obj:id()].pda_path = default_prefix..path
+				elseif flag == "3" then
+					tbl.max_ids[obj:id()].pda_path = obj:sound_voice_prefix()..path
 				end
 			end
 		end

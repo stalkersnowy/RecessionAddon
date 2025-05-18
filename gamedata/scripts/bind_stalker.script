@@ -117,6 +117,14 @@ function actor_binder:reinit()
 	self.object:set_callback(callback.take_item_from_box, self.take_item_from_box, self)
 end
 ----------------------------------------------------------------------------------------------------------------------
+camp_stash_robbery = false
+
+function load_robbery()
+	if constants_ini():r_bool("scripts", "camp_stash_robbery") == true then
+		camp_stash_robbery = true
+	end
+end
+
 function actor_binder:take_item_from_box(box, item)
 	local story_id = box:story_id()
 	if story_id == nil then
@@ -124,26 +132,27 @@ function actor_binder:take_item_from_box(box, item)
 	end
 
 	treasure_manager.take_item_from_box(box, story_id)
---[[	
+
 	local respawner = se_respawn.get_respawner_by_parent(story_id)
 	if respawner == nil then
 		return
 	end
 	
 	--' Ќеобходимо уменьшить счетчик в респавнере
-	respawner:remove_spawned(item:id())
+	respawner:remove_spawned(item:id()) -- SNW: такое чувство, что этот код закомментили случайно, он же никакого отношени€ к воровству не имеет - вернул на свой страх ирисок
 
-	local smart_terrain = db.strn_by_respawn[respawner:name()]
-	if smart_terrain == nil then
-		return
+	if camp_stash_robbery == true then
+		local smart_terrain = db.strn_by_respawn[respawner:name()]
+		if smart_terrain == nil then
+			return
+		end
+
+		local npc = smart_terrain.gulag:get_nearest_online_obj(db.actor:position())
+		if npc ~= nil and npc:relation(db.actor) ~= game_object.enemy then
+			xr_sound.set_sound_play(npc, "reac_box")
+			xr_gulag.setGulagEnemy(smart_terrain:name() , db.actor)		
+		end
 	end
-
-	local npc = smart_terrain.gulag:get_nearest_online_obj(db.actor:position())
-    if npc ~= nil then
-	    xr_sound.set_sound_play(npc, "reac_box")
-	    xr_gulag.setGulagEnemy(smart_terrain:name() , db.actor)		
-    end
-]]
 end
 ----------------------------------------------------------------------------------------------------------------------
 function actor_binder:level_border_enter(npc, info_id)

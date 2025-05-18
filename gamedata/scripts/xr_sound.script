@@ -24,6 +24,8 @@ function get_sound(path, tt, npc)
 		tt.min_snd = path.min_snd
 		tt.max_snd = path.max_snd
 		tt.rnd_snd = path.rnd_snd
+		
+		tt.pda_path = path.max_ids[npc:id()].pda_path
 	else
 		get_sound(path.types[path.exec(path.types, npc)], tt, npc)
 	end
@@ -217,7 +219,12 @@ function play_sound(npc, themes, timeout)
 			
 			--printf("*SND* play seq [%s] for [%s]", db.sound[npc_id].last_snd[snd.into_id]+1, npc:name())
 			process_tutor_on_sound(snd.theme)
-			npc:play_sound(snd.into_id, 1, 0, 1, 0, db.sound[npc_id].last_snd[snd.into_id]+1)
+			if snd.pda_path ~= nil then
+				local pda_obj = xr_sound.get_safe_sound_object(snd.pda_path..db.sound[npc_id].last_snd[snd.into_id]+1)
+				pda_obj:play_no_feedback(db.actor, sound_object.s2d, 0, vector(), 1.0)
+			else
+				npc:play_sound(snd.into_id, 1, 0, 1, 0, db.sound[npc_id].last_snd[snd.into_id]+1)
+			end
 			db.sound[npc_id].last_snd[snd.into_id] = db.sound[npc_id].last_snd[snd.into_id] + 1
 			--printf("*SND* play seq [%s] for [%s]", db.sound[npc_id].last_snd[snd.into_id], npc:name())
 			return
@@ -246,7 +253,12 @@ function play_sound(npc, themes, timeout)
 			end							
 			--printf("*SND* play rnd [%s] for [%s]", s, npc:name())
 			process_tutor_on_sound(snd.theme)
-			npc:play_sound(snd.rnd_id, timeout+1, timeout, 1, 0, s)
+			if snd.pda_path ~= nil then
+				local pda_obj = xr_sound.get_safe_sound_object(snd.pda_path..s)
+				pda_obj:play_no_feedback(db.actor, sound_object.s2d, 0, vector(), 1.0)
+			else
+				npc:play_sound(snd.rnd_id, timeout+1, timeout, 1, 0, s)
+			end
 			--db.sound[npc_id].last_snd[snd.rnd_id] = s
 			group_table.last_snd[snd.rnd_id] = s
 		end		

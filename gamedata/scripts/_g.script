@@ -1266,6 +1266,7 @@ function start_game_callback()
 	xr_sound.clear_all_sound_object()
 	dialog_manager.fill_phrase_table()	
 	news_manager.load_icons()
+	bind_stalker.load_robbery()
 end
 
 ammo_section = {}
