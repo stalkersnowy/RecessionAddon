@@ -36,6 +36,14 @@ local close_visuals = {
 	["actors\\nauchniy\\nauchniy_1"] = true
 }
 
+include_harmonica = false
+
+function load_constants()
+	if constants_ini():r_bool("scripts", "harmonica_in_kamps") == true then
+		include_harmonica = true
+	end
+end
+
 kamps = {}
 kamp_stalkers = {} -- могут ли сталкеры в лагере юзатьс€ игроком.
 -- ќбъ€влени€ итераторов
@@ -614,7 +622,7 @@ function CKampManager:checkNpcAbility(npc)
 				self.npc[npc_id].states["eat_bread"] = false
 			end
 			-- играть на гармошке
-			if npc:object("harmonica_a") then
+			if include_harmonica == true and npc:object("harmonica_a") then
 				self.npc[npc_id].states["play_harmonica"] = true
 				self.npc[npc_id].states["wait_harmonica"] = true
 				self.kamp_states["pre_harmonica"] = true
