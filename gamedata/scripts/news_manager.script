@@ -95,7 +95,7 @@ pda_news = xr_sound.get_safe_sound_object([[device\pda\pda_news]])
 pda_tips = xr_sound.get_safe_sound_object([[device\pda\pda_tip]])
 pda_task = xr_sound.get_safe_sound_object([[device\pda\pda_objective]])
 
-tips_icons = {
+local tips_icons_clans = {
 	default  = { 0, 658},
 	trader	 = { 332, 893},
 	dolg     = { 940, 865}, -- { 0, 658},
@@ -112,6 +112,30 @@ tips_icons = {
     prizrak  = { 415, 705},
     killer   = { 940, 765}, -- { 0, 658}
 }
+
+tips_icons = {
+	default  = { 0, 658},
+	trader	 = { 332, 893},
+	dolg     = { 0, 658},
+	freedom  = { 0, 658},
+	ecolog   = { 498, 0},
+	arena    = { 332, 141},
+	stalker  = { 0, 658},
+	krot     = { 332, 47},
+	barman   = { 332, 235},
+	wolf	 = { 332, 940},
+	o_soznanie = { 498, 893},
+	monolith = { 0, 658},
+    saharov  = { 332, 470},
+    prizrak  = { 415, 705},
+    killer   = { 0, 658}
+}
+
+function load_icons()
+	if constants_ini():r_bool("scripts", "clans_sms_icons") == true then
+		tips_icons = tips_icons_clans
+	end
+end
 
 
 function send_tip(actor, news_id, timeout, sender, showtime, sender_id)
