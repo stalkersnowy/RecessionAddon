@@ -85,7 +85,8 @@ void					CRender::create					()
 	m_skinning			= -1;
 
 	// hardware
-	o.smapsize			= ps_Smapsize == 4? 4096: 1536 + ps_Smapsize * 512;
+	o.smapsize			= 1024 + ps_Smapsize * 512;
+	Msg("SNW %d", o.smapsize);
 	o.mrt				= (HW.Caps.raster.dwMRT_count >= 3);
 	o.mrtmixdepth		= (HW.Caps.raster.b_MRT_mixdepth);
 
@@ -653,6 +654,13 @@ HRESULT	CRender::shader_compile			(
 	if (ps_r2_ls_flags.test(R2FLAG_OLD_DISTORT))
 	{
 		defines[def_it].Name		=	"OLD_DISTORT";
+		defines[def_it].Definition	=	"1";
+		def_it						++;
+	}
+
+	if (ps_r2_ls_flags.test(R2FLAG_SPECULAR_RGB))
+	{
+		defines[def_it].Name		=	"USE_SPECULAR_RGB";
 		defines[def_it].Definition	=	"1";
 		def_it						++;
 	}

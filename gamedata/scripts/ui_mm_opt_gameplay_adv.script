@@ -52,8 +52,16 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	xml:InitCheck								("gameplay_adv:check_r2_old_distort",			_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("gameplay_adv:cap_r2_specular_rgb",			_st)
+	xml:InitCheck								("gameplay_adv:check_r2_specular_rgb",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	xml:InitStatic								("gameplay_adv:cap_r2_tonemap",					_st)
 	xml:InitCheck								("gameplay_adv:check_r2_tonemap",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("gameplay_adv:cap_r__smapsize",				_st)
+	xml:InitComboBox							("gameplay_adv:combo_r__smapsize",				_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	xml:InitStatic								("gameplay_adv:cap_r__wallmarks_on_skeleton",	_st)

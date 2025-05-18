@@ -13,13 +13,15 @@ xr_token							qpreset_token							[ ]={
 	{ 0,							0											}
 };
 
-u32			ps_Smapsize				=	1	;
+u32			ps_Smapsize				=	2	;
 xr_token							qsmapsize_token							[ ]={
-	{ "1536",						0											},
-	{ "2048",						1											},
-	{ "2560",						2											},
-	{ "3072",						3											},
-	{ "4096",						4											},
+	{ "1024",						0											},
+	{ "1536",						1											},
+	{ "2048",						2											},
+	{ "2560",						3											},
+	{ "3072",						4											},
+	{ "3584",						5											},
+	{ "4096",						6											},
 	{ 0,							0											}
 };
 
@@ -630,6 +632,8 @@ void		xrRender_initconsole	()
 
 	CMD3(CCC_Mask,		"r2_old_distort",				&ps_r2_ls_flags,			R2FLAG_OLD_DISTORT);
 	CMD3(CCC_Mask,		"r2_old_aref",					&ps_r2_ls_flags,			R2FLAG_OLD_AREF);
+	
+	CMD3(CCC_Mask,		"r2_specular_rgb",				&ps_r2_ls_flags,			R2FLAG_SPECULAR_RGB);
 }
 
 void	xrRender_apply_tf		()

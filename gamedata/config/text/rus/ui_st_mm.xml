@@ -393,8 +393,14 @@
 	<string id="ui_mm_r2_old_distort">
 		<text>Ранний шейдер искажений</text>
 	</string>
+	<string id="ui_mm_r2_specular_rgb">
+		<text>Цветной спекуляр</text>
+	</string>
 	<string id="ui_mm_r2_tonemap">
 		<text>Tonemap</text>
+	</string>
+	<string id="ui_mm_r__smapsize">
+		<text>Размер теневой карты</text>
 	</string>
 	<string id="ui_mm_r__wallmarks_on_skeleton">
 		<text>Отметки от попаданий на дин. объектах</text>

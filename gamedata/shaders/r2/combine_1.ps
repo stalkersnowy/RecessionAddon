@@ -76,14 +76,22 @@ _out         main                ( _input I )
 			D.rgb		=	lerp			(D.rgb, hspecular, hfactor);
   	half4 	light 		= 	half4 			(L.rgb + hdiffuse, L.w*N.w);
   	half4 	C			= 	D*light			;					// rgb.gloss * light(diffuse.specular)
+#ifdef 	USE_SPECULAR_RGB
+	half3 	color 		  = C.rgb + C.www*lerp(L.rgb,1.h,.5h);// use diffuse*light as estimation of specular color
+#else
   	half3 	color 		= 	C.rgb + C.www 	;					// replicated specular
+#endif
 #else //outdoor
         half4         light       = half4         (L.rgb + hdiffuse, L.w)        ;
         half4         C           = D*light       ;                                                        // rgb.gloss * light(diffuse.specular)
 #if BLOOM_MODE > 1 && BLOOM_MODE < 4
 					  hspecular	  *= 1.5;
 #endif
-        half3         spec        = C.www         + hspecular;        // replicated specular
+#ifdef 	USE_SPECULAR_RGB
+		half3 		  spec 		  = hspecular + C.www*lerp(L.rgb,1.h,.5h);// use diffuse*light as estimation of specular color
+#else
+        half3         spec        = hspecular + C.www;        // replicated specular
+#endif
 #ifdef         USE_SUPER_SPECULAR
                       spec      = (C.rgb*.5h + .5h)*C.w + hspecular        ;
 #endif

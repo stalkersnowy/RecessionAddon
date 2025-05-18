@@ -954,21 +954,21 @@
 			<text font="letterica16" color="ui_6">ui_mm_g_use_ik</text>
 		</cap_g_use_ik>
 		<check_g_use_ik x="300" y="10" width="30" height="21">
-			<options_item entry="g_use_ik" group="mm_opt_video"/>
+			<options_item entry="g_use_ik" group="mm_opt_gameplay"/>
 		</check_g_use_ik>
 
 		<cap_g_use_lens x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_use_lens</text>
 		</cap_g_use_lens>
 		<check_g_use_lens x="300" y="10" width="30" height="21">
-			<options_item entry="g_use_lens" group="mm_opt_video"/>
+			<options_item entry="g_use_lens" group="mm_opt_gameplay"/>
 		</check_g_use_lens>
 
 		<cap_r2_bloom_mode x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_bloom_mode</text>
 		</cap_r2_bloom_mode>
 		<combo_r2_bloom_mode x="194" y="10" width="245" height="21" always_show_scroll="0" list_length="7">
-			<options_item entry="r2_bloom_mode" group="mm_opt_video_adv" depend="vid"/>
+			<options_item entry="r2_bloom_mode" group="mm_opt_gameplay" depend="vid"/>
 			<text_color>
 				<e r="216" g="186" b="140"/>
 				<d color="ui_gray"/>
@@ -981,56 +981,76 @@
 			<text font="letterica16" color="ui_6">ui_mm_r2_indoor_lighting</text>
 		</cap_r2_indoor_lighting>
 		<check_r2_indoor_lighting x="300" y="10" width="30" height="21">
-			<options_item entry="r2_indoor_lighting" group="mm_opt_video"/>
+			<options_item entry="r2_indoor_lighting" group="mm_opt_gameplay"/>
 		</check_r2_indoor_lighting>
 
 		<cap_r2_ls_bloom_fast x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_ls_bloom_fast</text>
 		</cap_r2_ls_bloom_fast>
 		<check_r2_ls_bloom_fast x="300" y="10" width="30" height="21">
-			<options_item entry="r2_ls_bloom_fast" group="mm_opt_video"/>
+			<options_item entry="r2_ls_bloom_fast" group="mm_opt_gameplay"/>
 		</check_r2_ls_bloom_fast>
 
 		<cap_r2_mblur x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_mblur</text>
 		</cap_r2_mblur>
 		<check_r2_mblur x="300" y="10" width="30" height="21">
-			<options_item entry="r2_mblur" group="mm_opt_video"/>
+			<options_item entry="r2_mblur" group="mm_opt_gameplay"/>
 		</check_r2_mblur>
 
 		<cap_r2_old_aref x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_old_aref</text>
 		</cap_r2_old_aref>
 		<check_r2_old_aref x="300" y="10" width="30" height="21">
-			<options_item entry="r2_old_aref" group="mm_opt_video"/>
+			<options_item entry="r2_old_aref" group="mm_opt_gameplay"/>
 		</check_r2_old_aref>
 
 		<cap_r2_old_distort x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_old_distort</text>
 		</cap_r2_old_distort>
 		<check_r2_old_distort x="300" y="10" width="30" height="21">
-			<options_item entry="r2_old_distort" group="mm_opt_video"/>
+			<options_item entry="r2_old_distort" group="mm_opt_gameplay"/>
 		</check_r2_old_distort>
+
+		<cap_r2_specular_rgb x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_specular_rgb</text>
+		</cap_r2_specular_rgb>
+		<check_r2_specular_rgb x="300" y="10" width="30" height="21">
+			<options_item entry="r2_specular_rgb" group="mm_opt_gameplay"/>
+		</check_r2_specular_rgb>
 
 		<cap_r2_tonemap x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_tonemap</text>
 		</cap_r2_tonemap>
 		<check_r2_tonemap x="300" y="10" width="30" height="21">
-			<options_item entry="r2_tonemap" group="mm_opt_video"/>
+			<options_item entry="r2_tonemap" group="mm_opt_gameplay"/>
 		</check_r2_tonemap>
+
+		<cap_r__smapsize x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r__smapsize</text>
+		</cap_r__smapsize>
+		<combo_r__smapsize x="194" y="10" width="245" height="21" always_show_scroll="0" list_length="7">
+			<options_item entry="r__smapsize" group="mm_opt_gameplay" depend="vid"/>
+			<text_color>
+				<e r="216" g="186" b="140"/>
+				<d color="ui_gray"/>
+			</text_color>
+			<list_font_s r="240" g="217" b="182"/>
+			<list_font r="216" g="186" b="140" font="letterica16"/>
+		</combo_r__smapsize>
 
 		<cap_r__wallmarks_on_skeleton x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r__wallmarks_on_skeleton</text>
 		</cap_r__wallmarks_on_skeleton>
 		<check_r__wallmarks_on_skeleton x="300" y="10" width="30" height="21">
-			<options_item entry="r__wallmarks_on_skeleton" group="mm_opt_video"/>
+			<options_item entry="r__wallmarks_on_skeleton" group="mm_opt_gameplay"/>
 		</check_r__wallmarks_on_skeleton>
 
 		<cap_weapon_bobbing x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_weapon_bobbing</text>
 		</cap_weapon_bobbing>
 		<check_weapon_bobbing x="300" y="10" width="30" height="21">
-			<options_item entry="weapon_bobbing" group="mm_opt_video"/>
+			<options_item entry="weapon_bobbing" group="mm_opt_gameplay"/>
 		</check_weapon_bobbing>
 
 		<btn_to_simply x="342" y="325" width="111" height="29">
