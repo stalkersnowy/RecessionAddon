@@ -27,6 +27,8 @@
 #include "UIMainIngameWnd.h"
 #include "UITabButton.h"
 
+#include "../GameConstants.h"
+
 #define		PDA_XML					"pda.xml"
 u32			g_pda_info_state		= 0;
 
@@ -76,7 +78,7 @@ void CUIPdaWnd::Init()
 
 	UIMainPdaFrame			= xr_new<CUIStatic>(); UIMainPdaFrame->SetAutoDelete(true);
 	AttachChild				(UIMainPdaFrame);
-	xml_init.InitStatic		(uiXml, "background_static", 0, UIMainPdaFrame);
+	xml_init.InitStatic		(uiXml, "background_static", GameConstants::GetRussianPDATexture()?1:0, UIMainPdaFrame);
 
 	//Элементы автоматического добавления
 	xml_init.InitAutoStatic	(uiXml, "auto_static", this);

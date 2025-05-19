@@ -8,6 +8,14 @@ local state_nowhere = 0 -- схема только что включилась
 local state_inside = 1 -- актер внутри
 local state_outside = 2 -- актер снаружи
 
+allow_sleep = false
+
+function load_constants()
+	if constants_ini():r_bool("gameplay", "enable_sleeping") == true then
+		allow_sleep = true
+	end
+end
+
 class "action_sleep"
 
 function action_sleep:__init(obj, storage)
@@ -56,25 +64,29 @@ function action_sleep:update(delta)
 end
 
 function action_sleep:switch_state(actor)
-	local state = self.state
-	local need_zone = (dream.active_sleep_zone == nil)
-	local is_active = (dream.active_sleep_zone == self.object:id())
+	if allow_sleep then
 	
-	if (need_zone or is_active) and self.object:inside(actor:position()) then
-		local can_sleep = true
-	    if self.cond then
-	        local cs = xr_logic.pick_section_from_condlist(db.actor, self.object, self.cond.condlist)
-	        can_sleep = (cs == "true" or cs == "")
-	    end
-		if can_sleep then
-			dream.active_sleep_zone = self.object:id()
-			if not has_alife_info("tutorial_part_17_sleep") then
-				game.start_tutorial("part_17_sleep")
-				db.actor:give_info_portion("tutorial_part_17_sleep")
+		local state = self.state
+		local need_zone = (dream.active_sleep_zone == nil)
+		local is_active = (dream.active_sleep_zone == self.object:id())
+		
+		if (need_zone or is_active) and self.object:inside(actor:position()) then
+			local can_sleep = true
+			if self.cond then
+				local cs = xr_logic.pick_section_from_condlist(db.actor, self.object, self.cond.condlist)
+				can_sleep = (cs == "true" or cs == "")
 			end
+			if can_sleep then
+				dream.active_sleep_zone = self.object:id()
+				if not has_alife_info("tutorial_part_17_sleep") then
+					game.start_tutorial("part_17_sleep")
+					db.actor:give_info_portion("tutorial_part_17_sleep")
+				end
+			end
+		elseif is_active then
+			dream.active_sleep_zone = nil
 		end
-	elseif is_active then
-		dream.active_sleep_zone = nil
+	
 	end
 end
 

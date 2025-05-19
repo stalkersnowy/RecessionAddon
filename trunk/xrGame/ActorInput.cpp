@@ -26,7 +26,6 @@
 #include "InventoryBox.h"
 #include "Bolt.h"
 #include "Grenade.h"
-#include "GameConstants.h"
 #include "WeaponKnife.h"
 #include "WeaponShotgun.h"
 
@@ -44,13 +43,7 @@ void CActor::IR_OnKeyboardPress(int cmd)
 	{
 	case kWPN_FIRE:
 		{
-			bool disable_stopping = GameConstants::GetDisableStopping();
-			bool disable_stopping_bolt = GameConstants::GetDisableStoppingBolt();
-			bool disable_stopping_gr = GameConstants::GetDisableStoppingGrenade();
-			CBolt* pBolt = smart_cast<CBolt*>(inventory().ActiveItem());
-			CGrenade* pGrenade = smart_cast<CGrenade*>(inventory().ActiveItem());
-			CWeapon* pWpn = smart_cast<CWeapon*>(inventory().ActiveItem());
-			if ((!disable_stopping_bolt && pBolt || !disable_stopping_gr && pGrenade) || !disable_stopping && !inventory().ActiveItem() || pWpn)
+			if (inventory().ActiveItem())
 				mstate_wishful &=~mcSprint;
 			//-----------------------------
 			if (OnServer())
@@ -69,7 +62,8 @@ void CActor::IR_OnKeyboardPress(int cmd)
 		}break;
 	case kWPN_ZOOM:
 		{
-			if (inventory().GetActiveSlot() == KNIFE_SLOT)
+			u32 active_slot = inventory().GetActiveSlot();
+			if (active_slot == KNIFE_SLOT || active_slot == BOLT_SLOT)
 				mstate_wishful &=~mcSprint;
 		}break;
 	default:

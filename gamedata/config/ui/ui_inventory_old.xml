@@ -1,0 +1,4 @@
+<ui_texture>
+    <file_name>ui\ui_inventory_old</file_name>
+    <texture id="ui_inventory_main_old" x="0" y="0" width="1005" height="483" />
+</ui_texture>

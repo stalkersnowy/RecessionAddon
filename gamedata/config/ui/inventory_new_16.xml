@@ -16,6 +16,9 @@
 	<back x="8" y="243" width="1000" height="483" stretch="1">
 		<texture>ui_inventory_main</texture>
 	</back>
+	<back x="8" y="243" width="1000" height="483" stretch="1">
+		<texture>ui_inventory_main_old</texture>
+	</back>
 
 
     <dragdrop_bag x="22" y="46" width="295" height="410"

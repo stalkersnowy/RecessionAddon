@@ -17,9 +17,12 @@
 		<text align="r" font="letterica16" r="135" g="128" b="122">st_condition</text>
 	</static_condition>
 
-	<descr_list x="20" y="245" width="300" height="129" always_show_scroll="0" left_ident="16">
+	<descr_list x="20" y="245" width="300" height="193" always_show_scroll="0" left_ident="16">
 		<font font="letterica16" r="240" g="217" b="182"/>
 	</descr_list>
+	<descr_list1 x="20" y="245" width="300" height="129" always_show_scroll="0" left_ident="16">
+		<font font="letterica16" r="240" g="217" b="182"/>
+	</descr_list1>
 
 	<image_static x="170" y="100" width="226" height="180" alignment="c" stretch="1"/>		
 	

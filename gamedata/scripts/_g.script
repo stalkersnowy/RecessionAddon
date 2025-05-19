@@ -1268,6 +1268,7 @@ function start_game_callback()
 	news_manager.load_icons()
 	bind_stalker.load_robbery()
 	xr_kamp.load_constants()
+	sr_sleep.load_constants()
 end
 
 ammo_section = {}

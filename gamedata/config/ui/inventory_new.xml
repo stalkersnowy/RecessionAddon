@@ -17,6 +17,9 @@
 	<back x="10" y="243" width="1005" height="483">
 		<texture>ui_inventory_main</texture>
 	</back>
+	<back x="10" y="243" width="1005" height="483">
+		<texture>ui_inventory_main_old</texture>
+	</back>
 
 	<bottom_static x="0" y="737" width="1024" height="32">
 		<texture>ui\ui_bottom_background</texture>

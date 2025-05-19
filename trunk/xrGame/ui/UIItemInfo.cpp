@@ -37,7 +37,7 @@ CUIItemInfo::~CUIItemInfo()
 	xr_delete					(UIArtefactParams);
 }
 
-void CUIItemInfo::Init(LPCSTR xml_name){
+void CUIItemInfo::Init(LPCSTR xml_name, bool descr1){
 
 	CUIXml						uiXml;
 	bool xml_result				= uiXml.Init(CONFIG_PATH, UI_PATH, xml_name);
@@ -93,8 +93,9 @@ void CUIItemInfo::Init(LPCSTR xml_name){
 		UICondProgresBar			= xr_new<CUIProgressBar>(); AttachChild(UICondProgresBar);UICondProgresBar->SetAutoDelete(true);
 		xml_init.InitProgressBar	(uiXml, "condition_progress", 0, UICondProgresBar);
 	}
-
-	if(uiXml.NavigateToNode("descr_list",0))
+	
+	LPCSTR node_name = descr1 ? "descr_list1" : "descr_list";
+	if(uiXml.NavigateToNode(node_name,0))
 	{
 		UIWpnParams						= xr_new<CUIWpnParams>();
 		UIArtefactParams				= xr_new<CUIArtefactParams>();
@@ -103,9 +104,9 @@ void CUIItemInfo::Init(LPCSTR xml_name){
 		UIDesc							= xr_new<CUIScrollView>(); 
 		AttachChild						(UIDesc);		
 		UIDesc->SetAutoDelete			(true);
-		m_desc_info.bShowDescrText		= !!uiXml.ReadAttribInt("descr_list",0,"only_text_info", 1);
-		xml_init.InitScrollView			(uiXml, "descr_list", 0, UIDesc);
-		xml_init.InitFont				(uiXml, "descr_list:font", 0, m_desc_info.uDescClr, m_desc_info.pDescFont);
+		m_desc_info.bShowDescrText		= !!uiXml.ReadAttribInt(node_name,0,"only_text_info", 1);
+		xml_init.InitScrollView			(uiXml, node_name, 0, UIDesc);
+		xml_init.InitFont				(uiXml, descr1?"descr_list1:font":"descr_list:font", 0, m_desc_info.uDescClr, m_desc_info.pDescFont);
 	}	
 
 	if (uiXml.NavigateToNode("image_static", 0))
@@ -124,10 +125,10 @@ void CUIItemInfo::Init(LPCSTR xml_name){
 	xml_init.InitAutoStaticGroup	(uiXml, "auto", 0, this);
 }
 
-void CUIItemInfo::Init(float x, float y, float width, float height, LPCSTR xml_name)
+void CUIItemInfo::Init(float x, float y, float width, float height, LPCSTR xml_name, bool descr1)
 {
 	inherited::Init	(x, y, width, height);
-	Init			(xml_name);
+	Init			(xml_name, descr1);
 }
 
 bool				IsGameTypeSingle();

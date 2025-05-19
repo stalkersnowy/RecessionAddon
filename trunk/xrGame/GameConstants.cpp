@@ -5,12 +5,10 @@
 #include "Actor.h"
 #include "Inventory.h"
 
-bool	m_bDisableStopping					= true;
-bool	m_bDisableStoppingBolt				= true;
-bool	m_bDisableStoppingGrenade			= true;
 bool	m_bMergeAmmoLineWithFiremode		= true;
 bool	m_bCheckOverlapForPickup			= true;
 bool	m_bEnableCheats						= false;
+bool	m_bEnableSleeping					= false;
 
 bool	m_bShowContactBio					= true;
 bool	m_bShowPartnerWeightInCarBody		= false;
@@ -18,6 +16,7 @@ bool	m_bShowTrackBarValues				= false;
 bool	m_bShowNumBeforeAnswers				= true;
 bool	m_bShowSatietyInInventory			= false;
 bool	m_bOldLuminosityBar					= false;
+bool	m_bRussianPDATexture				= false;
 
 namespace GameConstants
 {
@@ -28,36 +27,20 @@ namespace GameConstants
 			Msg("# GameConstants file does not exists");
 			return;
 		}
-		m_bDisableStopping					= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "disable_stopping_empty", true);
-		m_bDisableStoppingBolt				= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "disable_stopping_bolt", true);
-		m_bDisableStoppingGrenade			= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "disable_stopping_grenade", true);
-		m_bMergeAmmoLineWithFiremode		= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "merge_ammo_line_with_firemode", true);
-		m_bCheckOverlapForPickup			= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "check_overlap_for_pickup", true);
-		m_bEnableCheats						= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "enable_cheats", false);
+		m_bMergeAmmoLineWithFiremode		= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "merge_ammo_line_with_firemode", m_bMergeAmmoLineWithFiremode);
+		m_bCheckOverlapForPickup			= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "check_overlap_for_pickup", m_bCheckOverlapForPickup);
+		m_bEnableCheats						= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "enable_cheats", m_bEnableCheats);
+		m_bEnableSleeping					= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "enable_sleeping", m_bEnableSleeping);
 
-		m_bShowContactBio					= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_contact_bio", false);
-		m_bShowPartnerWeightInCarBody		= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_partner_weight_in_carbody", false);
-		m_bShowTrackBarValues				= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_track_bar_values", false);
-		m_bShowNumBeforeAnswers				= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_numbers_before_answers", false);
-		m_bShowSatietyInInventory			= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_satiety_bar_in_inventory", false);
-		m_bOldLuminosityBar					= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "old_luminosity_bar", false);
+		m_bShowContactBio					= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_contact_bio", m_bShowContactBio);
+		m_bShowPartnerWeightInCarBody		= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_partner_weight_in_carbody", m_bShowPartnerWeightInCarBody);
+		m_bShowTrackBarValues				= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_track_bar_values", m_bShowTrackBarValues);
+		m_bShowNumBeforeAnswers				= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_numbers_before_answers", m_bShowNumBeforeAnswers);
+		m_bShowSatietyInInventory			= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_satiety_bar_in_inventory", m_bShowSatietyInInventory);
+		m_bOldLuminosityBar					= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "old_luminosity_bar", m_bOldLuminosityBar);
+		m_bRussianPDATexture				= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "russian_pda_texture", m_bRussianPDATexture);
 
 		Msg("# GameConstants are loaded");
-	}
-
-	bool GetDisableStopping()
-	{
-		return m_bDisableStopping;
-	}
-
-	bool GetDisableStoppingBolt()
-	{
-		return m_bDisableStoppingBolt;
-	}
-
-	bool GetDisableStoppingGrenade()
-	{
-		return m_bDisableStoppingGrenade;
 	}
 
 	bool GetMergedAmmoLineWithFiremodes()
@@ -74,6 +57,12 @@ namespace GameConstants
 	{
 		return m_bEnableCheats;
 	}
+
+	bool GetEnableSleeping()
+	{
+		return m_bEnableSleeping;
+	}
+
 
 	bool GetContactsBioShowing()
 	{
@@ -103,5 +92,10 @@ namespace GameConstants
 	bool GetOldLuminosityBar()
 	{
 		return m_bOldLuminosityBar;
+	}
+
+	bool GetRussianPDATexture()
+	{
+		return m_bRussianPDATexture;
 	}
 }
