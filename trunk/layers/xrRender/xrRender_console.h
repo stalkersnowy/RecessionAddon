@@ -149,6 +149,8 @@ enum
 
 	R2FLAG_OLD_DISTORT			= (1<<25),
 	R2FLAG_OLD_AREF				= (1<<26),
+	
+	R2FLAG_SUN_HIGH				= (1<<27),
 };
 
 extern void						xrRender_initconsole	();

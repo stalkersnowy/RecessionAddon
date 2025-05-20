@@ -408,4 +408,7 @@
 	<string id="ui_mm_weapon_bobbing">
 		<text>Раскачка оружия</text>
 	</string>
+	<string id="ui_mm_r2_sun_quality">
+		<text>Высокое качество солнца</text>
+	</string>
 </string_table>

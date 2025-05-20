@@ -546,15 +546,9 @@
 			<text font="letterica16" color="ui_6">ui_mm_r2_sun_quality</text>
 		</cap_r2_sun_quality>
 
-		<list_r2_sun_quality x="162" y="10" width="200" height="21" always_show_scroll="0">
+		<check_r2_sun_quality x="162" y="10" width="27" height="21" stretch="1">
 			<options_item entry="r2_sun_quality" group="mm_opt_video"/>
-			<text_color>
-				<e r="216" g="186" b="140"/>
-				<d color="ui_gray"/>
-			</text_color>
-			<list_font_s r="240" g="217" b="182"/>
-			<list_font r="216" g="186" b="140" font="letterica16"/>
-		</list_r2_sun_quality>
+		</check_r2_sun_quality>
 
 		<cap_r3_dynamic_wet_surfaces x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r3_dynamic_wet_surfaces</text>

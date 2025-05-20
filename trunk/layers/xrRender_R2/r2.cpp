@@ -634,6 +634,13 @@ HRESULT	CRender::shader_compile			(
 			defines[def_it].Definition	=	c_sun_shafts;
 			def_it						++;
 		}
+		
+		if (ps_r2_ls_flags.test(R2FLAG_SUN_HIGH))
+		{
+			defines[def_it].Name		=	"SUN_QUALITY";
+			defines[def_it].Definition	=	"1";
+			def_it						++;
+		}
 	}
 
 	if (ps_BloomMode)

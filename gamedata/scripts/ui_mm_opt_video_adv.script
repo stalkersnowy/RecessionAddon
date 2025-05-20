@@ -89,6 +89,11 @@ function opt_video_adv:InitControls(x, y, xml, handler)
 	xml:InitStatic								("video_adv:cap_r2_steep_parallax",		_st)
 	ctl			= xml:InitCheck					("video_adv:check_r2_steep_parallax",	_st)
 	handler.m_preconditions[ctl]				= only_25_mode
+	
+	_st				= xml:InitStatic			("video_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("video_adv:cap_r2_sun_quality",		_st)
+	ctl			= xml:InitCheck					("video_adv:check_r2_sun_quality",		_st)
+	handler.m_preconditions[ctl]				= only_25_mode
 
 	_st				= xml:InitStatic			("video_adv:templ_item",				self.scroll_v)
 	xml:InitStatic								("video_adv:cap_sun_shafts",			_st)
