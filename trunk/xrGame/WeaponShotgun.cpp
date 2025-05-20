@@ -8,6 +8,7 @@
 #include "level.h"
 #include "actor.h"
 #include "hudmanager.h"
+#include "GameConstants.h"
 
 CWeaponShotgun::CWeaponShotgun(void) : CWeaponCustomPistol("TOZ34")
 {
@@ -210,7 +211,7 @@ bool CWeaponShotgun::Action			(s32 cmd, u32 flags)
 		return true;
 	}
 	//если оружие чем-то занято, то ничего не делать
-	if(IsPending() || m_bTriStateReload) return false;
+	if(IsPending() || m_bTriStateReload || !GameConstants::GetEnableDuplet()) return false;
 
 	switch(cmd) 
 	{

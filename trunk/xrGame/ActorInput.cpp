@@ -28,6 +28,7 @@
 #include "Grenade.h"
 #include "WeaponKnife.h"
 #include "WeaponShotgun.h"
+#include "GameConstants.h"
 
 bool g_bAutoClearCrouch = true;
 
@@ -56,9 +57,11 @@ void CActor::IR_OnKeyboardPress(int cmd)
 		}break;
 	case kWPN_FIRE2:
 		{
-			CWeaponShotgun* pWpnSG = smart_cast<CWeaponShotgun*>(inventory().ActiveItem());
-			if (pWpnSG && !pWpnSG->IsTriStateReload())
-				mstate_wishful &=~mcSprint;
+			if (GameConstants::GetEnableDuplet()){
+				CWeaponShotgun* pWpnSG = smart_cast<CWeaponShotgun*>(inventory().ActiveItem());
+				if (pWpnSG && !pWpnSG->IsTriStateReload())
+					mstate_wishful &=~mcSprint;
+			}
 		}break;
 	case kWPN_ZOOM:
 		{

@@ -8,6 +8,7 @@ namespace GameConstants
 	bool GetCheckOverlapForPickup			();
 	bool GetEnableCheats					();
 	bool GetEnableSleeping					();
+	bool GetEnableDuplet					();
 
 	bool GetContactsBioShowing				();
 	bool GetPartnerWeightInCarBodyShowing	();
