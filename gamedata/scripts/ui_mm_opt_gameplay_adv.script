@@ -18,11 +18,11 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	xml:InitStatic								("gameplay_adv:cap_g_hit_mark_index",			_st)
 	xml:InitSpinNum								("gameplay_adv:spin_g_hit_mark_index",			_st)
-
+--[[
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	xml:InitStatic								("gameplay_adv:cap_g_use_ik",					_st)
 	xml:InitCheck								("gameplay_adv:check_g_use_ik",					_st)
-
+]]
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	xml:InitStatic								("gameplay_adv:cap_g_use_lens",					_st)
 	xml:InitCheck								("gameplay_adv:check_g_use_lens",				_st)
