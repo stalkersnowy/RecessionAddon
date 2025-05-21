@@ -360,3 +360,8 @@ BOOL	CResourceManager::_GetDetailTexture(LPCSTR Name,LPCSTR& T, R_constant_setup
 		return FALSE;
 	}
 }*/
+
+shared_str CResourceManager::_GetBumpName(const shared_str& tex_name) const
+{
+	return m_textures_description.GetBumpName(tex_name);
+}

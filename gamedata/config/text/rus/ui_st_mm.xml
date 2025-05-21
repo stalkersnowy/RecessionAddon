@@ -411,4 +411,7 @@
 	<string id="ui_mm_r2_sun_quality">
 		<text>Высокое качество солнца</text>
 	</string>
+	<string id="ui_mm_r2_detail_bump">
+		<text>Детальный рельеф</text>
+	</string>
 </string_table>

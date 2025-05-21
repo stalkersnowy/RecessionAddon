@@ -197,6 +197,8 @@ uniform sampler2D       s_base;             	//
 uniform sampler2D       s_bump;             	//
 uniform sampler2D       s_bumpX;                //
 uniform sampler2D       s_detail;               //
+uniform sampler2D       s_detailBump;           //
+uniform sampler2D       s_detailBumpX;          //	Error for bump detail
 uniform sampler2D       s_bumpD;                //
 uniform sampler2D       s_hemi;             	//
 

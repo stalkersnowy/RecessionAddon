@@ -63,7 +63,23 @@ surface_bumped                sload_i         ( p_bumped I)
 #endif
         S.height            =       NuE.z       ;
 
-		#if defined(USE_TDETAIL) && defined(USE_STEEPPARALLAX)
+#ifdef 		  USE_TDETAIL
+#ifdef        USE_TDETAIL_BUMP
+	half4 NDetail		= tex2D( s_detailBump, vTexCoord * dt_params);
+	half4 NDetailX		= tex2D( s_detailBumpX, vTexCoord * dt_params);
+#if BLOOM_MODE > 5
+	S.gloss 			+= NDetail.x;
+#else
+	S.gloss				= S.gloss * NDetail.x * 2;
+#endif
+	//S.normal			+= NDetail.wzy-.5;
+	S.normal			+= NDetail.wzy + NDetailX.xyz - 1.0h; //	(Nu.wzyx - .5h) + (E-.5)
+
+	half4 detail		= tex2D( s_detail, vTexCoord * dt_params);
+	S.base.rgb			= S.base.rgb * detail.rgb * 2;
+
+//	S.base.rgb			= float3(1,0,0);
+#else        //	USE_TDETAIL_BUMP
 #if BLOOM_MODE > 1
 		float4 		 detail  = 		tex2D(s_bumpD,vTexCoord * dt_params).wzyx;
 	    S.normal			= 		Nu.wzyx + (NuE.xyz - (1.0h + 0.5h*def_dbumph)) + detail.xyz * def_dbumph ;
@@ -76,6 +92,7 @@ surface_bumped                sload_i         ( p_bumped I)
         float4       detail  =		tex2D(s_detail,vTexCoord * dt_params )        	;
         S.base.rgb          =		S.base.rgb     * detail.rgb*2		;
         S.gloss             =  		S.gloss * detail.w * 2				;
+#endif        //	USE_TDETAIL_BUMP
 #endif
 		#endif
 
@@ -103,6 +120,22 @@ surface_bumped                sload_i         ( p_bumped I)        // + texld, m
 
 
 #ifdef        USE_TDETAIL
+#ifdef        USE_TDETAIL_BUMP
+	half4 NDetail		= tex2D( s_detailBump, I.tcdbump);
+	half4 NDetailX		= tex2D( s_detailBumpX, I.tcdbump);
+#if BLOOM_MODE > 5
+	S.gloss 			+= NDetail.x;
+#else
+	S.gloss				= S.gloss * NDetail.x * 2;
+#endif
+	//S.normal			+= NDetail.wzy-.5;
+	S.normal			+= NDetail.wzy + NDetailX.xyz - 1.0h; //	(Nu.wzyx - .5h) + (E-.5)
+
+	half4 detail		= tex2D( s_detail, I.tcdbump);
+	S.base.rgb			= S.base.rgb * detail.rgb * 2;
+
+//	S.base.rgb			= float3(1,0,0);
+#else        //	USE_TDETAIL_BUMP
 #if BLOOM_MODE > 1
 		half4 		detail 	= 		tex2D(s_bumpD,I.tcdbump).wzyx;
 	   S.normal 		   = 		Nu.wzyx + (NuE.xyz - (1.0h + 0.5h*def_dbumph)) + detail.xyz * def_dbumph ;
@@ -116,6 +149,7 @@ surface_bumped                sload_i         ( p_bumped I)        // + texld, m
        S.base.rgb          =		S.base.rgb     * detail.rgb*2		;
         S.gloss             =  		S.gloss * detail.w * 2				;
 #endif
+#endif        //	USE_TDETAIL_BUMP
 #endif
 
         return                S;
@@ -137,6 +171,22 @@ surface_bumped                sload_i         ( p_bumped I)
         S.height            = 		NuE.z;
 
 #ifdef        USE_TDETAIL
+#ifdef        USE_TDETAIL_BUMP
+	half4 NDetail		= tex2D( s_detailBump, I.tcdbump);
+	half4 NDetailX		= tex2D( s_detailBumpX, I.tcdbump);
+#if BLOOM_MODE > 5
+	S.gloss 			+= NDetail.x;
+#else
+	S.gloss				= S.gloss * NDetail.x * 2;
+#endif
+	//S.normal			+= NDetail.wzy-.5;
+	S.normal			+= NDetail.wzy + NDetailX.xyz - 1.0h; //	(Nu.wzyx - .5h) + (E-.5)
+
+	half4 detail		= tex2D( s_detail, I.tcdbump);
+	S.base.rgb			= S.base.rgb * detail.rgb * 2;
+
+//	S.base.rgb			= float3(1,0,0);
+#else        //	USE_TDETAIL_BUMP
 #if BLOOM_MODE > 1
 		half4  detail 		= 		 tex2D(s_bumpD,I.tcdbump).wzyx;
 		S.normal 			= 		Nu.wzyx + (NuE.xyz - (1.0h + 0.5h*def_dbumph)) + detail.xyz * def_dbumph ;
@@ -150,6 +200,7 @@ surface_bumped                sload_i         ( p_bumped I)
         S.base.rgb          =      	S.base.rgb*detail.rgb        	*2      ;
         S.gloss             =  		S.gloss * detail.w * 2			;
 #endif
+#endif        //	USE_TDETAIL_BUMP
 #endif
         return              S;
 }

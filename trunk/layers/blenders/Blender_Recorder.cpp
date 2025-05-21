@@ -33,6 +33,8 @@ CBlender_Compile::CBlender_Compile		()
 CBlender_Compile::~CBlender_Compile		()
 {
 }
+int ps_r2_DetailBump = 1;
+extern BOOL r2_advanced_pp;
 void	CBlender_Compile::_cpp_Compile	(ShaderElement* _SH)
 {
 	SH =			_SH;
@@ -63,7 +65,18 @@ void	CBlender_Compile::_cpp_Compile	(ShaderElement* _SH)
 	bDetail_Diffuse	= FALSE;
 	bDetail_Bump	= FALSE;
 	if(bDetail)
+	{
 		Device.Resources->m_textures_description.GetTextureUsage(base, bDetail_Diffuse, bDetail_Bump);
+
+#ifndef _EDITOR
+		//	Detect the alowance of detail bump usage here.
+		if (!(r2_advanced_pp && ps_r2_DetailBump))
+		{
+			bDetail_Diffuse |= bDetail_Bump;
+			bDetail_Bump = false;
+		}
+#endif
+	}
 /*
 	if (bDetail && Device.Resources->m_description->line_exist("association",base))	
 	{
