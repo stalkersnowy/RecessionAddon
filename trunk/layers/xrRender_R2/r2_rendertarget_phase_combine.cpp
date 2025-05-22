@@ -188,6 +188,13 @@ void	CRenderTarget::phase_combine	()
 		}
 	}
 
+    //FXAA
+    if (ps_r_aa == 2)
+    {
+        phase_fxaa();
+        RCache.set_Stencil(FALSE);
+    }
+
 	// PP enabled ?
 	BOOL	PP_Complex		= u_need_PP	();
 	if (_menu_pp)			PP_Complex	= FALSE;
@@ -233,7 +240,7 @@ void	CRenderTarget::phase_combine	()
 		vDofKernel.mul(ps_r2_dof_kernel_size);
 
 		// Draw COLOR
-		if (ps_r2_ls_flags.test(R2FLAG_AA))			RCache.set_Element	(s_combine->E[bDistort?4:2]);	// look at blender_combine.cpp
+		if (ps_r_aa == 1)			RCache.set_Element	(s_combine->E[bDistort?4:2]);	// look at blender_combine.cpp
 		else										RCache.set_Element	(s_combine->E[bDistort?5:3]);	// look at blender_combine.cpp
 		RCache.set_c				("e_barrier",	ps_r2_aa_barier.x,	ps_r2_aa_barier.y,	ps_r2_aa_barier.z,	0);
 		RCache.set_c				("e_weights",	ps_r2_aa_weight.x,	ps_r2_aa_weight.y,	ps_r2_aa_weight.z,	0);

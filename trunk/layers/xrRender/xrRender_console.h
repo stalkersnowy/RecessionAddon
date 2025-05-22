@@ -108,8 +108,11 @@ extern ECORE_API float			ps_r2_dof_kernel_size;		//	7.0f
 extern ECORE_API u32			ps_Smapsize;
 extern ECORE_API u32			ps_BloomMode;
 
-extern ECORE_API	u32			ps_r_ssao;			//	=	0;
+extern ECORE_API	u32			ps_r_ssao;
 extern ECORE_API	xr_token	qssao_token[];
+
+extern ECORE_API	u32			ps_r_aa;
+extern ECORE_API	xr_token	qaa_token[];
 
 enum
 {
@@ -118,7 +121,7 @@ enum
 	R2FLAG_SUN_TSM				= (1<<2),
 	R2FLAG_SUN_DETAILS			= (1<<3),
 	R2FLAG_TONEMAP				= (1<<4),
-	R2FLAG_AA					= (1<<5),
+//	R2FLAG_AA					= (1<<5),
 	R2FLAG_GI					= (1<<6),
 	R2FLAG_FASTBLOOM			= (1<<7),
 	R2FLAG_GLOBALMATERIAL		= (1<<8),

@@ -55,6 +55,14 @@ xr_token							qsun_shafts_token							[ ]={
 	{ 0,							0												}
 };
 
+u32			ps_r_aa				=	0;
+xr_token							qaa_token							[ ]={
+	{ "st_opt_off",					0												},
+	{ "st_opt_aa",					1												},
+	{ "st_opt_fxaa",				2												},
+	{ 0,							0												}
+};
+
 // Common
 //int		ps_r__Supersample			= 1		;
 int			ps_r__LightSleepFrames		= 10	;
@@ -574,7 +582,7 @@ void		xrRender_initconsole	()
 	CMD4(CCC_Float,		"r2_sun_lumscale_hemi",	&ps_r2_sun_lumscale_hemi,	0.0,	+3.0	);
 	CMD4(CCC_Float,		"r2_sun_lumscale_amb",	&ps_r2_sun_lumscale_amb,	0.0,	+3.0	);
 
-	CMD3(CCC_Mask,		"r2_aa",				&ps_r2_ls_flags,			R2FLAG_AA		);
+	CMD3(CCC_Token,		"r2_aa",				&ps_r_aa,					qaa_token		);
 	CMD4(CCC_Float,		"r2_aa_kernel",			&ps_r2_aa_kernel,			0.3f,	0.7f	);
 	CMD3(CCC_Mask,		"r2_mblur",				&ps_r2_ls_flags,			R2FLAG_MBLUR	);
 	CMD4(CCC_Float,		"r2_mblur_power",		&ps_r2_mblur,				0.0f,	1.0f	);

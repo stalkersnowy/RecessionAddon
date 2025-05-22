@@ -10,6 +10,7 @@
 #include "blender_combine.h"
 #include "blender_bloom_build.h"
 #include "blender_luminance.h"
+#include "blender_fxaa.h"
 
 void	CRenderTarget::u_setrt			(const ref_rt& _1, const ref_rt& _2, const ref_rt& _3, IDirect3DSurface9* zb)
 {
@@ -206,6 +207,7 @@ CRenderTarget::CRenderTarget		()
 	b_bloom							= xr_new<CBlender_bloom_build>			();
 	b_luminance						= xr_new<CBlender_luminance>			();
 	b_combine						= xr_new<CBlender_combine>				();
+    b_fxaa 							= xr_new<CBlender_FXAA>					();
 
 	//	NORMAL
 	{
@@ -325,6 +327,12 @@ CRenderTarget::CRenderTarget		()
 		s_bloom_dbg_2.create		("effects\\screen_set",		r2_RT_bloom2);
 		s_bloom.create				(b_bloom,					"r2\\bloom");
 		f_bloom_factor				= 0.5f;
+	}
+
+	//FXAA
+	{
+		s_fxaa.create				(b_fxaa, "r2\\fxaa");
+		g_fxaa.create				(FVF::F_V, RCache.Vertex.Buffer(), RCache.QuadIB);
 	}
 
 	// TONEMAP
@@ -537,6 +545,7 @@ CRenderTarget::~CRenderTarget	()
 	xr_delete					(b_accum_direct_cascade	);
 	xr_delete					(b_accum_mask			);
 	xr_delete					(b_occq					);
+    xr_delete					(b_fxaa					);
 }
 
 bool CRenderTarget::need_to_render_sunshafts()

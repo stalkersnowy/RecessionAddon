@@ -958,6 +958,19 @@
 			<options_item entry="g_use_lens" group="mm_opt_gameplay"/>
 		</check_g_use_lens>
 
+		<cap_r2_aa x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_aa</text>
+		</cap_r2_aa>
+		<combo_r2_aa x="194" y="10" width="245" height="21" always_show_scroll="0" list_length="3">
+			<options_item entry="r2_aa" group="mm_opt_gameplay" depend="vid"/>
+			<text_color>
+				<e r="216" g="186" b="140"/>
+				<d color="ui_gray"/>
+			</text_color>
+			<list_font_s r="240" g="217" b="182"/>
+			<list_font r="216" g="186" b="140" font="letterica16"/>
+		</combo_r2_aa>
+
 		<cap_r2_bloom_mode x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_bloom_mode</text>
 		</cap_r2_bloom_mode>
