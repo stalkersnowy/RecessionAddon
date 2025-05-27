@@ -215,11 +215,11 @@ void CHudItem::UpdateHudInertion		(Fmatrix& hud_trans, bool bobbing)
 	if (pActor && m_pHUD && m_bInertionAllow && m_bInertionEnable){
 		Fmatrix								xform,xform_orig;
 		Fvector& origin						= hud_trans.c; 
+		xform								= hud_trans;
 		if (bobbing) {
-			pActor->Cameras().affected_Matrix	(xform);
 			pActor->Cameras().unaffected_Matrix	(xform_orig);
 		}else{
-			xform_orig = xform = hud_trans;
+			xform_orig = hud_trans;
 		}
 
 		static Fvector						m_last_dir={0,0,0};
