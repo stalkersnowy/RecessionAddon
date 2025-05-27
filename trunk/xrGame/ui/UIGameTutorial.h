@@ -12,6 +12,9 @@ protected:
 	xr_deque<CUISequenceItem*>m_items;
 	bool					m_bActive;
 	bool					m_bPlayEachItem;
+	bool					m_bNeedPauseOn;
+	bool					m_bNeedPauseOff;
+	bool					m_bStoredPauseState;
 	bool					GrabInput			();
 public:
 	IInputReceiver*			m_pStoredInputReceiver;
@@ -41,6 +44,8 @@ public:
 
 	virtual void			IR_OnMouseWheel		(int direction)	;
 	virtual void			IR_OnActivate		(void);
+
+	fastdelegate::FastDelegate0<>	m_on_destroy_event;
 
 };
 
@@ -73,6 +78,7 @@ public:
 	virtual void			Update				()=0;
 	virtual void			OnRender			()=0;
 	virtual void			OnKeyboardPress		(int dik)=0;
+	virtual void			OnMousePress		(int btn)=0;
 
 	virtual bool			IsPlaying			()=0;
 
@@ -113,6 +119,7 @@ public:
 	virtual void			Update				();
 	virtual void			OnRender			(){}
 	virtual void			OnKeyboardPress		(int dik);
+	virtual void			OnMousePress		(int btn);
 
 	virtual bool			IsPlaying			();
 };
@@ -130,6 +137,7 @@ class CUISequenceVideoItem: public CUISequenceItem
 	};
 	float					m_delay;
 	CUIStatic*				m_wnd;
+	CUIStatic*				m_wnd_bg;
 	u32						m_time_start;
 	u32						m_sync_time;
 public:
@@ -143,6 +151,7 @@ public:
 	virtual void			Update				();
 	virtual void			OnRender			();
 	virtual void			OnKeyboardPress		(int dik){}
+	virtual void			OnMousePress		(int btn){};
 
 	virtual bool			IsPlaying			();
 };

@@ -147,10 +147,12 @@ void CGamePersistent::OnAppEnd	()
 
 }
 
+extern int g_keypress_on_start;
+
 void CGamePersistent::Start		(LPCSTR op)
 {
 	__super::Start				(op);
-	m_intro_event.bind			(this,&CGamePersistent::start_game_intro);
+	if(!g_keypress_on_start) m_intro_event.bind			(this,&CGamePersistent::start_game_intro);
 }
 
 void CGamePersistent::Disconnect()
@@ -264,6 +266,19 @@ void CGamePersistent::WeathersUpdate()
 
 #include "UI/UIGameTutorial.h"
 
+bool allow_intro ()
+{
+//#ifdef MASTER_GOLD
+//	if (g_SASH.IsRunning())
+//#else	// #ifdef MASTER_GOLD
+	if ((0!=strstr(Core.Params, "-nointro"))/* || g_SASH.IsRunning()*/)
+//#endif	// #ifdef MASTER_GOLD
+	{
+		return false;
+	}else
+		return true;
+}
+
 void CGamePersistent::start_logo_intro		()
 {
 #if 1//def DEBUG
@@ -293,16 +308,50 @@ void CGamePersistent::update_logo_intro			()
 		xr_delete				(m_intro);
 		Console->Execute		("main_menu on");
 	}
+	else
+	if(!m_intro)
+	{
+		m_intro_event			= 0;
+	}
+}
+#include "string_table.h"
+#include "../XR_3DA/x_ray.h"
+void CGamePersistent::game_loaded()
+{
+	if(Device.dwPrecacheFrame<=2)
+	{
+		if(	g_pGameLevel							&&
+			g_pGameLevel->bReady					&&
+			(allow_intro() && g_keypress_on_start)	&&
+			load_screen_renderer.b_need_user_input	&& 
+			m_game_params.m_e_game_type == GAME_SINGLE)
+		{
+			VERIFY				(NULL==m_intro);
+			m_intro				= xr_new<CUISequencer>();
+			pApp->LoadTitleInt	("",false);
+			m_intro->Start		("game_loaded");
+			Msg					("intro_start game_loaded");
+			m_intro->m_on_destroy_event.bind(this, &CGamePersistent::update_game_loaded);
+		}
+		m_intro_event			= 0;
+	}
+}
+
+void CGamePersistent::update_game_loaded()
+{
+	xr_delete				(m_intro);
+	Msg("intro_delete ::update_game_loaded");
+	load_screen_renderer.stop();
+	start_game_intro		();
 }
 
 void CGamePersistent::start_game_intro		()
 {
-#if 1//def DEBUG
-	if (0!=strstr(Core.Params,"-nointro")){
+	if(!allow_intro())
+	{
 		m_intro_event			= 0;
 		return;
 	}
-#endif
 	if (g_pGameLevel && g_pGameLevel->bReady && Device.dwPrecacheFrame<=2){
 		m_intro_event.bind		(this,&CGamePersistent::update_game_intro);
 		if (0==stricmp(m_game_params.m_new_or_load,"new")){
@@ -319,6 +368,11 @@ void CGamePersistent::update_game_intro			()
 		xr_delete				(m_intro);
 		m_intro_event			= 0;
 	}
+	else
+	if(!m_intro)
+	{
+		m_intro_event			= 0;
+	}
 }
 #include "holder_custom.h"
 extern CUISequencer * g_tutorial;
@@ -326,6 +380,11 @@ extern CUISequencer * g_tutorial2;
 
 void CGamePersistent::OnFrame	()
 {
+	if(g_keypress_on_start && Device.dwPrecacheFrame==5 && m_intro_event.empty())
+	{
+		m_intro_event.bind			(this,&CGamePersistent::game_loaded);
+	}
+
 	if(g_tutorial2){ 
 		g_tutorial2->Destroy	();
 		xr_delete				(g_tutorial2);
@@ -339,6 +398,9 @@ void CGamePersistent::OnFrame	()
 	++m_frame_counter;
 #endif
 	if (!g_dedicated_server && !m_intro_event.empty())	m_intro_event();
+
+	if(!g_dedicated_server && Device.dwPrecacheFrame==0 && (!g_keypress_on_start || (!m_intro && m_intro_event.empty())))
+		load_screen_renderer.stop();
 
 	if( !m_pMainMenu->IsActive() )
 		m_pMainMenu->DestroyInternal(false);
@@ -420,6 +482,10 @@ void CGamePersistent::OnFrame	()
 
 #include "game_sv_single.h"
 #include "xrServer.h"
+#include "hudmanager.h"
+#include "UIGameSP.h"
+#include "ui/UIMainIngameWnd.h"
+#include "ui/UIPdaWnd.h"
 
 void CGamePersistent::OnEvent(EVENT E, u64 P1, u64 P2)
 {
@@ -427,6 +493,20 @@ void CGamePersistent::OnEvent(EVENT E, u64 P1, u64 P2)
 	{
 		if (Device.Paused())
 			Device.Pause		(FALSE, TRUE, TRUE, "eQuickLoad");
+		
+		if(HUD().GetUI())
+		{
+			HUD().GetUI()->UIGame()->HideShownDialogs();
+			HUD().GetUI()->UIMainIngameWnd->reset_ui();
+			CUIGameSP* pGameSP = smart_cast<CUIGameSP*>(HUD().GetUI()->UIGame());
+			pGameSP->PdaMenu->Reset();
+		}
+
+		if(g_tutorial)
+			g_tutorial->Stop();
+
+		if(g_tutorial2)
+			g_tutorial2->Stop();
 		
 		LPSTR		saved_name	= (LPSTR)(P1);
 
@@ -520,9 +600,13 @@ void CGamePersistent::OnRenderPPUI_PP()
 #include "../xr_3da/x_ray.h"
 void CGamePersistent::LoadTitle(LPCSTR str)
 {
-	string512			buff;
-	sprintf_s				(buff, "%s...", CStringTable().translate(str).c_str());
-	pApp->LoadTitleInt	(buff);
+	if(xr_strlen(str)){
+		string512			buff;
+		sprintf_s				(buff, "%s...", CStringTable().translate(str).c_str());
+		pApp->LoadTitleInt	(buff);
+	}else{
+		pApp->LoadTitleInt	("");
+	}
 }
 
 bool CGamePersistent::CanBePaused()

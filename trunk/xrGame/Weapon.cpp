@@ -35,7 +35,7 @@
 
 CUIXml*				pWpnScopeXml = NULL;
 
-BOOL				g_bUseLens = TRUE;
+BOOL				g_bUseLens = FALSE;
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction

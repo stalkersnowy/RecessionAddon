@@ -13,6 +13,7 @@
 #include "UIInventoryWnd.h"
 #include "UITalkWnd.h"
 #include "UICarBodyWnd.h"
+#include "../MainMenu.h"
 
 extern ENGINE_API BOOL bShowPauseString;
 
@@ -108,6 +109,25 @@ void CUISequenceSimpleItem::Load(CUIXml* xml, int idx)
 		_si->m_wnd					= smart_cast<CUIStatic*>(find_child_window(m_UIWindow, sname)); VERIFY(_si->m_wnd);
 		_si->m_wnd->SetTextComplexMode(true);
 		_si->m_wnd->Show			(false);
+//		_si->m_wnd->SetWidth		(_si->m_wnd->GetWidth()*UI()->get_current_kx());
+		
+		if(UI()->is_16_9_mode())
+		{
+			XML_NODE* autostatic_node	= xml->NavigateToNode("auto_static", i);
+			XML_NODE* ws_rect			= xml->NavigateToNode(autostatic_node, "widescreen_rect", 0);
+			if(ws_rect)
+			{
+				xml->SetLocalRoot		(autostatic_node);
+
+				Fvector2 pos, size;
+				pos.x					= xml->ReadAttribFlt("widescreen_rect", 0, "x");
+				pos.y					= xml->ReadAttribFlt("widescreen_rect", 0, "y");
+				size.x					= xml->ReadAttribFlt("widescreen_rect", 0, "width");
+				size.y					= xml->ReadAttribFlt("widescreen_rect", 0, "height");
+				_si->m_wnd->SetWndPos	(pos);
+				_si->m_wnd->SetWndSize	(size);
+			}
+		}
 
 		xml->SetLocalRoot			(_sr);
 	}
@@ -134,7 +154,7 @@ void CUISequenceSimpleItem::Update			()
 	SubItemVecIt _E					= m_subitems.end();
 	for(;_I!=_E;++_I){
 		SSubItem& s					= *_I;
-		bool bPlaying				= (gt>(m_time_start+s.m_start))&&(gt<(m_time_start+s.m_start+s.m_length));
+		bool bPlaying				= (gt>(m_time_start+s.m_start-EPS))&&(gt<(m_time_start+s.m_start+s.m_length+EPS));
 		if (true==bPlaying&&(false==s.m_visible))			s.Start	();
 		else if ((false==bPlaying)&&(true==s.m_visible))	s.Stop	();
 	}
@@ -149,12 +169,16 @@ void CUISequenceSimpleItem::Update			()
 				ui_game_sp->InventoryMenu->IsShown()	||
 				ui_game_sp->TalkMenu->IsShown()			||
 				ui_game_sp->UICarBodyMenu->IsShown()	||
-				ui_game_sp->UIChangeLevelWnd->IsShown()			)
+				ui_game_sp->UIChangeLevelWnd->IsShown() ||
+				(MainMenu()->IsActive() /*&& !m_owner->m_flags.test(CUISequencer::etsOverMainMenu)*/ )
+				)
 				m_UIWindow->Show						(false);
 			else
 				m_UIWindow->Show						(true);
 		}
 	}
+	if (m_desired_cursor_pos.x && m_desired_cursor_pos.y)
+		GetUICursor()->SetUICursorPosition(m_desired_cursor_pos);
 }
 
 void CUISequenceSimpleItem::Start()
@@ -220,8 +244,9 @@ bool CUISequenceSimpleItem::Stop			(bool bForce)
 {
 	if(!m_flags.test(etiCanBeStopped)&&!bForce) 
 		return false;
-
-	m_owner->MainWnd()->DetachChild	(m_UIWindow);
+	
+	if(m_UIWindow->GetParent()==m_owner->MainWnd()) //started??
+		m_owner->MainWnd()->DetachChild	(m_UIWindow);
 	m_sound.stop				();
 
 	if(m_flags.test(etiNeedPauseOn) && !m_flags.test(etiStoredPauseState))
@@ -255,3 +280,15 @@ void CUISequenceSimpleItem::OnKeyboardPress	(int dik)
 	}
 }
 
+void CUISequenceSimpleItem::OnMousePress	(int btn)
+{
+	int dik = 0;
+	switch(btn) 
+	{
+		case 0:dik = MOUSE_1;break;
+		case 1:dik = MOUSE_2;break;
+		case 2:dik = MOUSE_3;break;
+		default:return;
+	}
+	OnKeyboardPress(dik);
+}

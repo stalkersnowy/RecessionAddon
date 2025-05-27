@@ -88,6 +88,8 @@ extern	int		m_HitMarkIndex;
 
 extern	BOOL	g_bUseLens;
 
+int				g_keypress_on_start = 0;
+
 
 void register_mp_console_commands();
 //-----------------------------------------------------------
@@ -1782,6 +1784,8 @@ void CCC_RegisterCommands()
 	}
 
 	CMD3(CCC_Mask,		"g_autopickup",			&psActorFlags,	AF_AUTOPICKUP);
+	
+	CMD4(CCC_Integer,	"keypress_on_start",	&g_keypress_on_start, 0, 1);
 
 
 #ifdef DEBUG

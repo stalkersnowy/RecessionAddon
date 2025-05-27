@@ -18,6 +18,7 @@ CUISequenceVideoItem::CUISequenceVideoItem(CUISequencer* owner):CUISequenceItem(
 	m_flags.set				(etiPlaying|etiNeedStart|etiDelayed|etiBackVisible,FALSE);
 	m_delay					= 0.f;
 	m_wnd					= NULL;
+	m_wnd_bg				= NULL;
 	m_delay					= 0.f;
 	m_time_start			= 0;
 	m_sync_time				= 0;
@@ -28,6 +29,7 @@ CUISequenceVideoItem::~CUISequenceVideoItem()
 	m_sound[0].stop			();
 	m_sound[1].stop			();
 	delete_data				(m_wnd);
+	delete_data				(m_wnd_bg);
 }
 
 bool CUISequenceVideoItem::IsPlaying()
@@ -60,6 +62,12 @@ void CUISequenceVideoItem::Load(CUIXml* xml, int idx)
 	m_delay					= _max(xml->ReadFlt		("delay",0,0.f),0.f);
 
 	//ui-components
+	if(xml->NavigateToNode("background",0))
+	{
+		m_wnd_bg									= xr_new<CUIStatic>();
+		m_wnd_bg->SetAutoDelete						(false);
+		CUIXmlInit::InitStatic						(*xml, "background", 0, m_wnd_bg);
+	}
 	m_wnd											= xr_new<CUIStatic>();
 	m_wnd->SetAutoDelete							(false);
 	CUIXmlInit::InitStatic							(*xml, "video_wnd", 0, m_wnd);
@@ -100,6 +108,11 @@ void CUISequenceVideoItem::Update()
 	// deferred start
 	if (Device.dwTimeContinual>=m_time_start){
 		if (m_flags.test(etiDelayed)){
+			if(m_wnd_bg)
+			{
+				m_owner->MainWnd()->AttachChild	(m_wnd_bg);
+				m_wnd_bg->Show		(true);
+			}
 			m_owner->MainWnd()->AttachChild	(m_wnd);
 			m_wnd->Show		(true);
 			m_flags.set		(etiDelayed,FALSE);

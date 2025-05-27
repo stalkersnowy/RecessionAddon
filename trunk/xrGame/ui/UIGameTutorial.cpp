@@ -8,6 +8,15 @@
 #include "../xr_level_controller.h"
 #include "../script_engine.h"
 #include "../ai_space.h"
+#include "../UIGameSp.h"
+#include "UIInventoryWnd.h"
+#include "UICarBodyWnd.h"
+#include "UIPdaWnd.h"
+#include "../../XR_3DA/xr_ioconsole.h"
+#include "../HUDManager.h"
+#include "../level.h"
+
+extern ENGINE_API BOOL bShowPauseString;
 
 void CUISequenceItem::Load(CUIXml* xml, int idx)
 {
@@ -73,13 +82,16 @@ CUISequencer::CUISequencer()
 {
 	m_bActive					= false;
 	m_bPlayEachItem				= false;
+	m_bNeedPauseOn				= false;
+	m_bNeedPauseOff				= false;
+	m_bStoredPauseState			= false;
 }
 
 void CUISequencer::Start(LPCSTR tutor_name)
 {
 	VERIFY(m_items.size()==0);
 	Device.seqFrame.Add			(this, REG_PRIORITY_LOW-10000);
-	Device.seqRender.Add		(this, 3);
+//	Device.seqRender.Add		(this, 3);
 	
 	m_UIWindow					= xr_new<CUIWindow>();
 
@@ -90,6 +102,7 @@ void CUISequencer::Start(LPCSTR tutor_name)
 	uiXml.SetLocalRoot			(uiXml.NavigateToNode(tutor_name,0));
 
 	m_bPlayEachItem				= !!uiXml.ReadInt("play_each_item",0,0);
+	int render_prio				= uiXml.ReadInt("render_prio", 0, -2);
 
 	CUIXmlInit xml_init;
 	xml_init.InitWindow			(uiXml, "global_wnd", 0,	m_UIWindow);
@@ -105,12 +118,35 @@ void CUISequencer::Start(LPCSTR tutor_name)
 		pItem->Load				(&uiXml,i);
 	}
 
+	uiXml.SetLocalRoot(uiXml.NavigateToNode("global_wnd", 0));
+	{
+		LPCSTR str = uiXml.Read("pause_state", 0, "ignore");
+		m_bNeedPauseOn = (0 == _stricmp(str, "on"));
+		m_bNeedPauseOff = (0 == _stricmp(str, "off"));
+	}
+
+	Device.seqRender.Add		(this, render_prio /*-2*/);
+
 	CUISequenceItem* pCurrItem	= m_items.front();
 	pCurrItem->Start			();
 	m_pStoredInputReceiver		= pInput->CurrentIR();
 	IR_Capture					();
 	m_bActive					= true;
+
+	m_bStoredPauseState			= !!Device.Paused();
+
+	if (m_bNeedPauseOn && !m_bStoredPauseState)
+	{
+		Device.Pause(TRUE, TRUE, TRUE, "tutorial_start");
+		bShowPauseString = FALSE;
+	}
+
+	if (m_bNeedPauseOff && m_bStoredPauseState)
+		Device.Pause(FALSE, TRUE, FALSE, "tutorial_start");
 }
+
+extern CUISequencer * g_tutorial;
+extern CUISequencer * g_tutorial2;
 
 void CUISequencer::Destroy()
 {
@@ -121,6 +157,18 @@ void CUISequencer::Destroy()
 	IR_Release					();
 	m_bActive					= false;
 	m_pStoredInputReceiver		= NULL;
+	
+	if(!m_on_destroy_event.empty())
+		m_on_destroy_event		();
+
+	if(g_tutorial==this)
+	{
+		g_tutorial = NULL;
+	}
+	if(g_tutorial2==this)
+	{
+		g_tutorial2 = NULL;
+	}
 }
 
 void CUISequencer::Stop()
@@ -134,6 +182,13 @@ void CUISequencer::Stop()
 			pCurrItem->Stop		(true);
 		}
 	}
+
+	if (m_bNeedPauseOn && !m_bStoredPauseState)
+		Device.Pause(FALSE, TRUE, TRUE, "tutorial_stop");
+
+	if (m_bNeedPauseOff && m_bStoredPauseState)
+		Device.Pause(TRUE, TRUE, FALSE, "tutorial_stop");
+
 	Destroy			();
 }
 
@@ -192,6 +247,9 @@ bool CUISequencer::GrabInput()
 
 void CUISequencer::IR_OnMousePress		(int btn)
 {
+	if(m_items.size())	
+		m_items.front()->OnMousePress	(btn);
+
 	if(!GrabInput()&&m_pStoredInputReceiver)
 		m_pStoredInputReceiver->IR_OnMousePress(btn);
 }
@@ -247,10 +305,35 @@ void CUISequencer::IR_OnKeyboardPress	(int dik)
 	bool b = true;
 	if(m_items.size()) b &= m_items.front()->AllowKey(dik);
 
-	if(b && is_binded(kQUIT, dik) )
+	bool binded = is_binded(kQUIT, dik);
+	if(b && binded )
 	{
 		Stop		();
 		return;
+	}
+
+	if(g_pGameLevel){
+		CUIGameSP* ui_game_sp	= smart_cast<CUIGameSP*>(HUD().GetUI()->UIGame());
+		if(binded && ui_game_sp)
+		{
+			if(ui_game_sp->InventoryMenu->IsShown())
+			{
+				HUD().GetUI()->StartStopMenu(ui_game_sp->InventoryMenu, true);
+				return;
+			}
+			if(ui_game_sp->UICarBodyMenu->IsShown())
+			{
+				HUD().GetUI()->StartStopMenu(ui_game_sp->UICarBodyMenu, true);
+				return;
+			}
+			if(ui_game_sp->PdaMenu->IsShown())
+			{
+				HUD().GetUI()->StartStopMenu(ui_game_sp->PdaMenu, true);
+				return;
+			}
+			Console->Execute("main_menu");
+			return;
+		}
 	}
 
 	if(b&&!GrabInput()&&m_pStoredInputReceiver)	
