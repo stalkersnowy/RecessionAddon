@@ -522,6 +522,7 @@
     <ClInclude Include="..\layers\blenders\Blender.h" />
     <ClInclude Include="..\layers\blenders\Blender_CLSID.h" />
     <ClInclude Include="..\layers\blenders\Blender_Recorder.h" />
+    <ClInclude Include="R_Backend_hemi.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="defines.cpp">
@@ -911,6 +912,7 @@
     <ClCompile Include="..\layers\blenders\Blender.cpp" />
     <ClCompile Include="..\layers\blenders\Blender_Palette.cpp" />
     <ClCompile Include="..\layers\blenders\Blender_Recorder.cpp" />
+    <ClCompile Include="R_Backend_hemi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="OutOfVirtError.RES">

@@ -99,6 +99,7 @@ IC void CBackend::set_Constants			(R_constant_table* _C)
 	if (ctable== _C)	return;
 	ctable			= _C;
 	xforms.unmap	();
+	hemi.unmap		();
 	if (0== _C)		return;
 
 	PGO				(Msg("PGO:c-table"));

@@ -13,6 +13,7 @@
 #include "r_DStreams.h"
 #include "r_constants_cache.h"
 #include "r_backend_xform.h"
+#include "r_backend_hemi.h"
 #include "fvf.h"
 
 const	u32		CULL_CCW			= D3DCULL_CCW;
@@ -48,6 +49,7 @@ public:
 	IDirect3DIndexBuffer9*			old_QuadIB;
 	IDirect3DIndexBuffer9*			CuboidIB;
 	R_xforms						xforms;
+	R_hemi							hemi;
 private:
 	// Render-targets
 	IDirect3DSurface9*				pRT[4];

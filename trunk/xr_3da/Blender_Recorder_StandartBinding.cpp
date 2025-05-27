@@ -24,6 +24,27 @@ BIND_DECLARE(wv);
 BIND_DECLARE(vp);
 BIND_DECLARE(wvp);
 
+class cl_hemi_cube_pos_faces: public R_constant_setup
+{
+	virtual void setup(R_constant* C) {RCache.hemi.set_c_pos_faces(C);}
+};
+
+static cl_hemi_cube_pos_faces binder_hemi_cube_pos_faces;
+
+class cl_hemi_cube_neg_faces: public R_constant_setup
+{
+	virtual void setup(R_constant* C) {RCache.hemi.set_c_neg_faces(C);}
+};
+
+static cl_hemi_cube_neg_faces binder_hemi_cube_neg_faces;
+
+class cl_material: public R_constant_setup
+{
+	virtual void setup(R_constant* C) {RCache.hemi.set_c_material(C);}
+};
+
+static cl_material binder_material;
+
 class cl_texgen : public R_constant_setup
 {
 	virtual void setup(R_constant* C)
@@ -280,6 +301,11 @@ void	CBlender_Compile::SetMapping	()
 	r_Constant				("L_hemi_color",	&binder_hemi_color);
 	r_Constant				("L_ambient",		&binder_amb_color);
 	r_Constant				("screen_res",		&binder_screen_res);
+
+	//hemi cube
+	r_Constant				("L_material",			&binder_material);
+	r_Constant				("hemi_cube_pos_faces",			&binder_hemi_cube_pos_faces);
+	r_Constant				("hemi_cube_neg_faces",			&binder_hemi_cube_neg_faces);
 
 	// detail
 	if (bDetail	&& detail_scaler)

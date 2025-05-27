@@ -237,4 +237,7 @@
 	<string id="ui_st_invalid_saved_game">
 		<text>Не совпадает версия сохранённой игры или сохранённая игра испорчена.</text>
 	</string>
+	<string id="st_press_any_key">
+		<text>Нажмите любую клавишу для перехода к игре</text>
+	</string>
 </string_table>

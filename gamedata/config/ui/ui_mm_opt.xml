@@ -958,6 +958,13 @@
 			<options_item entry="g_use_lens" group="mm_opt_gameplay"/>
 		</check_g_use_lens>
 
+		<cap_keypress_on_start x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_keypress_on_start</text>
+		</cap_keypress_on_start>
+		<check_keypress_on_start x="300" y="10" width="30" height="21">
+			<options_item entry="keypress_on_start" group="mm_opt_gameplay"/>
+		</check_keypress_on_start>
+
 		<cap_r2_aa x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_aa</text>
 		</cap_r2_aa>
@@ -983,6 +990,20 @@
 			<list_font_s r="240" g="217" b="182"/>
 			<list_font r="216" g="186" b="140" font="letterica16"/>
 		</combo_r2_bloom_mode>
+
+		<cap_r2_dynamic_sun x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_dynamic_sun</text>
+		</cap_r2_dynamic_sun>
+		<check_r2_dynamic_sun x="300" y="10" width="30" height="21">
+			<options_item entry="r2_dynamic_sun" group="mm_opt_gameplay"/>
+		</check_r2_dynamic_sun>
+
+		<cap_r2_hemi_cube x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_hemi_cube</text>
+		</cap_r2_hemi_cube>
+		<check_r2_hemi_cube x="300" y="10" width="30" height="21">
+			<options_item entry="r2_hemi_cube" group="mm_opt_gameplay"/>
+		</check_r2_hemi_cube>
 
 		<cap_r2_indoor_lighting x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_indoor_lighting</text>
@@ -1032,6 +1053,13 @@
 		<check_r2_tonemap x="300" y="10" width="30" height="21">
 			<options_item entry="r2_tonemap" group="mm_opt_gameplay"/>
 		</check_r2_tonemap>
+
+		<cap_r2_true_sun x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_true_sun</text>
+		</cap_r2_true_sun>
+		<check_r2_true_sun x="300" y="10" width="30" height="21">
+			<options_item entry="r2_true_sun" group="mm_opt_gameplay"/>
+		</check_r2_true_sun>
 
 		<cap_r__smapsize x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r__smapsize</text>

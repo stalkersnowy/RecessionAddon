@@ -564,6 +564,7 @@ extern int			g_ErrorLineCount;
 ENGINE_API int			ps_r__Supersample			= 1;
 ENGINE_API int			ps_r__WallmarksOnSkeleton	= 0;
 extern int				ps_r2_DetailBump;
+extern int				ps_r2_DynamicSun;
 void CCC_Register()
 {
 	// General
@@ -618,6 +619,8 @@ void CCC_Register()
 	CMD4(CCC_Integer,	"r__wallmarks_on_skeleton", &ps_r__WallmarksOnSkeleton,		0, 1	);
 	//Detail bump
 	CMD4(CCC_Integer,	"r2_detail_bump",		&ps_r2_DetailBump, 0, 1);
+	//Detail bump
+	CMD4(CCC_Integer,	"r2_dynamic_sun",		&ps_r2_DynamicSun, 0, 1);
 
 	CMD3(CCC_Mask,		"rs_v_sync",			&psDeviceFlags,		rsVSync				);
 //	CMD3(CCC_Mask,		"rs_disable_objects_as_crows",&psDeviceFlags,	rsDisableObjectsAsCrows	);

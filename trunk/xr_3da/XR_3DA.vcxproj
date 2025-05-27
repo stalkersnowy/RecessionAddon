@@ -482,6 +482,7 @@
     <ClInclude Include="edit_actions.h" />
     <ClInclude Include="line_editor.h" />
     <ClInclude Include="line_edit_control.h" />
+    <ClInclude Include="R_Backend_hemi.h" />
     <ClInclude Include="xr_input_xinput.h" />
     <ClInclude Include="_d3d_extensions.h" />
     <ClInclude Include="CopyProtection.h" />
@@ -610,6 +611,7 @@
     <ClCompile Include="edit_actions.cpp" />
     <ClCompile Include="line_editor.cpp" />
     <ClCompile Include="line_edit_control.cpp" />
+    <ClCompile Include="R_Backend_hemi.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_Dedicated|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

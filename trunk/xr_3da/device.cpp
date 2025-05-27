@@ -18,6 +18,9 @@
 #include "XR_IOConsole.h"
 
 ENGINE_API CRenderDevice Device;
+ENGINE_API CLoadScreenRenderer load_screen_renderer;
+
+
 ENGINE_API BOOL g_bRendering = FALSE; 
 
 BOOL		g_bLoaded = FALSE;
@@ -89,7 +92,7 @@ void CRenderDevice::End		(void)
 	{
 		::Sound->set_master_volume	(0.f);
 		dwPrecacheFrame	--;
-		pApp->load_draw_internal	();
+//.		pApp->load_draw_internal	();
 		if (0==dwPrecacheFrame)
 		{
 			Gamma.Update		();
@@ -97,7 +100,7 @@ void CRenderDevice::End		(void)
 			if(precache_light) precache_light->set_active	(false);
 			if(precache_light) precache_light.destroy		();
 			::Sound->set_master_volume						(1.f);
-			pApp->destroy_loading_shaders					();
+//			pApp->destroy_loading_shaders					();
 			Resources->DestroyNecessaryTextures				();
 			Memory.mem_compact								();
 			Msg												("* MEMORY USAGE: %d K",Memory.mem_usage()/1024);
@@ -148,7 +151,7 @@ void 			mt_Thread	(void *ptr)	{
 }
 
 #include "igame_level.h"
-void CRenderDevice::PreCache	(u32 amount)
+void CRenderDevice::PreCache	(u32 amount, bool b_draw_loadscreen, bool b_wait_user_input)
 {
 	if (HW.Caps.bForceGPU_REF)	amount=0;
 #ifdef DEDICATED_SERVER
@@ -164,6 +167,11 @@ void CRenderDevice::PreCache	(u32 amount)
 		precache_light->set_color		(255,255,255);
 		precache_light->set_range		(5.0f);
 		precache_light->set_active		(true);
+	}
+
+	if(amount && b_draw_loadscreen && load_screen_renderer.b_registered==false)
+	{
+		load_screen_renderer.start	(b_wait_user_input);
 	}
 }
 
@@ -458,4 +466,29 @@ void CRenderDevice::OnWM_Activate(WPARAM wParam, LPARAM lParam)
 			ShowCursor				(TRUE);
 		}
 	}
+}
+
+CLoadScreenRenderer::CLoadScreenRenderer()
+:b_registered(false)
+{}
+
+void CLoadScreenRenderer::start(bool b_user_input) 
+{
+	Device.seqRender.Add			(this, 0);
+	b_registered					= true;
+	b_need_user_input				= b_user_input;
+}
+
+void CLoadScreenRenderer::stop()
+{
+	if(!b_registered)				return;
+	Device.seqRender.Remove			(this);
+	pApp->destroy_loading_shaders	();
+	b_registered					= false;
+	b_need_user_input				= false;
+}
+
+void CLoadScreenRenderer::OnRender() 
+{
+	pApp->load_draw_internal();
 }

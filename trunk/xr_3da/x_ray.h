@@ -48,7 +48,7 @@ public:
 	// Loading
 	void					LoadBegin			();
 	void					LoadEnd				();
-	void					LoadTitleInt		(LPCSTR str);
+	void					LoadTitleInt		(LPCSTR str, bool move = true);
 	void					SetLoadLogo			(ref_shader NewLoadLogo);
 	void					LoadSwitch			();
 	void					LoadDraw			();

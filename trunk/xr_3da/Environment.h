@@ -182,6 +182,8 @@ private:
 	void					SelectEnvs		(EnvVec* envs, CEnvDescriptor*& e0, CEnvDescriptor*& e1, float tm);
 	void					SelectEnv		(EnvVec* envs, CEnvDescriptor*& e, float tm);
 	void					StopWFX			();
+
+	void					calculate_dynamic_sun_dir();
 public:
 	static bool sort_env_pred	(const CEnvDescriptor* x, const CEnvDescriptor* y)
 	{	return x->exec_time < y->exec_time;	}

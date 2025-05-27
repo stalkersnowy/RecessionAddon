@@ -999,9 +999,9 @@ void CApplication::LoadDraw		()
 	CheckCopyProtection			();
 }
 
-void CApplication::LoadTitleInt(LPCSTR str)
+void CApplication::LoadTitleInt(LPCSTR str, bool move)
 {
-	load_stage++;
+	if(move) load_stage++;
 
 	VERIFY						(ll_dwReference);
 	VERIFY						(str && xr_strlen(str)<256);
