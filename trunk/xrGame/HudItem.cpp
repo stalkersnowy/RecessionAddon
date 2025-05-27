@@ -214,15 +214,13 @@ void CHudItem::UpdateHudInertion		(Fmatrix& hud_trans, bool bobbing)
 	CActor* pActor = smart_cast<CActor*>(object().H_Parent());
 	if (pActor && m_pHUD && m_bInertionAllow && m_bInertionEnable){
 		Fmatrix								xform,xform_orig;
+		Fvector& origin						= hud_trans.c; 
 		if (bobbing) {
 			pActor->Cameras().affected_Matrix	(xform);
 			pActor->Cameras().unaffected_Matrix	(xform_orig);
 		}else{
-			pActor->Cameras().camera_Matrix		(xform);
-			pActor->Cameras().camera_Matrix		(xform_orig);
+			xform_orig = xform = hud_trans;
 		}
-		Fvector& origin						= hud_trans.c; 
-		xform								= hud_trans;
 
 		static Fvector						m_last_dir={0,0,0};
 
