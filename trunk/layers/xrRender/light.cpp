@@ -1,6 +1,9 @@
 #include "StdAfx.h"
 #include "light.h"
 
+static const float	SQRT2		=	1.4142135623730950488016887242097f;
+static const float	RSQRTDIV2	=	0.70710678118654752440084436210485f;
+
 light::light		(void)	: ISpatial(g_SpatialSpace)
 {
 	spatial.type	= STYPE_LIGHTSOURCE;
@@ -57,7 +60,6 @@ void light::set_texture		(LPCSTR name)
 
 #pragma todo				("Only shadowed spot implements projective texture")
 	string256				temp;
-	s_spot.create			(RImplementation.Target->b_accum_spot,strconcat(sizeof(temp),temp,"r2\\accum_spot_",name),name);
 	s_spot.create			(RImplementation.Target->b_accum_spot,strconcat(sizeof(temp),temp,"r2\\accum_spot_",name),name);
 }
 #endif
@@ -150,8 +152,12 @@ void	light::spatial_move			()
 	case IRender_Light::OMNIPART	:
 		{
 			// is it optimal? seems to be...
-			spatial.sphere.P.mad		(position,direction,range);
-			spatial.sphere.R			= range;
+			//spatial.sphere.P.mad		(position,direction,range);
+			//spatial.sphere.R			= range;
+			// This is optimal.
+			const float fSphereR		= range*RSQRTDIV2;
+			spatial.sphere.P.mad		(position,direction,fSphereR);
+			spatial.sphere.R			= fSphereR;
 		}
 		break;
 	}
@@ -289,6 +295,14 @@ void	light::export_to		(light_Package& package)
 			case IRender_Light::SPOT:		package.v_spot.push_back	(this);	break;
 		}
 	}
+}
+
+void	light::set_attenuation_params	(float a0, float a1, float a2, float fo)
+{
+	attenuation0 = a0;
+	attenuation1 = a1;
+	attenuation2 = a2;
+	falloff      = fo;
 }
 
 #endif

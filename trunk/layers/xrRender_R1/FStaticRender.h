@@ -109,6 +109,8 @@ public:
 	virtual	GenerationLevel			get_generation			()	{ return IRender_interface::GENERATION_R1; }
 	virtual bool					supports_vtf			()	{ return true; }
 
+	virtual bool					is_sun_static			()	{ return true; }
+
 	// Loading / Unloading
 	virtual	void					create					();
 	virtual	void					destroy					();

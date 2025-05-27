@@ -28,6 +28,11 @@ public:
 	u32				frame_render;
 
 #if RENDER==R_R2
+	float			falloff;			// precalc to make light equal to zero at light range
+	float	        attenuation0;		// Constant attenuation		
+	float	        attenuation1;		// Linear attenuation		
+	float	        attenuation2;		// Quadratic attenuation	
+
 	light*						omnipart	[6]	;
 	xr_vector<light_indirect>	indirect		;
 	u32							indirect_photons;
@@ -107,6 +112,7 @@ public:
 	void			vis_prepare				();
 	void			vis_update				();
 	void			export_to 				(light_Package& dest);
+	void			set_attenuation_params	(float a0, float a1, float a2, float fo);
 #endif
 
 	float			get_LOD					();

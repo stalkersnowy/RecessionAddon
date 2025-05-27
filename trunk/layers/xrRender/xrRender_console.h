@@ -95,7 +95,10 @@ extern ECORE_API float			ps_r2_sun_lumscale_hemi;	// 1.0f
 extern ECORE_API float			ps_r2_sun_lumscale_amb;		// 1.0f
 extern ECORE_API float			ps_r2_zfill;				// .1f
 
+extern ECORE_API float			ps_r2_dhemi_sky_scale;		// 1.5f
 extern ECORE_API float			ps_r2_dhemi_scale;			// 1.5f
+extern ECORE_API float			ps_r2_dhemi_light_scale;	// 1.f
+extern ECORE_API float			ps_r2_dhemi_light_flow;		// .1f
 extern ECORE_API int			ps_r2_dhemi_count;			// 5
 extern ECORE_API float			ps_r2_slight_fade;			// 1.f
 extern ECORE_API int			ps_r2_wait_sleep;
@@ -121,7 +124,7 @@ enum
 	R2FLAG_SUN_TSM				= (1<<2),
 	R2FLAG_SUN_DETAILS			= (1<<3),
 	R2FLAG_TONEMAP				= (1<<4),
-//	R2FLAG_AA					= (1<<5),
+	R2FLAG_HEMI_CUBE			= (1<<5),
 	R2FLAG_GI					= (1<<6),
 	R2FLAG_FASTBLOOM			= (1<<7),
 	R2FLAG_GLOBALMATERIAL		= (1<<8),
@@ -155,6 +158,7 @@ enum
 	
 	R2FLAG_SUN_HIGH				= (1<<27),
 	R2FLAG_DETAIL_BUMP			= (1<<28),
+	R2FLAG_TRUE_SUN				= (1<<29),
 };
 
 extern void						xrRender_initconsole	();

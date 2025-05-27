@@ -263,6 +263,7 @@ void CRender::LoadLights(IReader *fs)
 {
 	// lights
 	Lights.Load	(fs);
+	Lights.LoadHemi();
 }
 
 struct b_portal

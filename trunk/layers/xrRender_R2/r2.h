@@ -117,6 +117,7 @@ public:
 	shared_str													c_sbase			;
 	shared_str													c_lmaterial		;
 	float														o_hemi			;
+	float														o_hemi_cube[CROS_impl::NUM_FACES]	;
 	float														o_sun			;
 	IDirect3DQuery9*											q_sync_point[2]	;
 	u32															q_sync_count	;
@@ -176,6 +177,7 @@ public:
 		LT.update_smooth			(O)								;
 		o_hemi						= 0.75f*LT.get_hemi			()	;
 		o_sun						= 0.75f*LT.get_sun			()	;
+		CopyMemory(o_hemi_cube, LT.get_hemi_cube(), CROS_impl::NUM_FACES*sizeof(float));
 	}
 	IC void							apply_lmaterial				()
 	{
@@ -189,13 +191,21 @@ public:
 #ifdef	DEBUG
 		if (ps_r2_ls_flags.test(R2FLAG_GLOBALMATERIAL))	mtl=ps_r2_gmaterial;
 #endif
-		RCache.set_c		(c_lmaterial,o_hemi,o_sun,0,(mtl+.5f)/4.f);
+		RCache.hemi.set_material (o_hemi,o_sun,0,(mtl+.5f)/4.f);
+		RCache.hemi.set_pos_faces(o_hemi_cube[CROS_impl::CUBE_FACE_POS_X],
+								  o_hemi_cube[CROS_impl::CUBE_FACE_POS_Y],
+								  o_hemi_cube[CROS_impl::CUBE_FACE_POS_Z]);
+		RCache.hemi.set_neg_faces	(o_hemi_cube[CROS_impl::CUBE_FACE_NEG_X],
+								 o_hemi_cube[CROS_impl::CUBE_FACE_NEG_Y],
+								 o_hemi_cube[CROS_impl::CUBE_FACE_NEG_Z]);
 	}
 
 public:
 	// feature level
 	virtual	GenerationLevel			get_generation			()	{ return IRender_interface::GENERATION_R2; }
 	virtual bool					supports_vtf			()	{ return ps_BloomMode < 6; }
+
+	virtual bool					is_sun_static			()	{ return o.sunstatic;}
 
 	// Loading / Unloading
 	virtual void					create						();

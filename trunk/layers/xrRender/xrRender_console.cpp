@@ -166,6 +166,9 @@ float		ps_r2_gmaterial				= 0.f;				//
 float		ps_r2_zfill					= 0.1f;				// .1f
 
 float		ps_r2_dhemi_scale			= 1.f;				// 1.5f
+float		ps_r2_dhemi_sky_scale		= 0.08f;				// 1.5f
+float		ps_r2_dhemi_light_scale     = 0.2f	;
+float		ps_r2_dhemi_light_flow      = 0.1f	;
 int			ps_r2_dhemi_count			= 5;				// 5
 int			ps_r2_wait_sleep			= 0;
 
@@ -643,6 +646,8 @@ void		xrRender_initconsole	()
 	CMD3(CCC_Mask,		"r2_old_aref",					&ps_r2_ls_flags,			R2FLAG_OLD_AREF);
 	
 	CMD3(CCC_Mask,		"r2_specular_rgb",				&ps_r2_ls_flags,			R2FLAG_SPECULAR_RGB);
+	CMD3(CCC_Mask,		"r2_hemi_cube",					&ps_r2_ls_flags,			R2FLAG_HEMI_CUBE);
+	CMD3(CCC_Mask,		"r2_true_sun",					&ps_r2_ls_flags,			R2FLAG_TRUE_SUN);
 }
 
 void	xrRender_apply_tf		()
