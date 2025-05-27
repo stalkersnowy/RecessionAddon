@@ -62,4 +62,6 @@ public:
 	virtual void	SetActor			(CActor* pActor) {m_pActor = pActor;};
 	
 	virtual CCameraShotEffector*		cast_effector_shot				()	{return this;}
+
+	virtual BOOL	Affected			() {return TRUE;}
 };

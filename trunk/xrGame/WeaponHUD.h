@@ -1,5 +1,5 @@
 #pragma once
-#define WPN_BOBBING // comment out this line to exclude the feature
+//#define WPN_BOBBING // comment out this line to exclude the feature
 #include "../layers/xrRender/SkeletonAnimated.h"
 class CHudItem;
 #ifdef WPN_BOBBING

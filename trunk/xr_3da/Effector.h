@@ -27,5 +27,7 @@ public:
 	virtual	void		ProcessIfInvalid(SCamEffectorInfo& info)			{};
 	virtual BOOL		AllowProcessingIfInvalid()							{return FALSE;}
 	virtual bool		AbsolutePositioning()								{return false;}		
-	virtual bool		IsScripted()										{return false;}
+	virtual bool		IsScripted		()									{return false;}
+
+	virtual BOOL		Affected		()									{return FALSE;}
 };

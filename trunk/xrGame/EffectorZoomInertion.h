@@ -49,4 +49,6 @@ public:
 	virtual	void	Init				(CWeaponMagazined*	pWeapon);
 
 	virtual CEffectorZoomInertion	*cast_effector_zoom_inertion	()	{return this;}
+
+	virtual BOOL	Affected			() {return TRUE;}
 };

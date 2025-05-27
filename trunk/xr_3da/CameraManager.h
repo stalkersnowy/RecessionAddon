@@ -120,6 +120,8 @@ public:
 	IC CObject*				Parent					()  const { return m_cam_info.parent; }
 
 	IC void					camera_Matrix			(Fmatrix& M){M.set(m_cam_info.r,m_cam_info.n,m_cam_info.d,m_cam_info.p);}
+	IC void					affected_Matrix			(Fmatrix& M){M.set(m_cam_info.ar,m_cam_info.an,m_cam_info.ad,m_cam_info.ap);}
+	IC void					unaffected_Matrix		(Fmatrix& M){M.set(m_cam_info.ur,m_cam_info.un,m_cam_info.ud,m_cam_info.up);}
 	void					Update					(const Fvector& P, const Fvector& D, const Fvector& N, float fFOV_Dest, float fASPECT_Dest, float fFAR_Dest, u32 flags);
 	void					UpdateFromCamera		(const CCameraBase* C);
 	

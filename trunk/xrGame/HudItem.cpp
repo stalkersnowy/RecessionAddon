@@ -177,8 +177,13 @@ void CHudItem::UpdateHudPosition	()
 
 		CActor* pActor = smart_cast<CActor*>(object().H_Parent());
 		if(pActor){
-			pActor->Cameras().camera_Matrix				(trans);
-			UpdateHudInertion							(trans);
+			if(psActorFlags.test(AF_WPN_BOBBING)){
+				pActor->Cameras().affected_Matrix		(trans);
+				UpdateHudInertion						(trans, true);
+			}else{
+				pActor->Cameras().camera_Matrix			(trans);
+				UpdateHudInertion						(trans);
+			}
 			UpdateHudAdditonal							(trans);
 			m_pHUD->UpdatePosition						(trans);
 		}
@@ -204,10 +209,18 @@ static const float PITCH_OFFSET_D	= 0.02f;
 static const float ORIGIN_OFFSET	= -0.05f;
 static const float TENDTO_SPEED		= 5.f;
 
-void CHudItem::UpdateHudInertion		(Fmatrix& hud_trans)
+void CHudItem::UpdateHudInertion		(Fmatrix& hud_trans, bool bobbing)
 {
-	if (m_pHUD && m_bInertionAllow && m_bInertionEnable){
-		Fmatrix								xform;//,xform_orig; 
+	CActor* pActor = smart_cast<CActor*>(object().H_Parent());
+	if (pActor && m_pHUD && m_bInertionAllow && m_bInertionEnable){
+		Fmatrix								xform,xform_orig;
+		if (bobbing) {
+			pActor->Cameras().affected_Matrix	(xform);
+			pActor->Cameras().unaffected_Matrix	(xform_orig);
+		}else{
+			pActor->Cameras().camera_Matrix		(xform);
+			pActor->Cameras().camera_Matrix		(xform_orig);
+		}
 		Fvector& origin						= hud_trans.c; 
 		xform								= hud_trans;
 
@@ -232,10 +245,10 @@ void CHudItem::UpdateHudInertion		(Fmatrix& hud_trans)
 		origin.mad		(diff_dir,ORIGIN_OFFSET);
 
 		// pitch compensation
-		float pitch		= angle_normalize_signed(xform.k.getP());
-		origin.mad		(xform.k,	-pitch * PITCH_OFFSET_D);
-		origin.mad		(xform.i,	-pitch * PITCH_OFFSET_R);
-		origin.mad		(xform.j,	-pitch * PITCH_OFFSET_N);
+		float pitch		= angle_normalize_signed(xform_orig.k.getP());
+		origin.mad		(xform_orig.k,	-pitch * PITCH_OFFSET_D);
+		origin.mad		(xform_orig.i,	-pitch * PITCH_OFFSET_R);
+		origin.mad		(xform_orig.j,	-pitch * PITCH_OFFSET_N);
 
 		// calc moving inertion
 	}

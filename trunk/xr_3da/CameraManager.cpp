@@ -322,6 +322,19 @@ void CCameraManager::Update(const Fvector& P, const Fvector& D, const Fvector& N
 	m_cam_info.r.crossproduct	(m_cam_info.n, m_cam_info.d);
 	m_cam_info.n.crossproduct	(m_cam_info.d, m_cam_info.r);
 
+	// Save affected matrix and vectors
+	m_cam_info.ap.set				(m_cam_info.p);
+	m_cam_info.ad.set				(m_cam_info.d);
+	m_cam_info.an.set				(m_cam_info.n);
+	m_cam_info.ar.crossproduct		(m_cam_info.n,m_cam_info.d);
+
+	// Save un-affected matrix and vectors
+	m_cam_info.uv.build_camera_dir	(m_cam_info.p,m_cam_info.d,m_cam_info.n);
+	m_cam_info.up.set				(m_cam_info.p);
+	m_cam_info.ud.set				(m_cam_info.d);
+	m_cam_info.un.set				(m_cam_info.n);
+	m_cam_info.ur.crossproduct		(m_cam_info.n,m_cam_info.d);
+
 	float aspect				= Device.fHeight_2/Device.fWidth_2;
 	float src					= 10*Device.fTimeDelta;	clamp(src,0.f,1.f);
 	float dst					= 1-src;
@@ -345,6 +358,9 @@ void CCameraManager::Update(const Fvector& P, const Fvector& D, const Fvector& N
 bool CCameraManager::ProcessCameraEffector(CEffectorCam* eff)
 {
 	bool res = false;
+	Fvector sp=m_cam_info.p;
+	Fvector sd=m_cam_info.d;
+	Fvector sn=m_cam_info.n;
 	if (eff->Valid() && eff->ProcessCam(m_cam_info))
 	{
 		res = true;
@@ -352,6 +368,19 @@ bool CCameraManager::ProcessCameraEffector(CEffectorCam* eff)
 	else if (eff->AllowProcessingIfInvalid())
 	{
 		eff->ProcessIfInvalid(m_cam_info);
+	}
+	else
+	{
+		if (eff->Affected())
+		{
+			sp.sub(m_cam_info.p,sp);
+			sd.sub(m_cam_info.d,sd);
+			sn.sub(m_cam_info.n,sn);
+
+			m_cam_info.ap.add	(sp);
+			m_cam_info.ad.add	(sd);
+			m_cam_info.an.add	(sn);
+		}
 	}
 	return res;
 }
