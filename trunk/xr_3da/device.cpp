@@ -16,6 +16,7 @@
 #include "x_ray.h"
 #include "render.h"
 #include "XR_IOConsole.h"
+#include "igame_persistent.h"
 
 ENGINE_API CRenderDevice Device;
 ENGINE_API CLoadScreenRenderer load_screen_renderer;
@@ -264,7 +265,16 @@ void CRenderDevice::Run			()
 				// Release start point - allow thread to run
 				mt_csLeave.Enter			();
 				mt_csEnter.Leave			();
-				Sleep						(0);
+
+				static u32 time_frame = 0;
+				u32 time_curr = timeGetTime();
+				u32 time_diff = time_curr - time_frame;
+				time_frame = time_curr;
+				u32 optimal = 10;
+				if (Device.Paused() || g_pGamePersistent->IsMainMenuActive())
+					optimal = 32;
+				if (time_diff < optimal)
+					Sleep(optimal - time_diff);
 
 #ifndef DEDICATED_SERVER
 				Statistic->RenderTOTAL_Real.FrameStart	();
