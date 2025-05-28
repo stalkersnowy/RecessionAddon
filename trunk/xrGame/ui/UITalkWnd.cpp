@@ -92,9 +92,10 @@ void CUITalkWnd::InitTalkDialog()
 	NeedUpdateQuestions						();
 	Update									();
 
-	UITalkDialogWnd->SetOsoznanieMode		(m_pOthersInvOwner->NeedOsoznanieMode());
+	bool oso = m_pOthersInvOwner->NeedOsoznanieMode();
+	UITalkDialogWnd->SetOsoznanieMode		(oso);
 	UITalkDialogWnd->Show					();
-	UITalkDialogWnd->UpdateButtonsLayout	(m_pOthersInvOwner->IsTradeEnabled());
+	UITalkDialogWnd->UpdateButtonsLayout	(!oso && m_pOthersInvOwner->IsTradeEnabled());
 
 	UITradeWnd->Hide						();
 }
@@ -252,7 +253,7 @@ void CUITalkWnd::Update()
 	inherited::Update			();
 	UpdateCameraDirection		(smart_cast<CGameObject*>(m_pOthersInvOwner));
 
-	UITalkDialogWnd->UpdateButtonsLayout(m_pOthersInvOwner->IsTradeEnabled());
+	UITalkDialogWnd->UpdateButtonsLayout(!m_pOthersInvOwner->NeedOsoznanieMode() && m_pOthersInvOwner->IsTradeEnabled());
 
 }
 

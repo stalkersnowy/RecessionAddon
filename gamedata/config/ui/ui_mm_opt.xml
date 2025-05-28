@@ -1085,7 +1085,7 @@
 			<text font="letterica16" color="ui_6">ui_mm_weapon_bobbing</text>
 		</cap_weapon_bobbing>
 		<check_weapon_bobbing x="300" y="10" width="30" height="21">
-			<options_item entry="weapon_bobbing" group="mm_opt_gameplay"/>
+			<options_item entry="g_weapon_bobbing" group="mm_opt_gameplay"/>
 		</check_weapon_bobbing>
 
 		<btn_to_simply x="342" y="325" width="111" height="29">
