@@ -15,7 +15,7 @@ class CMaterialManager;
 class CVisualMemoryManager;
 class CBlend;
 class CEntityAlive : public CEntity {
-private:
+protected:
 	typedef	CEntity			inherited;			
 public:
 	virtual CEntityAlive*				cast_entity_alive		()						{return this;}

@@ -48,6 +48,7 @@ public:
 
 class CAnimatorCamEffector :public CEffectorCam
 {
+protected:
 	typedef				CEffectorCam			inherited;
 	bool				m_bCyclic;
 protected:

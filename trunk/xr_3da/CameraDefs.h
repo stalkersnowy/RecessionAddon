@@ -56,6 +56,7 @@ struct ENGINE_API SCamEffectorInfo
 		ad = other.ad;
 		an = other.an;
 		ar = other.ar;
+		uv = other.uv;
 		up = other.up;
 		ud = other.ud;
 		un = other.un;
