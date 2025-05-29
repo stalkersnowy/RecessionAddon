@@ -429,6 +429,9 @@
 	<string id="ui_mm_r2_use_sunmask">
 		<text>Тени от облаков</text>
 	</string>
+	<string id="ui_mm_r__detail_radius">
+		<text>Дальность травы</text>
+	</string>
 	<string id="ui_mm_r__smapsize">
 		<text>Размер теневой карты</text>
 	</string>
@@ -509,6 +512,9 @@
 	</string>
 	<string id="descr_r2_use_sunmask">
 		<text>Отображение солнечных теней от облаков - было в ТЧ, в аддонах отключено</text>
+	</string>
+	<string id="descr_r__detail_radius">
+		<text>Регулировка дальности отрисовки травы (по умолчанию - крайнее левое положение ползунка)</text>
 	</string>
 	<string id="descr_r__smapsize">
 		<text>Аналог ключей из оригинала - регулирует качество теней от солнца (в оригинале по умолчанию - 2048)</text>

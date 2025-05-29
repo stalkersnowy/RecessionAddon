@@ -116,6 +116,11 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	xml:InitStatic								("gameplay_adv:cap_r2_use_sunmask",				_st)
 	xml:InitCheck								("gameplay_adv:check_r2_use_sunmask",			_st)
 
+	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r__detail_radius")
+	xml:InitStatic								("gameplay_adv:cap_r__detail_radius",			_st)
+	xml:InitTrackBar							("gameplay_adv:track_r__detail_radius",			_st)
+
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_r__smapsize")
 	xml:InitStatic								("gameplay_adv:cap_r__smapsize",				_st)

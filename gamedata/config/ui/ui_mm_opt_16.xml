@@ -1086,6 +1086,13 @@
 			<options_item entry="r2_use_sunmask" group="mm_opt_gameplay"/>
 		</check_r2_use_sunmask>
 
+		<cap_r__detail_radius x="17" y="10" width="125" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r__detail_radius</text>
+		</cap_r__detail_radius>
+		<track_r__detail_radius x="162" y="10" width="200" height="21" step="1" is_integer="1" slider_text="1">
+			<options_item entry="r__detail_radius" group="mm_opt_gameplay"/>
+		</track_r__detail_radius>
+
 		<cap_r__smapsize x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r__smapsize</text>
 		</cap_r__smapsize>
