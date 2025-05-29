@@ -363,6 +363,9 @@
 	<string id="ui_mm_volumetric_light">
 		<text>Объёмный свет</text>
 	</string>
+	<string id="ui_mm_cam_inert">
+		<text>Инерция камеры</text>
+	</string>
 	<string id="ui_mm_g_hit_mark_index">
 		<text>Текстура маркера попадания</text>
 	</string>
@@ -371,6 +374,9 @@
 	</string>
 	<string id="ui_mm_g_use_lens">
 		<text>Искажение в линзе прицела</text>
+	</string>
+	<string id="ui_mm_g_use_smart_hits">
+		<text>Анимации попадания по НПС</text>
 	</string>
 	<string id="ui_mm_keypress_on_start">
 		<text>Пауза при загрузке</text>
@@ -411,6 +417,9 @@
 	<string id="ui_mm_r2_true_sun">
 		<text>Корректное направление света солнца</text>
 	</string>
+	<string id="ui_mm_r2_use_sunmask">
+		<text>Тени от облаков</text>
+	</string>
 	<string id="ui_mm_r__smapsize">
 		<text>Размер теневой карты</text>
 	</string>
@@ -435,6 +444,9 @@
 	<string id="st_opt_fxaa">
 		<text>FXAA</text>
 	</string>
+	<string id="descr_cam_inert">
+		<text>Оригинальный cam_inert - регулировка инерции камеры. В основном выражается в раскачивании камеры при ходьбе (в оригинале по умолчанию 0.7)</text>
+	</string>
 	<string id="descr_g_hit_mark_index">
 		<text>Выбор текстуры маркера попадания по ГГ на худе - в ресурсах помимо используемой текстуры лежат 18 альтернативных вариантов текстуры, не используемых игрой (0 - оригинальная текстура, 1-18 - неиспользуемые варианты)</text>
 	</string>
@@ -443,6 +455,9 @@
 	</string>
 	<string id="descr_g_use_lens">
 		<text>Искажение в линзе прицела (недолго прожившая вырезанная фича 2006-го, в дальнейшем при разработке ЧН рассматривалось искажение в бинокле) - лучше всего работает в сочетании со старым шейдером искажения</text>
+	</string>
+	<string id="descr_g_use_smart_hits">
+		<text>Анимации реакции НПС на попадание по ним (дёргание при попадании в какую-то в часть тела) из исходников ТЧ с дефайном PRIQUEL - в ТЧ таких анимаций ещё не было</text>
 	</string>
 	<string id="descr_keypress_on_start">
 		<text>Переход к игре после загрузки по нажатию клавиши как в ЗП</text>
@@ -482,6 +497,9 @@
 	</string>
 	<string id="descr_r2_true_sun">
 		<text>В оригинальном ТЧ солнечный свет просчитывается со смещением от реального положения солнца (выше по вертикали), чтобы свет не проникал в закрытые помещения - опция убирает смещение как в ЧН/ЗП, где проблему решили добавлением nosun-геометрии на локации</text>
+	</string>
+	<string id="descr_r2_use_sunmask">
+		<text>Отображение солнечных теней от облаков - было в ТЧ, в аддонах отключено</text>
 	</string>
 	<string id="descr_r__smapsize">
 		<text>Аналог ключей из оригинала - регулирует качество теней от солнца (в оригинале по умолчанию - 2048)</text>

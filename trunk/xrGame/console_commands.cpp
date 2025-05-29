@@ -133,6 +133,7 @@ CUIOptConCom g_OptConCom;
 #endif // SEVERAL_ALLOCATORS
 
 extern BOOL g_bUseIK;
+extern BOOL g_bUseSmartHits;
 
 class CCC_MemStats : public IConsole_Command
 {
@@ -1864,8 +1865,9 @@ void CCC_RegisterCommands()
 
 	CMD3(CCC_Mask,		"ai_use_torch_dynamic_lights",	&g_uCommonFlags, flAiUseTorchDynamicLights);
 
-	CMD4(CCC_Integer,		"g_use_ik",		&g_bUseIK, 0,1);
-	CMD4(CCC_Integer,		"g_use_lens",	&g_bUseLens, 0,1);
+	CMD4(CCC_Integer,		"g_use_ik",			&g_bUseIK, 0,1);
+	CMD4(CCC_Integer,		"g_use_smart_hits",	&g_bUseSmartHits, 0,1);
+	CMD4(CCC_Integer,		"g_use_lens",		&g_bUseLens, 0,1);
 
 
 #ifndef MASTER_GOLD

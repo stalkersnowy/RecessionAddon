@@ -125,6 +125,7 @@ Flags32		ps_r2_ls_flags				= { R2FLAG_SUN
 	| R2FLAG_SUN_TSM
 	| R2FLAG_TONEMAP
 	| R2FLAG_VOLUMETRIC_LIGHTS
+	| R2FLAG_USE_SUNMASK
 	};	// r2-only
 float		ps_r2_df_parallax_h			= 0.02f;
 float		ps_r2_df_parallax_range		= 75.f;
@@ -648,6 +649,7 @@ void		xrRender_initconsole	()
 	CMD3(CCC_Mask,		"r2_specular_rgb",				&ps_r2_ls_flags,			R2FLAG_SPECULAR_RGB);
 	CMD3(CCC_Mask,		"r2_hemi_cube",					&ps_r2_ls_flags,			R2FLAG_HEMI_CUBE);
 	CMD3(CCC_Mask,		"r2_true_sun",					&ps_r2_ls_flags,			R2FLAG_TRUE_SUN);
+	CMD3(CCC_Mask,		"r2_use_sunmask",				&ps_r2_ls_flags,			R2FLAG_USE_SUNMASK);
 }
 
 void	xrRender_apply_tf		()

@@ -13,7 +13,7 @@ bool	m_bEnableDuplet						= false;
 
 bool	m_bShowContactBio					= true;
 bool	m_bShowPartnerWeightInCarBody		= false;
-bool	m_bShowTrackBarValues				= false;
+bool	m_bShowTrackBarValues				= true;
 bool	m_bShowNumBeforeAnswers				= true;
 bool	m_bShowSatietyInInventory			= false;
 bool	m_bOldLuminosityBar					= false;

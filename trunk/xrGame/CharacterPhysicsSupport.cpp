@@ -26,10 +26,9 @@
 
 #include "../xr_3da/device.h"
 
-#ifdef PRIQUEL
 #	define USE_SMART_HITS
-#endif // PRIQUEL
 #	define USE_IK
+BOOL g_bUseSmartHits = false;
 BOOL g_bUseIK = false;
 
 void  NodynamicsCollide(bool& do_colide,bool bo1,dContact& c,SGameMtl * /*material_1*/,SGameMtl * /*material_2*/)
@@ -437,7 +436,7 @@ void CCharacterPhysicsSupport::in_Hit(float P,Fvector &dir, CObject *who,s16 ele
 			m_PhysicMovementControl->ApplyHit(dir,impulse,hit_type);
 
 #ifdef USE_SMART_HITS
-		if(Type()==etStalker)
+		if(g_bUseSmartHits && Type()==etStalker)
 		{
 				m_hit_animations.PlayHitMotion(dir,p_in_object_space,element,m_EntityAlife);
 		}

@@ -948,6 +948,13 @@
 
 		<templ_item width="375" height="25"/>
 
+		<cap_cam_inert x="17" y="10" width="125" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_cam_inert</text>
+		</cap_cam_inert>
+		<track_cam_inert x="162" y="10" width="200" height="21" step="0.1" slider_text="1">
+			<options_item entry="cam_inert" group="mm_opt_gameplay"/>
+		</track_cam_inert>
+
 		<cap_g_hit_mark_index x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_hit_mark_index</text>
 		</cap_g_hit_mark_index>
@@ -968,6 +975,13 @@
 		<check_g_use_lens x="225" y="10" width="27" height="21" stretch="1">
 			<options_item entry="g_use_lens" group="mm_opt_gameplay"/>
 		</check_g_use_lens>
+
+		<cap_g_use_smart_hits x="17" y="10" width="119" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_g_use_smart_hits</text>
+		</cap_g_use_smart_hits>
+		<check_g_use_smart_hits x="225" y="10" width="27" height="21" stretch="1">
+			<options_item entry="g_use_smart_hits" group="mm_opt_gameplay"/>
+		</check_g_use_smart_hits>
 
 		<cap_keypress_on_start x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_keypress_on_start</text>
@@ -1071,6 +1085,13 @@
 		<check_r2_true_sun x="225" y="10" width="27" height="21" stretch="1">
 			<options_item entry="r2_true_sun" group="mm_opt_gameplay"/>
 		</check_r2_true_sun>
+
+		<cap_r2_use_sunmask x="17" y="10" width="119" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_use_sunmask</text>
+		</cap_r2_use_sunmask>
+		<check_r2_use_sunmask x="225" y="10" width="27" height="21" stretch="1">
+			<options_item entry="r2_use_sunmask" group="mm_opt_gameplay"/>
+		</check_r2_use_sunmask>
 
 		<cap_r__smapsize x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r__smapsize</text>

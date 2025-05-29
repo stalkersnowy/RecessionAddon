@@ -1450,9 +1450,13 @@ bool CUIXmlInit::InitTrackBar(CUIXml& xml_doc, LPCSTR path, int index, CUITrackB
 			pWnd->SetTokenValues(pWnd->GetOptToken());
 		}break;
 	}
+
+	bool slider_text = xml_doc.ReadAttribInt(path, index, "slider_text", 0);
+	pWnd->SetSliderText(slider_text);
+
 	pWnd->InitTrackBar(pWnd->GetWndPos(), pWnd->GetWndSize()); // moved because it should apply some params before track bar init
 
-	if (pWnd->GetSlider() && pWnd->GetSlider()->GetBtnStatic())
+	if (slider_text && pWnd->GetSlider() && pWnd->GetSlider()->GetBtnStatic())
 	{
 		CUI3tButton* pUIButton = pWnd->GetSlider();
 

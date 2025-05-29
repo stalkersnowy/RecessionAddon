@@ -159,6 +159,7 @@ enum
 	R2FLAG_SUN_HIGH				= (1<<27),
 	R2FLAG_DETAIL_BUMP			= (1<<28),
 	R2FLAG_TRUE_SUN				= (1<<29),
+	R2FLAG_USE_SUNMASK			= (1<<30),
 };
 
 extern void						xrRender_initconsole	();

@@ -16,7 +16,7 @@
 #define FRAME_LINE_TEXTURE_D	"ui_slider_d"
 #define SLIDER_TEXTURE			"ui_slider_button"
 
-CUITrackBar::CUITrackBar() : m_f_min(0), m_f_max(1.f), m_f_val(0.f), m_f_back_up(0.f), m_i_back_up(0), m_f_step(0.01f), m_b_invert(false), m_mode(eTrackBarModeFloat), m_tokens(nullptr), m_i_num_of_signs(1)
+CUITrackBar::CUITrackBar() : m_f_min(0), m_f_max(1.f), m_f_val(0.f), m_f_back_up(0.f), m_i_back_up(0), m_f_step(0.01f), m_b_invert(false), m_mode(eTrackBarModeFloat), m_tokens(nullptr), m_i_num_of_signs(1), m_b_slider_text(false)
 {
 	m_b_mouse_capturer				= false;
 	m_pFrameLine					= xr_new<CUIFrameLineWnd>();
@@ -128,7 +128,7 @@ void CUITrackBar::InitTrackBar(Fvector2 pos, Fvector2 size)
 	m_pSlider->Init				(0, (size.y - item_height) / 2, item_width, item_height);
 	m_pSlider->InitTexture		(SLIDER_TEXTURE);
 	
-	if (GameConstants::GetTrackBarValuesShowing())
+	if (m_b_slider_text && GameConstants::GetTrackBarValuesShowing())
 	{
 		m_pSlider->AddStatic				();
 		m_pSlider->SetStaticColorChanging	(true);

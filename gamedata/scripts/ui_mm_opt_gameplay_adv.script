@@ -16,9 +16,15 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	self.scroll_v	= xml:InitScrollView		("gameplay_adv:scroll_v", self)
 
 	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_cam_inert")
+	xml:InitStatic								("gameplay_adv:cap_cam_inert",					_st)
+	xml:InitTrackBar							("gameplay_adv:track_cam_inert",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_g_hit_mark_index")
 	xml:InitStatic								("gameplay_adv:cap_g_hit_mark_index",			_st)
 	xml:InitSpinNum								("gameplay_adv:spin_g_hit_mark_index",			_st)
+
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_g_use_ik")
@@ -29,6 +35,11 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	handler:SetCapCallbacks						(_st, 									"descr_g_use_lens")
 	xml:InitStatic								("gameplay_adv:cap_g_use_lens",					_st)
 	xml:InitCheck								("gameplay_adv:check_g_use_lens",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_g_use_smart_hits")
+	xml:InitStatic								("gameplay_adv:cap_g_use_smart_hits",			_st)
+	xml:InitCheck								("gameplay_adv:check_g_use_smart_hits",			_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_weapon_bobbing")
@@ -99,6 +110,11 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	handler:SetCapCallbacks						(_st, 									"descr_r2_true_sun")
 	xml:InitStatic								("gameplay_adv:cap_r2_true_sun",				_st)
 	xml:InitCheck								("gameplay_adv:check_r2_true_sun",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_use_sunmask")
+	xml:InitStatic								("gameplay_adv:cap_r2_use_sunmask",				_st)
+	xml:InitCheck								("gameplay_adv:check_r2_use_sunmask",			_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_r__smapsize")

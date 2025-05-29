@@ -51,6 +51,9 @@ ETrackBarMode		GetTrackBarMode			() const { return m_mode; }
 			void	SetTokenValues			(xr_token* tokens);
 			int		CurrentID				() const { return (m_i_val - 1); }
 			void	SetCurrentID			(int val_id) { m_i_val = val_id + 1;}
+
+			void	SetSliderText			(bool v) { m_b_slider_text = v; }
+			bool	GetSliderText			() const { return m_b_slider_text; }
 protected:
 			void 	UpdatePos				();
 			void 	UpdatePosRelativeToMouse();
@@ -63,6 +66,7 @@ protected:
 	int					m_i_num_of_signs;
 	xr_token*			m_tokens;
 	ETrackBarMode		m_mode;
+	bool				m_b_slider_text;
 
 	union{
 		struct{
