@@ -10,6 +10,7 @@
 #include "blender_combine.h"
 #include "blender_bloom_build.h"
 #include "blender_luminance.h"
+#include "blender_ssao.h"
 #include "blender_fxaa.h"
 
 void	CRenderTarget::u_setrt			(const ref_rt& _1, const ref_rt& _2, const ref_rt& _3, IDirect3DSurface9* zb)
@@ -205,6 +206,7 @@ CRenderTarget::CRenderTarget		()
 	b_accum_spot					= xr_new<CBlender_accum_spot>			();
 	b_accum_reflected				= xr_new<CBlender_accum_reflected>		();
 	b_bloom							= xr_new<CBlender_bloom_build>			();
+	b_ssao							= xr_new<CBlender_SSAO>					();
 	b_luminance						= xr_new<CBlender_luminance>			();
 	b_combine						= xr_new<CBlender_combine>				();
     b_fxaa 							= xr_new<CBlender_FXAA>					();
@@ -329,10 +331,39 @@ CRenderTarget::CRenderTarget		()
 		f_bloom_factor				= 0.5f;
 	}
 
+	//HBAO
+	if (RImplementation.o.ssao_opt_data)
+	{
+		u32		w = 0;
+		u32		h = 0;
+		if (RImplementation.o.ssao_half_data)
+		{
+			w = Device.dwWidth / 2;
+			h = Device.dwHeight / 2;
+		}
+		else
+		{
+			w = Device.dwWidth;
+			h = Device.dwHeight;
+		}
+		D3DFORMAT	fmt = HW.Caps.id_vendor==0x10DE?D3DFMT_R32F:D3DFMT_R16F;
+
+		rt_half_depth.create		(r2_RT_half_depth, w, h, fmt);
+		s_ssao.create				(b_ssao, "r2\\ssao");
+	}
+
 	//FXAA
 	{
 		s_fxaa.create				(b_fxaa, "r2\\fxaa");
 		g_fxaa.create				(FVF::F_V, RCache.Vertex.Buffer(), RCache.QuadIB);
+	}
+
+	//SSAO
+	if (RImplementation.o.ssao_blur_on)
+	{
+		u32		w = Device.dwWidth, h = Device.dwHeight;
+		rt_ssao_temp.create			(r2_RT_ssao_temp, w, h, D3DFMT_G16R16F);
+		s_ssao.create				(b_ssao, "r2\\ssao");
 	}
 
 	// TONEMAP
@@ -452,33 +483,70 @@ CRenderTarget::CRenderTarget		()
 		{
 			// Surfaces
 			D3DLOCKED_RECT				R[TEX_jitter_count];
-			for (int it=0; it<TEX_jitter_count; it++)
+			for (int it1=0; it1<TEX_jitter_count-1; it1++)
 			{
 				string_path					name;
-				sprintf						(name,"%s%d",r2_jitter,it);
-				R_CHK	(D3DXCreateTexture	(HW.pDevice,TEX_jitter,TEX_jitter,1,0,D3DFMT_Q8W8V8U8,D3DPOOL_MANAGED,&t_noise_surf[it]));
-				t_noise[it]					= Device.Resources->_CreateTexture	(name);
-				t_noise[it]->surface_set	(t_noise_surf[it]);
-				R_CHK						(t_noise_surf[it]->LockRect	(0,&R[it],0,0));
-			}
+				sprintf						(name,"%s%d",r2_jitter,it1);
+				R_CHK	(D3DXCreateTexture	(HW.pDevice,TEX_jitter,TEX_jitter,1,0,D3DFMT_Q8W8V8U8,D3DPOOL_MANAGED,&t_noise_surf[it1]));
+				t_noise[it1]					= Device.Resources->_CreateTexture	(name);
+				t_noise[it1]->surface_set	(t_noise_surf[it1]);
+				R_CHK						(t_noise_surf[it1]->LockRect	(0,&R[it1],0,0));
+			}	
 
 			// Fill it,
 			for (u32 y=0; y<TEX_jitter; y++)
 			{
 				for (u32 x=0; x<TEX_jitter; x++)
 				{
-					DWORD	data	[TEX_jitter_count];
-					generate_jitter	(data,TEX_jitter_count);
-					for (u32 it=0; it<TEX_jitter_count; it++)
+					DWORD	data	[TEX_jitter_count-1];
+					generate_jitter	(data,TEX_jitter_count-1);
+					for (u32 it2=0; it2<TEX_jitter_count-1; it2++)
 					{
-						u32*	p	=	(u32*)	(LPBYTE (R[it].pBits) + y*R[it].Pitch + x*4);
-								*p	=	data	[it];
+						u32*	p	=	(u32*)	(LPBYTE (R[it2].pBits) + y*R[it2].Pitch + x*4);
+								*p	=	data	[it2];
 					}
 				}
 			}
-			for (int it=0; it<TEX_jitter_count; it++)	{
-				R_CHK						(t_noise_surf[it]->UnlockRect(0));
-			}
+			
+			for (int it3=0; it3<TEX_jitter_count-1; it3++)	{
+				R_CHK						(t_noise_surf[it3]->UnlockRect(0));
+			}		
+
+			// generate HBAO jitter texture (last)
+			int it = TEX_jitter_count - 1;
+			string_path					name;
+			sprintf						(name,"%s%d",r2_jitter,it);
+			R_CHK	(D3DXCreateTexture	(HW.pDevice,TEX_jitter,TEX_jitter,1,0,D3DFMT_A32B32G32R32F,D3DPOOL_MANAGED,&t_noise_surf[it]));
+			t_noise[it]					= Device.Resources->_CreateTexture	(name);
+			t_noise[it]->surface_set	(t_noise_surf[it]);
+			R_CHK						(t_noise_surf[it]->LockRect	(0,&R[it],0,0));
+			
+			// Fill it,
+			for (u32 y=0; y<TEX_jitter; y++)
+			{
+				for (u32 x=0; x<TEX_jitter; x++)
+				{
+					float numDir = 1.0f;
+					switch (ps_r_ssao)
+					{
+						case 1: numDir = 4.0f; break;
+						case 2: numDir = 6.0f; break;
+						case 3: numDir = 8.0f; break;
+					}
+					float angle = 2 * PI * ::Random.randF(0.0f, 1.0f) / numDir;
+					float dist = ::Random.randF(0.0f, 1.0f);
+					//float dest[4];
+					
+					float*	p	=	(float*)	(LPBYTE (R[it].pBits) + y*R[it].Pitch + x*4*sizeof(float));
+					*p = (float)(_cos(angle));
+					*(p+1) = (float)(_sin(angle));
+					*(p+2) = (float)(dist);
+					*(p+3) = 0;
+					
+					//generate_hbao_jitter	(data,TEX_jitter*TEX_jitter);
+				}
+			}			
+			R_CHK						(t_noise_surf[it]->UnlockRect(0));
 		}
 	}
 
@@ -538,6 +606,7 @@ CRenderTarget::~CRenderTarget	()
 	xr_delete					(b_combine				);
 	xr_delete					(b_luminance			);
 	xr_delete					(b_bloom				);
+	xr_delete					(b_ssao					);
 	xr_delete					(b_accum_reflected		);
 	xr_delete					(b_accum_spot			);
 	xr_delete					(b_accum_point			);

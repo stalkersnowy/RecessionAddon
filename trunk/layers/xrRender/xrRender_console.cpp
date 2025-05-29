@@ -63,6 +63,8 @@ xr_token							qaa_token							[ ]={
 	{ 0,							0												}
 };
 
+int			ps_r_ssao_mode			=	1;
+
 // Common
 //int		ps_r__Supersample			= 1		;
 int			ps_r__LightSleepFrames		= 10	;
@@ -127,6 +129,9 @@ Flags32		ps_r2_ls_flags				= { R2FLAG_SUN
 	| R2FLAG_VOLUMETRIC_LIGHTS
 	| R2FLAG_USE_SUNMASK
 	};	// r2-only
+
+Flags32		ps_r2_ls_flags_ext			= {
+	};
 float		ps_r2_df_parallax_h			= 0.02f;
 float		ps_r2_df_parallax_range		= 75.f;
 float		ps_r2_tonemap_middlegray	= 0.25f;			// r2-only
@@ -469,6 +474,44 @@ public:
 
 };
 
+class	CCC_SSAO_Mode		: public CCC_Integer
+{
+public:
+	CCC_SSAO_Mode(LPCSTR N, int* V, int _min=0, int _max=999) : CCC_Integer(N,V,_min,_max)	{}	;
+
+	virtual void	Execute	(LPCSTR args)	{
+		CCC_Integer::Execute	(args);
+				
+		switch	(*value)
+		{
+			case 0:
+			{
+				ps_r2_ls_flags_ext.set(R2FLAGEXT_SSAO_HBAO, 0);
+				break;
+			}
+			case 1:
+			{
+				if (ps_r_ssao==0)
+				{
+					ps_r_ssao = 1;
+				}
+				ps_r2_ls_flags_ext.set(R2FLAGEXT_SSAO_HBAO, 0);
+				break;
+			}
+			case 2:
+			{
+				if (ps_r_ssao==0)
+				{
+					ps_r_ssao = 1;
+				}
+				ps_r2_ls_flags_ext.set(R2FLAGEXT_SSAO_HBAO, 1);
+				ps_r2_ls_flags_ext.set(R2FLAGEXT_SSAO_OPT_DATA, 1);
+				break;
+			}
+		}
+	}
+};
+
 //-----------------------------------------------------------------------
 void		xrRender_initconsole	()
 {
@@ -633,6 +676,7 @@ void		xrRender_initconsole	()
 	//	Igor: need restart
 	CMD3(CCC_Mask,		"r2_soft_water",				&ps_r2_ls_flags,			R2FLAG_SOFT_WATER);
 	CMD3(CCC_Mask,		"r2_soft_particles",			&ps_r2_ls_flags,			R2FLAG_SOFT_PARTICLES);
+	CMD4(CCC_SSAO_Mode,	"r2_ssao_mode",					&ps_r_ssao_mode,			0, 2);
 	CMD3(CCC_Token,		"r2_ssao",						&ps_r_ssao,					qssao_token);
 	CMD3(CCC_Mask,		"r2_steep_parallax",			&ps_r2_ls_flags,			R2FLAG_STEEP_PARALLAX);
 	CMD3(CCC_Token,		"r2_sun_shafts",				&ps_r_sun_shafts,			qsun_shafts_token);

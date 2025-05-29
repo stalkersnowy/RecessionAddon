@@ -6,6 +6,8 @@
 extern ECORE_API	u32			ps_r_sun_shafts;	//=	0;
 extern ECORE_API	xr_token	qsun_shafts_token[];
 
+extern ECORE_API	int			ps_r_ssao_mode;
+
 extern ENGINE_API	int			ps_r__Supersample;
 extern ECORE_API	int			ps_r__LightSleepFrames;
 
@@ -56,6 +58,7 @@ extern ECORE_API	float		ps_r2_tf_Mipbias;
 
 // R2-specific
 extern ECORE_API Flags32		ps_r2_ls_flags;				// r2-only
+extern ECORE_API Flags32		ps_r2_ls_flags_ext;			// r2-only
 extern ECORE_API float			ps_r2_df_parallax_h;		// r2-only
 extern ECORE_API float			ps_r2_df_parallax_range;	// r2-only
 extern ECORE_API float			ps_r2_gmaterial;			// r2-only
@@ -160,6 +163,14 @@ enum
 	R2FLAG_DETAIL_BUMP			= (1<<28),
 	R2FLAG_TRUE_SUN				= (1<<29),
 	R2FLAG_USE_SUNMASK			= (1<<30),
+};
+
+enum
+{
+	R2FLAGEXT_SSAO_BLUR				= (1<<0),
+	R2FLAGEXT_SSAO_OPT_DATA			= (1<<1),
+	R2FLAGEXT_SSAO_HALF_DATA		= (1<<2),
+	R2FLAGEXT_SSAO_HBAO				= (1<<3),
 };
 
 extern void						xrRender_initconsole	();

@@ -26,6 +26,7 @@ public:
 	IBlender*					b_accum_spot;
 	IBlender*					b_accum_reflected;
 	IBlender*					b_bloom;
+	IBlender*					b_ssao;
 	IBlender*					b_luminance;
 	IBlender*					b_combine;
     IBlender* 					b_fxaa;
@@ -111,6 +112,11 @@ private:
 	IDirect3DVertexBuffer9*		g_accum_volumetric_vb;
 	IDirect3DIndexBuffer9*		g_accum_volumetric_ib;
 
+	//SSAO
+	ref_shader					s_ssao;
+	ref_rt						rt_ssao_temp;
+	ref_rt						rt_half_depth;
+
 	// Bloom
 	ref_geom					g_bloom_build;
 	ref_geom					g_bloom_filter;
@@ -181,7 +187,9 @@ public:
 	BOOL						u_need_PP				();
 	BOOL						u_DBT_enable			(float zMin, float zMax);
 	void						u_DBT_disable			();
-
+	
+	void						phase_ssao				();
+	void						phase_downsamp			();
 	void						phase_scene_prepare		();
 	void						phase_scene_begin		();
 	void						phase_scene_end			();

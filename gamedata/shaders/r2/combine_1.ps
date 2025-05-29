@@ -2,7 +2,11 @@
 #include "lmodel.h"
 #include "hmodel.h"
 
+uniform	sampler2D	s_half_depth;
+
+#include "ssao_blur.ps"
 #include "ssao.ps"
+#include "ssao_hbao.ps"
 
 struct         _input      {
         float4         hpos        : POSITION        ;
@@ -58,7 +62,11 @@ _out         main                ( _input I )
         half3       hdiffuse,hspecular;
 
 	//  Calculate SSAO
+#ifdef USE_HBAO
+	float occ = calc_hbao(P.z, N, I.tc0);
+#else
 	half occ = calc_ssao(P, N, I.tc0, I.tcJ);
+#endif
 #if BLOOM_MODE < 1
 	occ = Contrast(occ,2);
 #endif

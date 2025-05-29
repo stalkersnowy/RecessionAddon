@@ -22,6 +22,14 @@ void	CRenderTarget::phase_combine	()
 	
 	RCache.set_CullMode	( CULL_NONE );
 
+	if (RImplementation.o.ssao_opt_data)
+	{
+		phase_downsamp();
+		//phase_ssao();
+	}
+	else if (RImplementation.o.ssao_blur_on)
+		phase_ssao();
+
 	// low/hi RTs
 	u_setrt				( rt_Generic_0,rt_Generic_1,0,HW.pBaseZB );
 	RCache.set_Stencil	( FALSE		);

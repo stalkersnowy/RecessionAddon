@@ -35,6 +35,11 @@ public:
 public:
 	struct		_options	{
 		u32		bug					: 1;
+		
+		u32		ssao_blur_on		: 1;
+		u32		ssao_opt_data		: 1;
+		u32		ssao_half_data		: 1;
+		u32		ssao_hbao			: 1;
 
 		u32		smapsize			: 16;
 		u32		depth16				: 1;
