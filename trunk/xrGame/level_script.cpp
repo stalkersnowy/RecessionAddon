@@ -523,6 +523,11 @@ void g_change_community_goodwill(LPCSTR _community, int _entity_id, int val)
 	RELATION_REGISTRY().ChangeCommunityGoodwill(c.index(), u16(_entity_id), val);
 }
 
+u32 vertex_id	(Fvector position)
+{
+	return	(ai().level_graph().vertex_id(position));
+}
+
 #pragma optimize("s",on)
 void CLevel::script_register(lua_State *L)
 {
@@ -611,6 +616,8 @@ void CLevel::script_register(lua_State *L)
 
 		def("add_complex_effector",				&add_complex_effector),
 		def("remove_complex_effector",			&remove_complex_effector),
+		
+		def("vertex_id",						&vertex_id),
 		
 		def("game_id",							&GameID)
 	],
