@@ -160,7 +160,7 @@ void CRenderDevice::PreCache	(u32 amount, bool b_draw_loadscreen, bool b_wait_us
 #endif
 	// Msg			("* PCACHE: start for %d...",amount);
 	dwPrecacheFrame	= dwPrecacheTotal = amount;
-	if(amount && !precache_light && g_pGameLevel)
+	if(amount && !precache_light && g_pGameLevel && g_loading_events.empty())
 	{
 		precache_light					= ::Render->light_create();
 		precache_light->set_shadow		(false);
