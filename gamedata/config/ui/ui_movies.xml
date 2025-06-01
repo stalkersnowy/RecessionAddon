@@ -137,18 +137,26 @@
 
 	<intro_game>
 		<play_each_item>1</play_each_item>
-		<global_wnd x="0" y="0" width="1024" height="768">
-			<auto_static x="0" y="0" width="1024" height="768" stretch="1">
-				<window_name>back</window_name>
-				<texture>intro\intro_back</texture>
-			</auto_static>
-		</global_wnd>
+		<global_wnd x="0" y="0" width="1024" height="768"/>
 
 		<item type="video">
 			<sound>characters_voice\scenario\video\intro_stalker</sound>
 			<pause_state>on</pause_state>
 			<video_wnd x="0" y="0" width="1024" height="768" stretch="1">
 				<texture x="1" y="1" width="1366" height="766">intro\intro_stalker</texture>
+			</video_wnd>
+			<background x="0" y="0" width="1024" height="768" stretch="1">
+				<texture>intro\intro_back</texture>
+			</background>
+		</item>
+		
+		<item type="video">
+			<grab_input>1</grab_input>
+			<sound>intro\intro_kill</sound>
+			<can_be_stopped>off</can_be_stopped>
+			<function_on_stop>xr_effects.end_intro_dream</function_on_stop>
+			<video_wnd x="0" y="0" width="1024" height="768" stretch="1">
+				<texture x="1" y="1" width="254" height="254">intro\intro_kill</texture>
 			</video_wnd>
 		</item>
 	</intro_game>

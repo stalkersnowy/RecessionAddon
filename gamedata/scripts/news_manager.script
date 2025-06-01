@@ -149,7 +149,7 @@ function send_tip(actor, news_id, timeout, sender, showtime, sender_id)
 			if npc ~= nil then
 				if npc.online then
 					--в онлайне проверяем на раненность
-					if xr_wounded.is_heavy_wounded_by_id(npc.id) and sender_id ~= 422 then
+					if xr_wounded.is_heavy_wounded_by_id(npc.id) and sender_id ~= 422 and sender_id ~= 1004 then
 						printf("[PDA]Cannot send tips [%s], sender is heavy wounded", tostring(news_id))
 						return false
 					end

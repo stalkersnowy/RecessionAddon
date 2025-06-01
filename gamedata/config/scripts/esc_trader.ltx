@@ -9,7 +9,8 @@ trade = misc\trade_trader.ltx
 ; ∆дем немного
 [mob_trader@new_start_wait]
 anim_global = chair_hack_idle
-on_timer = 5000| mob_trader@new_start_intro1
+;on_timer = 5000| mob_trader@new_start_intro1
+on_info = {+esc_intro_dream} mob_trader@new_start_intro1
 can_talk = false
 tip_text = 
 
