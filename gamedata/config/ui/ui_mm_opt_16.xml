@@ -1106,6 +1106,13 @@
 			<list_font r="216" g="186" b="140" font="letterica16"/>
 		</combo_r__smapsize>
 
+		<cap_r__ss_tga x="17" y="10" width="119" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r__ss_tga</text>
+		</cap_r__ss_tga>
+		<check_r__ss_tga x="225" y="10" width="27" height="21" stretch="1">
+			<options_item entry="r__ss_tga" group="mm_opt_gameplay"/>
+		</check_r__ss_tga>
+
 		<cap_r__wallmarks_on_skeleton x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r__wallmarks_on_skeleton</text>
 		</cap_r__wallmarks_on_skeleton>

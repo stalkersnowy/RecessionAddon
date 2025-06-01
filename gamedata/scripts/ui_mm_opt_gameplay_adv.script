@@ -127,6 +127,11 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	xml:InitComboBox							("gameplay_adv:combo_r__smapsize",				_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r__ss_tga")
+	xml:InitStatic								("gameplay_adv:cap_r__ss_tga",					_st)
+	xml:InitCheck								("gameplay_adv:check_r__ss_tga",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_r__wallmarks_on_skeleton")
 	xml:InitStatic								("gameplay_adv:cap_r__wallmarks_on_skeleton",	_st)
 	xml:InitCheck								("gameplay_adv:check_r__wallmarks_on_skeleton",	_st)

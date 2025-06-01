@@ -435,6 +435,9 @@
 	<string id="ui_mm_r__smapsize">
 		<text>Размер теневой карты</text>
 	</string>
+	<string id="ui_mm_r__ss_tga">
+		<text>Скриншоты в формате .tga</text>
+	</string>
 	<string id="ui_mm_r__wallmarks_on_skeleton">
 		<text>Отметки от попаданий на дин. объектах</text>
 	</string>
@@ -518,6 +521,9 @@
 	</string>
 	<string id="descr_r__smapsize">
 		<text>Аналог ключей из оригинала - регулирует качество теней от солнца (в оригинале по умолчанию - 2048)</text>
+	</string>
+	<string id="descr_r__ss_tga">
+		<text>Сохранение скриншотов в высоком качестве без сжатия в формате .tga (аналог ключа -ss_tga из оригинала)</text>
 	</string>
 	<string id="descr_r__wallmarks_on_skeleton">
 		<text>Возвращение билдовской фичи с отображением меток от пуль или ударов ножа не только на статичных, но и на динамичных объектах</text>

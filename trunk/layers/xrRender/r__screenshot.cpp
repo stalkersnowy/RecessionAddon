@@ -145,7 +145,7 @@ void CRender::Screenshot		(IRender_interface::ScreenshotMode mode, LPCSTR name)
 				fs->w				(saved->GetBufferPointer(),saved->GetBufferSize());
 				FS.w_close			(fs);
 				_RELEASE			(saved);
-				if (strstr(Core.Params,"-ss_tga"))	{ // hq
+				if (ps_r2_ls_flags_ext.test(R2FLAGEXT_SS_TGA) || strstr(Core.Params,"-ss_tga"))	{ // hq
 					xr_sprintf			(buf,sizeof(buf),"ssq_%s_%s_(%s).tga",Core.UserName,timestamp(t_stemp),(g_pGameLevel)?g_pGameLevel->name().c_str():"mainmenu");
 					ID3DXBuffer*		saved	= 0;
 					CHK_DX				(D3DXSaveSurfaceToFileInMemory (&saved,D3DXIFF_TGA,pFB,0,0));

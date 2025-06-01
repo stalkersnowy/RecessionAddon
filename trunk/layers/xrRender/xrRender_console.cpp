@@ -731,6 +731,8 @@ void		xrRender_initconsole	()
 	CMD3(CCC_Mask,		"r2_hemi_cube",					&ps_r2_ls_flags,			R2FLAG_HEMI_CUBE);
 	CMD3(CCC_Mask,		"r2_true_sun",					&ps_r2_ls_flags,			R2FLAG_TRUE_SUN);
 	CMD3(CCC_Mask,		"r2_use_sunmask",				&ps_r2_ls_flags,			R2FLAG_USE_SUNMASK);
+	
+	CMD3(CCC_Mask,		"r__ss_tga",					&ps_r2_ls_flags_ext,		R2FLAGEXT_SS_TGA);
 }
 
 void	xrRender_apply_tf		()
