@@ -557,7 +557,18 @@ void CUIStatic::SetText(LPCSTR str)
 	if (!str)
 		return;
 	CREATE_LINES;
-	m_pLines->SetText(str);
+    
+    xr_string temp_str = str;
+
+    if (m_ElipsisPos != eepNone)
+    {
+        Frect rect;
+        GetAbsoluteRect(rect);
+        rect.left += m_TextOffset.x + m_iElipsisIndent;
+        Elipsis(temp_str, rect, m_ElipsisPos, m_pLines->GetFont());
+    }
+	
+    m_pLines->SetText(temp_str.c_str());
 }
 
 void CUIStatic::SetTextColor(u32 color, E4States state)
@@ -670,7 +681,6 @@ void CUIStatic::Elipsis(const Frect &rect, EElipsisPosition elipsisPos)
 
 void CUIStatic::SetElipsis(EElipsisPosition pos, int indent)
 {
-#pragma todo("Satan->Satan : need adaptation")
 	m_ElipsisPos		= pos;
 	m_iElipsisIndent	= indent;
 }
@@ -727,4 +737,97 @@ void CUIStatic::DrawHighlightedText()
 bool CUIStatic::IsHighlightText()
 {
 	return m_bCursorOverWindow;
+}
+
+void CUIStatic::Elipsis(xr_string& str, const Frect& rect, EElipsisPosition elipsisPos, CGameFont* pFont)
+{
+    if (eepNone == elipsisPos || !pFont || !str.size())
+        return;
+
+    float textWidth = pFont->SizeOf_(str.c_str());
+    UI()->ClientToScreenScaledWidth(textWidth);
+    float availableWidth = rect.width();
+
+    if (textWidth <= availableWidth)
+        return;
+
+    float ellipsisWidth = pFont->SizeOf_("...");
+    UI()->ClientToScreenScaledWidth(ellipsisWidth);
+    availableWidth -= ellipsisWidth;
+
+    switch (elipsisPos)
+    {
+        case eepBegin:
+        {
+            for (int i = str.size() - 1; i >= 0; --i)
+            {
+                xr_string substr = str.substr(i);
+                float w = pFont->SizeOf_(substr.c_str());
+                UI()->ClientToScreenScaledWidth(w);
+                if (w <= availableWidth)
+                {
+                    str = "...";
+                    str += substr;
+                    break;
+                }
+            }
+        }
+        break;
+
+        case eepEnd:
+        {
+            for (int i = str.size(); i >= 0; --i)
+            {
+                xr_string substr = str.substr(0, i);
+                float w = pFont->SizeOf_(substr.c_str());
+                UI()->ClientToScreenScaledWidth(w);
+                if (w <= availableWidth)
+                {
+                    substr += "...";
+                    str = substr;
+                    break;
+                }
+            }
+        }
+        break;
+
+        case eepCenter:
+        {
+            int left = 0, right = str.size() - 1;
+            bool moveLeft = true;
+            xr_string leftStr, rightStr;
+            float leftWidth = 0, rightWidth = 0;
+
+            while (left <= right)
+            {
+                if (moveLeft)
+                {
+                    xr_string c = str.substr(left, 1);
+                    leftWidth += pFont->SizeOf_(c.c_str());
+                    UI()->ClientToScreenScaledWidth(leftWidth);
+                    if (leftWidth + rightWidth + ellipsisWidth > availableWidth)
+                        break;
+                    left++;
+                }
+                else
+                {
+                    xr_string c = str.substr(right, 1);
+                    rightWidth += pFont->SizeOf_(c.c_str());
+                    UI()->ClientToScreenScaledWidth(rightWidth);
+                    if (leftWidth + rightWidth + ellipsisWidth > availableWidth)
+                        break;
+                    right--;
+                }
+                moveLeft = !moveLeft;
+            }
+
+            leftStr = str.substr(0, left);
+            rightStr = str.substr(right + 1);
+            str = leftStr + "..." + rightStr;
+        }
+        break;
+
+        default:
+            NODEFAULT;
+    }
 }

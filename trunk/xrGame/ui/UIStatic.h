@@ -228,6 +228,8 @@ protected:
 	void Elipsis(const Frect &rect, EElipsisPosition elipsisPos);
 	int						m_iElipsisIndent;
 	Frect					m_ClipRect;
+
+	void Elipsis(xr_string& str, const Frect& rect, EElipsisPosition elipsisPos, CGameFont* pFont);
 public:
 
 	DECLARE_SCRIPT_REGISTER_FUNCTION
