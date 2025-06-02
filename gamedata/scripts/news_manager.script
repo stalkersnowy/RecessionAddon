@@ -95,24 +95,6 @@ pda_news = xr_sound.get_safe_sound_object([[device\pda\pda_news]])
 pda_tips = xr_sound.get_safe_sound_object([[device\pda\pda_tip]])
 pda_task = xr_sound.get_safe_sound_object([[device\pda\pda_objective]])
 
-local tips_icons_clans = {
-	default  = { 0, 658},
-	trader	 = { 332, 893},
-	dolg     = { 940, 865}, -- { 0, 658},
-	freedom  = { 855, 865}, -- { 0, 658},
-	ecolog   = { 498, 0},
-	arena    = { 332, 141},
-	stalker  = { 940, 815}, -- { 0, 658},
-	krot     = { 332, 47},
-	barman   = { 332, 235},
-	wolf	 = { 332, 940},
-	o_soznanie = { 498, 893},
-	monolith = { 855, 815}, -- { 0, 658},
-    saharov  = { 332, 470},
-    prizrak  = { 415, 705},
-    killer   = { 940, 765}, -- { 0, 658}
-}
-
 tips_icons = {
 	default  = { 0, 658},
 	trader	 = { 332, 893},
@@ -131,11 +113,22 @@ tips_icons = {
     killer   = { 0, 658}
 }
 
-function load_icons()
-	if constants_ini():r_bool("scripts", "clans_sms_icons") == true then
-		tips_icons = tips_icons_clans
-	end
-end
+tips_captions = {
+	trader	 = "trader",
+	dolg     = "dolg",
+	freedom  = "freedom",
+	ecolog   = "ecolog",
+	arena    = "bar_arny_name",
+	stalker  = "stalker",
+	krot     = "agr_krot_name",
+	barman   = "bar_barmen_name",
+	wolf	 = "esc_wolf_name",
+	o_soznanie = "Osoznanie",
+	monolith = "monolith",
+    saharov  = "yan_saharov_name",
+    prizrak  = "yan_ghost_name",
+    killer   = "killer"
+}
 
 
 function send_tip(actor, news_id, timeout, sender, showtime, sender_id)
@@ -179,13 +172,19 @@ function send_tip(actor, news_id, timeout, sender, showtime, sender_id)
 		end
 	end
 	
+	local news_caption = game.translate_string("st_tip")
 	if sender == nil then
 		sender = "default"
+	else
+		local sender_caption = tips_captions[sender]
+		if sender_caption then
+			news_caption = news_caption..". "..game.translate_string(sender_caption)
+		end
 	end
 	local x = tips_icons[sender][1]
 	local y = tips_icons[sender][2]
 	
-	local news_text = "%c[255,160,160,160]"..game.translate_string("st_tip").."\\n".."%c[default]"..game.translate_string(news_id)
+	local news_text = "%c[255,160,160,160]"..news_caption.."\\n".."%c[default]"..game.translate_string(news_id)
 	actor:give_game_news(news_text, "ui\\ui_iconsTotal", Frect():set(x,y,83,47), timeout*1000, showtime)
 	return true
 end

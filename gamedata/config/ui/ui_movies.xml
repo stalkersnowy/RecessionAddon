@@ -156,7 +156,7 @@
 			<can_be_stopped>off</can_be_stopped>
 			<function_on_stop>xr_effects.end_intro_dream</function_on_stop>
 			<video_wnd x="0" y="0" width="1024" height="768" stretch="1">
-				<texture x="1" y="1" width="254" height="254">intro\intro_kill</texture>
+				<texture x="1" y="1" width="1022" height="1022">intro\intro_kill</texture>
 			</video_wnd>
 		</item>
 	</intro_game>
