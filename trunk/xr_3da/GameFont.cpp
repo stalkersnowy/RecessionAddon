@@ -117,7 +117,7 @@ void CGameFont::Initialize		(LPCSTR cShader, LPCSTR cTextureName, bool need_pref
 			{
 				sprintf_s		(buf, sizeof(buf), "%d", i);
 				float w			= ini->r_float("char widths", buf);
-				TCMap[i].set	((i % cpl) * fHeight, ((float)i / cpl) * fHeight, w);
+				TCMap[i].set	((i % cpl) * fHeight, (i / cpl) * fHeight, w);
 			}
 		}
 		else
@@ -128,7 +128,7 @@ void CGameFont::Initialize		(LPCSTR cShader, LPCSTR cTextureName, bool need_pref
 			const int cpl		= ini->r_s32("font_size", "cpl");
 			for (u32 i = 0; i < nNumChars; i++)
 			{
-				TCMap[i].set((i % cpl) * width, ((float)i / cpl) * fHeight, width);
+				TCMap[i].set((i % cpl) * width, (i / cpl) * fHeight, width);
 			}
 		}
 	}
