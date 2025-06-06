@@ -102,4 +102,7 @@ void CUIOptionsItem::SaveValue(){
 
 	if (/*m_entry == "snd_freq" ||*/ m_entry == "snd_efx")
 		m_optionsManager.DoSndRestart();
+
+	if (m_entry == "g_hud_style")
+		m_optionsManager.DoUIReload();
 }

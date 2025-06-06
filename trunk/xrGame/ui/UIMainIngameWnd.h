@@ -39,6 +39,8 @@ public:
 
 	bool OnKeyboardPress(int dik);
 
+	bool	aztec;
+
 protected:
 	
 	CUIStatic			UIStaticDiskIO;
@@ -75,6 +77,7 @@ protected:
 	CUIStatic			UIWoundIcon;
 	CUIStatic			UIStarvationIcon;
 	CUIStatic			UIPsyHealthIcon;
+	CUIStatic			UIFatigueIcon;
 	CUIStatic			UIInvincibleIcon;
 	CUIStatic			UISleepIcon;
 	CUIStatic			UIArtefactIcon;
@@ -96,6 +99,7 @@ public:
 		ewiWound,
 		ewiStarvation,
 		ewiPsyHealth,
+		ewiFatigue,
 		ewiInvincible,
 		ewiSleep,
 		ewiArtefact,

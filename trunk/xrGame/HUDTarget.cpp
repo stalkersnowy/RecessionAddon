@@ -121,6 +121,7 @@ void CHUDTarget::CursorOnFrame ()
 }
 
 extern ENGINE_API BOOL g_bRendering; 
+extern u32 g_hud_style;
 void CHUDTarget::Render()
 {
 	VERIFY		(g_bRendering);
@@ -142,9 +143,26 @@ void CHUDTarget::Render()
 	PT.transform		(p2,Device.mFullTransform);
 	float				di_size = C_SIZE/powf(PT.p.w,.2f);
 
-	CGameFont* F		= HUD().Font().pFontGraffiti19Russian;
-	F->SetAligment		(CGameFont::alCenter);
-	F->OutSetI			(0.f,0.05f);
+	CGameFont* F;
+	bool old_format = false;
+	switch(g_hud_style){
+		case 3:
+		case 2:
+			F = HUD().Font().pFontDI;
+			F->SetAligment	(CGameFont::alCenter);
+			F->OutSetI		(0.f,0.f+di_size*2);
+			old_format		= true;
+			break;
+		case 1:
+			F = HUD().Font().pFontDI;
+			F->SetAligment	(CGameFont::alCenter);
+			F->OutSetI		(0.f,0.05f);
+			break;
+		default:
+			F = HUD().Font().pFontGraffiti19Russian;
+			F->SetAligment	(CGameFont::alCenter);
+			F->OutSetI		(0.f,0.05f);
+	}
 
 	if (psHUD_Flags.test(HUD_CROSSHAIR_DIST)){
 		F->SetColor		(C);
@@ -180,8 +198,13 @@ void CHUDTarget::Render()
 					if (fuzzyShowInfo>0.5f){
 						CStringTable	strtbl		;
 						F->SetColor	(subst_alpha(C,u8(iFloor(255.f*(fuzzyShowInfo-0.5f)*2.f))));
-						F->OutNext	("%s", *strtbl.translate(others_inv_owner->Name()) );
-						F->OutNext	("%s", *strtbl.translate(others_inv_owner->CharacterInfo().Community().id()) );
+						if(old_format){
+							F->OutNext("%s, %s", *strtbl.translate(others_inv_owner->Name()),
+											*strtbl.translate(others_inv_owner->CharacterInfo().Community().id()) );
+						}else{
+							F->OutNext("%s", *strtbl.translate(others_inv_owner->Name()) );
+							F->OutNext("%s", *strtbl.translate(others_inv_owner->CharacterInfo().Community().id()) );
+						}
 					}
 					}
 

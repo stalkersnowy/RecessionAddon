@@ -78,7 +78,7 @@ const u32	g_clWhite					= 0xffffffff;
 #define		C_ON_ENEMY					D3DCOLOR_XRGB(0xff,0,0)
 #define		C_DEFAULT					D3DCOLOR_XRGB(0xff,0xff,0xff)
 
-#define				MAININGAME_XML				"maingame.xml"
+extern u32	g_hud_style;
 
 CUIMainIngameWnd::CUIMainIngameWnd()
 {
@@ -93,6 +93,8 @@ CUIMainIngameWnd::CUIMainIngameWnd()
 	m_pMPLogWnd					= NULL;	
 
 	g_bShowHudInfo				= true;
+
+	aztec						= false;
 }
 
 #include "UIProgressShape.h"
@@ -110,7 +112,19 @@ CUIMainIngameWnd::~CUIMainIngameWnd()
 void CUIMainIngameWnd::Init()
 {
 	CUIXml						uiXml;
-	uiXml.Init					(CONFIG_PATH, UI_PATH, MAININGAME_XML);
+	LPCSTR mainingame_xml;
+	switch(g_hud_style){
+		case 3:
+			mainingame_xml		= "maingame_1472.xml";
+			aztec = true;
+			break;
+		case 2:
+			mainingame_xml		= "maingame_2232.xml";
+			break;
+		default:
+			mainingame_xml		= "maingame.xml";
+	}
+	uiXml.Init					(CONFIG_PATH, UI_PATH, mainingame_xml);
 	
 	CUIXmlInit					xml_init;
 	CUIWindow::Init				(0,0, UI_BASE_WIDTH, UI_BASE_HEIGHT);
@@ -121,12 +135,14 @@ void CUIMainIngameWnd::Init()
 	AttachChild					(&UIStaticHealth);
 	xml_init.InitStatic			(uiXml, "static_health", 0, &UIStaticHealth);
 
-	AttachChild					(&UIStaticArmor);
-	xml_init.InitStatic			(uiXml, "static_armor", 0, &UIStaticArmor);
+	if(!aztec){
+		AttachChild				(&UIStaticArmor);
+		xml_init.InitStatic		(uiXml, "static_armor", 0, &UIStaticArmor);
+	}
 
 	AttachChild					(&UIWeaponBack);
 	xml_init.InitStatic			(uiXml, "static_weapon", 0, &UIWeaponBack);
-
+	
 	UIWeaponBack.AttachChild	(&UIWeaponSignAmmo);
 	xml_init.InitStatic			(uiXml, "static_ammo", 0, &UIWeaponSignAmmo);
 	UIWeaponSignAmmo.SetElipsis	(CUIStatic::eepEnd, 2);
@@ -154,7 +170,7 @@ void CUIMainIngameWnd::Init()
 	UIZoneMap->Init				();
 	UIZoneMap->SetScale			(DEFAULT_MAP_SCALE);
 
-	if(IsGameTypeSingle())
+	if(IsGameTypeSingle() && !aztec)
 	{
 		xml_init.InitStatic					(uiXml, "static_pda_online", 0, &UIPdaOnline);
 		UIZoneMap->Background().AttachChild	(&UIPdaOnline);
@@ -163,12 +179,13 @@ void CUIMainIngameWnd::Init()
 
 	//Полоса прогресса здоровья
 	UIStaticHealth.AttachChild	(&UIHealthBar);
-//.	xml_init.InitAutoStaticGroup(uiXml,"static_health", &UIStaticHealth);
 	xml_init.InitProgressBar	(uiXml, "progress_bar_health", 0, &UIHealthBar);
 
 	//Полоса прогресса армора
-	UIStaticArmor.AttachChild	(&UIArmorBar);
-//.	xml_init.InitAutoStaticGroup(uiXml,"static_armor", &UIStaticArmor);
+	if(aztec)
+		UIStaticHealth.AttachChild(&UIArmorBar);
+	else
+		UIStaticArmor.AttachChild(&UIArmorBar);
 	xml_init.InitProgressBar	(uiXml, "progress_bar_armor", 0, &UIArmorBar);
 
 	
@@ -192,6 +209,11 @@ void CUIMainIngameWnd::Init()
 		xml_init.InitStatic		(uiXml, "psy_health_static", 0, &UIPsyHealthIcon);
 		UIPsyHealthIcon.Show	(false);
 
+		if(aztec){
+			xml_init.InitStatic	(uiXml, "fatigue_static", 0, &UIFatigueIcon);
+			UIFatigueIcon.Show	(false);
+		}
+
 		xml_init.InitStatic		(uiXml, "can_sleep_static", 0, &UISleepIcon);
 		UISleepIcon.Show		(false);
 	}
@@ -214,12 +236,13 @@ void CUIMainIngameWnd::Init()
 		UIArtefactIcon.Show		(false);
 	}
 	
-	shared_str warningStrings[6] = 
+	shared_str warningStrings[7] = 
 	{	
 		"jammed",
 		"radiation",
 		"wounds",
 		"starvation",
+		"fatigue",
 		"fatigue",
 		"invincible"
 	};
@@ -255,13 +278,13 @@ void CUIMainIngameWnd::Init()
 	AttachChild								(&UICarPanel);
 	xml_init.InitWindow						(uiXml, "car_panel", 0, &UICarPanel);
 
-	AttachChild								(&UIMotionIcon);
+	if(!aztec) AttachChild					(&UIMotionIcon);
 	UIMotionIcon.Init						();
 
 	if(IsGameTypeSingle())
 	{
 		m_artefactPanel->InitFromXML		(uiXml, "artefact_panel", 0);
-		this->AttachChild					(m_artefactPanel);	
+		if(!aztec) AttachChild				(m_artefactPanel);	
 	}
 
 	AttachChild								(&UIStaticDiskIO);
@@ -385,6 +408,7 @@ void CUIMainIngameWnd::Update()
 
 	if( !(Device.dwFrame%30) && IsGameTypeSingle() )
 	{
+		if(!aztec){
 			string256				text_str;
 			CPda* _pda	= m_pActor->GetPDA();
 			u32 _cn		= 0;
@@ -397,10 +421,11 @@ void CUIMainIngameWnd::Update()
 			{
 				UIPdaOnline.SetText("");
 			}
-			if(m_pActor->conditions().AllowSleep())
-				SetWarningIconColor	(ewiSleep,0xffffffff);
-			else
-				SetWarningIconColor	(ewiSleep,0x00ffffff);
+		}
+		if(m_pActor->conditions().AllowSleep())
+			SetWarningIconColor	(ewiSleep,0xffffffff);
+		else
+			SetWarningIconColor	(ewiSleep,0x00ffffff);
 	};
 
 	if( !(Device.dwFrame%5) )
@@ -428,21 +453,22 @@ void CUIMainIngameWnd::Update()
 		if (pItem)
 		{
 			UIArmorBar.Show					(true);
-			UIStaticArmor.Show				(true);
+			if(aztec)	UIStaticArmor.Show	(true);
 			UIArmorBar.SetProgressPos		(pItem->GetCondition()*100);
 		}
 		else
 		{
 			UIArmorBar.Show					(false);
-			UIStaticArmor.Show				(false);
+			if(aztec)	UIStaticArmor.Show	(false);
 		}
 
 		UpdateActiveItemInfo				();
 
 
 		EWarningIcons i					= ewiWeaponJammed;
+		EWarningIcons end				= aztec? ewiInvincible : ewiFatigue;
 
-		while (i < ewiInvincible)
+		while (i < end)
 		{
 			float value = 0;
 			switch (i)
@@ -463,6 +489,9 @@ void CUIMainIngameWnd::Update()
 				break;		
 			case ewiPsyHealth:
 				value = 1 - m_pActor->conditions().GetPsyHealth();
+				break;
+			case ewiFatigue:
+				value = 1 - m_pActor->conditions().GetPower();
 				break;
 			default:
 				R_ASSERT(!"Unknown type of warning icon");
@@ -989,6 +1018,9 @@ void CUIMainIngameWnd::SetWarningIconColor(EWarningIcons icon, const u32 cl)
 		if (bMagicFlag) break;	
 	case ewiPsyHealth:
 		SetWarningIconColor		(&UIPsyHealthIcon, cl);
+		if (bMagicFlag) break;
+	case ewiFatigue:
+		SetWarningIconColor		(&UIFatigueIcon, cl);
 		if (bMagicFlag) break;
 	case ewiInvincible:
 		SetWarningIconColor		(&UIInvincibleIcon, cl);

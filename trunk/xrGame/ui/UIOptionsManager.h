@@ -20,6 +20,7 @@ public:
 	void OptionsPostAccept();
 	void DoVidRestart();
 	void DoSndRestart();
+	void DoUIReload();
 
 	void SendMessage2Group(const char* group, const char* message);
 
@@ -38,4 +39,5 @@ protected:
 
 	bool	m_b_vid_restart;
 	bool	m_b_snd_restart;
+	bool	m_b_ui_reload;
 };

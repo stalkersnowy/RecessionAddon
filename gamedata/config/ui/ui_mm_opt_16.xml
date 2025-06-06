@@ -955,6 +955,19 @@
 			<options_item entry="g_hit_mark_index" group="mm_opt_gameplay"/>
 		</spin_g_hit_mark_index>
 
+		<cap_g_hud_style x="17" y="10" width="119" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_g_hud_style</text>
+		</cap_g_hud_style>
+		<combo_g_hud_style x="162" y="10" width="200" height="21" always_show_scroll="0" list_length="4">
+			<options_item entry="g_hud_style" group="mm_opt_gameplay" depend="vid"/>
+			<text_color>
+				<e r="216" g="186" b="140"/>
+				<d color="ui_gray"/>
+			</text_color>
+			<list_font_s r="240" g="217" b="182"/>
+			<list_font r="216" g="186" b="140" font="letterica16"/>
+		</combo_g_hud_style>
+
 		<cap_g_use_ik x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_use_ik</text>
 		</cap_g_use_ik>

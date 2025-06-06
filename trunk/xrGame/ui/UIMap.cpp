@@ -588,3 +588,12 @@ void CUIMiniMap::UpdateSpots()
 	}
 
 }
+
+extern u32 g_hud_style;
+void CUIMiniMap::Draw()
+{
+	if (g_hud_style == 3)
+		CUIWindow::Draw();
+	else
+		inherited::Draw();
+}

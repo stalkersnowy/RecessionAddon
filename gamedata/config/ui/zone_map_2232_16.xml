@@ -1,0 +1,24 @@
+
+<?xml version='1.0' encoding="UTF-8"?>
+<window>
+	<minimap>
+		<level_frame x="15" y="23" width="123" height="157"/>
+		
+		<background x="7" y="6" width="133" height="185" stretch="1"> 
+			<texture width="177" height="185">ui\ui_mg_back_map</texture>
+			
+			<dist_text x="23" y="3" width="113" height="20">
+				<text align="l" font="letterica16" color="ui_clr_1"/>
+			</dist_text>
+		</background>
+		
+		<compass x="113" y="150" width="24" height="32" heading="1" stretch="1">
+			<texture>ui\ui_hud_map_arrow</texture>
+		</compass>
+		
+		<center width="2" height="3" alignment="c" stretch="1"> 
+			<texture >ui_minimap_point</texture>
+		</center>
+	
+	</minimap>
+</window>

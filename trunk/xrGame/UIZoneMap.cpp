@@ -17,10 +17,14 @@
 
 #include "ui/UIMap.h"
 #include "ui/UIXmlInit.h"
+
+extern u32	g_hud_style;
 //////////////////////////////////////////////////////////////////////////
 
 CUIZoneMap::CUIZoneMap()
-{}
+{
+	no_aztec = true;
+}
 
 CUIZoneMap::~CUIZoneMap()
 {
@@ -31,14 +35,26 @@ void CUIZoneMap::Init()
 {
 
 	CUIXml uiXml;
-	bool xml_result			= uiXml.Init(CONFIG_PATH, UI_PATH, "zone_map.xml");
-	R_ASSERT3(xml_result, "xml file not found", "zone_map.xml");
+	LPCSTR zone_map_xml;
+	switch(g_hud_style){
+		case 3:
+			zone_map_xml = "zone_map_1472.xml";
+			no_aztec = false;
+			break;
+		case 2:
+			zone_map_xml = "zone_map_2232.xml";
+			break;
+		default:
+			zone_map_xml = "zone_map.xml";
+	}
+	bool xml_result			= uiXml.Init(CONFIG_PATH, UI_PATH, zone_map_xml);
+	R_ASSERT3(xml_result, "xml file not found", zone_map_xml);
 
 	// load map backgroundwwwwwwwwwwwww
 	CUIXmlInit xml_init;
 	xml_init.InitStatic			(uiXml, "minimap:background", 0, &m_background);
 
-	if(IsGameTypeSingle()){
+	if(no_aztec && IsGameTypeSingle()){
 		xml_init.InitStatic			(uiXml, "minimap:background:dist_text", 0, &m_pointerDistanceText);
 		m_background.AttachChild	(&m_pointerDistanceText);
 	}
@@ -80,7 +96,7 @@ void CUIZoneMap::UpdateRadar		(Fvector pos)
 	m_background.Update();
 	m_activeMap->SetActivePoint( pos );
 
-	if(IsGameTypeSingle()){
+	if(no_aztec && IsGameTypeSingle()){
 		if(m_activeMap->GetPointerDistance()>0.5f){
 			string64	str;
 			sprintf_s		(str,"%.1f m.",m_activeMap->GetPointerDistance());

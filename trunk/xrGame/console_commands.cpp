@@ -88,6 +88,15 @@ extern	int		m_HitMarkIndex;
 
 extern	BOOL	g_bUseLens;
 
+u32				g_hud_style = 0;
+xr_token		g_hud_style_token[] = {
+	{ "SoC",	0 },
+	{ "2571",	1 },
+	{ "2232",	2 },
+	{ "1472",	3 },
+	{ 0,		0 }
+};
+
 int				g_keypress_on_start = 0;
 
 
@@ -1868,6 +1877,8 @@ void CCC_RegisterCommands()
 	CMD4(CCC_Integer,		"g_use_ik",			&g_bUseIK, 0,1);
 	CMD4(CCC_Integer,		"g_use_smart_hits",	&g_bUseSmartHits, 0,1);
 	CMD4(CCC_Integer,		"g_use_lens",		&g_bUseLens, 0,1);
+	
+	CMD3(CCC_Token,			"g_hud_style",		&g_hud_style, g_hud_style_token);
 
 
 #ifndef MASTER_GOLD

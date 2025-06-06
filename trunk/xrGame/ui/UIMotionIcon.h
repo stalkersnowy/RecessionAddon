@@ -16,6 +16,7 @@ public:
 private:
 							EState				m_curren_state;
 							CUIStatic			m_states[stLast];
+							CUIProgressBar		m_states_progress[stLast];
 							CUIProgressBar		m_power_progress;
 							CUIProgressBar		m_luminosity_progress;
 							CUIProgressBar		m_noise_progress;
@@ -34,6 +35,7 @@ private:
 		xr_vector<_npc_visibility>				m_npc_visibility;
 		bool									m_bchanged;
 		float				m_luminosity;
+		bool				new_style;
 public:
 	virtual					~CUIMotionIcon		();
 							CUIMotionIcon		();

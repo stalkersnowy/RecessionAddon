@@ -114,9 +114,12 @@ void CUIOptionsManager::OptionsPostAccept(){
 		Console->Execute("vid_restart");
 	if (m_b_snd_restart)
 		Console->Execute("snd_restart");
+	if (m_b_ui_reload)
+		Console->Execute("ui_reload");
 
 	m_b_vid_restart = false;
 	m_b_snd_restart = false;
+	m_b_ui_reload	= false;
 }
 
 void CUIOptionsManager::DoVidRestart(){
@@ -125,6 +128,10 @@ void CUIOptionsManager::DoVidRestart(){
 
 void CUIOptionsManager::DoSndRestart(){
 	m_b_snd_restart = true;
+}
+
+void CUIOptionsManager::DoUIReload(){
+	m_b_ui_reload = true;
 }
 
 

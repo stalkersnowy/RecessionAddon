@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+<w>
+	<speech_menu x="260" y="550" width="300" height="265" always_show_scroll="0">
+		<text font="letterica16" r="238" g="224" b="198"/>		
+	</speech_menu>
+	
+	<static_health x="900" y="635" width="112" height="200" align="rb" stretch="1">
+		<text x="60" y="5" font="small" r="255" g="255" b="255" a="130">health</text>
+		<texture width="150" height="200">ui\ui_mn_health</texture>
+	</static_health>
+
+	<progress_bar_health x="12" y="23" width="90" height="18" horz="1" min="0" max="100" pos="0">
+		<progress stretch="1"><texture tile="0" width="120" height="16" length="120" r="255" g="50" b="50">ui\ui_mg_progress_efficiency_full</texture></progress>
+		<background stretch="1"><texture x="0" y="0" width="120" height="16" >ui\ui_mg_progress_efficiency_empty</texture></background>
+	</progress_bar_health>
+
+	<static_armor x="900" y="590" width="112" height="200" align="rb" stretch="1">
+		<text x="60" y="5" font="small" r="255" g="255" b="255" a="130">armor</text>
+		<texture width="150" height="200">ui\ui_mn_health</texture>
+	</static_armor>
+
+	<progress_bar_armor x="12" y="23" width="90" height="18" horz="1" min="0" max="100" pos="0">
+		<progress stretch="1"><texture tile="0" width="120" height="16" length="120" r="0" g="0" b="255">ui\ui_mg_progress_efficiency_full</texture></progress>
+		<background stretch="1"><texture x="0" y="0" width="120" height="16" >ui\ui_mg_progress_efficiency_empty</texture></background>
+	</progress_bar_armor>
+	
+	<static_weapon x="900" y="685" width="150" height="64" align="rb" stretch="1">
+		<text x="0" y="4" font="small" r="255" g="255" b="255" a="130" align="c"></text>
+		<texture width="200" height="64">ui\ui_mn_weapons</texture>
+	</static_weapon>
+	
+	<static_ammo x="61" y="22" width="64" height="30">
+		<text x="0" y="0" font="graffiti32" r="238" g="155" b="23" a="255">Ammo</text>
+	</static_ammo>
+	
+	<static_wpn_icon x="11" y="13" width="60" height="42">
+		<text font="graffiti19" r="239" g="154" b="29" a="230"></text>
+	</static_wpn_icon>
+
+	<car_panel x="900" y="545" width="112" height="200" align="rb"></car_panel>
+	
+	<static_pda_online x="1" y="187" width="150" height="32" stretch="1">
+		<texture width="200" height="32">ui\ui_mg_back_pager</texture>
+		<text x="77" y="2" font="graffiti19" r="239" g="154" b="29" a="230"></text>
+	</static_pda_online>
+	
+	
+	<quick_info x="1" y="700" width="1022" height="50" complex_mode="1">
+		<text align="c"/>
+	</quick_info>
+
+
+	<icons_scroll_view  x="955" y="100" width="48" height="455" right_ident="2" always_show_scroll="0" vert_interval="18" inverse_dir="1" flip_vert="0"/>
+
+	<weapon_jammed_static x="0" y="0" width="48" height="64" stretch="1">
+		<texture>ui_hud_icon_weapon</texture>
+	</weapon_jammed_static>
+
+	<radiation_static x="0" y="0" width="48" height="64" stretch="1">
+		<texture>ui_hud_icon_radiation</texture>
+	</radiation_static>
+
+	<wound_static x="0" y="0" width="48" height="64" stretch="1">
+		<texture>ui_hud_icon_drop</texture>
+	</wound_static>
+
+	<starvation_static x="0" y="0" width="48" height="64" stretch="1">
+		<texture>ui_hud_icon_eat</texture>
+	</starvation_static>
+
+	<psy_health_static x="0" y="0" width="48" height="64" stretch="1">
+		<texture>ui_hud_icon_psycho</texture>
+	</psy_health_static>
+
+	<invincible_static x="0" y="0" width="48" height="64" stretch="1">
+		<texture>ui_hud_icon_goodmode</texture>
+	</invincible_static>
+	
+	<can_sleep_static x="0" y="0" width="48" height="64" stretch="1">
+		<texture>ui_hud_icon_sleep</texture>
+	</can_sleep_static>
+
+	<artefact_static x="0" y="0" width="48" height="64" stretch="1">
+		<texture>ui_hud_icon_artefact</texture>
+	</artefact_static>
+
+	<disk_io x="1000" y="750" width="14" height="16" stretch="1">
+		<texture>ui\ui_disk_io</texture>
+	</disk_io>
+
+	<flashing_icons>
+		<flashing_icon x="14" y="220" width="75" height="50" type="pda" period="500" light_anim="ui_slow_blinking_alpha" stretch="1">
+			<texture x="300" y="650" width="100" height="50">ui\ui_icon_equipment</texture>
+		</flashing_icon>
+	</flashing_icons>
+
+	<pick_up_item x="437" y="400" width="150" height="100"/>
+
+	<artefact_panel x="52" y="710" width="790" height="50" cell_width="38" cell_height="50" scale="0.75"/>
+	
+	<new_contact_snd>detectors\contact_1</new_contact_snd>	
+</w>

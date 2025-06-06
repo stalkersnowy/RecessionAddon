@@ -1,0 +1,20 @@
+
+<?xml version='1.0' encoding="UTF-8"?>
+<window>
+	<minimap>
+		<level_frame x="8" y="15" width="112" height="141"/>
+		
+		<background x="7" y="9" width="115" height="148" stretch="1"> 
+			<texture width="153" height="148">ui\hud_map_back</texture>
+		</background>
+		
+		<compass x="94" y="118" width="24" height="32" heading="1" stretch="1">
+			<texture>ui\hud_map_arrow</texture>
+		</compass>
+		
+		<center width="2" height="3" alignment="c" stretch="1"> 
+			<texture width="3" height="3">ui\hud_map_point</texture>
+		</center>
+	
+	</minimap>
+</window>
