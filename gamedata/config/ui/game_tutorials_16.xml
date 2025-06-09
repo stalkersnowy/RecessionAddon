@@ -46,7 +46,7 @@
         </main_wnd>
     </item>
     <item>
-        <length_sec>8.4</length_sec>
+        <length_sec>8.2</length_sec>
         <pause_state>off</pause_state>
         <guard_key/>
         <sound>characters_voice\scenario\trader\trader_tutorial_pda_4</sound>
@@ -63,7 +63,16 @@
         <cursor_pos/>
         <grab_input>1</grab_input>
         <pda_section>pda_quests</pda_section>
-        <main_wnd/>
+		<main_wnd>
+			<auto_static start_time="3" length_sec="4" x="395" y="235" width="20" height="20" stretch="1" light_anim="tutor_rad_sign_clr" light_anim_cyclic="1" la_alpha="0" la_texture="1" xform_anim="tutor_rad_sign_xform" xform_anim_cyclic="1" alignment="c">
+				<window_name>w1</window_name>
+				<texture>ui_highlight</texture>
+			</auto_static>
+			<auto_static start_time="8" length_sec="5" x="421" y="565" width="50" height="50" stretch="1" light_anim="tutor_rad_sign_clr" light_anim_cyclic="1" la_alpha="0" la_texture="1" xform_anim="tutor_rad_sign_xform" xform_anim_cyclic="1" alignment="c">
+				<window_name>w2</window_name>
+				<texture>ui_highlight</texture>
+			</auto_static>
+		</main_wnd>
     </item>
     <item>
         <length_sec>5</length_sec>

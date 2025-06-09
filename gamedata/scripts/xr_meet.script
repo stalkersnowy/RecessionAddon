@@ -499,6 +499,7 @@ function init_meet(npc, ini, section, st, scheme)
 		st.syndata			= parse_syn_data(npc, def.syndata)
 		st.precond			= def.precond
 		st.abuse			= def.abuse
+		st.trade_enable		= utils.cfg_get_bool(ini, section, "trade_enable", npc, false, true)
 	elseif tostring(section) == "no_meet" then
 		st.meet_state		= parse_data(npc, "")
 		st.meet_state_wpn	= parse_data(npc, "")
@@ -512,6 +513,7 @@ function init_meet(npc, ini, section, st, scheme)
 		st.syndata			= parse_syn_data(npc, "")
 		st.precond			= "usability"
 		st.abuse			= "false"
+		st.trade_enable		= utils.cfg_get_bool(ini, section, "trade_enable", npc, false, false)
 	else
 		st.meet_state		= parse_data(npc, utils.cfg_get_string(ini, section, "meet_state", npc, false, "", def.meet_state))
 		st.meet_state_wpn	= parse_data(npc, utils.cfg_get_string(ini, section, "meet_state_wpn", npc, false, "", def.meet_state_wpn))
@@ -525,6 +527,7 @@ function init_meet(npc, ini, section, st, scheme)
 		st.syndata			= parse_syn_data(npc, utils.cfg_get_string(ini, section, "synpairs", npc, false, "", def.syndata))
 		st.precond			= utils.cfg_get_string(ini, section, "precond", npc, false, "", def.precond)
 		st.abuse			= utils.cfg_get_string(ini, section, "abuse", npc, false, "", def.abuse)
+		st.trade_enable		= utils.cfg_get_bool(ini, section, "trade_enable", npc, false, true)
 	end
 	
 	--print_table(st)
@@ -536,6 +539,11 @@ function init_meet(npc, ini, section, st, scheme)
 		xr_abuse.disable_abuse(npc)
 	end
 
+	if(st.trade_enable) then
+		npc:enable_trade()
+	else
+		npc:disable_trade()
+	end
 	-- флажок, что функция хотя бы раз вызывалась
 	st.meet_set = true
 end

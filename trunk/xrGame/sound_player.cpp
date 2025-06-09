@@ -256,6 +256,10 @@ CSoundPlayer::CSoundCollection::CSoundCollection	(const CSoundCollectionParams &
 			string256					name;
 			sprintf_s						(name,"%s%d",S,i);
 			if (FS.exist(fn,"$game_sounds$",name,".ogg")) {
+				string_path ignore_check;
+				if (FS.exist(ignore_check, "$game_sounds$", name, ".ogg#ignore")) {
+					break;
+				}
 				ref_sound				*temp = add(params.m_type,name);
 				if (temp)
 					m_sounds.push_back	(temp);
