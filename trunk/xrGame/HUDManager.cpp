@@ -133,6 +133,7 @@ CHUDManager::CHUDManager()
 { 
 	pUI						= 0;
 	m_pHUDTarget			= xr_new<CHUDTarget>();
+	HitMarker				= 0;
 	OnDisconnected			();
 }
 //--------------------------------------------------------------------
@@ -140,10 +141,14 @@ CHUDManager::~CHUDManager()
 {
 	xr_delete			(pUI);
 	xr_delete			(m_pHUDTarget);
+	xr_delete			(HitMarker);
 	b_online			= false;
 }
 
 //--------------------------------------------------------------------
+
+int						m_HitMarkIndex = 0;
+int						m_CurHitMarkIndex = 0;
 
 void CHUDManager::Load()
 {
@@ -153,6 +158,12 @@ void CHUDManager::Load()
 	}
 	pUI					= xr_new<CUI> (this);
 	pUI->Load			(NULL);
+	m_CurHitMarkIndex	= m_HitMarkIndex;
+	if(m_CurHitMarkIndex == -1)
+		HitMarker		= xr_new<CHitMarkerOld>();
+	else
+		HitMarker		= xr_new<CHitMarker>();
+	HitMarker->InitShader(m_CurHitMarkIndex);
 	OnDisconnected		();
 }
 //--------------------------------------------------------------------
@@ -214,7 +225,7 @@ void  CHUDManager::RenderUI()
 	BOOL bAlready					= FALSE;
 	if (true || psHUD_Flags.is(HUD_DRAW | HUD_DRAW_RT))
 	{
-		HitMarker.Render			();
+		HitMarker->Render			();
 		bAlready					= ! (pUI && !pUI->Render());
 		Font().Render();
 	}
@@ -261,12 +272,7 @@ void  CHUDManager::ShowCrosshair	(bool show)
 
 void CHUDManager::Hit(int idx, float power, const Fvector& dir)	
 {
-	HitMarker.Hit(idx, dir);
-}
-
-void CHUDManager::SetHitmarkType		(LPCSTR tex_name)
-{
-	HitMarker.InitShader				(tex_name);
+	HitMarker->Hit(idx, dir);
 }
 #include "ui\UIMainInGameWnd.h"
 extern CUIXml*			pWpnScopeXml;
@@ -274,6 +280,7 @@ void CHUDManager::OnScreenResolutionChanged()
 {
 	xr_delete							(pWpnScopeXml);
 	xr_delete							(pUI->UIMainIngameWnd);
+	xr_delete							(HitMarker);
 
 	pUI->UIMainIngameWnd				= xr_new<CUIMainIngameWnd>	();
 	pUI->UIMainIngameWnd->Init			();
@@ -289,6 +296,13 @@ void CHUDManager::OnScreenResolutionChanged()
 		if (actor)
 			pUI->UIMainIngameWnd->m_artefactPanel->InitIcons(actor->ArtefactsOnBelt());
 	}
+	
+	m_CurHitMarkIndex					= m_HitMarkIndex;
+	if(m_CurHitMarkIndex == -1)
+		HitMarker						= xr_new<CHitMarkerOld>();
+	else
+		HitMarker						= xr_new<CHitMarker>();
+	HitMarker->InitShader				(m_CurHitMarkIndex);
 }
 
 void CHUDManager::OnDisconnected()

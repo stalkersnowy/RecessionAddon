@@ -1898,7 +1898,7 @@ void CCC_RegisterCommands()
 #endif
 	*g_last_saved_game	= 0;
 
-	CMD4(CCC_Integer,	"g_hit_mark_index",	&m_HitMarkIndex,	0, 18);
+	CMD4(CCC_Integer,	"g_hit_mark_index",	&m_HitMarkIndex,	-1, 18);
 
 //	register_mp_console_commands					();
 }

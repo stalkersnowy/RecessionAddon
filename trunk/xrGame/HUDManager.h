@@ -44,7 +44,7 @@ class CHUDManager :
 	friend class CUI;
 private:
 	CUI*					pUI;
-	CHitMarker				HitMarker;
+	IHitMarker*				HitMarker;
 	CHUDTarget*				m_pHUDTarget;
 	bool					b_online;
 public:
@@ -72,7 +72,6 @@ public:
 	void					SetCrosshairDisp	(float dispf, float disps = 0.f);
 	void					ShowCrosshair		(bool show);
 
-	void					SetHitmarkType		(LPCSTR tex_name);
 	virtual void			OnScreenResolutionChanged();
 	virtual void			OnDisconnected		();
 	virtual void			OnConnected			();

@@ -19,7 +19,16 @@ struct SHitMark{
 };
 
 
-class CHitMarker
+class IHitMarker
+{
+public:
+	virtual void			Render		()								= 0;
+	virtual void			Hit			(int id, const Fvector& dir)	= 0;
+	virtual void			InitShader	(int index)						= 0;
+};
+
+
+class CHitMarker : public IHitMarker
 {
 public:
 /*
@@ -35,10 +44,25 @@ public:
 							CHitMarker	();
 							~CHitMarker	();
 
-	void					Render		();
-	void					Hit			(int id, const Fvector& dir);
-	void					InitShader	();
-	void					InitShader	(LPCSTR tex_name);
+	virtual void			Render		();
+	virtual void			Hit			(int id, const Fvector& dir);
+	virtual void			InitShader	(int index);
+};
+
+
+class CHitMarkerOld : public IHitMarker
+{
+public:
+	float					fHitMarks[4];
+	ref_shader				hShader;
+	ref_geom				hGeom;
+public:
+							CHitMarkerOld	();
+							~CHitMarkerOld	();
+
+	virtual void			Render		();
+	virtual void			Hit			(int id, const Fvector& dir);
+	virtual void			InitShader	(int index);
 };
 
 #endif // __XR_HITMARKER_H__

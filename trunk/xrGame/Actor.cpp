@@ -602,6 +602,7 @@ void	CActor::Hit							(SHit* pHDS)
 	}
 }
 
+extern int m_CurHitMarkIndex;
 void CActor::HitMark	(float P, 
 						 Fvector dir,			
 						 CObject* who, 
@@ -613,8 +614,46 @@ void CActor::HitMark	(float P,
 	// hit marker
 	if ( (hit_type==ALife::eHitTypeFireWound||hit_type==ALife::eHitTypeWound_2) && g_Alive() && Local() && /*(this!=who) && */(Level().CurrentEntity()==this) )	
 	{
-		HUD().Hit(0, P, dir);
+		int id						= -1;
+		if ( m_CurHitMarkIndex == -1 ){
+			Fvector cam_pos,cam_dir,cam_norm;
+			cam_Active()->Get			(cam_pos,cam_dir,cam_norm);
+			cam_dir.normalize_safe		();
+			dir.normalize_safe			();
 
+			float ang_diff				= angle_difference	(cam_dir.getH(), dir.getH());
+			Fvector						cp;
+			cp.crossproduct				(cam_dir,dir);
+			bool bUp					=(cp.y>0.0f);
+
+			Fvector cross;
+			cross.crossproduct			(cam_dir, dir);
+			VERIFY(ang_diff>=0.0f && ang_diff<=PI);
+
+			float _s1 = PI_DIV_8;
+			float _s2 = _s1+PI_DIV_4;
+			float _s3 = _s2+PI_DIV_4;
+			float _s4 = _s3+PI_DIV_4;
+
+			if(ang_diff<=_s1){
+				id = 2;
+			}else
+			if(ang_diff>_s1 && ang_diff<=_s2){
+				id = (bUp)?5:7;
+			}else
+			if(ang_diff>_s2 && ang_diff<=_s3){
+				id = (bUp)?3:1;
+			}else
+			if(ang_diff>_s3 && ang_diff<=_s4){
+				id = (bUp)?4:6;
+			}else
+			if(ang_diff>_s4){
+				id = 0;
+			}else{
+				VERIFY(0);
+			}
+		}
+		HUD().Hit(id, P, dir);
 	{
 		CEffectorCam* ce = Cameras().GetCamEffector((ECamEffectorType)effFireHit);
 		if(!ce)
