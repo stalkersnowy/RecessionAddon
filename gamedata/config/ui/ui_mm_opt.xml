@@ -957,6 +957,20 @@
 			<list_font r="216" g="186" b="140" font="letterica16"/>
 		</combo_g_hud_style>
 
+		<cap_g_more_contact_snds x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_g_more_contact_snds</text>
+		</cap_g_more_contact_snds>
+		<check_g_more_contact_snds x="300" y="10" width="30" height="21">
+			<options_item entry="g_more_contact_snds" group="mm_opt_gameplay"/>
+		</check_g_more_contact_snds>
+
+		<cap_g_old_pda x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_g_old_pda</text>
+		</cap_g_old_pda>
+		<check_g_old_pda x="300" y="10" width="30" height="21">
+			<options_item entry="g_old_pda" group="mm_opt_gameplay"/>
+		</check_g_old_pda>
+
 		<cap_g_use_ik x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_use_ik</text>
 		</cap_g_use_ik>

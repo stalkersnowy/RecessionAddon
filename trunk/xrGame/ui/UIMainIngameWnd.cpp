@@ -80,6 +80,8 @@ const u32	g_clWhite					= 0xffffffff;
 
 extern u32	g_hud_style;
 
+extern BOOL	g_bMoreContactSnds;
+
 CUIMainIngameWnd::CUIMainIngameWnd()
 {
 	m_pActor					= NULL;
@@ -291,7 +293,7 @@ void CUIMainIngameWnd::Init()
 	xml_init.InitStatic						(uiXml, "disk_io", 0, &UIStaticDiskIO);
 
 
-	HUD_SOUND::LoadSound					("maingame_ui", "snd_new_contact"		, m_contactSnd		, SOUND_TYPE_IDLE);
+	HUD_SOUND::LoadSound					("maingame_ui", g_bMoreContactSnds?"snd_new_contact_old":"snd_new_contact", m_contactSnd, SOUND_TYPE_IDLE);
 }
 
 float UIStaticDiskIO_start_time = 0.0f;

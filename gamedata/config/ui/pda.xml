@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <window>
 	<!-- PDA OFF BUTTON -->
-	<off_button x="0" y="0" width="1" height="1">
+	<off_button x="762" y="29" width="41" height="22" hint="pda_btn_off_hint" push_off_x="0" push_off_y="0">
 		<texture>ui\ui_pda_button</texture>
 		<text x="0" y="0" font="letterica18" r="255" g="255" b="255"/>
 	</off_button>
@@ -13,6 +13,9 @@
 	</background_static>
 	<background_static x="3" y="20" width="891" height="643">
 		<texture>ui_PDA_rus</texture>
+	</background_static>
+	<background_static x="3" y="20" width="891" height="643">
+		<texture>ui\ui_pda_back_big</texture>
 	</background_static>
 
 

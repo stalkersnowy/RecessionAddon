@@ -99,6 +99,9 @@ xr_token		g_hud_style_token[] = {
 
 int				g_keypress_on_start = 0;
 
+BOOL			g_bMoreContactSnds = FALSE;
+extern BOOL		g_old_pda;
+
 
 void register_mp_console_commands();
 //-----------------------------------------------------------
@@ -1879,6 +1882,9 @@ void CCC_RegisterCommands()
 	CMD4(CCC_Integer,		"g_use_lens",		&g_bUseLens, 0,1);
 	
 	CMD3(CCC_Token,			"g_hud_style",		&g_hud_style, g_hud_style_token);
+
+	CMD4(CCC_Integer,		"g_more_contact_snds",	&g_bMoreContactSnds,	0,1);
+	CMD4(CCC_Integer,		"g_old_pda",			&g_old_pda,				0,1);
 
 
 #ifndef MASTER_GOLD

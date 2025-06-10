@@ -31,6 +31,7 @@
 
 #define		PDA_XML					"pda.xml"
 u32			g_pda_info_state		= 0;
+BOOL		g_old_pda				= FALSE;
 
 void RearrangeTabButtons(CUITabControl* pTab, xr_vector<Fvector2>& vec_sign_places);
 
@@ -78,7 +79,7 @@ void CUIPdaWnd::Init()
 
 	UIMainPdaFrame			= xr_new<CUIStatic>(); UIMainPdaFrame->SetAutoDelete(true);
 	AttachChild				(UIMainPdaFrame);
-	xml_init.InitStatic		(uiXml, "background_static", GameConstants::GetRussianPDATexture()?1:0, UIMainPdaFrame);
+	xml_init.InitStatic		(uiXml, "background_static", g_old_pda?2:GameConstants::GetRussianPDATexture()?1:0, UIMainPdaFrame);
 
 	//Элементы автоматического добавления
 	xml_init.InitAutoStatic	(uiXml, "auto_static", this);
@@ -129,6 +130,15 @@ void CUIPdaWnd::Init()
 	xml_init.InitTabControl		(uiXml, "tab", 0, UITabControl);
 	UITabControl->SetMessageTarget(this);
 
+	if(g_old_pda){
+		// Off button
+		UIOffButton						= xr_new<CUIButton>(); UIOffButton->SetAutoDelete(true);
+		UIMainPdaFrame->AttachChild		(UIOffButton);
+		xml_init.InitButton				(uiXml, "off_button", 0, UIOffButton);
+		UIOffButton->TextureOff			();
+		UIOffButton->SetMessageTarget	(this);
+	}
+
 	if(GameID()!=GAME_SINGLE){
 		UITabControl->GetButtonsVector()->at(0)->Enable(false);
 		UITabControl->GetButtonsVector()->at(2)->Enable(false);
@@ -155,6 +165,14 @@ void CUIPdaWnd::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
 		if (TAB_CHANGED == msg){
 			SetActiveSubdialog	((EPdaTabs)UITabControl->GetActiveIndex());
 		}
+	}else 
+	if (UIOffButton == pWnd){
+		if (STATIC_FOCUS_RECEIVED == msg)
+			UIOffButton->TextureOn();
+		else if (STATIC_FOCUS_LOST == msg)
+			UIOffButton->TextureOff();
+		else if (BUTTON_CLICKED == msg)
+			Game().StartStopMenu(this,true);
 	}else 
 	{
 		R_ASSERT(m_pActiveDialog);

@@ -102,6 +102,9 @@ void CUIOptionsItem::SaveValue(){
 	if (/*m_entry == "snd_freq" ||*/ m_entry == "snd_efx")
 		m_optionsManager.DoSndRestart();
 
-	if (m_entry == "g_hud_style" || m_entry == "g_hit_mark_index")
+	if (m_entry == "g_hud_style"			|| 
+		m_entry == "g_hit_mark_index"		|| 
+		m_entry == "g_more_contact_snds"	|| 
+		m_entry == "g_old_pda")
 		m_optionsManager.DoUIReload();
 }
