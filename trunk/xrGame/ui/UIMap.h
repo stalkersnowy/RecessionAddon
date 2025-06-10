@@ -122,7 +122,6 @@ public:
 								CUIMiniMap			();
 	virtual						~CUIMiniMap			();
 	virtual void				Init				(shared_str name, CInifile& gameLtx, LPCSTR sh_name);
-	virtual void				Draw				();
 protected:
 	virtual void				UpdateSpots			();
 

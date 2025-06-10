@@ -573,10 +573,17 @@ CUIMiniMap::CUIMiniMap()
 CUIMiniMap::~CUIMiniMap()
 {}
 
+extern u32 g_hud_style;
 void CUIMiniMap::Init(shared_str name, CInifile& gameLtx, LPCSTR sh_name)
 {
 	inherited::Init(name, gameLtx, sh_name);
-	//CUIStatic::SetTextureColor(0x7fffffff);
+	switch(g_hud_style){
+	case 2:
+		CUIStatic::SetTextureColor(0x7fffffff);
+		break;
+	case 3:
+		CUIStatic::SetTextureColor(0x00ffffff);
+	}
 }
 
 void CUIMiniMap::UpdateSpots()
@@ -587,13 +594,4 @@ void CUIMiniMap::UpdateSpots()
 			(*it).location->UpdateMiniMap(this);
 	}
 
-}
-
-extern u32 g_hud_style;
-void CUIMiniMap::Draw()
-{
-	if (g_hud_style == 3)
-		CUIWindow::Draw();
-	else
-		inherited::Draw();
 }

@@ -12,7 +12,7 @@ class CUIZoneMap
 {
 	CUICustomMap*				m_activeMap;
 	float						m_fScale;
-	bool						no_aztec;
+	u32							m_bMode;
 
 	CUIStatic					m_background;
 	CUIStatic					m_center;
