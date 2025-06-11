@@ -148,12 +148,11 @@ void CActor::SelectBestWeapon	(CObject* O)
 	};
 }
 
-#define ENEMY_HIT_SPOT	"mp_hit_sector_location"
-BOOL	g_bShowHitSectors	= TRUE;
+extern u32 g_hud_style;
 
 void	CActor::HitSector(CObject* who, CObject* weapon)
 {
-	if (!g_bShowHitSectors) return;
+	if (g_hud_style==3) return;
 	if (!g_Alive()) return;
 
 	bool bShowHitSector = true;
@@ -178,7 +177,7 @@ void	CActor::HitSector(CObject* who, CObject* weapon)
 	}
 
 	if (!bShowHitSector) return;	
-		Level().MapManager().AddMapLocation(ENEMY_HIT_SPOT, who->ID());
+		Level().MapManager().AddMapLocation(g_hud_style==2?"mp_hit_sector_location_old":"mp_hit_sector_location", who->ID());
 }
 
 void CActor::on_weapon_shot_start		(CWeapon *weapon)
