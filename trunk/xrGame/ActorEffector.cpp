@@ -101,6 +101,21 @@ void AddEffector(CActor* A, int type, const shared_str& sect_name, float factor)
 	}
 };
 
+void AddEffectorCam(CActor* A, int type, const shared_str& sect_name, float factor)
+{
+	clamp(factor, 0.001f, 1.5f);
+	if(pSettings->line_exist(sect_name,"cam_eff_name")){
+		bool bCyclic						= !!pSettings->r_bool(sect_name,"cam_eff_cyclic");
+		CAnimatorCamLerpEffectorConst* cam_anm	= xr_new<CAnimatorCamLerpEffectorConst>();
+		cam_anm->SetFactor					(factor);
+		cam_anm->SetType					((ECamEffectorType)type);
+		cam_anm->SetCyclic					(bCyclic);
+		LPCSTR fn = pSettings->r_string		(sect_name,"cam_eff_name");
+		cam_anm->Start						(fn);
+		A->Cameras().AddCamEffector			(cam_anm);
+	}
+};
+
 
 void RemoveEffector		(CActor* A, int type)
 {

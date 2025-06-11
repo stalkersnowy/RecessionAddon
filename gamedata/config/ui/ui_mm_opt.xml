@@ -971,6 +971,13 @@
 			<options_item entry="g_old_pda" group="mm_opt_gameplay"/>
 		</check_g_old_pda>
 
+		<cap_g_shooting_eff x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_g_shooting_eff</text>
+		</cap_g_shooting_eff>
+		<check_g_shooting_eff x="300" y="10" width="30" height="21">
+			<options_item entry="g_shooting_eff" group="mm_opt_gameplay"/>
+		</check_g_shooting_eff>
+
 		<cap_g_use_ik x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_use_ik</text>
 		</cap_g_use_ik>

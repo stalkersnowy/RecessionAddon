@@ -362,8 +362,8 @@ protected:
 	float					fCurAVelocity;
 	CEffectorBobbing*		pCamBobbing;
 
-//	void					LoadShootingEffector	(LPCSTR section);
-//	SShootingEffector*		m_pShootingEffector;
+	void					LoadShootingEffector	(LPCSTR section);
+	SShootingEffector*		m_pShootingEffector;
 
 	void					LoadSleepEffector		(LPCSTR section);
 	SSleepEffector*			m_pSleepEffector;

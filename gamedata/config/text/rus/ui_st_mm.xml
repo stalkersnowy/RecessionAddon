@@ -387,6 +387,9 @@
 	<string id="ui_mm_g_old_pda">
 		<text>Старая текстура ПДА</text>
 	</string>
+	<string id="ui_mm_g_shooting_eff">
+		<text>Старый эффектор попадания</text>
+	</string>
 	<string id="ui_mm_g_use_ik">
 		<text>Инверсная кинематика</text>
 	</string>
@@ -482,6 +485,9 @@
 	</string>
 	<string id="descr_g_old_pda">
 		<text>Старая текстура ПДА образца билда 2571 и ранее с кнопкой выключения</text>
+	</string>
+	<string id="descr_g_shooting_eff">
+		<text>Покраснение экрана при попадании по ГГ из билдов</text>
 	</string>
 	<string id="descr_g_use_ik">
 		<text>Инверсная кинематика в её реализации из исходников ТЧ с дефайном PRIQUEL и билда 3120 (нужна, чтобы персонажи правильно ставили ноги на поверхностях) - работает криво, оставлена чисто ради эксперимента, к включению не рекомендуется</text>

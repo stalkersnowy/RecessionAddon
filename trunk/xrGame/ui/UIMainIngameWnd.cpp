@@ -455,13 +455,13 @@ void CUIMainIngameWnd::Update()
 		if (pItem)
 		{
 			UIArmorBar.Show					(true);
-			if(aztec)	UIStaticArmor.Show	(true);
+			if(!aztec)	UIStaticArmor.Show	(true);
 			UIArmorBar.SetProgressPos		(pItem->GetCondition()*100);
 		}
 		else
 		{
 			UIArmorBar.Show					(false);
-			if(aztec)	UIStaticArmor.Show	(false);
+			if(!aztec)	UIStaticArmor.Show	(false);
 		}
 
 		UpdateActiveItemInfo				();

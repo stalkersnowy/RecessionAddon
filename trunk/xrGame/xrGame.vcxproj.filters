@@ -6576,6 +6576,9 @@
     <ClInclude Include="GameConstants.h">
       <Filter>Core\Client\GameConstants</Filter>
     </ClInclude>
+    <ClInclude Include="ShootingHitEffector.h">
+      <Filter>Core\Client\Effectors\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="damage_manager.cpp">
@@ -9736,6 +9739,9 @@
     </ClCompile>
     <ClCompile Include="GameConstants.cpp">
       <Filter>Core\Client\GameConstants</Filter>
+    </ClCompile>
+    <ClCompile Include="ShootingHitEffector.cpp">
+      <Filter>Core\Client\Effectors\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

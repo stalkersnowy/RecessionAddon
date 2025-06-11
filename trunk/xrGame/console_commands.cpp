@@ -146,6 +146,7 @@ CUIOptConCom g_OptConCom;
 
 extern BOOL g_bUseIK;
 extern BOOL g_bUseSmartHits;
+extern BOOL g_bShootingEffector;
 
 class CCC_MemStats : public IConsole_Command
 {
@@ -1885,6 +1886,7 @@ void CCC_RegisterCommands()
 
 	CMD4(CCC_Integer,		"g_more_contact_snds",	&g_bMoreContactSnds,	0,1);
 	CMD4(CCC_Integer,		"g_old_pda",			&g_old_pda,				0,1);
+	CMD4(CCC_Integer,		"g_shooting_eff",		&g_bShootingEffector,	0,1);
 
 
 #ifndef MASTER_GOLD

@@ -64,6 +64,7 @@
 #include "script_callback_ex.h"
 #include "InventoryBox.h"
 #include "location_manager.h"
+#include "ShootingHitEffector.h"
 
 const u32		patch_frames	= 50;
 const float		respawn_delay	= 1.f;
@@ -117,6 +118,7 @@ CActor::CActor() : CEntityAlive()
 	fCurAVelocity			= 0.0f;
 	// эффекторы
 	pCamBobbing				= 0;
+	m_pShootingEffector		= NULL;
 	m_pSleepEffector		= NULL;
 	m_pSleepEffectorPP		= NULL;
 
@@ -214,7 +216,8 @@ CActor::~CActor()
 	m_BloodSnd.destroy		();
 
 	xr_delete				(m_pActorEffector);
-
+	
+	xr_delete				(m_pShootingEffector);
 	xr_delete				(m_pSleepEffector);
 
 	hFriendlyIndicator.destroy();
@@ -339,7 +342,7 @@ void CActor::Load	(LPCSTR section )
 	character_physics_support()->in_Load		(section);
 	
 	//загрузить параметры эффектора
-//	LoadShootingEffector	("shooting_effector");
+	LoadShootingEffector	("shooting_effector");
 	LoadSleepEffector		("sleep_effector");
 
 	//загрузить параметры смещения firepoint
@@ -603,6 +606,7 @@ void	CActor::Hit							(SHit* pHDS)
 }
 
 extern int m_CurHitMarkIndex;
+BOOL g_bShootingEffector = FALSE;
 void CActor::HitMark	(float P, 
 						 Fvector dir,			
 						 CObject* who, 
@@ -654,51 +658,56 @@ void CActor::HitMark	(float P,
 			}
 		}
 		HUD().Hit(id, P, dir);
-	{
+		if(g_bShootingEffector) Cameras().AddPPEffector(xr_new<CShootingHitEffectorPP>(m_pShootingEffector));
+		{
 		CEffectorCam* ce = Cameras().GetCamEffector((ECamEffectorType)effFireHit);
 		if(!ce)
 			{
-			int id						= -1;
-			Fvector						cam_pos,cam_dir,cam_norm;
-			cam_Active()->Get			(cam_pos,cam_dir,cam_norm);
-			cam_dir.normalize_safe		();
-			dir.normalize_safe			();
+			if(id==-1){
+				Fvector						cam_pos,cam_dir,cam_norm;
+				cam_Active()->Get			(cam_pos,cam_dir,cam_norm);
+				cam_dir.normalize_safe		();
+				dir.normalize_safe			();
 
-			float ang_diff				= angle_difference	(cam_dir.getH(), dir.getH());
-			Fvector						cp;
-			cp.crossproduct				(cam_dir,dir);
-			bool bUp					=(cp.y>0.0f);
+				float ang_diff				= angle_difference	(cam_dir.getH(), dir.getH());
+				Fvector						cp;
+				cp.crossproduct				(cam_dir,dir);
+				bool bUp					=(cp.y>0.0f);
 
-			Fvector cross;
-			cross.crossproduct			(cam_dir, dir);
-			VERIFY						(ang_diff>=0.0f && ang_diff<=PI);
+				Fvector cross;
+				cross.crossproduct			(cam_dir, dir);
+				VERIFY						(ang_diff>=0.0f && ang_diff<=PI);
 
-			float _s1 = PI_DIV_8;
-			float _s2 = _s1+PI_DIV_4;
-			float _s3 = _s2+PI_DIV_4;
-			float _s4 = _s3+PI_DIV_4;
+				float _s1 = PI_DIV_8;
+				float _s2 = _s1+PI_DIV_4;
+				float _s3 = _s2+PI_DIV_4;
+				float _s4 = _s3+PI_DIV_4;
 
-			if(ang_diff<=_s1){
-				id = 2;
-			}else
-			if(ang_diff>_s1 && ang_diff<=_s2){
-				id = (bUp)?5:7;
-			}else
-			if(ang_diff>_s2 && ang_diff<=_s3){
-				id = (bUp)?3:1;
-			}else
-			if(ang_diff>_s3 && ang_diff<=_s4){
-				id = (bUp)?4:6;
-			}else
-			if(ang_diff>_s4){
-				id = 0;
-			}else{
-				VERIFY(0);
+				if(ang_diff<=_s1){
+					id = 2;
+				}else
+				if(ang_diff>_s1 && ang_diff<=_s2){
+					id = (bUp)?5:7;
+				}else
+				if(ang_diff>_s2 && ang_diff<=_s3){
+					id = (bUp)?3:1;
+				}else
+				if(ang_diff>_s3 && ang_diff<=_s4){
+					id = (bUp)?4:6;
+				}else
+				if(ang_diff>_s4){
+					id = 0;
+				}else{
+					VERIFY(0);
+				}
 			}
 
 			string64 sect_name;
 			sprintf_s(sect_name,"effector_fire_hit_%d",id);
-			AddEffector(this, effFireHit, sect_name, P/100.0f);
+			if(g_bShootingEffector)
+				AddEffectorCam(this, effFireHit, sect_name, P/100.0f);
+			else
+				AddEffector(this, effFireHit, sect_name, P/100.0f);
 			}
 		}
 	}
