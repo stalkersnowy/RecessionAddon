@@ -18,12 +18,19 @@
 #include "ui/UIMap.h"
 #include "ui/UIXmlInit.h"
 
+#include "GameConstants.h"
+
+#define MAX_SCALE		8.f
+#define MIN_SCALE		1.f
+
 extern u32	g_hud_style;
 //////////////////////////////////////////////////////////////////////////
 
 CUIZoneMap::CUIZoneMap()
 {
-	m_bMode = 0;
+	m_bMode			= 0;
+	m_fScale		= 1.f;
+	m_bMinimapZoom	= false;
 }
 
 CUIZoneMap::~CUIZoneMap()
@@ -75,6 +82,13 @@ void CUIZoneMap::Init()
 
 	m_clipFrame.AttachChild			(&m_center);
 	m_center.SetWndPos				(m_clipFrame.GetWidth()/2,m_clipFrame.GetHeight()/2);
+
+	if(GameConstants::GetMinimapZoom()){
+		m_bMinimapZoom = true;
+		Frect temp;
+		m_clipFrame.GetAbsoluteRect		(temp);
+		m_zoom_text.set					(m_background.GetWndPos().x + 12.f, temp.y2);
+	}
 }
 
 void CUIZoneMap::Render			()
@@ -110,16 +124,47 @@ void CUIZoneMap::UpdateRadar		(Fvector pos)
 			m_pointerDistanceText.SetText("");
 		}
 	}
+
+	//draw scale sign
+	if(m_bMinimapZoom){
+		CGameFont* l_pF = HUD().Font().pFontMedium;
+		l_pF->SetColor(0xffffffff);
+		string256 buf;
+		sprintf(buf, "%dx", int(m_fScale));
+		l_pF->Out(m_zoom_text.x, 
+				  m_zoom_text.y - l_pF->GetHeight(),  buf);
+	}
 }
 
-bool CUIZoneMap::ZoomIn()
+void CUIZoneMap::ResetZoomFactor() 
 {
-	return true;
+	Fvector2 wnd_size;
+	const float zoom_factor = (static_cast<float>(m_clipFrame.GetWndRect().width()) / 100.0f)*m_fScale;
+	wnd_size.x = m_activeMap->BoundRect().width()*zoom_factor;
+	wnd_size.y = m_activeMap->BoundRect().height()*zoom_factor;
+	m_activeMap->SetWndSize(wnd_size);
 }
 
-bool CUIZoneMap::ZoomOut()
+void CUIZoneMap::ZoomIn()
 {
-	return true;
+	if(m_bMinimapZoom){
+		if(m_fScale<MAX_SCALE)
+		{
+			m_fScale += 1.f;
+		}
+		ResetZoomFactor();
+	}
+}
+
+void CUIZoneMap::ZoomOut()
+{
+	if(m_bMinimapZoom){
+		if(m_fScale>MIN_SCALE)
+		{
+			m_fScale -= 1.f;
+		}
+		ResetZoomFactor();
+	}
 }
 
 void CUIZoneMap::SetupCurrentMap()
@@ -140,4 +185,6 @@ void CUIZoneMap::SetupCurrentMap()
 	wnd_size.x						= m_activeMap->BoundRect().width()*zoom_factor;
 	wnd_size.y						= m_activeMap->BoundRect().height()*zoom_factor;
 	m_activeMap->SetWndSize			(wnd_size);
+
+	if(m_bMinimapZoom) ResetZoomFactor					();
 }

@@ -5,7 +5,7 @@
 	<main x=0 y=0 width=1024 height=768/>
 
 	<static_icon x="30" y="22" width="150" height="220" stretch="1">
-		<texture_offset x="-11" y="0"/>
+		<texture_offset x="-8" y="0"/>
 		<texture>ui_charinfo_left</texture>
 	</static_icon>
 	

@@ -2,9 +2,9 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <window>
 	<minimap>
-		<level_frame x="11" y="15" width="149" height="141"/>
+		<level_frame x="20" y="21" width="130" height="130"/>
 		
-		<background x="9" y="9" width="153" height="148"> 
+		<background x="9" y="6" width="153" height="148"> 
 			<texture>ui\hud_map_back</texture>
 		</background>
 		

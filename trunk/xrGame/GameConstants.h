@@ -17,4 +17,5 @@ namespace GameConstants
 	bool GetSatietyBarInInventoryShowing	();
 	bool GetOldLuminosityBar				();
 	bool GetRussianPDATexture				();
+	bool GetMinimapZoom						();
 };

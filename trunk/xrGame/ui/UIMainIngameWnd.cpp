@@ -115,6 +115,7 @@ void CUIMainIngameWnd::Init()
 {
 	CUIXml						uiXml;
 	LPCSTR mainingame_xml;
+	bool ind_pda_online = false;
 	switch(g_hud_style){
 		case 3:
 			mainingame_xml		= "maingame_1472.xml";
@@ -122,6 +123,7 @@ void CUIMainIngameWnd::Init()
 			break;
 		case 2:
 			mainingame_xml		= "maingame_2232.xml";
+			ind_pda_online = true;
 			break;
 		default:
 			mainingame_xml		= "maingame.xml";
@@ -175,7 +177,8 @@ void CUIMainIngameWnd::Init()
 	if(IsGameTypeSingle() && !aztec)
 	{
 		xml_init.InitStatic					(uiXml, "static_pda_online", 0, &UIPdaOnline);
-		UIZoneMap->Background().AttachChild	(&UIPdaOnline);
+		if(ind_pda_online)	AttachChild	(&UIPdaOnline);
+		else				UIZoneMap->Background().AttachChild	(&UIPdaOnline);
 	}
 
 
