@@ -39,7 +39,7 @@ local close_visuals = {
 include_harmonica = false
 
 function load_constants()
-	if constants_ini():r_bool("scripts", "harmonica_in_kamps") == true then
+	if constants_ini() ~= nil and constants_ini():line_exist("scripts", "harmonica_in_kamps") == true and constants_ini():r_bool("scripts", "harmonica_in_kamps") == true then
 		include_harmonica = true
 	end
 end

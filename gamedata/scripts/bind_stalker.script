@@ -120,7 +120,7 @@ end
 camp_stash_robbery = false
 
 function load_robbery()
-	if constants_ini():r_bool("scripts", "camp_stash_robbery") == true then
+	if constants_ini() ~= nil and constants_ini():line_exist("scripts", "camp_stash_robbery") == true and constants_ini():r_bool("scripts", "camp_stash_robbery") == true then
 		camp_stash_robbery = true
 	end
 end

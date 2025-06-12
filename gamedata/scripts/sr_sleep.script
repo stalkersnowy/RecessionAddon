@@ -11,7 +11,7 @@ local state_outside = 2 -- актер снаружи
 allow_sleep = false
 
 function load_constants()
-	if constants_ini():r_bool("gameplay", "enable_sleeping") == true then
+	if constants_ini() ~= nil and constants_ini():line_exist("gameplay", "enable_sleeping") == true and constants_ini():r_bool("gameplay", "enable_sleeping") == true then
 		allow_sleep = true
 	end
 end
