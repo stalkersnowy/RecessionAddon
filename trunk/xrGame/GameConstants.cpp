@@ -10,6 +10,7 @@ bool	m_bCheckOverlapForPickup			= true;
 bool	m_bEnableCheats						= false;
 bool	m_bEnableSleeping					= false;
 bool	m_bEnableDuplet						= false;
+bool	m_bOldShotEffector					= false;
 
 bool	m_bShowContactBio					= true;
 bool	m_bShowPartnerWeightInCarBody		= false;
@@ -34,6 +35,7 @@ namespace GameConstants
 		m_bEnableCheats						= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "enable_cheats", m_bEnableCheats);
 		m_bEnableSleeping					= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "enable_sleeping", m_bEnableSleeping);
 		m_bEnableDuplet						= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "enable_duplet", m_bEnableDuplet);
+		m_bOldShotEffector					= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "old_shot_effector", m_bOldShotEffector);
 
 		m_bShowContactBio					= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_contact_bio", m_bShowContactBio);
 		m_bShowPartnerWeightInCarBody		= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_partner_weight_in_carbody", m_bShowPartnerWeightInCarBody);
@@ -70,6 +72,11 @@ namespace GameConstants
 	bool GetEnableDuplet()
 	{
 		return m_bEnableDuplet;
+	}
+
+	bool GetOldShotEffector()
+	{
+		return m_bOldShotEffector;
 	}
 
 

@@ -9,6 +9,7 @@ namespace GameConstants
 	bool GetEnableCheats					();
 	bool GetEnableSleeping					();
 	bool GetEnableDuplet					();
+	bool GetOldShotEffector					();
 
 	bool GetContactsBioShowing				();
 	bool GetPartnerWeightInCarBodyShowing	();

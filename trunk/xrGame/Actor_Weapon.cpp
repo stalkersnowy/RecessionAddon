@@ -180,69 +180,89 @@ void	CActor::HitSector(CObject* who, CObject* weapon)
 		Level().MapManager().AddMapLocation(g_hud_style==2?"mp_hit_sector_location_old":"mp_hit_sector_location", who->ID());
 }
 
+#include "GameConstants.h"
+#include "EffectorShotX.h"
 void CActor::on_weapon_shot_start		(CWeapon *weapon)
 {
-	CWeaponMagazined* pWM = smart_cast<CWeaponMagazined*> (weapon);
-	//*
-	CCameraShotEffector				*effector = smart_cast<CCameraShotEffector*>	(Cameras().GetCamEffector(eCEShot)); 
-	if (!effector) {
-		effector					= 
-			(CCameraShotEffector*)Cameras().AddCamEffector(
-			xr_new<CCameraShotEffector>(weapon->camMaxAngle,
-			weapon->camRelaxSpeed,
-			weapon->camMaxAngleHorz,
-			weapon->camStepAngleHorz,
-			weapon->camDispertionFrac)	);
-	}
-	R_ASSERT						(effector);
-
-	if (pWM)
-	{
-		if (effector->IsSingleShot())
-			update_camera(effector);
-
-		if (pWM->GetCurrentFireMode() == 1)
-		{
-			effector->SetSingleShoot(TRUE);
+	if(GameConstants::GetOldShotEffector()){
+		CCameraShotEffector* S	= smart_cast<CCameraShotEffector*>	(Cameras().GetCamEffector(eCEShot)); 
+		if (!S)	S				= (CCameraShotEffector*)Cameras().AddCamEffector(xr_new<CCameraShotEffectorX> (weapon->camMaxAngle,weapon->camRelaxSpeed, weapon->camMaxAngleHorz, weapon->camStepAngleHorz, weapon->camDispertionFrac));
+		R_ASSERT				(S);
+		S->SetRndSeed(GetShotRndSeed());
+		S->SetActor(this);
+		S->Shot					(weapon->camDispersion+weapon->camDispersionInc*float(weapon->ShotsFired()));
+	}else{
+		CWeaponMagazined* pWM = smart_cast<CWeaponMagazined*> (weapon);
+		//*
+		CCameraShotEffector				*effector = smart_cast<CCameraShotEffector*>	(Cameras().GetCamEffector(eCEShot)); 
+		if (!effector) {
+			effector					= 
+				(CCameraShotEffector*)Cameras().AddCamEffector(
+				xr_new<CCameraShotEffector>(weapon->camMaxAngle,
+				weapon->camRelaxSpeed,
+				weapon->camMaxAngleHorz,
+				weapon->camStepAngleHorz,
+				weapon->camDispertionFrac)	);
 		}
-		else
+		R_ASSERT						(effector);
+
+		if (pWM)
 		{
-			effector->SetSingleShoot(FALSE);
+			if (effector->IsSingleShot())
+				update_camera(effector);
+
+			if (pWM->GetCurrentFireMode() == 1)
+			{
+				effector->SetSingleShoot(TRUE);
+			}
+			else
+			{
+				effector->SetSingleShoot(FALSE);
+			}
+		};
+
+		effector->SetRndSeed			(GetShotRndSeed());
+		effector->SetActor				(this);
+		effector->Shot					(weapon->camDispersion + weapon->camDispersionInc*float(weapon->ShotsFired()));
+
+		if (pWM)
+		{
+			if (pWM->GetCurrentFireMode() != 1)
+			{
+				effector->SetActive(FALSE);
+				update_camera(effector);
+			}		
 		}
-	};
-
-	effector->SetRndSeed			(GetShotRndSeed());
-	effector->SetActor				(this);
-	effector->Shot					(weapon->camDispersion + weapon->camDispersionInc*float(weapon->ShotsFired()));
-
-	if (pWM)
-	{
-		if (pWM->GetCurrentFireMode() != 1)
-		{
-			effector->SetActive(FALSE);
-			update_camera(effector);
-		}		
 	}
 }
 
 void CActor::on_weapon_shot_stop		(CWeapon *weapon)
 {
-	//---------------------------------------------
-	CCameraShotEffector				*effector = smart_cast<CCameraShotEffector*>(Cameras().GetCamEffector(eCEShot)); 
-	if (effector && effector->IsActive())
-	{
-		if (effector->IsSingleShot())
-			update_camera(effector);
+	if(GameConstants::GetOldShotEffector()){
+		Cameras().RemoveCamEffector	(eCEShot);
+	}else{
+		//---------------------------------------------
+		CCameraShotEffector				*effector = smart_cast<CCameraShotEffector*>(Cameras().GetCamEffector(eCEShot)); 
+		if (effector && effector->IsActive())
+		{
+			if (effector->IsSingleShot())
+				update_camera(effector);
+		}
+		//---------------------------------------------
+		Cameras().RemoveCamEffector(eCEShot);
 	}
-	//---------------------------------------------
-	Cameras().RemoveCamEffector(eCEShot);
 }
 
 void CActor::on_weapon_hide				(CWeapon *weapon)
 {
-	CCameraShotEffector				*effector = smart_cast<CCameraShotEffector*>(Cameras().GetCamEffector(eCEShot)); 
-	if (effector && !effector->IsActive())
-		effector->Clear				();
+	if(GameConstants::GetOldShotEffector()){
+		CCameraShotEffector* S		= smart_cast<CCameraShotEffector*>	(Cameras().GetCamEffector(eCEShot)); 
+		if (S) S->Clear();
+	}else{
+		CCameraShotEffector				*effector = smart_cast<CCameraShotEffector*>(Cameras().GetCamEffector(eCEShot)); 
+		if (effector && !effector->IsActive())
+			effector->Clear				();
+	}
 }
 
 Fvector CActor::weapon_recoil_delta_angle	()
