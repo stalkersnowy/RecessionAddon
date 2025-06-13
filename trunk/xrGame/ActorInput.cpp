@@ -66,7 +66,7 @@ void CActor::IR_OnKeyboardPress(int cmd)
 	case kWPN_ZOOM:
 		{
 			u32 active_slot = inventory().GetActiveSlot();
-			if (active_slot == KNIFE_SLOT || active_slot == BOLT_SLOT)
+			if (active_slot == KNIFE_SLOT || active_slot == BOLT_SLOT || active_slot == GRENADE_SLOT)
 				mstate_wishful &=~mcSprint;
 		}break;
 	default:

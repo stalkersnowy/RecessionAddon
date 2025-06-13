@@ -432,6 +432,9 @@
 	<string id="ui_mm_r2_specular_rgb">
 		<text>Цветной спекуляр</text>
 	</string>
+	<string id="ui_mm_r2_ssao_blur">
+		<text>Размытие SSAO</text>
+	</string>
 	<string id="ui_mm_r2_tonemap">
 		<text>Tonemap</text>
 	</string>
@@ -530,6 +533,9 @@
 	</string>
 	<string id="descr_r2_specular_rgb">
 		<text>Аналог билдовского дефайна USE_SPECULAR_RGB - добавляет спекулярным бликам от источников света на поверхностях учёт цвета источников (в оригинале блики не окрашены)</text>
+	</string>
+	<string id="descr_r2_ssao_blur">
+		<text>Размытие SSAO (команда r2_ssao_blur)</text>
 	</string>
 	<string id="descr_r2_tonemap">
 		<text>Оригинальный r2_tonemap - собственно, включает тонмаппинг (влияет на яркость отдельных элементов изображения)</text>

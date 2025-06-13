@@ -1099,6 +1099,13 @@
 			<options_item entry="r2_specular_rgb" group="mm_opt_gameplay"/>
 		</check_r2_specular_rgb>
 
+		<cap_r2_ssao_blur x="17" y="10" width="119" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_ssao_blur</text>
+		</cap_r2_ssao_blur>
+		<check_r2_ssao_blur x="225" y="10" width="27" height="21" stretch="1">
+			<options_item entry="r2_ssao_blur" group="mm_opt_gameplay"/>
+		</check_r2_ssao_blur>
+
 		<cap_r2_tonemap x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_tonemap</text>
 		</cap_r2_tonemap>
