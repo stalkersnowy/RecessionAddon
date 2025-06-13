@@ -167,13 +167,13 @@
 		<text>тушкан</text>
 	</string>
 	<string id="zombie_normal">
-		<text>зарезать</text>
+		<text>взрослый зомби</text>
 	</string>
 	<string id="zombie_strong">
-		<text>зарезать</text>
+		<text>матерый зомби</text>
 	</string>
 	<string id="zombie_weak">
-		<text>зарезать</text>
+		<text>молодой зомби</text>
 	</string>
 	<string id="zombied_experienced">
 		<text>зомбированный, опытный</text>

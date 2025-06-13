@@ -20,7 +20,9 @@ local killCountProps = {
 	poltergeist_weak = 2,
 	pseudo_gigant_weak = 4,
 	controller_weak = 4,
-	bloodsucker_weak = 1, bloodsucker_normal = 2, bloodsucker_strong = 3
+	burer_weak = 4,
+	bloodsucker_weak = 1, bloodsucker_normal = 2, bloodsucker_strong = 3,
+	zombie_weak = 1, zombie_normal = 2, zombie_strong = 3
 }
 
 local sect_alias = {	
@@ -28,6 +30,7 @@ local sect_alias = {
 	poltergeist_normal = "poltergeist_weak", poltergeist_strong = "poltergeist_weak",
 	pseudo_gigant_normal = "pseudo_gigant_weak", pseudo_gigant_strong = "pseudo_gigant_weak",
 	controller_normal = "controller_weak", controller_strong = "controller_weak",
+	burer_normal = "burer_weak", burer_strong = "burer_weak",
 	psy_dog_weak = "psy_dog", psy_dog_normal = "psy_dog", psy_dog_strong = "psy_dog", rad_psy_dog = "psy_dog"
 }
 
@@ -43,7 +46,9 @@ monster_classes = {
 			[clsid.poltergeist_s ] = "poltergeist",
 			[clsid.gigant_s      ] = "pseudo_gigant",
 			[clsid.controller_s  ] = "controller",
-			[clsid.bloodsucker_s ] = "bloodsucker"
+			[clsid.bloodsucker_s ] = "bloodsucker",
+			[clsid.zombie_s 	 ] = "zombie",
+			[clsid.burer_s 	 	 ] = "burer"
 		}		
 
 
