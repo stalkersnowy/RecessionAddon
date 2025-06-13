@@ -81,7 +81,7 @@ function action_wounded:execute ()
 	end
 
 	
-	if self.object:relation(db.actor) == game_object.enemy then
+	if self.object:relation(db.actor) == game_object.enemy and self.a.help_start_dialog == nil then
 		self.object:disable_talk()
 	else
 		self.object:enable_talk()
