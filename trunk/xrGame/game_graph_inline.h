@@ -8,19 +8,19 @@
 
 #pragma once
 
-#if !defined(AI_COMPILER) && !defined(PRIQUEL)
+#if !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
 IC CGameGraph::CGameGraph											()
-#else // !defined(AI_COMPILER) && !defined(PRIQUEL)
+#else // !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
 #	ifdef AI_COMPILER
 		IC CGameGraph::CGameGraph									(LPCSTR file_name, u32 current_version)
 #	endif // AI_COMPILER
-#endif // !defined(AI_COMPILER) && !defined(PRIQUEL)
-#if defined(AI_COMPILER) || !defined(PRIQUEL)
+#endif // !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
+#if defined(AI_COMPILER) || !defined(PRIQUEL_GRAPH)
 {
-#if !defined(AI_COMPILER) && !defined(PRIQUEL)
+#if !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
 	string_path						file_name;
 	FS.update_path					(file_name,"$game_data$",GRAPH_NAME);
-#endif // !defined(AI_COMPILER) && !defined(PRIQUEL)
+#endif // !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
 
 	m_reader						= FS.r_open(file_name);
 	VERIFY							(m_reader);
@@ -29,16 +29,16 @@ IC CGameGraph::CGameGraph											()
 	m_nodes							= (CVertex*)m_reader->pointer();
 	m_current_level_some_vertex_id	= _GRAPH_ID(-1);
 	m_enabled.assign				(header().vertex_count(),true);
-#ifdef PRIQUEL
+#ifdef PRIQUEL_GRAPH
 	u8								*temp = (u8*)(m_nodes + header().vertex_count());
 	temp							+= header().edge_count()*sizeof(CGameGraph::CEdge);
 	m_cross_tables					= (u32*)(((CLevelPoint*)temp) + header().death_point_count());
 	m_current_level_cross_table		= 0;
-#endif // PRIQUEL
+#endif // PRIQUEL_GRAPH
 }
-#endif // defined(AI_COMPILER) || !defined(PRIQUEL)
+#endif // defined(AI_COMPILER) || !defined(PRIQUEL_GRAPH)
 
-#ifdef PRIQUEL
+#ifdef PRIQUEL_GRAPH
 IC CGameGraph::CGameGraph											(const IReader &_stream)
 {
 	IReader							&stream = const_cast<IReader&>(_stream);
@@ -52,17 +52,17 @@ IC CGameGraph::CGameGraph											(const IReader &_stream)
 	m_cross_tables					= (u32*)(((CLevelPoint*)temp) + header().death_point_count());
 	m_current_level_cross_table		= 0;
 }
-#endif // PRIQUEL
+#endif // PRIQUEL_GRAPH
 
 IC CGameGraph::~CGameGraph											()
 {
-#ifdef PRIQUEL
+#ifdef PRIQUEL_GRAPH
 	xr_delete					(m_current_level_cross_table);
-#endif // PRIQUEL
+#endif // PRIQUEL_GRAPH
 
-#if defined(AI_COMPILER) || !defined(PRIQUEL)
+#if defined(AI_COMPILER) || !defined(PRIQUEL_GRAPH)
 	FS.r_close					(m_reader);
-#endif // defined(AI_COMPILER) || !defined(PRIQUEL)
+#endif // defined(AI_COMPILER) || !defined(PRIQUEL_GRAPH)
 }
 
 IC const CGameGraph::CHeader &CGameGraph::header					() const
@@ -163,6 +163,19 @@ IC	const u32 &GameGraph::CHeader::death_point_count				() const
 IC	const GameGraph::LEVEL_MAP &GameGraph::CHeader::levels			() const
 {
 	return						(m_levels);
+}
+
+IC	bool GameGraph::CHeader::level_exist							(const _LEVEL_ID& id) const
+{
+	return levels().find(id) != levels().end();
+}
+
+IC	bool GameGraph::CHeader::level_exist							(pcstr level_name) const
+{
+	for (const auto& levelPair : levels())
+		if (xr_strcmp(levelPair.second.name(), level_name) == 0)
+			return true;
+	return false;
 }
 
 IC	const GameGraph::SLevel &GameGraph::CHeader::level				(const _LEVEL_ID &id) const
@@ -340,7 +353,7 @@ IC	void GameGraph::CHeader::save									(IWriter *writer)
 
 IC	void CGameGraph::set_current_level								(const u32 &level_id)
 {
-#ifdef PRIQUEL
+#ifdef PRIQUEL_GRAPH
 	xr_delete					(m_current_level_cross_table);
 	u32							*current_cross_table = m_cross_tables;
 	GameGraph::LEVEL_MAP::const_iterator	I = header().levels().begin();
@@ -356,7 +369,7 @@ IC	void CGameGraph::set_current_level								(const u32 &level_id)
 	}
 
 	VERIFY						(m_current_level_cross_table);
-#endif // PRIQUEL
+#endif // PRIQUEL_GRAPH
 
 	m_current_level_some_vertex_id = _GRAPH_ID(-1);
 	for (_GRAPH_ID i=0, n = header().vertex_count(); i<n; ++i) {
@@ -370,7 +383,7 @@ IC	void CGameGraph::set_current_level								(const u32 &level_id)
 	VERIFY						(valid_vertex_id(m_current_level_some_vertex_id));
 }
 
-#ifdef PRIQUEL
+#ifdef PRIQUEL_GRAPH
 IC const CGameLevelCrossTable &CGameGraph::cross_table	() const
 {
 	VERIFY						(m_current_level_cross_table);
@@ -403,4 +416,4 @@ IC void CGameGraph::save								(IWriter &stream)
 }
 #endif // AI_COMPILER
 
-#endif // PRIQUEL
+#endif // PRIQUEL_GRAPH

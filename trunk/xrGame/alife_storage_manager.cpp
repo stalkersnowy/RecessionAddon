@@ -91,9 +91,9 @@ void CALifeStorageManager::load	(void *buffer, const u32 &buffer_size, LPCSTR fi
 	time_manager().load			(source);
 	spawns().load				(source,file_name);
 
-#ifdef PRIQUEL
+#ifdef PRIQUEL_GRAPH
 	graph().on_load				();
-#endif // PRIQUEL
+#endif // PRIQUEL_GRAPH
 
 	objects().load				(source);
 

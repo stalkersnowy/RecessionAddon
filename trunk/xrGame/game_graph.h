@@ -12,9 +12,9 @@
 #include "script_export_space.h"
 #include "game_level_cross_table.h"
 
-#ifndef PRIQUEL
+//#ifndef PRIQUEL_GRAPH
 #	define GRAPH_NAME			"game.graph"
-#endif // PRIQUEL
+//#endif // PRIQUEL_GRAPH
 
 class CGameGraph {
 private:
@@ -38,34 +38,34 @@ public:
 
 private:
 	CHeader							m_header;
-#if defined(AI_COMPILER) || !defined(PRIQUEL)
+#if defined(AI_COMPILER) || !defined(PRIQUEL_GRAPH)
 	IReader							*m_reader;
-#endif // defined(AI_COMPILER) || !defined(PRIQUEL)
+#endif // defined(AI_COMPILER) || !defined(PRIQUEL_GRAPH)
 	CVertex							*m_nodes;
 	mutable ENABLED					m_enabled;
 	_GRAPH_ID						m_current_level_some_vertex_id;
 
-#ifdef PRIQUEL
+#ifdef PRIQUEL_GRAPH
 private:
 	u32								*m_cross_tables;
 	CGameLevelCrossTable			*m_current_level_cross_table;
-#endif // PRIQUEL
+#endif // PRIQUEL_GRAPH
 
 public:
-#if !defined(AI_COMPILER) && !defined(PRIQUEL)
+#if !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
 	IC 								CGameGraph				();
-#else // !defined(AI_COMPILER) && !defined(PRIQUEL)
+#else // !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
 #	ifdef AI_COMPILER
 		IC 							CGameGraph				(LPCSTR file_name, u32 current_version = XRAI_CURRENT_VERSION);
 #	endif // AI_COMPILER
-#endif // !defined(AI_COMPILER) && !defined(PRIQUEL)
+#endif // !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
 
-#ifdef PRIQUEL
+#ifdef PRIQUEL_GRAPH
 public:
 	IC								CGameGraph				(const IReader &stream);
 	IC		void					save					(IWriter &stream);
 	IC	const CGameLevelCrossTable	&cross_table			() const;
-#endif // PRIQUEL
+#endif // PRIQUEL_GRAPH
 
 public:
 	IC virtual						~CGameGraph				();
