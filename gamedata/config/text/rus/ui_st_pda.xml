@@ -210,4 +210,7 @@
 	<string id="st_user_spot">
 		<text>своя отметка на карте</text>
 	</string>
+	<string id="st_user_task">
+		<text>Своя запись</text>
+	</string>
 </string_table>

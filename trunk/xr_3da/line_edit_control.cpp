@@ -424,10 +424,31 @@ void line_edit_control::on_key_press( int dik )
 	clear_inserted();
 	compute_positions();
 
-	if ( m_actions[dik] )
-	{
-		m_actions[dik]->on_key_press( this );
-	}
+    if (m_actions[dik])
+    {
+        m_actions[dik]->on_key_press(this);
+    }
+
+    if (is_russian_layout() && !empty_inserted())
+    {
+        char c = m_inserted[0];
+        bool is_upper = (c >= 'A' && c <= 'Z');
+        char c_lower = is_upper ? c + ('a' - 'A') : c;
+
+        if (const char* pos = strchr(latin_chars, c_lower))
+        {
+            int index = pos - latin_chars;
+            char new_c = russian_chars[index];
+
+            if (is_upper)
+            {
+                if ((u8)new_c >= 0xE0 && (u8)new_c <= 0xFF) {
+                    new_c = (char)((u8)new_c - 0x20);
+                }
+            }
+            m_inserted[0] = new_c;
+        }
+    }
 	// ===========
 	if ( dik == DIK_LCONTROL || dik == DIK_RCONTROL )
 	{

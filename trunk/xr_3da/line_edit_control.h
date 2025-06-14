@@ -54,6 +54,14 @@ private:
 	typedef  text_editor::base						Base;
 	typedef  fastdelegate::FastDelegate0<void>	Callback;
 
+    static constexpr const char* latin_chars = "qwertyuiop[]asdfghjkl;'zxcvbnm,./";
+    static constexpr const char* russian_chars = "יצףךוםדרשחץתפûגאןנמכהז‎ÿקסלטעüב‏.";
+    
+    bool is_russian_layout() const {
+        HKL current_layout = GetKeyboardLayout(0);
+        return (LOWORD(current_layout) == 0x0419);
+    }
+
 public:
 					line_edit_control	( u32 str_buffer_size );
 			void	init				( u32 str_buffer_size, init_mode mode = im_standart );
