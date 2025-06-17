@@ -1101,11 +1101,14 @@ bool CWeaponMagazined::GetBriefInfo(II_BriefInfo& info)
 {
 	string32	int_str;
 	int	ae					= GetAmmoElapsed();
-	int	ac					= GameConstants::GetSeparateAmmoCount()?GetAmmoSpecific():GetAmmoCurrent();
+	int	ac					= GetAmmoCurrent();
 
-	if (!unlimited_ammo())
-		xr_sprintf(int_str, "%d/%d", ae, ac - ae);
-	else
+	if (!unlimited_ammo()){
+		if(GameConstants::GetSeparateAmmoCount())
+			xr_sprintf(int_str, "%d/%d", ae, GetAmmoCount(m_ammoType));
+		else
+			xr_sprintf(int_str, "%d/%d", ae, ac - ae);
+	}else
 		xr_sprintf(int_str, "%d/--", ae);
 
 	info.cur_ammo = int_str;

@@ -777,7 +777,10 @@ bool CWeaponMagazinedWGrenade::GetBriefInfo(II_BriefInfo& info)
 
 	if (!unlimited_ammo())
 	{
-		xr_sprintf(int_str, "%d/%d", ae, ac - ae);
+		if(GameConstants::GetSeparateAmmoCount())
+			xr_sprintf(int_str, "%d/%d", ae, GetAmmoCount(m_ammoType));
+		else
+			xr_sprintf(int_str, "%d/%d", ae, ac - ae);
 	}
 	else
 	{
