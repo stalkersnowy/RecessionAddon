@@ -1096,12 +1096,12 @@ void CWeaponMagazined::net_Import	(NET_Packet& P)
 	m_iCurFireMode = P.r_u8();
 	SetQueueSize(GetCurrentFireMode());
 }
-#include "string_table.h"
+
 bool CWeaponMagazined::GetBriefInfo(II_BriefInfo& info)
 {
 	string32	int_str;
 	int	ae					= GetAmmoElapsed();
-	int	ac					= GetAmmoCurrent();
+	int	ac					= GameConstants::GetSeparateAmmoCount()?GetAmmoSpecific():GetAmmoCurrent();
 
 	if (!unlimited_ammo())
 		xr_sprintf(int_str, "%d/%d", ae, ac - ae);

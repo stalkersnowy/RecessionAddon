@@ -19,4 +19,5 @@ namespace GameConstants
 	bool GetOldLuminosityBar				();
 	bool GetRussianPDATexture				();
 	bool GetMinimapZoom						();
+	bool GetSeparateAmmoCount				();
 };

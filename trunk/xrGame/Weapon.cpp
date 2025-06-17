@@ -991,6 +991,44 @@ int CWeapon::GetAmmoCurrent(bool use_item_to_spawn) const
 	return l_count + iAmmoCurrent;
 }
 
+int CWeapon::GetAmmoSpecific() const
+{
+	int l_count = iAmmoElapsed;
+	if(!m_pCurrentInventory) return l_count;
+
+	//чтоб не делать лишних пересчетов
+	if(m_pCurrentInventory->ModifyFrame()<=m_dwAmmoCurrentCalcFrame)
+		return l_count + iAmmoCurrent;
+
+	m_dwAmmoCurrentCalcFrame = Device.dwFrame;
+	iAmmoCurrent = 0;
+	
+	VERIFY( 0 <= m_ammoType && m_ammoType < m_ammoTypes.size() );
+	{
+		LPCSTR l_ammoType = *m_ammoTypes[m_ammoType];
+
+		for(TIItemContainer::iterator l_it = m_pCurrentInventory->m_belt.begin(); m_pCurrentInventory->m_belt.end() != l_it; ++l_it) 
+		{
+			CWeaponAmmo *l_pAmmo = smart_cast<CWeaponAmmo*>(*l_it);
+
+			if(l_pAmmo && !xr_strcmp(l_pAmmo->cNameSect(), l_ammoType)) 
+			{
+				iAmmoCurrent = iAmmoCurrent + l_pAmmo->m_boxCurr;
+			}
+		}
+
+		for(TIItemContainer::iterator l_it = m_pCurrentInventory->m_ruck.begin(); m_pCurrentInventory->m_ruck.end() != l_it; ++l_it) 
+		{
+			CWeaponAmmo *l_pAmmo = smart_cast<CWeaponAmmo*>(*l_it);
+			if(l_pAmmo && !xr_strcmp(l_pAmmo->cNameSect(), l_ammoType)) 
+			{
+				iAmmoCurrent = iAmmoCurrent + l_pAmmo->m_boxCurr;
+			}
+		}
+	}
+	return l_count + iAmmoCurrent;
+}
+
 float CWeapon::GetConditionMisfireProbability() const
 {
 	if( GetCondition()>0.95f ) return 0.0f;
