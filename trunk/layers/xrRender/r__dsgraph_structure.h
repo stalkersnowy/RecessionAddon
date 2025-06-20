@@ -40,10 +40,12 @@ public:
 	R_dsgraph::mapHUD_T											mapHUD;
 	R_dsgraph::mapLOD_T											mapLOD;
 	R_dsgraph::mapSorted_T										mapDistort;
+	R_dsgraph::mapHUD_T											mapHUDSorted;
 
 #if RENDER==R_R2
 	R_dsgraph::mapSorted_T										mapWmark;			// sorted
 	R_dsgraph::mapSorted_T										mapEmissive;
+	R_dsgraph::mapSorted_T										mapHUDEmissive;
 #endif
 
 	// Runtime structures 
@@ -129,10 +131,12 @@ public:
 		mapHUD.destroy			();
 		mapLOD.destroy			();
 		mapDistort.destroy		();
+		mapHUDSorted.destroy();
 
 #if RENDER==R_R2
 		mapWmark.destroy		();
 		mapEmissive.destroy		();
+		mapHUDEmissive.destroy	();
 #endif
 	}
 
