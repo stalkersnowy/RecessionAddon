@@ -1022,7 +1022,7 @@
 		<cap_r2_bloom_mode x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_bloom_mode</text>
 		</cap_r2_bloom_mode>
-		<combo_r2_bloom_mode x="194" y="10" width="245" height="21" always_show_scroll="0" list_length="7">
+		<combo_r2_bloom_mode x="194" y="10" width="245" height="21" always_show_scroll="0" list_length="8">
 			<options_item entry="r2_bloom_mode" group="mm_opt_gameplay" depend="vid"/>
 			<text_color>
 				<e r="216" g="186" b="140"/>

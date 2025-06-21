@@ -208,7 +208,7 @@ public:
 public:
 	// feature level
 	virtual	GenerationLevel			get_generation			()	{ return IRender_interface::GENERATION_R2; }
-	virtual bool					supports_vtf			()	{ return ps_BloomMode < 6; }
+	virtual bool					supports_vtf			()	{ return ps_BloomMode < 7; }
 
 	virtual bool					is_sun_static			()	{ return o.sunstatic;}
 

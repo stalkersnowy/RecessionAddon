@@ -25,15 +25,16 @@ xr_token							qsmapsize_token							[ ]={
 	{ 0,							0											}
 };
 
-u32			ps_BloomMode			=	1	;
+u32			ps_BloomMode			=	2	;
 xr_token							qbloommode_token						[ ]={
-	{ "3120",						0											},
-	{ "SoC",						1											},
-	{ "2588",						2											},
-	{ "2559",						3											},
-	{ "2571",						4											},
-	{ "2232",						5											},
-	{ "2218",						6											},
+	{ "CS",							0											},
+	{ "3120",						1											},
+	{ "SoC",						2											},
+	{ "2588",						3											},
+	{ "2559",						4											},
+	{ "2571",						5											},
+	{ "2232",						6											},
+	{ "2218",						7											},
 	{ 0,							0											}
 };
 
@@ -326,12 +327,14 @@ public:
 		string_path		cmd;
 		
 		if (*value==0)
-			strcpy(_cfg, "bloom_3120.ltx");
+			strcpy(_cfg, "bloom_cs.ltx");
 		else if (*value == 1)
+			strcpy(_cfg, "bloom_3120.ltx");
+		else if (*value == 2)
 			strcpy(_cfg, "bloom_soc.ltx");
-		else if (*value < 5)
+		else if (*value < 6)
 			strcpy(_cfg, "bloom_2588.ltx");
-		else //if (*value < 6)
+		else //if (*value < 7)
 			strcpy(_cfg, "bloom_2232.ltx");
 //		else
 //			strcpy(_cfg, "bloom_2218.ltx");

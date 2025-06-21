@@ -56,7 +56,7 @@ void	CalcGauss_wave(
 					   )
 {
 	CalcGauss_k7(w0,w1,r_base,  s_out);
-	if(ps_BloomMode<6){
+	if(ps_BloomMode<7){
 		Fvector4	t0,t1;
 		CalcGauss_k7(t0,t1,r_detail,s_out);
 		w0.add		(t0);
