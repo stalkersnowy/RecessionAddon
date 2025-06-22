@@ -10,6 +10,7 @@ namespace GameConstants
 	bool GetEnableSleeping					();
 	bool GetEnableDuplet					();
 	bool GetOldShotEffector					();
+	bool GetBornArtefacts					();
 
 	bool GetContactsBioShowing				();
 	bool GetPartnerWeightInCarBodyShowing	();

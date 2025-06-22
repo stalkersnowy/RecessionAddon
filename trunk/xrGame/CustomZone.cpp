@@ -18,9 +18,9 @@
 #include "breakableobject.h"
 #include "ai/stalker/ai_stalker.h"
 #include "GamePersistent.h"
+#include "GameConstants.h"
 
 //////////////////////////////////////////////////////////////////////////
-#define PREFETCHED_ARTEFACTS_NUM 1	//количество предварительно проспавненых артефактов
 #define WIND_RADIUS (4*Radius())	//расстояние до актера, когда появляется ветер 
 #define FASTMODE_DISTANCE (50.f)	//distance to camera from sphere, when zone switches to fast update sequence
 
@@ -370,7 +370,8 @@ BOOL CCustomZone::net_Spawn(CSE_Abstract* DC)
 
 	m_dwLastTimeMoved			= Device.dwTimeGlobal;
 	m_vPrevPos.set				(Position());
-
+	
+	if(GameConstants::GetBornArtefacts())	PrefetchArtefacts();
 
 	m_fDistanceToCurEntity		= flt_max;
 	m_bBlowoutWindActive		= false;
@@ -1217,8 +1218,8 @@ void CCustomZone::BornArtefact()
 	if(!m_zone_flags.test(eSpawnBlowoutArtefacts) || m_SpawnedArtefacts.empty()) return;
 
 	if(::Random.randF(0.f, 1.f)> m_fArtefactSpawnProbability) return;
-
-	PrefetchArtefacts						();
+	
+	if(!GameConstants::GetBornArtefacts())	PrefetchArtefacts();
 	CArtefact* pArtefact					= m_SpawnedArtefacts.back(); VERIFY(pArtefact);
 	m_SpawnedArtefacts.pop_back				();
 
@@ -1231,7 +1232,8 @@ void CCustomZone::BornArtefact()
 			u_EventSend						(P);
 		}
 	}
-
+	
+	if(GameConstants::GetBornArtefacts())	PrefetchArtefacts();
 }
 
 void CCustomZone::ThrowOutArtefact(CArtefact* pArtefact)
@@ -1258,7 +1260,8 @@ void CCustomZone::PrefetchArtefacts()
 {
 	if (FALSE==m_zone_flags.test(eSpawnBlowoutArtefacts) || m_ArtefactSpawn.empty()) return;
 
-	for(u32 i = m_SpawnedArtefacts.size(); i < PREFETCHED_ARTEFACTS_NUM; ++i)
+	u32 max = GameConstants::GetBornArtefacts() ? 4 : 1;
+	for(u32 i = m_SpawnedArtefacts.size(); i < max; ++i)
 		SpawnArtefact();
 }
 
