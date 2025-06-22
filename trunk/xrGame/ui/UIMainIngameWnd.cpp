@@ -82,6 +82,8 @@ extern u32	g_hud_style;
 
 extern BOOL	g_bMoreContactSnds;
 
+BOOL g_hide_zone_map = FALSE;
+
 CUIMainIngameWnd::CUIMainIngameWnd()
 {
 	m_pActor					= NULL;
@@ -333,7 +335,7 @@ void CUIMainIngameWnd::Draw()
 	if(g_bShowHudInfo)
 	{
 		CUIWindow::Draw				();
-		UIZoneMap->Render			();			
+		if(!g_hide_zone_map) UIZoneMap->Render();
 	}
 
 	RenderQuickInfos			();		

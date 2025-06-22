@@ -40,6 +40,7 @@ public:
 	virtual					~CUIMotionIcon		();
 							CUIMotionIcon		();
 	virtual	void			Update				();
+	virtual void			Draw				();
 			void			Init				();
 			void			ShowState			(EState state);
 			void			SetPower			(float Pos);

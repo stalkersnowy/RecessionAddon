@@ -5,6 +5,8 @@
 #include "GameConstants.h"
 extern u32	g_hud_style;
 
+BOOL g_hide_motion_icon = FALSE;
+
 CUIMotionIcon::CUIMotionIcon()
 {
 	m_curren_state	= stLast;
@@ -213,4 +215,13 @@ void CUIMotionIcon::SetActorVisibility		(u16 who_id, float value)
 	}
 
 	m_bchanged = true;
+}
+
+void CUIMotionIcon::Draw()
+{
+	if(!g_hide_motion_icon)
+	{
+		CUIStatic::Draw();
+	}
+
 }

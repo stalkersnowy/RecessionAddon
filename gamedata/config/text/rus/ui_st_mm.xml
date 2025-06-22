@@ -375,6 +375,12 @@
 	<string id="ui_mm_cam_inert">
 		<text>Инерция камеры</text>
 	</string>
+	<string id="ui_mm_g_hide_motion_icon">
+		<text>Скрыть индикатор состояния ГГ</text>
+	</string>
+	<string id="ui_mm_g_hide_zone_map">
+		<text>Скрыть миникарту</text>
+	</string>
 	<string id="ui_mm_g_hit_mark_index">
 		<text>Текстура маркера попадания</text>
 	</string>
@@ -479,6 +485,12 @@
 	</string>
 	<string id="descr_cam_inert">
 		<text>Оригинальный cam_inert - регулировка инерции камеры. В основном выражается в раскачивании камеры при ходьбе (в оригинале по умолчанию 0.7)</text>
+	</string>
+	<string id="descr_g_hide_motion_icon">
+		<text>Скрыть индикатор состояния ГГ (силуэт и шкалы шума и заметности) как в ЧН</text>
+	</string>
+	<string id="descr_g_hide_zone_map">
+		<text>Скрыть миникарту как на ранних скриншотах ЧН с худом из ТЧ</text>
 	</string>
 	<string id="descr_g_hit_mark_index">
 		<text>Выбор текстуры маркера попадания по ГГ на худе - в ресурсах помимо используемой текстуры лежат 18 альтернативных вариантов текстуры, не используемых игрой (0 - релизная текстура, 1-18 - неиспользуемые варианты, -1 - билдовский вариант за 2005-й)</text>

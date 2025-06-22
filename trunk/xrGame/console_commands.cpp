@@ -88,6 +88,9 @@ extern	int		m_HitMarkIndex;
 
 extern	BOOL	g_bUseLens;
 
+extern	BOOL	g_hide_motion_icon;
+extern	BOOL	g_hide_zone_map;
+
 u32				g_hud_style = 0;
 xr_token		g_hud_style_token[] = {
 	{ "SoC",	0 },
@@ -1887,6 +1890,9 @@ void CCC_RegisterCommands()
 	CMD4(CCC_Integer,		"g_more_contact_snds",	&g_bMoreContactSnds,	0,1);
 	CMD4(CCC_Integer,		"g_old_pda",			&g_old_pda,				0,1);
 	CMD4(CCC_Integer,		"g_shooting_eff",		&g_bShootingEffector,	0,1);
+	
+	CMD4(CCC_Integer,		"g_hide_motion_icon",	&g_hide_motion_icon,	0,1);
+	CMD4(CCC_Integer,		"g_hide_zone_map",		&g_hide_zone_map,		0,1);
 
 
 #ifndef MASTER_GOLD

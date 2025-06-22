@@ -937,6 +937,20 @@
 			<options_item entry="cam_inert" group="mm_opt_gameplay"/>
 		</track_cam_inert>
 
+		<cap_g_hide_motion_icon x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_g_hide_motion_icon</text>
+		</cap_g_hide_motion_icon>
+		<check_g_hide_motion_icon x="300" y="10" width="30" height="21">
+			<options_item entry="g_hide_motion_icon" group="mm_opt_gameplay"/>
+		</check_g_hide_motion_icon>
+
+		<cap_g_hide_zone_map x="20" y="10" width="143" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_g_hide_zone_map</text>
+		</cap_g_hide_zone_map>
+		<check_g_hide_zone_map x="300" y="10" width="30" height="21">
+			<options_item entry="g_hide_zone_map" group="mm_opt_gameplay"/>
+		</check_g_hide_zone_map>
+
 		<cap_g_hit_mark_index x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_hit_mark_index</text>
 		</cap_g_hit_mark_index>
