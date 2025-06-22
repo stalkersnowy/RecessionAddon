@@ -25,7 +25,7 @@ vf main (vi v)
         o.tc1               = v.tc1;                        					// copy tc
 #ifdef USE_VTF
         float	scale		= tex2Dlod	(s_tonemap,float4(.5,.5,.5,.5)).x ;
-#if BLOOM_MODE < 1
+#if BLOOM_MODE < 2
         o.c                	= float4	( v.c.rgb*scale*1.7, v.c.a );      		// copy color, pre-scale by tonemap //float4 ( v.c.rgb*scale*2, v.c.a );
 #else
         o.c                	= float4	( v.c.rgb*scale*2.0, v.c.a );      		// copy color, pre-scale by tonemap //float4 ( v.c.rgb*scale*2, v.c.a );

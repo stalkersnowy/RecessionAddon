@@ -23,7 +23,7 @@ p_bumped 	main 	(v_tree I)
 #endif
 	float4 	w_pos 	= float4(pos.x+result.x, pos.y, pos.z+result.y, 1);
 	float2 	tc 		= (I.tc * consts).xy;
-#if BLOOM_MODE < 1
+#if BLOOM_MODE == 1
     float 	hemi 	= I.Nh.w;
 #else
 	float 	hemi 	= I.Nh.w * c_scale.w + c_bias.w;

@@ -240,11 +240,11 @@ uniform sampler2D       s_tonemap;              // actually MidleGray / exp(Lw +
 #define def_hdr_clip	half(0.75h)        		//
 
 //////////////////////////////////////////////////////////////////////////////////////////
-#if BLOOM_MODE > 0
- #if BLOOM_MODE > 1
-  #if BLOOM_MODE > 4
+#if BLOOM_MODE > 1
+ #if BLOOM_MODE > 2
+  #if BLOOM_MODE > 5
    #define def_aref        half(128.f/255.f)
-   #if BLOOM_MODE > 5
+   #if BLOOM_MODE > 6
     #define def_hdr		   half(1.h)	// hight luminance range
     #define def_lum_hrange half(0.55h)	// hight luminance range
    #else
@@ -270,14 +270,30 @@ uniform sampler2D       s_tonemap;              // actually MidleGray / exp(Lw +
 void        tonemap              (out half4 low, out half4 high, half3 rgb, half scale)
 {
         rgb     =      	rgb*scale       ;
-#if defined(USE_BRANCHING) && BLOOM_MODE < 2		// ps_3_0
+
+#if BLOOM_MODE < 1
+		const float fWhiteIntensity = 1.7;
+
+		const float fWhiteIntensitySQR = fWhiteIntensity*fWhiteIntensity;
+#endif
+
+#if defined(USE_BRANCHING) && BLOOM_MODE < 3		// ps_3_0
+ #if BLOOM_MODE < 1
+		low		=	( (rgb*(1+rgb/fWhiteIntensitySQR)) / (rgb+1) ).xyzz;
+ #else
         low		=       rgb.xyzz		;
+ #endif
         high	=		low/def_hdr		;        // 8x dynamic range
 #else
+ #if BLOOM_MODE > 6
         low		=       half4           (rgb,           0 )	;
- #if BLOOM_MODE > 5
 		high	= 		half4			(rgb-def_lum_hrange, dot( min(rgb,def_lum_hrange), LUMINANCE_VECTOR ) );
  #else
+  #if BLOOM_MODE < 1
+        low		=       half4           ( ( (rgb*(1+rgb/fWhiteIntensitySQR)) / (rgb+1) ),           0 )	;
+  #else
+        low		=       half4           (rgb,           0 )	;
+  #endif
         high	=       half4       	(rgb/def_hdr,   0 )	;		// 8x dynamic range
  #endif
 #endif
@@ -287,7 +303,7 @@ void        tonemap              (out half4 low, out half4 high, half3 rgb, half
 //		high	= 	half4	(rgb, dot(rgb,0.333f)-def_hdr_clip)		;
 }
 half4		combine_bloom        (half3  low, half4 high)	{
-#if BLOOM_MODE > 1
+#if BLOOM_MODE > 2
         return        half4(low+high, 1.h);
 #else
         return        half4(low + high*high.a, 1.h);

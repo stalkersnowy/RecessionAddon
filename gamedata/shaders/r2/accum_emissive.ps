@@ -2,9 +2,9 @@
 
 half4  main  ( p_flat I )  : COLOR
 {
-#if BLOOM_MODE > 3
- #if BLOOM_MODE > 4
-  #if BLOOM_MODE > 5
+#if BLOOM_MODE > 4
+ #if BLOOM_MODE > 5
+  #if BLOOM_MODE > 6
    return   half4    (1,1,1,0)*5.h;
   #else
    return   half4    (1,1,1,0)*2.0h;
@@ -13,6 +13,10 @@ half4  main  ( p_flat I )  : COLOR
   return   half4    (1,1,1,0)*8.0h;
  #endif
 #else
+ #if BLOOM_MODE > 0
   return   half4    (1,1,1,1)*8.0h;
+ #else
+  return   half4    (1,1,1,1)*16.0h;
+ #endif
 #endif
 }

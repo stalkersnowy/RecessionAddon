@@ -56,7 +56,7 @@ surface_bumped                sload_i         ( p_bumped I)
         S.base              =       tbase                (vTexCoord);                                // IN:  rgb.a
         S.normal            = 		Nu.wzyx + (NuE.xyz - 1.0h);							 // (Nu.wzyx - .5h) + (E-.5)
 //        S.normal            = 		half3(1,0,0);
-#if BLOOM_MODE > 1
+#if BLOOM_MODE > 2
 		S.gloss				= 		Nu.x		;
 #else
         S.gloss             =       Nu.x*Nu.x	;                                        //        S.gloss             =        Nu.x*Nu.x;
@@ -67,7 +67,7 @@ surface_bumped                sload_i         ( p_bumped I)
 #ifdef        USE_TDETAIL_BUMP
 	half4 NDetail		= tex2D( s_detailBump, vTexCoord * dt_params);
 	half4 NDetailX		= tex2D( s_detailBumpX, vTexCoord * dt_params);
-#if BLOOM_MODE > 5
+#if BLOOM_MODE > 6
 	S.gloss 			+= NDetail.x;
 #else
 	S.gloss				= S.gloss * NDetail.x * 2;
@@ -80,10 +80,10 @@ surface_bumped                sload_i         ( p_bumped I)
 
 //	S.base.rgb			= float3(1,0,0);
 #else        //	USE_TDETAIL_BUMP
-#if BLOOM_MODE > 1
+#if BLOOM_MODE > 2
 		float4 		 detail  = 		tex2D(s_bumpD,vTexCoord * dt_params).wzyx;
 	    S.normal			= 		Nu.wzyx + (NuE.xyz - (1.0h + 0.5h*def_dbumph)) + detail.xyz * def_dbumph ;
-#if BLOOM_MODE > 5
+#if BLOOM_MODE > 6
 		S.gloss 			+= 		detail.w							;
 #else
         S.gloss             =  		S.gloss * detail.w * 2				;
@@ -111,7 +111,7 @@ surface_bumped                sload_i         ( p_bumped I)        // + texld, m
         S.base              =       tbase                (new_tc);                                // IN:  rgb.a
         S.normal            = 		Nu.wzyx + (NuE.xyz - 1.0h);							 // (Nu.wzyx - .5h) + (E-.5)
 //        S.normal            = 		half3(1,0,0);
-#if BLOOM_MODE > 1
+#if BLOOM_MODE > 2
 		S.gloss				= 		Nu.x		;
 #else
         S.gloss             =       Nu.x*Nu.x	;                                        //        S.gloss             =        Nu.x*Nu.x;
@@ -123,7 +123,7 @@ surface_bumped                sload_i         ( p_bumped I)        // + texld, m
 #ifdef        USE_TDETAIL_BUMP
 	half4 NDetail		= tex2D( s_detailBump, I.tcdbump);
 	half4 NDetailX		= tex2D( s_detailBumpX, I.tcdbump);
-#if BLOOM_MODE > 5
+#if BLOOM_MODE > 6
 	S.gloss 			+= NDetail.x;
 #else
 	S.gloss				= S.gloss * NDetail.x * 2;
@@ -136,10 +136,10 @@ surface_bumped                sload_i         ( p_bumped I)        // + texld, m
 
 //	S.base.rgb			= float3(1,0,0);
 #else        //	USE_TDETAIL_BUMP
-#if BLOOM_MODE > 1
+#if BLOOM_MODE > 2
 		half4 		detail 	= 		tex2D(s_bumpD,I.tcdbump).wzyx;
 	   S.normal 		   = 		Nu.wzyx + (NuE.xyz - (1.0h + 0.5h*def_dbumph)) + detail.xyz * def_dbumph ;
-#if BLOOM_MODE > 5
+#if BLOOM_MODE > 6
 		S.gloss 			+= 		detail.w							;
 #else
         S.gloss             =  		S.gloss * detail.w * 2				;
@@ -163,7 +163,7 @@ surface_bumped                sload_i         ( p_bumped I)
         S.base              =		tbase                (I.tcdh)		;                         // IN:  rgb.a
         S.normal            =		Nu.wzyx + (NuE.xyz - 1.0h)			;
 //        S.normal            = 		half3(1,0,0);
-#if BLOOM_MODE > 1
+#if BLOOM_MODE > 2
 		S.gloss				= 		Nu.x								;
 #else
         S.gloss             =		Nu.x*Nu.x							;                         //        S.gloss             =        Nu.x*Nu.x;
@@ -174,7 +174,7 @@ surface_bumped                sload_i         ( p_bumped I)
 #ifdef        USE_TDETAIL_BUMP
 	half4 NDetail		= tex2D( s_detailBump, I.tcdbump);
 	half4 NDetailX		= tex2D( s_detailBumpX, I.tcdbump);
-#if BLOOM_MODE > 5
+#if BLOOM_MODE > 6
 	S.gloss 			+= NDetail.x;
 #else
 	S.gloss				= S.gloss * NDetail.x * 2;
@@ -187,10 +187,10 @@ surface_bumped                sload_i         ( p_bumped I)
 
 //	S.base.rgb			= float3(1,0,0);
 #else        //	USE_TDETAIL_BUMP
-#if BLOOM_MODE > 1
+#if BLOOM_MODE > 2
 		half4  detail 		= 		 tex2D(s_bumpD,I.tcdbump).wzyx;
 		S.normal 			= 		Nu.wzyx + (NuE.xyz - (1.0h + 0.5h*def_dbumph)) + detail.xyz * def_dbumph ;
-#if BLOOM_MODE > 5
+#if BLOOM_MODE > 6
 		S.gloss 			+= 		detail.w;
 #else
         S.gloss             =  		S.gloss * detail.w * 2			;
@@ -208,7 +208,7 @@ surface_bumped                sload_i         ( p_bumped I)
 surface_bumped              sload                 ( p_bumped I)
 {
         surface_bumped      S   = sload_i	(I);
-#if BLOOM_MODE < 2
+#if BLOOM_MODE < 3
 		S.normal.z			*=	0.5;		//. make bump twice as contrast (fake, remove me if possible)
 #endif
 

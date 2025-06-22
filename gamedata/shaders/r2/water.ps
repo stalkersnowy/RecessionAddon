@@ -12,12 +12,15 @@ struct   vf
         half3        v2point        :        TEXCOORD6        ;
 	float4      tctexgen    :         TEXCOORD7        ;
            half4        c0                :          COLOR0                ;
-        float          fog        :         FOG                ;
+//        float          fog        :         FOG                ;
 };
 
 uniform        sampler2D                s_nmap;
 uniform        samplerCUBE                s_env0;
 uniform        samplerCUBE                s_env1;
+#if BLOOM_MODE == 0
+uniform 	   sampler2D					s_leaves;
+#endif
 
 #if defined(USE_SOFT_WATER) && defined(NEED_SOFT_WATER)
 half3	water_intensity;
@@ -44,7 +47,7 @@ half4   main         ( v2p I )  : COLOR
 }
 */
 
-half4   main_ps_2_0  ( vf I )          : COLOR
+half4   main  ( vf I )          : COLOR
 {
 	half4	base	= tex2D (s_base,I.tbase);
 	half3	n0	= tex2D (s_nmap,I.tnorm0);
@@ -105,6 +108,19 @@ half4   main_ps_2_0  ( vf I )          : COLOR
 	alpha = 	min(alpha, saturate(waterDepth));
 
 	alpha 		= max (fog, alpha);
+
+#if BLOOM_MODE == 0
+	//	Leaves
+	half4	leaves	= tex2D(s_leaves, I.tbase);
+			leaves.rgb *= water_intensity.r;
+	half	calc_cos = -dot(float3(I.M1.z, I.M2.z, I.M3.z),  normalize(v2point));
+	half	calc_depth = saturate(waterDepth*calc_cos);
+	half	fLeavesFactor = smoothstep(0.025, 0.05, calc_depth );
+			fLeavesFactor *= smoothstep(0.1, 0.075, calc_depth );
+	final		= lerp(final, leaves, leaves.a*fLeavesFactor);
+	alpha		= lerp(alpha, leaves.a, leaves.a*fLeavesFactor);
+#endif
+	
 #endif	//	USE_SOFT_WATER
 
 	return  half4   (final, alpha*I.c0.a*I.c0.a )                ;

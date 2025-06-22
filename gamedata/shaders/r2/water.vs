@@ -30,7 +30,7 @@ struct   vf
         float          fog        :         FOG                ;
 };
 
-vf main_vs_2_0 (v_vert v)
+vf main (v_vert v)
 {
         vf                 o;
 

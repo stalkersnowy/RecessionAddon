@@ -71,9 +71,9 @@ half4 	main		( v2p I )	: COLOR
 	float	scale 		= MiddleGray.x / (result*MiddleGray.y + MiddleGray.z);	// final
 	float  	scale_prev	= tex2D	(s_tonemap,I.tc0).x;
 	float 	rvalue		= lerp	(scale_prev,scale,MiddleGray.w);
-#if BLOOM_MODE < 1
+#if BLOOM_MODE < 2
 			clamp		(rvalue, 1.f/128.f, 20.0f);
-#elif BLOOM_MODE < 2
+#elif BLOOM_MODE < 3
 			clamp		(rvalue, 1.f/8.f, 2.0f);
 #endif
 	return 	rvalue		;

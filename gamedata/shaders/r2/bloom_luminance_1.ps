@@ -16,7 +16,7 @@ struct 	v2p
 #define	LUMINANCE_BASE		0.0001h
 
 half	luminance	(float2	tc)	{
-#if BLOOM_MODE > 5
+#if BLOOM_MODE > 6
 	half4	source 	= tex2D(s_image,tc);
 	half4 	summator= half4(LUMINANCE_VECTOR,1);	// lum(rgb)+low_lum
 	return 	dot	(source,summator);

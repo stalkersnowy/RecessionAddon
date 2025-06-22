@@ -31,7 +31,7 @@ _out         main                ( _input I )
           half4 N         = tex2D         (s_normal,        I.tc0);                // normal.hemi
           half4 D         = tex2D         (s_diffuse,       I.tc0);                // rgb.gloss
           half4 L         = tex2D         (s_accumulator, 	I.tc0);                // diffuse.specular
-//#if BLOOM_MODE > 3
+//#if BLOOM_MODE > 4
 //		D = 	N*0.5+0.5	;	//..
 //#endif
 
@@ -67,13 +67,13 @@ _out         main                ( _input I )
 #else
 	half occ = calc_ssao(P, N, I.tc0, I.tcJ);
 #endif
-#if BLOOM_MODE < 1
+#if BLOOM_MODE == 1
 	occ = Contrast(occ,2);
 #endif
 
         hmodel		(hdiffuse, hspecular, mtl, N.w, D.w, P.xyz, N.xyz);
 		//			hdiffuse*=hdiffuse;			//. high contrast hemi
-#if BLOOM_MODE < 1
+#if BLOOM_MODE == 1
 	hdiffuse*=(D.rgb*0.95 + 0.05h);	// rise texture contrast for diffuse lighting
 #endif
 	hdiffuse *= occ;
@@ -92,7 +92,7 @@ _out         main                ( _input I )
 #else //outdoor
         half4         light       = half4         (L.rgb + hdiffuse, L.w)        ;
         half4         C           = D*light       ;                                                        // rgb.gloss * light(diffuse.specular)
-#if BLOOM_MODE > 1 && BLOOM_MODE < 4
+#if BLOOM_MODE > 2 && BLOOM_MODE < 5
 					  hspecular	  *= 1.5;
 #endif
 #ifdef 	USE_SPECULAR_RGB
@@ -132,7 +132,7 @@ _out         main                ( _input I )
 #ifndef INDOOR
         half        	skyblend		= saturate		(fog*fog);
                         o.low.a         = skyblend	;
-#if BLOOM_MODE < 2
+#if BLOOM_MODE < 3
 						o.high.a		= skyblend	;
 #endif
 #endif

@@ -15,13 +15,13 @@ uniform half4                b_params;
 half4         main                        ( v2p I )        : COLOR
 {
         // hi-rgb.base-lum
-#if BLOOM_MODE > 1
+#if BLOOM_MODE > 2
         half4        s0                =        tex2D                (s_image,        I.tc0);
         half4         s1                =        tex2D                (s_image,        I.tc1);
         half4         s2                =        tex2D                (s_image,        I.tc2);
         half4         s3                =        tex2D                (s_image,        I.tc3);
 
-#if BLOOM_MODE > 3
+#if BLOOM_MODE > 4
 		return		  (s0+s1+s2+s3)/4		 ;
 #else
         return        (s0+s1+s2+s3)/8        ; //4

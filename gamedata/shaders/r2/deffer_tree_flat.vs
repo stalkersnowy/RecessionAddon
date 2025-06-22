@@ -28,7 +28,7 @@ p_flat 	main 	(v_tree I)
 	// Final xform(s)
 	// Final xform
 	float3	Pe		= mul		(m_V,  f_pos				);
-#if BLOOM_MODE < 1
+#if BLOOM_MODE == 1
     float 	hemi 	= I.Nh.w;
 #else
 	float 	hemi 	= I.Nh.w*c_scale.w + c_bias.w;
