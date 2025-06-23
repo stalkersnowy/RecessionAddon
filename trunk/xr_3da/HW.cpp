@@ -144,9 +144,36 @@ void	CHW::DestroyDevice	()
 	free_vid_mode_list		();
 #endif
 }
+
+ENGINE_API void GetMonitorResolution(u32& horizontal, u32& vertical)
+{
+	HMONITOR hMonitor = MonitorFromWindow(
+		Device.m_hWnd, MONITOR_DEFAULTTOPRIMARY);
+
+	MONITORINFO mi;
+	mi.cbSize = sizeof(mi);
+	if (GetMonitorInfoA(hMonitor, &mi))
+	{
+		horizontal = mi.rcMonitor.right - mi.rcMonitor.left;
+		vertical = mi.rcMonitor.bottom - mi.rcMonitor.top;
+	}
+	else
+	{
+		RECT desktop;
+		const HWND hDesktop = GetDesktopWindow();
+		GetWindowRect(hDesktop, &desktop);
+		horizontal = desktop.right - desktop.left;
+		vertical = desktop.bottom - desktop.top;
+	}
+}
+
 void	CHW::selectResolution	(u32 &dwWidth, u32 &dwHeight, BOOL bWindowed)
 {
 	fill_vid_mode_list			(this);
+
+	if (psCurrentVidMode[0] == 0 || psCurrentVidMode[1] == 0)
+		GetMonitorResolution(psCurrentVidMode[0], psCurrentVidMode[1]);
+
 #ifdef DEDICATED_SERVER
 	dwWidth		= 640;
 	dwHeight	= 480;
