@@ -989,6 +989,13 @@
 			<options_item entry="g_more_contact_snds" group="mm_opt_gameplay"/>
 		</check_g_more_contact_snds>
 
+		<cap_g_old_hit_anim x="17" y="10" width="119" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_g_old_hit_anim</text>
+		</cap_g_old_hit_anim>
+		<check_g_old_hit_anim x="225" y="10" width="27" height="21" stretch="1">
+			<options_item entry="g_old_hit_anim" group="mm_opt_gameplay"/>
+		</check_g_old_hit_anim>
+
 		<cap_g_old_pda x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_old_pda</text>
 		</cap_g_old_pda>

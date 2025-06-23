@@ -606,7 +606,8 @@ void	CActor::Hit							(SHit* pHDS)
 }
 
 extern int m_CurHitMarkIndex;
-BOOL g_bShootingEffector = FALSE;
+BOOL g_bShootingEffector	= FALSE;
+BOOL g_bOldHitAnim			= FALSE;
 void CActor::HitMark	(float P, 
 						 Fvector dir,			
 						 CObject* who, 
@@ -704,10 +705,11 @@ void CActor::HitMark	(float P,
 
 			string64 sect_name;
 			sprintf_s(sect_name,"effector_fire_hit_%d",id);
+			float pow = g_bOldHitAnim? P : P/100.0f;
 			if(g_bShootingEffector)
-				AddEffectorCam(this, effFireHit, sect_name, P/100.0f);
+				AddEffectorCam(this, effFireHit, sect_name, pow);
 			else
-				AddEffector(this, effFireHit, sect_name, P/100.0f);
+				AddEffector(this, effFireHit, sect_name, pow);
 			}
 		}
 	}

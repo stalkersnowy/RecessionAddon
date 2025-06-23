@@ -150,6 +150,7 @@ CUIOptConCom g_OptConCom;
 extern BOOL g_bUseIK;
 extern BOOL g_bUseSmartHits;
 extern BOOL g_bShootingEffector;
+extern BOOL g_bOldHitAnim;
 
 class CCC_MemStats : public IConsole_Command
 {
@@ -1890,6 +1891,7 @@ void CCC_RegisterCommands()
 	CMD4(CCC_Integer,		"g_more_contact_snds",	&g_bMoreContactSnds,	0,1);
 	CMD4(CCC_Integer,		"g_old_pda",			&g_old_pda,				0,1);
 	CMD4(CCC_Integer,		"g_shooting_eff",		&g_bShootingEffector,	0,1);
+	CMD4(CCC_Integer,		"g_old_hit_anim",		&g_bOldHitAnim,			0,1);
 	
 	CMD4(CCC_Integer,		"g_hide_motion_icon",	&g_hide_motion_icon,	0,1);
 	CMD4(CCC_Integer,		"g_hide_zone_map",		&g_hide_zone_map,		0,1);
