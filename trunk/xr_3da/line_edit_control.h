@@ -54,8 +54,10 @@ private:
 	typedef  text_editor::base						Base;
 	typedef  fastdelegate::FastDelegate0<void>	Callback;
 
-    static constexpr const char* latin_chars = "qwertyuiop[]asdfghjkl;'zxcvbnm,./";
-    static constexpr const char* russian_chars = "יצףךוםדרשחץתפûגאןנמכהז‎ÿקסלטעüב‏.";
+//    static constexpr const char* latin_chars = "qwertyuiop[]asdfghjkl;'zxcvbnm,./";
+//    static constexpr const char* russian_chars = "יצףךוםדרשחץתפûגאןנמכהז‎ÿקסלטעüב‏.";
+    static constexpr const char* latin_chars	= "qwertyuiop[]asdfghjkl;'zxcvbnm,./QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>?!@#$%^&";
+	static constexpr const char* russian_chars	= "יצףךוםדרשחץתפûגאןנמכהז‎ÿקסלטעüב‏.ÉÖÓÊÅÍÃØÙÇÕÚÔÛÂÀÏÐÎËÄÆÝ‗×ÑÌÈÒÜÁÞ,!\"¹;%:?";
     
     bool is_russian_layout() const {
         HKL current_layout = GetKeyboardLayout(0);
