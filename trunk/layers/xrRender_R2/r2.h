@@ -127,6 +127,8 @@ public:
 	IDirect3DQuery9*											q_sync_point[2]	;
 	u32															q_sync_count	;
 
+	bool														m_bFirstFrameAfterReset;	// Determines weather the frame is the first after resetting device.
+
 	xr_vector<sun::cascade>										m_sun_cascades;
 private:
 	// Loading / Unloading
@@ -224,16 +226,12 @@ public:
 	virtual IDirect3DBaseTexture9*	texture_load			(LPCSTR	fname, u32& msize);
 	virtual HRESULT					shader_compile			(
 		LPCSTR							name,
-		LPCSTR                          pSrcData,
+		DWORD const*					pSrcData,
 		UINT                            SrcDataLen,
-		void*							pDefines,
-		void*							pInclude,
 		LPCSTR                          pFunctionName,
 		LPCSTR                          pTarget,
 		DWORD                           Flags,
-		void*							ppShader,
-		void*							ppErrorMsgs,
-		void*							ppConstantTable);
+		void*&							result);
 
 	// Information
 	virtual void					Statistics					(CGameFont* F);
@@ -300,6 +298,9 @@ public:
 	// Constructor/destructor/loader
 	CRender							();
 	virtual ~CRender				();
+
+private:
+	FS_FileSet						m_file_set;
 };
 
 extern CRender						RImplementation;

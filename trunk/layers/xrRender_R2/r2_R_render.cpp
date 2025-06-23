@@ -195,6 +195,13 @@ void CRender::Render		()
 		return					;
 	};
 	if( !(g_pGameLevel && g_pGameLevel->pHUD) )	return;
+
+	if( m_bFirstFrameAfterReset )
+	{
+		m_bFirstFrameAfterReset = false;
+		return;
+	}
+
 //.	VERIFY					(g_pGameLevel && g_pGameLevel->pHUD);
 
 	// Configure
