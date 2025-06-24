@@ -168,8 +168,17 @@
 	<string id="ui_mm_eax">
 		<text>EAX</text>
 	</string>
+	<string id="ui_mm_screen_mode">
+		<text>Режим экрана</text>
+	</string>
+	<string id="ui_mm_windowed">
+		<text>Оконный</text>
+	</string>
+	<string id="ui_mm_borderless">
+		<text>Без рамок</text>
+	</string>
 	<string id="ui_mm_fullscreen">
-		<text>Полный экран</text>
+		<text>Полноэкранный</text>
 	</string>
 	<string id="ui_mm_gameplay">
 		<text>Игра</text>

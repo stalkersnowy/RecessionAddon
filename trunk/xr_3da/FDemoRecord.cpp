@@ -123,8 +123,9 @@ CDemoRecord::~CDemoRecord()
 static Fvector cmNorm[6]	= {{0.f,1.f,0.f}, {0.f,1.f,0.f}, {0.f,0.f,-1.f},{0.f,0.f,1.f}, {0.f,1.f,0.f}, {0.f,1.f,0.f}};
 static Fvector cmDir[6]		= {{1.f,0.f,0.f}, {-1.f,0.f,0.f},{0.f,1.f,0.f}, {0.f,-1.f,0.f},{0.f,0.f,1.f}, {0.f,0.f,-1.f}};
 
-static Flags32	s_hud_flag	= {0};
-static Flags32	s_dev_flags	= {0};
+static Flags32	s_hud_flag			= {0};
+static Flags32	s_dev_flags			= {0};
+static u32		s_dev_screen_mode	= 0;
 
 void CDemoRecord::MakeScreenshotFace()
 {
@@ -187,10 +188,12 @@ void CDemoRecord::MakeLevelMapProcess()
 	case 0:
 		{
 			s_dev_flags			= psDeviceFlags;
+			s_dev_screen_mode	= psScreenMode;
 			s_hud_flag.assign	(psHUD_Flags);
 			psDeviceFlags.zero	();
-			psDeviceFlags.set	(rsClearBB|rsFullscreen|rsDrawStatic,TRUE);
-			if (!psDeviceFlags.equal(s_dev_flags,rsFullscreen))
+			psDeviceFlags.set	(rsClearBB|rsDrawStatic,TRUE);
+			psScreenMode		= sm_fullscreen;
+			if (s_dev_screen_mode != psScreenMode)
 				Device.Reset();
 
 		}break;
@@ -223,8 +226,9 @@ void CDemoRecord::MakeLevelMapProcess()
 			{
 				psHUD_Flags.assign			(s_hud_flag);
 
-				BOOL bDevReset				= !psDeviceFlags.equal(s_dev_flags,rsFullscreen);
+				BOOL bDevReset				= (s_dev_screen_mode != psScreenMode);
 				psDeviceFlags				= s_dev_flags;
+				psScreenMode				= s_dev_screen_mode;
 				if (bDevReset)				Device.Reset();
 				m_bMakeLevelMap				= FALSE;
 				m_iLMScreenshotFragment		= -1;

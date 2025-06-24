@@ -15,7 +15,7 @@ ENGINE_API extern	int		psTextureLOD		;
 
 // psDeviceFlags
 enum {
-	rsFullscreen					= (1ul<<0ul),
+//	rsFullscreen					= (1ul<<0ul),
 	rsClearBB						= (1ul<<1ul),
 	rsVSync							= (1ul<<2ul),
 	rsWireframe						= (1ul<<3ul),
@@ -38,7 +38,7 @@ enum {
 
 	rsCameraPos						= (1ul<<18ul),
 	rsR2							= (1ul<<19ul),
-
+	
 	// 20-32 bit - reserved to Editor
 };
 
@@ -49,6 +49,11 @@ constexpr float UI_BASE_HEIGHT		= 768.0f;
 ENGINE_API extern	u32			psCurrentVidMode[];
 ENGINE_API extern	u32			psCurrentBPP		;
 ENGINE_API extern	Flags32		psDeviceFlags		;
+ENGINE_API extern	u32			psScreenMode		;
+
+#define sm_windowed				0
+#define sm_borderless			1
+#define sm_fullscreen			2
 
 // game path definition
 #define _game_data_				"$game_data$"

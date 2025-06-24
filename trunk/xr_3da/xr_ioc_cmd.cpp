@@ -38,9 +38,16 @@ xr_token							vid_quality_token							[ ]={
 	{ 0,							0											}
 };
 
-xr_token							vid_bpp_token							[ ]={
+xr_token							vid_bpp_token								[ ]={
 	{ "16",							16											},
 	{ "32",							32											},
+	{ 0,							0											}
+};
+
+xr_token							screen_mode_token							[ ]={
+	{ "ui_mm_windowed",				sm_windowed									},
+	{ "ui_mm_borderless",			sm_borderless								},
+	{ "ui_mm_fullscreen",			sm_fullscreen								},
 	{ 0,							0											}
 };
 
@@ -624,7 +631,7 @@ void CCC_Register()
 
 	CMD3(CCC_Mask,		"rs_v_sync",			&psDeviceFlags,		rsVSync				);
 //	CMD3(CCC_Mask,		"rs_disable_objects_as_crows",&psDeviceFlags,	rsDisableObjectsAsCrows	);
-	CMD3(CCC_Mask,		"rs_fullscreen",		&psDeviceFlags,		rsFullscreen			);
+	CMD3(CCC_Token,		"rs_screen_mode",		&psScreenMode,		screen_mode_token		);
 	CMD3(CCC_Mask,		"rs_refresh_60hz",		&psDeviceFlags,		rsRefresh60hz			);
 	CMD3(CCC_Mask,		"rs_stats",				&psDeviceFlags,		rsStatistic				);
 	CMD4(CCC_Float,		"rs_vis_distance",		&psVisDistance,		0.4f,	1.5f			);

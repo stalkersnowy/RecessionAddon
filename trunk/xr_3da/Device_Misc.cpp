@@ -9,7 +9,7 @@ static struct _DF {
 	char *	name;
 	u32	mask;
 } DF[] = {
-	{"rsFullscreen",	rsFullscreen	},
+//	{"rsFullscreen",	rsFullscreen	},
 	{"rsClearBB",		rsClearBB 		},
 	{"rsVSync",			rsVSync 		},
 	{"rsWireframe",		rsWireframe		},
