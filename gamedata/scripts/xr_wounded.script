@@ -277,15 +277,31 @@ function Cwound_manager:process_psy_wound(hp)
 	return "nil","nil"
 end
 function Cwound_manager:get_key_from_distance(t, hp)
-	local key
-	for k,v in pairs(t) do
-		if v.dist >= hp then 
-			key = k 
-		else
-			return key
-		end		
-	end
-	return key
+    local min_candidate_dist = nil
+    local min_candidate_key = nil
+
+    for k, v in pairs(t) do
+        if v.dist >= 100 then
+            if min_candidate_dist == nil or v.dist < min_candidate_dist then
+                min_candidate_dist = v.dist
+                min_candidate_key = k
+            end
+        end
+    end
+
+    if min_candidate_key and hp >= min_candidate_dist then
+        return min_candidate_key
+    end
+
+    local key
+    for k, v in pairs(t) do
+        if v.dist >= hp then 
+            key = k 
+        else
+            return key
+        end		
+    end
+    return key
 end
 function Cwound_manager:hit_callback()
 	if self.npc:alive() == false then
