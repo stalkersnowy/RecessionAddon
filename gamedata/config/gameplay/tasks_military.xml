@@ -287,7 +287,6 @@
     <text>mil_hunters_phase1</text>
     <map_location_type hint="mil_ugrumy">blue_location</map_location_type>
     <object_story_id>Mil_Hunter3</object_story_id>
-    <infoportion_set_complete>mil_controller_dead</infoportion_set_complete>
     <infoportion_complete>mil_hunt_ready</infoportion_complete>
     <infoportion_fail>mil_ugrumy_dead</infoportion_fail>
   </objective>
@@ -295,6 +294,7 @@
     <text>mil_hunters_phase2</text>
     <map_location_type hint="mil_watertower_hint">green_location</map_location_type>
     <object_story_id>Mil_WaterTower</object_story_id>
+    <infoportion_set_complete>mil_controller_dead</infoportion_set_complete>
     <function_complete>mil_tasks.bloodsuckers_dead</function_complete>
     <infoportion_fail>mil_miser_task_failed</infoportion_fail>
   </objective>

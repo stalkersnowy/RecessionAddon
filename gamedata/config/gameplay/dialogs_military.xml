@@ -1716,7 +1716,9 @@
             </phrase>
             <phrase id="5">
                 <text>mil_hunter_dialog_5</text>
-                <next>6</next>
+                <action>dialogs.break_dialog</action>
+                <give_info>mil_hunt_ready</give_info>
+                <!--next>6</next-->
             </phrase>
             <phrase id="6">
                 <text>mil_hunter_dialog_6</text>

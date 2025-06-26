@@ -519,9 +519,9 @@ bool CUILevelMap::OnMouseAction(float x, float y, EUIMessages mouse_action)
 	if (MapWnd()->GlobalMap()->Locked())
 		return true;
 
-	if (MapWnd()->m_flags.is_any(CUIMapWnd::lmZoomIn+CUIMapWnd::lmZoomOut) || !IsCursorInHintRect() || m_bHideMap)	return false;
+	if (MapWnd()->m_flags.is_any(CUIMapWnd::lmZoomIn+CUIMapWnd::lmZoomOut) || !IsCursorInHintRect())	return false;
 
-	if (mouse_action == WINDOW_LBUTTON_DOWN)
+	if (mouse_action == WINDOW_LBUTTON_DOWN && (!m_bHideHint || !m_bHideMap))
 	{
 		if (MapWnd()->m_flags.test(CUIMapWnd::lmUserSpotAdd) )
 			MapWnd()->AddUserSpot(this);
