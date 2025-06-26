@@ -21,6 +21,11 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	xml:InitTrackBar							("gameplay_adv:track_cam_inert",				_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_quick_save_counter")
+	xml:InitStatic								("gameplay_adv:cap_quick_save_counter",			_st)
+	xml:InitSpinNum								("gameplay_adv:spin_quick_save_counter",		_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_g_hide_motion_icon")
 	xml:InitStatic								("gameplay_adv:cap_g_hide_motion_icon",			_st)
 	xml:InitCheck								("gameplay_adv:check_g_hide_motion_icon",		_st)

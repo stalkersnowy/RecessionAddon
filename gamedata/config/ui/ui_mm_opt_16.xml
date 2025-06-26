@@ -971,7 +971,7 @@
 		<cap_g_hit_mark_index x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_hit_mark_index</text>
 		</cap_g_hit_mark_index>
-		<spin_g_hit_mark_index x="225" y="10" width="34" height="21" max="18">
+		<spin_g_hit_mark_index x="225" y="9" width="34" height="21" max="18">
 			<options_item entry="g_hit_mark_index" group="mm_opt_gameplay"/>
 		</spin_g_hit_mark_index>
 
@@ -1187,6 +1187,13 @@
 		<check_r__wallmarks_on_skeleton x="225" y="10" width="27" height="21" stretch="1">
 			<options_item entry="r__wallmarks_on_skeleton" group="mm_opt_gameplay"/>
 		</check_r__wallmarks_on_skeleton>
+
+		<cap_quick_save_counter x="17" y="10" width="119" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_quick_save_counter</text>
+		</cap_quick_save_counter>
+		<spin_quick_save_counter x="225" y="9" width="34" height="21" max="25">
+			<options_item entry="quick_save_counter" group="mm_opt_gameplay"/>
+		</spin_quick_save_counter>
 
 		<cap_weapon_bobbing x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_weapon_bobbing</text>
