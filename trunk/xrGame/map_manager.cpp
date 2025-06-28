@@ -255,7 +255,7 @@ void CheckUserLocation		(CMapLocation* ml)
 	if(false == ml->IsUserDefined()) return;
 	Level().Server->FreeID(ml->ObjectID(),Device.TimerAsync());
 
-	Actor()->GameTaskManager().RemoveUserTask(ml);
+//	Actor()->GameTaskManager().RemoveUserTask(ml);
 }
 
 #ifdef DEBUG
