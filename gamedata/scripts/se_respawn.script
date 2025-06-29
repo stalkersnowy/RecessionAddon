@@ -171,6 +171,9 @@ function se_respawn:__init( section ) super( section )
 	self.sectSpawnProps = {}
 
 	self.proxy_initialized = false
+	
+	-- производим первичную инициализацию
+	self.respawn_time = game.CTime()
 end
 -- сохранение
 function se_respawn:STATE_Write( packet )
@@ -180,6 +183,7 @@ function se_respawn:STATE_Write( packet )
 --	printf("SPAWNER SAVE table_size[%d]", table_size)
 --	print_table(self.spawned_obj)
 	
+	utils.w_CTime(packet, self.respawn_time)
 	packet:w_u8(table_size)
 	for i=1,table_size do
 		packet:w_u16(self.spawned_obj[i])
@@ -193,6 +197,7 @@ function se_respawn:STATE_Read( packet, size )
 		return
 	end
 
+	self.respawn_time = utils.r_CTime( packet )
 	local table_size = packet:r_u8()
 	for i=1,table_size do
 		table.insert(self.spawned_obj, packet:r_u16())
@@ -262,9 +267,6 @@ function se_respawn:on_register()
 
 	self.parent	= r_num(ini, section_name, "parent", nil)
 	self.item_spawn	= r_bool(ini, section_name, "item_spawn", false)
-	
-	-- производим первичную инициализацию
-	self.respawn_time = game.CTime()
 	
 	-- Для сбора статистики сохраняем указатель на респавнер
 	respawners[self:name()] = self

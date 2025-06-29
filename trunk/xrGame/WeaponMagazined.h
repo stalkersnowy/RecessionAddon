@@ -62,7 +62,7 @@ protected:
 	virtual void	UpdateSounds	();
 
 	bool			TryReload		();
-	bool			TryPlayAnimIdle	();
+	virtual bool	TryPlayAnimIdle	();
 
 protected:
 	virtual void	ReloadMagazine	();
