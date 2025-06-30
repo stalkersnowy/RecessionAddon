@@ -1180,10 +1180,10 @@ end
 function check_village_state (gulag)
     if has_alife_info("mil_miser_task_complete") or 
        has_alife_info("mil_after_hunt_talked") then 
-       printf ("VILLAGE GULAG CHANGE STATE TO 1")
+       --printf ("VILLAGE GULAG CHANGE STATE TO 1")
        return 1 
     end
-    printf ("VILLAGE GULAG CHANGE STATE TO 0")
+    --printf ("VILLAGE GULAG CHANGE STATE TO 0")
     return 0    
 end
 

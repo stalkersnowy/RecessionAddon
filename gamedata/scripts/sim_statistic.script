@@ -57,6 +57,7 @@ function simulation_statistic:simNpcCount(community, rank)
 	return self.allocation[community][rank]
 end
 function simulation_statistic:pstats(npc)
+--[[
 	printf("*** SIMULATION POPULATION STATISTIC ***")
 	print_table(self.allocation)
 	local sum = 0
@@ -66,6 +67,7 @@ function simulation_statistic:pstats(npc)
 		end	
 	end
 	printf("TOTAL: [%s]", sum)		
+]]
 end
 
 
@@ -103,10 +105,12 @@ function simNpcCount(community, rank)
 end
 
 function pstats()
+--[[
 	if simulator == nil then
 		return
 	end
 	simulator:pstats(npc)
+]]
 end
 
 

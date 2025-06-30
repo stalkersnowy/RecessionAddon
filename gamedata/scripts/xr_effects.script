@@ -373,7 +373,7 @@ function play_snd_from_obj(actor, npc, p)
 		local snd_obj = xr_sound.get_safe_sound_object(p[2])
 		local obj     = level_object_by_sid(p[1])
         if obj ~= nil then
-           printf("can't find object with story id %s", tostring(p[1]))
+           --printf("can't find object with story id %s", tostring(p[1]))
         
 --		snd_obj:play_at_pos(obj, obj:position(), sound_object.s3d)
 		snd_obj:play_no_feedback(obj, sound_object.s3d, 0, obj:position(), 1.0)
@@ -390,14 +390,14 @@ end
 -- прибавить к указанному счётчику актёра 1
 function inc_counter(actor, npc, p)
 	if p[1] then
-		printf( "inc_counter '%s'", p[1] )
+		--printf( "inc_counter '%s'", p[1] )
 		xr_logic.pstor_store(actor, p[1], xr_logic.pstor_retrieve(actor, p[1], 0) + 1)
 	end
 end
 
 function dec_counter(actor, npc, p)
 	if p[1] then
-		printf( "dec_counter '%s'", p[1] )
+		--printf( "dec_counter '%s'", p[1] )
 		xr_logic.pstor_store(actor, p[1], xr_logic.pstor_retrieve(actor, p[1], 0) - 1)
 	end
 end
@@ -405,7 +405,7 @@ end
 
 -- переключает камеру на монстра или на актёра
 function alien_control( actor, npc, p )
-	printf( "alien_control(%s)", p[1] )
+	--printf( "alien_control(%s)", p[1] )
 	npc:set_alien_control( p[1] == "true" )
 end
 
@@ -419,7 +419,7 @@ end
 -- принудительное обновление смарта. Использовать только в КРАЙНИХ случаях!!!
 -- каждое использование согласовывать со мной. Чугай.
 function smart_terrain_force_update(actor, npc, p)
-	printf( "xr_effects.smart_terrain_force_update called" )
+	--printf( "xr_effects.smart_terrain_force_update called" )
 
 	if p[1] then
 		local gulag = xr_gulag.get_gulag(p[1])
@@ -465,7 +465,7 @@ end
 
 -- забывание обиды
 function clearAbuse(npc)
-	printf("CLEAR_ABUSE")
+	--printf("CLEAR_ABUSE")
 	xr_abuse.clear_abuse(npc)
 end
 
@@ -538,7 +538,7 @@ function gar_dm_bandits_fight(actor, npc)
 end
 
 function gar_dm_bandit_demand(actor, npc)
-	printf("_bp: gar_dm_bandit_demand: actor=%s", actor:name())
+	--printf("_bp: gar_dm_bandit_demand: actor=%s", actor:name())
 
 	if has_alife_info("gar_dm_bandit1_demand") or
 	   has_alife_info("gar_dm_bandit2_demand") or
@@ -643,7 +643,7 @@ end
 
 	
 function actor_friend(actor, npc)
-	printf("_bp: xr_effects: actor_friend(): npc='%s': time=%d", npc:name(), time_global())
+	--printf("_bp: xr_effects: actor_friend(): npc='%s': time=%d", npc:name(), time_global())
 	npc:set_relation(game_object.friend, actor)
 end
 
@@ -686,7 +686,7 @@ function disable_combat_ignore_handler(actor, npc)
 end
 
 function log_bp1(actor, npc)
-	printf("xr_effects: log_bp1 (actor='%s', npc='%s'", actor:name(), npc:name())
+	--printf("xr_effects: log_bp1 (actor='%s', npc='%s'", actor:name(), npc:name())
 end
 
 function psi_hit_npc(actor, npc,p)
@@ -1170,7 +1170,7 @@ function mil_bomb_explode (actor, npc)
 end
 
 function mil_set_alarm (actor, npc)
-	printf("pl:millitary base is under attack!!!!!!!")
+	--printf("pl:millitary base is under attack!!!!!!!")
     actor:give_info_portion ("mil_freedom_under_attack")
     
     local skull = level_object_by_sid (708)
@@ -1440,8 +1440,8 @@ function pri_drop_rpg_ammo(actor, npc)
     local item = npc:object("ammo_og-7b")
     if item then
         npc:drop_item(item)
-    else
-        printf("xr_effects <pri_drop_rpg_ammo>: there is no [ammo_og-7b] in [%s] inventory.", npc:name())
+    --else
+        --printf("xr_effects <pri_drop_rpg_ammo>: there is no [ammo_og-7b] in [%s] inventory.", npc:name())
     end
 end
 
@@ -1560,7 +1560,7 @@ local sar2_hero_next_free_id = 1
 local sar2_heroes_sel = {}
 
 function sar2_scene_start(actor, npc)
-    printf("effects <sar2>: scene start initializing.")
+    --printf("effects <sar2>: scene start initializing.")
     local i = 0
     
     sar2_heroes_sel = {}
@@ -1573,8 +1573,8 @@ function sar2_scene_start(actor, npc)
         end
     end
 
-    print_table(sar2_heroes_sel)
-    printf("effects <sar2>: scene end initializing.")
+    --print_table(sar2_heroes_sel)
+    --printf("effects <sar2>: scene end initializing.")
 end
 
 function sar_hero_dead(actor, npc)
@@ -1588,11 +1588,11 @@ function sar_hero_dead(actor, npc)
         actor:give_info_portion("sar2_monolith_end")
     end
 
-    printf("effects <sar2>: hero dead.")
+    --printf("effects <sar2>: hero dead.")
 end
 
 function sar2_hero_spawn(actor, npc)
-    printf("effects <sar2>: hero count - %d, max - %d.", sar2_heroes_count, sar2_heroes_max_count)
+    --printf("effects <sar2>: hero count - %d, max - %d.", sar2_heroes_count, sar2_heroes_max_count)
     local c = sar2_heroes_max_count - sar2_heroes_count
 
     -- check if we need to spawn stalkers
@@ -1603,9 +1603,9 @@ function sar2_hero_spawn(actor, npc)
             actor:give_info_portion("sar2_spawn_" .. sar2_heroes_sel[i])
         end
 
-        if n >= sar2_hero_next_free_id then
-            printf("effects <sar2>: hero spawn.")
-        end
+        --if n >= sar2_hero_next_free_id then
+            --printf("effects <sar2>: hero spawn.")
+        --end
         
         sar2_heroes_count = sar2_heroes_count + (n - sar2_hero_next_free_id + 1)
         sar2_hero_next_free_id = n + 1
@@ -1914,7 +1914,7 @@ end
 
 
 function monolith_generator_hit (actor, npc)
-    printf ("ON GENERATOR HIT !!!")
+    --printf ("ON GENERATOR HIT !!!")
 end
 
 
@@ -2010,7 +2010,7 @@ function game_over(actor, npc)
 	end
 	local c = get_console()
 --	c:execute("disconnect")
-	printf("main_menu on console command is executed")
+	--printf("main_menu on console command is executed")
 	c:execute("main_menu on")
 end
 
@@ -2026,7 +2026,7 @@ end
 function pri_game_over(actor, npc)
 	local c = get_console()
 --	c:execute("disconnect")
-	printf("main_menu on console command is executed")
+	--printf("main_menu on console command is executed")
 	c:execute("main_menu on")
 end
 
@@ -2083,7 +2083,7 @@ end
 function on_tutor_gameover_stop()
 	local c = get_console()
 --	c:execute("disconnect")
-	printf("main_menu on console command is executed")
+	--printf("main_menu on console command is executed")
 	c:execute("main_menu on")
 end
 
@@ -2098,7 +2098,7 @@ end
 -- При смерти кровососа дать ему небольшой пинок в сторону вейпоинта, чтобы он упал
 -- с обрыва
 function val_bs_victim_dead(actor, npc)
-	printf("_bp: val_bs_victim_dead: npc='%s'", npc:name())
+	--printf("_bp: val_bs_victim_dead: npc='%s'", npc:name())
 	local h = hit()
 	h.power = 100
 	h.direction = utils.vector_copy_by_val(patrol("val_bs_hit_direction"):point(0)):sub(npc:position())

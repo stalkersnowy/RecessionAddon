@@ -141,7 +141,7 @@ function configure_schemes(npc, ini, ini_filename, stype, section_logic, gulag_n
 	else
 		local filename = utils.cfg_get_string(ini, section_logic, "cfg", npc, false, "")
 		if filename then
-			printf("_bp: enable_scripts: object '%s' has external configuration file '%s'", npc:name(), filename)
+			--printf("_bp: enable_scripts: object '%s' has external configuration file '%s'", npc:name(), filename)
 			-- Рекурсивно обработать конфигурационный файл, на который ссылается поле cfg
 			actual_ini_filename = filename
 			actual_ini = ini_file(filename)
@@ -153,7 +153,7 @@ function configure_schemes(npc, ini, ini_filename, stype, section_logic, gulag_n
 			end
 			--]]
 		else
-			printf("_bp: enable_scripts: object '%s' has NO external configuration file, using '%s'", npc:name(), ini_filename)
+			--printf("_bp: enable_scripts: object '%s' has NO external configuration file, using '%s'", npc:name(), ini_filename)
 			actual_ini_filename = ini_filename
 			actual_ini = ini
 		end
@@ -275,7 +275,7 @@ function enable_generic_schemes(ini, npc, stype, section)
 
 		local combat_ignore_section = utils.cfg_get_string(ini, section, "combat_ignore", npc, false, "")
 		if combat_ignore_section then
-			printf("combat_ignore_section= '%s'", combat_ignore_section )
+			--printf("combat_ignore_section= '%s'", combat_ignore_section )
 			xr_combat_ignore.set_combat_ignore_checker(npc, ini, "combat_ignore", combat_ignore_section)
 		end
 
@@ -303,7 +303,7 @@ function enable_generic_schemes(ini, npc, stype, section)
 
 	elseif stype == modules.stype_item then
 		local hit_section = utils.cfg_get_string(ini, section, "on_hit", npc, false, "")
-		printf("HIT SECTION [%s]", tostring(hit_section))
+		--printf("HIT SECTION [%s]", tostring(hit_section))
 		if hit_section then
 			ph_on_hit.set_scheme(npc, ini, "ph_on_hit", hit_section)
 		end
@@ -317,7 +317,7 @@ function enable_generic_schemes(ini, npc, stype, section)
 end
 
 function activate_by_section(npc, ini, section, loading)
-	printf("DEBUG: object '%s': activate_by_section: looking for section '%s'", npc:name(), section)
+	--printf("DEBUG: object '%s': activate_by_section: looking for section '%s'", npc:name(), section)
 
 	if loading == nil then
 		abort("xr_logic: activate_by_section: loading field is nil, true or false expected")
@@ -364,7 +364,7 @@ function activate_by_section(npc, ini, section, loading)
 		if filename == nil then
 			abort("xr_logic: scheme '%s' is not registered in modules.script", scheme)
 		end
-		printf("_bp: calling module('%s')", filename)
+		--printf("_bp: calling module('%s')", filename)
 		if not _G[filename] then
 			abort("xr_logic: can't call %s.set_scheme() - a nil value", filename)
 		end
@@ -1092,8 +1092,8 @@ function cfg_get_npc_and_zone(ini, section, field, npc)
 			end
 		else
 			t.npc_id = -1
-			printf("WARNING: object '%s': section '%s': field '%s': can't use story_id without simulation!",
-			        npc:name(), section, field)
+			--printf("WARNING: object '%s': section '%s': field '%s': can't use story_id without simulation!",
+			        --npc:name(), section, field)
 		end
 	end
 
@@ -1209,7 +1209,7 @@ function pstor_save_all(obj, packet)
 	packet:w_u32(ctr)
 
 	for k, v in pairs(pstor) do
-		printf("_bp: pstor_save_all: saving [%s]='%s'", utils.to_str(k), utils.to_str(v))
+		--printf("_bp: pstor_save_all: saving [%s]='%s'", utils.to_str(k), utils.to_str(v))
  		packet:w_stringZ(k)
 		local tv = type(v)
 		if tv == "number" then
@@ -1248,20 +1248,20 @@ function pstor_load_all(obj, reader)
 		else
 			abort("xr_logic: pstor_load_all: not registered type N %d encountered", tn)
 		end
-		printf("_bp: pstor_load_all: loaded [%s]='%s'", varname, utils.to_str(pstor[varname]))
+		--printf("_bp: pstor_load_all: loaded [%s]='%s'", varname, utils.to_str(pstor[varname]))
 	end
 end
 
 function save_obj(obj, packet)
-	printf("save_obj: obj:name()='%s'", obj:name())
+	--printf("save_obj: obj:name()='%s'", obj:name())
 
 	local npc_id = obj:id()
 	local st = db.storage[npc_id]
 
-	printf("save_obj: ini_filename='%s'", utils.to_str(st.ini_filename))
-	printf("save_obj: section_logic='%s'", utils.to_str(st.section_logic))
-	printf("save_obj: active_section='%s'", utils.to_str(st.active_section))
-	printf("save_obj: gulag_name='%s'", utils.to_str(st.gulag_name))
+	--printf("save_obj: ini_filename='%s'", utils.to_str(st.ini_filename))
+	--printf("save_obj: section_logic='%s'", utils.to_str(st.section_logic))
+	--printf("save_obj: active_section='%s'", utils.to_str(st.active_section))
+	--printf("save_obj: gulag_name='%s'", utils.to_str(st.gulag_name))
 
 	if st.ini_filename then
 		packet:w_stringZ(st.ini_filename)
@@ -1305,7 +1305,7 @@ function save_obj(obj, packet)
 end
 
 function load_obj(obj, reader)
-	printf("load_obj: obj:name()='%s'", obj:name())
+	--printf("load_obj: obj:name()='%s'", obj:name())
 	local npc_id = obj:id()
 	local st = db.storage[npc_id]
 
@@ -1345,11 +1345,11 @@ function load_obj(obj, reader)
 	st.loaded_gulag_name = gulag_name
 	--st.loaded_stype = stype
 
-	printf("load_obj: ini_filename='%s'", utils.to_str(st.loaded_ini_filename))
-	printf("load_obj: section_logic='%s'", utils.to_str(st.loaded_section_logic))
-	printf("load_obj: active_section='%s'", utils.to_str(st.loaded_active_section))
+	--printf("load_obj: ini_filename='%s'", utils.to_str(st.loaded_ini_filename))
+	--printf("load_obj: section_logic='%s'", utils.to_str(st.loaded_section_logic))
+	--printf("load_obj: active_section='%s'", utils.to_str(st.loaded_active_section))
 	--printf("load_obj: active_scheme='%s'", utils.to_str(st.loaded_active_scheme))
-	printf("load_obj: gulag_name='%s'", utils.to_str(st.loaded_gulag_name))
+	--printf("load_obj: gulag_name='%s'", utils.to_str(st.loaded_gulag_name))
 
 	load_logic(obj, reader)
 
@@ -1387,7 +1387,7 @@ function initialize_obj(obj, st, loaded, actor, stype)
 		if ini_filename then
 			local ini = get_customdata_or_ini_file(obj, ini_filename)
 			ini = xr_logic.configure_schemes(obj, ini, ini_filename, stype, st.loaded_section_logic, st.loaded_gulag_name)
-			printf( "initialize_obj: loaded" )
+			--printf( "initialize_obj: loaded" )
 			xr_logic.activate_by_section(obj, ini, st.loaded_active_section, true)
 		end
 

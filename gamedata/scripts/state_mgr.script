@@ -3,8 +3,8 @@
 --	автор: Диденко Руслан (Stohe)
 --	TODO: 
 ----------------------------------------------------------------------------------------------------------------------
-function printf()
-end
+--function printf()
+--end
 
 aim_ratio = 1000/50
 min_ratio = 1500
@@ -305,11 +305,12 @@ function state_manager:__init(npc)
 	self.need_reweapon = false
 end
 function state_manager:set_state(state_name, callback, timeout, target, emerg, synsound, extrakeys)
-	printf("Set State called: for %s State: %s", self.npc:name(), state_name)
+	--printf("Set State called: for %s State: %s", self.npc:name(), state_name)
 	
 	if state_lib.states[state_name] == nil then
 		abort("ERROR: ILLEGAL SET STATE CALLED!!! %s fo %s", tostring(state_name), self.npc:name())
 	end
+--[[
 	if target then
 		if target.look_position then
 			printf("look position: %s %s %s", target.look_position.x,
@@ -326,7 +327,7 @@ function state_manager:set_state(state_name, callback, timeout, target, emerg, s
 	else
 		printf("look target NIL")
 	end
-
+]]
 	--сперва устанавливаем цели
 	if target ~= nil then
 		self.look_position = target.look_position

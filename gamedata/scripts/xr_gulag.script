@@ -6,7 +6,7 @@
 --' в работах поле object хранит id объекта
 
 level_gulags = {gulag_general, gulag_escape, gulag_garbage, gulag_agroprom, gulag_agroprom_underground, gulag_dark_valley, gulag_labx18, gulag_bar,
-                gulag_military, gulag_radar, gulag_radar_u, gulag_yantar, gulag_pripyat, gulag_kishka, gulag_sarcofag,
+                gulag_military, gulag_radar, gulag_radar_u, gulag_yantar, gulag_pripyat, gulag_sarcofag,
                 gulag_deadcity}
 
 level_groups = {l01_escape = 1, l02_garbage = 2, l03_agroprom = 3, l03u_agr_underground = 4,
@@ -114,7 +114,7 @@ function gulag:validate_jobs()
 
 	for i, v in ipairs( jobs_avail_in_states ) do
 		if v < self.capacity then
-			print_table( self.Job )
+			--print_table( self.Job )
 			abort( "[smart_terrain %s] type=%s state=%d capacity=%d: too few absolutely available jobs", self.name, self.type, i, self.capacity )
 		end
 	end
@@ -347,7 +347,7 @@ end
 -- настроить персонажа на работу в офлайне.
 -- если он в это время в онлайне, то вызвать object_setup_online
 function gulag:object_setup_offline( obj_id, was_online )
-	printf( "[smart_terrain %s] gulag: object_setup_offline: obj=%s", self.name, self.npc_info[obj_id].name )
+	--printf( "[smart_terrain %s] gulag: object_setup_offline: obj=%s", self.name, self.npc_info[obj_id].name )
 
 	self.Object[obj_id] = true
 
@@ -366,7 +366,7 @@ end
 -- если он уже пришёл на работу, настроить ему логику и рестрикторы (при необходимости).
 -- obj=game_object
 function gulag:object_setup_online( obj_id, obj, need_setup_logic, need_setup_restrictors )
-	printf( "[smart_terrain %s] gulag: object_setup_online: obj=%s need_setup_logic=%s need_setup_restrictors=%s", self.name, obj:name(), tostring(need_setup_logic), tostring(need_setup_restrictors) )
+	--printf( "[smart_terrain %s] gulag: object_setup_online: obj=%s need_setup_logic=%s need_setup_restrictors=%s", self.name, obj:name(), tostring(need_setup_logic), tostring(need_setup_restrictors) )
 
 	self.Object[obj_id] = obj
 
@@ -415,7 +415,7 @@ function gulag:update()
 	self:updateJob()
 	self:update_beginning_jobs()
 
-	self:print()
+--	self:print()
 end
 
 -- убирает мёртвых.
@@ -441,7 +441,7 @@ end
 
 --' Убирание мертвого чувака. Вызывается из смарттеррейна
 function gulag:clear_dead(obj_id)
-	printf( "[smart_terrain %s] gulag: Clear_dead: obj=%s", self.name, self.npc_info[obj_id].name)
+	--printf( "[smart_terrain %s] gulag: Clear_dead: obj=%s", self.name, self.npc_info[obj_id].name)
 
 	if self.ObjectJob[obj_id] then
 		self:changeCasualities( 1 )
@@ -529,10 +529,10 @@ end
 function gulag:obj1_job_suits_obj2( obj_id, npc_info )
 	local job = self.Job[self.ObjectJob[obj_id]]
 
-	if not job then
-		printf( "job=nil! obj=%s obj_id=%d", self.npc_info[obj_id].name, obj_id )
-		self:print()
-	end
+--	if not job then
+--		printf( "job=nil! obj=%s obj_id=%d", self.npc_info[obj_id].name, obj_id )
+--		self:print()
+--	end
 
 	return not job.predicate or job.predicate( npc_info, self )
 end
@@ -783,6 +783,7 @@ end
 
 -- вывод текущего состояния гулага (работы, объекты, состояние, население)
 function gulag:print()
+--[[
 	local npc_info, going
 
 	printf("***  %s -- State: %d -- Total population: %d/%d -- Non exclusive population: %d/%d",
@@ -819,6 +820,7 @@ function gulag:print()
 			end
 		end
 	end
+]]
 end
 
 -- получить количество живых объектов под смартом
@@ -870,12 +872,12 @@ function gulag:setup_squad_and_group( obj_id, job )
 
 		local squad = level_groups[level.name()]
 		if not obj:alive() then
-			printf("CHANGE TEAM [%s] to [%s][%s][%s]. Object is DEAD, clearing", obj:name(), npc_info.team, squad or npc_info.o_squad, job.group or npc_info.o_group)
+			--printf("CHANGE TEAM [%s] to [%s][%s][%s]. Object is DEAD, clearing", obj:name(), npc_info.team, squad or npc_info.o_squad, job.group or npc_info.o_group)
 			self:clear_dead(obj_id) --'Затычка против вылета.
 			return
 		end
 
-		printf("CHANGE TEAM [%s] to [%s][%s][%s]", obj:name(), npc_info.team, squad or npc_info.o_squad, job.group or npc_info.o_group )
+		--printf("CHANGE TEAM [%s] to [%s][%s][%s]", obj:name(), npc_info.team, squad or npc_info.o_squad, job.group or npc_info.o_group )
 		obj:change_team( npc_info.team, squad or npc_info.o_squad, job.group or npc_info.o_group )
 
 		npc_info.squad = obj:squad()
@@ -893,7 +895,7 @@ end
 
 -- установить npc работу, к ней рестрикторы, настроить логику, поменять squad, group
 function gulag:setJob(obj_id, job)
-	printf( "[smart_terrain %s] gulag: setJob: obj=%s job=%d %s", self.name, self.npc_info[obj_id].name, job.num, job.section )
+	--printf( "[smart_terrain %s] gulag: setJob: obj=%s job=%d %s", self.name, self.npc_info[obj_id].name, job.num, job.section )
 
 	job.object = obj_id
 
@@ -913,7 +915,7 @@ end
 -- вызвать спавнер.
 function gulag:beginJob( obj_id )
 	local job = self.Job[self.ObjectJob[obj_id]]
-	printf( "[smart_terrain %s] gulag: beginJob: obj=%s job=%d %s", self.name, self.npc_info[obj_id].name, job.num, job.section )
+	--printf( "[smart_terrain %s] gulag: beginJob: obj=%s job=%d %s", self.name, self.npc_info[obj_id].name, job.num, job.section )
 
 	self.Object_begin_job[obj_id] = true
 
@@ -1171,7 +1173,7 @@ function setup_gulag_and_logic_on_spawn( obj, st, sobject, stype, loaded )
 			strn_id = 65535
 		end
 
-		printf( "setup_gulag_and_logic_on_spawn obj=%s, strn_id=%s", obj:name(), tostring(strn_id) )
+		--printf( "setup_gulag_and_logic_on_spawn obj=%s, strn_id=%s", obj:name(), tostring(strn_id) )
 
 		if strn_id ~= 65535 then
 			local strn                   = sim:object( strn_id )
@@ -1299,7 +1301,7 @@ end
 -- освободить персонажа от работы.
 -- obj=game_object
 function resetJob( obj )
-	printf( "gulag resetJob: obj=%s", obj:name() )
+	--printf( "gulag resetJob: obj=%s", obj:name() )
 
 	local gulag = get_npc_gulag( obj )
 	if gulag then

@@ -201,7 +201,8 @@ function load_job(sj, gname, type, squad, groups)
 			prior = 7, state = {0}, squad = squad, group = groups[1],
 			in_rest = "", out_rest = ""
 		}
-		table.insert(sj, t)		    
+		table.insert(sj, t)
+		return
 	end
 	-- Yantar scientist
 	if type == "yan_scientist" then
@@ -281,6 +282,7 @@ function load_job(sj, gname, type, squad, groups)
 						 end
 		}
 		table.insert(sj, t)
+		return
 	end
 	if type == "yan_tonnel_snorks" then
 		t = { section = "logic@yan_tonnel_snork_home_1",

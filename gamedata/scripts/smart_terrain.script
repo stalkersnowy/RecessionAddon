@@ -94,12 +94,14 @@ function se_smart_terrain:detect_probability()
 end
 
 function se_smart_terrain:print()
+--[[
 	printf( "NPCs:" )
 	if self.npc_info then
 		for id, v in pairs( self.npc_info ) do
 			printf( "    %d %s", id, tostring(v.name) )
 		end
 	end
+]]
 end
 
 -- сохранение
@@ -310,7 +312,7 @@ function se_smart_terrain:read_params()
 
 		if not ini:section_exist( sect ) then
 --			abort( "[smart_terrain %s] no configuration!", self:name() )
-			printf( "[smart_terrain %s] no configuration!", self:name() )
+			--printf( "[smart_terrain %s] no configuration!", self:name() )
 			self.disabled = true
 			return
 		end
@@ -623,7 +625,7 @@ end
 -- вытолкнуть из этого smart terrain с подход€щей работы объект, который попал в него не эксклюзивно.
 function se_smart_terrain:register_npc( obj )
 
-	printf( "[smart_terrain %s] register called obj=%s gulag_type=%s", self:name(), obj:name(), self.gparams.type )
+	--printf( "[smart_terrain %s] register called obj=%s gulag_type=%s", self:name(), obj:name(), self.gparams.type )
 
 	local npc_info = {
 		-- старые squad и group
@@ -642,9 +644,9 @@ function se_smart_terrain:register_npc( obj )
 --	   ( self.gulag:get_population() == self.gulag.capacity or
 	   not self.gulag:is_there_any_suitable_job( npc_info, false ) --)
 	then
-		printf( "get_population=%d capacity=%d", self.gulag:get_population(), self.gulag.capacity )
-		printf( "is_there_any_suitable_job=%s", tostring(self.gulag:is_there_any_suitable_job(npc_info, false)) )
-		print_table( self.npc_info )
+		--printf( "get_population=%d capacity=%d", self.gulag:get_population(), self.gulag.capacity )
+		--printf( "is_there_any_suitable_job=%s", tostring(self.gulag:is_there_any_suitable_job(npc_info, false)) )
+		--print_table( self.npc_info )
 		self:kick_someone_non_exclusive( npc_info )
 	end
 
@@ -697,13 +699,13 @@ function se_smart_terrain:unregister_npc( obj )
 			end
 		end
 	end
-
+--[[
 	if not n then
-		printf( "self.npc_info[obj.id] = nil !!! obj.id=%d", obj.id )
+		--printf( "self.npc_info[obj.id] = nil !!! obj.id=%d", obj.id )
 		self:print()
 		self.gulag:print()
 	end
-
+]]
 	self.gulag:removeObject( obj.id )
 
 	obj.squad = n.o_squad
@@ -725,7 +727,7 @@ function se_smart_terrain:unregister_npc( obj )
 --'		level.map_change_spot_hint(obj.id, spot, str)		
 --'	end
 
-	printf( "[smart_terrain %s] removed %s from gulag type=%s, strn_id=%s", self:name(), obj:name() or "<<<nil>>>", self.gparams.type, obj:smart_terrain_id())
+	--printf( "[smart_terrain %s] removed %s from gulag type=%s, strn_id=%s", self:name(), obj:name() or "<<<nil>>>", self.gparams.type, obj:smart_terrain_id())
 end
 
 -- изменть ранг сталкера при регистрации в смарт
@@ -747,7 +749,7 @@ end
 function se_smart_terrain:kick_someone_non_exclusive( new_npc_info )
 	for obj_id, npc_info in pairs( self.npc_info ) do
 		if not npc_info.exclusive and self.gulag:obj1_job_suits_obj2( obj_id, new_npc_info ) then
-			printf("[smart_terrain %s] kicking %s", self:name(), npc_info.name)
+			--printf("[smart_terrain %s] kicking %s", self:name(), npc_info.name)
 			self:unregister_npc( npc_info.se_obj )
 			return
 		end
@@ -760,7 +762,7 @@ end
 function se_smart_terrain:task( obj )
 	local path_name = self.gulag:get_obj_job_path_name( obj.id )
 	if not path_name then
-		printf("[smart_terrain %s] task: obj=%s job_path=nil, CLEARING", self:name(), obj:name() )
+		--printf("[smart_terrain %s] task: obj=%s job_path=nil, CLEARING", self:name(), obj:name() )
 		self:unregister_npc(obj) --'«атычка против вылета.
 		return CALifeSmartTerrainTask("simulation_default_path")
 	end
@@ -866,7 +868,7 @@ function se_smart_terrain:remove_gulag( disable )
 		return
 	end
 
-	printf( "[smart_terrain %s] removed gulag type=%s", self:name(), self.gparams.type )
+	--printf( "[smart_terrain %s] removed gulag type=%s", self:name(), self.gparams.type )
 
 	-- освободить всех персонажей
 	for id, npc_info in pairs( self.npc_info ) do
@@ -965,7 +967,7 @@ function se_smart_terrain:register_if_needed()
 	end
 	self.registred = true
 	
-	printf( "%s register called", self:name() )
+	--printf( "%s register called", self:name() )
 	-- DEBUG
 	if self.disabled then
 		return
@@ -1090,7 +1092,7 @@ function se_smart_terrain:stat()
 
 	s = s .. pop .. " " .. cap .. " " .. self:stat_get_accepted_communities()
 
-	printf( s )
+	--printf( s )
 
 --	for id, npc_info in pairs( self.npc_info ) do
 --		printf( "    %s", npc_info.name )
@@ -1120,7 +1122,7 @@ function se_smart_terrain:update()
 			--' провер€ть, не собралс€ ли кто-то к этому времени уже уходить
 			for id, npc_info in pairs( self.npc_info ) do
 				if npc_info.cond and xr_logic.pick_section_from_condlist( db.actor_proxy, npc_info.se_obj, npc_info.cond ) == nil then
-					printf("[smart_terrain %s] leaving %s", self:name(), npc_info.name)
+					--printf("[smart_terrain %s] leaving %s", self:name(), npc_info.name)
 					self:unregister_npc( npc_info.se_obj )
 				end
 			end
@@ -1198,6 +1200,7 @@ end
 --------------------
 -- ¬ывод статистики по всем смартам в симул€ции
 function stat()
+--[[
 	printf( "--------------- Smart terrains statistics START ----------------------" )
 
 	local jobs, jobs_in_avail, occupied
@@ -1246,4 +1249,5 @@ function stat()
 	printf( "    Occupied jobs : %d",                    occupied )
 
 	printf( "--------------- Smart terrains statistics END ------------------------" )
+]]
 end

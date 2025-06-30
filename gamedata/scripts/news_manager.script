@@ -134,7 +134,7 @@ tips_captions = {
 function send_tip(actor, news_id, timeout, sender, showtime, sender_id)
 	if news_id == nil then return false end
 
-	printf("try to send tips for [%s]", tostring(sender_id))
+	--printf("try to send tips for [%s]", tostring(sender_id))
 	if sender_id ~= nil then
 		local sim = alife()
 		if sim ~= nil then
@@ -143,13 +143,13 @@ function send_tip(actor, news_id, timeout, sender, showtime, sender_id)
 				if npc.online then
 					--в онлайне проверяем на раненность
 					if xr_wounded.is_heavy_wounded_by_id(npc.id) and sender_id ~= 422 and sender_id ~= 1004 then
-						printf("[PDA]Cannot send tips [%s], sender is heavy wounded", tostring(news_id))
+						--printf("[PDA]Cannot send tips [%s], sender is heavy wounded", tostring(news_id))
 						return false
 					end
 				end
 				-- в других случаях только на смерть
 				if npc:alive() == 1 then
-					printf("[PDA]Cannot send tips [%s], sender is dead", tostring(news_id))
+					--printf("[PDA]Cannot send tips [%s], sender is dead", tostring(news_id))
 					return false
 				end
 			end

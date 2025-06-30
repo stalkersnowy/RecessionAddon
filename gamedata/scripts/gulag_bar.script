@@ -208,6 +208,7 @@ function load_job(sj, gname, type, squad, groups)
 		}
 		table.insert(sj, t)		    
 	
+		return
 	end
 	
 	-- Гулаг ламеров Долга внутри базы Долга
@@ -323,6 +324,7 @@ function load_job(sj, gname, type, squad, groups)
 		table.insert(sj, t)
 
 
+		return
 	end
 
 	-- Гулаг ветеранов Долга внутри базы Долга
@@ -369,6 +371,7 @@ function load_job(sj, gname, type, squad, groups)
 					online = "{=actor_in_zone(bar_dolg_online_restrictor)}"
 		}
 		table.insert(sj, t)
+		return
 	end
 
 	-- Гулаг в бункере Долга
@@ -402,6 +405,7 @@ function load_job(sj, gname, type, squad, groups)
 		}
 		table.insert(sj, t)		    
 		
+		return
 	end
 
     -- Гулаг сталкеров на заставе 1
@@ -426,7 +430,8 @@ function load_job(sj, gname, type, squad, groups)
                 }
 		    table.insert(sj, t)
         end
-    end
+    	return
+	end
 
     -- Гулаг сталкеров на заставе 2
 
@@ -440,7 +445,8 @@ function load_job(sj, gname, type, squad, groups)
                 }
 		    table.insert(sj, t)
         end
-    end
+    	return
+	end
 
 	-- Гулаг нехороших сталкеров ветеранов на Дикой территории
 	if type == "bar_evil_veterans" then
@@ -525,6 +531,7 @@ function load_job(sj, gname, type, squad, groups)
 			in_rest = "", out_rest = ""
 		}
 		table.insert(sj, t)
+		return
 	end
 
 	-- Ученные, защищающие инфу от свободы
@@ -570,7 +577,8 @@ function load_job(sj, gname, type, squad, groups)
 		}
 		table.insert(sj, t)
         
-    end
+    	return
+	end
 
 	-- Свобода, атакующая ученных с целью отнимания инфы
 	if type == "bar_freedom_attack" then
@@ -901,6 +909,7 @@ function load_job(sj, gname, type, squad, groups)
 			            end
 		}
 		table.insert(sj, t)		
+		return
 	end		
 	-- killers na stroyke
 	
@@ -955,6 +964,7 @@ function load_job(sj, gname, type, squad, groups)
 		table.insert(sj, t)
 		
 	
+		return
 	end
 	
 	-- Засада боевиков Наемников на стройке
@@ -1010,6 +1020,7 @@ function load_job(sj, gname, type, squad, groups)
 			in_rest = "", out_rest = ""
 		}
 		table.insert(sj, t)
+		return
 	end
 
 

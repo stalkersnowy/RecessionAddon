@@ -280,7 +280,7 @@ end
 -- Создаем объект
 function se_respawn:create(prob)
 	if tostring(prob) == "nil" then		
-		print_table(self.conditions)
+		--print_table(self.conditions)
 		abort("RESPAWN[%s]spawn probability doesn't set", tostring(self:name()))
 		prob = 0
 	end
@@ -367,7 +367,7 @@ function se_respawn:create(prob)
 					local pos = obj.position
 --					printf("SPAWNING [%s] -> [%s], position [%s][%s][%s]", tostring(self:name()), spawn_section, pos.x, pos.y, pos.z)
 					local sm_obj = alife():object(smart_terrain_id)
-					printf("SPAWNING for SMART [%s] : [%s] -> [%s]", self:name(), obj:name(), sm_obj:name())
+					--printf("SPAWNING for SMART [%s] : [%s] -> [%s]", self:name(), obj:name(), sm_obj:name())
 
 					return true
 				else
@@ -507,6 +507,7 @@ end
 
 -- Сбор статистики
 function stats()
+--[[
 	local total_spawned = 0
 	local total_avail = 0
 	local total = 0
@@ -524,7 +525,7 @@ function stats()
 			str_pops = tostring(pops)
 		end
 		printf("[%s] spawns [%s] object", tostring(v:name()), str_pops)
-		print_table(v.respawn_section)
+		--print_table(v.respawn_section)
 		-- Увеличиваем общие счетчики
 		total = total + v.max_count
 		if pops ~= "DISABLE" then
@@ -537,12 +538,14 @@ function stats()
 	printf("	total_avail = %s", total_avail)
 	printf("	total_spawned = %s", total_spawned)
 	printf("***************")
+]]
 end
 
 
 
 -- Сбор продвинутой статистики статистики по лимитам
 function lstats()
+--[[
 	local can_spawn = {}
 	printf("***************** LIMITS STATISTIC *********************")
 	for k,v in pairs(respawners) do
@@ -574,11 +577,13 @@ function lstats()
 		printf("%s current=%s limit=%s", k, cs, gl)
 	end
 	printf("TOTAL: current=%s limit=%s", total_current, total_limit)
+]]
 end
 
 
 -- Сбор статистики по ненастроенным объектам
 function estats()
+--[[
 	printf("***************** SPAWN ERROR STATISTIC *********************")
 	for k,v in pairs(respawners) do
 		-- Заносим максимальное количество всех типов чуваков, которые данный респавнер может наспаунить.
@@ -590,6 +595,7 @@ function estats()
 			end
 		end
 	end	
+]]
 end
 
 

@@ -36,7 +36,7 @@ end
 function see_npc(actor, npc, p)
     local npc1 = level_object_by_sid(p[1])
     if npc and npc1 then
-        printf("cond <see_npc>: [%s]->[%s]", npc:name(), npc1:name())
+        --printf("cond <see_npc>: [%s]->[%s]", npc:name(), npc1:name())
         return npc:see(npc1)
     else
         return false
@@ -230,7 +230,7 @@ function hitted_by(actor, npc, p)
 		for i, v in pairs(p) do
 			npc1 = level_object_by_sid(v)
 			if npc1 and t.who == npc1:id() then
-				printf("_bp: hitted_by(%d)", v)
+				--printf("_bp: hitted_by(%d)", v)
 				return true
 			end
 		end
@@ -274,7 +274,7 @@ function killed_by(actor, npc, p)
 		for i, v in pairs(p) do
 			npc1 = level_object_by_sid(v)
 			if npc1 and t.killer == npc1:id() then
-				printf("_bp: killed_by(%d)", v)
+				--printf("_bp: killed_by(%d)", v)
 				return true
 			end
 		end
@@ -329,8 +329,8 @@ function is_dead_all(actor, npc, p)
 		if npc1 then
 			if npc1:alive() then
 				return false
-			else
-				printf("_bp: is_dead_all(%d) = true", v)
+			--else
+				--printf("_bp: is_dead_all(%d) = true", v)
 			end
 		end
 	end
@@ -345,7 +345,7 @@ function is_dead_one(actor, npc, p)
 	for i, v in pairs(p) do
 		npc1 = level_object_by_sid(v)
 		if not npc1 or not npc1:alive() then
-			printf("_bp: is_dead_one(%d) = true", v)
+			--printf("_bp: is_dead_one(%d) = true", v)
 			return true
 		end
 	end
@@ -606,14 +606,14 @@ end
 function hit_by_actor(actor, npc)
 	local t = db.storage[npc:id()].hit
 	local hit_by_actor = (t ~= nil and t.who == actor:id())
-	printf("_bp: hit_by_actor: %s", if_then_else(hit_by_actor, "true", "false"))
+	--printf("_bp: hit_by_actor: %s", if_then_else(hit_by_actor, "true", "false"))
 	return hit_by_actor
 end
 
 function killed_by_actor(actor, npc)
 	local t = db.storage[npc:id()].death
 	local killed_by_actor = t ~= nil and t.killer == actor:id()
-	printf("_bp: killed_by_actor: %s", if_then_else(killed_by_actor, "true", "false"))
+	--printf("_bp: killed_by_actor: %s", if_then_else(killed_by_actor, "true", "false"))
 	return killed_by_actor
 end
 
@@ -876,7 +876,7 @@ function val_hit_by_nap1(actor, npc)
 	if nap1 == nil then return false end
 	local t = db.storage[npc:id()].hit
 	local hit_by_nap1 = (t ~= nil and t.who == nap1:id())
-	printf("_bp: hit_by_nap1: %s", if_then_else(hit_by_nap1, "true", "false"))
+	--printf("_bp: hit_by_nap1: %s", if_then_else(hit_by_nap1, "true", "false"))
 	return hit_by_nap1
 end
 
@@ -889,7 +889,7 @@ function val_hit_by_guard(actor, npc)
 						  ((g1 ~= nil and t.who == g1:id()) or
 						   (g2 ~= nil and t.who == g2:id())
 						  ))
-	printf("_bp: hit_by_guard: %s", if_then_else(hit_by_guard, "true", "false"))
+	--printf("_bp: hit_by_guard: %s", if_then_else(hit_by_guard, "true", "false"))
 	return hit_by_guard
 end
 
@@ -913,10 +913,10 @@ end
 
 function val_actor_has_key_to_underground(actor, npc)
 	if xr_conditions_impl.actor_has_object(actor, "val_key_to_underground") then
-		printf("_bp: xr_conditions: val_actor_has_key_to_underground: true")
+		--printf("_bp: xr_conditions: val_actor_has_key_to_underground: true")
 		return true
 	end
-	printf("_bp: xr_conditions: val_actor_has_key_to_underground [actor='%s']: false", actor:name())
+	--printf("_bp: xr_conditions: val_actor_has_key_to_underground [actor='%s']: false", actor:name())
 	return false
 end
 
@@ -1123,7 +1123,7 @@ function mil_actor_enemy (actor, npc)
        if npc == nil or npc:alive () == false then
           npc = level_object_by_sid (728)
           if npc == nil then 
-             printf ("NOT LEAVED NPC !!!")
+             --printf ("NOT LEAVED NPC !!!")
              return
           end
         end         

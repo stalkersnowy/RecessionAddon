@@ -196,7 +196,7 @@ function action_sound:on_enter( obj )
 			end
 
 			local snd_name = self.st.sound_names[math.random(1, #self.st.sound_names)]
-			printf( "sr_sound: restrictor=%s pos_type=%d snd=%s", self.object:name(), self.st.pos_type, snd_name )
+			--printf( "sr_sound: restrictor=%s pos_type=%d snd=%s", self.object:name(), self.st.pos_type, snd_name )
 
 			self.snd_obj	= xr_sound.get_safe_sound_object(snd_name)
 	        if self.st.play_at_actor == false then
@@ -204,7 +204,7 @@ function action_sound:on_enter( obj )
 			else
 			   self.snd_obj:play_at_pos( obj, vector ():set (0, 0, 0), self.st.delay, sound_object.s2d )
 			end   
-			printf ("SOUND PLAY %s", snd_name)
+			--printf ("SOUND PLAY %s", snd_name)
 			self.st.signals["sound_end"] = false
 		end
 	end
@@ -241,7 +241,7 @@ end
 
 ---------------------------------------------------------------------------------------------------------------------
 function add_to_binder( npc, ini, scheme, section, storage )
-	printf("DEBUG: add_to_binder: scheme='%s', section='%s'", scheme, section)
+	--printf("DEBUG: add_to_binder: scheme='%s', section='%s'", scheme, section)
 
 	local new_action = action_sound(npc, storage)
 

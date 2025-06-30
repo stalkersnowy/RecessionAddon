@@ -329,7 +329,7 @@ function load(p)
 end
 
 function add_to_binder(npc, ini, scheme, section, storage)
-	printf("DEBUG: add_to_binder: scheme='%s', section='%s'", scheme, section)
+	--printf("DEBUG: add_to_binder: scheme='%s', section='%s'", scheme, section)
 
 	if not psy_antenna then
 		psy_antenna = PsyAntenna()

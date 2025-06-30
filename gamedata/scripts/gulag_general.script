@@ -292,6 +292,7 @@ function load_job(sj, gname, type, squad, groups, st)
 			it = it + 1
 		end
 
+		return
 	end
 
 	-- смхбепяюкэмне кнцнбн лнмярпнб
@@ -372,6 +373,7 @@ function load_job(sj, gname, type, squad, groups, st)
 		end
 
 
+		return
 	end
 end
 

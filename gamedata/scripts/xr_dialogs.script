@@ -190,7 +190,7 @@ function dialog_mgr:new_phrase()
 
 	-- выбор новой фразы
 	if not self.a.cur_phrase then
-		printf( self.a.cur_dlg )
+		--printf( self.a.cur_dlg )
 		self.a.cur_phrase = dialogs[self.a.cur_dlg][1]
 	else
 		local p = self.a.cur_phrase.next

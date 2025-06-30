@@ -93,7 +93,7 @@ function CTreasure:__init()
 end
 --' Юзание инициатора (возможность выдать тайник)
 function CTreasure:use(npc)
-	printf("TREASURE USE")
+	--printf("TREASURE USE")
 
 	--' Проверим, не вызывались ли мы уже для этого объекта. 
 	local se_obj = alife():object(npc:id())
@@ -213,8 +213,8 @@ function CTreasure:give_treasure(k)
 		--' Пометим тайник как выданный
 		self.treasure_info[k].active = true
 		self.treasure_info[k].done = true
-	else
-		printf("TREASURE %s, target doesnt exist", k)
+	--else
+		--printf("TREASURE %s, target doesnt exist", k)
 	end
 end
 --' Перенос содержимого для предотвращения возможной потери
@@ -234,7 +234,7 @@ function CTreasure:loss_workaround()
 end
 --' Снимаем отметку с тайника
 function CTreasure:treasure_empty(box, box_story_id)
-	printf("!!! treasure empty")
+	--printf("!!! treasure empty")
 	local k = self.treasure_by_target[box_story_id]
 
 	if k == nil or self.treasure_info[k] == nil then 
@@ -277,7 +277,7 @@ function get_treasure_manager()
 end
 
 function take_item_from_box(box, box_story_id)
-	printf("!!! take item from box %s", tostring(box:is_inv_box_empty()))
+	--printf("!!! take item from box %s", tostring(box:is_inv_box_empty()))
 	if box:is_inv_box_empty() == true then
 		get_treasure_manager():treasure_empty(box, box_story_id)
 	end

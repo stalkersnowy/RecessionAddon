@@ -304,11 +304,11 @@ end
 function CKampManager:getDestVertex(npc_id, radius)
 	--printf("get dest Vertex called [%s]", npc_id)
 	if self.npc[npc_id].position == nil then
-		printf("-------debug_info-------------")
-		print_table(self.npc)
-		printf("-------debug_info-------------")
-		print_table(self.position)
-		printf("-------debug_info-------------")
+		--printf("-------debug_info-------------")
+		--print_table(self.npc)
+		--printf("-------debug_info-------------")
+		--print_table(self.position)
+		--printf("-------debug_info-------------")
 		abort("get dest Vertex: nil [%s]", npc_id)
 		return nil
 	end
@@ -383,7 +383,7 @@ function CKampManager:proceedState(npc)
 	for k,v in pairs(temp) do
 		p = p - v
 		if p <= 0 then
-			printf("Selected [%s]", k)
+			--printf("Selected [%s]", k)
 			if k == "idle" then
 				self.director = nil
 				if self.kamp_state ~= "idle" then
@@ -674,9 +674,9 @@ function CKampManager:checkNpcAbility(npc)
 ]]
 end
 function CKampManager:addNpc(npc)
-	printf("KAMP [%s] add npc", npc:name())
+	--printf("KAMP [%s] add npc", npc:name())
 	if self.npc[npc:id()] ~= nil then
-		printf("NPC is already exist")
+		--printf("NPC is already exist")
 		return
 	end
 	
@@ -696,7 +696,7 @@ function CKampManager:addNpc(npc)
 	self:selectPosition(npc:id())	
 end
 function CKampManager:removeNpc(npc)
-	printf("KAMP [%s] remove npc", npc:name())
+	--printf("KAMP [%s] remove npc", npc:name())
 	local npc_id = npc:id()
 	if self.npc[npc_id] ~= nil then
 		-- ≈сли удал€ем режиссера - необходимо форсированно перевести лагерь в идловое состо€ние.
@@ -743,7 +743,7 @@ function add_to_binder(object, ini, scheme, section, storage)
 	manager:add_evaluator (properties["kamp_end"], 		this.evaluator_kamp_end		("kamp_end", storage, "kamp_end"))
 	manager:add_evaluator (properties["on_position"],	this.evaluator_on_position	("kamp_on_position", storage, "kamp_on_position"))
 
-	printf("PRP %s", stalker_ids.property_script)
+	--printf("PRP %s", stalker_ids.property_script)
 
 	-- Actions
 	local action = this.action_wait (object:name(),"action_kamp_wait", storage)

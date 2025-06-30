@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------------------------------------
 -- Author: Oleg Kreptul (Haron) haronk@ukr.net 2005
 ----------------------------------------------------------------------------------------------------
- function printf() end
+ --function printf() end
 
 active_sleep_zone = nil
 dream_prob  = -1
@@ -17,7 +17,7 @@ local def_regular_type = "normal"
 class "dream_mgr"
 
 function dream_mgr:__init()
-    printf("dream <init>: START INITIALIZATION")
+    --printf("dream <init>: START INITIALIZATION")
 
 	local ini = ini_file("misc\\dream.ltx")
     self.regular = nil
@@ -66,16 +66,16 @@ function dream_mgr:__init()
                             end
 
                             self.regular[rd_sect] = {dream_path, prob, tp}
-                        else
-                            printf("dream <error>: can't find field <dream> in section [%s].", rd_sect)
+                        --else
+                            --printf("dream <error>: can't find field <dream> in section [%s].", rd_sect)
                         end
-                    else
-                        printf("dream <error>: can't find section [%s] defined in the field <regular> in section [dreams].", rd_sect)
+                    --else
+                        --printf("dream <error>: can't find section [%s] defined in the field <regular> in section [dreams].", rd_sect)
                     end
                 end
             end
-        else
-            printf("dream <error>: can't find field <regular> in section [dreams].")
+        --else
+            --printf("dream <error>: can't find field <regular> in section [dreams].")
         end
 
         if ini:line_exist("dreams", "scenario") then
@@ -108,25 +108,25 @@ function dream_mgr:__init()
                                 end
 
                                 self.scenario[sd_sect] = {dream_path, cond, to_regular}
-                            else
-                                printf("dream <error>: can't find field <cond> in section [%s].", sd_sect)
+                            --else
+                                --printf("dream <error>: can't find field <cond> in section [%s].", sd_sect)
                             end
-                        else
-                            printf("dream <error>: can't find field <dream> in section [%s].", sd_sect)
+                        --else
+                            --printf("dream <error>: can't find field <dream> in section [%s].", sd_sect)
                         end
-                    else
-                        printf("dream <error>: can't find section [%s] defined in the field <scenario> in section [dreams].", sd_sect)
+                    --else
+                        --printf("dream <error>: can't find section [%s] defined in the field <scenario> in section [dreams].", sd_sect)
                     end
                 end
             end
-        else
-            printf("dream <error>: can't find field <scenario> in section [dreams].")
+        --else
+            --printf("dream <error>: can't find field <scenario> in section [dreams].")
         end
-    else
-        printf("dream <error>: can't find section [dreams].")
+    --else
+        --printf("dream <error>: can't find section [dreams].")
     end
 
-    printf("dream <init>: END INITIALIZATION")
+    --printf("dream <init>: END INITIALIZATION")
 end
 
 function dream_mgr:name()
@@ -201,10 +201,10 @@ function can_sleep_callback()
     -- function must return "can_sleep" to allow actor sleeping,
     -- otherwise return string_table identifier that describes  reason
     if active_sleep_zone ~= nil then
-        printf("dream <can_sleep_callback>: can_sleep")
+        --printf("dream <can_sleep_callback>: can_sleep")
         return "can_sleep" -- registered keyword
     else
-        printf("dream <can_sleep_callback>: cant_sleep_not_on_solid_ground")
+        --printf("dream <can_sleep_callback>: cant_sleep_not_on_solid_ground")
         return "cant_sleep_not_on_solid_ground"
     end
 end	

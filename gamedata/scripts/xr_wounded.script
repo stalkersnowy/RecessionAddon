@@ -385,7 +385,7 @@ local wounded_by_state = {
 }
 
 function init_wounded(npc, ini, section, st, scheme)
-	printf("WOUNDED SECTION [%s][%s]", tostring(section), tostring(scheme))
+	--printf("WOUNDED SECTION [%s][%s]", tostring(section), tostring(scheme))
 
 	if tostring(section) == st.wounded_section and
 	   tostring(section) ~= "nil" 
