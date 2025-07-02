@@ -105,16 +105,6 @@ function action_door:close_action()
 		self.joint:set_max_force_and_velocity(0, 0, 0)
 	else
 		self.joint:set_max_force_and_velocity(10000, 1, 0)
-		
-		--!!! Фиксируем кость.
-		local ph_shell = self.object:get_physics_shell()
-		if ph_shell then
-			local ph_element = ph_shell:get_element_by_bone_name("door")
-			if not ph_element:is_fixed() then
-				--printf("FIX")
-				ph_element:fix()
-			end	
-		end		
 	end
 	self.block = false
 	-- Отыграть звук когда дверь захлопнулась:
@@ -129,16 +119,6 @@ function action_door:open_door(disable_snd)
 		if self.st.snd_open_start then
 			self:door_play_snd_from_set(self.st.snd_open_start)
 		end
-	end
-
-	--!!! Тут надо снять фиксацию кости
-	local ph_shell = self.object:get_physics_shell()
-	if ph_shell then
-		local ph_element = ph_shell:get_element_by_bone_name("door")
-		if ph_element:is_fixed() then
-			--printf("RELEASE")
-			ph_element:release_fixed()
-		end	
 	end
 	 
 	
