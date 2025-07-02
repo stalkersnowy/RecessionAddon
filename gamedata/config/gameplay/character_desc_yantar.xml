@@ -82,7 +82,7 @@
 		<crouch_type>1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_walther \n
+			wpn_beretta_m1 \n
 			ammo_9x19_fmj \n
 			kruglov_flash \n			
 		</supplies>
