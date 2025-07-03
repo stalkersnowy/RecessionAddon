@@ -468,6 +468,9 @@
 	<string id="ui_mm_r__detail_radius">
 		<text>Дальность травы</text>
 	</string>
+	<string id="ui_mm_r__shader_gamma">
+		<text>Влияние ползунков гаммы в шейдерах</text>
+	</string>
 	<string id="ui_mm_r__smapsize">
 		<text>Размер теневой карты</text>
 	</string>
@@ -581,6 +584,9 @@
 	</string>
 	<string id="descr_r__detail_radius">
 		<text>Регулировка дальности отрисовки травы (по умолчанию - крайнее левое положение ползунка)</text>
+	</string>
+	<string id="descr_r__shader_gamma">
+		<text>В оригинале ползунки гаммы, яркости и контраста работали только в полноэкранном режиме и не влияли на результат скриншотов и записи - опция переносит их влияние в шейдеры</text>
 	</string>
 	<string id="descr_r__smapsize">
 		<text>Аналог ключей из оригинала - регулирует качество теней от солнца (в оригинале по умолчанию - 2048)</text>

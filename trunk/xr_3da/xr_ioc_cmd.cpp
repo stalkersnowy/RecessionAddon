@@ -455,6 +455,7 @@ public:
 
 //-----------------------------------------------------------------------
 float	ps_gamma=1.f,ps_brightness=1.f,ps_contrast=1.f;
+ENGINE_API int	psShaderGamma=0;
 class CCC_Gamma : public CCC_Float
 {
 public:
@@ -463,9 +464,37 @@ public:
 	virtual void Execute(LPCSTR args)
 	{
 		CCC_Float::Execute		(args);
-		Device.Gamma.Gamma		(ps_gamma);
-		Device.Gamma.Brightness	(ps_brightness);
-		Device.Gamma.Contrast	(ps_contrast);
+		if(psShaderGamma){
+			Device.Gamma.Gamma		(1.f);
+			Device.Gamma.Brightness	(1.f);
+			Device.Gamma.Contrast	(1.f);
+		}else{
+			Device.Gamma.Gamma		(ps_gamma);
+			Device.Gamma.Brightness	(ps_brightness);
+			Device.Gamma.Contrast	(ps_contrast);
+		}
+		Device.Gamma.Update		();
+	}
+};
+
+//-----------------------------------------------------------------------
+class CCC_ShaderGamma : public CCC_Integer
+{
+public:
+	CCC_ShaderGamma	(LPCSTR N, int* V) : CCC_Integer(N,V,0,1)	{}
+
+	virtual void Execute(LPCSTR args)
+	{
+		CCC_Integer::Execute		(args);
+		if(psShaderGamma){
+			Device.Gamma.Gamma		(1.f);
+			Device.Gamma.Brightness	(1.f);
+			Device.Gamma.Contrast	(1.f);
+		}else{
+			Device.Gamma.Gamma		(ps_gamma);
+			Device.Gamma.Brightness	(ps_brightness);
+			Device.Gamma.Contrast	(ps_contrast);
+		}
 		Device.Gamma.Update		();
 	}
 };
@@ -646,6 +675,7 @@ void CCC_Register()
 	CMD2(CCC_Gamma,		"rs_c_gamma"			,&ps_gamma			);
 	CMD2(CCC_Gamma,		"rs_c_brightness"		,&ps_brightness		);
 	CMD2(CCC_Gamma,		"rs_c_contrast"			,&ps_contrast		);
+	CMD2(CCC_ShaderGamma,"r__shader_gamma"		,&psShaderGamma		);
 //	CMD4(CCC_Integer,	"rs_vb_size",			&rsDVB_Size,		32,		4096);
 //	CMD4(CCC_Integer,	"rs_ib_size",			&rsDIB_Size,		32,		4096);
 

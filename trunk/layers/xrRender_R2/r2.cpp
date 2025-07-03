@@ -76,6 +76,7 @@ static class cl_sun_shafts_intensity : public R_constant_setup
 
 extern ENGINE_API BOOL r2_sun_static;
 extern ENGINE_API BOOL r2_advanced_pp;
+extern ENGINE_API int psShaderGamma;
 //////////////////////////////////////////////////////////////////////////
 // Just two static storage
 void					CRender::create					()
@@ -939,6 +940,18 @@ HRESULT	CRender::shader_compile			(
 	if (ps_r2_ls_flags.test(R2FLAG_USE_SUNMASK))
 	{
 		defines[def_it].Name		=	"USE_SUNMASK";
+		defines[def_it].Definition	=	"1";
+		def_it						++;
+		sh_name[len]='1'; ++len;
+	}
+	else
+	{
+		sh_name[len]='0'; ++len;
+	}
+
+	if (psShaderGamma)
+	{
+		defines[def_it].Name		=	"SHADER_GAMMA";
 		defines[def_it].Definition	=	"1";
 		def_it						++;
 		sh_name[len]='1'; ++len;

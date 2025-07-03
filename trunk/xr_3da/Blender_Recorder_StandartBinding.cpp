@@ -264,6 +264,15 @@ static class cl_screen_res : public R_constant_setup
 	}
 }	binder_screen_res;
 
+extern float ps_gamma,ps_brightness,ps_contrast;
+static class cl_gamma_params : public R_constant_setup		
+{	
+	virtual void setup	(R_constant* C)
+	{
+		RCache.set_c	(C, ps_gamma, ps_brightness, ps_contrast, 0);
+	}
+}	binder_gamma_params;
+
 
 // Standart constant-binding
 void	CBlender_Compile::SetMapping	()
@@ -301,6 +310,7 @@ void	CBlender_Compile::SetMapping	()
 	r_Constant				("L_hemi_color",	&binder_hemi_color);
 	r_Constant				("L_ambient",		&binder_amb_color);
 	r_Constant				("screen_res",		&binder_screen_res);
+	r_Constant				("gamma_params",	&binder_gamma_params);
 
 	//hemi cube
 	r_Constant				("L_material",			&binder_material);

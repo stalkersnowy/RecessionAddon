@@ -1161,6 +1161,13 @@
 			<options_item entry="r__detail_radius" group="mm_opt_gameplay"/>
 		</track_r__detail_radius>
 
+		<cap_r__shader_gamma x="17" y="10" width="119" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r__shader_gamma</text>
+		</cap_r__shader_gamma>
+		<check_r__shader_gamma x="225" y="10" width="27" height="21" stretch="1">
+			<options_item entry="r__shader_gamma" group="mm_opt_gameplay"/>
+		</check_r__shader_gamma>
+
 		<cap_r__smapsize x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r__smapsize</text>
 		</cap_r__smapsize>

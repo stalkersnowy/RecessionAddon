@@ -1,6 +1,7 @@
 #include "common.h"
 #include "mblur.h"
 #include "dof.h"
+#include "gamma.h"
 
 struct 	v2p
 {
@@ -71,7 +72,8 @@ half4 	main		( v2p I )	: COLOR
 
 //SNW: доф
 	half3 	final	=  mblur	(center, dc, (s0+s1+s2+s3)/4.h);
-			final	=  dof		(center, final);
+			final	=  dof		(center, final);	
+	half4	fin		=  combine_bloom(final, tex2D(s_bloom, I.tc0));
 
-  return combine_bloom(final,tex2D	(s_bloom, I.tc0));
+  return gamma(fin);
 }
