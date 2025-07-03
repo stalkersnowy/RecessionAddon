@@ -224,9 +224,9 @@ function CTreasure:loss_workaround()
 		if box == nil then
 			abort("inv box nil")
 		end
-		dbglog("loss_workaround:box=%d", k)
+--		dbglog("loss_workaround:box=%d", k)
 		for kk,vv in ipairs(v) do
-			dbglog("  item:name=%s", level.object_by_id(vv):name())
+--			dbglog("  item:name=%s", level.object_by_id(vv):name())
 			db.actor:transfer_item(level.object_by_id(vv), box)
 		end
 	end

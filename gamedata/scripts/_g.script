@@ -21,9 +21,9 @@ function printf(fmt,...)
 end
 
 function dbglog(fmt,...)
-	local msg = string.format(fmt, ...)
-	local msg_no_ws = string.gsub(msg, "%s", "_")
-	get_console():execute("dbg:" .. msg_no_ws)
+--	local msg = string.format(fmt, ...)
+--	local msg_no_ws = string.gsub(msg, "%s", "_")
+--	get_console():execute("dbg:" .. msg_no_ws)
 end
 
 ----------------------------------------------------------------------
