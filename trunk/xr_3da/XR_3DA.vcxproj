@@ -120,8 +120,8 @@
     <OutDir>..\..\binaries\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>..\..\intermediate\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>.\;..\..\3rd party\Xiph\libogg\include;..\..\3rd party\Xiph\libtheora\include;..\Luabind\;..\..\3rd party\boost\;..\LuaJIT\src\;..\..\3rd party\dxerr\src;..\..\3rd party\DPlay;..\..\3rd party\dxsdk\Include\;..\xrCore;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\3rd party\dxsdk\Lib;..\..\libraries\$(Platform)\$(Configuration)\;..\..\3rd party\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>.\;..\..\3rd party\Xiph\libogg\include;..\..\3rd party\Xiph\libtheora\include;..\Luabind\;..\..\3rd party\boost\;..\LuaJIT\src\;..\..\3rd party\dxerr\src;..\..\3rd party\DPlay;..\..\3rd party\dxsdk\Include\;..\xrCore;..\..\3rd party\hw\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\3rd party\dxsdk\Lib;..\..\libraries\$(Platform)\$(Configuration)\;..\..\3rd party\libs;..\..\3rd party\hw;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Dedicated|Win32'">
     <OutDir>..\..\binaries\$(Platform)\$(Configuration)\</OutDir>
@@ -300,8 +300,8 @@
       <Culture>0x0422</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalOptions>/MACHINE:I386  %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>msacm32.lib;vfw32.lib;libogg_static.lib;libtheora_static.lib;openAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/MACHINE:I386  /SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>msacm32.lib;vfw32.lib;libogg_static.lib;libtheora_static.lib;openAL32.lib;nvapi.lib;atimgpud_s_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <IgnoreSpecificDefaultLibraries>libcmt;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -315,6 +315,8 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <ImportLibrary>..\..\libraries\$(Platform)\$(Configuration)\$(ProjectName).lib</ImportLibrary>
       <FixedBaseAddress>false</FixedBaseAddress>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Dedicated|Win32'">

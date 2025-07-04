@@ -105,8 +105,10 @@ void CRenderTarget::accum_point		(light* L)
 		draw_volume					(L);
 	}
 
-	dwLightMarkerID					+=	2;	// keep lowest bit always setted up
 	CHK_DX		(HW.pDevice->SetRenderState(D3DRS_SCISSORTESTENABLE,FALSE));
+	
+	//dwLightMarkerID					+=	2;	// keep lowest bit always setted up
+	increment_light_marker();
 
 	u_DBT_disable				();
 }

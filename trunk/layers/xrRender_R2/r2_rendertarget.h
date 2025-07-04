@@ -243,6 +243,11 @@ public:
 	virtual u32					get_width				()				{ return dwWidth;					}
 	virtual u32					get_height				()				{ return dwHeight;					}
 
+	//	Need to reset stencil only when marker overflows.
+	//	Don't clear when render for the first time
+	void						reset_light_marker( bool bResetStencil = false);
+	void						increment_light_marker();
+
 #ifdef DEBUG
 	IC void						dbg_addline				(Fvector& P0, Fvector& P1, u32 c)					{
 		dbg_lines.push_back		(dbg_line_t());

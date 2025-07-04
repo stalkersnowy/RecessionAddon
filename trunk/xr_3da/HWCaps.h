@@ -6,6 +6,11 @@
 
 class ENGINE_API CHWCaps {
 public:
+	enum
+	{
+		MAX_GPUS		= 8
+	};
+
 	struct		caps_Geometry
 	{
 		u32	dwRegisters		: 16;
@@ -33,6 +38,8 @@ public:
 	BOOL			bForceGPU_SW;
 	BOOL			bForceGPU_NonPure;
 	BOOL			SceneMode;
+
+	u32				iGPUNum;
 
 	// device format
 	D3DFORMAT		fTarget;

@@ -377,7 +377,7 @@ CRenderTarget::CRenderTarget		()
 		t_LUM_dest.create			(r2_RT_luminance_cur);
 
 		// create pool
-		for (u32 it=0; it<4; it++)	{
+		for (u32 it=0; it<HW.Caps.iGPUNum*2; it++)	{
 			string256					name;
 			sprintf						(name,"%s_%d",	r2_RT_luminance_pool,it	);
 			rt_LUM_pool[it].create		(name,	1,	1,	D3DFMT_R32F				);
@@ -615,6 +615,61 @@ CRenderTarget::~CRenderTarget	()
 	xr_delete					(b_accum_mask			);
 	xr_delete					(b_occq					);
     xr_delete					(b_fxaa					);
+}
+
+void CRenderTarget::reset_light_marker( bool bResetStencil)
+{
+	dwLightMarkerID = 5;
+	if (bResetStencil)
+	{
+		RCache.set_ColorWriteEnable	(FALSE);
+		u32		Offset;
+		float	_w					= float(Device.dwWidth);
+		float	_h					= float(Device.dwHeight);
+		u32		C					= color_rgba	(255,255,255,255);
+		float	eps					= EPS_S;
+		FVF::TL* pv					= (FVF::TL*) RCache.Vertex.Lock	(4,g_combine->vb_stride,Offset);
+		pv->set						(eps,			float(_h+eps),	eps,	1.f, C, 0, 0);	pv++;
+		pv->set						(eps,			eps,			eps,	1.f, C, 0, 0);	pv++;
+		pv->set						(float(_w+eps),	float(_h+eps),	eps,	1.f, C, 0, 0);	pv++;
+		pv->set						(float(_w+eps),	eps,			eps,	1.f, C, 0, 0);	pv++;
+		RCache.Vertex.Unlock		(4,g_combine->vb_stride);
+		RCache.set_CullMode			(CULL_NONE	);
+		//	Clear everything except last bit
+		RCache.set_Stencil	(TRUE,D3DCMP_ALWAYS,dwLightMarkerID,0x00,0xFE, D3DSTENCILOP_ZERO, D3DSTENCILOP_ZERO, D3DSTENCILOP_ZERO);
+		//RCache.set_Stencil	(TRUE,D3DCMP_ALWAYS,dwLightMarkerID,0x00,0xFF, D3DSTENCILOP_ZERO, D3DSTENCILOP_ZERO, D3DSTENCILOP_ZERO);
+		RCache.set_Element			(s_occq->E[1]	);
+		RCache.set_Geometry			(g_combine		);
+		RCache.Render				(D3DPT_TRIANGLELIST,Offset,0,4,0,2);
+
+/*
+		u32		Offset;
+		float	_w					= float(Device.dwWidth);
+		float	_h					= float(Device.dwHeight);
+		u32		C					= color_rgba	(255,255,255,255);
+		float	eps					= 0;
+		float	_dw					= 0.5f;
+		float	_dh					= 0.5f;
+		FVF::TL* pv					= (FVF::TL*) RCache.Vertex.Lock	(4,g_combine->vb_stride,Offset);
+		pv->set						(-_dw,		_h-_dh,		eps,	1.f, C, 0, 0);	pv++;
+		pv->set						(-_dw,		-_dh,		eps,	1.f, C, 0, 0);	pv++;
+		pv->set						(_w-_dw,	_h-_dh,		eps,	1.f, C, 0, 0);	pv++;
+		pv->set						(_w-_dw,	-_dh,		eps,	1.f, C, 0, 0);	pv++;
+		RCache.Vertex.Unlock		(4,g_combine->vb_stride);
+		RCache.set_Element			(s_occq->E[2]	);
+		RCache.set_Geometry			(g_combine		);
+		RCache.Render				(D3DPT_TRIANGLELIST,Offset,0,4,0,2);
+*/
+	}
+}
+
+void CRenderTarget::increment_light_marker()
+{
+	dwLightMarkerID += 2;
+
+	//if (dwLightMarkerID>10)
+	if (dwLightMarkerID>255)
+		reset_light_marker(true);
 }
 
 bool CRenderTarget::need_to_render_sunshafts()
