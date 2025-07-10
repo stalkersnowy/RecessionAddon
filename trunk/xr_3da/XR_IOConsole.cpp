@@ -354,6 +354,9 @@ void CConsole::OnRender	()
 	u32 qn = xr_strlen( q );
 	pFont->SetColor( total_font_color );
 	pFont->OutI( 0.95f - 0.03f * qn, fMaxY - 2.0f * LDIST, "[%d]", log_line );
+
+	LPCSTR layout = ec().is_russian_layout()? "RU" : "EN";
+	pFont->OutI(0.95f - 0.03f * qn, fMaxY - 3.0f * LDIST, "[%s]", layout);
 		
 	pFont->OnRender();
 	pFont2->OnRender();

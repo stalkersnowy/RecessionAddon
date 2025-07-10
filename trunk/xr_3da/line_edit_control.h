@@ -59,12 +59,12 @@ private:
     static constexpr const char* latin_chars	= "qwertyuiop[]asdfghjkl;'zxcvbnm,./QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>?!@#$%^&";
 	static constexpr const char* russian_chars	= "éöóêåíãøùçõúôûâàïğîëäæıÿ÷ñìèòüáş.ÉÖÓÊÅÍÃØÙÇÕÚÔÛÂÀÏĞÎËÄÆİß×ÑÌÈÒÜÁŞ,!\"¹;%:?";
     
-    bool is_russian_layout() const {
-        HKL current_layout = GetKeyboardLayout(0);
-        return (LOWORD(current_layout) == 0x0419);
-    }
-
 public:
+			bool is_russian_layout() const {
+				HKL current_layout = GetKeyboardLayout(0);
+				return (LOWORD(current_layout) == 0x0419);
+			}
+
 					line_edit_control	( u32 str_buffer_size );
 			void	init				( u32 str_buffer_size, init_mode mode = im_standart );
 					~line_edit_control	();
