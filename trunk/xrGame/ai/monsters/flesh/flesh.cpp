@@ -65,7 +65,7 @@ void CAI_Flesh::Load(LPCSTR section)
 
 	anim().AddAnim(eAnimAttack,			"stand_attack_",		-1, &velocity_turn,		PS_STAND);
 	anim().AddAnim(eAnimAttackFromBack,	"stand_attack_back_",	-1, &velocity_none,		PS_STAND);
-	anim().AddAnim(eAnimCheckCorpse,		"stand_eat_",			 1,	&velocity_none,		PS_STAND);
+	anim().AddAnim(eAnimCheckCorpse,	"stand_check_corpse_",	 1,	&velocity_none,		PS_STAND);
 
 	anim().AddAnim(eAnimEat,				"stand_eat_",			-1, &velocity_none,		PS_STAND);
 	anim().AddAnim(eAnimDie,				"stand_die_",			-1, &velocity_none,		PS_STAND);

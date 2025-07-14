@@ -101,7 +101,7 @@ void CAI_PseudoDog::Load(LPCSTR section)
 	anim().AddAnim(eAnimLieToSleep,		"lie_to_sleep_",		-1,	&velocity_none,		PS_LIE);
 	anim().AddAnim(eAnimSleepStandUp,	"lie_to_stand_up_",		-1, &velocity_none,		PS_LIE);
 	anim().AddAnim(eAnimAttackPsi,		"stand_psi_attack_",	-1, &velocity_turn,		PS_STAND);
-	anim().AddAnim(eAnimThreaten,		"stand_howling_",		-1,	&velocity_none,		PS_STAND);
+	anim().AddAnim(eAnimThreaten,		"stand_idle_threaten_",	-1,	&velocity_none,		PS_STAND);
 	
 	anim().AddAnim(eAnimRunTurnLeft,	"stand_run_turn_left_",	-1, &velocity_run,		PS_STAND);
 	anim().AddAnim(eAnimRunTurnRight,	"stand_run_turn_right_",-1, &velocity_run,		PS_STAND);

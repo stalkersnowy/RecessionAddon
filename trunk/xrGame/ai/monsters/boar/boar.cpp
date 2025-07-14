@@ -69,7 +69,7 @@ void CAI_Boar::Load(LPCSTR section)
 	anim().AddAnim(eAnimDragCorpse,		"stand_drag_",			-1, &velocity_drag,		PS_STAND);
 	anim().AddAnim(eAnimLookAround,		"stand_idle_",			 2, &velocity_none,		PS_STAND);
 	anim().AddAnim(eAnimSteal,			"stand_steal_",			-1, &velocity_steal,	PS_STAND);
-	anim().AddAnim(eAnimDie,				"stand_idle_",			-1, &velocity_none,		PS_STAND);
+	anim().AddAnim(eAnimDie,				"stand_die_",			-1, &velocity_none,		PS_STAND);
 	anim().AddAnim(eAnimJumpLeft,		"stand_jump_left_",		-1, &velocity_turn,		PS_STAND);
 	anim().AddAnim(eAnimJumpRight,		"stand_jump_right_",	-1, &velocity_turn,		PS_STAND);
 //	anim().AddAnim(eAnimAttackRun,		"stand_run_attack_",	-1, &velocity_run,		PS_STAND);
