@@ -11,6 +11,7 @@ namespace GameConstants
 	bool GetEnableDuplet					();
 	bool GetOldShotEffector					();
 	bool GetBornArtefacts					();
+	bool GetOldMutants						();
 
 	bool GetContactsBioShowing				();
 	bool GetPartnerWeightInCarBodyShowing	();

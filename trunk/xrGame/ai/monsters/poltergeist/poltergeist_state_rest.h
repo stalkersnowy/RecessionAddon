@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../states/monster_state_rest.h"
+#include "GameConstants.h"
 
 template<typename _Object>
 class	CPoltergeistStateRest : public CStateMonsterRest<_Object> {
@@ -14,6 +15,10 @@ public:
 template<typename _Object>
 void CPoltergeistStateRest<_Object>::execute()
 {
+	if(GameConstants::GetOldMutants()){
+		inherited::execute();
+		return;
+	}
 	// check alife control
 	bool captured_by_smart_terrain = false;
 

@@ -38,7 +38,7 @@ void CControlJump::load(LPCSTR section)
 	m_min_distance					= pSettings->r_float(section,"jump_min_distance");
 	m_max_distance					= pSettings->r_float(section,"jump_max_distance");
 	m_max_angle						= pSettings->r_float(section,"jump_max_angle");
-	m_max_height					= pSettings->r_float(section,"jump_max_height");
+	m_max_height					= READ_IF_EXISTS(pSettings,r_float,section,"jump_max_height",3.5f);
 }
 
 bool CControlJump::check_start_conditions()

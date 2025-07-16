@@ -7,6 +7,7 @@
 #include "../control_path_builder_base.h"
 #include "controller_direction.h"
 #include "../monster_velocity_space.h"
+#include "GameConstants.h"
 
 const float	_pmt_psy_attack_time  = 0.5f;
 
@@ -78,22 +79,17 @@ void CControllerAnimation::on_event(ControlCom::EEventType type, ControlCom::IEv
 
 void CControllerAnimation::update_frame()
 {
+	if (!GameConstants::GetOldMutants() || m_controller->m_mental_state == CController::eStateIdle) {
+		inherited::update_frame();
+		return;
+	}
 	
-	inherited::update_frame();
-	return;
-
+	if (is_moving()) set_path_direction();
 	
-	//if (m_controller->m_mental_state == CController::eStateIdle) {
-	//	inherited::update_frame();
-	//	return;
-	//}
-	//
-	//if (is_moving()) set_path_direction();
-	//
-	//select_legs_animation	();	
-	//select_torso_animation	();	
-	//
-	//select_velocity			();
+	select_legs_animation	();	
+	select_torso_animation	();	
+	
+	select_velocity			();
 }
 
 void CControllerAnimation::load()
@@ -288,10 +284,13 @@ CControllerAnimation::SPathRotations CControllerAnimation::get_path_rotation(flo
 
 void CControllerAnimation::set_body_state(ETorsoActionType torso, ELegsActionType legs)
 {
-	m_current_legs_action		= CControllerAnimation::eLegsTypeStealMotion;
-	m_current_torso_action		= CControllerAnimation::eTorsoSteal;
-	//m_current_legs_action		= legs;
-	//m_current_torso_action		= torso;
+	if(GameConstants::GetOldMutants()){
+		m_current_legs_action	= legs;
+		m_current_torso_action	= torso;
+	}else{
+		m_current_legs_action	= CControllerAnimation::eLegsTypeStealMotion;
+		m_current_torso_action	= CControllerAnimation::eTorsoSteal;
+	}
 }
 
 bool CControllerAnimation::is_moving()

@@ -12,6 +12,7 @@ bool	m_bEnableSleeping					= false;
 bool	m_bEnableDuplet						= false;
 bool	m_bOldShotEffector					= false;
 bool	m_bBornArtefacts					= false;
+bool	m_bOldMutants						= false;
 
 bool	m_bShowContactBio					= true;
 bool	m_bShowPartnerWeightInCarBody		= false;
@@ -39,6 +40,7 @@ namespace GameConstants
 		m_bEnableDuplet						= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "enable_duplet", m_bEnableDuplet);
 		m_bOldShotEffector					= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "old_shot_effector", m_bOldShotEffector);
 		m_bBornArtefacts					= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "born_artefacts", m_bBornArtefacts);
+		m_bOldMutants						= READ_IF_EXISTS(pConstantsSettings, r_bool, "gameplay", "old_mutants", m_bOldMutants);
 
 		m_bShowContactBio					= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_contact_bio", m_bShowContactBio);
 		m_bShowPartnerWeightInCarBody		= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_partner_weight_in_carbody", m_bShowPartnerWeightInCarBody);
@@ -86,6 +88,11 @@ namespace GameConstants
 	bool GetBornArtefacts()
 	{
 		return m_bBornArtefacts;
+	}
+
+	bool GetOldMutants()
+	{
+		return m_bOldMutants;
 	}
 
 

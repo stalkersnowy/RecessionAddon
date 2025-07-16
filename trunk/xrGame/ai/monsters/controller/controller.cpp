@@ -41,6 +41,7 @@
 #include "controller_psy_hit.h"
 #include "../monster_cover_manager.h"
 #include "controller_psy_aura.h"
+#include "GameConstants.h"
 
 #ifdef _DEBUG
 #	include <dinput.h>
@@ -79,7 +80,7 @@ CController::~CController()
 void CController::Load(LPCSTR section)
 {
 	inherited::Load	(section);
-
+	
 	// Load Control FX texture
 //	m_UIControlFX.Init(pSettings->r_string(section, "control_fx_texture"), "hud\\default",0,0,0);
 //	m_UIControlFX2.Init(pSettings->r_string(section, "control_fx_texture2"), "hud\\default",0,0,0);
@@ -88,8 +89,10 @@ void CController::Load(LPCSTR section)
 	m_controlled_objects.reserve	(m_max_controlled_number);
 
 	anim().accel_load			(section);
-	//anim().accel_chain_add		(eAnimWalkFwd,		eAnimRun);
-	//anim().accel_chain_add		(eAnimWalkDamaged,	eAnimRunDamaged);
+	if(GameConstants::GetOldMutants()){
+		anim().accel_chain_add	(eAnimWalkFwd,		eAnimRun);
+		anim().accel_chain_add	(eAnimWalkDamaged,	eAnimRunDamaged);
+	}
 
 	::Sound->create(control_start_sound,pSettings->r_string(section,"sound_control_start"),	st_Effect,SOUND_TYPE_WORLD);
 	::Sound->create(control_hit_sound,	pSettings->r_string(section,"sound_control_hit"),	st_Effect,SOUND_TYPE_WORLD);
@@ -630,26 +633,27 @@ void CController::create_base_controls()
 
 void CController::TranslateActionToPathParams()
 {
-	//if (m_mental_state == eStateIdle) {
-	//	inherited::TranslateActionToPathParams();
-	//	return;
-	//}
-	//custom_anim().set_path_params();
-
-	if ((anim().m_tAction != ACT_RUN) && (anim().m_tAction != ACT_WALK_FWD)) {
-		inherited::TranslateActionToPathParams();
-		return;
-	}
+	if(GameConstants::GetOldMutants()){
+		if (m_mental_state == eStateIdle) {
+			inherited::TranslateActionToPathParams();
+			return;
+		}
+		custom_anim().set_path_params();
+	}else{
+		if ((anim().m_tAction != ACT_RUN) && (anim().m_tAction != ACT_WALK_FWD)) {
+			inherited::TranslateActionToPathParams();
+			return;
+		}
 	
-	u32 vel_mask = (m_bDamaged ? MonsterMovement::eVelocityParamsWalkDamaged : MonsterMovement::eVelocityParamsWalk);
-	u32 des_mask = (m_bDamaged ? MonsterMovement::eVelocityParameterWalkDamaged : MonsterMovement::eVelocityParameterWalkNormal);
+		u32 vel_mask = (m_bDamaged ? MonsterMovement::eVelocityParamsWalkDamaged : MonsterMovement::eVelocityParamsWalk);
+		u32 des_mask = (m_bDamaged ? MonsterMovement::eVelocityParameterWalkDamaged : MonsterMovement::eVelocityParameterWalkNormal);
 
-	if (m_force_real_speed) vel_mask = des_mask;
+		if (m_force_real_speed) vel_mask = des_mask;
 
-	path().set_velocity_mask	(vel_mask);
-	path().set_desirable_mask	(des_mask);
-	path().enable_path			();
-
+		path().set_velocity_mask	(vel_mask);
+		path().set_desirable_mask	(des_mask);
+		path().enable_path			();
+	}
 }
 
 bool CController::is_relation_enemy(const CEntityAlive *tpEntityAlive) const

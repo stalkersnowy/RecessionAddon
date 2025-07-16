@@ -15,6 +15,7 @@
 #include "../../../detail_path_manager.h"
 #include "../../../CharacterPhysicsSupport.h"
 #include "../control_path_builder_base.h"
+#include "GameConstants.h"
 
 
 CPseudoGigant::CPseudoGigant()
@@ -25,7 +26,7 @@ CPseudoGigant::CPseudoGigant()
 	
 	com_man().add_ability(ControlCom::eControlRunAttack);
 	com_man().add_ability(ControlCom::eControlThreaten);
-	//com_man().add_ability(ControlCom::eControlJump);
+	if(GameConstants::GetOldMutants()) com_man().add_ability(ControlCom::eControlJump);
 	com_man().add_ability(ControlCom::eControlRotationJump);
 }
 
@@ -39,16 +40,22 @@ void CPseudoGigant::Load(LPCSTR section)
 {
 	inherited::Load	(section);
 
+	bool m_old_behaviour = GameConstants::GetOldMutants();
+
 	anim().AddReplacedAnim(&m_bDamaged,			eAnimRun,		eAnimRunDamaged);
 	anim().AddReplacedAnim(&m_bDamaged,			eAnimWalkFwd,	eAnimWalkDamaged);
-	//anim().AddReplacedAnim(&m_bRunTurnLeft,		eAnimRun,		eAnimRunTurnLeft);
-	//anim().AddReplacedAnim(&m_bRunTurnRight,	eAnimRun,		eAnimRunTurnRight);
+	if(m_old_behaviour){
+		anim().AddReplacedAnim(&m_bRunTurnLeft,	eAnimRun,		eAnimRunTurnLeft);
+		anim().AddReplacedAnim(&m_bRunTurnRight,eAnimRun,		eAnimRunTurnRight);
+	}
 
 	anim().accel_load			(section);
-	//anim().accel_chain_add		(eAnimWalkFwd,		eAnimRun);
-	//anim().accel_chain_add		(eAnimWalkFwd,		eAnimRunTurnLeft);
-	//anim().accel_chain_add		(eAnimWalkFwd,		eAnimRunTurnRight);
-	//anim().accel_chain_add		(eAnimWalkDamaged,	eAnimRunDamaged);
+	if(m_old_behaviour){
+		anim().accel_chain_add	(eAnimWalkFwd,		eAnimRun);
+		anim().accel_chain_add	(eAnimWalkFwd,		eAnimRunTurnLeft);
+		anim().accel_chain_add	(eAnimWalkFwd,		eAnimRunTurnRight);
+		anim().accel_chain_add	(eAnimWalkDamaged,	eAnimRunDamaged);
+	}
 
 	step_effector.time			= pSettings->r_float(section,	"step_effector_time");
 	step_effector.amplitude		= pSettings->r_float(section,	"step_effector_amplitude");
@@ -177,7 +184,7 @@ void CPseudoGigant::reinit()
 	move().load_velocity(*cNameSect(), "Velocity_JumpPrepare",MonsterMovement::eGiantVelocityParameterJumpPrepare);
 	move().load_velocity(*cNameSect(), "Velocity_JumpGround",MonsterMovement::eGiantVelocityParameterJumpGround);
 	
-	//com_man().load_jump_data(0,"jump_attack_0", "jump_attack_1", "jump_attack_2", MonsterMovement::eGiantVelocityParameterJumpPrepare, MonsterMovement::eGiantVelocityParameterJumpGround,0);
+	if(GameConstants::GetOldMutants()) com_man().load_jump_data(0,"jump_attack_0", "jump_attack_1", "jump_attack_2", MonsterMovement::eGiantVelocityParameterJumpPrepare, MonsterMovement::eGiantVelocityParameterJumpGround,0);
 	com_man().add_rotation_jump_data("1","2","3","4", PI_DIV_2);
 
 	com_man().set_threaten_data	("stand_kick_0", 0.43f);
@@ -306,7 +313,7 @@ void CPseudoGigant::HitEntityInJump		(const CEntity *pEntity)
 
 void CPseudoGigant::TranslateActionToPathParams()
 {
-	if ((anim().m_tAction != ACT_RUN) && (anim().m_tAction != ACT_WALK_FWD)) {
+	if (GameConstants::GetOldMutants() || (anim().m_tAction != ACT_RUN) && (anim().m_tAction != ACT_WALK_FWD)) {
 		inherited::TranslateActionToPathParams();
 		return;
 	}

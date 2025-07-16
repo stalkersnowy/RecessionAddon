@@ -19,11 +19,11 @@
 #include "../states/monster_state_hear_int_sound.h"
 #include "../states/monster_state_hear_danger_sound.h"
 #include "../states/monster_state_hitted.h"
-#include "../states/monster_state_attack.h"
 
 #include "../../../entitycondition.h"
 
 #include "../states/state_test_state.h"
+#include "GameConstants.h"
 
 CStateManagerController::CStateManagerController(CController *obj) : inherited(obj)
 {
@@ -36,13 +36,13 @@ CStateManagerController::CStateManagerController(CController *obj) : inherited(o
 	add_state(eStateAttack_Run,				xr_new<CStateMonsterAttackRun<CController> >			(obj));
 	add_state(eStateAttack_Melee,			xr_new<CStateMonsterAttackMelee<CController> >			(obj));
 
-	//add_state(
-	//	eStateAttack, 
-	//	xr_new<CStateControllerAttack<CController> > (obj,
-	//		xr_new<CStateMonsterAttackRun<CController> >(obj), 
-	//		xr_new<CStateMonsterAttackMelee<CController> >(obj)
-	//	)
-	//);
+	add_state(
+		eStateAttack, 
+		xr_new<CStateControllerAttack<CController> > (obj,
+			xr_new<CStateMonsterAttackRun<CController> >(obj), 
+			xr_new<CStateMonsterAttackMelee<CController> >(obj)
+		)
+	);
 
 	add_state(eStateEat,		xr_new<CStateMonsterEat<CController> >(obj));
 	add_state(eStateCustom,		xr_new<CStateControlHide<CController> >(obj));
@@ -70,37 +70,42 @@ void CStateManagerController::execute()
 
 	// Lain: changed logic
 	if (enemy) {
-
-		if ( object->EnemyMan.get_danger_type() == eStrong )
-		{
-			state_id = eStatePanic; 
-		}
-		else
-		{
-			if ( current_substate == eStateAttack_Melee )
+		if(GameConstants::GetOldMutants()){
+			switch (object->EnemyMan.get_danger_type()) {
+				case eStrong:	state_id = eStatePanic; break;
+				case eWeak:		state_id = eStateAttack; break;
+			}
+		}else{
+			if ( object->EnemyMan.get_danger_type() == eStrong )
 			{
-				if ( get_state(eStateAttack_Melee)->check_completion() )
-				{
-					state_id = eStateAttack_Run;
-				}
-				else
-				{
-					state_id = eStateAttack_Melee;
-				}
+				state_id = eStatePanic; 
 			}
 			else
 			{
-				if ( get_state(eStateAttack_Melee)->check_start_conditions() )
+				if ( current_substate == eStateAttack_Melee )
 				{
-					state_id = eStateAttack_Melee;
+					if ( get_state(eStateAttack_Melee)->check_completion() )
+					{
+						state_id = eStateAttack_Run;
+					}
+					else
+					{
+						state_id = eStateAttack_Melee;
+					}
 				}
 				else
 				{
-					state_id = eStateAttack_Run;
+					if ( get_state(eStateAttack_Melee)->check_start_conditions() )
+					{
+						state_id = eStateAttack_Melee;
+					}
+					else
+					{
+						state_id = eStateAttack_Run;
+					}
 				}
-			}
-		}		
-
+			}		
+		}
 	} else if (object->HitMemory.is_hit()) {
 		state_id = eStateHitted;
 	} else if (object->hear_dangerous_sound) {
