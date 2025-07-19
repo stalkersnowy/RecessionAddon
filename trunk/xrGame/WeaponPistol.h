@@ -12,6 +12,7 @@ public:
 	virtual void	Load			(LPCSTR section);
 	
 	virtual void	switch2_Reload	();
+	virtual void	switch2_Hiding	();
 
 	virtual void	OnShot			();
 	virtual void	OnAnimationEnd	(u32 state);
@@ -45,4 +46,6 @@ protected:
 	SWMmotions&			swm_current	();
 
 	bool m_opened;
+
+	bool m_use_close_anim;
 };

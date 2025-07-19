@@ -74,6 +74,7 @@ void CWeaponPistol::Load	(LPCSTR section)
 		animGet				(wm_mhud_r.mhud_idle_aim,		str);
 	}
 
+	m_use_close_anim	= READ_IF_EXISTS(pSettings,r_bool,*hud_sect,"use_close_anim",false);
 }
 
 void CWeaponPistol::OnH_B_Chield		()
@@ -103,8 +104,25 @@ void CWeaponPistol::PlayAnimIdle	()
 {
 	VERIFY(GetState()==eIdle);
 	if(m_opened){ 
-		CWeaponPistol::WWPMotions& m = wwpm_current();
-		m_pHUD->animPlay(random_anim(m.mhud_empty), TRUE, NULL, GetState());
+		bool no_anim_yet = true;
+		CActor* pActor = smart_cast<CActor*>(H_Parent());
+		if (pActor)
+		{
+			CEntity::SEntityState st;
+			pActor->g_State(st);
+			if (st.bSprint)
+			{
+				if (mhud.mhud_idle_sprint.size())
+				{
+					m_pHUD->animPlay(random_anim(mhud.mhud_idle_sprint), TRUE, NULL, GetState());
+					no_anim_yet = false;
+				}
+			}
+		}
+		if(no_anim_yet){
+			CWeaponPistol::WWPMotions& m = wwpm_current();
+			m_pHUD->animPlay(random_anim(m.mhud_empty), TRUE, NULL, GetState());
+		}
 	}else{
 		CActor* A = smart_cast<CActor*>(H_Parent());
 		if(A && A->Holder()){
@@ -135,7 +153,6 @@ void CWeaponPistol::PlayAnimHide()
 	VERIFY(GetState()==eHiding);
 	if(m_opened) 
 	{
-		PlaySound			(sndClose,get_LastFP());
 		CWeaponPistol::WWPMotions& m = wwpm_current();
 		m_pHUD->animPlay	(random_anim(m.mhud_close), TRUE, this, GetState());
 	} 
@@ -169,12 +186,16 @@ void CWeaponPistol::switch2_Reload()
 
 void CWeaponPistol::OnAnimationEnd(u32 state)
 {
+	bool need_main = true;
 	if(state == eHiding && m_opened) 
 	{
 		m_opened = false;
-//		switch2_Hiding();
+		if(m_use_close_anim){
+			switch2_Hiding();
+			need_main = false;
+		}
 	} 
-	inherited::OnAnimationEnd(state);
+	if(need_main) inherited::OnAnimationEnd(state);
 }
 
 void CWeaponPistol::OnShot		()
@@ -228,4 +249,14 @@ CWeaponMagazined::SWMmotions&	 CWeaponPistol::swm_current	()
 	}
 //.	Msg("double-hands animation playing");
 	return					mhud;
+}
+
+void CWeaponPistol::switch2_Hiding()
+{
+	CWeapon::FireEnd();
+	
+	PlaySound	((m_use_close_anim&&m_opened) ? sndClose : sndHide,get_LastFP());
+
+	PlayAnimHide();
+	m_bPending = true;
 }
