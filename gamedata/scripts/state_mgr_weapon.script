@@ -205,7 +205,7 @@ function act_state_mgr_weapon_drop:initialize()
 	local weap = get_weapon(self.object, self.st.target_state)
 	if strappable_weapon(weap) then
     --' Тут надо уменьшить кондишн оружия
-		if weap then weap:set_condition((math.random(15)+75)/100) end
+		if weap then weap:set_condition((math.random(15)+75)*weap:condition()/100) end
 		self.object:set_item(object.drop, weap)
 	else
 		self.object:set_item(object.idle, nil)
