@@ -37,6 +37,7 @@
 #include "weaponmagazined.h"
 #include "stalker_animation_manager.h"
 #include "level_path_manager.h"
+#include "GameConstants.h"
 
 #define DISABLE_COVER_BEFORE_DETOUR
 
@@ -263,18 +264,18 @@ void CStalkerActionGetReadyToKill::initialize	()
 {
 	inherited::initialize								();
 
-	m_body_state										= object().movement().body_state();
-//	m_movement_type										= Random.randI(2) ? eMovementTypeRun : eMovementTypeWalk;
-//	m_movement_type										= eMovementTypeRun;
-
 	object().movement().set_desired_direction			(0);
 	object().movement().set_path_type					(MovementManager::ePathTypeLevelPath);
 	object().movement().set_detail_path_type			(DetailPathManager::eDetailPathTypeSmooth);
 	object().movement().set_nearest_accessible_position	();
 	object().movement().set_mental_state				(eMentalStateDanger);
-	object().movement().set_body_state					(m_body_state);
-//	object().movement().set_movement_type				(eMovementTypeRun);
-//	object().sight().setup								(CSightAction(SightManager::eSightTypePathDirection));
+	if(GameConstants::GetOldCombat()){
+		object().movement().set_body_state				(eBodyStateStand);
+		object().movement().set_movement_type			(eMovementTypeStand);
+	}else{
+		m_body_state									= object().movement().body_state();
+		object().movement().set_body_state				(m_body_state);
+	}
 	if (m_affect_properties) {
 		m_storage->set_property							(eWorldPropertyInCover,false);
 		m_storage->set_property							(eWorldPropertyLookedOut,false);
@@ -307,21 +308,22 @@ void CStalkerActionGetReadyToKill::execute		()
 
 	if (!object().memory().enemy().selected())
 		return;
+	
+	bool old_combat = GameConstants::GetOldCombat();
 
-	if (object().movement().detail().distance_to_target() < 2.f) {
-		object().movement().set_movement_type	(eMovementTypeWalk);
-		object().sight().setup					(CSightAction(SightManager::eSightTypeCurrentDirection));
-	}
-	else {
-		object().movement().set_movement_type	(eMovementTypeRun);
-		object().sight().setup					(CSightAction(SightManager::eSightTypePathDirection));
-	}
+	if(!old_combat){
+		if (object().movement().detail().distance_to_target() < 2.f) {
+			object().movement().set_movement_type	(eMovementTypeWalk);
+			object().sight().setup					(CSightAction(SightManager::eSightTypeCurrentDirection));
+		}
+		else {
+			object().movement().set_movement_type	(eMovementTypeRun);
+			object().sight().setup					(CSightAction(SightManager::eSightTypePathDirection));
+		}
 
-	if (object().movement().detail().distance_to_target() > CLOSE_MOVE_DISTANCE)
-		object().movement().set_body_state		(eBodyStateStand);
-//	else {
-//		object().movement().set_movement_type	(m_movement_type);
-//	}
+		if (object().movement().detail().distance_to_target() > CLOSE_MOVE_DISTANCE)
+			object().movement().set_body_state		(eBodyStateStand);
+	}
 
 	CMemoryInfo							mem_object = object().memory().memory(object().memory().enemy().selected());
 	Fvector								position = mem_object.m_object_params.m_position;
@@ -330,21 +332,23 @@ void CStalkerActionGetReadyToKill::execute		()
 	if (point) {
 		object().movement().set_level_dest_vertex	(point->level_vertex_id());
 		object().movement().set_desired_position	(&point->position());
-//		object().movement().set_movement_type		(eMovementTypeRun);
+		if(old_combat) object().movement().set_movement_type	(eMovementTypeRun);
 		if (object().movement().path_completed() || object().Position().distance_to(point->position()) < 1.f) {
-//			object().movement().set_body_state		(eBodyStateCrouch);
+			if(old_combat) object().movement().set_body_state	(eBodyStateCrouch);
 			object().brain().affect_cover			(true);
 		}
 		else {
-//			object().movement().set_body_state		(eBodyStateStand);
+			if(old_combat) object().movement().set_body_state	(eBodyStateStand);
 			object().brain().affect_cover			(false);
 		}
 	}
 	else {
 		object().brain().affect_cover				(true);
 		object().movement().set_movement_type		(eMovementTypeStand);
-//		object().movement().set_body_state			(eBodyStateCrouch);
-		object().movement().set_nearest_accessible_position	();
+		if(old_combat)
+			object().movement().set_body_state		(eBodyStateCrouch);
+		else
+			object().movement().set_nearest_accessible_position	();
 	}
 
 //	if (object().memory().visual().visible_now(object().memory().enemy().selected()))
@@ -381,7 +385,8 @@ void CStalkerActionKillEnemy::initialize		()
 	object().movement().set_detail_path_type	(DetailPathManager::eDetailPathTypeSmooth);
 	object().movement().set_nearest_accessible_position		();
 	object().movement().set_mental_state		(eMentalStateDanger);
-//	object().movement().set_body_state			(m_storage->property(eWorldPropertyUseCrouchToLookOut) ? eBodyStateCrouch : eBodyStateStand);
+	if(GameConstants::GetOldCombat())
+		object().movement().set_body_state		(m_storage->property(eWorldPropertyUseCrouchToLookOut) ? eBodyStateCrouch : eBodyStateStand);
 	object().movement().set_movement_type		(eMovementTypeStand);
 	m_storage->set_property						(eWorldPropertyLookedOut,false);
 	m_storage->set_property						(eWorldPropertyPositionHolded,false);
@@ -436,16 +441,20 @@ void CStalkerActionTakeCover::initialize		()
 {
 	inherited::initialize						();
 
-	m_body_state								= object().movement().body_state();
-//	m_movement_type								= Random.randI(2) ? eMovementTypeRun : eMovementTypeWalk;
-	m_movement_type								= eMovementTypeWalk;
-
 	object().movement().set_desired_direction	(0);
 	object().movement().set_path_type			(MovementManager::ePathTypeLevelPath);
 	object().movement().set_detail_path_type	(DetailPathManager::eDetailPathTypeSmooth);
-	object().movement().set_mental_state		(eMentalStateDanger);
-	object().movement().set_body_state			(m_body_state);
-	object().movement().set_movement_type		(m_movement_type);
+	if(GameConstants::GetOldCombat()){
+		object().movement().set_body_state		(eBodyStateStand);
+		object().movement().set_movement_type	(eMovementTypeRun);
+		object().movement().set_mental_state	(eMentalStateDanger);
+	}else{
+		m_body_state							= object().movement().body_state();
+		m_movement_type							= eMovementTypeWalk;
+		object().movement().set_mental_state	(eMentalStateDanger);
+		object().movement().set_body_state		(m_body_state);
+		object().movement().set_movement_type	(m_movement_type);
+	}
 	m_storage->set_property						(eWorldPropertyLookedOut,false);
 	m_storage->set_property						(eWorldPropertyPositionHolded,false);
 	m_storage->set_property						(eWorldPropertyEnemyDetoured,false);
@@ -482,11 +491,13 @@ void CStalkerActionTakeCover::execute		()
 
 	if (!mem_object.m_object)
 		return;
-
-	if (object().movement().detail().distance_to_target() > CLOSE_MOVE_DISTANCE)
-		object().movement().set_body_state(eBodyStateStand);
-	else
-		object().movement().set_movement_type(m_movement_type);
+	
+	if(!GameConstants::GetOldCombat()){
+		if (object().movement().detail().distance_to_target() > CLOSE_MOVE_DISTANCE)
+			object().movement().set_body_state(eBodyStateStand);
+		else
+			object().movement().set_movement_type(m_movement_type);
+	}
 
 	Fvector	position = mem_object.m_object_params.m_position;
 	const CCoverPoint* point = object().best_cover(position);
@@ -547,7 +558,11 @@ void CStalkerActionLookOut::initialize		()
 {
 	inherited::initialize						();
 	
-	if (Device.dwTimeGlobal >= m_last_change_time + CROUCH_LOOK_OUT_DELTA) {
+	bool old_combat = GameConstants::GetOldCombat();
+
+	if(old_combat){
+		m_storage->set_property					(eWorldPropertyUseCrouchToLookOut,	!!m_crouch_look_out_random.random(2));
+	}else if (Device.dwTimeGlobal >= m_last_change_time + CROUCH_LOOK_OUT_DELTA) {
 		m_storage->set_property					(eWorldPropertyUseCrouchToLookOut,	!!m_crouch_look_out_random.random(2));
 		m_last_change_time						= Device.dwTimeGlobal;
 	}
@@ -559,13 +574,17 @@ void CStalkerActionLookOut::initialize		()
 
 	object().movement().set_body_state			(m_storage->property(eWorldPropertyUseCrouchToLookOut) ? eBodyStateCrouch : eBodyStateStand);
 	object().movement().set_movement_type		(eMovementTypeWalk);
-	object().movement().set_nearest_accessible_position	();
+	if(old_combat){
+			aim_ready							();
+	}else{
+		object().movement().set_nearest_accessible_position	();
 
-	if (object().ready_to_detour())
-		aim_ready								();
-	else {
-		aim_ready_force_full					();
-		object().movement().set_movement_type	(eMovementTypeStand);
+		if (object().ready_to_detour())
+			aim_ready							();
+		else {
+			aim_ready_force_full				();
+			object().movement().set_movement_type(eMovementTypeStand);
+		}
 	}
 
 	set_inertia_time							(1000);
@@ -678,7 +697,7 @@ void CStalkerActionHoldPosition::initialize		()
 
 	aim_ready									();
 
-	set_inertia_time							(1000 + ::Random32.random(2000));
+	set_inertia_time							((GameConstants::GetOldCombat()?5000:1000) + ::Random32.random(2000));
 	object().brain().affect_cover				(true);
 }
 
@@ -706,7 +725,7 @@ void CStalkerActionHoldPosition::execute		()
 	if (current_cover(m_object) < 3.f)
 		m_storage->set_property			(eWorldPropertyLookedOut,false);
 
-	//Prevent stalkers from staring at floor or ceiling for this actionAdd commentMore actions
+	//Prevent stalkers from staring at floor or ceiling for this action
 	if (_abs(object().Position().y - mem_object.m_object_params.m_position.y) > 3.f)
 		object().sight().setup(CSightAction(SightManager::eSightTypePathDirection));
 	else
@@ -828,7 +847,7 @@ void CStalkerActionDetourEnemy::execute			()
 			m_storage->set_property			(eWorldPropertyEnemyDetoured,true);
 	}
 
-	//Prevent stalkers from looking at ceiling or floor during actionAdd commentMore actions
+	//Prevent stalkers from looking at ceiling or floor during action
 	if (_abs(object().Position().y - mem_object.m_object_params.m_position.y) >= 3.f)
 		object().sight().setup(CSightAction(SightManager::eSightTypePathDirection));
 	else

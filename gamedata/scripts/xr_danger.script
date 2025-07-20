@@ -37,8 +37,9 @@ function evaluator_danger:evaluate()
 	end
 
 	local best_danger = self.object:best_danger()
-	local best_danger_name = "ricochet"
-	local active_scheme = db.storage[self.object:id()].active_scheme	
+--	local best_danger_name = "ricochet"
+	local active_scheme = db.storage[self.object:id()].active_scheme
+--[[
 	if best_danger and best_danger:object() then
 		best_danger_name = best_danger:object():name()
 
@@ -49,6 +50,7 @@ function evaluator_danger:evaluate()
 --			return true
 --		end
 	end
+]]
 
 	-- проверка на денжер.
 	if best_danger == nil then
@@ -228,6 +230,11 @@ function reset_danger(npc, scheme, st, section)
 			st.danger.ignore_types[v] = true
 		end
 	end
+		
+	--nv130301 keep zombies from panicking at grenades
+	-- this overrides any zombie danger_section grenade entry; move above check if needed
+	if npc:character_community() == "zombied" then st.danger.ignore_types["grenade"] = true end
+	
 	st.danger.ignore_distance			=  math.pow(utils.cfg_get_number(st.ini, danger_section, "ignore_distance", npc, false, def_ignore_distance), 2)
 	st.danger.ignore_distance_grenade	=  math.pow(utils.cfg_get_number(st.ini, danger_section, "ignore_distance_grenade", npc, false, def_ignore_distance_grenade), 2)
 	st.danger.ignore_distance_corpse	=  math.pow(utils.cfg_get_number(st.ini, danger_section, "ignore_distance_corpse", npc, false, def_ignore_distance_corpse), 2)
