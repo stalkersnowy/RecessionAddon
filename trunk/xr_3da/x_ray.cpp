@@ -612,6 +612,16 @@ int APIENTRY WinMain_impl(HINSTANCE hInstance,
 	logoWindow					= CreateDialog(GetModuleHandle(NULL),	MAKEINTRESOURCE(IDD_STARTUP), 0, logDlgProc );
 	
 	HWND logoPicture			= GetDlgItem(logoWindow, IDC_STATIC_LOGO);
+    
+    bool useAltSplash = strstr(lpCmdLine, "-splash1") != NULL;
+    HBITMAP hSplash = LoadBitmap(
+        GetModuleHandle(NULL),
+        MAKEINTRESOURCE(useAltSplash ? IDB_BITMAP1 : IDB_BITMAP2)
+    );
+    if (hSplash) {
+        SendMessage(logoPicture, STM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hSplash);
+    }
+
 	RECT logoRect;
 	GetWindowRect(logoPicture, &logoRect);
 
