@@ -384,6 +384,9 @@
 	<string id="ui_mm_cam_inert">
 		<text>Инерция камеры</text>
 	</string>
+	<string id="ui_mm_g_cop_dof">
+		<text>Режим DoF</text>
+	</string>
 	<string id="ui_mm_g_hide_motion_icon">
 		<text>Скрыть индикатор состояния ГГ</text>
 	</string>
@@ -429,6 +432,9 @@
 	<string id="CS">
 		<text>ЧН</text>
 	</string>
+	<string id="CoP">
+		<text>ЗП</text>
+	</string>
 	<string id="ui_mm_r2_dynamic_sun">
 		<text>Динамичное положение солнца</text>
 	</string>
@@ -443,6 +449,9 @@
 	</string>
 	<string id="ui_mm_r2_mblur">
 		<text>Размытие в движении</text>
+	</string>
+	<string id="ui_mm_r2_mblur_power">
+		<text>Интенсивность размытия</text>
 	</string>
 	<string id="ui_mm_r2_old_aref">
 		<text>Ранний шейдер прозрачных поверхностей</text>
@@ -504,6 +513,9 @@
 	<string id="descr_cam_inert">
 		<text>Оригинальный cam_inert - регулировка инерции камеры. В основном выражается в раскачивании камеры при ходьбе (в оригинале по умолчанию 0.7)</text>
 	</string>
+	<string id="descr_g_cop_dof">
+		<text>Выбор режима применения глубины резкости для оружия: из ЧН (при перезарядке и статичный фокус в прицеле) или из ЗП (динамичный фокус в прицеле)</text>
+	</string>
 	<string id="descr_g_hide_motion_icon">
 		<text>Скрыть индикатор состояния ГГ (силуэт и шкалы шума и заметности) как в ЧН</text>
 	</string>
@@ -560,6 +572,9 @@
 	</string>
 	<string id="descr_r2_mblur">
 		<text>Размытие в движении (аналог ключа -mblur из оригинальной игры)</text>
+	</string>
+	<string id="descr_r2_mblur_power">
+		<text>Интенсивность размытия в движении (если оно включено)</text>
 	</string>
 	<string id="descr_r2_old_aref">
 		<text>Старый шейдер поверхностей с прозрачностью (заборы из колючей проволоки, маскировочная сетка и пр.) - лучше работает освещение, появляются тени от источников света, зато текстура хуже рисуется при отдалении</text>

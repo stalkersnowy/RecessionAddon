@@ -1094,6 +1094,13 @@
 			<options_item entry="r2_mblur" group="mm_opt_gameplay"/>
 		</check_r2_mblur>
 
+		<cap_r2_mblur_power x="20" y="10" width="150" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_mblur_power</text>
+		</cap_r2_mblur_power>
+		<track_r2_mblur_power x="194" y="10" width="245" height="21" step="0.1">
+			<options_item entry="r2_mblur_power" group="mm_opt_gameplay"/>
+		</track_r2_mblur_power>
+
 		<cap_r2_old_aref x="20" y="10" width="143" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_old_aref</text>
 		</cap_r2_old_aref>
@@ -1198,10 +1205,52 @@
 			<options_item entry="g_weapon_bobbing" group="mm_opt_gameplay"/>
 		</check_weapon_bobbing>
 
+        <cap_g_cop_dof x="20" y="10" width="143" height="21">
+            <text font="letterica16" color="ui_6">ui_mm_g_cop_dof</text>
+        </cap_g_cop_dof>
+		<radio_tab_g_cop_dof x="300" y="10" width="135" height="92" radio="1">
+			<options_item entry="g_cop_dof" group="mm_opt_video" depend="restart"/>
+			<button x="0" y="0" width="32" height="21" id="disabled" stretch="1">
+				<text font="letterica16">CS</text>
+	            <text_color>
+					<e r="216" g="186" b="140"/>
+					<d color="ui_gray"/>
+	            </text_color>
+			</button>
+			<button x="0" y="25" width="32" height="21" id="default" stretch="1">
+				<text font="letterica16">CoP</text>
+	            <text_color>
+					<e r="216" g="186" b="140"/>
+					<d color="ui_gray"/>
+	            </text_color>
+			</button>
+		</radio_tab_g_cop_dof>
+
 		<btn_to_simply x="342" y="325" width="111" height="29">
 			<text align="c" font="letterica16" r="227" g="199" b="178">ui_mm_simply</text>
 			<texture>ui_button_ordinary</texture>
 		</btn_to_simply>
+		
+		<cap_video x="0" y="7" width="450" height="23">
+			<texture>ui_brokenline</texture>
+			<auto_static x="10" y="2" width="446" height="23">
+				<text font="letterica16" color="ui_6">ui_mm_video</text>
+			</auto_static>
+		</cap_video>
+		
+		<cap_gameplay x="0" y="7" width="450" height="23">
+			<texture>ui_brokenline</texture>
+			<auto_static x="10" y="2" width="446" height="23">
+				<text font="letterica16" color="ui_6">ui_mm_gameplay</text>
+			</auto_static>
+		</cap_gameplay>
+		
+		<cap_ui x="0" y="7" width="450" height="23">
+			<texture>ui_brokenline</texture>
+			<auto_static x="10" y="2" width="446" height="23">
+				<text font="letterica16" color="ui_6">st_ui_art</text>
+			</auto_static>
+		</cap_ui>
 
 	</gameplay_adv>
 

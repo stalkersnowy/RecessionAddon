@@ -14,81 +14,9 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	
 	self.bk			= xml:InitFrame				("frame_gameplayadv", self)
 	self.scroll_v	= xml:InitScrollView		("gameplay_adv:scroll_v", self)
-
+	
 	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_cam_inert")
-	xml:InitStatic								("gameplay_adv:cap_cam_inert",					_st)
-	xml:InitTrackBar							("gameplay_adv:track_cam_inert",				_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_quick_save_counter")
-	xml:InitStatic								("gameplay_adv:cap_quick_save_counter",			_st)
-	xml:InitSpinNum								("gameplay_adv:spin_quick_save_counter",		_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_g_hide_motion_icon")
-	xml:InitStatic								("gameplay_adv:cap_g_hide_motion_icon",			_st)
-	xml:InitCheck								("gameplay_adv:check_g_hide_motion_icon",		_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_g_hide_zone_map")
-	xml:InitStatic								("gameplay_adv:cap_g_hide_zone_map",			_st)
-	xml:InitCheck								("gameplay_adv:check_g_hide_zone_map",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_g_hit_mark_index")
-	xml:InitStatic								("gameplay_adv:cap_g_hit_mark_index",			_st)
-	xml:InitSpinNum								("gameplay_adv:spin_g_hit_mark_index",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_g_hud_style")
-	xml:InitStatic								("gameplay_adv:cap_g_hud_style",				_st)
-	xml:InitComboBox							("gameplay_adv:combo_g_hud_style",				_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_g_more_contact_snds")
-	xml:InitStatic								("gameplay_adv:cap_g_more_contact_snds",		_st)
-	xml:InitCheck								("gameplay_adv:check_g_more_contact_snds",		_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_g_old_hit_anim")
-	xml:InitStatic								("gameplay_adv:cap_g_old_hit_anim",				_st)
-	xml:InitCheck								("gameplay_adv:check_g_old_hit_anim",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_g_old_pda")
-	xml:InitStatic								("gameplay_adv:cap_g_old_pda",					_st)
-	xml:InitCheck								("gameplay_adv:check_g_old_pda",				_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_g_shooting_eff")
-	xml:InitStatic								("gameplay_adv:cap_g_shooting_eff",				_st)
-	xml:InitCheck								("gameplay_adv:check_g_shooting_eff",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_g_use_ik")
-	xml:InitStatic								("gameplay_adv:cap_g_use_ik",					_st)
-	xml:InitCheck								("gameplay_adv:check_g_use_ik",					_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_g_use_lens")
-	xml:InitStatic								("gameplay_adv:cap_g_use_lens",					_st)
-	xml:InitCheck								("gameplay_adv:check_g_use_lens",				_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_g_use_smart_hits")
-	xml:InitStatic								("gameplay_adv:cap_g_use_smart_hits",			_st)
-	xml:InitCheck								("gameplay_adv:check_g_use_smart_hits",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_weapon_bobbing")
-	xml:InitStatic								("gameplay_adv:cap_weapon_bobbing",				_st)
-	xml:InitCheck								("gameplay_adv:check_weapon_bobbing",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_keypress_on_start")
-	xml:InitStatic								("gameplay_adv:cap_keypress_on_start",			_st)
-	xml:InitCheck								("gameplay_adv:check_keypress_on_start",		_st)
+	xml:InitFrameLine							("gameplay_adv:cap_video",						_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_r2_aa")
@@ -124,6 +52,11 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	handler:SetCapCallbacks						(_st, 									"descr_r2_mblur")
 	xml:InitStatic								("gameplay_adv:cap_r2_mblur",					_st)
 	xml:InitCheck								("gameplay_adv:check_r2_mblur",					_st)
+
+	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_mblur_power")
+	xml:InitStatic								("gameplay_adv:cap_r2_mblur_power",				_st)
+	xml:InitTrackBar							("gameplay_adv:track_r2_mblur_power",			_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_r2_old_aref")
@@ -184,6 +117,93 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	handler:SetCapCallbacks						(_st, 									"descr_r__wallmarks_on_skeleton")
 	xml:InitStatic								("gameplay_adv:cap_r__wallmarks_on_skeleton",	_st)
 	xml:InitCheck								("gameplay_adv:check_r__wallmarks_on_skeleton",	_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_g_use_ik")
+	xml:InitStatic								("gameplay_adv:cap_g_use_ik",					_st)
+	xml:InitCheck								("gameplay_adv:check_g_use_ik",					_st)
+	
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitFrameLine							("gameplay_adv:cap_gameplay",					_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_cam_inert")
+	xml:InitStatic								("gameplay_adv:cap_cam_inert",					_st)
+	xml:InitTrackBar							("gameplay_adv:track_cam_inert",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_quick_save_counter")
+	xml:InitStatic								("gameplay_adv:cap_quick_save_counter",			_st)
+	xml:InitSpinNum								("gameplay_adv:spin_quick_save_counter",		_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	_st:SetWndSize								(vector2():set(_st:GetWidth(), 56))
+	handler:SetCapCallbacks						(_st, 									"descr_g_cop_dof")
+	xml:InitStatic								("gameplay_adv:cap_g_cop_dof",					_st)
+	xml:InitTab									("gameplay_adv:radio_tab_g_cop_dof",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_g_use_lens")
+	xml:InitStatic								("gameplay_adv:cap_g_use_lens",					_st)
+	xml:InitCheck								("gameplay_adv:check_g_use_lens",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_weapon_bobbing")
+	xml:InitStatic								("gameplay_adv:cap_weapon_bobbing",				_st)
+	xml:InitCheck								("gameplay_adv:check_weapon_bobbing",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_g_use_smart_hits")
+	xml:InitStatic								("gameplay_adv:cap_g_use_smart_hits",			_st)
+	xml:InitCheck								("gameplay_adv:check_g_use_smart_hits",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_keypress_on_start")
+	xml:InitStatic								("gameplay_adv:cap_keypress_on_start",			_st)
+	xml:InitCheck								("gameplay_adv:check_keypress_on_start",		_st)
+	
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitFrameLine							("gameplay_adv:cap_ui",							_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_g_hide_motion_icon")
+	xml:InitStatic								("gameplay_adv:cap_g_hide_motion_icon",			_st)
+	xml:InitCheck								("gameplay_adv:check_g_hide_motion_icon",		_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_g_hide_zone_map")
+	xml:InitStatic								("gameplay_adv:cap_g_hide_zone_map",			_st)
+	xml:InitCheck								("gameplay_adv:check_g_hide_zone_map",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_g_hit_mark_index")
+	xml:InitStatic								("gameplay_adv:cap_g_hit_mark_index",			_st)
+	xml:InitSpinNum								("gameplay_adv:spin_g_hit_mark_index",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_g_hud_style")
+	xml:InitStatic								("gameplay_adv:cap_g_hud_style",				_st)
+	xml:InitComboBox							("gameplay_adv:combo_g_hud_style",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_g_more_contact_snds")
+	xml:InitStatic								("gameplay_adv:cap_g_more_contact_snds",		_st)
+	xml:InitCheck								("gameplay_adv:check_g_more_contact_snds",		_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_g_old_hit_anim")
+	xml:InitStatic								("gameplay_adv:cap_g_old_hit_anim",				_st)
+	xml:InitCheck								("gameplay_adv:check_g_old_hit_anim",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_g_old_pda")
+	xml:InitStatic								("gameplay_adv:cap_g_old_pda",					_st)
+	xml:InitCheck								("gameplay_adv:check_g_old_pda",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_g_shooting_eff")
+	xml:InitStatic								("gameplay_adv:cap_g_shooting_eff",				_st)
+	xml:InitCheck								("gameplay_adv:check_g_shooting_eff",			_st)
 
 	btn		= xml:Init3tButton					("gameplay_adv:btn_to_simply",	self)	
 	handler:Register							(btn, "btn_simply_gameplay")	

@@ -642,13 +642,21 @@ void CGamePersistent::RestoreEffectorDOF()
 {
 	SetEffectorDOF			(m_dof[3]);
 }
-#include "hudmanager.h"
 
-//	m_dof		[4];	// 0-dest 1-current 2-from 3-original
+extern u32 g_dof_mode;
+#define DOF_COP g_dof_mode == 1
+
 void CGamePersistent::UpdateDof()
 {
-	static float diff_far	= 70.0f;//pSettings->r_float("zone_pick_dof","far");//70.0f;
-	static float diff_near	= -70.0f;//pSettings->r_float("zone_pick_dof","near");//-70.0f;
+	static float diff_far;
+	static float diff_near;
+	if(DOF_COP){
+		diff_far	= 10.0f;
+		diff_near	= -1500.0f;
+	}else{
+		diff_far	= 70.0f;
+		diff_near	= -70.0f;
+	}
 
 	if(m_bPickableDOF)
 	{

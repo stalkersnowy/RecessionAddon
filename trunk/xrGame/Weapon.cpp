@@ -37,6 +37,10 @@ CUIXml*				pWpnScopeXml = NULL;
 
 BOOL				g_bUseLens = FALSE;
 
+extern u32 g_dof_mode;
+#define DOF_CS g_dof_mode == 0
+#define DOF_COP g_dof_mode == 1
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -1396,10 +1400,14 @@ void CWeapon::OnZoomIn()
 		m_zoom_params.m_pVision = xr_new<CBinocularsVision>(m_zoom_params.m_sUseBinocularVision);
 	StopHudInertion();
 	if (m_UILens) m_UILens->SetPPMode();
-
 	
-	if(m_zoom_params.m_bZoomDofEnabled && !IsScopeAttached())
-		GamePersistent().SetEffectorDOF	(m_zoom_params.m_ZoomDof);
+	if(DOF_COP){
+		if(GetHUDmode())
+			GamePersistent().SetPickableEffectorDOF(true);
+	}else{
+		if(m_zoom_params.m_bZoomDofEnabled && !IsScopeAttached())
+			GamePersistent().SetEffectorDOF	(m_zoom_params.m_ZoomDof);
+	}
 }
 
 void CWeapon::OnZoomOut()
@@ -1416,8 +1424,13 @@ void CWeapon::OnZoomOut()
 	xr_delete(m_zoom_params.m_pVision);
 	StartHudInertion();
 	if (m_UILens) m_UILens->ResetPPMode();
-
- 	GamePersistent().RestoreEffectorDOF	();
+	
+	if(DOF_COP){
+		if(GetHUDmode())
+			GamePersistent().SetPickableEffectorDOF(false);
+	}else{
+ 		GamePersistent().RestoreEffectorDOF	();
+	}
 }
 
 CUIWindow* CWeapon::ZoomTexture()
@@ -1951,7 +1964,7 @@ void CWeapon::OnStateSwitch	(u32 S)
 	inherited::OnStateSwitch(S);
 	m_dwAmmoCurrentCalcFrame = 0;
 
-	if(GetState()==eReload)
+	if(DOF_CS && GetState()==eReload)
 	{
 		if(H_Parent()==Level().CurrentEntity() && !fsimilar(m_zoom_params.m_ReloadDof.w,-1.0f))
 		{

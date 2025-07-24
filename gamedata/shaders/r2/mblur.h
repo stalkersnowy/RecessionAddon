@@ -31,8 +31,8 @@ float3 mblur(float2 UV, float3 pos, float3 c_original)
 			p_velocity	= clamp(p_velocity, -MBLUR_CLAMP, +MBLUR_CLAMP);
 			
 	//Small hud attenuation
-	if (pos.z < 2.0) // disable for hud
-		p_velocity = 0.0;
+//	if (pos.z < 2.0) // disable for hud
+//		p_velocity = 0.0;
 
 	// For each sample, sum up each sample's color in "Blurred" and then divide
 	// to average the color after all the samples are added.
