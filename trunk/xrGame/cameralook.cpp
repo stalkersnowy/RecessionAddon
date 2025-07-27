@@ -5,6 +5,7 @@
 #include "../xr_3da/CameraManager.h"
 #include "xr_level_controller.h"
 #include "actor.h"
+#include "object_broker.h"
 
 CCameraLook::CCameraLook(CObject* p, u32 flags ) 
 :CCameraBase(p, flags)
@@ -37,11 +38,16 @@ void CCameraLook::Update(Fvector& point, Fvector& /**noise_dangle/**/)
 		parent->XFORM().transform_dir(vDirection);
 		parent->XFORM().transform_dir(vNormal);
 	}
-	Fvector				vDir;
-	collide::rq_result	R;
+	UpdateDistance(point);
+}
 
-	float				covariance = VIEWPORT_NEAR*6.f;
-	vDir.invert			(vDirection);
+void CCameraLook::UpdateDistance(Fvector& point)
+{
+	Fvector vDir;
+	vDir.invert(vDirection);
+
+	collide::rq_result R;
+	float covariance = VIEWPORT_NEAR * 6.0f;
 	g_pGameLevel->ObjectSpace.RayPick( point, vDir, dist+covariance, collide::rqtBoth, R, parent);
 
 	float d				= psCamSlideInert*prev_d+(1.f-psCamSlideInert)*(R.range-covariance);
@@ -72,10 +78,21 @@ void CCameraLook::OnActivate( CCameraBase* old_cam )
 	if (old_cam&&(m_Flags.is(flRelativeLink)==old_cam->m_Flags.is(flRelativeLink)))
 	{
 		yaw				= old_cam->yaw;
+		pitch			= old_cam->pitch;
 		vPosition.set	(old_cam->vPosition);
 	}
 	if (yaw>PI_MUL_2) yaw-=PI_MUL_2;
 	if (yaw<-PI_MUL_2)yaw+=PI_MUL_2;
+}
+
+void CCameraLook::save(NET_Packet& packet)
+{
+	save_data(pitch, packet);
+}
+
+void CCameraLook::load(IReader& packet)
+{
+	load_data(pitch, packet);
 }
 
 #include "../xr_3da/xr_input.h"
@@ -100,45 +117,10 @@ void CCameraLook2::OnActivate( CCameraBase* old_cam )
 
 void CCameraLook2::Update(Fvector& point, Fvector&)
 {
-	if(!m_locked_enemy)
-	{//autoaim
-		if( pInput->iGetAsyncKeyState(cam_dik) )
-		{
-			const CVisualMemoryManager::VISIBLES& vVisibles = Actor()->memory().visual().objects();
-			CVisualMemoryManager::VISIBLES::const_iterator v_it = vVisibles.begin();
-			float _nearest_dst	= flt_max;
-
-			for (; v_it!=vVisibles.end(); ++v_it)
-			{
-				const CObject*	_object_			= (*v_it).m_object;
-				if (!Actor()->memory().visual().visible_now(smart_cast<const CGameObject*>(_object_)))	continue;
-
-				CObject* object_ = const_cast<CObject*>(_object_);
-				
-
-				CEntityAlive*	EA					= smart_cast<CEntityAlive*>(object_);
-				if(!EA || !EA->g_Alive())			continue;
-				
-				float d = object_->Position().distance_to_xz(Actor()->Position());
-				if( !m_locked_enemy || d<_nearest_dst)
-				{
-					m_locked_enemy	= object_;
-					_nearest_dst	= d;
-				}
-			}
-//.			if(m_locked_enemy) Msg("enemy is %s", *m_locked_enemy->cNameSect() );
-		}
-	}else
-	{
-		if( !pInput->iGetAsyncKeyState(cam_dik) ){
-			m_locked_enemy	= NULL;
-//.			Msg				("enemy is NILL");
-		}
-	}
-
-	if(m_locked_enemy)
-		UpdateAutoAim	();
-
+//	if (psActorFlags.test(AF_RIGHT_SHOULDER))
+//		m_cam_offset = Fvector().set(-0.400f, 0.2f, 0.0f);
+//	else
+//		m_cam_offset = Fvector().set(0.314f, 0.2f, 0.0f);
 
 	Fmatrix mR;
 	mR.setHPB						(-yaw,-pitch,-roll);
@@ -152,42 +134,13 @@ void CCameraLook2::Update(Fvector& point, Fvector&)
 	Fvector _off					= m_cam_offset;
 	a_xform.transform_tiny			(_off);
 	vPosition.set					(_off);
-}
-
-void CCameraLook2::UpdateAutoAim()
-{
-	Fvector								_dest_point;
-	m_locked_enemy->Center				(_dest_point);
-	_dest_point.y						+= 0.2f;
-
-	Fvector								_dest_dir;
-	_dest_dir.sub						(_dest_point, vPosition);
-	
-	Fmatrix								_m;
-	_m.identity							();
-	_m.k.normalize_safe					(_dest_dir);
-	Fvector::generate_orthonormal_basis	(_m.k, _m.j, _m.i);
-
-	Fvector								xyz;
-	_m.getXYZi							(xyz);
-
-	yaw				= angle_inertion_var(	yaw,xyz.y,
-											m_autoaim_inertion_yaw.x,
-											m_autoaim_inertion_yaw.y,
-											PI,
-											Device.fTimeDelta);
-
-	pitch			= angle_inertion_var(	pitch,xyz.x,
-											m_autoaim_inertion_pitch.x,
-											m_autoaim_inertion_pitch.y,
-											PI,
-											Device.fTimeDelta);
+	UpdateDistance					(_off);
 }
 
 void CCameraLook2::Load(LPCSTR section)
 {
 	CCameraLook::Load		(section);
-	m_cam_offset			= pSettings->r_fvector3	(section,"offset");
-	m_autoaim_inertion_yaw	= pSettings->r_fvector2	(section,"autoaim_speed_y");
-	m_autoaim_inertion_pitch= pSettings->r_fvector2	(section,"autoaim_speed_x");
+	m_cam_offset = Fvector().set(0.314f, 0.2f, 0.0f);
+	dist = 1.4f;
+	prev_d = 0.0f;
 }

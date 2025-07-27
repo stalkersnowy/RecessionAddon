@@ -14,6 +14,7 @@
 #else
 	#include "xr_object.h"
 	#include "igame_level.h"
+	#include "CameraManager.h"
 #endif
 
 #define FAR_DIST g_pGamePersistent->Environment().CurrentEnv.far_plane
@@ -284,7 +285,15 @@ void CLensFlare::OnFrame(int id)
 	else
 		fBlend = fBlend + BLEND_INC_SPEED * Device.fTimeDelta;
 #else
-	CObject*	o_main		= g_pGameLevel->CurrentViewEntity();
+	// Ignore actor's model in RayQuery when 1st person view is active
+	// to avoid sun flares flickering. In 3rd person view we must take it into account
+	// to prevent sun flares appearing through actor.
+	CObject* o_ignore = nullptr;
+	CObject* curr_v_entity = g_pGameLevel->CurrentViewEntity();
+	CCameraManager& c_m = g_pGameLevel->Cameras();
+	if (curr_v_entity && c_m.Parent() == curr_v_entity && c_m.Style() == ECameraStyle::csFirstEye)
+		o_ignore = curr_v_entity;
+
 	STranspParam TP			(this,Device.vCameraPosition,vSunDir,1000.f,EPS_L);
 	collide::ray_defs RD	(TP.P,TP.D,TP.f,CDB::OPT_CULL,collide::rqtBoth);
 	if (m_ray_cache.result&&m_ray_cache.similar(TP.P,TP.D,TP.f)){
@@ -297,7 +306,7 @@ void CLensFlare::OnFrame(int id)
 		}else{
 			// cache outdated. real query.
 			r_dest.r_clear	();
-			if (g_pGameLevel->ObjectSpace.RayQuery	(r_dest,RD,material_callback,&TP,NULL,o_main))
+			if (g_pGameLevel->ObjectSpace.RayQuery	(r_dest,RD,(collide::rq_callback*)material_callback,&TP,NULL,o_ignore))
 				m_ray_cache.result = FALSE			;
 		}
 	}

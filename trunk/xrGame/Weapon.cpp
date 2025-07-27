@@ -88,6 +88,7 @@ CWeapon::CWeapon(LPCSTR name)
 	m_StrapOffset.identity	();
 	m_strapped_mode			= false;
 	m_can_be_strapped		= false;
+	m_freelook_switch_back	= false;
 	m_ef_main_weapon_type	= u32(-1);
 	m_ef_weapon_type		= u32(-1);
 	m_UIScope				= NULL;
@@ -1387,6 +1388,14 @@ float CWeapon::CurrentZoomFactor	()
 float LastZoomFactor = 0.0f;
 void CWeapon::OnZoomIn()
 {
+	//Alun: Force switch to first-person for zooming
+	CActor *pA = smart_cast<CActor *>(H_Parent());
+	if (pA->active_cam() == eacLookAt)
+	{
+		pA->cam_Set(eacFirstEye);
+		m_freelook_switch_back = true;
+	}
+
 	m_zoom_params.m_bIsZoomModeNow = true;
 
 	if (LastZoomFactor)
@@ -1412,6 +1421,15 @@ void CWeapon::OnZoomIn()
 
 void CWeapon::OnZoomOut()
 {
+	//Alun: Switch back to third-person if was forced
+	if (m_freelook_switch_back)
+	{
+		CActor *pA = smart_cast<CActor *>(H_Parent());
+		if (pA)
+			pA->cam_Set(eacLookAt);
+		m_freelook_switch_back = false;
+	}
+
 	m_zoom_params.m_bIsZoomModeNow = false;
 
 	if (LastZoomFactor)

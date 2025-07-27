@@ -198,17 +198,35 @@ void CWeaponKnife::KnifeStrike(u32 state, const Fvector& pos, const Fvector& dir
 
 		PlaySound(m_sndShot, pos);
 
-		Level().BulletManager().AddBullet(pos,
-			dir,
-			m_fStartBulletSpeed,
-			cur_fHit,
-			cur_fHitImpulse,
-			H_Parent()->ID(),
-			ID(),
-			cur_eHitType,
-			fireDistance,
-			cartridge,
-			send_hit);
+		CActor* actor = smart_cast<CActor*>(H_Parent());
+		if (actor->active_cam() != eacFirstEye)
+		{
+			Level().BulletManager().AddBullet(pos,
+				dir,
+				m_fStartBulletSpeed,
+				cur_fHit,
+				cur_fHitImpulse,
+				H_Parent()->ID(),
+				ID(),
+				cur_eHitType,
+				fireDistance + 1.3f,
+				cartridge,
+				send_hit);
+		}
+		else
+		{
+			Level().BulletManager().AddBullet(pos,
+				dir,
+				m_fStartBulletSpeed,
+				cur_fHit,
+				cur_fHitImpulse,
+				H_Parent()->ID(),
+				ID(),
+				cur_eHitType,
+				fireDistance,
+				cartridge,
+				send_hit);
+		}
 	}
 }
 

@@ -94,6 +94,8 @@ public:
 
 	CWeaponHUD*		GetHUD				() {return m_pHUD;}
 
+	virtual bool	DrawUIForLookCam	() {return false;}
+
 protected:
 	//TRUE - оружие занято, выполнением некоторого действия
 	bool					m_bPending;

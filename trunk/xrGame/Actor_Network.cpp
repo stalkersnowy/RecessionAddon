@@ -562,12 +562,7 @@ BOOL CActor::net_Spawn		(CSE_Abstract* DC)
 	unaffected_r_torso.pitch= r_torso.pitch;
 	unaffected_r_torso.roll	= r_torso.roll;
 
-	if( psActorFlags.test(AF_PSP) )
-		cam_Set					(eacLookAt);
-	else
-		cam_Set					(eacFirstEye);
-
-	cam_Active()->Set		(-E->o_torso.yaw,E->o_torso.pitch,0);//E->o_Angle.z);
+	cam_Active()->Set		(-E->o_torso.yaw, (cam_active != eacFirstEye) ? E->o_torso.pitch : cameras[eacFirstEye]->pitch, 0);//E->o_Angle.z);
 
 	// *** movement state - respawn
 	mstate_wishful			= 0;
@@ -1323,6 +1318,10 @@ void CActor::save(NET_Packet &output_packet)
 {
 	inherited::save(output_packet);
 	CInventoryOwner::save(output_packet);
+
+	cam_Active()->save(output_packet);
+	output_packet.w_u8(cam_active);
+
 	output_packet.w_u8(u8(m_bOutBorder));
 	output_packet.w_u8(u8(character_physics_support()->movement()->BoxID()));
 }
@@ -1331,6 +1330,10 @@ void CActor::load(IReader &input_packet)
 {
 	inherited::load(input_packet);
 	CInventoryOwner::load(input_packet);
+
+	cam_Active()->load(input_packet);
+	cam_Set(EActorCameras(input_packet.r_u8()));
+
 	m_bOutBorder=!!(input_packet.r_u8());
 	m_loaded_ph_box_id=input_packet.r_u8();
 }

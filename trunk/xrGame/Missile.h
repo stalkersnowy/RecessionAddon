@@ -63,6 +63,8 @@ public:
 	virtual void 			OnStateSwitch				(u32 S);
 	virtual bool			GetBriefInfo				(II_BriefInfo& info);
 
+	virtual bool			DrawUIForLookCam			() {return true;}
+
 protected:
 	virtual void			UpdateFireDependencies_internal	();
 	virtual void			UpdateXForm						();

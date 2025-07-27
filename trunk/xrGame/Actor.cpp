@@ -95,20 +95,9 @@ CActor::CActor() : CEntityAlive()
 	cameras[eacFirstEye]	= xr_new<CCameraFirstEye>				(this);
 	cameras[eacFirstEye]->Load("actor_firsteye_cam");
 
-	if(strstr(Core.Params,"-psp"))
-		psActorFlags.set(AF_PSP, TRUE);
-	else
-		psActorFlags.set(AF_PSP, FALSE);
+	cameras[eacLookAt]		= xr_new<CCameraLook2>					(this);
+	cameras[eacLookAt]->Load("actor_look_cam_psp");
 
-	if( psActorFlags.test(AF_PSP) )
-	{
-		cameras[eacLookAt]		= xr_new<CCameraLook2>				(this);
-		cameras[eacLookAt]->Load("actor_look_cam_psp");
-	}else
-	{
-		cameras[eacLookAt]		= xr_new<CCameraLook>				(this);
-		cameras[eacLookAt]->Load("actor_look_cam");
-	}
 	cameras[eacFreeLook]	= xr_new<CCameraLook>					(this);
 	cameras[eacFreeLook]->Load("actor_free_cam");
 
@@ -376,10 +365,7 @@ if(!g_dedicated_server)
 		m_BloodSnd.create		(pSettings->r_string(section,"heavy_blood_snd"), st_Effect,SOUND_TYPE_MONSTER_INJURING);
 	}
 }
-	if( psActorFlags.test(AF_PSP) )
-		cam_Set					(eacLookAt);
-	else
-		cam_Set					(eacFirstEye);
+	cam_Set						(eacFirstEye);
 
 	// sheduler
 	shedule.t_min				= shedule.t_max = 1;
@@ -1003,6 +989,9 @@ void CActor::UpdateCL	()
 }
 
 float	NET_Jump = 0;
+
+#include "ai\monsters\ai_monster_utils.h"
+
 void CActor::shedule_Update	(u32 DT)
 {
 	setSVU(OnServer());
@@ -1185,7 +1174,18 @@ void CActor::shedule_Update	(u32 DT)
 	collide::rq_result& RQ = HUD().GetCurrentRayQuery();
 	
 
-	if(!input_external_handler_installed() && RQ.O &&  RQ.range<inventory().GetTakeDist()) 
+	float InteractionDist;
+	if (eacFirstEye != cam_active) {
+		InteractionDist = 2.4f;
+	}
+	else {
+		InteractionDist = 2.0f;
+	}
+
+	float dist_to_obj = RQ.range;
+	if (RQ.O && eacFirstEye != cam_active)
+		dist_to_obj = get_bone_position(this, "bip01_spine").distance_to((smart_cast<CGameObject*>(RQ.O))->Position());
+	if (!input_external_handler_installed() && RQ.O && dist_to_obj < InteractionDist)
 	{
 		m_pObjectWeLookingAt			= smart_cast<CGameObject*>(RQ.O);
 		

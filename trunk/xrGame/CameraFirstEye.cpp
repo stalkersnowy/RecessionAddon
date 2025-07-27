@@ -4,6 +4,7 @@
 #include "CameraFirstEye.h"
 #include "xr_level_controller.h"
 #include "../xr_3da/xr_object.h"
+#include "object_broker.h"
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -72,6 +73,18 @@ void CCameraFirstEye::Move( int cmd, float val, float factor )
 
 void CCameraFirstEye::OnActivate( CCameraBase* old_cam )
 {
-	if (old_cam&&(m_Flags.is(flRelativeLink)==old_cam->m_Flags.is(flRelativeLink)))
+	if (old_cam&&(m_Flags.is(flRelativeLink)==old_cam->m_Flags.is(flRelativeLink))){
 		yaw = (old_cam)->yaw;
+		pitch = (old_cam)->pitch;
+	}
+}
+
+void CCameraFirstEye::save(NET_Packet& packet)
+{
+	save_data(pitch, packet);
+}
+
+void CCameraFirstEye::load(IReader& packet)
+{
+	load_data(pitch, packet);
 }
