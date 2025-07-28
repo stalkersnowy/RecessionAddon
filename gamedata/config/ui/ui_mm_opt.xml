@@ -850,7 +850,7 @@
 			<text font="letterica16" color="ui_6">ui_mm_important_save</text>
 		</check_important_save>
 
-		<check_hud_draw x="20" y="255" width="30" height="21">
+		<check_hud_draw x="20" y="205" width="30" height="21">
 			<options_item entry="hud_draw" group="mm_opt_gameplay"/>
 			<text font="letterica16" color="ui_6">ui_st_disable_hud</text>
 		</check_hud_draw>

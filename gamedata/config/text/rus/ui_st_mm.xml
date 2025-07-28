@@ -618,4 +618,7 @@
 	<string id="descr_weapon_bobbing">
 		<text>Билдовская раскачка оружия при влиянии эффекторов камеры (ходьба, удары монстров и др.)</text>
 	</string>
+	<string id="ui_st_disable_hud">
+		<text>Показывать интерфейс</text>
+	</string>
 </string_table>

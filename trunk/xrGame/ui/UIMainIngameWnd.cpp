@@ -933,7 +933,7 @@ bool CUIMainIngameWnd::OnKeyboardPress(int dik)
 			break;
 		}
 	}
-	else
+/*	else
 	{
 		switch(dik)
 		{
@@ -948,7 +948,7 @@ bool CUIMainIngameWnd::OnKeyboardPress(int dik)
 			return true;
 			break;
 		}
-	}
+	}*/
 
 	return false;
 }
