@@ -22,6 +22,7 @@ on_info = %+rad_start_svoboda_vs_dolg%
 ;--------Свобода
 [logic@rad_svoboda]
 active = walker@rad_svoboda
+selective = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg1, walker@rad_svoboda
 combat_ignore=combat_ignore
 on_hit = hit@rad_svoboda
 on_death = death@rad_svoboda
@@ -30,7 +31,7 @@ on_death = death@rad_svoboda
 combat_ignore_cond = {-rad_start_svoboda_vs_dolg}
 path_walk = way_svoboda
 path_look = way_look
-on_info = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg1, {+rad_start_svoboda_vs_dolg} walker1@rad_svoboda
+on_info = {+rad_start_svoboda_vs_dolg} walker1@rad_svoboda
 
 [walker1@rad_svoboda]
 path_walk = walk_kamp_1
@@ -42,7 +43,7 @@ on_signal = end| kamp@svoboda_vs_dolg1 %+rad_end_svoboda_vs_dolg%
 
 
 [logic@rad_svoboda1]
-active = walker@rad_svoboda1
+selective = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg1, walker@rad_svoboda1
 combat_ignore=combat_ignore
 on_hit = hit@rad_svoboda
 on_death = death@rad_svoboda
@@ -51,7 +52,7 @@ on_death = death@rad_svoboda
 combat_ignore_cond = {-rad_start_svoboda_vs_dolg}
 path_walk = way_svoboda_0000
 path_look = way_look
-on_info = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg1, {+rad_start_svoboda_vs_dolg} walker1@rad_svoboda1
+on_info = {+rad_start_svoboda_vs_dolg} walker1@rad_svoboda1
 
 [walker1@rad_svoboda1]
 path_walk = walk_kamp_2
@@ -63,7 +64,7 @@ on_signal = end| kamp@svoboda_vs_dolg1 %+rad_end_svoboda_vs_dolg%
 
 
 [logic@rad_svoboda2]
-active = walker@rad_svoboda2
+selective = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg1, walker@rad_svoboda2
 combat_ignore=combat_ignore
 on_hit = hit@rad_svoboda
 on_death = death@rad_svoboda
@@ -72,7 +73,7 @@ on_death = death@rad_svoboda
 combat_ignore_cond = {-rad_start_svoboda_vs_dolg}
 path_walk = way_svoboda_0001
 path_look = way_look
-on_info = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg1, {+rad_start_svoboda_vs_dolg} walker1@rad_svoboda2
+on_info = {+rad_start_svoboda_vs_dolg} walker1@rad_svoboda2
 
 [walker1@rad_svoboda2]
 path_walk = walk_kamp_3
@@ -84,7 +85,7 @@ on_signal = end| kamp@svoboda_vs_dolg1 %+rad_end_svoboda_vs_dolg%
 
 
 [logic@rad_svoboda3]
-active = walker@rad_svoboda3
+selective = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg1, walker@rad_svoboda3
 combat_ignore=combat_ignore
 on_hit = hit@rad_svoboda
 on_death = death@rad_svoboda
@@ -93,7 +94,7 @@ on_death = death@rad_svoboda
 combat_ignore_cond = {-rad_start_svoboda_vs_dolg}
 path_walk = way_svoboda_0002
 path_look = way_look
-on_info = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg1, {+rad_start_svoboda_vs_dolg} walker1@rad_svoboda3
+on_info = {+rad_start_svoboda_vs_dolg} walker1@rad_svoboda3
 
 [walker1@rad_svoboda3]
 path_walk = walk_kamp_4
@@ -106,7 +107,7 @@ on_signal = end| kamp@svoboda_vs_dolg1 %+rad_end_svoboda_vs_dolg%
 
 
 [logic@rad_svoboda4]
-active = walker@rad_svoboda4
+selective = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg1, walker@rad_svoboda4
 combat_ignore=combat_ignore
 on_hit = hit@rad_svoboda
 on_death = death@rad_svoboda
@@ -115,7 +116,7 @@ on_death = death@rad_svoboda
 combat_ignore_cond = {-rad_start_svoboda_vs_dolg}
 path_walk = way_svoboda_0003
 path_look = way_look
-on_info = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg1, {+rad_start_svoboda_vs_dolg} walker1@rad_svoboda4
+on_info = {+rad_start_svoboda_vs_dolg} walker1@rad_svoboda4
 
 [walker1@rad_svoboda4]
 path_walk = walk_kamp_5
@@ -127,7 +128,7 @@ on_signal = end| kamp@svoboda_vs_dolg1 %+rad_end_svoboda_vs_dolg%
 
 
 [logic@rad_svoboda5]
-active = walker@rad_svoboda5
+selective = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg1, walker@rad_svoboda5
 combat_ignore=combat_ignore
 on_hit = hit@rad_svoboda
 on_death = death@rad_svoboda
@@ -136,7 +137,7 @@ on_death = death@rad_svoboda
 combat_ignore_cond = {-rad_start_svoboda_vs_dolg}
 path_walk = way_svoboda_0004
 path_look = way_look
-on_info = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg1, {+rad_start_svoboda_vs_dolg} walker1@rad_svoboda5
+on_info = {+rad_start_svoboda_vs_dolg} walker1@rad_svoboda5
 
 [walker1@rad_svoboda5]
 path_walk = walk_kamp_6
@@ -150,7 +151,7 @@ on_signal = end| kamp@svoboda_vs_dolg1 %+rad_end_svoboda_vs_dolg%
 
 ;--------Долг
 [logic@rad_dolg]
-active = walker@rad_dolg
+selective = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg, walker@rad_dolg
 combat_ignore=combat_ignore
 on_hit = hit@rad_svoboda
 on_death = death@rad_svoboda
@@ -159,7 +160,7 @@ on_death = death@rad_svoboda
 combat_ignore_cond = {-rad_start_svoboda_vs_dolg}
 path_walk = way_dolg
 path_look = way_look
-on_info = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg, {+rad_start_svoboda_vs_dolg} walker1@rad_dolg
+on_info = {+rad_start_svoboda_vs_dolg} walker1@rad_dolg
 
 [walker1@rad_dolg]
 path_walk = walk_kamp_1
@@ -170,7 +171,7 @@ def_state_moving3=assault
 on_signal = end| kamp@svoboda_vs_dolg %+rad_end_svoboda_vs_dolg%
 
 [logic@rad_dolg1]
-active = walker@rad_dolg1
+selective = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg, walker@rad_dolg1
 combat_ignore=combat_ignore
 on_hit = hit@rad_svoboda
 on_death = death@rad_svoboda
@@ -179,7 +180,7 @@ on_death = death@rad_svoboda
 combat_ignore_cond = {-rad_start_svoboda_vs_dolg}
 path_walk = way_dolg_0000
 path_look = way_look
-on_info = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg, {+rad_start_svoboda_vs_dolg} walker1@rad_dolg1
+on_info = {+rad_start_svoboda_vs_dolg} walker1@rad_dolg1
 
 [walker1@rad_dolg1]
 path_walk = walk_kamp_2
@@ -190,7 +191,7 @@ def_state_moving3=assault
 on_signal = end| kamp@svoboda_vs_dolg %+rad_end_svoboda_vs_dolg%
 
 [logic@rad_dolg2]
-active = walker@rad_dolg2
+selective = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg, walker@rad_dolg2
 combat_ignore=combat_ignore
 on_hit = hit@rad_svoboda
 on_death = death@rad_svoboda
@@ -199,7 +200,7 @@ on_death = death@rad_svoboda
 combat_ignore_cond = {-rad_start_svoboda_vs_dolg}
 path_walk = way_dolg_0001
 path_look = way_look
-on_info = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg, {+rad_start_svoboda_vs_dolg} walker1@rad_dolg2
+on_info = {+rad_start_svoboda_vs_dolg} walker1@rad_dolg2
 
 [walker1@rad_dolg2]
 path_walk = walk_kamp_3
@@ -210,7 +211,7 @@ def_state_moving3=assault
 on_signal = end| kamp@svoboda_vs_dolg %+rad_end_svoboda_vs_dolg%
 
 [logic@rad_dolg3]
-active = walker@rad_dolg3
+selective = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg, walker@rad_dolg3
 combat_ignore=combat_ignore
 on_hit = hit@rad_svoboda
 on_death = death@rad_svoboda
@@ -219,7 +220,7 @@ on_death = death@rad_svoboda
 combat_ignore_cond = {-rad_start_svoboda_vs_dolg}
 path_walk = way_dolg_0002
 path_look = way_look
-on_info = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg, {+rad_start_svoboda_vs_dolg} walker1@rad_dolg3
+on_info = {+rad_start_svoboda_vs_dolg} walker1@rad_dolg3
 
 [walker1@rad_dolg3]
 path_walk = walk_kamp_4
@@ -230,7 +231,7 @@ def_state_moving3=assault
 on_signal = end| kamp@svoboda_vs_dolg %+rad_end_svoboda_vs_dolg%
 
 [logic@rad_dolg4]
-active = walker@rad_dolg4
+selective = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg, walker@rad_dolg4
 combat_ignore=combat_ignore
 on_hit = hit@rad_svoboda
 on_death = death@rad_svoboda
@@ -239,7 +240,7 @@ on_death = death@rad_svoboda
 combat_ignore_cond = {-rad_start_svoboda_vs_dolg}
 path_walk = way_dolg_0003
 path_look = way_look
-on_info = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg, {+rad_start_svoboda_vs_dolg} walker1@rad_dolg4
+on_info = {+rad_start_svoboda_vs_dolg} walker1@rad_dolg4
 
 [walker1@rad_dolg4]
 path_walk = walk_kamp_5
@@ -250,7 +251,7 @@ def_state_moving3=assault
 on_signal = end| kamp@svoboda_vs_dolg %+rad_end_svoboda_vs_dolg%
 
 [logic@rad_dolg5]
-active = walker@rad_dolg5
+selective = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg, walker@rad_dolg5
 combat_ignore=combat_ignore
 on_hit = hit@rad_svoboda
 on_death = death@rad_svoboda
@@ -259,7 +260,7 @@ on_death = death@rad_svoboda
 combat_ignore_cond = {-rad_start_svoboda_vs_dolg}
 path_walk = way_dolg_0004
 path_look = way_look
-on_info = {+rad_end_svoboda_vs_dolg} kamp@svoboda_vs_dolg, {+rad_start_svoboda_vs_dolg} walker1@rad_dolg5
+on_info = {+rad_start_svoboda_vs_dolg} walker1@rad_dolg5
 
 [walker1@rad_dolg5]
 path_walk = walk_kamp_6

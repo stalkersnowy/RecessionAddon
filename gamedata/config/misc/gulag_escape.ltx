@@ -387,7 +387,9 @@ danger = danger_condition@shustryi
 ;Шустрый
 
 [logic@esc_lager_shustryi]
-active = camper@esc_lager_prisoner
+; active = camper@esc_lager_prisoner
+; nv130116 prevent Nimble suicide (requires xr_gulag.script, xr_logic.script support)
+selective = {+tutorial_wounded_give_info} sleeper4@esc_lager, camper@esc_lager_prisoner
 combat_ignore = combat_ignore
 
 [camper@esc_lager_prisoner]
@@ -395,8 +397,9 @@ path_walk = prisoner_walk
 path_look = prisoner_look
 combat_ignore_cond = always
 def_state_campering = prisoner
-on_info2 = {=esc_bandits_die} remark@esc_lager_help
+; nv100223 reverse check order to prevent Nimble suicide
 on_info = {+tutorial_wounded_give_info} sleeper4@esc_lager
+on_info2 = {=esc_bandits_die} remark@esc_lager_help
 meet = no_meet
 danger = danger_condition@shustryi
 

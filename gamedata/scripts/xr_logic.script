@@ -189,23 +189,25 @@ end
 
 -- Вызывается биндером с целью определить первую активную схему
 function determine_section_to_activate(npc, ini, section_logic, actor)
-	if not ini:section_exist(section_logic) then
-		return "nil"
-	end
+  if not ini:section_exist(section_logic) then
+    return "nil"
+  end
 
-	-- Распарсить строку выбора активной секции с учетом команд, заключенных в %%
-	local active_section_cond = cfg_get_condlist(ini, section_logic, "active", npc)
-	local active_section
-	if not active_section_cond then
-		abort("object '%s': section '%s': unable to find field 'active'", npc:name(), section_logic)
-	else
-		active_section = pick_section_from_condlist(actor, npc, active_section_cond.condlist)
-		if not active_section then
-			abort("object '%s': section '%s': section 'active' has no conditionless else clause",
-				npc:name(), section_logic)
-		end
-	end
-	return active_section
+  -- Распарсить строку выбора активной секции с учетом команд, заключенных в %%
+  -- nv130116 added conditional section selection support
+  local active_section_cond = cfg_get_condlist(ini, section_logic, "active", npc) or
+        cfg_get_condlist(ini, section_logic, "selective", npc)
+  local active_section
+  if not active_section_cond then
+    abort("object '%s': section '%s': no 'active' or 'selective'", npc:name(), section_logic)
+  else
+    active_section = pick_section_from_condlist(actor, npc, active_section_cond.condlist)
+    if not active_section then
+      abort("object '%s': section '%s': field 'active'/'selective' has no conditionless else clause",
+        npc:name(), section_logic)
+    end
+  end
+  return active_section
 end
 
 ------------------------------------------------------------------------------------------------------------

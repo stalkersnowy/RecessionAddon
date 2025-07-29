@@ -41,6 +41,9 @@ function gulag:__init(smrttrn, type, squad, groups, npc_info, capacity)
 	self.capacity = capacity     -- общая ёмкость гулага
 --	self.capacity_non_exclusive  -  ёмкость гулага для неэксклюзивных персонажей
 	
+	-- nv130215 init of zero implies camp is empty, falsely changing gulag state
+	-- so we use a flag to indicate true initialization
+	self.pop_valid = false
 	self.population = 0					-- Население гулага
 	self.population_comed = 0			-- Уже пришедшее население гулага
 	self.population_non_exclusive = 0	-- Неэксклюзивное население
@@ -223,15 +226,53 @@ function gulag:init_ltx(name, type)
 	end
 end
 
+function gulag_cfg_get_condlist(ini, section, field)
+  local str = ini:r_string(section, field)
+  if not str then
+    return nil
+  end
+
+  local par = utils.parse_params(str)
+  if not par[1] then
+    return nil
+  end
+
+  local t = {}
+
+  t.name = field
+  t.condlist = xr_logic.parse_condlist(nil, section, field, par[1])
+
+  return t
+end
+
 -- получить имя пути места работы
 function gulag:get_job_path_name( job )
 	local section = job.section
+	local active_section
 
-	if not self.ltx:line_exist( section, "active" ) then
-		abort( "gulag: ltx=%s  no 'active' in section %s", self.ltx_name, section )
+	-- nv130116 added support for conditional job assignments
+	-- replace "active" instances with "selective" for individuals with complex job assignments (e.g. Nimble)
+	-- if not self.ltx:line_exist( section, "active" ) then
+	if self.ltx:line_exist( section, "active" ) then
+		active_section = self.ltx:r_string( section, "active" )
+	elseif self.ltx:line_exist( section, "selective" ) then
+		-- determine section to use, get condlist
+		local active_section_cond = gulag_cfg_get_condlist(self.ltx, section, "selective")
+		if not active_section_cond then
+			abort("xr_gulag: job '%s': unable to find section(s) for 'selective'",section)
+			return nil
+		else
+			active_section = xr_logic.pick_section_from_condlist(actor, npc, active_section_cond.condlist)
+			if not active_section then
+				abort("xr_gulag: job section '%s': section 'selective' has no conditionless else clause", section)
+				return nil
+			end
+		end
+	else
+		abort( "gulag: ltx=%s  no 'active' or 'selective' in section %s", self.ltx_name, section )
+		return nil
 	end
-
-	local active_section = self.ltx:r_string( section, "active" )
+	
 	local path_field
 
 	for i, v in ipairs( path_fields ) do
@@ -243,18 +284,21 @@ function gulag:get_job_path_name( job )
 
 	if not path_field then
 		abort( "gulag: ltx=%s, there is no path in section %s", self.ltx_name, active_section )
+		return
 	end
 
+	local sf = string.format
+	local path_name = sf("%s_%s", self.name, self.ltx:r_string(active_section, path_field))
 	if path_field == "center_point" then --' TODO убрать затык
-		local path_name = self.name .. "_" .. self.ltx:r_string( active_section, path_field )
-
-		if level.patrol_path_exists( path_name .. "_task" ) then
-			return path_name .. "_task"
+		local path_name_task = sf("%s_task", path_name)
+		if level.patrol_path_exists( path_name_task ) then
+			return path_name_task
 		else
 			return path_name
 		end
 	else
-		return self.name .. "_" .. self.ltx:r_string( active_section, path_field )
+		-- return self.name .. "_" .. self.ltx:r_string( active_section, path_field )
+		return path_name
 	end
 end
 
@@ -286,6 +330,7 @@ function gulag:load_common( packet )
 	self.population					= packet:r_u8()
 	self.population_comed			= packet:r_u8()
 	self.population_non_exclusive	= packet:r_u8()
+	self.pop_valid = true
 
 	local n = packet:r_u8()
 
@@ -529,10 +574,9 @@ end
 function gulag:obj1_job_suits_obj2( obj_id, npc_info )
 	local job = self.Job[self.ObjectJob[obj_id]]
 
---	if not job then
---		printf( "job=nil! obj=%s obj_id=%d", self.npc_info[obj_id].name, obj_id )
---		self:print()
---	end
+	if not job then
+		return false --nv 091228 crash protection for nil job
+	end
 
 	return not job.predicate or job.predicate( npc_info, self )
 end
@@ -830,7 +874,8 @@ end
 
 -- получить количество живых пришедших объектов под смартом
 function gulag:get_population_comed()
-	return self.population_comed
+	--nv130217 support valid init
+	return (self.pop_valid and self.population_comed) or 0
 end
 
 -- получить количество живых неэксклюзивных объектов под смартом
@@ -946,6 +991,9 @@ function gulag:beginJob( obj_id )
 		self.Object_didnt_begin_job[obj_id] = false
 	end
 	
+	-- if not self.pop_valid then -- was unitialized
+		self.pop_valid = true
+	-- end
 	self.population_comed = self.population_comed + 1 --' Увеличиваем счетчик пришедших персонажей
 end
 
