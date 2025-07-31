@@ -190,6 +190,13 @@ function heli_combat:save( packet )
 		packet:w_u8  ( self.combat_type )
 
 		if self.combat_type == combat_type_search then
+			-- nv090314 prevent initialization bug crash
+			if self.change_dir_time == nil then
+				self.change_dir_time            = t
+				self.change_pos_time            = t
+				self.center_pos                 = self.enemy_last_seen_pos
+				self.flight_direction           = random_choice( true, false )
+			end
 			packet:w_u32 ( self.change_dir_time - t )
 			packet:w_u32 ( self.change_pos_time - t )
 			packet:w_bool( self.flight_direction )

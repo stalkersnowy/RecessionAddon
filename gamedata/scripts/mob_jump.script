@@ -42,7 +42,8 @@ function mob_jump:reset_scheme()
 	end
 
 	
-	self.point = vector().add(self.jump_path:point(0), self.st.offset)
+	-- self.point = vector().add(self.jump_path:point(0), self.st.offset)
+	self.point = self.jump_path:point(0):add(self.st.offset)
 
 	self.state_current  = STATE_START_LOOK
 	

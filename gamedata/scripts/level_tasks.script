@@ -10,7 +10,7 @@ local level_scripts = {
 	pripyat_tasks
 }
 
-
+--[[ nv120322 - autojump not used in retail
 local jump_level_by_name = {
 	l01_escape				= "l02_garbage",
 	l02_garbage				= "l03_agroprom",
@@ -31,6 +31,7 @@ local jump_level_by_name = {
 	l12u_control_monolith	= "l12_stancia_2",
 	l12_stancia_2			= "l01_escape"
 }
+--]]
 
 function proceed()
 	if db.actor == nil then
@@ -40,6 +41,7 @@ function proceed()
 		v.proceed()
 	end
 
+--[[ nv120322 - autojump not used in retail
 	if db.actor:has_info("autojump_enabled") then
 		local jname = jump_level_by_name[level.name()]
 		if jname ~= nil then
@@ -47,6 +49,7 @@ function proceed()
 			get_console():execute("jump_to_level "..jname)
 		end
 	end
+--]]
 end
 
 function autojump()

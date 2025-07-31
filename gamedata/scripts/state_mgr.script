@@ -199,12 +199,12 @@ function act_state_mgr_end:execute()
 --	if not self.st.planner:evaluator(self.st.properties["movement_stand_now"]):evaluate() then		
 --		state_mgr_direction.update_movement_direction(self.object, self.st)
 --	end
-	local t = state_lib.states[self.st.target_state].weapon
-	local w = isWeapon(self.object:best_weapon())
-
-	if not w then
+	local wpn = self.object:best_weapon()
+	if not wpn or not isWeapon(wpn) then
 		return
 	end
+	
+	local t = state_lib.states[self.st.target_state].weapon
 	if t == "fire" or t == "sniper_fire" then
 		--printf("[%s] shooting", self.object:name())
 		local sniper_aim = 3000
@@ -222,16 +222,16 @@ function act_state_mgr_end:execute()
 				if t == "sniper_fire" then
 					sniper_aim = self.object:position():distance_to(look_object:position())*aim_ratio
 					if sniper_aim <= min_ratio then
-						self.object:set_item(object.fire1, self.object:best_weapon(), 1, min_ratio)
+						self.object:set_item(object.fire1, wpn, 1, min_ratio)
 						return
 					end					
-					self.object:set_item(object.fire1, self.object:best_weapon(), 1, sniper_aim)
+					self.object:set_item(object.fire1, wpn, 1, sniper_aim)
 				else
-					self.object:set_item(object.fire1, self.object:best_weapon(), state_mgr_weapon.get_queue_params(self.object, look_object))
+					self.object:set_item(object.fire1, wpn, state_mgr_weapon.get_queue_params(self.object, look_object))
 				end
 				return
 			else
-				self.object:set_item(object.idle, self.object:best_weapon())
+				self.object:set_item(object.idle, wpn)
 				return
 			end
 		end
@@ -240,23 +240,23 @@ function act_state_mgr_end:execute()
 			self.st.look_object == nil
 		then
 			if t == "sniper_fire" then
-				self.object:set_item(object.fire1, self.object:best_weapon(), 1, sniper_aim)
+				self.object:set_item(object.fire1, wpn, 1, sniper_aim)
 			else
-				self.object:set_item(object.fire1, self.object:best_weapon(), state_mgr_weapon.get_queue_params(self.object, nil))
+				self.object:set_item(object.fire1, wpn, state_mgr_weapon.get_queue_params(self.object, nil))
 			end
 			return
 		else
 			if self.st.target_state == "psy_shoot" then
-				self.object:set_item(object.fire1, self.object:best_weapon())
+				self.object:set_item(object.fire1, wpn)
 				return
 			end
-			self.object:set_item(object.idle, self.object:best_weapon())
+			self.object:set_item(object.idle, wpn)
 			return				
 		end
 		return
 	elseif t == "unstrapped" then
 		--printf("[%s] not shooting", self.object:name())
-		self.object:set_item(state_mgr_weapon.get_idle_state(self.st.target_state), self.object:best_weapon())
+		self.object:set_item(state_mgr_weapon.get_idle_state(self.st.target_state), wpn)
 	end	
 end
 function act_state_mgr_end:finalize()
@@ -309,6 +309,7 @@ function state_manager:set_state(state_name, callback, timeout, target, emerg, s
 	
 	if state_lib.states[state_name] == nil then
 		abort("ERROR: ILLEGAL SET STATE CALLED!!! %s fo %s", tostring(state_name), self.npc:name())
+		return
 	end
 --[[
 	if target then

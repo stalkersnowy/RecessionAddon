@@ -74,7 +74,7 @@ void CUITaskRootItem::Init			()
 
 	m_switchDescriptionBtn		= xr_new<CUI3tButton>();	m_switchDescriptionBtn->SetAutoDelete(true); AttachChild(m_switchDescriptionBtn);
 	m_switchDescriptionBtn		->SetAlwaysHighlight(true);
-	m_captionTime				= xr_new<CUI3tButton>();	m_captionTime->SetAutoDelete(true);			AttachChild(m_captionTime);
+	m_captionTime				= xr_new<CUIStatic>();		m_captionTime->SetAutoDelete(true);			AttachChild(m_captionTime);
 	
 	m_showLocationBtn->SetWindowName("m_showLocationBtn");
 	Register					(m_showLocationBtn);

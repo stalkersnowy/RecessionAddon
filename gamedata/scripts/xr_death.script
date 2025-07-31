@@ -11,7 +11,9 @@ function action_process_death:__init(obj, storage)
 end
 
 function action_process_death:death_callback(victim, who)
-	if who ~= nil then
+	-- nv140501 if no enemy known before they die suddenly, then no killer known when save reloaded
+	-- if who ~= nil then
+	if who ~= nil and victim:best_enemy() ~= nil then
 		--printf("[%s] killed by [%s]", victim:name(), who:name() )
 		db.storage[victim:id()].death.killer = who:id()
 	else

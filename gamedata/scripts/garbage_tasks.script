@@ -1,8 +1,10 @@
 function proceed()
+	-- nv 071008 some optimization
+	if has_alife_info("agr_krot_band_start") then return end
 	if db.actor ~= nil and 
 		has_alife_info("garbage_meetstalker_die") and
-		has_alife_info("agr_can_ask_krot_about_gunslinger") and
-		not has_alife_info("agr_krot_band_start")
+		has_alife_info("agr_can_ask_krot_about_gunslinger") -- and
+		-- not has_alife_info("agr_krot_band_start")
 	then
 		db.actor:give_info_portion("agr_krot_band_start")
 		news_manager.send_tip(db.actor, "gar_seryi_info")
@@ -22,16 +24,13 @@ function task_hellcar_complete()
 end
 
 function task_hellcar_fail()
-	if (xr_gulag.getGulagPopulation("gar_hellcar_group") < 1) or has_alife_info("gar_hellcar_death")
-	then
-		return true
-	else
-		return false
-	end
+	-- Bes (gar_hellcar) is a member of gar_hellcar_group; if he's dead, that's it.
+	-- if (xr_gulag.getGulagPopulation("gar_hellcar_group") < 1) or has_alife_info("gar_hellcar_death")
+	return has_alife_info("gar_hellcar_death")
 end
 
 function task_hellcar_fail2()
-	local actor = db.actor
+	-- local actor = db.actor
 	if 	(xr_gulag.getCasualities("gar_hellcar_group") > 0 and
 	   not has_alife_info("gar_hellcar_help")) or has_alife_info("gar_hellcar_death")
 	then

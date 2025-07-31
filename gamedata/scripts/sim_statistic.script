@@ -117,7 +117,7 @@ end
 
 
 --' Отметка всех сталкеров мапспотами. Дебаговая фича!!!
-show_stalker_spot = true
+show_stalker_spot = false
 function unmark_all_stalkers()
 	show_stalker_spot = false
 end
@@ -126,7 +126,7 @@ function mark_all_stalkers()
 end
 
 --' Отметка всех монстров мапспотами. Дебаговая фича!!!
-show_monster_spot = true
+show_monster_spot = false
 function unmark_all_monsters()
 	show_monster_spot = false
 end

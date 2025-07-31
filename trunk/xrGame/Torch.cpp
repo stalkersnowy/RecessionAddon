@@ -209,7 +209,7 @@ void CTorch::Switch	(bool light_on)
 
 		pVisual->LL_SetBoneVisible			(bi,	light_on,	TRUE);
 		pVisual->CalculateBones				(TRUE);
-//.		pVisual->LL_SetBoneVisible			(bi,	light_on,	TRUE); //hack
+		pVisual->LL_SetBoneVisible			(bi,	light_on,	TRUE); //hack
 	}
 }
 

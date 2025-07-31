@@ -2,6 +2,8 @@
 Схема "Охотник за вертолётами"
 Чугай Александр
 --------------------------------------------------------------------------------------------------------------------]]
+-- nv130308 reduced load of nil scheme binding bug in existing game saves
+-- nv150312 removed math.pow() usage for speed
 
 local def_attack_dist = 1000 -- расстояние, на котором вертолёт может быть атакован
 local def_actor_dist  = 20  -- расстояние, на котором игрок может быть атакован
@@ -12,9 +14,11 @@ function get_nearest_heli(npc_position, attack_dist_sqr)
 	local heli = nil
 
 	for k,v in pairs(db.heli) do
-		if v:position():distance_to_sqr(npc_position) <= attack_dist_sqr and
+		-- if v:position():distance_to_sqr(npc_position) <= attack_dist_sqr and
+		if v:position():distance_to(npc_position) <= attack_dist_sqr and
 		   (heli == nil or
-		   v:position():distance_to_sqr(npc_position) < heli:position():distance_to_sqr(npc_position))
+		   -- v:position():distance_to_sqr(npc_position) < heli:position():distance_to_sqr(npc_position))
+		   v:position():distance_to(npc_position) < heli:position():distance_to(npc_position))
 		then
 			heli = v
 		end
@@ -61,7 +65,8 @@ function evaluator_shoot:evaluate()
 		-- проверка не потерялся ли вертолет.
 --		if db.heli[self.a.heli:id()] ~= nil and
 --		printf( "dist=%d", self.a.heli:position():distance_to_sqr(self.object:position()) )
-		if self.a.heli:position():distance_to_sqr(self.object:position()) > self.a.attack_dist_sqr then
+		-- if self.a.heli:position():distance_to_sqr(self.object:position()) > self.a.attack_dist_sqr then
+		if self.a.heli:position():distance_to(self.object:position()) > self.a.attack_dist_sqr then
 			self.a.heli = nil
 			return false
 		end
@@ -71,7 +76,8 @@ function evaluator_shoot:evaluate()
 		if best_enemy and
 		   best_enemy:id() == db.actor:id()
 		then
-		    if db.actor:position():distance_to_sqr(self.object:position()) < self.a.attack_actor_sqr then
+		    -- if db.actor:position():distance_to_sqr(self.object:position()) < self.a.attack_actor_sqr then
+		    if db.actor:position():distance_to(self.object:position()) < self.a.attack_actor_sqr then
 				return false
 		    end
 		end
@@ -83,7 +89,8 @@ function evaluator_shoot:evaluate()
 		   if bd_object ~= nil and
 		      bd_object:id() == db.actor:id()
 		   then
-				if best_danger:position():distance_to_sqr(self.object:position()) < self.a.attack_actor_sqr then
+				-- if best_danger:position():distance_to_sqr(self.object:position()) < self.a.attack_actor_sqr then
+				if best_danger:position():distance_to(self.object:position()) < self.a.attack_actor_sqr then
 					return false
 				end
 		   end
@@ -123,8 +130,7 @@ end
 ----------------------------------------------------------------------------------------------------------------------
 
 function add_to_binder( npc, ini, scheme, section, storage )
-	--printf( "DEBUG: add_to_binder: scheme='%s'", scheme )
-
+	-- printf( "DEBUG: add_to_binder: scheme='%s'", scheme )
 	local manager = npc:motivation_action_manager()
 
 	manager:add_evaluator( xr_evaluators_id.chugai_heli_hunter_base, evaluator_shoot( "heli_hunter", storage ) )
@@ -146,14 +152,17 @@ function add_to_binder( npc, ini, scheme, section, storage )
 end
 
 function set_scheme( npc, ini, scheme, section )
-	--printf( "DEBUG: set_scheme: scheme='%s' section='%s'", scheme, utils.to_str(section) )
+	-- printf( "DEBUG: set_scheme: scheme='%s' section='%s'", scheme, utils.to_str(section) )
 
 	local a = xr_logic.assign_storage_and_bind( npc, ini, scheme, section )
 
-	a.attack_dist_sqr = math.pow( utils.cfg_get_number( ini, section, "dist", npc, false, def_attack_dist ), 2 )
-	a.attack_actor_sqr = math.pow( utils.cfg_get_number( ini, section, "actor_dist", npc, false, def_actor_dist ), 2 )
+	-- a.attack_dist_sqr = math.pow( utils.cfg_get_number( ini, section, "dist", npc, false, def_attack_dist ), 2 )
+	a.attack_dist_sqr = utils.cfg_get_number( ini, section, "dist", npc, false, def_attack_dist )
+	-- a.attack_actor_sqr = math.pow( utils.cfg_get_number( ini, section, "actor_dist", npc, false, def_actor_dist ), 2 )
+	a.attack_actor_sqr = utils.cfg_get_number( ini, section, "actor_dist", npc, false, def_actor_dist )
 	a.heli = nil
-	a.enabled = true
+	-- nv130308 this is a workaround for the useless scheme binding bug in existing games
+	a.enabled = section ~= nil --true
 end
 
 function disable_scheme(npc, scheme)

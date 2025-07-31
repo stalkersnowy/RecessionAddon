@@ -113,12 +113,15 @@ function CTreasure:use(npc)
 				treasure_prob = 0
 			end
 
-			if tonumber(treasure_prob) >= 0 and
+			-- nv - don't include treasure_prob == 0 case!
+			if tonumber(treasure_prob) > 0 and
 			v.community[npc:character_community()] == true and
 			v.active == false
 			then
 				if tonumber(treasure_prob) == 100 then
 					self:give_treasure(k)
+					-- nv - secret given, just return
+					return
 				else
 					table.insert(avail, {k = k, prob = treasure_prob})
 					tr_sum = tr_sum + treasure_prob

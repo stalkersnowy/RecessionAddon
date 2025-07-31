@@ -78,21 +78,22 @@ end
 function getNpcType(npc)
 	if IsStalker(npc) then
 		local community = "neutral"
-		if npc:character_community() == "monolith" then
+		local npc_community = npc:character_community()
+		if npc_community == "monolith" then
 			community = "monolith"
-		elseif npc:character_community() == "military" then
+		elseif npc_community == "military" then
 			community = "military"
-		elseif npc:character_community() == "killer" then
+		elseif npc_community == "killer" then
 			community = "killer"
-		elseif npc:character_community() == "ecolog" then
+		elseif npc_community == "ecolog" then
 			community = "ecolog"
-		elseif npc:character_community() == "dolg" then
+		elseif npc_community == "dolg" then
 			community = "dolg"
-		elseif npc:character_community() == "freedom" then
+		elseif npc_community == "freedom" then
 			community = "freedom"
-		elseif npc:character_community() == "bandit" then
+		elseif npc_community == "bandit" then
 			community = "bandit"
-		elseif npc:character_community() == "zombied" then
+		elseif npc_community == "zombied" then
 			community = "zombied"
 		end
 		local rank = ranks.get_obj_rank_name(npc)
@@ -101,6 +102,7 @@ function getNpcType(npc)
 		local community = monster_classes[get_clsid(npc)]
 		if community == nil then
 			abort("Statistic ERROR: cannot find monstr class for [%s]", npc:name())
+			return nil,nil
 		end
 		if community == "NIL" then
 			return nil,nil

@@ -1,4 +1,5 @@
 function proceed()
+	if level.name() ~= "l01_escape" then return end
     local actor = db.actor
 	
 	if	has_alife_info("tutorial_artefact_start") and

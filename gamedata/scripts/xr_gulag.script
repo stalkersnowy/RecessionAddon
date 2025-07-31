@@ -1066,7 +1066,7 @@ function gulag:set_restrictions(obj, r_out, r_in, r_info)
 --'	printf( "RESTR [%s] AFTER (OUT): %s", obj:name(), obj:out_restrictions() )
 
 	-- информационный рестриктор
-	db.info_restr[obj:id()] = r_info
+	-- db.info_restr[obj:id()] = r_info --nv130303 info not used in vanilla
 
 --'	printf( "INFO [%s] RESTR      : %s", obj:name(), utils.to_str( r_info ) )
 end
@@ -1076,7 +1076,7 @@ end
 function gulag:clear_restrictors_info( obj_id )
 	self.restrictors[obj_id] = nil
 
-	db.info_restr[obj_id] = nil
+	-- db.info_restr[obj_id] = nil --nv130303 not used in vanilla
 end
 
 -- получить работу, которую занимает объект
@@ -1376,12 +1376,15 @@ end
 -- если вне, то информация будет запрещена
 -- функция кеширует game_object рестриктора
 function is_info_restricted( obj_id, info_pos )
+--[[  -- nv130303 function called by xr_danger.script to determine if threat is in a zone where it can be ignored, 
+	--but the db table is not ever populated with non-nil data in vanilla (always returns false)
 	local r = db.info_restr[obj_id]
 
 	if r == nil then
 		return false
 	end
 
+	dbglog("is_info_restricted() called for %d, type of info is %s",obj_id,type(r))
 	if type(r) == "string" then
 		r = db.zone_by_name[r]
 
@@ -1393,6 +1396,8 @@ function is_info_restricted( obj_id, info_pos )
 	end
 
 	return not r:inside( info_pos )
+--]]
+	return false
 end
 
 -----------------------------------------------------------------------------------------------------------------

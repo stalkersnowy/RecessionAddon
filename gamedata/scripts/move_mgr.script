@@ -94,13 +94,14 @@ function move_mgr:extrapolate_callback(npc)
 end
 
 function move_mgr:standing_on_terminal_waypoint()
-	for idx = 0, self.patrol_walk:count() - 1 do
-		if utils.stalker_at_waypoint(self.object, self.patrol_walk, idx) and
-		   self.patrol_walk:terminal(idx) then
-			return true, idx
+	if self.patrol_walk ~= nil then 
+		for idx = 0, self.patrol_walk:count() - 1 do
+			if utils.stalker_at_waypoint(self.object, self.patrol_walk, idx) and
+			   self.patrol_walk:terminal(idx) then
+				return true, idx
+			end
 		end
 	end
-	
 	return false
 end
 
@@ -190,7 +191,7 @@ function move_mgr:reset(path_walk, path_walk_info, path_look, path_look_info, te
 		self.path_look = path_look
 		self.path_look_info = path_look_info
 
-		self:validate_paths()
+--		self:validate_paths()
 
 		self.at_terminal_waypoint_flag = false
 

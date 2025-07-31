@@ -2,14 +2,14 @@ local light_zones = {}
 
 local indoor_levels = {
 	l03u_agr_underground = true,
-	l03u_agr_underground_e3 = true,
-	l03u_agr_underground_hw = true,
+--	l03u_agr_underground_e3 = true,
+--	l03u_agr_underground_hw = true,
 	l04u_labx18 = true,
 	l08u_brainlab = true,
 	l10u_bunker = true,
 	l12u_sarcofag = true,
-	l12u_control_monolith = true,
-	chugai_test = true
+	l12u_control_monolith = true--,
+--	chugai_test = true
 }
 ---------------------------------------------------------------------------------------------------------------------
 class "action_light"
@@ -78,20 +78,22 @@ function check_light(stalker)
 	local forced = false
 
 	if stalker:alive() == false then
-		light  = false
-		forced = true
+		-- light  = false
+		-- forced = true
+		torch:enable_attachable_item(false)
+		return
 	end
 
 	--'printf("[check_light %s] alive_passed: light=%s, forced=%s", stalker:name(), tostring(light), tostring(forced))
     --' Проверка по лайтзонам
-    if not forced then
+    -- if not forced then
 	    for k,v in pairs(light_zones) do
 			light, forced = v:check_stalker(stalker)
 			if forced == true then
 				break
 			end
 	    end
-	end
+	-- end
 
 	--'printf("[check_light %s] lightzone_passed: light=%s, forced=%s", stalker:name(), tostring(light), tostring(forced))
 	if not forced then
@@ -99,6 +101,8 @@ function check_light(stalker)
 		local htime = level.get_time_hours()
 		if htime <= 4 or htime >= 22 then
 			light = true
+		else
+			light = false
 		end
 	
 		--' Проверка на индор-аутдор (внутри всегда включено)
@@ -111,16 +115,18 @@ function check_light(stalker)
 
 	--'printf("[check_light %s] timezone_passed: light=%s, forced=%s", stalker:name(), tostring(light), tostring(forced))
 	--' Проверка по активному действию
-	if not forced and light == true then
-		--' Фонарики должны быть выключены у костра
-		local scheme = db.storage[stalker:id()].active_scheme
-		if scheme == "kamp" or
-		   scheme == "camper" 
-		then
-			light = false
-			forced = true
+		-- if not forced and light == true then
+		if light == true then
+			--' Фонарики должны быть выключены у костра
+			local scheme = db.storage[stalker:id()].active_scheme
+			if scheme == "kamp" or
+				scheme == "camper" or
+				scheme == "sleeper" -- nv120704 per ZaGaR
+			then
+				light = false
+				-- forced = true
+			end
 		end
-	end
 
 	--'printf("[check_light %s] scheme_passed: light=%s, forced=%s", stalker:name(), tostring(light), tostring(forced))	
 --	if not forced and light == true then
@@ -131,6 +137,8 @@ function check_light(stalker)
 --	end
 	
 	if light ~= nil then
+		 -- nv080224 - hack to force light off if it should be off
+		if light == false then torch:enable_attachable_item(true) end
 		torch:enable_attachable_item(light)
 	end
 end

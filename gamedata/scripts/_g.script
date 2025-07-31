@@ -3,7 +3,7 @@ if (jit == nil) then
 end
 
 schemes = {} -- ñîîòâåòñòâèå ñõåì ìîäóëÿì
-stypes = {} -- òèïû ñõåì
+-- stypes = {} -- òèïû ñõåì -- nv150404 not currently used
 
 -- Çàãðóæàåò ñõåìó èç ôàéëà íà äèñêå è àêòèâèðóåò â ìîòèâàòîðå.
 -- Çäåñü:
@@ -11,7 +11,7 @@ stypes = {} -- òèïû ñõåì
 -- 	scheme - èìÿ ñõåìû
 function load_scheme(filename, scheme, stype)
 	schemes[scheme] = filename
-	stypes[scheme] = stype
+	-- stypes[scheme] = stype -- nv150404 not currently used
 end
 
 ----------------------------------------------------------------------
@@ -735,30 +735,46 @@ end
 
 -- ¯à®¢¥àï¥â ®àã¦¨¥ «¨ íâ® (¯¥à¥¤ ¢ âì game_object)
 function isWeapon(object)
-    local id = get_clsid(object)
-    if id == nil then return false end
+	local id = get_clsid(object) or 0 --nv150404 for math compare
+--[[ --nv150404 use faster test
+	if id == nil then return false end
 
-    if id == clsid.wpn_vintorez_s then return true
-    elseif id == clsid.wpn_ak74_s then return true
-    elseif id == clsid.wpn_lr300_s then return true
-    elseif id == clsid.wpn_hpsa_s then return true
-    elseif id == clsid.wpn_pm_s then return true
-    elseif id == clsid.wpn_shotgun_s then return true
-    elseif id == clsid.wpn_bm16_s then return true
-    elseif id == clsid.wpn_svd_s then return true
-    elseif id == clsid.wpn_svu_s then return true
-    elseif id == clsid.wpn_rpg7_s then return true
-    elseif id == clsid.wpn_val_s then return true
-    elseif id == clsid.wpn_walther_s then return true
-    elseif id == clsid.wpn_usp45_s then return true
-    elseif id == clsid.wpn_groza_s then return true
-    elseif id == clsid.wpn_knife_s then return true
-    elseif id == clsid.wpn_grenade_launcher then return true
-    elseif id == clsid.wpn_grenade_f1 then return true
-    elseif id == clsid.wpn_grenade_rpg7 then return true
-    elseif id == clsid.wpn_grenade_rgd5 then return true
-    elseif id == clsid.wpn_grenade_fake then return true
-    else return false end
+	if id == clsid.wpn_vintorez_s then return true
+	elseif id == clsid.wpn_ak74_s then return true
+	elseif id == clsid.wpn_lr300_s then return true
+	elseif id == clsid.wpn_hpsa_s then return true
+	elseif id == clsid.wpn_pm_s then return true
+	elseif id == clsid.wpn_shotgun_s then return true
+	elseif id == clsid.wpn_bm16_s then return true
+	elseif id == clsid.wpn_svd_s then return true
+	elseif id == clsid.wpn_svu_s then return true
+	elseif id == clsid.wpn_rpg7_s then return true
+	elseif id == clsid.wpn_val_s then return true
+	elseif id == clsid.wpn_walther_s then return true
+	elseif id == clsid.wpn_usp45_s then return true
+	elseif id == clsid.wpn_groza_s then return true
+	elseif id == clsid.wpn_knife_s then return true
+	elseif id == clsid.wpn_grenade_launcher then return true
+	elseif id == clsid.wpn_grenade_f1 then return true
+	elseif id == clsid.wpn_grenade_rpg7 then return true
+	elseif id == clsid.wpn_grenade_rgd5 then return true
+	elseif id == clsid.wpn_grenade_fake then return true
+	-- nv130224 added per castl
+	elseif id == clsid.wpn_rg6_s then return true
+	else return false end
+--]]
+	--wpn_f2000 = clsid.wpn_groza_s, wpn_fort = clsid.wpn_pm_s, etc. Some clsid.wpn_grenade_* items are not weapons
+	-- too bad wpn_binocular_s is between wpn_ak74_s and wpn_bm16_s
+	if (id >= clsid.wpn_bm16_s and id <= clsid.wpn_walther_s) or id == clsid.wpn_ak74_s then
+		return true
+	elseif
+		id == clsid.wpn_grenade_f1 or
+		id == clsid.wpn_grenade_rgd5 or
+		id == clsid.wpn_grenade_fake
+	then
+		return true
+	end
+	return false
 end
 
 --Tv÷èñëÿåò yaw â ðàäèàíàõ
@@ -905,24 +921,35 @@ end
 
 // ßâëÿåòñÿ ëè îbj ìîíñòðîì
 function is_object_monster(obj)
-	local otype = get_clsid(obj)
+	local otype = get_clsid(obj) or 0 --nv150404 for math compare
+--[[
 	if(otype == clsid.crow			or
-		otype == clsid.zombie		or
-		otype == clsid.flesh		or
-		otype == clsid.controller	or
-		otype == clsid.bloodsucker	or
-		otype == clsid.burer		or
-		otype == clsid.chimera		or
-		otype == clsid.boar			or
-		otype == clsid.dog_red		or
-		otype == clsid.dog_black	or
-		otype == clsid.poltergeist	or
+		otype == clsid.zombie_s		or
+		otype == clsid.flesh_s		or
+		otype == clsid.controller_s	or
+		otype == clsid.bloodsucker_s	or
+		otype == clsid.burer_s		or
+		otype == clsid.cat_s		or
+		otype == clsid.chimera_s		or
+		otype == clsid.boar_s			or
+		-- otype == clsid.dog_red		or
+		-- otype == clsid.dog_black	or
+		otype == clsid.psy_dog_s	or
+		otype == clsid.pseudodog_s	or
+		otype == clsid.dog_s	or
+		otype == clsid.poltergeist_s	or
+		otype == clsid.tushkano_s or
+		otype == clsid.snork_s or
+		otype == clsid.gigant_s	or
 		otype == clsid.pseudo_gigant  )
 	then
 		return true
 	end
 
 	return false
+--]]
+	--clsid.pseudo_gigant is not in the game
+	return (otype >= clsid.bloodsucker_s and otype <= clsid.zombie_s) or otype == clsid.crow
 end
 
 --¢®§¢à é ¥â ¯à®¨§¢®«ì­ãî â®çªã ¯ãâ¨ ã ª®â®à®© ãáâ ­®¢«¥­ ¡¨â
@@ -1058,27 +1085,31 @@ function get_actor_id()
 end
 -------------------------------------------------------------------------------------------
 function IsMonster (object, class_id)
-    local id = class_id or get_clsid (object)
-    if id == clsid.boar_s or
-       id == clsid.bloodsucker_s or
-       id == clsid.dog_s or
-       id == clsid.flesh_s or
-       id == clsid.pseudodog_s or
-       id == clsid.psy_dog_s or
-       id == clsid.burer_s or
-       id == clsid.cat_s or
-       id == clsid.chimera_s or
-       id == clsid.controller_s or
-       id == clsid.fracture_s or
-       id == clsid.poltergeist_s or
-       id == clsid.gigant_s or
-       id == clsid.zombie_s or
-       id == clsid.tushkano_s or
-       id == clsid.snork_s
-    then
-	    return true
+	local id = class_id or get_clsid (object) or 0 -- for math compare
+--[[ --nv150404 use quicker test
+	if id == clsid.boar_s or
+	   id == clsid.bloodsucker_s or
+	   id == clsid.dog_s or
+	   id == clsid.flesh_s or
+	   id == clsid.pseudodog_s or
+	   id == clsid.psy_dog_s or
+	   id == clsid.burer_s or
+	   id == clsid.cat_s or
+	   id == clsid.chimera_s or
+	   id == clsid.controller_s or
+	   id == clsid.fracture_s or
+	   id == clsid.poltergeist_s or
+	   id == clsid.gigant_s or
+	   id == clsid.zombie_s or
+	   id == clsid.tushkano_s or
+	   id == clsid.snork_s
+	then
+		return true
 	end
-    return false
+	return false
+--]]
+	-- also includes psy_dog_phantom_s, should not be a problem
+	return id >= clsid.bloodsucker_s and id <= clsid.zombie_s
 end
 -------------------------------------------------------------------------------------------
 function IsStalker (object, class_id)

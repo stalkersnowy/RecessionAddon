@@ -73,7 +73,7 @@ function actor_binder:net_destroy()
     sr_light.clean_up ()
 
 	self.object:set_callback(callback.inventory_info, nil)
-	self.object:set_callback(callback.article_info, nil)
+--	self.object:set_callback(callback.article_info, nil)
 	self.object:set_callback(callback.on_item_take, nil)
 	self.object:set_callback(callback.on_item_drop, nil)
 	--self.object:set_callback(callback.actor_sleep, nil)
@@ -105,7 +105,7 @@ function actor_binder:reinit()
 	self.next_restrictors_update_time = -10000
 
 	self.object:set_callback(callback.inventory_info, self.info_callback, self)
-	self.object:set_callback(callback.article_info, self.article_callback, self)
+--	self.object:set_callback(callback.article_info, self.article_callback, self)
 	self.object:set_callback(callback.on_item_take, self.on_item_take, self)
 	self.object:set_callback(callback.on_item_drop, self.on_item_drop, self)
 	self.object:set_callback(callback.trade_sell_buy_item, self.on_trade, self) -- for game stats
@@ -131,7 +131,10 @@ function actor_binder:take_item_from_box(box, item)
 		return
 	end
 
-	treasure_manager.take_item_from_box(box, story_id)
+	if story_id >= 5000 then
+		treasure_manager.take_item_from_box(box, story_id)
+		return
+	end
 
 	local respawner = se_respawn.get_respawner_by_parent(story_id)
 	if respawner == nil then
@@ -237,13 +240,15 @@ function actor_binder:update(delta)
 
 	local time = time_global()
 	
-	game_stats.update (delta, self.object)
+		-- nv 100521 moved this below to reduce processing
+	-- game_stats.update (delta, self.object)
 
 	-- апдейт погоды
 	self.weather_manager:update()
 	
+		-- nv 100521 moved this below to reduce processing
 	-- апдейт схемы детектора
-	self.actor_detector:update()
+	-- self.actor_detector:update()
 
 	-- апдейт звуковой схемы актера
 	xr_sound.update_actor()
@@ -293,7 +298,28 @@ function actor_binder:update(delta)
 
 		self.next_restrictors_update_time = time + 200
 
+		-- nv 100521 moved these here to reduce processing
+		-- game_stats.update (delta, self.object) --used only for debugging
+		self.actor_detector:update()
+
 		task_manager.actor_update()
+
+		-- nv130402 moved here to reduce loop load;
+		-- checking five times a second is enough for a HUD message update
+		--' Вывод сообщения о большой радиации
+		local rad_danger = "cs_radiation_danger"
+		local hud = get_hud()
+		local custom_static = hud:GetCustomStatic(rad_danger)
+		if self.object.radiation >= 0.7 then
+			if custom_static == nil then
+				custom_static = hud:AddCustomStatic(rad_danger, true)
+				custom_static:wnd():SetTextST("st_radiation_danger")
+			end
+		else
+			if custom_static ~= nil then
+				hud:RemoveCustomStatic(rad_danger)
+			end
+		end
 	end
 
 	-- обновление постпроцессов
@@ -306,22 +332,6 @@ function actor_binder:update(delta)
 	-- обновление пси-антенны
 	if sr_psy_antenna.psy_antenna then
 		sr_psy_antenna.psy_antenna:update(delta)
-	end
-
-	--' Вывод сообщения о большой радиации
-	if self.object.radiation >= 0.7 then
-		local hud = get_hud()
-		local custom_static = hud:GetCustomStatic("cs_radiation_danger")
-		if custom_static == nil then
-			hud:AddCustomStatic("cs_radiation_danger", true)
-			hud:GetCustomStatic("cs_radiation_danger"):wnd():SetTextST("st_radiation_danger")
-		end
-	else
-		local hud = get_hud()
-		local custom_static = hud:GetCustomStatic("cs_radiation_danger")
-		if custom_static ~= nil then
-			hud:RemoveCustomStatic("cs_radiation_danger")
-		end
 	end
 
 	--' Запускаем затычку от возможной потери содержимого тайников

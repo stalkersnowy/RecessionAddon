@@ -23,7 +23,8 @@ local disagreed, agreed, agreed_exclusive = 0, 1, 2
 local smart_section = "smart_terrains"
 
 local smart_terrains = {}
-local smart_terrains_by_name = {}
+-- nv130219 This local table was filled/emptied but not used
+-- local smart_terrains_by_name = {}
 
 exclusives = {}
 
@@ -86,6 +87,7 @@ function se_smart_terrain:__init( section ) super( section )
 
 	self.initialized = false
 	self.registred = false
+	self:fill_monster_classes() -- nv 120303 call moved here to reduce overhead
 end
 
 function se_smart_terrain:detect_probability()
@@ -207,7 +209,7 @@ end
 --   xr_gulag.get_gulag_by_sid()
 function se_smart_terrain:initialize_if_needed()
 	if not self.initialized then
-		sim_statistic.update()
+--		sim_statistic.update()
 
 		self:get_se_objs()
 
@@ -246,7 +248,7 @@ function se_smart_terrain:get_se_objs()
 			abort( "[smart_terrain %s] can't get server object id=%d", self:name(), id )
 		end
 
-		sim_statistic.add( obj )
+--		sim_statistic.add( obj )
 
 		self:fill_npc_info( obj, v )
 	end
@@ -501,7 +503,7 @@ end
 -- вариант: any=condlist
 function se_smart_terrain:obj_accepts_smart_terrain( obj )
 	if obj.smart_terrain_conditions then
-		local any_exclusive = false
+--		local any_exclusive = false
 		local s
 
 		for name, condlist in pairs(obj.smart_terrain_conditions) do
@@ -669,7 +671,7 @@ function se_smart_terrain:register_npc( obj )
 
 	self.gulag:addObject( obj.id )
 
-	sim_statistic.add( obj )
+--	sim_statistic.add( obj )
 
 	self.gulag:update()
 
@@ -715,7 +717,7 @@ function se_smart_terrain:unregister_npc( obj )
 
 	obj:clear_smart_terrain()
 
-	sim_statistic.remove( obj )
+--	sim_statistic.remove( obj )
 
 --'	if sim_statistic.show_stalker_spot == true and obj:alive() then
 --'		local community, rank = sim_statistic.getNpcType(obj)
@@ -973,7 +975,7 @@ function se_smart_terrain:register_if_needed()
 		return
 	end
 
-	self:fill_monster_classes()
+	-- self:fill_monster_classes() --already done
 
 	local level_name = self:get_level_name()
 
@@ -986,7 +988,7 @@ function se_smart_terrain:register_if_needed()
 	end
 
 	smart_terrains[level_name][self.id] = self
-	smart_terrains_by_name[self:name()] = self
+	-- smart_terrains_by_name[self:name()] = self
 
 	if self.gparams.respawn then
 		db.strn_by_respawn[self.gparams.respawn] = self
@@ -998,7 +1000,7 @@ function se_smart_terrain:register_if_needed()
 		self.gulag:initialize()
 	end
 
-	sim_statistic.reinit()
+--	sim_statistic.reinit()
 
 	-- Регистрация в таскменеджере
 	task_manager.get_random_task():register_target(self)
@@ -1019,7 +1021,7 @@ function se_smart_terrain:on_unregister()
 		lvl_smarts[self.id] = nil
 	end
 
-	smart_terrains_by_name[self:name()] = nil
+	-- smart_terrains_by_name[self:name()] = nil
 
 	if self.gparams and self.gparams.respawn then
 		db.strn_by_respawn[self.gparams.respawn] = nil
