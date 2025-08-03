@@ -287,8 +287,24 @@ void CParticleGroup::SItem::OnFrame(u32 u_dt, const CPGDef::SEffect& def, Fbox& 
                     for(u32 i = 0; i < p_cnt; i++){
                         PAPI::Particle &m	= particles[i]; 
                         CParticleEffect* C 	= static_cast<CParticleEffect*>(_children_related[i]);
-                        Fmatrix M; 			M.translate(m.pos);
-                        Fvector vel; 		vel.sub(m.pos,m.posB); vel.div(fDT_STEP);
+
+                        Fmatrix M;
+                        M.identity();
+                        Fvector pos_world;
+                        if (E->m_RT_Flags.is(CParticleEffect::flRT_XFORM)) {
+                            E->m_XFORM.transform_tiny(pos_world, m.pos);
+                        } else {
+                            pos_world.set(m.pos);
+                        }
+                        M.translate(pos_world);
+
+                        Fvector vel;
+                        vel.sub(m.pos, m.posB);
+                        vel.div(fDT_STEP);
+                        if (E->m_RT_Flags.is(CParticleEffect::flRT_XFORM)) {
+                            E->m_XFORM.transform_dir(vel);
+                        }
+
                         C->UpdateParent		(M,vel,FALSE);
                     }
                 }
