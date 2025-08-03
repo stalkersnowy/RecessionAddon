@@ -2,10 +2,10 @@
 --' AGROPROM UnderGround
 --'--------------------------------------------------------------------------
 
-local t = {}
+-- local t = {}
 
 function load_job( sj, gname, type, squad, groups )
-
+	local t
 ----------------------------------------------------------------------------
 	if type == "agr_u_soldiers" then
 		for i = 1, 8 do
@@ -15,7 +15,7 @@ function load_job( sj, gname, type, squad, groups )
 				squad = squad, group = groups[1],
 				in_rest = "", out_rest = ""
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 		return
 	end
@@ -28,7 +28,7 @@ function load_job( sj, gname, type, squad, groups )
 				squad = squad, group = groups[1],
 				in_rest = "", out_rest = ""
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 	end
 end

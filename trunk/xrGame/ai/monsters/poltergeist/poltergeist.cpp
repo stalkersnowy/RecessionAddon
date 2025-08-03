@@ -204,9 +204,14 @@ BOOL CPoltergeist::net_Spawn (CSE_Abstract* DC)
 {
 	if (!inherited::net_Spawn(DC)) return(FALSE);
 
-	// спаунится нивидимым
-	setVisible		(false);
-	ability()->on_hide();
+    if (g_Alive())
+    {
+        // спаунится нивидимым
+        setVisible(false);
+        ability()->on_hide();
+    }
+    else
+        OnDie();
 	
 
 	return			(TRUE);
@@ -220,7 +225,7 @@ void CPoltergeist::net_Destroy()
 	ability()->on_destroy();
 }
 
-void CPoltergeist::Die(CObject* who)
+void CPoltergeist::OnDie()
 {
 	if (m_tele) {
 		if (state_invisible) {
@@ -236,9 +241,14 @@ void CPoltergeist::Die(CObject* who)
 		}
 	}
 
-	inherited::Die				(who);
 	Energy::disable				();
+    CTelekinesis::deactivate();
+}
 
+void CPoltergeist::Die(CObject* who)
+{
+    inherited::Die(who);
+    OnDie();
 	ability()->on_die			();
 }
 

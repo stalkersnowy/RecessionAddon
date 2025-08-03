@@ -3,10 +3,10 @@
 --' AGROPROM
 --'--------------------------------------------------------------------------
 
-local t = {}
+-- local t = {}
 
 function load_job( sj, gname, type, squad, groups )
-
+	local t
 
 	if type == "agr_road_patrol1" then
 		for i = 1, 5 do
@@ -16,7 +16,7 @@ function load_job( sj, gname, type, squad, groups )
 				squad = squad, group = groups[1],
 				in_rest = "", out_rest = "agr_patrol_1_space_restrictor"
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 		return
 	end
@@ -29,7 +29,7 @@ function load_job( sj, gname, type, squad, groups )
 				squad = squad, group = groups[1],
 				in_rest = "", out_rest = ""
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 		return
 	end
@@ -47,7 +47,7 @@ function load_job( sj, gname, type, squad, groups )
 			            end,
 			in_rest = "", out_rest = "agr_nii_space_restrictor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_night_commander",
 			idle = 0, position_threshold = 150, 
 			prior = 9, state = {1,2},
@@ -56,13 +56,13 @@ function load_job( sj, gname, type, squad, groups )
 			            end,
 			in_rest = "", out_rest = "agr_nii_space_restrictor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_night_commander",
 			idle = 0, position_threshold = 150, 
 			prior = 1, state = {1,2},
 			in_rest = "", out_rest = "agr_nii_space_restrictor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_alarm_commander",
 			idle = 0, position_threshold = 150, 
 			prior = 9, state = {3},
@@ -71,139 +71,139 @@ function load_job( sj, gname, type, squad, groups )
 			            end,
 			in_rest = "", out_rest = "agr_nii_sr_building"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_alarm_commander",
 			idle = 0, position_threshold = 150, 
 			prior = 1, state = {3},
 			in_rest = "", out_rest = ""
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		-- пост на северных воротах
 		t = { section = "logic@agr_nii_north_gate_walker1",
 			idle = 0, position_threshold = 150, 
 			prior = 5, state = {0,1,2,3},
 			in_rest = "agr_nii_sr_building", out_rest = "agr_nii_space_restrictor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_north_gate_walker2",
 			idle = 0, position_threshold = 150, 
 			prior = 5, state = {0,1,2,3},
 			in_rest = "agr_nii_sr_building", out_rest = "agr_nii_space_restrictor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_north_gate_walker3",
 			idle = 0, position_threshold = 150, 
 			prior = 5, state = {0,1,2,3},
 			in_rest = "agr_nii_sr_building", out_rest = "agr_nii_space_restrictor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		-- пост на восточных воротах
 		t = { section = "logic@agr_nii_east_gate_walker1",
 			idle = 0, position_threshold = 150, 
 			prior = 5, state = {0,1,2,3},
 			in_rest = "agr_nii_sr_building", out_rest = "agr_nii_space_restrictor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_east_gate_walker2",
 			idle = 0, position_threshold = 150, 
 			prior = 5, state = {0,1,2,3},
 			in_rest = "agr_nii_sr_building", out_rest = "agr_nii_space_restrictor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		-- 1-й этаж основного здания
 		t = { section = "logic@agr_nii_floor1_day_walker1",
 			idle = 0, position_threshold = 150, 
 			prior = 3, state = {0},
 			in_rest = "", out_rest = "agr_nii_sr_building"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_floor1_alarm_walker1",
 			idle = 0, position_threshold = 150, 
 			prior = 3, state = {3},
 			in_rest = "", out_rest = "agr_nii_sr_building"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_floor1_day_walker2",
 			idle = 0, position_threshold = 150, 
 			prior = 3, state = {0,1,3},
 			in_rest = "", out_rest = "agr_nii_sr_building"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_floor1_alarm_walker2",
 			idle = 0, position_threshold = 150, 
 			prior = 3, state = {3},
 			in_rest = "", out_rest = "agr_nii_sr_building"
 		}
-        table.insert(sj, t)
+        sj[#sj+1] = t
 		-- 2-й этаж основного здания
 		t = { section = "logic@agr_nii_floor2_day_walker1",
 			idle = 0, position_threshold = 150, 
 			prior = 3, state = {0},
 			in_rest = "", out_rest = "agr_nii_sr_building"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_floor2_alarm_walker1",
 			idle = 0, position_threshold = 150, 
 			prior = 3, state = {3},
 			in_rest = "", out_rest = "agr_nii_sr_building"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_floor2_day_walker2",
 			idle = 0, position_threshold = 150, 
 			prior = 3, state = {0,3},
 			in_rest = "", out_rest = "agr_nii_sr_building"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		-- 3-й этаж основного здания
 		t = { section = "logic@agr_nii_floor3_walker1",
 			idle = 0, position_threshold = 150, 
 			prior = 4, state = {0,1,3},
 			in_rest = "", out_rest = "agr_nii_3_floor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_floor3_walker2",
 			idle = 0, position_threshold = 150, 
 			prior = 4, state = {0,1,3},
 			in_rest = "", out_rest = "agr_nii_3_floor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_floor3_walker3",
 			idle = 0, position_threshold = 150, 
 			prior = 4, state = {0,1},
 			in_rest = "", out_rest = "agr_nii_3_floor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		-- дневные патрули
 		t = { section = "logic@agr_nii_day_patrol_walker1",
 			idle = 0, position_threshold = 150, 
 			prior = 2, state = {0},
 			in_rest = "agr_nii_sr_building", out_rest = "agr_nii_space_restrictor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_day_patrol_walker2",
 			idle = 0, position_threshold = 150, 
 			prior = 2, state = {0},
 			in_rest = "agr_nii_sr_building", out_rest = "agr_nii_space_restrictor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_day_patrol_walker3",
 			idle = 0, position_threshold = 150, 
 			prior = 2, state = {0},
 			in_rest = "agr_nii_sr_building", out_rest = "agr_nii_space_restrictor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_day_patrol_walker4",
 			idle = 0, position_threshold = 150, 
 			prior = 2, state = {0},
 			in_rest = "agr_nii_sr_building", out_rest = "agr_nii_space_restrictor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_nii_day_patrol_walker5",
 			idle = 0, position_threshold = 150, 
 			prior = 2, state = {0},
 			in_rest = "agr_nii_sr_building", out_rest = "agr_nii_space_restrictor"
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		-- патрули в тревоге
 		for i = 1, 5 do
 			t = { section = "logic@agr_nii_alarm_patrol_walker"..i,
@@ -211,7 +211,7 @@ function load_job( sj, gname, type, squad, groups )
 				prior = 4, state = {3},
 				in_rest = "agr_nii_sr_building", out_rest = "agr_nii_space_restrictor"
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 		-- дневные отдыхающие
 		for i = 1, 2 do
@@ -220,7 +220,7 @@ function load_job( sj, gname, type, squad, groups )
 				prior = 0, state = {0},
 				in_rest = "agr_nii_sr_building", out_rest = "agr_nii_space_restrictor"
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 		-- ночные отдыхающие
 		for i = 1, 11 do
@@ -229,7 +229,7 @@ function load_job( sj, gname, type, squad, groups )
 				prior = 0, state = {1,2},
 				in_rest = "agr_nii_sr_building", out_rest = "agr_nii_space_restrictor"
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 		return
 	end
@@ -246,7 +246,7 @@ function load_job( sj, gname, type, squad, groups )
 			            end,
 			in_rest = "", out_rest = ""
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_factory_assault_walker2",
 			idle = 0, position_threshold = 150, 
 			prior = 0, state = {0},
@@ -256,7 +256,7 @@ function load_job( sj, gname, type, squad, groups )
 			            end,
 			in_rest = "", out_rest = ""
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_factory_assault_walker3",
 			idle = 0, position_threshold = 150, 
 			prior = 0, state = {0},
@@ -266,7 +266,7 @@ function load_job( sj, gname, type, squad, groups )
 			            end,
 			in_rest = "", out_rest = ""
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_factory_assault_walker4",
 			idle = 0, position_threshold = 150, 
 			prior = 0, state = {0},
@@ -276,7 +276,7 @@ function load_job( sj, gname, type, squad, groups )
 			            end,
 			in_rest = "", out_rest = ""
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_factory_assault_walker5",
 			idle = 0, position_threshold = 150, 
 			prior = 0, state = {0},
@@ -286,7 +286,7 @@ function load_job( sj, gname, type, squad, groups )
 			            end,
 			in_rest = "", out_rest = ""
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_factory_assault_walker6",
 			idle = 0, position_threshold = 150, 
 			prior = 0, state = {0},
@@ -296,7 +296,7 @@ function load_job( sj, gname, type, squad, groups )
 			            end,
 			in_rest = "", out_rest = ""
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_factory_assault_walker7",
 			idle = 0, position_threshold = 150, 
 			prior = 0, state = {0},
@@ -306,7 +306,7 @@ function load_job( sj, gname, type, squad, groups )
 			            end,
 			in_rest = "", out_rest = ""
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		t = { section = "logic@agr_factory_assault_walker8",
 			idle = 0, position_threshold = 150, 
 			prior = 0, state = {0},
@@ -316,7 +316,7 @@ function load_job( sj, gname, type, squad, groups )
 			            end,
 			in_rest = "", out_rest = ""
 		}
-		table.insert(sj, t)
+		sj[#sj+1] = t
 		-- сражаются на улице
 		for i = 1, 8 do
 			t = { section = "logic@agr_factory_assault_skirmish_walker"..i,
@@ -325,7 +325,7 @@ function load_job( sj, gname, type, squad, groups )
 				squad = squad, group = groups[1],
 				in_rest = "", out_rest = "agr_factory_skirmish"
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 		-- идут к Кроту
 		for i = 1, 8 do
@@ -335,7 +335,7 @@ function load_job( sj, gname, type, squad, groups )
 				squad = squad, group = groups[1],
 				in_rest = "", out_rest = "agr_factory_hold_restrictor"
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 		return
 	end
@@ -350,7 +350,7 @@ function load_job( sj, gname, type, squad, groups )
 				squad = squad, group = groups[1],
 				in_rest = "", out_rest = "agr_factory_skirmish_defence"
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 		-- отстреливаются от военных
 		for i = 1, 6 do
@@ -360,7 +360,7 @@ function load_job( sj, gname, type, squad, groups )
 				squad = squad, group = groups[1],
 				in_rest = "", out_rest = "agr_factory_skirmish_defence"
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 		-- бегут помогать Кроту
 		for i = 1, 9 do
@@ -370,7 +370,7 @@ function load_job( sj, gname, type, squad, groups )
 				squad = squad, group = groups[1],
 				in_rest = "", out_rest = ""
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 		-- бегут по путям к колодцу и стоят там
 		for i = 1, 9 do
@@ -380,7 +380,7 @@ function load_job( sj, gname, type, squad, groups )
 				squad = squad, group = groups[1],
 				in_rest = "", out_rest = ""
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 
 ------ Сталкеры ждут начала атаки ---------------------------------------------------------------
@@ -391,7 +391,7 @@ function load_job( sj, gname, type, squad, groups )
 				squad = squad, group = groups[1],
 				in_rest = "", out_rest = ""
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 		return
 	end
@@ -406,7 +406,7 @@ function load_job( sj, gname, type, squad, groups )
 				squad = squad, group = groups[1],
 				in_rest = "", out_rest = "agr_factory_hold_restrictor"
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 		-- срываются в универсальный бой под рестриктором
 		for i = 1, 3 do
@@ -416,7 +416,7 @@ function load_job( sj, gname, type, squad, groups )
 				squad = squad, group = groups[1],
 				in_rest = "", out_rest = "agr_factory_hold_restrictor"
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 		-- Убили Крота. Ходят по путям без рестрикторов
 		for i = 1, 3 do
@@ -426,7 +426,7 @@ function load_job( sj, gname, type, squad, groups )
 				squad = squad, group = groups[1],
 				in_rest = "", out_rest = ""
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 	end
 

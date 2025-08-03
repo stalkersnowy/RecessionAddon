@@ -218,7 +218,7 @@ gulags.pri_followers.job = function(sj, gname, type, squad, groups)
                 idle_after_death = 50,
                 predicate = pd
             }
-            table.insert(sj, t)
+            sj[#sj+1] = t
         end
     end
 
@@ -504,14 +504,14 @@ gulags.pri_ambush7.job = function(sj, gname, type, squad, groups)
             prior = 1, state = {0}, squad = squad, group = groups[1],
             in_rest = "", out_rest = gname .. "_out_restr"
         }
-        table.insert(sj, t)
+        sj[#sj+1] = t
         --- state 1
         t = { section = "logic@" .. gname .. "_monolith" .. i, 
             idle = 0,
             prior = 1, state = {1}, squad = squad, group = groups[1],
             in_rest = "", out_rest = gname .. "_out_restr"
         }
-        table.insert(sj, t)
+        sj[#sj+1] = t
 
         ltx = ltx.."[logic@" .. gname .. "_monolith" .. i .. "_hide]\n" ..
                    "active              = walker@" .. gname .. "_monolith" .. i .. "_hide\n" ..
@@ -627,7 +627,7 @@ gulags.pri_wave.job = function(sj, gname, type, squad, groups)
             prior = 1, state = {0}, squad = squad, group = groups[1],
             in_rest = inr, out_rest = outr
         }
-        table.insert(sj, t)
+        sj[#sj+1] = t
 
         -- добавляем описание должности в лтх.
         ltx = ltx.."[logic@" .. idstr .. "]\n" ..
@@ -734,7 +734,7 @@ gulags.pri_wave.job = function(sj, gname, type, squad, groups)
             prior = 1, state = {0}, squad = squad, group = groups[2],
             in_rest = inr, out_rest = outr
         }
-        table.insert(sj, t)
+        sj[#sj+1] = t
 
         -- добавляем описание должности в лтх.
         ltx = ltx.."[logic@" .. idstr .. "]\n" ..
@@ -820,7 +820,7 @@ gulags.pri_wave.job = function(sj, gname, type, squad, groups)
             prior = 1, state = {0}, squad = squad, group = groups[2 + kampi],
             in_rest = inr, out_rest = outr
         }
-        table.insert(sj, t)
+        sj[#sj+1] = t
 
         -- добавляем описание должности в лтх.
         ltx = ltx.."[logic@" .. idstr .. "]\n" ..
@@ -889,7 +889,7 @@ gulags.pri_corner.job = function(sj, gname, type, squad, groups)
             prior = 1, state = {0}, squad = squad, group = groups[1],
             in_rest = "", out_rest = ""
         }
-        table.insert(sj, t)
+        sj[#sj+1] = t
 
         ltx = ltx.."[logic@" .. gname .. "_monolith" .. i .. "]\n" ..
                    "active              = camper@" .. gname .. "_monolith" .. i .. "_guard\n" ..
@@ -941,7 +941,7 @@ gulags.pri_depot.job = function(sj, gname, type, squad, groups)
             in_rest = "", out_rest = gname .. "_base_restr",
             predicate = z_predicate_c
         }
-        table.insert(sj, t)
+        sj[#sj+1] = t
     end
 
     way_name = gname .."_psydogs_home"
@@ -957,7 +957,7 @@ gulags.pri_depot.job = function(sj, gname, type, squad, groups)
             in_rest = gname .. "_base_restr", out_rest = "",
             predicate = z_predicate_pd
         }
-        table.insert(sj, t)
+        sj[#sj+1] = t
     end
 
     ltx = "[logic@" .. gname .. "_controller]\n" ..
@@ -1059,7 +1059,7 @@ gulags.pri_monolith.job = function(sj, gname, type, squad, groups)
         in_rest = in_r, out_rest = gname .. "_leader_restr",
         online = "{+pri_monolith_spawn2}",
         predicate = m_predicate_l
-    } table.insert(sj, t)
+    } sj[#sj+1] = t
 
     ltx = ltx.. "[logic@" .. gname .. "_leader]\n" ..
                 "active              = walker@" .. gname .. "_leader\n" ..
@@ -1082,7 +1082,7 @@ gulags.pri_monolith.job = function(sj, gname, type, squad, groups)
         in_rest = in_r, out_rest = gname .. "_leader_restr",
         online = "{+pri_monolith_spawn2}",
         predicate = m_predicate_l
-    } table.insert(sj, t)
+    } sj[#sj+1] = t
 
     ltx = ltx.. "[logic@" .. gname .. "_leader_attack]\n" ..
                 "active              = camper@" .. gname .. "_leader_attack\n" ..
@@ -1109,7 +1109,7 @@ gulags.pri_monolith.job = function(sj, gname, type, squad, groups)
             in_rest = in_r, out_rest = "",
             online = "{+pri_monolith_spawn1}",
             predicate = pred_pl[i]
-        } table.insert(sj, t)
+        } sj[#sj+1] = t
         ltx = ltx.. "[logic@" .. gname .. "_patrol" .. v .. "]\n" ..
                     "active              = walker@" .. gname .. "_patrol" .. v .. "\n" ..
                     "combat_ignore       = combat_ignore\n" ..
@@ -1127,7 +1127,7 @@ gulags.pri_monolith.job = function(sj, gname, type, squad, groups)
             in_rest = "", out_rest = gname .. state1_restr[i],
             online = "{+pri_monolith_spawn1}",
             predicate = m_predicate_s
-        } table.insert(sj, t)
+        } sj[#sj+1] = t
 
         ltx = ltx.. "[logic@" .. gname .. "_patrol" .. v .. "_attack]\n" ..
                     "active              = camper@" .. gname .. "_patrol" .. v .. "_attack\n" ..
@@ -1155,7 +1155,7 @@ gulags.pri_monolith.job = function(sj, gname, type, squad, groups)
                 in_rest = in_r, out_rest = "",
                 online = "{+pri_monolith_spawn1}",
                 predicate = m_predicate_s
-            } table.insert(sj, t)
+            } sj[#sj+1] = t
 
             t = { section = "logic@" .. gname .. state1_kamp[i], 
                 idle = 0,
@@ -1164,7 +1164,7 @@ gulags.pri_monolith.job = function(sj, gname, type, squad, groups)
                 in_rest = "", out_rest = gname .. state1_restr[i],
                 online = "{+pri_monolith_spawn1}",
                 predicate = m_predicate_s
-            } table.insert(sj, t)
+            } sj[#sj+1] = t
         end
         ltx = ltx.. "[logic@" .. gname .. "_group_patrol" .. i .. "]\n" ..
                     "active              = patrol@" .. gname .. "_group_patrol" .. i .. "\n" ..
@@ -1192,7 +1192,7 @@ gulags.pri_monolith.job = function(sj, gname, type, squad, groups)
             in_rest = in_r, out_rest = "",
             online = "{+pri_monolith_spawn1}",
             predicate = pred[i]
-        } table.insert(sj, t)
+        } sj[#sj+1] = t
         ltx = ltx.. "[logic@" .. gname .. "_stalker_" .. v .. "]\n" ..
                     "active              = camper@" .. gname .. "_stalker_" .. v .. "\n" ..
                     "combat_ignore       = combat_ignore\n" ..
@@ -1224,7 +1224,7 @@ gulags.pri_monolith.job = function(sj, gname, type, squad, groups)
             in_rest = in_r, out_rest = "pri_monolith_base_altar_restr",
             online = "{+pri_monolith_spawn2}",
             predicate = m_predicate_r
-        } table.insert(sj, t)
+        } sj[#sj+1] = t
         ltx = ltx.. "[logic@" .. gname .. "_prayer" .. i .. "]\n" ..
                     "active              = walker@" .. gname .. "_prayer" .. i .. "\n" ..
                     "combat_ignore       = combat_ignore\n" ..
@@ -1260,7 +1260,7 @@ gulags.pri_monolith.job = function(sj, gname, type, squad, groups)
                 in_rest = in_r, out_rest = "",
                 online = online_cond[i],
                 predicate = pd[j]
-            } table.insert(sj, t)
+            } sj[#sj+1] = t
 
             t = { section = "logic@" .. gname .. "_kamp" .. i .. "_attack" .. j,
                 idle = 0,
@@ -1269,7 +1269,7 @@ gulags.pri_monolith.job = function(sj, gname, type, squad, groups)
                 in_rest = "", out_rest = gname .. state1_restr[i],
                 online = online_cond[i],
                 predicate = pd[j]
-            } table.insert(sj, t)
+            } sj[#sj+1] = t
             ltx = ltx.. "[logic@" .. gname .. "_kamp" .. i .. "_attack" .. j .. "]\n" ..
                         "active              = camper@" .. gname .. "_kamp" .. i .. "_attack" .. j .. "\n" ..
                         "combat_ignore       = combat_ignore\n" ..
@@ -1301,7 +1301,7 @@ gulags.pri_monolith.job = function(sj, gname, type, squad, groups)
             in_rest = in_r, out_rest = "",
             online = "{+pri_monolith_spawn1}",
             predicate = m_predicate_s_sniper
-        } table.insert(sj, t)
+        } sj[#sj+1] = t
         ltx = ltx.. "[logic@" .. gname .. "_sniper" .. i .. "]\n" ..
                     "active          = camper@" .. gname .. "_sniper" .. i .. "_wait\n" ..
                     "combat_ignore   = combat_ignore\n" ..
@@ -1372,7 +1372,7 @@ gulags.pri_stadium.job = function(sj, gname, type, squad, groups)
             online = "{+pri_stadium_scene_start}",
             predicate = m_predicate_e_rpg
         }
-        table.insert(sj, t)
+        sj[#sj+1] = t
 
         -- добавляем описание должности в лтх.
         ltx = ltx.."[logic@" .. way_name .. "]\n" ..

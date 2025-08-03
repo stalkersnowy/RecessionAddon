@@ -17,7 +17,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_leader" and info.story_id == 707
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     -- Повар
     t = {section = "logic@mil_freedom_cook",
 		idle = 0,
@@ -29,7 +29,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_cook"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     -- Снайпер №1
     t = {section = "logic@mil_freedom_sniper1",
 		idle = 0,
@@ -41,7 +41,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_sniper" and info.story_id == 704
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 
     -- Снайпер №2
     t = {section = "logic@mil_freedom_sniper2",
@@ -54,7 +54,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_sniper" and info.story_id == 731
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 
     -- Снайпер №3
     t = {section = "logic@mil_freedom_sniper5",
@@ -67,7 +67,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_sniper" and info.story_id == 730
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	
     -- Снайпер №4
     t = {section = "logic@mil_freedom_sniper4",
@@ -80,7 +80,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_sniper"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 
     -- Снайпер №5
     t = {section = "logic@mil_freedom_sniper3",
@@ -93,7 +93,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_sniper" and info.story_id == 732
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	
     -- Скряга
     t = {section = "logic@mil_freedom_trader",
@@ -106,7 +106,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_trader" and info.story_id == 734
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 		
     -- Охранник Лукаша
     t = {section = "logic@mil_freedom_guard1",
@@ -119,7 +119,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_specnaz"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     -- Охранник Лукаша
     t = {section = "logic@mil_freedom_bodyguard1",
 		idle = 0,
@@ -131,7 +131,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_bodyguard"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     -- Охранник Лукаша
     t = {section = "logic@mil_freedom_bodyguard2",
 		idle = 0,
@@ -143,7 +143,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_bodyguard"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	-- Охранник арсенала
     t = {section = "logic@mil_freedom_aguard",
 		idle = 0,
@@ -155,7 +155,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_specnaz"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	
     
     -- Max
@@ -169,7 +169,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_master_Max"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	
 	t = { section = "logic@mil_freedom_walker7",
 		idle = 0,
@@ -181,7 +181,7 @@ function load_job_base (sj, gname, type, squad, groups)
 	                    return info.profile_name == "mil_Svoboda_engineer"
 	                end
      	}
-	table.insert(sj, t)
+	sj[#sj+1] = t
 	------
 	-- мужик у костра 1
     t = {section = "logic@mil_freedom_stalker1",
@@ -191,7 +191,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		position_threshold = 600,
 		in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 
     -- мужик у костра 2
     t = {section = "logic@mil_freedom_stalker2",
@@ -201,7 +201,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		position_threshold = 600,
 		in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     -- одиночный патрульный на базе
     t = {section = "logic@mil_freedom_stalker4",
@@ -214,7 +214,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_specnaz"
 		            end         
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 
     -- патрульный на базе
     t = {section = "logic@mil_freedom_stalker5",
@@ -227,7 +227,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_specnaz"
 		            end         
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 
     --охранник у входа 
     t = {section = "logic@mil_freedom_stalker8",
@@ -240,7 +240,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_zoneguard"
 		            end         
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	-- просто мужик на входе
     t = {section = "logic@mil_freedom_stalker9",
 		idle = 0,
@@ -249,7 +249,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		position_threshold = 600,
 		in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	-- просто мужик на входе
     t = {section = "logic@mil_freedom_stalker10",
 		idle = 0,
@@ -258,7 +258,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		position_threshold = 600,
 		in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 
         
 	t = { section = "logic@mil_freedom_walker1",
@@ -271,7 +271,7 @@ function load_job_base (sj, gname, type, squad, groups)
 --'		                return (level.get_time_hours() > 6 and level.get_time_hours() < 21)
 --'		            end    
 	}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	------
 	t = { section = "logic@mil_freedom_walker2",
 		idle = 0,
@@ -283,7 +283,7 @@ function load_job_base (sj, gname, type, squad, groups)
 --'		                return (level.get_time_hours() > 6 and level.get_time_hours() < 21)
 --'		            end    
 	}                         
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	------
 	t = { section = "logic@mil_freedom_walker3",
 		idle = 0,
@@ -295,7 +295,7 @@ function load_job_base (sj, gname, type, squad, groups)
 --'		                return (level.get_time_hours() > 6 and level.get_time_hours() < 21)
 --'		            end    
 	}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	------
 	t = { section = "logic@mil_freedom_walker4",
 		idle = 0,
@@ -304,7 +304,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		position_threshold = 600,
 		in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 	}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	------
 	t = { section = "logic@mil_freedom_kamp1",
 		idle = 0,
@@ -313,7 +313,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		position_threshold = 600,
 		in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 	    }
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	------
 	t = { section = "logic@mil_freedom_kamp2",
 		idle = 0,
@@ -322,7 +322,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		position_threshold = 600,
 		in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 	}
-	table.insert(sj, t)
+	sj[#sj+1] = t
 	------
 	t = { section = "logic@mil_freedom_kamp3",
 		idle = 0,
@@ -331,7 +331,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		position_threshold = 600,
 		in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 	}
-	table.insert(sj, t)
+	sj[#sj+1] = t
 	------
 	t = { section = "logic@mil_freedom_sleep1",
 		idle = 0,
@@ -340,7 +340,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		position_threshold = 600,
 		in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 	}
-	table.insert(sj, t)
+	sj[#sj+1] = t
 	------
 --	t = { section = "logic@mil_freedom_sleep2",
 		--idle = 0,
@@ -349,7 +349,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		--position_threshold = 600,
 		--in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 	--}
-	--table.insert(sj, t)
+	--sj[#sj+1] = t
 	------
 	--t = { section = "logic@mil_freedom_walker5",
 		--idle = 0,
@@ -358,7 +358,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		--position_threshold = 600,
 		--in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 	--}
-	--table.insert(sj, t)
+	--sj[#sj+1] = t
 	------
 	--t = { section = "logic@mil_freedom_camper6",
 		--idle = 0,
@@ -367,7 +367,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		--position_threshold = 600,
 		--in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 	--}
-	--table.insert(sj, t)
+	--sj[#sj+1] = t
 	
 	-------------------------------- combat state 1-----------------------------
     -- Лукаш
@@ -381,7 +381,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_leader"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     -- Скряга
     t = {section = "logic@mil_freedom_trader_combat1",
 		idle = 0,
@@ -393,7 +393,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_trader"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     -- Охранник Лукаша
     t = {section = "logic@mil_freedom_guard_combat1",
 		idle = 0,
@@ -405,7 +405,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_specnaz"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     -- Охранник Лукаша
     t = {section = "logic@mil_freedom_bodyguard1_combat1",
 		idle = 0,
@@ -417,7 +417,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_bodyguard"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     -- Охранник Лукаша
     t = {section = "logic@mil_freedom_bodyguard2_combat1",
 		idle = 0,
@@ -429,7 +429,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_bodyguard"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 
 	-------------------------------- combat state 2-----------------------------
 	
@@ -442,7 +442,7 @@ function load_job_base (sj, gname, type, squad, groups)
     		position_threshold = 600,
 		    in_rest = "mil_freedom_wall_restrictor", out_rest = "mil_freedom_gulag_defense_res"
 	        }
-	    table.insert(sj, t)
+	    sj[#sj+1] = t
     end
 
 	-------------------------------- Атака хутора Долга-----------------------------
@@ -459,7 +459,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_master_Max"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	-- Мужик у костра 1
     t = {section = "logic@mil_freedom_stalker1_attack",
 		idle = 0,
@@ -473,7 +473,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     --return info.profile_name == "mil_Svoboda_specnaz"
 		            --end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	-- Мужик у костра 2
     t = {section = "logic@mil_freedom_stalker2_attack",
 		idle = 0,
@@ -487,7 +487,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     --return info.profile_name == "mil_Svoboda_specnaz"
 		            --end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	-- 
     t = {section = "logic@mil_freedom_stalker4_attack",
 		idle = 0,
@@ -501,7 +501,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     --return info.profile_name == "mil_Svoboda_specnaz"
 		            --end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	-- 
     t = {section = "logic@mil_freedom_stalker5_attack",
 		idle = 0,
@@ -515,7 +515,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     --return info.profile_name == "mil_Svoboda_specnaz"
 		            --end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	-- 
     t = {section = "logic@mil_freedom_stalker6_attack",
 		idle = 0,
@@ -526,7 +526,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		idle_after_death = 36000,
 		in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	-- 
     t = {section = "logic@mil_freedom_stalker7_attack",
 		idle = 0,
@@ -537,7 +537,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		idle_after_death = 36000,
 		in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	-- 
     t = {section = "logic@mil_freedom_stalker8_attack",
 		idle = 0,
@@ -548,7 +548,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		idle_after_death = 36000,
 		in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	-- 
     t = {section = "logic@mil_freedom_stalker9_attack",
 		idle = 0,
@@ -559,7 +559,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		idle_after_death = 36000,
 		in_rest = "mil_freedom_wall_restrictor", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	
 -- четвертое состояние гулага Свободы
     -- Лукаш
@@ -574,7 +574,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_leader" and info.story_id == 707
 		            end
 		}
-	table.insert(sj, t)
+	sj[#sj+1] = t
 	
     -- Снайпер №1
     t = {section = "logic@mil_freedom_sniper14",
@@ -587,7 +587,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_sniper"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 
     -- Снайпер №2
     t = {section = "logic@mil_freedom_sniper24",
@@ -600,7 +600,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_sniper"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 
     -- Снайпер №3
     t = {section = "logic@mil_freedom_sniper54",
@@ -613,7 +613,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_sniper"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	
     -- Снайпер №4
     t = {section = "logic@mil_freedom_sniper44",
@@ -626,7 +626,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_sniper"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 
     -- Снайпер №5
     t = {section = "logic@mil_freedom_sniper34",
@@ -639,7 +639,7 @@ function load_job_base (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_sniper"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	
 end
 
@@ -745,7 +745,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --мужик у костра 2
     t = {section = "logic@mil_fblockpost_stalker",
 		idle = 0,
@@ -754,7 +754,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --мужик у костра 3
     t = {section = "logic@mil_fblockpost_stalker",
 		idle = 0,
@@ -763,7 +763,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --мужик у костра 4
     t = {section = "logic@mil_fblockpost_stalker",
 		idle = 0,
@@ -772,7 +772,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --мужик у костра 5
     t = {section = "logic@mil_fblockpost_stalker",
 		idle = 0,
@@ -781,7 +781,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --командир
     t = {section = "logic@mil_fblockpost_commander",
 		idle = 0,
@@ -793,7 +793,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_blockpost_leader"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --патрульный 1
     t = {section = "logic@mil_fblockpost_patrol1",
 		idle = 0,
@@ -802,7 +802,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --патрульный 2
     t = {section = "logic@mil_fblockpost_patrol2",
 		idle = 0,
@@ -811,7 +811,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --кэмпер 1
     t = {section = "logic@mil_fblockpost_camper3",
 		idle = 0,
@@ -820,7 +820,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --кэмпер 2
     t = {section = "logic@mil_fblockpost_camper6",
 		idle = 0,
@@ -829,7 +829,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	-- состояние 2
     --кэмпер 1
     t = {section = "logic@mil_fblockpost_camper1",
@@ -839,7 +839,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --кэмпер 2
     t = {section = "logic@mil_fblockpost_camper2",
 		idle = 0,
@@ -848,7 +848,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --кэмпер 3
     t = {section = "logic@mil_fblockpost_camper3",
 		idle = 0,
@@ -857,7 +857,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --кэмпер 4
     t = {section = "logic@mil_fblockpost_camper4",
 		idle = 0,
@@ -866,7 +866,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --кэмпер 5
     t = {section = "logic@mil_fblockpost_camper5",
 		idle = 0,
@@ -875,7 +875,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --кэмпер 6
     t = {section = "logic@mil_fblockpost_camper6",
 		idle = 0,
@@ -884,7 +884,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --кэмпер 7
     t = {section = "logic@mil_fblockpost_camper7",
 		idle = 0,
@@ -893,7 +893,7 @@ function load_job_fblockpost (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 end
 --------------------------------------------------------------------------
 -- Функция проверки состояния гулага Свободы у выхода на Радар
@@ -931,7 +931,7 @@ function load_job_fneutral (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --мужик у костра 2
     t = {section = "logic@mil_fneutral_stalker",
 		idle = 0,
@@ -940,7 +940,7 @@ function load_job_fneutral (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --мужик у костра 3
     t = {section = "logic@mil_fneutral_stalker",
 		idle = 0,
@@ -949,7 +949,7 @@ function load_job_fneutral (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --мужик у костра 4
     t = {section = "logic@mil_fneutral_stalker",
 		idle = 0,
@@ -958,7 +958,7 @@ function load_job_fneutral (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --мужик у костра 5
     t = {section = "logic@mil_fneutral_stalker",
 		idle = 0,
@@ -967,7 +967,7 @@ function load_job_fneutral (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --командир
     --t = {section = "logic@mil_fneutral_commander",
 		--idle = 0,
@@ -979,7 +979,7 @@ function load_job_fneutral (sj, gname, type, squad, groups)
 		                     --return info.profile_name == "mil_Stalker_master"
 		            --end
 		--}
-	--table.insert(sj, t)		
+	--sj[#sj+1] = t		
     --кэмпер 1
     t = {section = "logic@mil_fneutral_camper3",
 		idle = 0,
@@ -988,7 +988,7 @@ function load_job_fneutral (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --кэмпер 2
     t = {section = "logic@mil_fneutral_camper5",
 		idle = 0,
@@ -997,7 +997,7 @@ function load_job_fneutral (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 	-- состояние 2
     --кэмпер 1
     t = {section = "logic@mil_fneutral_camper1",
@@ -1007,7 +1007,7 @@ function load_job_fneutral (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --кэмпер 2
     t = {section = "logic@mil_fneutral_camper2",
 		idle = 0,
@@ -1016,7 +1016,7 @@ function load_job_fneutral (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --кэмпер 3
     t = {section = "logic@mil_fneutral_camper3",
 		idle = 0,
@@ -1025,7 +1025,7 @@ function load_job_fneutral (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --кэмпер 4
     t = {section = "logic@mil_fneutral_camper4",
 		idle = 0,
@@ -1034,7 +1034,7 @@ function load_job_fneutral (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --кэмпер 5
     t = {section = "logic@mil_fneutral_camper5",
 		idle = 0,
@@ -1043,7 +1043,7 @@ function load_job_fneutral (sj, gname, type, squad, groups)
 		position_threshold = 100,
 		in_rest = "", out_rest = ""
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 end
 --------------------------------------------------------------------------
 -- Функция проверки состояния гулага нейтралов у выхода на Радар
@@ -1117,7 +1117,7 @@ function load_job_village (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_master_Ugrumiy"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --Спецназовец
     t = {section = "logic@mil_village_soldier1",
 		idle = 0,
@@ -1128,7 +1128,7 @@ function load_job_village (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_specnaz"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --Рядовой
     t = {section = "logic@mil_village_soldier2",
 		idle = 0,
@@ -1139,7 +1139,7 @@ function load_job_village (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_regular"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --Угрюмый
     t = {section = "logic@mil_village_ugrumy_search",
 		idle = 0,
@@ -1150,7 +1150,7 @@ function load_job_village (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_master_Ugrumiy"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --Спецназовец
     t = {section = "logic@mil_village_specnaz_search",
 		idle = 0,
@@ -1161,7 +1161,7 @@ function load_job_village (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_specnaz"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
     --Рядовой
     t = {section = "logic@mil_village_regular_search",
 		idle = 0,
@@ -1172,7 +1172,7 @@ function load_job_village (sj, gname, type, squad, groups)
 		                     return info.profile_name == "mil_Svoboda_regular"
 		            end
 		}
-	table.insert(sj, t)		
+	sj[#sj+1] = t		
 end
 --------------------------------------------------------------------------
 -- Функция проверки состояния гулага деревни
@@ -1207,7 +1207,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg" and info.story_id == 708
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     t = {section = "logic@mil_dolg_soldier1",
 		idle = 0,
@@ -1219,7 +1219,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 
     t = {section = "logic@mil_dolg_soldier2",
 		idle = 0,
@@ -1231,7 +1231,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg" and info.story_id == 711
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     t = {section = "logic@mil_dolg_soldier3",
 		idle = 0,
@@ -1243,7 +1243,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     t = {section = "logic@mil_dolg_soldier4",
 		idle = 0,
@@ -1255,7 +1255,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     t = {section = "logic@mil_dolg_soldier5",
 		idle = 0,
@@ -1267,7 +1267,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     t = {section = "logic@mil_dolg_soldier6",
 		idle = 0,
@@ -1279,7 +1279,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 
     t = {section = "logic@mil_dolg_soldier7",
 		idle = 0,
@@ -1291,7 +1291,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
     -- второе состояние
     t = {section = "logic@mil_dolg_skull_attack",
 		idle = 0,
@@ -1305,7 +1305,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.story_id == 708
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     t = {section = "logic@mil_dolg_soldier1_attack",
 		idle = 0,
@@ -1317,7 +1317,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 
     t = {section = "logic@mil_dolg_soldier2_attack",
 		idle = 0,
@@ -1329,7 +1329,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg" and info.story_id == 711
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     t = {section = "logic@mil_dolg_soldier3_attack",
 		idle = 0,
@@ -1341,7 +1341,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     t = {section = "logic@mil_dolg_soldier4_attack",
 		idle = 0,
@@ -1353,7 +1353,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     t = {section = "logic@mil_dolg_soldier5_attack",
 		idle = 0,
@@ -1365,7 +1365,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     t = {section = "logic@mil_dolg_soldier6_attack",
 		idle = 0,
@@ -1377,7 +1377,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 
     t = {section = "logic@mil_dolg_soldier7_attack",
 		idle = 0,
@@ -1389,7 +1389,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
     -- третье состояние
     t = {section = "logic@mil_dolg_skull_return",
 		idle = 0,
@@ -1403,7 +1403,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.story_id == 708
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     t = {section = "logic@mil_dolg_soldier1_return",
 		idle = 0,
@@ -1415,7 +1415,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 
     t = {section = "logic@mil_dolg_soldier2_return",
 		idle = 0,
@@ -1427,7 +1427,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     t = {section = "logic@mil_dolg_soldier3_return",
 		idle = 0,
@@ -1439,7 +1439,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     t = {section = "logic@mil_dolg_soldier4_return",
 		idle = 0,
@@ -1451,7 +1451,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     t = {section = "logic@mil_dolg_soldier5_return",
 		idle = 0,
@@ -1463,7 +1463,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 	
     t = {section = "logic@mil_dolg_soldier6_return",
 		idle = 0,
@@ -1475,7 +1475,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 
     t = {section = "logic@mil_dolg_soldier7_return",
 		idle = 0,
@@ -1487,7 +1487,7 @@ function load_job_dolg (sj, gname, type, squad, groups)
 		                     return info.community == "dolg"
 		            end
 		}
-	table.insert(sj, t)	
+	sj[#sj+1] = t	
 end
 --------------------------------------------------------------------------
 -- Функция проверки состояния гулага Долга
@@ -1526,7 +1526,7 @@ function load_job_monolith (sj, gname, type, squad, groups)
 		                         return info.community == "monolith"
 		                end
 		    }
-	    table.insert(sj, t)	
+	    sj[#sj+1] = t	
 	    
         t = {section = "logic@mil_monolith_soldier2",
 	    	idle = 0,
@@ -1537,7 +1537,7 @@ function load_job_monolith (sj, gname, type, squad, groups)
 		                         return info.community == "monolith"
 		                end
 		    }
-	    table.insert(sj, t)	
+	    sj[#sj+1] = t	
 	    
         t = {section = "logic@mil_monolith_soldier3",
 	    	idle = 0,
@@ -1548,7 +1548,7 @@ function load_job_monolith (sj, gname, type, squad, groups)
 		                         return info.community == "monolith"
 		                end
 		    }
-	    table.insert(sj, t)	
+	    sj[#sj+1] = t	
 	    
         t = {section = "logic@mil_monolith_soldier4",
 	    	idle = 0,
@@ -1559,7 +1559,7 @@ function load_job_monolith (sj, gname, type, squad, groups)
 		                         return info.community == "monolith"
 		                end
 		    }
-	    table.insert(sj, t)	
+	    sj[#sj+1] = t	
 	    
         t = {section = "logic@mil_monolith_soldier5",
 	    	idle = 0,
@@ -1570,7 +1570,7 @@ function load_job_monolith (sj, gname, type, squad, groups)
 		                         return info.community == "monolith"
 		                end
 		    }
-	    table.insert(sj, t)	
+	    sj[#sj+1] = t	
 	    
         t = {section = "logic@mil_monolith_soldier6",
 	    	idle = 0,
@@ -1581,7 +1581,7 @@ function load_job_monolith (sj, gname, type, squad, groups)
 		                         return info.community == "monolith"
 		                end
 		    }
-	    table.insert(sj, t)	
+	    sj[#sj+1] = t	
 	    
 --	     t = {section = "logic@mil_monolith_soldier7",
 --	    	idle = 0,
@@ -1592,7 +1592,7 @@ function load_job_monolith (sj, gname, type, squad, groups)
 --		                         return info.community == "monolith"
 --		                end
 --		    }
---	    table.insert(sj, t)	
+--	    sj[#sj+1] = t	
 --	    
 --      t = {section = "logic@mil_monolith_soldier8",
 --	    	idle = 0,
@@ -1603,7 +1603,7 @@ function load_job_monolith (sj, gname, type, squad, groups)
 --		                         return info.community == "monolith"
 --		                end
 --		    }
---	    table.insert(sj, t)
+--	    sj[#sj+1] = t
     end	    
 end
 -------------------------------------------------------------------------------------------
@@ -1629,7 +1629,7 @@ function load_job_mil_monster (sj, gname, type, squad, groups)
 		    squad = squad, group = groups[0],
 		    in_rest = "", out_rest = ""
 		    }
-	    table.insert(sj, t)	
+	    sj[#sj+1] = t	
 	    
         t = {section = "logic@mil_monster2",
 	    	idle = 0,
@@ -1637,7 +1637,7 @@ function load_job_mil_monster (sj, gname, type, squad, groups)
 		    squad = squad, group = groups[0],
 		    in_rest = "", out_rest = ""
 		    }
-	    table.insert(sj, t)	
+	    sj[#sj+1] = t	
     end	    
 end
 -------------------------------------------------------------------------------------------

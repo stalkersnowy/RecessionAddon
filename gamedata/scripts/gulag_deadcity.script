@@ -139,7 +139,7 @@ gulags.cit_killers.job = function(sj, gname, type, squad, groups)
 		in_rest = "cit_jail_restr", out_rest = "",
 		predicate = k_predicate_l
 	}
-	table.insert(sj, t)
+	sj[#sj+1] = t
 
 	ltx = ltx.."[logic@" .. gname .. "_leader]\n" ..
                "active          = patrol@" .. gname .. "_leader_attack\n" ..
@@ -176,7 +176,7 @@ gulags.cit_killers.job = function(sj, gname, type, squad, groups)
 		    in_rest = "cit_jail_restr", out_rest = "",
 		    predicate = k_predicate_e
 	    }
-	    table.insert(sj, t)
+	    sj[#sj+1] = t
 
 	    ltx = ltx.."[logic@" .. gname .. "_leader_guard" .. i .. "]\n" ..
                    "active          = patrol@" .. gname .. "_base_patrol" .. i .. "_attack\n" ..
@@ -212,7 +212,7 @@ gulags.cit_killers.job = function(sj, gname, type, squad, groups)
 		in_rest = "cit_jail_restr", out_rest = "",
 		predicate = k_predicate_v
 	}
-	table.insert(sj, t)
+	sj[#sj+1] = t
 
 	ltx = ltx.."#include \"scripts\\cit\\cit_jail_guard1.ltx\"\n"
 ]]
@@ -224,7 +224,7 @@ gulags.cit_killers.job = function(sj, gname, type, squad, groups)
 		in_rest = "cit_jail_restr", out_rest = "",
 		predicate = k_predicate_v
 	}
-	table.insert(sj, t)
+	sj[#sj+1] = t
 
 	ltx = ltx.."#include \"scripts\\cit\\cit_jail_guard2.ltx\"\n"
 
@@ -236,7 +236,7 @@ gulags.cit_killers.job = function(sj, gname, type, squad, groups)
 		in_rest = "cit_selmag_up_floor_restr", out_rest = "",
 		predicate = k_predicate_v
 	}
-	table.insert(sj, t)
+	sj[#sj+1] = t
 
 	ltx = ltx.."[logic@" .. gname .. "_base_patrol]\n" ..
                 "active          = camper@" .. gname .. "_base_patrol\n" ..
@@ -263,7 +263,7 @@ gulags.cit_killers.job = function(sj, gname, type, squad, groups)
     		online = true,
 		    predicate = k_predicate_es
 	    }
-	    table.insert(sj, t)
+	    sj[#sj+1] = t
 
 	    ltx = ltx.."[logic@" .. gname .. "_sniper" .. i .. "]\n" ..
                    "active              = camper@" .. gname .. "_sniper" .. i .. "\n" ..
@@ -294,7 +294,7 @@ gulags.cit_killers.job = function(sj, gname, type, squad, groups)
 		    in_rest = "cit_selmag_restr", out_rest = "",
 		    predicate = k_predicate_e
 	    }
-	    table.insert(sj, t)
+	    sj[#sj+1] = t
 
         d = delays[i]
         kc = kamp_change[i]
@@ -338,7 +338,7 @@ gulags.cit_killers.job = function(sj, gname, type, squad, groups)
 		        in_rest = "cit_selmag_restr", out_rest = "",
 		        predicate = k_predicate_g
 	        }
-	        table.insert(sj, t)
+	        sj[#sj+1] = t
 	    end
 
 	    ltx = ltx.."[logic@" .. gname .. "_kamp" .. k .. "_patrol]\n" ..
@@ -373,7 +373,7 @@ gulags.cit_killers.job = function(sj, gname, type, squad, groups)
 		    in_rest = "cit_jail_restr", out_rest = "",
 		    predicate = k_predicate_v
 	    }
-	    table.insert(sj, t)
+	    sj[#sj+1] = t
 
         d = delays[i]
         ltx = ltx.."[logic@" .. gname .. "_free_stalker" .. i .. "]\n" ..
@@ -432,7 +432,7 @@ gulags.cit_killers.job = function(sj, gname, type, squad, groups)
 		        in_rest = "cit_selmag_restr", out_rest = "",
 		        predicate = pred[i]
 	        }
-	        table.insert(sj, t)
+	        sj[#sj+1] = t
         end
 
         ltx = ltx.."[logic@" .. gname .. "_kamp" .. i .. "]\n" ..
@@ -459,7 +459,7 @@ gulags.cit_killers.job = function(sj, gname, type, squad, groups)
 		    in_rest = "cit_selmag_restr", out_rest = "",
 		    predicate = pred[i]
 	    }
-	    table.insert(sj, t)
+	    sj[#sj+1] = t
 
 	    ltx = ltx.."[logic@" .. gname .. "_gate2_guard" .. i .. "]\n" ..
                    "active          = walker@" .. gname .. "_gate2_guard" .. i .. "\n" ..
@@ -483,7 +483,7 @@ gulags.cit_killers.job = function(sj, gname, type, squad, groups)
 		    in_rest = "cit_selmag_up_floor_restr", out_rest = "",
 		    predicate = k_predicate_v
 	    }
-	    table.insert(sj, t)
+	    sj[#sj+1] = t
 
 	    ltx = ltx.."[logic@" .. gname .. "_road_patrol" .. i .. "]\n" ..
                    "active          = walker@" .. gname .. "_road_patrol" .. i .. "\n" ..
@@ -549,7 +549,7 @@ gulags.cit_bandits.job = function(sj, gname, type, squad, groups)
 		in_rest = "cit_selmag_restr", out_rest = "",
 		predicate = b_predicate_vb
 	}
-	table.insert(sj, t)
+	sj[#sj+1] = t
 
 	ltx = ltx.."[logic@" .. gname .. "_leader]\n" ..
                "active              = walker@" .. gname .. "_leader\n" ..
@@ -572,7 +572,7 @@ gulags.cit_bandits.job = function(sj, gname, type, squad, groups)
 		    in_rest = "cit_selmag_restr", out_rest = "",
 		    predicate = b_predicate_vb
 	    }
-	    table.insert(sj, t)
+	    sj[#sj+1] = t
 
 	    ltx = ltx.."[logic@" .. gname .. "_leader_guard" .. i .. "]\n" ..
                    "active              = walker@" .. gname .. "_leader_guard" .. i .. "\n" ..
@@ -601,7 +601,7 @@ gulags.cit_bandits.job = function(sj, gname, type, squad, groups)
 		    in_rest = "cit_selmag_restr", out_rest = "",
 		    predicate = b_predicate_v
 	    }
-	    table.insert(sj, t)
+	    sj[#sj+1] = t
 
         d = delays[i]
         kc = kamp_change[i]
@@ -647,7 +647,7 @@ gulags.cit_bandits.job = function(sj, gname, type, squad, groups)
 		        in_rest = "cit_selmag_restr", out_rest = "",
 		        predicate = b_predicate_v
 	        }
-	        table.insert(sj, t)
+	        sj[#sj+1] = t
 	    end
 
 	    ltx = ltx.."[logic@" .. gname .. "_kamp" .. k .. "_patrol]\n" ..
@@ -685,7 +685,7 @@ gulags.cit_bandits.job = function(sj, gname, type, squad, groups)
 		        in_rest = "cit_selmag_restr", out_rest = "",
 		        predicate = b_predicate_g
 	        }
-	        table.insert(sj, t)
+	        sj[#sj+1] = t
         end
 
         ltx = ltx.."[logic@" .. gname .. "_kamp" .. i .. "]\n" ..
@@ -712,7 +712,7 @@ gulags.cit_bandits.job = function(sj, gname, type, squad, groups)
 		    in_rest = "cit_selmag_restr", out_rest = "",
 		    predicate = pred[i]
 	    }
-	    table.insert(sj, t)
+	    sj[#sj+1] = t
 
 	    ltx = ltx.."[logic@" .. gname .. "_base_guard" .. i .. "]\n" ..
                    "active          = walker@" .. gname .. "_base_guard" .. i .. "\n" ..
@@ -736,7 +736,7 @@ gulags.cit_bandits.job = function(sj, gname, type, squad, groups)
 		    in_rest = "cit_selmag_restr", out_rest = "",
 		    predicate = b_predicate_v
 	    }
-	    table.insert(sj, t)
+	    sj[#sj+1] = t
     end
 
 	ltx = ltx.."[logic@" .. gname .. "_center_patrol]\n" ..
@@ -766,7 +766,7 @@ gulags.cit_bandits.job = function(sj, gname, type, squad, groups)
 		        in_rest = "cit_selmag_restr", out_rest = "",
 		        predicate = pred[i]
 	        }
-	        table.insert(sj, t)
+	        sj[#sj+1] = t
 
 	        ltx = ltx.."[logic@" .. gname .. "_gate" .. i .. "_guard" .. j .. "]\n" ..
                        "active      = walker@" .. gname .. "_gate" .. i .. "_guard" .. j .. "\n" ..
@@ -791,7 +791,7 @@ gulags.cit_bandits.job = function(sj, gname, type, squad, groups)
 		    in_rest = "cit_selmag_restr", out_rest = "",
 		    predicate = b_predicate_d
 	    }
-	    table.insert(sj, t)
+	    sj[#sj+1] = t
 
 	    ltx = ltx.."[logic@" .. gname .. "_drunken" .. i .. "]\n" ..
                    "active          = walker@" .. gname .. "_drunken" .. i .. "\n" ..
@@ -839,7 +839,7 @@ gulags.cit_beasts.job = function(sj, gname, type, squad, groups)
 				position_threshold = 20,
 				in_rest = "", out_rest = gname .. "_restr"
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 		end
 
 		-- добавляем описание должности в лтх.

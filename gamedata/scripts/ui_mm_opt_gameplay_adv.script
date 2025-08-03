@@ -16,114 +16,6 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	self.scroll_v	= xml:InitScrollView		("gameplay_adv:scroll_v", self)
 	
 	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	xml:InitFrameLine							("gameplay_adv:cap_video",						_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_aa")
-	xml:InitStatic								("gameplay_adv:cap_r2_aa",						_st)
-	xml:InitComboBox							("gameplay_adv:combo_r2_aa",					_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_bloom_mode")
-	xml:InitStatic								("gameplay_adv:cap_r2_bloom_mode",				_st)
-	xml:InitComboBox							("gameplay_adv:combo_r2_bloom_mode",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_dynamic_sun")
-	xml:InitStatic								("gameplay_adv:cap_r2_dynamic_sun",				_st)
-	xml:InitCheck								("gameplay_adv:check_r2_dynamic_sun",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_hemi_cube")
-	xml:InitStatic								("gameplay_adv:cap_r2_hemi_cube",				_st)
-	xml:InitCheck								("gameplay_adv:check_r2_hemi_cube",				_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_indoor_lighting")
-	xml:InitStatic								("gameplay_adv:cap_r2_indoor_lighting",			_st)
-	xml:InitCheck								("gameplay_adv:check_r2_indoor_lighting",		_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_ls_bloom_fast")
-	xml:InitStatic								("gameplay_adv:cap_r2_ls_bloom_fast",			_st)
-	xml:InitCheck								("gameplay_adv:check_r2_ls_bloom_fast",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_mblur")
-	xml:InitStatic								("gameplay_adv:cap_r2_mblur",					_st)
-	xml:InitCheck								("gameplay_adv:check_r2_mblur",					_st)
-
-	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_mblur_power")
-	xml:InitStatic								("gameplay_adv:cap_r2_mblur_power",				_st)
-	xml:InitTrackBar							("gameplay_adv:track_r2_mblur_power",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_old_aref")
-	xml:InitStatic								("gameplay_adv:cap_r2_old_aref",				_st)
-	xml:InitCheck								("gameplay_adv:check_r2_old_aref",				_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_old_distort")
-	xml:InitStatic								("gameplay_adv:cap_r2_old_distort",				_st)
-	xml:InitCheck								("gameplay_adv:check_r2_old_distort",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_specular_rgb")
-	xml:InitStatic								("gameplay_adv:cap_r2_specular_rgb",			_st)
-	xml:InitCheck								("gameplay_adv:check_r2_specular_rgb",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_ssao_blur")
-	xml:InitStatic								("gameplay_adv:cap_r2_ssao_blur",				_st)
-	xml:InitCheck								("gameplay_adv:check_r2_ssao_blur",				_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_tonemap")
-	xml:InitStatic								("gameplay_adv:cap_r2_tonemap",					_st)
-	xml:InitCheck								("gameplay_adv:check_r2_tonemap",				_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_true_sun")
-	xml:InitStatic								("gameplay_adv:cap_r2_true_sun",				_st)
-	xml:InitCheck								("gameplay_adv:check_r2_true_sun",				_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_use_sunmask")
-	xml:InitStatic								("gameplay_adv:cap_r2_use_sunmask",				_st)
-	xml:InitCheck								("gameplay_adv:check_r2_use_sunmask",			_st)
-
-	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r__detail_radius")
-	xml:InitStatic								("gameplay_adv:cap_r__detail_radius",			_st)
-	xml:InitTrackBar							("gameplay_adv:track_r__detail_radius",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r__shader_gamma")
-	xml:InitStatic								("gameplay_adv:cap_r__shader_gamma",			_st)
-	xml:InitCheck								("gameplay_adv:check_r__shader_gamma",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r__smapsize")
-	xml:InitStatic								("gameplay_adv:cap_r__smapsize",				_st)
-	xml:InitComboBox							("gameplay_adv:combo_r__smapsize",				_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r__ss_tga")
-	xml:InitStatic								("gameplay_adv:cap_r__ss_tga",					_st)
-	xml:InitCheck								("gameplay_adv:check_r__ss_tga",				_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r__wallmarks_on_skeleton")
-	xml:InitStatic								("gameplay_adv:cap_r__wallmarks_on_skeleton",	_st)
-	xml:InitCheck								("gameplay_adv:check_r__wallmarks_on_skeleton",	_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_g_use_ik")
-	xml:InitStatic								("gameplay_adv:cap_g_use_ik",					_st)
-	xml:InitCheck								("gameplay_adv:check_g_use_ik",					_st)
-	
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	xml:InitFrameLine							("gameplay_adv:cap_gameplay",					_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
@@ -161,6 +53,7 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	handler:SetCapCallbacks						(_st, 									"descr_keypress_on_start")
 	xml:InitStatic								("gameplay_adv:cap_keypress_on_start",			_st)
 	xml:InitCheck								("gameplay_adv:check_keypress_on_start",		_st)
+	
 	
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	xml:InitFrameLine							("gameplay_adv:cap_ui",							_st)
@@ -204,6 +97,115 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	handler:SetCapCallbacks						(_st, 									"descr_g_shooting_eff")
 	xml:InitStatic								("gameplay_adv:cap_g_shooting_eff",				_st)
 	xml:InitCheck								("gameplay_adv:check_g_shooting_eff",			_st)
+	
+	
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	xml:InitFrameLine							("gameplay_adv:cap_video",						_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_aa")
+	xml:InitStatic								("gameplay_adv:cap_r2_aa",						_st)
+	xml:InitComboBox							("gameplay_adv:combo_r2_aa",					_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_bloom_mode")
+	xml:InitStatic								("gameplay_adv:cap_r2_bloom_mode",				_st)
+	xml:InitComboBox							("gameplay_adv:combo_r2_bloom_mode",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_hemi_cube")
+	xml:InitStatic								("gameplay_adv:cap_r2_hemi_cube",				_st)
+	xml:InitCheck								("gameplay_adv:check_r2_hemi_cube",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_true_sun")
+	xml:InitStatic								("gameplay_adv:cap_r2_true_sun",				_st)
+	xml:InitCheck								("gameplay_adv:check_r2_true_sun",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r__wallmarks_on_skeleton")
+	xml:InitStatic								("gameplay_adv:cap_r__wallmarks_on_skeleton",	_st)
+	xml:InitCheck								("gameplay_adv:check_r__wallmarks_on_skeleton",	_st)
+
+	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r__detail_radius")
+	xml:InitStatic								("gameplay_adv:cap_r__detail_radius",			_st)
+	xml:InitTrackBar							("gameplay_adv:track_r__detail_radius",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_mblur")
+	xml:InitStatic								("gameplay_adv:cap_r2_mblur",					_st)
+	xml:InitCheck								("gameplay_adv:check_r2_mblur",					_st)
+
+	local _st		= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_mblur_power")
+	xml:InitStatic								("gameplay_adv:cap_r2_mblur_power",				_st)
+	xml:InitTrackBar							("gameplay_adv:track_r2_mblur_power",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_ls_bloom_fast")
+	xml:InitStatic								("gameplay_adv:cap_r2_ls_bloom_fast",			_st)
+	xml:InitCheck								("gameplay_adv:check_r2_ls_bloom_fast",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r__shader_gamma")
+	xml:InitStatic								("gameplay_adv:cap_r__shader_gamma",			_st)
+	xml:InitCheck								("gameplay_adv:check_r__shader_gamma",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_old_aref")
+	xml:InitStatic								("gameplay_adv:cap_r2_old_aref",				_st)
+	xml:InitCheck								("gameplay_adv:check_r2_old_aref",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_old_distort")
+	xml:InitStatic								("gameplay_adv:cap_r2_old_distort",				_st)
+	xml:InitCheck								("gameplay_adv:check_r2_old_distort",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_specular_rgb")
+	xml:InitStatic								("gameplay_adv:cap_r2_specular_rgb",			_st)
+	xml:InitCheck								("gameplay_adv:check_r2_specular_rgb",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_ssao_blur")
+	xml:InitStatic								("gameplay_adv:cap_r2_ssao_blur",				_st)
+	xml:InitCheck								("gameplay_adv:check_r2_ssao_blur",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_tonemap")
+	xml:InitStatic								("gameplay_adv:cap_r2_tonemap",					_st)
+	xml:InitCheck								("gameplay_adv:check_r2_tonemap",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_dynamic_sun")
+	xml:InitStatic								("gameplay_adv:cap_r2_dynamic_sun",				_st)
+	xml:InitCheck								("gameplay_adv:check_r2_dynamic_sun",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_use_sunmask")
+	xml:InitStatic								("gameplay_adv:cap_r2_use_sunmask",				_st)
+	xml:InitCheck								("gameplay_adv:check_r2_use_sunmask",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r__smapsize")
+	xml:InitStatic								("gameplay_adv:cap_r__smapsize",				_st)
+	xml:InitComboBox							("gameplay_adv:combo_r__smapsize",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r__ss_tga")
+	xml:InitStatic								("gameplay_adv:cap_r__ss_tga",					_st)
+	xml:InitCheck								("gameplay_adv:check_r__ss_tga",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_indoor_lighting")
+	xml:InitStatic								("gameplay_adv:cap_r2_indoor_lighting",			_st)
+	xml:InitCheck								("gameplay_adv:check_r2_indoor_lighting",		_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_g_use_ik")
+	xml:InitStatic								("gameplay_adv:cap_g_use_ik",					_st)
+	xml:InitCheck								("gameplay_adv:check_g_use_ik",					_st)
 
 	btn		= xml:Init3tButton					("gameplay_adv:btn_to_simply",	self)	
 	handler:Register							(btn, "btn_simply_gameplay")	

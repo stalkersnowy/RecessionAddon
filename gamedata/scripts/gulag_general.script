@@ -1,7 +1,9 @@
-local t
+-- local t
 local ltx
 
 function load_job(sj, gname, type, squad, groups, st)
+	local t
+
 	ltx = "[meet@generic_lager_guard]\n"..
 		  "meet_state		= 10|wait@wait\n"..
 		  "meet_state_wpn	= 10|backoff@threat_weap\n"..
@@ -44,7 +46,7 @@ function load_job(sj, gname, type, squad, groups, st)
 					position_threshold = 50,
 					in_rest = "", out_rest = ""
 				}
-				table.insert(sj, t)
+				sj[#sj+1] = t
 			end
 
 			-- добавляем описание должности в лтх.
@@ -72,7 +74,7 @@ function load_job(sj, gname, type, squad, groups, st)
 				position_threshold = 50,
 				in_rest = "", out_rest = ""
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 
 			-- добавляем описание должности в лтх.
 			local job_ltx = "[logic@"..way_name.."]\n"..
@@ -99,7 +101,7 @@ function load_job(sj, gname, type, squad, groups, st)
 				position_threshold = 50,
 				in_rest = "", out_rest = ""
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 
 			-- добавляем описание должности в лтх.
 			local job_ltx = "[logic@"..way_name.."]\n"..
@@ -130,7 +132,7 @@ function load_job(sj, gname, type, squad, groups, st)
 				position_threshold = 50,
 				in_rest = "", out_rest = ""
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 
 			-- добавляем описание должности в лтх.
 			local job_ltx = "[logic@"..way_name.."]\n"..
@@ -168,7 +170,7 @@ function load_job(sj, gname, type, squad, groups, st)
 					position_threshold = 50,
 					in_rest = "", out_rest = ""
 				}
-				table.insert(sj, t)
+				sj[#sj+1] = t
 			end
 
 			-- добавляем описание должности в лтх.
@@ -202,7 +204,7 @@ function load_job(sj, gname, type, squad, groups, st)
 				position_threshold = 50,
 				in_rest = "", out_rest = ""
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 
 			-- добавляем описание должности в лтх.
 			local job_ltx = "[logic@"..way_name.."]\n"..
@@ -236,7 +238,7 @@ function load_job(sj, gname, type, squad, groups, st)
 								return npc_info.is_sniper == true
 				            end
 			}
-			table.insert(sj, t)
+			sj[#sj+1] = t
 
 			-- добавляем описание должности в лтх.
 			local job_ltx = "[logic@"..way_name.."]\n"..
@@ -272,7 +274,7 @@ function load_job(sj, gname, type, squad, groups, st)
 					position_threshold = 50,
 					in_rest = "", out_rest = ""
 				}
-				table.insert(sj, t)
+				sj[#sj+1] = t
 			end
 
 			-- добавляем описание должности в лтх.
@@ -317,7 +319,7 @@ function load_job(sj, gname, type, squad, groups, st)
 					position_threshold = 20,
 					in_rest = "", out_rest = ""
 				}
-				table.insert(sj, t)
+				sj[#sj+1] = t
 			end
 
 			-- добавляем описание должности в лтх.
@@ -357,7 +359,7 @@ function load_job(sj, gname, type, squad, groups, st)
 					position_threshold = 70,
 					in_rest = "", out_rest = ""
 				}
-				table.insert(sj, t)
+				sj[#sj+1] = t
 			end
 
 			-- добавляем описание должности в лтх.
