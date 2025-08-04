@@ -57,7 +57,7 @@ function evaluator_kamp_end:__init(name, storage) super (nil, name)
 	self.a = storage
 end
 function evaluator_kamp_end:evaluate()
-	return not xr_logic.is_active(self.object, self.a)
+	return (self.a.section ~= db.storage[self.object:id()].active_section)
 end
 --' Ќаходимс€ ли мы на заданной позиции
 class "evaluator_on_position" (property_evaluator)
@@ -75,7 +75,7 @@ end
 ----------------------------------------------------------------------------------------------------------------------
 --' »дет в заданную область
 class "action_go_position" (action_base)
-function action_go_position:__init (npc_name,action_name,storage) super (nil,action_name)
+function action_go_position:__init (action_name,storage) super (nil,action_name)
 	self.a = storage
 end
 function action_go_position:initialize()
@@ -86,6 +86,7 @@ function action_go_position:initialize()
 	self.object:set_desired_direction()
 	
 	self.a.pos_vertex = nil
+	self.a.dest_vertex = nil
 end
 function action_go_position:execute ()
 	action_base.execute (self)
@@ -96,20 +97,26 @@ function action_go_position:execute ()
 		end
 	end	
 	
-	local tmp_pos_vertex = kamps[self.a.center_point]:getDestVertex(self.object:id(), self.a.radius)
+	local tmp_pos_vertex = self.a.dest_vertex
+	if tmp_pos_vertex == nil then -- we set this only once instead of every cycle
+		tmp_pos_vertex = kamps[self.a.center_point]:getDestVertex(self.object:id(), self.a.radius)
+		self.a.dest_vertex = tmp_pos_vertex 
+	end
 	if self.a.pos_vertex ~= tmp_pos_vertex then
-		self.a.pos_vertex = tmp_pos_vertex
+		-- self.a.pos_vertex = tmp_pos_vertex
 		
-		if not self.object:accessible(self.a.pos_vertex) then
+		if not self.object:accessible(tmp_pos_vertex) then -- self.a.pos_vertex) then -- they are the same here
 			--'printf("[%s] KAMP NODE NOT ACCESSIBLE. Get accessible nearest", self.object:name())
 			local ttp = vector():set(0,0,0)
-			self.a.pos_vertex = self.object:accessible_nearest(level.vertex_position(self.a.pos_vertex), ttp)
+			tmp_pos_vertex = self.object:accessible_nearest(level.vertex_position(tmp_pos_vertex), ttp)
 		end
+		self.a.pos_vertex = tmp_pos_vertex
 		
-		self.a.pp = patrol(self.a.center_point):level_vertex_id(0)
-		self.a.pp = level.vertex_in_direction(self.a.pp, vector():set(math.random(-1,1), 0, math.random(-1,1)), math.random(0,0.5))
-		self.object:set_dest_level_vertex_id(self.a.pos_vertex)
-		self.object:set_desired_direction(vector():sub(level.vertex_position(self.a.pp),level.vertex_position(self.a.pos_vertex)))
+		local kamp_vertex = patrol(self.a.center_point):level_vertex_id(0)
+		local math_random = math.random
+		self.a.pp = level.vertex_in_direction(kamp_vertex, vector():set(math_random(-1,1), 0, math_random(-1,1)), math_random(0,0.5))
+		self.object:set_dest_level_vertex_id(tmp_pos_vertex)
+		self.object:set_desired_direction(vector():sub(level.vertex_position(self.a.pp),level.vertex_position(tmp_pos_vertex)))
 		self.object:set_path_type(game_object.level_path)
 		state_mgr.set_state(self.object, self.a.def_state_moving)
 	end
@@ -120,7 +127,7 @@ end
 
 --' ѕросто сидит и втыкает
 class "action_wait" (action_base)
-function action_wait:__init (npc_name,action_name,storage) super (nil,action_name)
+function action_wait:__init (action_name,storage) super (nil,action_name)
 	self.a = storage
 end
 function action_wait:initialize()
@@ -162,6 +169,56 @@ function action_wait:net_destroy(npc)
 end
 
 
+ks_avail_state = {	idle				= { directed	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
+					pre_harmonica		= { directed	= { "wait_harmonica"},
+											undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
+					harmonica			= { directed	= { "play_harmonica"},
+											undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
+					post_harmonica		= { directed	= { "wait_harmonica"},
+											undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
+					pre_guitar			= { directed	= { "wait_guitar"},
+											undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
+					guitar				= { directed	= { "play_guitar"},
+											undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
+					post_guitar			= { directed	= { "wait_guitar"},
+											undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
+					story				= { directed	= { "declarate"},
+											undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
+					post_story			= { directed	= { "declarate"},
+											undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
+					pre_joke			= { directed	= { "declarate"},
+											undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
+					joke				= { directed	= { "declarate"},
+											undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
+					post_joke			= { directed	= { "declarate"},
+											undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}}}
+											
+ks_avail_sound = {	idle				= { directed = "idle"},
+					pre_harmonica		= { directed = "pre_harmonica", undirected = ""},
+					harmonica			= { directed = "play_harmonica", undirected = ""},
+					post_harmonica		= { directed = "", undirected = "reac_harmonica"},
+					pre_guitar			= { directed = "pre_guitar", undirected = ""},
+					guitar				= { directed = "play_guitar", undirected = ""},
+					post_guitar			= { directed = "", undirected = "reac_guitar"},
+					story				= { directed = "play_story", undirected = ""},
+					post_story			= { directed = "", undirected = "reac_story"},
+					pre_joke			= { directed = "pre_joke", undirected = ""},
+					joke				= { directed = "play_joke", undirected = ""},
+					post_joke			= { directed = "", undirected = "reac_joke"}}
+
+ks_trans_kamp =  { 	idle			= { idle = 0, pre_harmonica = 30, pre_guitar = 30, story = 0, pre_joke = 40 }, 
+					pre_harmonica	= { harmonica = 100 }, 
+					harmonica		= { post_harmonica = 100 }, 
+					post_harmonica	= { idle = 70, harmonica = 30 },
+					pre_guitar		= { guitar = 100 }, 
+					guitar			= { post_guitar = 100 }, 
+					post_guitar		= { idle = 70, guitar = 30 },
+					story			= { post_story = 100 }, 
+					post_story		= { idle = 100 },
+					pre_joke		= { joke = 100 }, 
+					joke			= { post_joke = 100 }, 
+					post_joke		= { idle = 100 }}
+						
 class "CKampManager"
 function CKampManager:__init(path)
 	self.kamp_name = path
@@ -210,41 +267,9 @@ function CKampManager:__init(path)
 	end
 	--print_table(self.position)
 	--“аблица соответствий состо€ни€ лагер€ и допустимых анимаций и звуков.	
-	self.avail_state = {idle				= { directed	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
-						pre_harmonica		= { directed	= { "wait_harmonica"},
-												undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
-						harmonica			= { directed	= { "play_harmonica"},
-												undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
-						post_harmonica		= { directed	= { "wait_harmonica"},
-												undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
-						pre_guitar			= { directed	= { "wait_guitar"},
-												undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
-						guitar				= { directed	= { "play_guitar"},
-												undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
-						post_guitar			= { directed	= { "wait_guitar"},
-												undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
-						story				= { directed	= { "declarate"},
-												undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
-						post_story			= { directed	= { "declarate"},
-												undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
-						pre_joke			= { directed	= { "declarate"},
-												undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
-						joke				= { directed	= { "declarate"},
-												undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}},
-						post_joke			= { directed	= { "declarate"},
-												undirected	= { "wait", "sit", "sit_ass", "sit_knee", "eat_kolbasa", "eat_vodka", "eat_energy", "eat_bread", "trans"}}}
-	self.avail_sound = {idle				= { directed = "idle"},
-						pre_harmonica		= { directed = "pre_harmonica", undirected = ""},
-						harmonica			= { directed = "play_harmonica", undirected = ""},
-						post_harmonica		= { directed = "", undirected = "reac_harmonica"},
-						pre_guitar			= { directed = "pre_guitar", undirected = ""},
-						guitar				= { directed = "play_guitar", undirected = ""},
-						post_guitar			= { directed = "", undirected = "reac_guitar"},
-						story				= { directed = "play_story", undirected = ""},
-						post_story			= { directed = "", undirected = "reac_story"},
-						pre_joke			= { directed = "pre_joke", undirected = ""},
-						joke				= { directed = "play_joke", undirected = ""},
-						post_joke			= { directed = "", undirected = "reac_joke"}}
+	-- nv130122 moved some const local data out of constructor
+	-- self.avail_state = ks_avail_state
+	-- self.avail_sound = ks_avail_sound
 	-- “аблица таймаутов по состо€нию. ≈сли состо€ние установилось, то некоторое врем€ оно не может быт изменено.						
 	self.timeout	 = {idle				= { min = 30000 },
 						pre_harmonica		= { min = 3000 },
@@ -265,18 +290,7 @@ function CKampManager:__init(path)
 						 story = false, post_story = false,
 						 pre_joke = true, joke = true, post_joke = true}
 	-- “аблица допустимых переходов между состо€ни€ми с веро€тност€ми.
-	self.trans_kamp = { idle			= { idle = 0, pre_harmonica = 30, pre_guitar = 30, story = 0, pre_joke = 40 }, 
-						pre_harmonica	= { harmonica = 100 }, 
-						harmonica		= { post_harmonica = 100 }, 
-						post_harmonica	= { idle = 70, harmonica = 30 },
-						pre_guitar		= { guitar = 100 }, 
-						guitar			= { post_guitar = 100 }, 
-						post_guitar		= { idle = 70, guitar = 30 },
-						story			= { post_story = 100 }, 
-						post_story		= { idle = 100 },
-						pre_joke		= { joke = 100 }, 
-						joke			= { post_joke = 100 }, 
-						post_joke		= { idle = 100 }}
+	-- self.trans_kamp = ks_trans_kamp
 	-- ’ранилище дл€ режиссера лагер€. –ежиссерем €вл€етс€ сталкер, зате€вший необычное поведение
 	self.director = nil
 end
@@ -366,7 +380,8 @@ function CKampManager:proceedState(npc)
 	-- ќпредел€ютс€ допустимые в данный момент переходы.
 	local temp = {}
 	local max_rnd = 0
-	for k,v in pairs(self.trans_kamp[self.kamp_state]) do		
+	local trans_kamp = ks_trans_kamp
+	for k,v in pairs(trans_kamp[self.kamp_state]) do
 		-- ќпредел€ютс€ допустимые состо€ни€ дл€ лагер€.
 		if self.kamp_states[k] == true then
 			temp[k] = v
@@ -403,7 +418,8 @@ function CKampManager:proceedState(npc)
 			if k == "post_story" then
 				local dep = sound_theme.theme[self.selected_story].depence[self.story_last]
 				if dep and dep.min and dep.max then
-					self.timeout["post_story"].min = math.random(dep.min, dep.max)*1000
+					-- nv130219 a little more randomness
+					self.timeout["post_story"].min = math.random(dep.min*1000, dep.max*1000)
 				end
 			end
 			for kk,vv in pairs(self.npc) do
@@ -418,19 +434,21 @@ function CKampManager:proceedRole(npc, director)
 	-- ќпределить список доступных анимаций по состо€нию лагер€.
 	-- определить список доступных анимаций по наличию предметов
 	-- выбрать одну из них (то же самое со звуком).
-	local states = 0
-	local sound = ""
-	local state = ""
+	local sound
+	local state
 	local npc_id = npc:id()
+	local avail_state = ks_avail_state
+	local avail_sound = ks_avail_sound
 	if self.npc[npc_id].begin == nil or
 	   time_global() - self.npc[npc_id].begin >= self.npc[npc_id].state_idle
 	then
+		local states
 		if director then
-			states = self.avail_state[self.kamp_state].directed
-			sound = self.avail_sound[self.kamp_state].directed
+			states = avail_state[self.kamp_state].directed
+			sound = avail_sound[self.kamp_state].directed
 		else
-			states = self.avail_state[self.kamp_state].undirected
-			sound = self.avail_sound[self.kamp_state].undirected
+			states = avail_state[self.kamp_state].undirected
+			sound = avail_sound[self.kamp_state].undirected
 		end
 		-- ¬ыбирать новое состо€ние только раз в какое то врем€.
 		local temp = {}
@@ -454,9 +472,9 @@ function CKampManager:proceedRole(npc, director)
 		self.npc[npc_id].state_idle = math.random(15000,20000)		
 	else
 		if director then
-			sound = self.avail_sound[self.kamp_state].directed
+			sound = avail_sound[self.kamp_state].directed
 		else
-			sound = self.avail_sound[self.kamp_state].undirected
+			sound = avail_sound[self.kamp_state].undirected
 		end
 		state = self.npc[npc_id].state_selected	
 	end
@@ -469,7 +487,17 @@ function CKampManager:updateNpc(npc)
 	-- ѕросим лагерь выбрать текущее состо€ние. ћен€ть состо€ние лагер€
 	-- имеет право только режиссер.
 	local npc_id = npc:id()
+	local camp_npc = self.npc[npc_id]
+	-- ѕроверка что сталкер может делать, а что нет.
 	local director = self.director == nil or self.director == npc_id
+
+	if camp_npc.comm_class == 0 then -- only normal stalkers need updating
+		if director or camp_npc.camp_pop ~= self.population then
+			--should only need to do this when 1) first added or 2) camp population changed
+			-- but it sets kamp's kamp_states EACH TIME, so it is a must for directors
+			self:checkNpcAbility(npc)
+		end
+	end
 	if director	then
 		self:proceedState(npc)
 	end
@@ -478,9 +506,9 @@ function CKampManager:updateNpc(npc)
 	
 	local substate = nil
 	if state == "wait_harmonica" then
-		if sound == "pre_harmonica" and self.npc[npc_id].new == true then
+		if sound == "pre_harmonica" and camp_npc.new == true then
 			xr_sound.set_sound_play(npc, "intro_music", math.random(2000,3000))
-			self.npc[npc_id].new = false
+			camp_npc.new = false
 		end
 		state = "harmonica"
 		xr_kamp.kamp_stalkers[npc_id] = false
@@ -489,9 +517,9 @@ function CKampManager:updateNpc(npc)
 		substate = 1
 		xr_kamp.kamp_stalkers[npc_id] = false
 	elseif state == "wait_guitar" then
-		if sound == "pre_guitar" and self.npc[npc_id].new == true then
+		if sound == "pre_guitar" and camp_npc.new == true then
 			xr_sound.set_sound_play(npc, "intro_music", math.random(2000,3000))
-			self.npc[npc_id].new = false
+			camp_npc.new = false
 		end
 		state = "guitar"
 		xr_kamp.kamp_stalkers[npc_id] = false
@@ -500,7 +528,7 @@ function CKampManager:updateNpc(npc)
 		substate = 1
 		xr_kamp.kamp_stalkers[npc_id] = false
 	elseif state == "declarate" then
-		if self.npc[npc_id].new == true then
+		if camp_npc.new == true then
 			if sound == "pre_joke" then
 				xr_sound.set_sound_play(npc, "intro_joke", math.random(2000,3000))
 			elseif sound == "play_joke" then
@@ -509,17 +537,19 @@ function CKampManager:updateNpc(npc)
 				xr_sound.set_sound_play(npc, self.selected_story)
 				self.story_last, self.story_max = xr_sound.get_last_IDS(npc, self.selected_story)
 			end
-			self.npc[npc_id].new = false
+			camp_npc.new = false
 		end
 
-		if npc:character_community() == "monolith" then
+		-- if npc:character_community() == "monolith" then
+		if camp_npc.comm_class == -1 then
 			local t = math.mod(npc_id, 2)
 			if t == 0 then
 				state = "trans_0"
 			else
 				state = "trans_1"
 			end
-		elseif npc:character_community() == "zombied" then
+		-- elseif npc:character_community() == "zombied" then
+		elseif camp_npc.comm_class == -2 then
 			state = "trans_zombied"
 		else
 			local t = math.mod(npc_id, 3)
@@ -533,14 +563,16 @@ function CKampManager:updateNpc(npc)
 		end
 		xr_kamp.kamp_stalkers[npc_id] = false
 	elseif state == "trans" then
-		if npc:character_community() == "monolith" then
+		-- if npc:character_community() == "monolith" then
+		if camp_npc.comm_class == -1 then
 			local t = math.mod(npc_id, 2)
 			if t == 0 then
 				state = "trans_0"
 			else
 				state = "trans_1"
 			end
-		elseif npc:character_community() == "zombied" then
+		-- elseif npc:character_community() == "zombied" then
+		elseif camp_npc.comm_class == -2 then
 			state = "trans_zombied"
 		end
 		xr_kamp.kamp_stalkers[npc_id] = false
@@ -556,18 +588,18 @@ function CKampManager:updateNpc(npc)
 		sound = "reac_music"
 	elseif sound == "reac_joke" then
 		sound = ""	
-		if self.npc[npc_id].new == true then
+		if camp_npc.new == true then
 			if self.censor == nil then
 				xr_sound.set_sound_play(npc, "reac_joke", math.random(2000,3000))
 				self.censor = npc_id
 			else
 				xr_sound.set_sound_play(npc, "story_reac_laughter", math.random(100,300))
 			end
-			self.npc[npc_id].new = false
+			camp_npc.new = false
 		end
 	elseif sound == "reac_story" then
 		sound = ""
-		if self.npc[npc_id].new == true then
+		if camp_npc.new == true then
 			local dep = sound_theme.theme[self.selected_story].depence[self.story_last+1]
 			if dep then
 				if dep.type == "all" then
@@ -588,9 +620,12 @@ function CKampManager:updateNpc(npc)
 end
 function CKampManager:checkNpcAbility(npc)
 	local npc_id = npc:id()
+	local camp_npc = self.npc[npc_id]
+	camp_npc.camp_pop = self.population
 	
-	if npc:character_community() == "monolith" or
-	   npc:character_community() == "zombied"
+--	if npc:character_community() == "monolith" or
+--	   npc:character_community() == "zombied"
+	if camp_npc.comm_class ~= 0
 	then
 		self.kamp_states["pre_joke"] = false
 		self.kamp_states["joke"] = false
@@ -599,38 +634,38 @@ function CKampManager:checkNpcAbility(npc)
 		if not close_visuals[npc:get_visual_name()] then
 			-- есть колбасу
 			if npc:object("kolbasa") then
-				self.npc[npc_id].states["eat_kolbasa"] = true
+				camp_npc.states["eat_kolbasa"] = true
 			else
-				self.npc[npc_id].states["eat_kolbasa"] = false
+				camp_npc.states["eat_kolbasa"] = false
 			end
 			-- пить водку
 			if npc:object("vodka") then
-				self.npc[npc_id].states["eat_vodka"] = true
+				camp_npc.states["eat_vodka"] = true
 			else
-				self.npc[npc_id].states["eat_vodka"] = false
+				camp_npc.states["eat_vodka"] = false
 			end
 			-- пить енергитический напиток
 			if npc:object("energy_drink") then
-				self.npc[npc_id].states["eat_energy"] = true
+				camp_npc.states["eat_energy"] = true
 			else
-				self.npc[npc_id].states["eat_energy"] = false
+				camp_npc.states["eat_energy"] = false
 			end
 			-- есть хлеб
 			if npc:object("bread") then
-				self.npc[npc_id].states["eat_bread"] = true
+				camp_npc.states["eat_bread"] = true
 			else
-				self.npc[npc_id].states["eat_bread"] = false
+				camp_npc.states["eat_bread"] = false
 			end
 			-- играть на гармошке
 			if include_harmonica == true and npc:object("harmonica_a") then
-				self.npc[npc_id].states["play_harmonica"] = true
-				self.npc[npc_id].states["wait_harmonica"] = true
+				camp_npc.states["play_harmonica"] = true
+				camp_npc.states["wait_harmonica"] = true
 				self.kamp_states["pre_harmonica"] = true
 				self.kamp_states["harmonica"] = true
 				self.kamp_states["post_harmonica"] = true
 			else
-				self.npc[npc_id].states["play_harmonica"] = false
-				self.npc[npc_id].states["wait_harmonica"] = false
+				camp_npc.states["play_harmonica"] = false
+				camp_npc.states["wait_harmonica"] = false
 				self.kamp_states["pre_harmonica"] = false
 				self.kamp_states["harmonica"] = false
 				self.kamp_states["post_harmonica"] = false
@@ -638,14 +673,14 @@ function CKampManager:checkNpcAbility(npc)
 		end
 		-- играть на гитаре
 		if npc:object("guitar_a") then
-			self.npc[npc_id].states["play_guitar"] = true
-			self.npc[npc_id].states["wait_guitar"] = true
+			camp_npc.states["play_guitar"] = true
+			camp_npc.states["wait_guitar"] = true
 			self.kamp_states["pre_guitar"] = true
 			self.kamp_states["guitar"] = true
 			self.kamp_states["post_guitar"] = true
 		else
-			self.npc[npc_id].states["play_guitar"] = false
-			self.npc[npc_id].states["wait_guitar"] = false
+			camp_npc.states["play_guitar"] = false
+			camp_npc.states["wait_guitar"] = false
 			self.kamp_states["pre_guitar"] = false
 			self.kamp_states["guitar"] = false
 			self.kamp_states["post_guitar"] = false
@@ -675,25 +710,34 @@ function CKampManager:checkNpcAbility(npc)
 end
 function CKampManager:addNpc(npc)
 	--printf("KAMP [%s] add npc", npc:name())
-	if self.npc[npc:id()] ~= nil then
+	local npc_id = npc:id()
+	if self.npc[npc_id] ~= nil then
 		--printf("NPC is already exist")
 		return
 	end
 	
-	if npc:character_community() == "monolith" or
-	   npc:character_community() == "zombied"
+	-- if npc:character_community() == "monolith" or
+	   -- npc:character_community() == "zombied"
+	-- then
+	local comm_type = 0 -- stalker
+	if npc:character_community() == "monolith" then
+		 comm_type = -1
+	elseif npc:character_community() == "zombied" then
+		 comm_type = -2
+	end
+	if comm_type ~= 0
 	then
-		self.npc[npc:id()] = {name = npc:name(), position = nil, current = nil, speak = 0, states = {
+		self.npc[npc_id] = {name = npc:name(), position = nil, current = nil, speak = 0, comm_class = comm_type, camp_pop = 0, states = {
 								stand_wait = false, sit = false, sit_ass = false, sit_knee = false, declarate = true,
 								eat_kolbasa = false, eat_vodka = false, eat_energy = false, eat_bread = false, trans = true,
 								play_harmonica = false, play_guitar = false, play_joke = false, play_story = false}}
 	else
-		self.npc[npc:id()] = {name = npc:name(), position = nil, current = nil, speak = 0, states = {
+		self.npc[npc_id] = {name = npc:name(), position = nil, current = nil, speak = 0, comm_class = 0, camp_pop = 0, states = {
 								stand_wait = true, sit = true, sit_ass = true, sit_knee = true, declarate = true,
 								eat_kolbasa = false, eat_vodka = false, eat_energy = false, eat_bread = false, trans = false,
 								play_harmonica = false, play_guitar = false, play_joke = false, play_story = false}}
 	end
-	self:selectPosition(npc:id())	
+	self:selectPosition(npc_id)	
 end
 function CKampManager:removeNpc(npc)
 	--printf("KAMP [%s] remove npc", npc:name())
@@ -746,7 +790,7 @@ function add_to_binder(object, ini, scheme, section, storage)
 	--printf("PRP %s", stalker_ids.property_script)
 
 	-- Actions
-	local action = this.action_wait (object:name(),"action_kamp_wait", storage)
+	local action = this.action_wait ("action_kamp_wait", storage)
 	action:add_precondition		(world_property(stalker_ids.property_alive, true))
 	action:add_precondition		(world_property(stalker_ids.property_danger,false))
 	action:add_precondition		(world_property(stalker_ids.property_enemy,	false))
@@ -757,7 +801,7 @@ function add_to_binder(object, ini, scheme, section, storage)
 	manager:add_action (operators["wait"], action)
 	xr_logic.subscribe_action_for_events(object, storage, action)
 	
-	action = this.action_go_position (object:name(),"action_go_kamp", storage)
+	action = this.action_go_position ("action_go_kamp", storage)
 	action:add_precondition		(world_property(stalker_ids.property_alive, true))
 	action:add_precondition		(world_property(stalker_ids.property_danger,false))
 	action:add_precondition		(world_property(stalker_ids.property_enemy,	false))
@@ -779,6 +823,8 @@ function set_scheme(npc, ini, scheme, section, gulag_name)
     
 	st.center_point = utils.cfg_get_string(ini, section, "center_point", npc, true,  gulag_name)
 	st.radius		= utils.cfg_get_number(ini, section, "radius", npc, false, 2)
+	st.pos_vertex = nil
+	st.dest_vertex = nil
 	
 	if kamps[st.center_point] == nil then
 		kamps[st.center_point] = CKampManager(st.center_point)

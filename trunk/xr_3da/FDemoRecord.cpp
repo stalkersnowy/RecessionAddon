@@ -475,11 +475,15 @@ void CDemoRecord::IR_OnMouseMove		(int dx, int dy)
 		g_pGameLevel->IR_OnMouseMove(dx, dy);
 		return;
 	}
+
+	Fvector		vR_delta = Fvector().set(0,0,0);
+
 	float scale			= .5f;//psMouseSens;
 	if (dx||dy){
-		m_vR.y			+= float(dx)*scale; // heading
-		m_vR.x			+= ((psMouseInvert.test(1))?-1:1)*float(dy)*scale*(3.f/4.f); // pitch
+		vR_delta.y		+= float(dx)*scale; // heading
+		vR_delta.x		+= ((psMouseInvert.test(1))?-1:1)*float(dy)*scale*(3.f/4.f); // pitch
 	}
+	update_whith_timescale( m_vR, vR_delta );
 }
 
 void CDemoRecord::IR_OnMouseHold		(int btn)
@@ -489,10 +493,12 @@ void CDemoRecord::IR_OnMouseHold		(int btn)
 		g_pGameLevel->IR_OnMouseHold(btn);
 		return;
 	}
+	Fvector		vT_delta = Fvector().set(0,0,0);
 	switch (btn){
-	case 0:			m_vT.z += 1.0f; break; // Move Backward
-	case 1:			m_vT.z -= 1.0f; break; // Move Forward
+	case 0:			vT_delta.z += 1.0f; break; // Move Backward
+	case 1:			vT_delta.z -= 1.0f; break; // Move Forward
 	}
+	update_whith_timescale( m_vT, vT_delta );
 }
 
 void CDemoRecord::RecordKey			()

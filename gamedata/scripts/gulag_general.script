@@ -3,34 +3,38 @@ local ltx
 
 function load_job(sj, gname, type, squad, groups, st)
 	local t
-
-	ltx = "[meet@generic_lager_guard]\n"..
-		  "meet_state		= 10|wait@wait\n"..
-		  "meet_state_wpn	= 10|backoff@threat_weap\n"..
-		  "victim			= 10|actor\n"..
-		  "victim_wpn		= 10|actor\n"..
-		  "use				= true\n"..
-		  "use_wpn			= false\n"..
-		  "syndata			= backoff@threat_weap\n"..
-		  "precond			= visibility\n"..
-
-		  "[meet@generic_lager_patrol]\n"..
-		  "meet_state		= 5|wait@wait\n"..
-		  "meet_state_wpn	= 10|backoff@threat_weap\n"..
-		  "victim			= 5|actor\n"..
-		  "victim_wpn		= 10|actor\n"..
-		  "use				= true\n"..
-		  "use_wpn			= false\n"..
-		  "syndata			= backoff@threat_weap\n"..
-		  "precond			= visibility\n"
+	local way_name
+	local sf = string.format
 		  
 	-- УНИВЕРСАЛЬНЫЙ ЛАГЕРЬ СТАЛКЕРОВ
 	if type == "general_lager" then
+
+		ltx = "[meet@generic_lager_guard]\n"..
+			  "meet_state		= 10|wait@wait\n"..
+			  "meet_state_wpn	= 10|backoff@threat_weap\n"..
+			  "victim			= 10|actor\n"..
+			  "victim_wpn		= 10|actor\n"..
+			  "use				= true\n"..
+			  "use_wpn			= false\n"..
+			  "syndata			= backoff@threat_weap\n"..
+			  "precond			= visibility\n"..
+
+			  "[meet@generic_lager_patrol]\n"..
+			  "meet_state		= 5|wait@wait\n"..
+			  "meet_state_wpn	= 10|backoff@threat_weap\n"..
+			  "victim			= 5|actor\n"..
+			  "victim_wpn		= 10|actor\n"..
+			  "use				= true\n"..
+			  "use_wpn			= false\n"..
+			  "syndata			= backoff@threat_weap\n"..
+			  "precond			= visibility\n"
+		  
 		-- Проверяем наличие кампов.
 		local it = 1
-		while level.patrol_path_exists(gname.."_kamp_"..it) do
+		way_name = sf("%s_kamp_%d",gname,it)
+		while level.patrol_path_exists(way_name) do
 			-- Необходимо вычитать количество работ из названия точки пути.
-			local way_name = gname.."_kamp_"..it
+			-- local way_name = gname.."_kamp_"..it
 			local ptr = patrol(way_name)
 			local wp_prop = utils.parse_waypoint_data(way_name, ptr:flags(0), ptr:name(0))
 			local job_count = 5
@@ -59,13 +63,15 @@ function load_job(sj, gname, type, squad, groups, st)
 
 			ltx = ltx..job_ltx
 			it = it + 1
+			way_name = sf("%s_kamp_%d",gname,it) --gname.."_kamp_"..it
 		end
 
 		-- Проверяем наличие путей для сна.
 		it = 1
-		while level.patrol_path_exists(gname.."_sleep_"..it) do
+		way_name = sf("%s_sleep_%d",gname,it) --gname.."_sleep_"..it
+		while level.patrol_path_exists(way_name) do
 			-- Необходимо вычитать количество работ из названия точки пути.
-			local way_name = gname.."_sleep_"..it
+			-- local way_name = gname.."_sleep_"..it
 
 			-- добавляем должность
 			t = { section = "logic@"..way_name,
@@ -85,14 +91,16 @@ function load_job(sj, gname, type, squad, groups, st)
 
 			ltx = ltx..job_ltx
 			it = it + 1
+			way_name = sf("%s_sleep_%d",gname,it) --gname.."_sleep_"..it
 		end
 
 
 		-- Проверяем наличие путей брожения внутри лагеря.
 		it = 1
-		while level.patrol_path_exists(gname.."_walker_"..it.."_walk") do
+		way_name = sf("%s_walker_%d_walk",gname,it) --gname.."_walker_"..it.."_walk"
+		while level.patrol_path_exists(way_name) do
 			-- Необходимо вычитать количество работ из названия точки пути.
-			local way_name = gname.."_walker_"..it.."_walk"
+			-- local way_name = gname.."_walker_"..it.."_walk"
 
 			-- добавляем должность
 			t = { section = "logic@"..way_name,
@@ -117,13 +125,15 @@ function load_job(sj, gname, type, squad, groups, st)
 
 			ltx = ltx..job_ltx
 			it = it + 1
+			way_name = sf("%s_walker_%d_walk",gname,it) --gname.."_walker_"..it.."_walk"
 		end
 
 		-- Проверяем наличие путей брожения внутри лагеря(без таймаута).
 		it = 1
-		while level.patrol_path_exists(gname.."_walker2_"..it.."_walk") do
+		way_name = sf("%s_walker2_%d_walk",gname,it) --gname.."_walker2_"..it.."_walk"
+		while level.patrol_path_exists(way_name) do
 			-- Необходимо вычитать количество работ из названия точки пути.
-			local way_name = gname.."_walker2_"..it.."_walk"
+			-- local way_name = gname.."_walker2_"..it.."_walk"
 
 			-- добавляем должность
 			t = { section = "logic@"..way_name,
@@ -148,13 +158,15 @@ function load_job(sj, gname, type, squad, groups, st)
 
 			ltx = ltx..job_ltx
 			it = it + 1
+			way_name = sf("%s_walker2_%d_walk",gname,it) --gname.."_walker2_"..it.."_walk"
 		end
 
 		-- Проверяем наличие патрулей обхода в лагере.
 		it = 1
-		while level.patrol_path_exists(gname.."_patrol_"..it.."_walk") do
+		way_name = sf("%s_patrol_%d_walk",gname,it) --gname.."_patrol_"..it.."_walk"
+		while level.patrol_path_exists(way_name) do
 			-- Необходимо вычитать количество работ из названия точки пути.
-			local way_name = gname.."_patrol_"..it.."_walk"
+			-- local way_name = gname.."_patrol_"..it.."_walk"
 			local ptr = patrol(way_name)
 			local wp_prop = utils.parse_waypoint_data(way_name, ptr:flags(0), ptr:name(0))
 			local job_count = 3
@@ -189,13 +201,15 @@ function load_job(sj, gname, type, squad, groups, st)
 
 			ltx = ltx..job_ltx
 			it = it + 1
+			way_name = sf("%s_patrol_%d_walk",gname,it) --gname.."_patrol_"..it.."_walk"
 		end
 
 		-- Проверяем наличие часовых в лагере.
 		it = 1
-		while level.patrol_path_exists(gname.."_guard_"..it.."_walk") do
+		way_name = sf("%s_guard_%d_walk",gname,it) --gname.."_guard_"..it.."_walk"
+		while level.patrol_path_exists(way_name) do
 			-- Необходимо вычитать количество работ из названия точки пути.
-			local way_name = gname.."_guard_"..it.."_walk"
+			-- local way_name = gname.."_guard_"..it.."_walk"
 
 			-- добавляем должность
 			t = { section = "logic@"..way_name,
@@ -220,13 +234,15 @@ function load_job(sj, gname, type, squad, groups, st)
 
 			ltx = ltx..job_ltx
 			it = it + 1
+			way_name = sf("%s_guard_%d_walk",gname,it) --gname.."_guard_"..it.."_walk"
 		end
 
 		-- Проверяем наличие снайперов в лагере.
 		it = 1
-		while level.patrol_path_exists(gname.."_sniper_"..it.."_walk") do
+		way_name = sf("%s_sniper_%d_walk",gname,it) --gname.."_sniper_"..it.."_walk"
+		while level.patrol_path_exists(way_name) do
 			-- Необходимо вычитать количество работ из названия точки пути.
-			local way_name = gname.."_sniper_"..it.."_walk"
+			-- local way_name = gname.."_sniper_"..it.."_walk"
 
 			-- добавляем должность
 			t = { section = "logic@"..way_name,
@@ -251,14 +267,16 @@ function load_job(sj, gname, type, squad, groups, st)
 
 			ltx = ltx..job_ltx
 			it = it + 1
+			way_name = sf("%s_sniper_%d_walk",gname,it) --gname.."_sniper_"..it.."_walk"
 		end
 
 		-- Проверяем возможность вырулить в рейд (наличие путей, алгоритм переключения)
 		it = 1
 		local job_count = 5
-		while level.patrol_path_exists(gname.."_raid_"..it.."_walk") do
+		way_name = sf("%s_raid_%d_walk",gname,it) --gname.."_raid_"..it.."_walk"
+		while level.patrol_path_exists(way_name) do
 			-- Необходимо вычитать количество работ из названия точки пути.
-			local way_name = gname.."_raid_"..it.."_walk"
+			-- local way_name = gname.."_raid_"..it.."_walk"
 			local ptr = patrol(way_name)
 			local wp_prop = utils.parse_waypoint_data(way_name, ptr:flags(0), ptr:name(0))
 			if wp_prop.count ~= nil then
@@ -292,18 +310,20 @@ function load_job(sj, gname, type, squad, groups, st)
 
 			ltx = ltx..job_ltx
 			it = it + 1
+			way_name = sf("%s_raid_%d_walk",gname,it) --gname.."_raid_"..it.."_walk"
 		end
 
 		return
-	end
+	-- end --nv130205 combine ifs
 
 	-- УНИВЕРСАЛЬНОЕ ЛОГОВО МОНСТРОВ
-	if type == "general_lair" then
+	elseif type == "general_lair" then
 		-- Проверяем наличие моб_хом.
 		local it = 1
-		while level.patrol_path_exists(gname.."_home_"..it) do
+		way_name = sf("%s_home_%d",gname,it) --gname.."_home_"..it
+		while level.patrol_path_exists(way_name) do
 			-- Необходимо вычитать количество работ из названия точки пути.
-			local way_name = gname.."_home_"..it
+			-- local way_name = gname.."_home_"..it
 			local ptr = patrol(way_name)
 			local wp_prop = utils.parse_waypoint_data(way_name, ptr:flags(0), ptr:name(0))
 			local job_count = 10
@@ -331,6 +351,7 @@ function load_job(sj, gname, type, squad, groups, st)
 
 			ltx = ltx..job_ltx
 			it = it + 1
+			way_name = sf("%s_home_%d",gname,it) --gname.."_home_"..it
 		end
 
 		-- Необходим fake_death с патрульным путем
@@ -341,9 +362,10 @@ function load_job(sj, gname, type, squad, groups, st)
 		-- Проверяем возможность вырулить в рейд (наличие путей, алгоритм переключения)
 		it = 1
 		local job_count = 5
-		while level.patrol_path_exists(gname.."_raid_"..it) do
+		way_name = sf("%s_raid_%d",gname,it) --gname.."_raid_"..it
+		while level.patrol_path_exists(way_name) do
 			-- Необходимо вычитать количество работ из названия точки пути.
-			local way_name = gname.."_raid_"..it
+			-- local way_name = gname.."_raid_"..it
 			local ptr = patrol(way_name)
 			local wp_prop = utils.parse_waypoint_data(way_name, ptr:flags(0), ptr:name(0))
 			if wp_prop.count ~= nil then
@@ -372,6 +394,7 @@ function load_job(sj, gname, type, squad, groups, st)
 
 			ltx = ltx..job_ltx
 			it = it + 1
+			way_name = sf("%s_raid_%d",gname,it) --gname.."_raid_"..it
 		end
 
 
@@ -397,13 +420,17 @@ function load_states(gname, type)
 				-- Если гулаг не на этой локации, то остальное проверять бессмысленно, так как
 				-- 1) упомянутые в switch_0 гулаги элементарно не найдутся по имени;
 				-- 2) пришедшее население может оказаться равным нулю из-за другой схемы его подсчёта.
-				if not db.zone_by_name[gulag.name] then
+				if not db.zone_by_name[gulag.name] then --this handles gulags on other levels
 					return 1
+				end
+				-- nv130218 the above doesn't handle local gulags, so this adds a bit more reliability
+				if not gulag.pop_valid then
+					return 1 -- don't change state just yet - camp is not fully initialized
 				end
 				if gulag.population_comed == 0 then
 					return 0
 				end
-				if xr_logic.pick_section_from_condlist(db.actor, gulag.smrttrn, gulag.state_switch_0) ~= nil then
+				if gulag.state_switch_0 and xr_logic.pick_section_from_condlist(db.actor, gulag.smrttrn, gulag.state_switch_0) ~= nil then
 					
 					--level.map_remove_object_spot(gulag.smrttrn.id, "alife_presentation_smart_ready")
 					return 0
@@ -411,26 +438,30 @@ function load_states(gname, type)
 				return 1
 			end
 		end
-	end
+	-- end --nv130205 combine ifs
 
-	if type == "general_lair" then
+	elseif type == "general_lair" then
 		return function(gulag) 
 			if gulag.state == 0 then
 				if gulag.population_comed == 0 then
 					return 0
-				end
+				-- end
 
-				if xr_logic.pick_section_from_condlist(db.actor, gulag.object, gulag.state_switch_1) ~= nil then
+				elseif gulag.state_switch_1 and xr_logic.pick_section_from_condlist(db.actor, gulag.smrttrn, gulag.state_switch_1) ~= nil then -- nv141126
 					
 					--level.map_add_object_spot(gulag.smrttrn.id, "alife_presentation_smart_ready", "Ready")	
 					return 1
 				end
 				return 0
 			elseif gulag.state == 1 then
+				-- nv130217 although unlikely, handle uninit too
+				if not gulag.pop_valid then
+					return 1 -- don't change state just yet
+				end
 				if gulag.population_comed == 0 then
 					return 0
-				end
-				if xr_logic.pick_section_from_condlist(db.actor, gulag.object, gulag.state_switch_0) ~= nil then
+				-- end
+				elseif gulag.state_switch_0 and xr_logic.pick_section_from_condlist(db.actor, gulag.smrttrn, gulag.state_switch_0) ~= nil then -- nv141126
 
 					--level.map_remove_object_spot(gulag.smrttrn.id, "alife_presentation_smart_ready")
 					return 0
