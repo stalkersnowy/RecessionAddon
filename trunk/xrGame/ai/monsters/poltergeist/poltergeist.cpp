@@ -30,6 +30,7 @@ CPoltergeist::CPoltergeist()
 	
 	m_flame						= 0;
 	m_tele						= 0;
+	m_both						= 0;
 }
 
 CPoltergeist::~CPoltergeist()
@@ -37,6 +38,7 @@ CPoltergeist::~CPoltergeist()
 	xr_delete		(StateMan);
 	xr_delete		(m_flame);
 	xr_delete		(m_tele);
+	xr_delete		(m_both);
 }
 
 void CPoltergeist::Load(LPCSTR section)
@@ -103,6 +105,9 @@ void CPoltergeist::Load(LPCSTR section)
 	if (xr_strcmp(polter_type,"flamer") == 0) {
 		m_flame			= xr_new<CPolterFlame>(this);
 		m_flame->load	(section);
+	} else if (xr_strcmp(polter_type,"ambidexter") == 0) {
+		m_both			= xr_new<CPolterBoth>(this);
+		m_both->load	(section);
 	} else {
 		m_tele			= xr_new<CPolterTele>(this);
 		m_tele->load	(section);
@@ -122,6 +127,8 @@ void CPoltergeist::reinit()
 	Energy::reinit();
 
 	m_current_position = Position();
+
+	ability()->on_reinit();
 
 	target_height		= 0.3f;
 	time_height_updated = 0;
@@ -227,7 +234,7 @@ void CPoltergeist::net_Destroy()
 
 void CPoltergeist::OnDie()
 {
-	if (m_tele) {
+	if (m_tele || m_both) {
 		if (state_invisible) {
 			setVisible(true);
 

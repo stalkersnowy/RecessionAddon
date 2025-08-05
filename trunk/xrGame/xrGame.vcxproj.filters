@@ -9743,6 +9743,7 @@
     <ClCompile Include="ShootingHitEffector.cpp">
       <Filter>Core\Client\Effectors\Actor</Filter>
     </ClCompile>
+    <ClCompile Include="ai\monsters\poltergeist\poltergeist_ambidexter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="graph_abstract.h">

@@ -28,6 +28,7 @@ class CPoltergeist :	public CBaseMonster ,
 
 	CPolterSpecialAbility	*m_flame;
 	CPolterSpecialAbility	*m_tele;
+	CPolterSpecialAbility	*m_both;
 
 
 public:
@@ -58,7 +59,10 @@ public:
 	virtual	void	Hit					(SHit* pHDS);
 
 
-	IC		CPolterSpecialAbility		*ability() {return (m_flame ? m_flame : m_tele);}
+	IC		CPolterSpecialAbility		*ability() {return (m_both ? m_both : (m_flame ? m_flame : m_tele));}
+	IC		bool						both_abilities() {return m_both;}
+
+			void	PerformAttack		(u32& flame, u32& tele, u32& scare);
 	
 	
 	IC		bool	is_hidden			() {return state_invisible;}
@@ -109,19 +113,20 @@ add_to_type_list(CPoltergeist)
 
 class CPolterSpecialAbility {
 
-	CParticlesObject	*m_particles_object;
-	CParticlesObject	*m_particles_object_electro;
-
-	LPCSTR				m_particles_hidden;
 	LPCSTR				m_particles_damage;
 	LPCSTR				m_particles_death;
-	LPCSTR				m_particles_idle;
 
 	ref_sound			m_sound_base;
 	u32					m_last_hit_frame;
 
 protected:
 	CPoltergeist		*m_object;	
+
+	CParticlesObject	*m_particles_object;
+	CParticlesObject	*m_particles_object_electro;
+
+	LPCSTR				m_particles_hidden;
+	LPCSTR				m_particles_idle;
 
 public:			
 					CPolterSpecialAbility		(CPoltergeist *polter);
@@ -135,6 +140,7 @@ public:
 	virtual void	on_destroy					(){}
 	virtual void	on_die						();
 	virtual void	on_hit						(SHit* pHDS);
+	virtual void	on_reinit					(){}
 };
 
 
@@ -277,3 +283,66 @@ private:
 			bool	trace_object				(CObject *obj, const Fvector &target);
 };
 
+
+//////////////////////////////////////////////////////////////////////////
+// BOTH
+//////////////////////////////////////////////////////////////////////////
+class CPolterBoth : public CPolterSpecialAbility {
+	typedef CPolterSpecialAbility inherited;
+
+	xr_vector<CObject*>	m_nearest;
+
+public:	
+					CPolterBoth					(CPoltergeist *polter);
+	virtual			~CPolterBoth				();
+
+	virtual void	load						(LPCSTR section);
+			
+	virtual void	on_reinit					();
+	virtual void	on_destroy					();
+	virtual void	on_die						();
+	virtual void	on_hit						(SHit* pHDS){}
+	
+	virtual void	update_schedule				();
+	
+	// FireBall
+
+			void	LoadFlame				(LPCSTR section);
+			void	FireFlame				(const CObject *target_object);
+			bool	GetValidFlamePosition	(const CObject *target_object, Fvector &res_pos);
+			void	UpdateFlame				();
+			void	RemoveFlames			();
+	
+			// ltx params
+			ref_sound			m_flame_sound;
+			LPCSTR				m_flame_particles_prepare;
+			LPCSTR				m_flame_particles_fire;
+			u32					m_flame_fire_delay;
+			float				m_flame_length;
+			float				m_flame_hit_value;
+
+
+			struct SFlameElement {
+				const CObject		*target_object;
+				Fvector				position;
+				Fvector				target_dir;
+				u32					time_started;
+				ref_sound			sound;
+			};
+			
+			DEFINE_VECTOR(SFlameElement*, FLAME_ELEMS_VEC, FLAME_ELEMS_IT);
+			FLAME_ELEMS_VEC	m_flames;
+
+	// Telekinesis
+	
+			void	ProcessTelekinesis	(const CObject *target);
+			void	UpdateTelekinesis	();
+
+			u32					time_tele_start;
+			const CObject		*tele_enemy;
+			CPhysicsShellHolder *tele_object;
+
+	struct SDelay {
+		u32 min, normal, aggressive;
+	} m_flame_delay, m_tele_delay, m_scare_delay;
+};

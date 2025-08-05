@@ -266,3 +266,41 @@ void CPolterTele::tele_fire_objects()
 	}
 }
 
+#define TELE_RADIUS  10.f
+#define TIME_TO_HOLD 2000
+
+void CPolterBoth::ProcessTelekinesis(const CObject *target)
+{
+	if (m_object->CTelekinesis::is_active())	return;
+	
+	m_nearest.clear_not_free		();
+	Level().ObjectSpace.GetNearest	(m_nearest,target->Position(), TELE_RADIUS, NULL); 
+	//xr_vector<CObject*> &tpObjects = Level().ObjectSpace.q_nearest;
+
+	if (m_nearest.empty()) return;
+
+	u32 index = Random.randI(m_nearest.size());
+
+	CPhysicsShellHolder  *obj = smart_cast<CPhysicsShellHolder *>(const_cast<CObject*>(m_nearest[index]));
+	if (!obj || !obj->m_pPhysicsShell) return;
+
+	m_object->CTelekinesis::activate(obj,1.5f, 2.f, 5000);
+
+	time_tele_start = Device.dwTimeGlobal;
+	tele_enemy		= target;
+	tele_object		= obj;
+}
+
+
+void CPolterBoth::UpdateTelekinesis()
+{
+	if (!m_object->CTelekinesis::is_active()) return;
+	if (!tele_enemy) return;
+	if (time_tele_start + TIME_TO_HOLD > Device.dwTimeGlobal) return;
+	
+	Fvector enemy_pos;
+	enemy_pos	= get_head_position(const_cast<CObject*>(tele_enemy));
+	m_object->CTelekinesis::fire_t(tele_object,enemy_pos, 0.55f);
+
+	tele_enemy = 0;
+}

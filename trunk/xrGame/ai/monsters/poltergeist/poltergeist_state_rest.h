@@ -15,7 +15,7 @@ public:
 template<typename _Object>
 void CPoltergeistStateRest<_Object>::execute()
 {
-	if(GameConstants::GetOldMutants()){
+	if(object->both_abilities() || GameConstants::GetOldMutants()){
 		inherited::execute();
 		return;
 	}
