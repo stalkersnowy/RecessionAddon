@@ -14,6 +14,7 @@ CMapSpot::CMapSpot(CMapLocation* ml)
 {
 	ClipperOn			();
 	m_bScale			= false;
+	m_bMouseIgnore		= false;
 }
 
 CMapSpot::~CMapSpot()
@@ -28,8 +29,10 @@ void CMapSpot::Load(CUIXml* xml, LPCSTR path)
 
 		SetStretchTexture	(true);
 	}
-	int i = xml->ReadAttribInt(path, 0, "scale", 0);
-	m_bScale			= (i==1);
+	int i	= xml->ReadAttribInt(path, 0, "scale", 0);
+	m_bScale		= (i==1);
+	i		= xml->ReadAttribInt(path, 0, "mouse_ignore", 0);
+	m_bMouseIgnore	= (i==1);
 
 	m_originSize		= GetWndSize();
 }
@@ -48,6 +51,11 @@ void CMapSpot::Update()
 			GetMessageTarget()->SendMessage(this, MAP_SHOW_HINT, NULL);
 		}
 	}
+}
+
+bool CMapSpot::OnMouseAction(float x, float y, EUIMessages mouse_action)
+{
+	return (m_bMouseIgnore ? false : inherited::OnMouseAction(x, y, mouse_action));
 }
 
 bool CMapSpot::OnMouseDown		(int mouse_btn)

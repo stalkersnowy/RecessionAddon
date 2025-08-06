@@ -75,7 +75,7 @@ void CActor::g_fireParams	(const CHudItem* pHudItem, Fvector &fire_pos, Fvector 
 		CWeapon *weapon = smart_cast<CWeapon*>(inventory().ActiveItem());
 		if(weapon)
 		{
-			fire_pos = weapon->get_LastFP();
+			fire_pos = Cameras().Position();//weapon->get_LastFP();
 		}
 		else
 		{

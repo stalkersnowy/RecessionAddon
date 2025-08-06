@@ -194,11 +194,11 @@
 		<level_map spot="actor_level_spot_p"></level_map>
 	</actor_location_p>
 
-	<actor_level_spot x="0" y="0" width="25" height="25" alignment="c">
+	<actor_level_spot x="0" y="0" width="25" height="25" alignment="c" mouse_ignore="1">
 		<texture>ui_icons_newPDA_man</texture>
 	</actor_level_spot>
 	
-	<actor_level_spot_p x="0" y="0" width="49" height="49" heading="1" alignment="c">
+	<actor_level_spot_p x="0" y="0" width="49" height="49" heading="1" alignment="c" mouse_ignore="1">
 		<texture>ui_icons_newPDA_manArrow</texture>
 	</actor_level_spot_p>
 

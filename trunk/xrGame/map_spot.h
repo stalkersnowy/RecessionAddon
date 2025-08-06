@@ -10,6 +10,7 @@ class CMapSpot :public CUIStatic
 	CMapLocation*			m_map_location;
 public:
 	bool					m_bScale;
+	bool					m_bMouseIgnore;
 	Fvector2				m_originSize;
 							CMapSpot						(CMapLocation*);
 	virtual					~CMapSpot						();
@@ -17,6 +18,7 @@ public:
 	CMapLocation*			MapLocation						()							{return m_map_location;}
 	virtual LPCSTR			GetHint							();
 	virtual		void		Update							();
+	virtual		bool		OnMouseAction					(float x, float y, EUIMessages mouse_action);
 	virtual		bool		OnMouseDown						(int mouse_btn);
 	virtual		void		OnFocusLost						();
 	virtual		void		EndXformAnimation				();
