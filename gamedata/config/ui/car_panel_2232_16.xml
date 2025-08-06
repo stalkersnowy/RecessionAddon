@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <w>
 	<!-- CAR_HEALTH -->
-	<car_health_static x="0" y="0" width="112" height="200" align="rb" stretch="1">
+	<car_health_static x="0" y="0" width="114" height="200" align="rb" stretch="1">
 		<text x="60" y="5" font="small" r="255" g="255" b="255" a="130">vehicle</text>
-		<texture width="150" height="200">ui\ui_mn_health</texture>
+		<texture width="152" height="200">ui\ui_mn_health</texture>
 	</car_health_static>
 
 	<!-- car health bar -->

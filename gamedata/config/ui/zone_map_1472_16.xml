@@ -4,8 +4,8 @@
 	<minimap>
 		<level_frame x="15" y="21" width="97" height="130"/>
 		
-		<background x="7" y="6" width="115" height="148" stretch="1"> 
-			<texture width="153" height="148">ui\hud_map_back</texture>
+		<background x="7" y="6" width="115" height="149" stretch="1"> 
+			<texture width="153" height="149">ui\hud_map_back</texture>
 		</background>
 		
 		<compass x="94" y="118" width="24" height="32" heading="1" stretch="1">

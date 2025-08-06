@@ -4,8 +4,8 @@
 		<text font="letterica16" r="238" g="224" b="198"/>		
 	</speech_menu>
 	
-	<static_health x="11" y="693" width="67" height="61" align="lb" stretch="1">
-		<texture width="90" height="61">ui\hud_health_back</texture>
+	<static_health x="11" y="693" width="67" height="63" align="lb" stretch="1">
+		<texture width="90" height="63">ui\hud_health_back</texture>
 	</static_health>
 
 	<progress_bar_health x="2" y="14" width="63" height="16" horz="1" min="0" max="100" pos="0" align="lb">
@@ -22,9 +22,9 @@
 		<max_color r="0" g="174" b="239"/>
 	</progress_bar_armor>
 	
-	<static_weapon x="945" y="693" width="67" height="61" align="rb" stretch="1">
+	<static_weapon x="945" y="693" width="67" height="62" align="rb" stretch="1">
 		<text x="4" y="15" font="small" a="128"></text>
-		<texture width="90" height="61">ui\hud_weapon_back</texture>
+		<texture width="90" height="62">ui\hud_weapon_back</texture>
 	</static_weapon>
 	
 	<static_ammo x="2" y="2" width="64" height="30">

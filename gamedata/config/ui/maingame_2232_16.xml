@@ -4,24 +4,24 @@
 		<text font="letterica16" r="238" g="224" b="198"/>		
 	</speech_menu>
 	
-	<static_health x="900" y="635" width="112" height="200" align="rb" stretch="1">
+	<static_health x="900" y="635" width="114" height="200" align="rb" stretch="1">
 		<text x="60" y="5" font="small" r="255" g="255" b="255" a="130">health</text>
-		<texture width="150" height="200">ui\ui_mn_health</texture>
+		<texture width="152" height="200">ui\ui_mn_health</texture>
 	</static_health>
 
-	<progress_bar_health x="12" y="23" width="90" height="18" horz="1" min="0" max="100" pos="0">
-		<progress stretch="1"><texture tile="0" width="120" height="16" length="120" r="255" g="50" b="50">ui\ui_mg_progress_efficiency_full</texture></progress>
-		<background stretch="1"><texture x="0" y="0" width="120" height="16" >ui\ui_mg_progress_efficiency_empty</texture></background>
+	<progress_bar_health x="12" y="23" width="90" height="17" horz="1" min="0" max="100" pos="0">
+		<progress stretch="1"><texture tile="0" width="120" height="17" length="120" r="255" g="50" b="50">ui\ui_mg_progress_efficiency_full</texture></progress>
+		<background stretch="1"><texture x="0" y="0" width="120" height="17" >ui\ui_mg_progress_efficiency_empty</texture></background>
 	</progress_bar_health>
 
-	<static_armor x="900" y="590" width="112" height="200" align="rb" stretch="1">
+	<static_armor x="900" y="590" width="114" height="200" align="rb" stretch="1">
 		<text x="60" y="5" font="small" r="255" g="255" b="255" a="130">armor</text>
-		<texture width="150" height="200">ui\ui_mn_health</texture>
+		<texture width="152" height="200">ui\ui_mn_health</texture>
 	</static_armor>
 
-	<progress_bar_armor x="12" y="23" width="90" height="18" horz="1" min="0" max="100" pos="0">
-		<progress stretch="1"><texture tile="0" width="120" height="16" length="120" r="0" g="0" b="255">ui\ui_mg_progress_efficiency_full</texture></progress>
-		<background stretch="1"><texture x="0" y="0" width="120" height="16" >ui\ui_mg_progress_efficiency_empty</texture></background>
+	<progress_bar_armor x="12" y="23" width="90" height="17" horz="1" min="0" max="100" pos="0">
+		<progress stretch="1"><texture tile="0" width="120" height="17" length="120" r="0" g="0" b="255">ui\ui_mg_progress_efficiency_full</texture></progress>
+		<background stretch="1"><texture x="0" y="0" width="120" height="17" >ui\ui_mg_progress_efficiency_empty</texture></background>
 	</progress_bar_armor>
 	
 	<static_weapon x="900" y="685" width="150" height="64" align="rb" stretch="1">

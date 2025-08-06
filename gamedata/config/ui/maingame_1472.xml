@@ -4,7 +4,7 @@
 		<text font="letterica16" r="238" g="224" b="198"/>		
 	</speech_menu>
 	
-	<static_health x="15" y="693" width="90" height="61" align="lb">
+	<static_health x="15" y="693" width="90" height="63" align="lb">
 		<texture>ui\hud_health_back</texture>
 	</static_health>
 
@@ -22,7 +22,7 @@
 		<max_color r="0" g="174" b="239"/>
 	</progress_bar_armor>
 	
-	<static_weapon x="918" y="693" width="90" height="61" align="rb">
+	<static_weapon x="918" y="693" width="90" height="62" align="rb">
 		<text x="6" y="15" font="small" a="128"></text>
 		<texture>ui\hud_weapon_back</texture>
 	</static_weapon>

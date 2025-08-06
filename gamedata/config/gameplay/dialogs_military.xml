@@ -2157,6 +2157,7 @@
 				<dont_has_info>mil_fblockpost_quest_complete</dont_has_info>
 				<dont_has_info>mil_lukash_blockpost</dont_has_info>
 				<dont_has_info>mil_lukash_delay</dont_has_info>
+                <dont_has_info>mil_leader_quest2_failed</dont_has_info>
 				<dont_has_info>mil_ara_dead</dont_has_info>
 				<has_info>mil_courier_dead</has_info>
 				<has_info>mil_leader_quest2_start</has_info>

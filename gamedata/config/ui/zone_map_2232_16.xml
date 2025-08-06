@@ -5,7 +5,7 @@
 		<level_frame x="15" y="23" width="123" height="157"/>
 		
 		<background x="7" y="6" width="133" height="185" stretch="1"> 
-			<texture width="177" height="185">ui\ui_mg_back_map</texture>
+			<texture width="178" height="185">ui\ui_mg_back_map</texture>
 			
 			<dist_text x="23" y="3" width="113" height="20">
 				<text align="l" font="letterica16" color="ui_clr_1"/>
