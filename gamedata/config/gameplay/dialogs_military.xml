@@ -2151,6 +2151,18 @@
                 <has_info>mil_leader_quest2_start</has_info>
                 <next>7001</next>
             </phrase>
+			<!-- MTB-michal-chudzik: JUD-526 - fixed crash when talking to Freedom leader after killing the snitch without killing agent-->
+			<phrase id="15000">
+				<text />
+				<dont_has_info>mil_fblockpost_quest_complete</dont_has_info>
+				<dont_has_info>mil_lukash_blockpost</dont_has_info>
+				<dont_has_info>mil_lukash_delay</dont_has_info>
+				<dont_has_info>mil_ara_dead</dont_has_info>
+				<has_info>mil_courier_dead</has_info>
+				<has_info>mil_leader_quest2_start</has_info>
+				<!--next>7001</next--> <!-- SNW -->
+				<next>4001</next>
+			</phrase>
             <phrase id="11001">
                 <text>mil_leader_start_dialog_11001</text>
             </phrase>
@@ -2170,6 +2182,7 @@
                 <next>12000</next>
                 <next>13000</next>
                 <next>14000</next>
+				<next>15000</next>
             </phrase>
             <phrase id="1000">
                 <text />
