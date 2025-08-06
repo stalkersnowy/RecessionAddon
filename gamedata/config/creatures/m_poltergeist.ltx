@@ -339,6 +339,40 @@ rank				= 401
 community			= poltergeist
 
 ;===========================================================================
+; BOTH
+;===========================================================================
+
+[m_poltergeist_normal_both]:m_poltergeist_normal
+$spawn               = "monsters\poltergeists\poltergeist_normal_both"
+
+type							= ambidexter
+
+;-- FLAME -----------------
+
+flame_sound				= monsters\poltergeist\attack_hit_flame		
+flame_particles_prepare	= monsters\polter_yadro
+flame_particles_fire	= monsters\polter_flame_fire
+flame_fire_delay		= 2400							; don't change - for programmers only
+flame_length			= 8.0
+flame_hit_value			= 0.8
+
+Hidden_Particles		= monsters\polter_hidden
+Hide_Particles			= monsters\polter_hide
+
+sound_idle				= monsters\poltergeist\idle_
+sound_eat				= monsters\poltergeist\idle_
+sound_aggressive		= monsters\poltergeist\attack_
+sound_attack_hit		= monsters\poltergeist\attack_hit_
+sound_take_damage		= monsters\poltergeist\hit_
+sound_die				= monsters\poltergeist\die_
+sound_threaten			= monsters\poltergeist\idle_
+sound_landing			= monsters\poltergeist\idle_
+sound_steal				= monsters\poltergeist\idle_
+sound_panic				= monsters\poltergeist\attack_
+sound_growling			= monsters\poltergeist\idle_
+sound_die_in_anomaly	= monsters\poltergeist\die_
+
+;===========================================================================
 ; TELE
 ;===========================================================================
 

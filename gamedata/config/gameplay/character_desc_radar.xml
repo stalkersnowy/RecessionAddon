@@ -2190,67 +2190,6 @@
 			
 		<start_dialog>hello_dialog</start_dialog>
 	</specific_character>
-
-<!---------------------------- MONOLIT MASTER ------------------------->
-    <specific_character id="rad_monolith_master_default1" team_default = "1">
-        <name>GENERATE_NAME_stalker</name>
-        <icon>ui_npc_u_stalker_mo_exo</icon>
-        <map_icon x="3" y="0"></map_icon>
-        <bio>sim_monolith_master_bio</bio>
-
-        <class>rad_monolith_master</class>
-        <community>monolith</community>
-
-
-        <rank>912</rank>
-        <reputation>-864</reputation>
-
-        <visual>actors\monolit\stalker_mo_exo</visual>
-        <snd_config>characters_voice\human_03\monolith\</snd_config>
-		<crouch_type>0</crouch_type>
-        <supplies>
-            [spawn] \n
-            wpn_usp \n
-            ammo_11.43x23_fmj = 1 \n
-			wpn_g36 \n
-			ammo_5.56x45_ap = 1 \n
-#include "gameplay\character_food.xml"
-#include "gameplay\character_drugs.xml"
-        </supplies>
-        
-#include "gameplay\character_criticals_1.xml"
-#include "gameplay\character_dialogs.xml"
-    </specific_character>
-
-    <specific_character id="rad_monolith_master_default2" team_default = "1">
-        <name>GENERATE_NAME_stalker</name>
-        <icon>ui_npc_u_stalker_mo_exo</icon>
-        <map_icon x="3" y="0"></map_icon>
-        <bio>sim_monolith_master_bio</bio>
-
-        <class>rad_monolith_master</class>
-        <community>monolith</community>
-
-
-        <rank>936</rank>
-        <reputation>-957</reputation>
-
-        <visual>actors\monolit\stalker_mo_exo</visual>
-        <snd_config>characters_voice\human_03\monolith\</snd_config>
-		<crouch_type>0</crouch_type>
-        <supplies>
-            [spawn] \n
-            wpn_walther \n
-            ammo_9x19_fmj  = 1 \n
-			wpn_g36 \n
-			ammo_5.56x45_ap = 1 \n
-#include "gameplay\character_food.xml"
-#include "gameplay\character_drugs.xml"
-        </supplies>
-        
-#include "gameplay\character_criticals_1.xml"
-#include "gameplay\character_dialogs.xml"
-    </specific_character>
 	
 	
 
