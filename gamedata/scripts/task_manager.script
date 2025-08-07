@@ -53,8 +53,8 @@ function CRandomTask:__init()
 		abort("There is no section [list] in task_manager.ltx")
 	end
 	local n = self.task_ini:line_count("list")
-	local id, value = "",""
-	local category = ""
+	local result, id, value -- nv150404 make result local
+	-- local category = "" -- nv150402 not used
 
 	--' начальная установка
 	self.task_info = {}
@@ -66,8 +66,8 @@ function CRandomTask:__init()
 			abort("There is no section [%s] in task_manager.ltx", id)
 		end		
 
-		self.task_info[tostring(id)]			= {}
-		local curr_task_info					= self.task_info[tostring(id)]
+		self.task_info[id]			= {}
+		local curr_task_info		= self.task_info[id]
 		
 		if not self.task_ini:line_exist(id, "type") then
 			abort("Task manager error: no type in section [%s]", id)

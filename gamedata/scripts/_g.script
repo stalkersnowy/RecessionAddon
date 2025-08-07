@@ -1163,10 +1163,10 @@ function abort(fmt, ...)
 end
 
 function set_postprocess(name_ini_file)
-	bind_stalker.post_process = postprocess.PostProcess(ini_file(name_ini_file))
+--	bind_stalker.post_process = postprocess.PostProcess(ini_file(name_ini_file))
 end
 function remove_postprocess()
-	bind_stalker.post_process = nil
+--	bind_stalker.post_process = nil
 end
 
 function set_inactivate_input_time(delta)

@@ -41,29 +41,30 @@ end
 class "CTreasure"
 function CTreasure:__init()
 	--' На конструкторе вычитываем LTX и создаем заготовки квестов.
-	self.ini = ini_file("misc\\treasure_manager.ltx")
+	-- self.ini = ini_file("misc\\treasure_manager.ltx") -- not used beyond this function
+	local self_ini = ini_file("misc\\treasure_manager.ltx")
 
 	--' Итерируемся по всем настройкам фраз
-	if not self.ini:section_exist("list") then
+	if not self_ini:section_exist("list") then
 		abort("There is no section [list] in treasure_manager.ltx")
 	end
-	local n = self.ini:line_count("list")
-	local id, value = "",""
+	local n = self_ini:line_count("list")
+	local result, id, value --nv150404 make result local
 
 	--' начальная установка
 	self.treasure_info = {}
 
 	for i=0,n-1 do
-		result, id, value	= self.ini:r_line("list",i,"","")
+		result, id, value	= self_ini:r_line("list",i,"","")
 		
 		self.treasure_info[id] = {}
 
-		self.treasure_info[id].target		= utils.cfg_get_number(self.ini, id, "target", nil, true)
-		self.treasure_info[id].name			= utils.cfg_get_string(self.ini, id, "name", nil, true, "")
-		self.treasure_info[id].description	= utils.cfg_get_string(self.ini, id, "description", nil, true, "")
-		self.treasure_info[id].items		= parse_spawns(utils.cfg_get_string(self.ini, id, "items", nil, true, ""))
+		self.treasure_info[id].target		= utils.cfg_get_number(self_ini, id, "target", nil, true)
+		self.treasure_info[id].name			= utils.cfg_get_string(self_ini, id, "name", nil, true, "")
+		self.treasure_info[id].description	= utils.cfg_get_string(self_ini, id, "description", nil, true, "")
+		self.treasure_info[id].items		= parse_spawns(utils.cfg_get_string(self_ini, id, "items", nil, true, ""))
 
-		local community	= parse_names(utils.cfg_get_string(self.ini, id, "community", nil, false, "", "stalker, bandit, dolg, freedom"))
+		local community	= parse_names(utils.cfg_get_string(self_ini, id, "community", nil, false, "", "stalker, bandit, dolg, freedom"))
 		self.treasure_info[id].community = {}
 		for k,v in pairs(community) do
 			self.treasure_info[id].community[v] = true
@@ -74,7 +75,7 @@ function CTreasure:__init()
 			abort("cant find 'items' in %s", id)
 		end
 
-		self.treasure_info[id].condlist		= xr_logic.parse_condlist(db.actor, "treasure_manager", "condlist", utils.cfg_get_string(self.ini, id, "condlist", nil, false, "", ""))
+		self.treasure_info[id].condlist		= xr_logic.parse_condlist(db.actor, "treasure_manager", "condlist", utils.cfg_get_string(self_ini, id, "condlist", nil, false, "", ""))
 		
 		--' Отметим тайник как новый
 		self.treasure_info[id].active = false

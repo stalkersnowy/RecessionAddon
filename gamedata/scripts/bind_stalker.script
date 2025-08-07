@@ -226,6 +226,60 @@ function actor_binder:task_callback(_task, _objective, _state)
 	end
 end
 
+--------------------------------------------------------------------------------
+-- nv111103/nv130223: level-specific autosaves
+-- Decane 18.08.2014: adapted for CS with minor tweaks
+--        21.06.2015: unique autosaves for freeplay
+-- SNW: таблица с префиксами уровней
+local prefix_by_level = {
+	l01_escape = "esc",
+	l02_garbage = "gar",
+	l03_agroprom = "agr",
+	l03u_agr_underground = "kat",
+	l04_darkvalley = "val",
+	l04u_labx18 = "dar",
+	l05_bar = "bar",
+	l06_rostok = "ros",
+	l07_military = "mil",
+	l08_yantar = "yan",
+	l08u_brainlab = "x16",
+	l09_deadcity = "cit",
+	l10_radar = "rad",
+	l10u_bunker = "bun",
+	l11_pripyat = "pri",
+	l12_stancia = "aes",
+	l12_stancia_2 = "aes2",
+	l12u_control_monolith = "mon",
+	l12u_sarcofag = "sar",
+	l23_final_battle = "sar2"
+}
+
+local function manage_autosaves()
+	local fs = getFS()
+	local fs_path = "$game_saves$"
+	local autosave = string.lower(user_name()).."_autosave"
+	local autosave_sav = autosave..".sav"
+	if fs:exist(fs_path, autosave_sav) then
+		local sg = CSavedGameWrapper(autosave)
+		local level_name = level.name()
+		if level_name == sg:level_name() then
+			-- update_path info per fluffy22
+			local savedir = fs:update_path(fs_path, "")
+			local level_prefix = prefix_by_level[level_name] or user_name()
+			local lvl_autosave = level_prefix.."_autosave"
+			local lvl_autosave_sav = lvl_autosave..".sav"
+			local lvl_autosave_start = lvl_autosave.."_start"
+			local lvl_autosave_start_sav = lvl_autosave_start..".sav"
+			if not fs:exist(fs_path, lvl_autosave_start_sav) and not fs:exist(fs_path, lvl_autosave_sav) then
+				fs:file_rename(savedir..autosave_sav, savedir..lvl_autosave_start_sav, true)
+				get_console():execute("load_last_save "..lvl_autosave_start)
+			else
+				fs:file_rename(savedir..autosave_sav, savedir..lvl_autosave_sav, true)
+				get_console():execute("load_last_save "..lvl_autosave)
+			end
+		end
+	end
+end
 ----------------------------------------------------------------------------------------------------------------------
 function actor_binder:map_location_added_callback(spot_type_str, object_id)
 	if (false==app_ready()) or (device().precache_frame>1) then return end
@@ -270,6 +324,7 @@ function actor_binder:update(delta)
 		self.st.disable_input_time = nil
 	end
 	-- Обновление сна с переносом чувака в указанную позицию
+--[[
 	if self.st.sleep_relocate_time ~= nil and
 	   game.get_game_time():diffSec(self.st.sleep_relocate_time) >= self.st.sleep_relocate_idle 
 	then
@@ -278,6 +333,7 @@ function actor_binder:update(delta)
 		self.object:set_actor_direction(dir:getH())
 		self.st.sleep_relocate_time = nil
 	end
+]]	
 
 	-- Апдейт прятание оружия игрока во время диалога
 	if weapon_hide == true or self.object:is_talking() then
@@ -323,11 +379,13 @@ function actor_binder:update(delta)
 	end
 
 	-- обновление постпроцессов
+--[[
 	if post_process ~= 0 then
 		if post_process:update () == true then
 		   post_process = 0
 		end
 	end
+]]
 
 	-- обновление пси-антенны
 	if sr_psy_antenna.psy_antenna then
@@ -345,9 +403,11 @@ function actor_binder:update(delta)
 		   (level.name() == "l01_escape")
 		then
 			self.object:give_info_portion("storyline_actor_start")
-			_G.g_start_avi = true
+--			_G.g_start_avi = true
 			--printf("*AVI* RUN START AVI")			
 		end
+
+		manage_autosaves()
 
 --		if not has_alife_info("encyclopedy") then
 --			self.object:give_info_portion("encyclopedy")
