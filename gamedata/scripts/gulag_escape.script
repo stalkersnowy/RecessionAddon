@@ -358,7 +358,7 @@ if type == "esc_specnaz" then
 						end
 		}
 		sj[#sj+1] = t
-		t = { section = "logic@esc_lager_kamp1",
+		t = { section = "logic@esc_lager_defend14", -- SNW: до этого он зачем-то у костра садился - пускай сидит на месте для Волка, всё равно пустует
 			idle = 0,
 			prior = 16, state = {2},
             online = true,
@@ -469,11 +469,8 @@ if type == "esc_specnaz" then
 		sj[#sj+1] = t
 		t = { section = "logic@esc_lager_defend9",
 			idle = 0,
-			prior = 16, state = {2},
-			in_rest = "", out_rest = "esc_lager_guard_kill_zone",
-			predicate = function(obj_info)
-        					return obj_info.name == "esc_novice_attacker1"
-						end
+			prior = 8, state = {2},
+			in_rest = "", out_rest = "esc_lager_guard_kill_zone"
 		}
 		sj[#sj+1] = t
 		t = { section = "logic@esc_lager_defend10",
@@ -500,7 +497,7 @@ if type == "esc_specnaz" then
 						end
 		}
 		sj[#sj+1] = t
-		t = { section = "logic@esc_lager_defend13",
+		t = { section = "logic@esc_lager_defend13", -- SNW: нафига волку место в защите лагеря от наймов, если он сам наёмн... кхм, если он по-любому уже покинул лагерь?
 			idle = 0,
 			prior = 20, state = {2},
 			in_rest = "", out_rest = "esc_lager_guard_kill_zone",

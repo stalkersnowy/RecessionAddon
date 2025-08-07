@@ -782,6 +782,16 @@ path_walk = defend13_walk
 path_look = defend13_look
 
 
+[logic@esc_lager_defend14]
+active = walker@esc_lager_defend14
+
+[walker@esc_lager_defend14]
+path_walk = defend13_walk
+path_look = defend13_look
+combat_ignore_cond = {-esc_open_lager_fire}
+radius = 5
+
+
 [meet@lager]
 meet_dialog = esc_lager_no_talk
 
