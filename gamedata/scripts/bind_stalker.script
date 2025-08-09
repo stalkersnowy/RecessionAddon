@@ -209,19 +209,19 @@ end
 ----------------------------------------------------------------------------------------------------------------------
 
 function actor_binder:task_callback(_task, _objective, _state)
-	task_manager.task_callback(_task:get_id(), _objective:get_idx(), _state)
+	local has_vendor = task_manager.task_callback(_task:get_id(), _objective:get_idx(), _state)
 	if _objective:get_idx() == 0 then
 		if _state == task.fail then
-			news_manager.send_task(db.actor, "fail", _task, _objective)
+			news_manager.send_task(db.actor, "fail", _task, _objective, has_vendor)
 		elseif _state == task.completed then
 			task_manager.reward_by_task(_task)
-			news_manager.send_task(db.actor, "complete", _task, _objective)
+			news_manager.send_task(db.actor, "complete", _task, _objective, has_vendor)
 		else
-			news_manager.send_task(db.actor, "new", _task, _objective)
+			news_manager.send_task(db.actor, "new", _task, _objective, has_vendor)
 		end
 	else
 		if _task:get_objective(0):get_state() == task.in_progress then
-			news_manager.send_task(db.actor, "update", _task, _objective)
+			news_manager.send_task(db.actor, "update", _task, _objective, has_vendor)
 		end
 	end
 end

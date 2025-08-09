@@ -61,6 +61,15 @@ u16 storyId2GameId	(ALife::_STORY_ID id)
 
 CUIXml*	g_gameTaskXml=NULL;
 
+CGameTask::CGameTask(const TASK_ID& id, const shared_str sect)
+{
+	m_ReceiveTime	= 0;
+	m_FinishTime	= 0;
+	m_Title			= NULL;
+	m_priority		= u32(-1);
+	Load			(id,sect);
+}
+
 CGameTask::CGameTask(const TASK_ID& id)
 {
 	m_ReceiveTime	= 0;
@@ -76,26 +85,28 @@ CGameTask::CGameTask()
 	m_FinishTime	= 0;
 	m_Title			= NULL;
 	m_ID			= NULL;
+	m_Sect			= NULL;
 }
 
-void CGameTask::Load(const TASK_ID& id)
+void CGameTask::Load(const TASK_ID& id, const shared_str sect)
 {
 	m_ID							= id;
+	m_Sect							= sect;
 
 	if(!g_gameTaskXml){
 		g_gameTaskXml				= xr_new<CUIXml>();
 		g_gameTaskXml->Init			(CONFIG_PATH, "gameplay", "game_tasks.xml");
 	}
-	XML_NODE* task_node				= g_gameTaskXml->NavigateToNodeWithAttribute("game_task","id",*id);
+	XML_NODE* task_node				= g_gameTaskXml->NavigateToNodeWithAttribute("game_task","id",*sect);
 
-	THROW3							(task_node, "game task id=", *id);
+	THROW3							(task_node, "game task id=", *sect);
 	g_gameTaskXml->SetLocalRoot		(task_node);
 	m_Title							= g_gameTaskXml->Read(g_gameTaskXml->GetLocalRoot(), "title", 0, NULL);
 	m_priority						= g_gameTaskXml->ReadAttribInt(g_gameTaskXml->GetLocalRoot(), "prio", -1);
 #ifdef DEBUG
 	if(m_priority == u32(-1))
 	{
-		Msg("Game Task [%s] has no priority", *id);
+		Msg("Game Task [%s] has no priority", *sect);
 	}
 #endif // DEBUG
 	int tag_num						= g_gameTaskXml->GetNodesNum(g_gameTaskXml->GetLocalRoot(),"objective");
@@ -381,7 +392,7 @@ bool SGameTaskObjective::CheckFunctions	(xr_vector<luabind::functor<bool> >& v)
 	bool res = false;
 	xr_vector<luabind::functor<bool> >::iterator it	= v.begin();
 	for(;it!=v.end();++it){
-		if( (*it).is_valid() ) res = (*it)(*(parent->m_ID), idx);
+		if( (*it).is_valid() ) res = (*it)(*(parent->m_Sect), idx);
 		if(!res) break;
 	}
 	return res;
@@ -392,7 +403,7 @@ void SGameTaskObjective::CallAllFuncs	(xr_vector<luabind::functor<bool> >& v)
 {
 	xr_vector<luabind::functor<bool> >::iterator it	= v.begin();
 	for(;it!=v.end();++it){
-		if( (*it).is_valid() ) (*it)(*(parent->m_ID), idx);
+		if( (*it).is_valid() ) (*it)(*(parent->m_Sect), idx);
 	}
 }
 void SGameTaskObjective::SetDescription_script(LPCSTR _descr)
@@ -475,6 +486,11 @@ void SGameTaskObjective::AddOnFailFunc_script(LPCSTR _str)
 void CGameTask::Load_script(LPCSTR _id)		
 {
 	Load(_id);
+}
+
+void CGameTask::Load_script2(LPCSTR _id, LPCSTR _sect)		
+{
+	Load(_id, _sect);
 }
 
 void CGameTask::SetTitle_script(LPCSTR _title)		
@@ -595,6 +611,7 @@ void SScriptObjectiveHelper::save(IWriter &stream)
 void SGameTaskKey::save(IWriter &stream)
 {
 	save_data(task_id,						stream);
+	save_data(task_sect,					stream);
 	save_data(game_task->m_ReceiveTime,		stream);
 	save_data(game_task->m_FinishTime,		stream);
 	save_data(game_task->m_TimeToComplete,	stream);
@@ -613,7 +630,8 @@ void SGameTaskKey::save(IWriter &stream)
 void SGameTaskKey::load(IReader &stream)
 {
 	load_data(task_id,						stream);
-	game_task = xr_new<CGameTask>			(task_id);
+	load_data(task_sect,					stream);
+	game_task = xr_new<CGameTask>			(task_id,task_sect);
 	load_data(game_task->m_ReceiveTime,		stream);
 	load_data(game_task->m_FinishTime,		stream);
 	load_data(game_task->m_TimeToComplete,	stream);

@@ -20,8 +20,10 @@ class CGameTask;
 
 struct SGameTaskKey : public IPureSerializeObject<IReader,IWriter>,public IPureDestroyableObject {
 	TASK_ID			task_id;
+	shared_str		task_sect;
 	CGameTask*		game_task;
-	SGameTaskKey	(TASK_ID t_id):task_id(t_id),game_task(NULL){};
+	SGameTaskKey	(TASK_ID t_id,shared_str t_sect):task_id(t_id),task_sect(t_sect),game_task(NULL){};
+	SGameTaskKey	(TASK_ID t_id):task_id(t_id),task_sect(t_id),game_task(NULL){};
 	SGameTaskKey	():task_id(NULL),game_task(NULL){};
 
 

@@ -59,6 +59,8 @@ function CRandomTask:__init()
 	--' начальная установка
 	self.task_info = {}
 	
+	self.task_types_with_vendors = {}
+	
 	for i=0,n-1 do
 		result, id, value	= self.task_ini:r_line("list",i,"","")
 		
@@ -79,6 +81,7 @@ function CRandomTask:__init()
 		if self.task_ini:line_exist(id, "parent") then
 			curr_task_info.parent		= self.task_ini:r_string(id, "parent")
 			curr_task_info.complex_type = curr_task_info.type .. "_" .. self.task_info[id].parent
+			self.task_types_with_vendors[curr_task_info.complex_type] = true
 		else
 			curr_task_info.parent		= "nil"
 			curr_task_info.complex_type = curr_task_info.type
@@ -302,7 +305,7 @@ function CRandomTask:action_give_task(actor, npc, p1, p2)
 
 	local task_desc = self.task_info[self.task_id_by_yes_phrase_id[p2]]
 	
-	task:load(task_desc.complex_type)
+	task:load(task_desc.name, task_desc.complex_type)
 	task:set_title(task_desc.type)
 
 	local oo = task:get_objective(0)
@@ -492,12 +495,14 @@ function CRandomTask:task_fail(p1, p2)
 end
 --' Обнуление переменных при завершении или провале таска
 function CRandomTask:task_callback(p1, p2, state)
+	local res = (self.task_types_with_vendors[p1] == true)
+
 	if p2 ~= 0 then
-		return
+		return res
 	end
 
 	if self.active_task_by_type[p1] == nil then
-		return
+		return res
 	end
 
 	if state == task.completed then
@@ -521,6 +526,8 @@ function CRandomTask:task_callback(p1, p2, state)
 		end
 		self.active_task_by_type[p1] = nil	
 	end
+	
+	return res
 end
 --' Выводит список доступных квестов
 function CRandomTask:action_task_show(npc, actor)

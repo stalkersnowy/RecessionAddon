@@ -206,11 +206,30 @@ local action_descr_by_type = {
 	complete = "general_complete_task",
 	fail = "general_fail_task"
 }
-function send_task(actor, type, task, objective)
+local task_types = {
+	"eliminate_lager",
+	"defend_lager",
+	"kill_stalker",
+	"artefact",
+	"monster_part",
+	"find_item"
+}
+function send_task(actor, type, task, objective, has_vendor)
 	if db.actor == nil then return false end
 	
+	-- SNW: уникальные иконки цикличек
+	local icon_id = task:get_id()
+	if has_vendor == true then
+		for k,v in pairs(task_types) do
+			if string.find(icon_id,v,1,true) then
+				icon_id = v
+				break
+			end
+		end
+	end
+	
 	--' Берем координаты из текстуры таска
-    local task_texture, task_rect = get_texture_info("ui_iconsTotal_"..task:get_id(), "ui_iconsTotal_locations")
+    local task_texture, task_rect = get_texture_info("ui_iconsTotal_"..icon_id, "ui_iconsTotal_locations")
         
 	--' Играем дефолтный звук
 	pda_task:play(db.actor, 0, sound_object.s2d)
