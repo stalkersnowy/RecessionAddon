@@ -171,6 +171,28 @@ bool CUIXmlInit::InitOptionsItem(CUIXml& xml_doc, LPCSTR paht, int index, CUIOpt
 		shared_str group = xml_doc.ReadAttrib(buf, index, "group");
 
 		pWnd->Register(*entry, *group);
+		
+		LPCSTR depends			= xml_doc.ReadAttrib(buf, index,"depend", NULL);
+		if(depends)
+		{
+			CUIOptionsItem::ESystemDepends d = CUIOptionsItem::sdNothing;
+
+			if(0==stricmp(depends,"vid"))
+				d = CUIOptionsItem::sdVidRestart;
+			else
+			if(0==stricmp(depends,"snd"))
+				d = CUIOptionsItem::sdSndRestart;
+			else
+			if(0==stricmp(depends,"restart"))
+				d = CUIOptionsItem::sdSystemRestart;
+			else
+			if(0==stricmp(depends,"ui"))
+				d = CUIOptionsItem::sdUIRestart;
+//			else
+//				Msg("! unknown param [%s] in optionsItem [%s]", depends, entry.c_str());
+
+			pWnd->SetSystemDepends		(d);
+		}
 		return true;
 	}
 	return false;

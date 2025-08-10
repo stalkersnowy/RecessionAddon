@@ -951,35 +951,35 @@
 			<text font="letterica16" color="ui_6">ui_mm_cam_inert</text>
 		</cap_cam_inert>
 		<track_cam_inert x="162" y="10" width="200" height="21" step="0.1" slider_text="1">
-			<options_item entry="cam_inert" group="mm_opt_gameplay"/>
+			<options_item entry="cam_inert" group="mm_opt_gameplay_adv"/>
 		</track_cam_inert>
 
 		<cap_g_hide_motion_icon x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_hide_motion_icon</text>
 		</cap_g_hide_motion_icon>
 		<check_g_hide_motion_icon x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="g_hide_motion_icon" group="mm_opt_gameplay"/>
+			<options_item entry="g_hide_motion_icon" group="mm_opt_gameplay_adv"/>
 		</check_g_hide_motion_icon>
 
 		<cap_g_hide_zone_map x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_hide_zone_map</text>
 		</cap_g_hide_zone_map>
 		<check_g_hide_zone_map x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="g_hide_zone_map" group="mm_opt_gameplay"/>
+			<options_item entry="g_hide_zone_map" group="mm_opt_gameplay_adv"/>
 		</check_g_hide_zone_map>
 
 		<cap_g_hit_mark_index x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_hit_mark_index</text>
 		</cap_g_hit_mark_index>
 		<spin_g_hit_mark_index x="225" y="9" width="34" height="21" max="18">
-			<options_item entry="g_hit_mark_index" group="mm_opt_gameplay"/>
+			<options_item entry="g_hit_mark_index" group="mm_opt_gameplay_adv" depend="ui"/>
 		</spin_g_hit_mark_index>
 
 		<cap_g_hud_style x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_hud_style</text>
 		</cap_g_hud_style>
 		<combo_g_hud_style x="162" y="10" width="200" height="21" always_show_scroll="0" list_length="4">
-			<options_item entry="g_hud_style" group="mm_opt_gameplay" depend="vid"/>
+			<options_item entry="g_hud_style" group="mm_opt_gameplay_adv" depend="ui"/>
 			<text_color>
 				<e r="216" g="186" b="140"/>
 				<d color="ui_gray"/>
@@ -992,63 +992,63 @@
 			<text font="letterica16" color="ui_6">ui_mm_g_more_contact_snds</text>
 		</cap_g_more_contact_snds>
 		<check_g_more_contact_snds x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="g_more_contact_snds" group="mm_opt_gameplay"/>
+			<options_item entry="g_more_contact_snds" group="mm_opt_gameplay_adv" depend="ui"/>
 		</check_g_more_contact_snds>
 
 		<cap_g_old_hit_anim x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_old_hit_anim</text>
 		</cap_g_old_hit_anim>
 		<check_g_old_hit_anim x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="g_old_hit_anim" group="mm_opt_gameplay"/>
+			<options_item entry="g_old_hit_anim" group="mm_opt_gameplay_adv"/>
 		</check_g_old_hit_anim>
 
 		<cap_g_old_pda x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_old_pda</text>
 		</cap_g_old_pda>
 		<check_g_old_pda x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="g_old_pda" group="mm_opt_gameplay"/>
+			<options_item entry="g_old_pda" group="mm_opt_gameplay_adv" depend="ui"/>
 		</check_g_old_pda>
 
 		<cap_g_shooting_eff x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_shooting_eff</text>
 		</cap_g_shooting_eff>
 		<check_g_shooting_eff x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="g_shooting_eff" group="mm_opt_gameplay"/>
+			<options_item entry="g_shooting_eff" group="mm_opt_gameplay_adv"/>
 		</check_g_shooting_eff>
 
 		<cap_g_use_ik x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_use_ik</text>
 		</cap_g_use_ik>
 		<check_g_use_ik x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="g_use_ik" group="mm_opt_gameplay"/>
+			<options_item entry="g_use_ik" group="mm_opt_gameplay_adv" depend="restart"/>
 		</check_g_use_ik>
 
 		<cap_g_use_lens x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_use_lens</text>
 		</cap_g_use_lens>
 		<check_g_use_lens x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="g_use_lens" group="mm_opt_gameplay"/>
+			<options_item entry="g_use_lens" group="mm_opt_gameplay_adv"/>
 		</check_g_use_lens>
 
 		<cap_g_use_smart_hits x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_g_use_smart_hits</text>
 		</cap_g_use_smart_hits>
 		<check_g_use_smart_hits x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="g_use_smart_hits" group="mm_opt_gameplay"/>
+			<options_item entry="g_use_smart_hits" group="mm_opt_gameplay_adv"/>
 		</check_g_use_smart_hits>
 
 		<cap_keypress_on_start x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_keypress_on_start</text>
 		</cap_keypress_on_start>
 		<check_keypress_on_start x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="keypress_on_start" group="mm_opt_gameplay"/>
+			<options_item entry="keypress_on_start" group="mm_opt_gameplay_adv"/>
 		</check_keypress_on_start>
 
 		<cap_r2_aa x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_aa</text>
 		</cap_r2_aa>
 		<combo_r2_aa x="162" y="10" width="200" height="21" always_show_scroll="0" list_length="3">
-			<options_item entry="r2_aa" group="mm_opt_gameplay" depend="vid"/>
+			<options_item entry="r2_aa" group="mm_opt_gameplay_adv"/>
 			<text_color>
 				<e r="216" g="186" b="140"/>
 				<d color="ui_gray"/>
@@ -1061,7 +1061,7 @@
 			<text font="letterica16" color="ui_6">ui_mm_r2_bloom_mode</text>
 		</cap_r2_bloom_mode>
 		<combo_r2_bloom_mode x="162" y="10" width="200" height="21" always_show_scroll="0" list_length="8">
-			<options_item entry="r2_bloom_mode" group="mm_opt_gameplay" depend="vid"/>
+			<options_item entry="r2_bloom_mode" group="mm_opt_gameplay_adv" depend="restart"/>
 			<text_color>
 				<e r="216" g="186" b="140"/>
 				<d color="ui_gray"/>
@@ -1074,112 +1074,112 @@
 			<text font="letterica16" color="ui_6">ui_mm_r2_dynamic_sun</text>
 		</cap_r2_dynamic_sun>
 		<check_r2_dynamic_sun x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="r2_dynamic_sun" group="mm_opt_gameplay"/>
+			<options_item entry="r2_dynamic_sun" group="mm_opt_gameplay_adv"/>
 		</check_r2_dynamic_sun>
 
 		<cap_r2_hemi_cube x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_hemi_cube</text>
 		</cap_r2_hemi_cube>
 		<check_r2_hemi_cube x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="r2_hemi_cube" group="mm_opt_gameplay"/>
+			<options_item entry="r2_hemi_cube" group="mm_opt_gameplay_adv" depend="restart"/>
 		</check_r2_hemi_cube>
 
 		<cap_r2_indoor_lighting x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_indoor_lighting</text>
 		</cap_r2_indoor_lighting>
 		<check_r2_indoor_lighting x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="r2_indoor_lighting" group="mm_opt_gameplay"/>
+			<options_item entry="r2_indoor_lighting" group="mm_opt_gameplay_adv" depend="restart"/>
 		</check_r2_indoor_lighting>
 
 		<cap_r2_ls_bloom_fast x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_ls_bloom_fast</text>
 		</cap_r2_ls_bloom_fast>
 		<check_r2_ls_bloom_fast x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="r2_ls_bloom_fast" group="mm_opt_gameplay"/>
+			<options_item entry="r2_ls_bloom_fast" group="mm_opt_gameplay_adv"/>
 		</check_r2_ls_bloom_fast>
 
 		<cap_r2_mblur x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_mblur</text>
 		</cap_r2_mblur>
 		<check_r2_mblur x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="r2_mblur" group="mm_opt_gameplay"/>
+			<options_item entry="r2_mblur" group="mm_opt_gameplay_adv" depend="restart"/>
 		</check_r2_mblur>
 
 		<cap_r2_mblur_power x="17" y="10" width="125" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_mblur_power</text>
 		</cap_r2_mblur_power>
 		<track_r2_mblur_power x="162" y="10" width="200" height="21" step="0.1">
-			<options_item entry="r2_mblur_power" group="mm_opt_gameplay"/>
+			<options_item entry="r2_mblur_power" group="mm_opt_gameplay_adv"/>
 		</track_r2_mblur_power>
 
 		<cap_r2_old_aref x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_old_aref</text>
 		</cap_r2_old_aref>
 		<check_r2_old_aref x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="r2_old_aref" group="mm_opt_gameplay"/>
+			<options_item entry="r2_old_aref" group="mm_opt_gameplay_adv" depend="restart"/>
 		</check_r2_old_aref>
 
 		<cap_r2_old_distort x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_old_distort</text>
 		</cap_r2_old_distort>
 		<check_r2_old_distort x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="r2_old_distort" group="mm_opt_gameplay"/>
+			<options_item entry="r2_old_distort" group="mm_opt_gameplay_adv" depend="restart"/>
 		</check_r2_old_distort>
 
 		<cap_r2_specular_rgb x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_specular_rgb</text>
 		</cap_r2_specular_rgb>
 		<check_r2_specular_rgb x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="r2_specular_rgb" group="mm_opt_gameplay"/>
+			<options_item entry="r2_specular_rgb" group="mm_opt_gameplay_adv" depend="restart"/>
 		</check_r2_specular_rgb>
 
 		<cap_r2_ssao_blur x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_ssao_blur</text>
 		</cap_r2_ssao_blur>
 		<check_r2_ssao_blur x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="r2_ssao_blur" group="mm_opt_gameplay"/>
+			<options_item entry="r2_ssao_blur" group="mm_opt_gameplay_adv"/>
 		</check_r2_ssao_blur>
 
 		<cap_r2_tonemap x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_tonemap</text>
 		</cap_r2_tonemap>
 		<check_r2_tonemap x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="r2_tonemap" group="mm_opt_gameplay"/>
+			<options_item entry="r2_tonemap" group="mm_opt_gameplay_adv"/>
 		</check_r2_tonemap>
 
 		<cap_r2_true_sun x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_true_sun</text>
 		</cap_r2_true_sun>
 		<check_r2_true_sun x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="r2_true_sun" group="mm_opt_gameplay"/>
+			<options_item entry="r2_true_sun" group="mm_opt_gameplay_adv"/>
 		</check_r2_true_sun>
 
 		<cap_r2_use_sunmask x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_use_sunmask</text>
 		</cap_r2_use_sunmask>
 		<check_r2_use_sunmask x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="r2_use_sunmask" group="mm_opt_gameplay"/>
+			<options_item entry="r2_use_sunmask" group="mm_opt_gameplay_adv" depend="restart"/>
 		</check_r2_use_sunmask>
 
 		<cap_r__detail_radius x="17" y="10" width="125" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r__detail_radius</text>
 		</cap_r__detail_radius>
 		<track_r__detail_radius x="162" y="10" width="200" height="21" step="1" is_integer="1" slider_text="1">
-			<options_item entry="r__detail_radius" group="mm_opt_gameplay"/>
+			<options_item entry="r__detail_radius" group="mm_opt_gameplay_adv"/>
 		</track_r__detail_radius>
 
 		<cap_r__shader_gamma x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r__shader_gamma</text>
 		</cap_r__shader_gamma>
 		<check_r__shader_gamma x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="r__shader_gamma" group="mm_opt_gameplay"/>
+			<options_item entry="r__shader_gamma" group="mm_opt_gameplay_adv"/>
 		</check_r__shader_gamma>
 
 		<cap_r__smapsize x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r__smapsize</text>
 		</cap_r__smapsize>
 		<combo_r__smapsize x="162" y="10" width="200" height="21" always_show_scroll="0" list_length="7">
-			<options_item entry="r__smapsize" group="mm_opt_gameplay" depend="vid"/>
+			<options_item entry="r__smapsize" group="mm_opt_gameplay_adv" depend="restart"/>
 			<text_color>
 				<e r="216" g="186" b="140"/>
 				<d color="ui_gray"/>
@@ -1192,43 +1192,43 @@
 			<text font="letterica16" color="ui_6">ui_mm_r__ss_tga</text>
 		</cap_r__ss_tga>
 		<check_r__ss_tga x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="r__ss_tga" group="mm_opt_gameplay"/>
+			<options_item entry="r__ss_tga" group="mm_opt_gameplay_adv"/>
 		</check_r__ss_tga>
 
 		<cap_r__wallmarks_on_skeleton x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r__wallmarks_on_skeleton</text>
 		</cap_r__wallmarks_on_skeleton>
 		<check_r__wallmarks_on_skeleton x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="r__wallmarks_on_skeleton" group="mm_opt_gameplay"/>
+			<options_item entry="r__wallmarks_on_skeleton" group="mm_opt_gameplay_adv"/>
 		</check_r__wallmarks_on_skeleton>
 
 		<cap_quick_save_counter x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_quick_save_counter</text>
 		</cap_quick_save_counter>
 		<spin_quick_save_counter x="225" y="9" width="34" height="21" max="25">
-			<options_item entry="quick_save_counter" group="mm_opt_gameplay"/>
+			<options_item entry="quick_save_counter" group="mm_opt_gameplay_adv"/>
 		</spin_quick_save_counter>
 
 		<cap_weapon_bobbing x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_weapon_bobbing</text>
 		</cap_weapon_bobbing>
 		<check_weapon_bobbing x="225" y="10" width="27" height="21" stretch="1">
-			<options_item entry="g_weapon_bobbing" group="mm_opt_gameplay"/>
+			<options_item entry="g_weapon_bobbing" group="mm_opt_gameplay_adv"/>
 		</check_weapon_bobbing>
 
         <cap_g_cop_dof x="17" y="10" width="119" height="21">
             <text font="letterica16" color="ui_6">ui_mm_g_cop_dof</text>
         </cap_g_cop_dof>
 		<radio_tab_g_cop_dof x="225" y="10" width="108" height="92" radio="1">
-			<options_item entry="g_cop_dof" group="mm_opt_gameplay" depend="restart"/>
-			<button x="0" y="0" width="27" height="21" id="disabled" stretch="1">
+			<options_item entry="g_dof_mode" group="mm_opt_gameplay_adv"/>
+			<button x="0" y="0" width="27" height="21" id="CS" stretch="1">
 				<text font="letterica16">CS</text>
 	            <text_color>
 					<e r="216" g="186" b="140"/>
 					<d color="ui_gray"/>
 	            </text_color>
 			</button>
-			<button x="0" y="25" width="27" height="21" id="default" stretch="1">
+			<button x="0" y="25" width="27" height="21" id="CoP" stretch="1">
 				<text font="letterica16">CoP</text>
 	            <text_color>
 					<e r="216" g="186" b="140"/>

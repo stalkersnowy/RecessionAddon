@@ -37,7 +37,7 @@ CUIXml*				pWpnScopeXml = NULL;
 
 BOOL				g_bUseLens = FALSE;
 
-extern u32 g_dof_mode;
+extern int g_dof_mode;
 #define DOF_CS g_dof_mode == 0
 #define DOF_COP g_dof_mode == 1
 

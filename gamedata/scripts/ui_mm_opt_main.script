@@ -107,6 +107,9 @@ function options_dialog:UpdateControls()
 
 	opt:SetCurrentValues("mm_opt_gameplay")
 	opt:SaveBackupValues("mm_opt_gameplay")
+	
+	opt:SetCurrentValues("mm_opt_gameplay_adv")
+	opt:SaveBackupValues("mm_opt_gameplay_adv")
 
 	opt:SetCurrentValues("mm_opt_sound")
 	opt:SaveBackupValues("mm_opt_sound")
@@ -148,7 +151,7 @@ function options_dialog:InitCallBacks()
 	self:AddCallback("btn_cancel",			ui_events.BUTTON_CLICKED,	self.OnBtnCancel,			self)
 	self:AddCallback("btn_default_graphic",	ui_events.BUTTON_CLICKED,	self.OnBtnDefGraph,			self)	
 	self:AddCallback("btn_default_sound",	ui_events.BUTTON_CLICKED,	self.OnBtnDefSound,			self)	
-	self:AddCallback("combo_r2",			ui_events.LIST_ITEM_SELECT,	self.OnR2changed,			self)	
+	self:AddCallback("combo_r2",			ui_events.LIST_ITEM_SELECT,	self.UpdateDependControls,	self)	
 	self:AddCallback("combo_preset",		ui_events.LIST_ITEM_SELECT,	self.OnPresetChanged,		self)	
 	self:AddCallback("btn_simply_graphic",	ui_events.BUTTON_CLICKED,	self.OnSimplyGraphic,		self)	
 	self:AddCallback("btn_keyb_default",	ui_events.BUTTON_CLICKED,	self.OnBtnDefault,			self)
@@ -187,18 +190,6 @@ function options_dialog:OnPresetChanged()
 	opt:SetCurrentValues		("mm_opt_video_adv")
 end
 
-function options_dialog:OnR2changed()	
-
-	self:UpdateDependControls				()
-	
-	if false==self.b_r2_restart_shown then
-		self.b_r2_restart_shown			 = true
-		self.message_box:Init			("message_box_restart_game")
-		self:GetHolder():start_stop_menu(self.message_box,true)
-	end
-	
-end
-
 function options_dialog:OnBtnDefGraph()
 	local opt = COptionsManager()
 	opt:SendMessage2Group("mm_opt_video","set_default_value")
@@ -219,6 +210,7 @@ function options_dialog:OnBtnAccept()
 	opt:SaveValues("mm_opt_video")
 	opt:SaveValues("mm_opt_video_adv")
 	opt:SaveValues("mm_opt_gameplay")
+	opt:SaveValues("mm_opt_gameplay_adv")
 	opt:SaveValues("mm_opt_sound")	
 	opt:SaveValues("mm_opt_controls")
 	opt:OptionsPostAccept()	
@@ -226,6 +218,15 @@ function options_dialog:OnBtnAccept()
 	self:GetHolder():start_stop_menu	(self.owner, true) --new(show main window)
 	self:GetHolder():start_stop_menu	(self,true)
 	self.owner:Show						(true)
+	
+	if false==self.b_r2_restart_shown then
+		local opt = COptionsManager()
+		if opt:NeedSystemRestart() then
+			self.b_r2_restart_shown		= true
+			self.message_box:Init		("message_box_restart_game")
+			self.owner:GetHolder():start_stop_menu(self.message_box,true)
+		end
+	end
 	
 	self:OptDescrClearAbs()
 end
@@ -235,6 +236,7 @@ function options_dialog:OnBtnCancel()
 	opt:UndoGroup("mm_opt_video_preset")
 	opt:UndoGroup("mm_opt_video")
 	opt:UndoGroup("mm_opt_video_adv")
+--	opt:UndoGroup("mm_opt_gameplay_adv") SNW: а чё только видео и звук сбрасываются, где геймплей и кнопки? ладно, тоже сбрасывать не буду
 	opt:UndoGroup("mm_opt_sound")
 	opt:OptionsPostAccept()
 	

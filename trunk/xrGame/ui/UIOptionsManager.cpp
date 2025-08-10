@@ -8,8 +8,10 @@
 #include "../xr_3da/XR_IOConsole.h"
 
 CUIOptionsManager::CUIOptionsManager(){
-	m_b_vid_restart = false;
-	m_b_vid_restart = false;
+	m_b_vid_restart		= false;
+	m_b_snd_restart		= false;
+	m_b_system_restart	= false;
+	m_b_ui_reload		= false;
 }
 
 void CUIOptionsManager::RegisterItem(CUIOptionsItem* item, const char* group){
@@ -128,6 +130,10 @@ void CUIOptionsManager::DoVidRestart(){
 
 void CUIOptionsManager::DoSndRestart(){
 	m_b_snd_restart = true;
+}
+
+void CUIOptionsManager::DoSystemRestart(){
+	m_b_system_restart = true;
 }
 
 void CUIOptionsManager::DoUIReload(){

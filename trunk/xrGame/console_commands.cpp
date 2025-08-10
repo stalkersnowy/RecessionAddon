@@ -102,12 +102,7 @@ xr_token		g_hud_style_token[] = {
 	{ 0,		0 }
 };
 
-u32				g_dof_mode = 0;
-xr_token		g_dof_mode_token[] = {
-	{ "CS",		0 },
-	{ "CoP",	1 },
-	{ 0,		0 }
-};
+int				g_dof_mode = 0;
 
 int				g_keypress_on_start = 0;
 
@@ -1667,7 +1662,7 @@ void CCC_RegisterCommands()
 
 	CMD3(CCC_Mask,				"g_backrun",			&psActorFlags,	AF_RUN_BACKWARD);
 	CMD3(CCC_Mask,				"g_weapon_bobbing",		&psActorFlags,	AF_WPN_BOBBING);
-	CMD3(CCC_Token,				"g_dof_mode",			&g_dof_mode,	g_dof_mode_token);
+	CMD4(CCC_Integer,			"g_dof_mode",			&g_dof_mode,	0, 1);
 
 	// alife
 #ifdef DEBUG

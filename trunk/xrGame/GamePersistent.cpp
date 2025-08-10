@@ -643,7 +643,7 @@ void CGamePersistent::RestoreEffectorDOF()
 	SetEffectorDOF			(m_dof[3]);
 }
 
-extern u32 g_dof_mode;
+extern int g_dof_mode;
 #define DOF_COP g_dof_mode == 1
 
 void CGamePersistent::UpdateDof()

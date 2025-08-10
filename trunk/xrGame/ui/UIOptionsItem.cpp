@@ -5,6 +5,11 @@
 
 CUIOptionsManager CUIOptionsItem::m_optionsManager;
 
+CUIOptionsItem::CUIOptionsItem()
+{
+	m_dep = sdNothing;
+}
+
 CUIOptionsItem::~CUIOptionsItem()
 {
 	m_optionsManager.UnRegisterItem(this);
@@ -90,21 +95,12 @@ void CUIOptionsItem::SaveOptTokenValue(const char* val){
 }
 
 void CUIOptionsItem::SaveValue(){
-	if (	m_entry == "vid_mode"		|| 
-			m_entry == "_preset"		|| 
-			m_entry == "rs_screen_mode"	||
-			m_entry == "r__supersample"	|| 
-			m_entry == "rs_refresh_60hz"||
-			m_entry == "rs_no_v_sync"	||
-			m_entry == "texture_lod")
-	m_optionsManager.DoVidRestart();
-
-	if (/*m_entry == "snd_freq" ||*/ m_entry == "snd_efx")
+	if(m_dep==sdVidRestart)
+		m_optionsManager.DoVidRestart();
+	else if(m_dep==sdSndRestart)
 		m_optionsManager.DoSndRestart();
-
-	if (m_entry == "g_hud_style"			|| 
-		m_entry == "g_hit_mark_index"		|| 
-		m_entry == "g_more_contact_snds"	|| 
-		m_entry == "g_old_pda")
+	else if(m_dep==sdSystemRestart)
+		m_optionsManager.DoSystemRestart();
+	else if(m_dep==sdUIRestart)
 		m_optionsManager.DoUIReload();
 }
