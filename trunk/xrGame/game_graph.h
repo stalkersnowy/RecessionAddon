@@ -12,9 +12,7 @@
 #include "script_export_space.h"
 #include "game_level_cross_table.h"
 
-//#ifndef PRIQUEL_GRAPH
 #	define GRAPH_NAME			"game.graph"
-//#endif // PRIQUEL_GRAPH
 
 class CGameGraph {
 private:
@@ -38,38 +36,23 @@ public:
 
 private:
 	CHeader							m_header;
-#if defined(AI_COMPILER) || !defined(PRIQUEL_GRAPH)
-	IReader							*m_reader;
-#endif // defined(AI_COMPILER) || !defined(PRIQUEL_GRAPH)
-	CVertex							*m_nodes;
+	IReader*						m_reader;
+	CVertex*						m_nodes;
+	bool							m_separated_graphs;
 	mutable ENABLED					m_enabled;
 	_GRAPH_ID						m_current_level_some_vertex_id;
 
-#ifdef PRIQUEL_GRAPH
 private:
-	u32								*m_cross_tables;
-	CGameLevelCrossTable			*m_current_level_cross_table;
-#endif // PRIQUEL_GRAPH
+	u32*							m_cross_tables;
+	CGameLevelCrossTable*			m_current_level_cross_table;
 
 public:
-#if !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
-	IC 								CGameGraph				();
-#else // !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
-#	ifdef AI_COMPILER
-		IC 							CGameGraph				(LPCSTR file_name, u32 current_version = XRAI_CURRENT_VERSION);
-#	endif // AI_COMPILER
-#endif // !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
-
-#ifdef PRIQUEL_GRAPH
-public:
-	IC								CGameGraph				(const IReader &stream);
-	IC		void					save					(IWriter &stream);
-	IC	const CGameLevelCrossTable	&cross_table			() const;
-#endif // PRIQUEL_GRAPH
+	IC 								CGameGraph				(IReader* stream, bool separatedGraphs);
 
 public:
 	IC virtual						~CGameGraph				();
 	IC		const CHeader			&header					() const;
+	IC		const CGameLevelCrossTable& cross_table			() const;
 	IC		bool					mask					(const svector<_LOCATION_ID,GameGraph::LOCATION_TYPE_COUNT> &M, const _LOCATION_ID E[GameGraph::LOCATION_TYPE_COUNT]) const;
 	IC		bool					mask					(const _LOCATION_ID M[GameGraph::LOCATION_TYPE_COUNT], const _LOCATION_ID E[GameGraph::LOCATION_TYPE_COUNT]) const;
 	IC		float					distance				(const _GRAPH_ID tGraphID0, const _GRAPH_ID tGraphID1) const;

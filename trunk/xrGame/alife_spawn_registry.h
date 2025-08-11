@@ -37,12 +37,10 @@ private:
 	SPAWN_IDS								m_temp1;
 	SPAWN_STORY_IDS							m_spawn_story_ids;
 
-#ifdef PRIQUEL_GRAPH
-private:
-	IReader									*m_file;
-	IReader									*m_chunk;
-	CGameGraph								*m_game_graph;
-#endif // PRIQUEL_GRAPH
+	IReader*								m_file;
+	IReader*								m_chunk;
+	CGameGraph*								m_game_graph;
+	bool									m_separated_graphs;
 
 protected:
 			void							save_updates				(IWriter &stream);
@@ -72,6 +70,8 @@ public:
 			void							fill_new_spawns				(xr_vector<ALife::_SPAWN_ID> &spawns, ALife::_TIME_ID game_time, xr_vector<ALife::_SPAWN_ID> &objects);
 	IC		const CALifeSpawnHeader			&header						() const;
 	IC		const SPAWN_GRAPH				&spawns						() const;
+			shared_str const&				get_spawn_name				() const { return m_spawn_name; }
+			IReader*						get_spawn_file				() const { return m_file; }
 	IC		void							assign_artefact_position	(CSE_ALifeAnomalousZone	*anomaly, CSE_ALifeDynamicObject *object) const;
 	IC		const ALife::_SPAWN_ID			&spawn_id					(const ALife::_SPAWN_STORY_ID &spawn_story_id) const;
 };

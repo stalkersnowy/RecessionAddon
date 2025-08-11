@@ -14,13 +14,9 @@ using namespace ALife;
 
 CALifeGraphRegistry::CALifeGraphRegistry	()
 {
-#ifndef PRIQUEL_GRAPH
-	on_load							();
-#endif // PRIQUEL_GRAPH
-
-	m_level							= 0;
-	m_process_time					= 0;
-	m_actor							= 0;
+	m_level							= nullptr;
+	m_process_time					= 0.f;
+	m_actor							= nullptr;
 }
 
 CALifeGraphRegistry::~CALifeGraphRegistry	()

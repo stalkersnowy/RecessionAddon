@@ -236,11 +236,7 @@ void CALifeUpdateManager::new_game			(LPCSTR save_name)
 	unload								();
 	reload								(m_section);
 	spawns().load						(save_name);
-
-#ifdef PRIQUEL_GRAPH
 	graph().on_load						();
-#endif // PRIQUEL_GRAPH
-
 	server().PerformIDgen				(0x0000);
 	time_manager().init					(m_section);
 	VERIFY								(can_register_objects());

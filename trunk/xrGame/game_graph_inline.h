@@ -8,61 +8,36 @@
 
 #pragma once
 
-#if !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
-IC CGameGraph::CGameGraph											()
-#else // !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
-#	ifdef AI_COMPILER
-		IC CGameGraph::CGameGraph									(LPCSTR file_name, u32 current_version)
-#	endif // AI_COMPILER
-#endif // !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
-#if defined(AI_COMPILER) || !defined(PRIQUEL_GRAPH)
+IC CGameGraph::CGameGraph(IReader* stream, bool separatedGraphs)
 {
-#if !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
-	string_path						file_name;
-	FS.update_path					(file_name,"$game_data$",GRAPH_NAME);
-#endif // !defined(AI_COMPILER) && !defined(PRIQUEL_GRAPH)
-
-	m_reader						= FS.r_open(file_name);
+	m_reader						= stream;
+	m_separated_graphs				= separatedGraphs;
 	VERIFY							(m_reader);
 	m_header.load					(m_reader);
 	R_ASSERT2						(header().version() == XRAI_CURRENT_VERSION,"Graph version mismatch!");
 	m_nodes							= (CVertex*)m_reader->pointer();
 	m_current_level_some_vertex_id	= _GRAPH_ID(-1);
 	m_enabled.assign				(header().vertex_count(),true);
-#ifdef PRIQUEL_GRAPH
-	u8								*temp = (u8*)(m_nodes + header().vertex_count());
-	temp							+= header().edge_count()*sizeof(CGameGraph::CEdge);
-	m_cross_tables					= (u32*)(((CLevelPoint*)temp) + header().death_point_count());
-	m_current_level_cross_table		= 0;
-#endif // PRIQUEL_GRAPH
+
+	if (m_separated_graphs)
+	{
+		m_cross_tables				= nullptr;
+		m_current_level_cross_table	= nullptr;
+	}
+	else
+	{
+		u8* temp					= (u8*)(m_nodes + header().vertex_count());
+		temp						+= header().edge_count() * sizeof(CGameGraph::CEdge);
+		m_cross_tables				= (u32*)(((CLevelPoint*)temp) + header().death_point_count());
+		m_current_level_cross_table	= nullptr;
+	}
 }
-#endif // defined(AI_COMPILER) || !defined(PRIQUEL_GRAPH)
 
-#ifdef PRIQUEL_GRAPH
-IC CGameGraph::CGameGraph											(const IReader &_stream)
+IC CGameGraph::~CGameGraph()
 {
-	IReader							&stream = const_cast<IReader&>(_stream);
-	m_header.load					(&stream);
-	R_ASSERT2						(header().version() == XRAI_CURRENT_VERSION,"Graph version mismatch!");
-	m_nodes							= (CVertex*)stream.pointer();
-	m_current_level_some_vertex_id	= _GRAPH_ID(-1);
-	m_enabled.assign				(header().vertex_count(),true);
-	u8								*temp = (u8*)(m_nodes + header().vertex_count());
-	temp							+= header().edge_count()*sizeof(CGameGraph::CEdge);
-	m_cross_tables					= (u32*)(((CLevelPoint*)temp) + header().death_point_count());
-	m_current_level_cross_table		= 0;
-}
-#endif // PRIQUEL_GRAPH
-
-IC CGameGraph::~CGameGraph											()
-{
-#ifdef PRIQUEL_GRAPH
-	xr_delete					(m_current_level_cross_table);
-#endif // PRIQUEL_GRAPH
-
-#if defined(AI_COMPILER) || !defined(PRIQUEL_GRAPH)
-	FS.r_close					(m_reader);
-#endif // defined(AI_COMPILER) || !defined(PRIQUEL_GRAPH)
+	xr_delete						(m_current_level_cross_table);
+	if (m_separated_graphs)
+		FS.r_close					(m_reader);
 }
 
 IC const CGameGraph::CHeader &CGameGraph::header					() const
@@ -163,6 +138,19 @@ IC	const u32 &GameGraph::CHeader::death_point_count				() const
 IC	const GameGraph::LEVEL_MAP &GameGraph::CHeader::levels			() const
 {
 	return						(m_levels);
+}
+
+IC	bool GameGraph::CHeader::level_exist							(const _LEVEL_ID& id) const
+{
+	return levels().find(id) != levels().end();
+}
+
+IC	bool GameGraph::CHeader::level_exist							(pcstr level_name) const
+{
+	for (const auto& levelPair : levels())
+		if (xr_strcmp(levelPair.second.name(), level_name) == 0)
+			return true;
+	return false;
 }
 
 IC	const GameGraph::SLevel &GameGraph::CHeader::level				(const _LEVEL_ID &id) const
@@ -340,67 +328,45 @@ IC	void GameGraph::CHeader::save									(IWriter *writer)
 
 IC	void CGameGraph::set_current_level								(const u32 &level_id)
 {
-#ifdef PRIQUEL_GRAPH
 	xr_delete					(m_current_level_cross_table);
-	u32							*current_cross_table = m_cross_tables;
-	GameGraph::LEVEL_MAP::const_iterator	I = header().levels().begin();
-	GameGraph::LEVEL_MAP::const_iterator	E = header().levels().end();
-	for ( ; I != E; ++I) {
-		if (level_id != (*I).first) {
-			current_cross_table	= (u32*)((u8*)current_cross_table + *current_cross_table);
-			continue;
+	if (m_cross_tables)
+	{
+		u32* current_cross_table = m_cross_tables;
+		for (const auto& levelPair : header().levels())
+		{
+			if (level_id != levelPair.first)
+			{
+				current_cross_table = (u32*)((u8*)current_cross_table + *current_cross_table);
+				continue;
+			}
+
+			m_current_level_cross_table = xr_new<CGameLevelCrossTable>(current_cross_table + 1, *current_cross_table);
+			break;
 		}
-
-		m_current_level_cross_table	= xr_new<CGameLevelCrossTable>(current_cross_table + 1,*current_cross_table);
-		break;
 	}
-
-	VERIFY						(m_current_level_cross_table);
-#endif // PRIQUEL_GRAPH
+	else
+	{
+		string_path					fName;
+		FS.update_path				(fName, "$level$", CROSS_TABLE_NAME);
+		m_current_level_cross_table = xr_new<CGameLevelCrossTable>(fName);
+	}
+	VERIFY							(m_current_level_cross_table);
 
 	m_current_level_some_vertex_id = _GRAPH_ID(-1);
-	for (_GRAPH_ID i=0, n = header().vertex_count(); i<n; ++i) {
+	for (_GRAPH_ID i = 0, n = header().vertex_count(); i < n; ++i)
+	{
 		if (level_id != vertex(i)->level_id())
 			continue;
 
-		m_current_level_some_vertex_id	= i;
+		m_current_level_some_vertex_id = i;
 		break;
 	}
 
-	VERIFY						(valid_vertex_id(m_current_level_some_vertex_id));
+	VERIFY							(valid_vertex_id(m_current_level_some_vertex_id));
 }
 
-#ifdef PRIQUEL_GRAPH
-IC const CGameLevelCrossTable &CGameGraph::cross_table	() const
+IC const CGameLevelCrossTable& CGameGraph::cross_table					() const
 {
-	VERIFY						(m_current_level_cross_table);
-	return						(*m_current_level_cross_table);
+	VERIFY							(m_current_level_cross_table);
+	return							(*m_current_level_cross_table);
 }
-
-#ifdef AI_COMPILER
-IC void CGameGraph::save								(IWriter &stream)
-{
-	m_header.save				(&stream);
-	
-	u8							*buffer = (u8*)m_nodes;
-	stream.w					(buffer,header().vertex_count()*sizeof(CVertex));
-	buffer						+= header().vertex_count()*sizeof(CVertex);
-
-	stream.w					(buffer,header().edge_count()*sizeof(CGameGraph::CEdge));
-	buffer						+= header().edge_count()*sizeof(CGameGraph::CEdge);
-
-	stream.w					(buffer,header().death_point_count()*sizeof(CLevelPoint));
-	buffer						+= header().death_point_count()*sizeof(CLevelPoint);
-
-	VERIFY						((u8*)m_cross_tables == buffer);
-	GameGraph::LEVEL_MAP::const_iterator	I = header().levels().begin();
-	GameGraph::LEVEL_MAP::const_iterator	E = header().levels().end();
-	for ( ; I != E; ++I) {
-		u32						size = *(u32*)buffer;
-		stream.w				(buffer,size);
-		buffer					+= size;
-	}
-}
-#endif // AI_COMPILER
-
-#endif // PRIQUEL_GRAPH
