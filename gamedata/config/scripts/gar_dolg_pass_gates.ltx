@@ -1,5 +1,15 @@
 [logic]
-active = ph_door@locked
+active = ph_door@blocked
+
+[ph_door@blocked]
+locked = true
+closed = true
+snd_open_start = trader_door_open_start
+snd_close_start = trader_door_close_start
+snd_close_stop = trader_door_close_stop
+on_info = {+agroprom_military_case_have} ph_door@locked
+show_tips = false
+slider = true
 
 [ph_door@locked]
 locked = true
