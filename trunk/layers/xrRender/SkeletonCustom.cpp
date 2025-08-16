@@ -593,7 +593,7 @@ bool	CKinematics::	PickBone			(const Fmatrix &parent_xform,  Fvector& normal, fl
 	return false;
 }
 
-void CKinematics::AddWallmark(const Fmatrix* parent_xform, const Fvector3& start, const Fvector3& dir, ref_shader _shader, float size)
+void CKinematics::AddWallmark(const Fmatrix* parent_xform, const Fvector3& start, const Fvector3& dir, ref_shader shader, float size)
 {
 	Fvector S,D,normal		= {0,0,0};
 	// transform ray from world to model
@@ -640,7 +640,7 @@ void CKinematics::AddWallmark(const Fmatrix* parent_xform, const Fvector3& start
 	// find similar wm
 	for (u32 wm_idx=0; wm_idx<wallmarks.size(); wm_idx++){
 		intrusive_ptr<CSkeletonWallmark>& wm = wallmarks[wm_idx];		
-		if (wm->Similar(_shader,cp,0.02f)){
+		if (wm->Similar(shader,cp,0.02f)){ 
 			if (wm_idx<wallmarks.size()-1) 
 				wm = wallmarks.back();
 			wallmarks.pop_back();
@@ -649,7 +649,7 @@ void CKinematics::AddWallmark(const Fmatrix* parent_xform, const Fvector3& start
 	}
 
 	// ok. allocate wallmark
-	intrusive_ptr<CSkeletonWallmark>		wm = xr_new<CSkeletonWallmark>(this,parent_xform, _shader,cp,Device.fTimeGlobal);
+	intrusive_ptr<CSkeletonWallmark>		wm = xr_new<CSkeletonWallmark>(this,parent_xform,shader,cp,Device.fTimeGlobal);
 	wm->m_LocalBounds.set		(cp,size*2.f);
 	wm->XFORM()->transform_tiny	(wm->m_Bounds.P,cp);
 	wm->m_Bounds.R				= wm->m_LocalBounds.R; 
@@ -665,9 +665,9 @@ void CKinematics::AddWallmark(const Fmatrix* parent_xform, const Fvector3& start
 
 	// fill vertices
 	for (u32 i=0; i<children.size(); i++){
-		CSkeletonX* _S		= LL_GetChild(i);
+		CSkeletonX* S		= LL_GetChild(i);
 		for (U16It b_it=test_bones.begin(); b_it!=test_bones.end(); b_it++)
-			_S->FillVertices		(mView,*wm,normal,size,*b_it);
+			S->FillVertices		(mView,*wm,normal,size,*b_it);
 	}
 
 	wallmarks.push_back		(wm);

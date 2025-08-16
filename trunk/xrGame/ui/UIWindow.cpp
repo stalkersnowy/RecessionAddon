@@ -270,9 +270,9 @@ void CUIWindow::GetAbsoluteRect(Frect& r)
 //.	return			rect;
 }
 
-//реакция на мышь
-//координаты курсора всегда, кроме начального вызова 
-//задаются относительно текущего окна
+//������� �� ����
+//���������� ������� ������, ����� ���������� ������ 
+//�������� ������������ �������� ����
 
 #define DOUBLE_CLICK_TIME 250
 
@@ -280,8 +280,8 @@ bool CUIWindow::OnMouseAction(float x, float y, EUIMessages mouse_action)
 {	
 	Frect	wndRect = GetWndRect();
 
-	m_cursor_pos.x = x;
-	m_cursor_pos.y = y;
+	cursor_pos.x = x;
+	cursor_pos.y = y;
 
 
 	if( WINDOW_LBUTTON_DOWN == mouse_action )
@@ -300,20 +300,20 @@ bool CUIWindow::OnMouseAction(float x, float y, EUIMessages mouse_action)
 
 	if(GetParent()== NULL)
 	{
-		if(!wndRect.in(m_cursor_pos))
-			return false;
-		//получить координаты относительно окна
-		m_cursor_pos.x -= wndRect.left;
-		m_cursor_pos.y -= wndRect.top;
+		if(!wndRect.in(cursor_pos))
+            return false;
+		//�������� ���������� ������������ ����
+		cursor_pos.x -= wndRect.left;
+		cursor_pos.y -= wndRect.top;
 	}
 
 
-	//если есть дочернее окно,захватившее мышь, то
-	//сообщение направляем ему сразу
+	//���� ���� �������� ����,����������� ����, ��
+	//��������� ���������� ��� �����
 	if(m_pMouseCapturer)
 	{
-		m_pMouseCapturer->OnMouseAction(m_cursor_pos.x - m_pMouseCapturer->GetWndRect().left,
-								  m_cursor_pos.y - m_pMouseCapturer->GetWndRect().top, 
+		m_pMouseCapturer->OnMouseAction(cursor_pos.x - m_pMouseCapturer->GetWndRect().left,
+								  cursor_pos.y - m_pMouseCapturer->GetWndRect().top, 
 								  mouse_action);
 		return true;
 	}
@@ -338,27 +338,27 @@ bool CUIWindow::OnMouseAction(float x, float y, EUIMessages mouse_action)
 			break;
 	}
 
-	//Проверка на попадание мыши в окно,
-	//происходит в обратном порядке, чем рисование окон
-	//(последние в списке имеют высший приоритет)
+	//�������� �� ��������� ���� � ����,
+	//���������� � �������� �������, ��� ��������� ����
+	//(��������� � ������ ����� ������ ���������)
 	WINDOW_LIST::reverse_iterator it = m_ChildWndList.rbegin();
 
 	for(; it!=m_ChildWndList.rend(); ++it)
 	{
 		CUIWindow* w	= (*it);
-		wndRect	= w->GetWndRect();
-		if (wndRect.in(m_cursor_pos) )
+		Frect wndRect	= w->GetWndRect();
+		if (wndRect.in(cursor_pos) )
 		{
 			if(w->IsEnabled())
 			{
-				if( w->OnMouseAction(m_cursor_pos.x -w->GetWndRect().left,
-							   m_cursor_pos.y -w->GetWndRect().top, mouse_action))return true;
+				if( w->OnMouseAction(cursor_pos.x -w->GetWndRect().left,
+							   cursor_pos.y -w->GetWndRect().top, mouse_action))return true;
 			}
 		}
 		else if (w->IsEnabled() && w->CursorOverWindow())
 		{
-			if( w->OnMouseAction(m_cursor_pos.x -w->GetWndRect().left,
-						   m_cursor_pos.y -w->GetWndRect().top, mouse_action))return true;
+			if( w->OnMouseAction(cursor_pos.x -w->GetWndRect().left,
+						   cursor_pos.y -w->GetWndRect().top, mouse_action))return true;
 		}
 	}
 
@@ -374,7 +374,7 @@ bool CUIWindow::HasChildMouseHandler(){
 		if ((*it)->m_bClickable)
 		{
 			Frect wndRect = (*it)->GetWndRect();
-			if (wndRect.in(m_cursor_pos) )
+			if (wndRect.in(cursor_pos) )
 				return true;
 		}
 	}
@@ -414,10 +414,10 @@ void CUIWindow::OnFocusLost()
 }
 
 
-//Сообщение, посылаемое дочерним окном,
-//о том, что окно хочет захватить мышь,
-//все сообщения от нее будут направляться только
-//ему в независимости от того где мышь
+//���������, ���������� �������� �����,
+//� ���, ��� ���� ����� ��������� ����,
+//��� ��������� �� ��� ����� ������������ ������
+//��� � ������������� �� ���� ��� ����
 void CUIWindow::SetCapture(CUIWindow *pChildWindow, bool capture_status)
 {
 	if(NULL != GetParent())
@@ -428,7 +428,7 @@ void CUIWindow::SetCapture(CUIWindow *pChildWindow, bool capture_status)
 
 	if(capture_status)
 	{
-		//оповестить дочернее окно о потере фокуса мыши
+		//���������� �������� ���� � ������ ������ ����
 		if(NULL!=m_pMouseCapturer)
 			m_pMouseCapturer->SendMessage(this, WINDOW_MOUSE_CAPTURE_LOST);
 
@@ -441,13 +441,13 @@ void CUIWindow::SetCapture(CUIWindow *pChildWindow, bool capture_status)
 }
 
 
-//реакция на клавиатуру
+//������� �� ����������
 bool CUIWindow::OnKeyboardAction(int dik, EUIMessages keyboard_action)
 {
 	bool result;
 
-	//если есть дочернее окно,захватившее клавиатуру, то
-	//сообщение направляем ему сразу
+	//���� ���� �������� ����,����������� ����������, ��
+	//��������� ���������� ��� �����
 	if(NULL!=m_pKeyboardCapturer)
 	{
 		result = m_pKeyboardCapturer->OnKeyboardAction(dik, keyboard_action);
@@ -502,7 +502,7 @@ void CUIWindow::SetKeyboardCapture(CUIWindow* pChildWindow, bool capture_status)
 
 	if(capture_status)
 	{
-		//оповестить дочернее окно о потере фокуса клавиатуры
+		//���������� �������� ���� � ������ ������ ����������
 		if(NULL!=m_pKeyboardCapturer)
 			m_pKeyboardCapturer->SendMessage(this, WINDOW_KEYBOARD_CAPTURE_LOST);
 			
@@ -513,10 +513,10 @@ void CUIWindow::SetKeyboardCapture(CUIWindow* pChildWindow, bool capture_status)
 }
 
 
-//обработка сообщений 
+//��������� ��������� 
 void CUIWindow::SendMessage(CUIWindow *pWnd, s16 msg, void *pData)
 {
-	//оповестить дочерние окна
+	//���������� �������� ����
 	for(WINDOW_LIST_it it = m_ChildWndList.begin(); m_ChildWndList.end()!=it; ++it)
 	{
 		if((*it)->IsEnabled())
@@ -537,7 +537,7 @@ CUIWindow* CUIWindow::GetChildMouseHandler(){
 		Frect wndRect = (*it)->GetWndRect();
 		// very strange code.... i can't understand difference between
 		// first and second condition. I Got It from OnMouse() method;
-		if (wndRect.in(m_cursor_pos) )
+		if (wndRect.in(cursor_pos) )
 		{
 			if((*it)->IsEnabled())
 			{
@@ -553,27 +553,27 @@ CUIWindow* CUIWindow::GetChildMouseHandler(){
 	return this;
 }
 
-//перемесчтить окно на вершину.
-//false если такого дочернего окна нет
+//������������ ���� �� �������.
+//false ���� ������ ��������� ���� ���
 bool CUIWindow::BringToTop(CUIWindow* pChild)
 {
-	//найти окно в списке
+	//����� ���� � ������
 /*	WINDOW_LIST_it it = std::find(m_ChildWndList.begin(), 
 										m_ChildWndList.end(), 
 										pChild);
 */
 	if( !IsChild(pChild) ) return false;
 
-	//удалить со старого места
+	//������� �� ������� �����
 	SafeRemoveChild(pChild);
 //	m_ChildWndList.remove(pChild);
-	//поместить на вершину списка
+	//��������� �� ������� ������
 	m_ChildWndList.push_back(pChild);
 
 	return true;
 }
 
-//поднять на вершину списка всех родителей окна и его самого
+//������� �� ������� ������ ���� ��������� ���� � ��� ������
 void CUIWindow::BringAllToTop()
 {
 	if(GetParent() == NULL)
@@ -585,7 +585,7 @@ void CUIWindow::BringAllToTop()
 	}
 }
 
-//для перевода окна и потомков в исходное состояние
+//��� �������� ���� � �������� � �������� ���������
 void CUIWindow::Reset()
 {
 	m_pOrignMouseCapturer = m_pMouseCapturer = NULL;

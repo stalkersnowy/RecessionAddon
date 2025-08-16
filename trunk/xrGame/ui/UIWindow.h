@@ -75,11 +75,11 @@ public:
 	virtual		~CUIWindow						();
 
 	////////////////////////////////////
-	//инициализация
+	//�������������
 	virtual void			Init				(Frect* pRect);
 
 	////////////////////////////////////
-	//работа с дочерними и родительскими окнами
+	//������ � ��������� � ������������� ������
 	virtual void			AttachChild			(CUIWindow* pChild);
 	virtual void			DetachChild			(CUIWindow* pChild);
 	virtual bool			IsChild				(CUIWindow* pChild) const;
@@ -89,17 +89,17 @@ public:
 	void					SetParent			(CUIWindow* pNewParent);
 	CUIWindow*				GetParent			()	const							{return m_pParentWnd;}
 	
-	//получить окно самого верхнего уровня
+	//�������� ���� ������ �������� ������
 	CUIWindow*				GetTop				()								{if(m_pParentWnd == NULL) return  this; 
 																				else return  m_pParentWnd->GetTop();}
 	CUIWindow*				GetCurrentMouseHandler();
 	CUIWindow*				GetChildMouseHandler();
 
 
-	//поднять на вершину списка выбранное дочернее окно
+	//������� �� ������� ������ ��������� �������� ����
 	bool					BringToTop			(CUIWindow* pChild);
 
-	//поднять на вершину списка всех родителей окна и его самого
+	//������� �� ������� ������ ���� ��������� ���� � ��� ������
 	void					BringAllToTop		();
 	
 
@@ -114,46 +114,46 @@ public:
 	virtual void 			OnFocusLost			();
 			bool 			HasChildMouseHandler();
 
-	//захватить/освободить мышь окном
-	//сообщение посылается дочерним окном родительскому
+	//���������/���������� ���� �����
+	//��������� ���������� �������� ����� �������������
 	void					SetCapture			(CUIWindow* pChildWindow, bool capture_status);
 	CUIWindow*				GetMouseCapturer	()													{return m_pMouseCapturer;}
 
-	//окошко, которому пересылаются сообщения,
-	//если NULL, то шлем на GetParent()
+	//������, �������� ������������ ���������,
+	//���� NULL, �� ���� �� GetParent()
 	void					SetMessageTarget	(CUIWindow* pWindow)								{m_pMessageTarget = pWindow;}
 	CUIWindow*				GetMessageTarget	();
 
-	//реакция на клавиатуру
+	//������� �� ����������
 	virtual bool			OnKeyboardAction	(int dik, EUIMessages keyboard_action);
 	virtual bool			OnKeyboardHold		(int dik);
 	virtual void			SetKeyboardCapture	(CUIWindow* pChildWindow, bool capture_status);
 
 	
 	
-	//обработка сообщений не предусмотреных стандартными обработчиками
-	//ф-ция должна переопределяться
-	//pWnd - указатель на окно, которое послало сообщение
-	//pData - указатель на дополнительные данные, которые могут понадобиться
+	//��������� ��������� �� �������������� ������������ �������������
+	//�-��� ������ ����������������
+	//pWnd - ��������� �� ����, ������� ������� ���������
+	//pData - ��������� �� �������������� ������, ������� ����� ������������
 	virtual void			SendMessage			(CUIWindow* pWnd, s16 msg, void* pData = NULL);
 	
 	
 
-	//запрещение/разрешение на ввод с клавиатуры
+	//����������/���������� �� ���� � ����������
 	virtual void			Enable				(bool status)									{m_bIsEnabled=status;}
 			bool			IsEnabled			() const										{ return m_bIsEnabled; }
 
-	//задание позиции относительно центра (прибавляется UI_BASE_WIDTH / 2.f и UI_BASE_HEIGHT / 2.f)
-	//можно задавать также отрицательные координаты
+	//������� ������� ������������ ������ (������������ UI_BASE_WIDTH / 2.f � UI_BASE_HEIGHT / 2.f)
+	//����� �������� ����� ������������� ����������
 	virtual void			SetCenterFromScreen	(bool status)									{ m_bIsCenterFromScreen = status; }
 	virtual bool			IsCenterFromScreen	() const										{ return m_bIsCenterFromScreen; }
 
-	//убрать/показать окно и его дочерние окна
+	//������/�������� ���� � ��� �������� ����
 	virtual void			Show				(bool status)									{SetVisible(status); Enable(status); }
 	IC		bool			IsShown				()												{return this->GetVisible();}
 			void			ShowChildren		(bool show);
 	
-	//абсолютные координаты
+	//���������� ����������
 	IC void					GetAbsoluteRect		(Frect& r) ;
 	IC void					GetAbsolutePos		(Fvector2& p) 	{Frect abs; GetAbsoluteRect(abs); p.set(abs.x1,abs.y1);}
 	
@@ -168,22 +168,22 @@ public:
 			void			SetWndPos_script	(Fvector2 pos)							{ m_bIsCenterFromScreen ? CUISimpleWindow::SetWndPosFromCenter(pos) : CUISimpleWindow::SetWndPos(pos); }
 			void			SetWndSize_script	(Fvector2 size)							{ CUISimpleWindow::SetWndSize(size); }
 
-	//прорисовка окна
+	//���������� ����
 	virtual void			Draw				();
 	virtual void			Draw				(float x, float y);
-	//обновление окна передпрорисовкой
+	//���������� ���� ����������������
 	virtual void			Update				();
 
 
 			void			SetPPMode			();
 			void			ResetPPMode			();
 	IC		bool			GetPPMode			()		{return m_bPP;};
-	//для перевода окна и потомков в исходное состояние
+	//��� �������� ���� � �������� � �������� ���������
 	virtual void			Reset				();
 			void			ResetAll			();
 
 
-	//временно!!!! (а может уже и нет)
+	//��������!!!! (� ����� ��� � ���)
 	virtual void			SetFont				(CGameFont* pFont)			{ m_pFont = pFont;}
 	CGameFont*				GetFont				()							{if(m_pFont) return m_pFont;
 																				if(m_pParentWnd== NULL)	
@@ -210,48 +210,48 @@ protected:
 	IC void					SafeRemoveChild(CUIWindow* child)				{WINDOW_LIST_it it = std::find(m_ChildWndList.begin(),m_ChildWndList.end(),child); if(it!=m_ChildWndList.end())m_ChildWndList.erase(it);};
 
 	shared_str				m_windowName;
-	//список дочерних окон
+	//������ �������� ����
 	WINDOW_LIST				m_ChildWndList;
 	
-	//указатель на родительское окно
+	//��������� �� ������������ ����
 	CUIWindow*				m_pParentWnd;
 
-	//дочернее окно которое, захватило ввод мыши
+	//�������� ���� �������, ��������� ���� ����
 	CUIWindow*				m_pMouseCapturer;
 	
-	//кто изначально иницировал
-	//захват фокуса, только он теперь
-	//может весь фокус и освободить
+	//��� ���������� ����������
+	//������ ������, ������ �� ������
+	//����� ���� ����� � ����������
 	CUIWindow*				m_pOrignMouseCapturer;
 
-	//дочернее окно которое, захватило ввод клавиатуры
+	//�������� ���� �������, ��������� ���� ����������
 	CUIWindow*				m_pKeyboardCapturer;
 
-	//кому шлем сообщения
+	//���� ���� ���������
 	CUIWindow*				m_pMessageTarget;
 
 
 	CGameFont*				m_pFont;
 
-	// Последняя позиция мышки
-	Fvector2				m_cursor_pos;
+	// ��������� ������� �����
+	Fvector2 cursor_pos;
 
-	//время прошлого клика мышки
-	//для определения DoubleClick
+	//����� �������� ����� �����
+	//��� ����������� DoubleClick
 	u32						m_dwLastClickTime;
 	u32						m_dwFocusReceiveTime;
 
-	//флаг автоматического удаления во время вызова деструктора
+	//���� ��������������� �������� �� ����� ������ �����������
 	bool					m_bAutoDelete;
 
-	// Флаг разрешающий/запрещающий генерацию даблклика
+	// ���� �����������/����������� ��������� ���������
 	bool					m_bPP;
-	//разрешен ли ввод пользователя
+	//�������� �� ���� ������������
 	bool					m_bIsEnabled;
-	//включено ли задание позиции от центра экрана
+	//�������� �� ������� ������� �� ������ ������
 	bool					m_bIsCenterFromScreen;
 
-	// Если курсор над окном
+	// ���� ������ ��� �����
 	bool					m_bCursorOverWindow;
 	bool					m_bClickable;
 

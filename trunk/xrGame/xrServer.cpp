@@ -524,7 +524,7 @@ u32 xrServer::OnMessage	(NET_Packet& P, ClientID sender)			// Non-Zero means bro
 		}break;
 	case M_CL_UPDATE:
 		{
-			CL		= ID_to_client	(sender);
+			xrClientData* CL		= ID_to_client	(sender);
 			if (!CL)				break;
 			CL->net_Ready			= TRUE;
 
@@ -540,7 +540,7 @@ u32 xrServer::OnMessage	(NET_Packet& P, ClientID sender)			// Non-Zero means bro
 		}break;
 	case M_MOVE_PLAYERS_RESPOND:
 		{
-			CL		= ID_to_client	(sender);
+			xrClientData* CL		= ID_to_client	(sender);
 			if (!CL)				break;
 			CL->net_Ready			= TRUE;
 			CL->net_PassUpdates		= TRUE;
@@ -548,7 +548,7 @@ u32 xrServer::OnMessage	(NET_Packet& P, ClientID sender)			// Non-Zero means bro
 	//-------------------------------------------------------------------
 	case M_CL_INPUT:
 		{
-			CL		= ID_to_client	(sender);
+			xrClientData* CL		= ID_to_client	(sender);
 			if (CL)	CL->net_Ready	= TRUE;
 			if (SV_Client) SendTo	(SV_Client->ID, P, net_flags(TRUE, TRUE));
 			VERIFY					(verify_entities());
@@ -560,7 +560,7 @@ u32 xrServer::OnMessage	(NET_Packet& P, ClientID sender)			// Non-Zero means bro
 		}break;
 	case M_CLIENTREADY:
 		{
-			CL		= ID_to_client(sender);
+			xrClientData* CL		= ID_to_client(sender);
 			if ( CL )	
 			{
 				CL->net_Ready	= TRUE;

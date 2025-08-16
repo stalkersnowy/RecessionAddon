@@ -154,18 +154,18 @@ struct profile_timer_script {
 	IC		float					time					() const
 	{
 		FPU::m64r				();
-		float					_result = (float(double(m_accumulator)/double(CPU::clk_per_second))*1000000.f);
+		float					result = (float(double(m_accumulator)/double(CPU::clk_per_second))*1000000.f);
 		FPU::m24r				();
-		return					(_result);
+		return					(result);
 	}
 };
 
 IC	profile_timer_script	operator+	(const profile_timer_script &portion0, const profile_timer_script &portion1)
 {
-	profile_timer_script	_result;
-	_result.m_accumulator	= portion0.m_accumulator + portion1.m_accumulator;
-	_result.m_count			= portion0.m_count + portion1.m_count;
-	return					(_result);
+	profile_timer_script	result;
+	result.m_accumulator	= portion0.m_accumulator + portion1.m_accumulator;
+	result.m_count			= portion0.m_count + portion1.m_count;
+	return					(result);
 }
 
 //IC	std::ostream& operator<<(std::ostream &stream, profile_timer_script &timer)
@@ -187,8 +187,8 @@ void CScriptEngine::script_register(lua_State *L)
 		class_<profile_timer_script>("profile_timer")
 			.def(constructor<>())
 			.def(constructor<profile_timer_script&>())
-			.def(m_const_self + profile_timer_script())
-			.def(m_const_self < profile_timer_script())
+			.def(const_self + profile_timer_script())
+			.def(const_self < profile_timer_script())
 //			.def(tostring(self))
 			.def("start",&profile_timer_script::start)
 			.def("stop",&profile_timer_script::stop)

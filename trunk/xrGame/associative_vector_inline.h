@@ -198,32 +198,32 @@ TEMPLATE_SPECIALIZATION
 IC	typename _associative_vector::iterator _associative_vector::lower_bound					(const key_type &key)
 {
 	actualize			();
-	value_compare		&_self = *this;
-	return				(std::lower_bound(begin(),end(),key, _self));
+	value_compare		&self = *this;
+	return				(std::lower_bound(begin(),end(),key,self));
 }
 
 TEMPLATE_SPECIALIZATION
 IC	typename _associative_vector::const_iterator _associative_vector::lower_bound			(const key_type &key) const
 {
 	actualize			();
-	const value_compare	&_self = *this;
-	return				(std::lower_bound(begin(),end(),key, _self));
+	const value_compare	&self = *this;
+	return				(std::lower_bound(begin(),end(),key,self));
 }
 
 TEMPLATE_SPECIALIZATION
 IC	typename _associative_vector::iterator _associative_vector::upper_bound					(const key_type &key)
 {
 	actualize			();
-	value_compare		&_self = *this;
-	return				(std::upper_bound(begin(),end(),key, _self));
+	value_compare		&self = *this;
+	return				(std::upper_bound(begin(),end(),key,self));
 }
 
 TEMPLATE_SPECIALIZATION
 IC	typename _associative_vector::const_iterator _associative_vector::upper_bound			(const key_type &key) const
 {
 	actualize			();
-	const value_compare	&_self = *this;
-	return				(std::upper_bound(begin(),end(),key, _self));
+	const value_compare	&self = *this;
+	return				(std::upper_bound(begin(),end(),key,self));
 }
 
 TEMPLATE_SPECIALIZATION

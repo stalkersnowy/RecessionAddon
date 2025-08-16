@@ -105,9 +105,9 @@ bool CStateBloodsuckerVampireAbstract::check_start_conditions()
 	if (!object->WantVampire()) return false;
 	if (object->berserk_always) return false;
 	
-	// является ли враг актером
-	const CEntityAlive * _enemy = object->EnemyMan.get_enemy();
-	if (_enemy->CLS_ID != CLSID_OBJECT_ACTOR)		return false;
+	// �������� �� ���� �������
+	const CEntityAlive *enemy = object->EnemyMan.get_enemy();
+	if (enemy->CLS_ID != CLSID_OBJECT_ACTOR)		return false;
 	if (!object->EnemyMan.see_enemy_now())			return false;
 	if (object->CControlledActor::is_controlling())	return false;
 
@@ -123,14 +123,14 @@ bool CStateBloodsuckerVampireAbstract::check_start_conditions()
 TEMPLATE_SPECIALIZATION
 bool CStateBloodsuckerVampireAbstract::check_completion()
 {
-	// если убежал
+	// ���� ������
 	if ((current_substate == eStateVampire_Hide) && 
 		get_state_current()->check_completion())	return true;
 
-	// если враг изменился
+	// ���� ���� ���������
 	if (enemy != object->EnemyMan.get_enemy())		return true;
 	
-	// если актера уже контролит другой кровосос
+	// ���� ������ ��� ��������� ������ ��������
 	if ((current_substate != eStateVampire_Execute) && 
 		object->CControlledActor::is_controlling())	return true;
 

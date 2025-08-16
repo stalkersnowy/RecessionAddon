@@ -17,7 +17,7 @@ public:
 					CUIVote		();
 			void 	Init		();
 	virtual void 	Update		();
-	virtual void 	SendMessage	(CUIWindow* pWnd, s16 _msg, void* pData = 0);
+	virtual void 	SendMessage	(CUIWindow* pWnd, s16 msg, void* pData = 0);
 			void 	OnBtnYes	();
 			void 	OnBtnNo		();
 			void 	OnBtnCancel	();

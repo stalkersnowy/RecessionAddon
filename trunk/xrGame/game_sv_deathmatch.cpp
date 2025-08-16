@@ -898,9 +898,9 @@ void	game_sv_Deathmatch::OnPlayerBuyFinished		(ClientID id_who, NET_Packet& P)
 		xr_vector<u16>::iterator	EDI = ItemsToDelete.end();
 		for ( ; IDI != EDI; ++IDI) 
 		{
-			NET_Packet			_P;
-			u_EventGen			(_P,GE_DESTROY,*IDI);
-			Level().Send(_P,net_flags(TRUE,TRUE));
+			NET_Packet			P;
+			u_EventGen			(P,GE_DESTROY,*IDI);
+			Level().Send(P,net_flags(TRUE,TRUE));
 		};
 	};
 
@@ -1828,8 +1828,8 @@ BOOL game_sv_Deathmatch::Is_Anomaly_InLists(CSE_Abstract* E)
 	for (u32 j=0; j<m_AnomalySetsList.size(); j++)
 	{
 		ANOMALIES* Anomalies = &(m_AnomalySetsList[j]);
-		ANOMALIES_it _It = std::find(Anomalies->begin(), Anomalies->end(),E->name_replace());
-		if (_It != Anomalies->end())
+		ANOMALIES_it It = std::find(Anomalies->begin(), Anomalies->end(),E->name_replace());
+		if (It != Anomalies->end())
 		{
 			return TRUE;
 		};

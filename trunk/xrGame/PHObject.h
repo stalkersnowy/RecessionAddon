@@ -46,7 +46,7 @@ public:
 					tpStaticShell
 			};
 protected:
-				Fvector			m_AABB;
+				Fvector		AABB;
 protected:
 
 	virtual		dGeomID			dSpacedGeom						()								=0;

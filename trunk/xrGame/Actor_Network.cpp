@@ -1736,13 +1736,13 @@ void	CActor::Check_for_AutoPickUp()
 	Fbox APU_Box;
 	APU_Box.set(Fvector().sub(bc, m_AutoPickUp_AABB), Fvector().add(bc, m_AutoPickUp_AABB));
 
-	xr_vector<ISpatial*>	_ISpatialResult;
-	g_SpatialSpace->q_box   (_ISpatialResult,0,STYPE_COLLIDEABLE,bc,m_AutoPickUp_AABB);
+	xr_vector<ISpatial*>	ISpatialResult;
+	g_SpatialSpace->q_box   (ISpatialResult,0,STYPE_COLLIDEABLE,bc,m_AutoPickUp_AABB);
 
 	// Determine visibility for dynamic part of scene
-	for (u32 o_it=0; o_it< _ISpatialResult.size(); o_it++)
+	for (u32 o_it=0; o_it<ISpatialResult.size(); o_it++)
 	{
-		ISpatial*		spatial	= _ISpatialResult[o_it];
+		ISpatial*		spatial	= ISpatialResult[o_it];
 		CInventoryItem*	pIItem	= smart_cast<CInventoryItem*> (spatial->dcast_CObject        ());
 		if (0 == pIItem)							continue;
 		if (!pIItem->CanTake())						continue;
@@ -1763,10 +1763,10 @@ void	CActor::Check_for_AutoPickUp()
 					}
 				}
 			}			
-			NET_Packet _P;
-			u_EventGen(_P,GE_OWNERSHIP_TAKE, ID());
-			_P.w_u16(pIItem->object().ID());
-			u_EventSend(_P);
+			NET_Packet P;
+			u_EventGen(P,GE_OWNERSHIP_TAKE, ID());
+			P.w_u16(pIItem->object().ID());
+			u_EventSend(P);
 		}		
 	}
 }

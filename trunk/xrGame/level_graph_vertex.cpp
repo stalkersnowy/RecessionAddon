@@ -259,10 +259,10 @@ u32	 CLevelGraph::check_position_in_direction_slow	(u32 start_vertex_id, const F
 				if (dest_xz == v->position().xz()) {
 					return	(is_accessible(next_vertex_id) ? next_vertex_id : u32(-1));
 				}
-				Fvector2		temp1;
-				temp1.add		(box.min,box.max);
-				temp1.mul		(.5f);
-				float			dist = _sqr(temp1.x - dest.x) + _sqr(temp1.y - dest.y);
+				Fvector2		temp;
+				temp.add		(box.min,box.max);
+				temp.mul		(.5f);
+				float			dist = _sqr(temp.x - dest.x) + _sqr(temp.y - dest.y);
 				if (dist > cur_sqr)
 					continue;
 				
@@ -312,10 +312,10 @@ bool CLevelGraph::check_vertex_in_direction_slow	(u32 start_vertex_id, const Fve
 				if (next_vertex_id == finish_vertex_id) {
 					return		(is_accessible(next_vertex_id));
 				}
-				Fvector2		temp2;
-				temp2.add		(box.min,box.max);
-				temp2.mul		(.5f);
-				float			dist = _sqr(temp2.x - dest.x) + _sqr(temp2.y - dest.y);
+				Fvector2		temp;
+				temp.add		(box.min,box.max);
+				temp.mul		(.5f);
+				float			dist = _sqr(temp.x - dest.x) + _sqr(temp.y - dest.y);
 				if (dist > cur_sqr)
 					continue;
 
@@ -388,10 +388,10 @@ bool CLevelGraph::create_straight_path(u32 start_vertex_id, const Fvector2 &star
 			box.min			= box.max = temp;
 			box.grow		(identity);
 			if (box.pick_exact(start,dir)) {
-				Fvector2		temp3;
-				temp3.add		(box.min,box.max);
-				temp3.mul		(.5f);
-				float			dist = _sqr(temp3.x - dest.x) + _sqr(temp3.y - dest.y);
+				Fvector2		temp;
+				temp.add		(box.min,box.max);
+				temp.mul		(.5f);
+				float			dist = _sqr(temp.x - dest.x) + _sqr(temp.y - dest.y);
 				if (dist > cur_sqr)
 					continue;
 
@@ -489,24 +489,24 @@ bool CLevelGraph::neighbour_in_direction	(const Fvector &direction, u32 start_ve
 	dest					= dir;
 	dest.mul				(header().cell_size()*4.f);
 	dest.add				(start);
-	Fvector2				temp4;
-	unpack_xz				(vertex(start_vertex_id),temp4.x,temp4.y);
+	Fvector2				temp;
+	unpack_xz				(vertex(start_vertex_id),temp.x,temp.y);
 
-	float					cur_sqr = _sqr(temp4.x - dest.x) + _sqr(temp4.y - dest.y);
+	float					cur_sqr = _sqr(temp.x - dest.x) + _sqr(temp.y - dest.y);
 	const_iterator			I,E;
 	begin					(cur_vertex_id,I,E);
 	for ( ; I != E; ++I) {
 		u32					next_vertex_id = value(cur_vertex_id,I);
 		if ((next_vertex_id == prev_vertex_id) || !is_accessible(next_vertex_id))
 			continue;
-		unpack_xz			(vertex(next_vertex_id),temp4.x,temp4.y);
-		box.min				= box.max = temp4;
+		unpack_xz			(vertex(next_vertex_id),temp.x,temp.y);
+		box.min				= box.max = temp;
 		box.grow			(identity);
 		if (box.pick_exact(start,dir)) {
-			Fvector2		temp5;
-			temp5.add		(box.min,box.max);
-			temp5.mul		(.5f);
-			float			dist = _sqr(temp5.x - dest.x) + _sqr(temp5.y - dest.y);
+			Fvector2		temp;
+			temp.add		(box.min,box.max);
+			temp.mul		(.5f);
+			float			dist = _sqr(temp.x - dest.x) + _sqr(temp.y - dest.y);
 			if (dist > cur_sqr)
 				continue;
 			return			(true);

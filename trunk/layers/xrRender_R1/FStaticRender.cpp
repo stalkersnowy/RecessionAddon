@@ -441,8 +441,8 @@ void CRender::Calculate				()
 							// rendering
 							if (o_it==uID_LTRACK && renderable->renderable_ROS())	{
 								// track lighting environment
-								CROS_impl* _T = (CROS_impl*)renderable->renderable_ROS();
-								_T->update			(renderable);
+								CROS_impl*		T = (CROS_impl*)renderable->renderable_ROS();
+								T->update			(renderable);
 							}
 							set_Object						(renderable);
 							renderable->renderable_Render	();

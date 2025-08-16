@@ -17,27 +17,27 @@ bool r_eof(NET_Packet *self)
 	return			(!!self->r_eof());
 }
 
-LPCSTR r_stringZ(NET_Packet * _self)
+LPCSTR r_stringZ(NET_Packet *self)
 {
 	shared_str			temp;
-	_self->r_stringZ	(temp);
+	self->r_stringZ	(temp);
 	return			(*temp);
 }
 
-void w_bool(NET_Packet * _self, bool value)
+void w_bool(NET_Packet *self, bool value)
 {
-	_self->w_u8		(value ? 1 : 0);
+	self->w_u8		(value ? 1 : 0);
 }
 
-bool r_bool(NET_Packet * _self)
+bool r_bool(NET_Packet *self)
 {
-	return			(!!_self->r_u8());
+	return			(!!self->r_u8());
 }
 
-ClientID r_clientID(NET_Packet * _self)
+ClientID r_clientID(NET_Packet *self)
 {
 	ClientID		clientID;
-	_self->r_clientID(clientID);
+	self->r_clientID(clientID);
 	return clientID;
 }
 
@@ -54,7 +54,7 @@ void CScriptNetPacket::script_register(lua_State *L)
 			.def(					constructor<>()				)
 			.def("value",			&ClientID::value			)
 			.def("set",				&ClientID::set				)
-			.def(m_self == other<ClientID>()),
+			.def(self == other<ClientID>()),
 
 		class_<NET_Packet>("net_packet")
 			.def(					constructor<>()				)

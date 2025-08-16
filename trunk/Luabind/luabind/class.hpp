@@ -667,21 +667,21 @@ namespace luabind
 		template<class T>
 		struct static_scope
 		{
-			static_scope(T& self_) : m_self(self_)
+			static_scope(T& self_) : self(self_)
 			{
 			}
 
 			T& operator[](scope s) const
 			{
-				m_self.add_inner_scope(s);
-				return m_self;
+				self.add_inner_scope(s);
+				return self;
 			}
 
 		private:
 			template<class U> void operator,(U const&) const;
 			void operator=(static_scope const&);
 			
-			T& m_self;
+			T& self;
 		};
 
 		struct class_registration;
@@ -764,14 +764,14 @@ namespace luabind
 		{
 		    static void execute(void* p)
             {
-			    wrapped_self_t& m_self = wrap_access::ref(
+			    wrapped_self_t& self = wrap_access::ref(
 					*static_cast<W*>(static_cast<T*>(p))
 				);
 
-				LUABIND_CHECK_STACK(m_self.state());
+				LUABIND_CHECK_STACK(self.state());
 
-				m_self.get(m_self.state());
-				m_self.m_strong_ref.set(m_self.state());
+				self.get(self.state());
+				self.m_strong_ref.set(self.state());
             }
         };
 

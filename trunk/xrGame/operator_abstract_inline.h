@@ -149,9 +149,9 @@ IC	bool CAbstractOperator::applicable_reverse	(const CSConditionState &condition
 }
 
 TEMPLATE_SPECIALIZATION
-IC	bool CAbstractOperator::apply_reverse	(const CSConditionState &condition, const CSConditionState &start, CSConditionState & _result, const CSConditionState &self_condition) const
+IC	bool CAbstractOperator::apply_reverse	(const CSConditionState &condition, const CSConditionState &start, CSConditionState &result, const CSConditionState &self_condition) const
 {
-	_result.clear			();
+	result.clear			();
 	bool					changed = false;
 	xr_vector<COperatorCondition>::const_iterator	i = self_condition.conditions().begin();
 	xr_vector<COperatorCondition>::const_iterator	e = self_condition.conditions().end();
@@ -169,18 +169,18 @@ IC	bool CAbstractOperator::apply_reverse	(const CSConditionState &condition, con
 				++J;
 			}
 			else
-				_result.add_condition_back(*I);
+				result.add_condition_back(*I);
 			++I;
 		}
 		else
 			if ((*I).condition() > (*i).condition()) {
-				_result.add_condition_back(*i);
+				result.add_condition_back(*i);
 				++i;
 			}
 			else {
 				if ((*I).value() != (*i).value())
 					changed	= true;
-				_result.add_condition_back(*i);
+				result.add_condition_back(*i);
 				++I;
 				++i;
 			}
@@ -189,7 +189,7 @@ IC	bool CAbstractOperator::apply_reverse	(const CSConditionState &condition, con
 		if (!changed)
 			return			(false);
 		for ( ; (i != e); ++i)
-			_result.add_condition_back(*i);
+			result.add_condition_back(*i);
 		return				(true);
 	}
 
@@ -198,7 +198,7 @@ IC	bool CAbstractOperator::apply_reverse	(const CSConditionState &condition, con
 			++J;
 		else
 			if ((*J).condition() > (*I).condition()) {
-				_result.add_condition_back(*I);
+				result.add_condition_back(*I);
 				++I;
 			}
 			else {
@@ -213,7 +213,7 @@ IC	bool CAbstractOperator::apply_reverse	(const CSConditionState &condition, con
 
 	if ((J == EE) && (I != E))
 		for ( ; (I != E); ++I)
-			_result.add_condition_back(*I);
+			result.add_condition_back(*I);
 
 	return					(true);
 }
@@ -277,9 +277,9 @@ IC	bool CAbstractOperator::applicable	(const CSConditionState &current, const CS
 
 TEMPLATE_SPECIALIZATION
 template <typename T>
-IC	const typename CAbstractOperator::CSConditionState &CAbstractOperator::apply	(const CSConditionState &current, const CSConditionState &effects, CSConditionState &_result, CSConditionState &start,T &problem_solver) const
+IC	const typename CAbstractOperator::CSConditionState &CAbstractOperator::apply	(const CSConditionState &current, const CSConditionState &effects, CSConditionState &result, CSConditionState &start,T &problem_solver) const
 {
-	_result.clear			();
+	result.clear			();
 	xr_vector<COperatorCondition>::const_iterator	I = current.conditions().begin();
 	xr_vector<COperatorCondition>::const_iterator	E = current.conditions().end();
 	xr_vector<COperatorCondition>::const_iterator	i = effects.conditions().begin();
@@ -288,7 +288,7 @@ IC	const typename CAbstractOperator::CSConditionState &CAbstractOperator::apply	
 	xr_vector<COperatorCondition>::const_iterator	EE = start.conditions().end();
 	for ( ; (I != E) && (i != e); ) {
 		if ((*I).condition() < (*i).condition()) {
-			_result.add_condition_back(*I);
+			result.add_condition_back(*I);
 			++I;
 		}
 		else
@@ -298,13 +298,13 @@ IC	const typename CAbstractOperator::CSConditionState &CAbstractOperator::apply	
 				if ((II == EE) || ((*II).condition() > (*i).condition()))
 					problem_solver.evaluate_condition(II,EE,(*i).condition());
 				if ((*II).value() != (*i).value())
-					_result.add_condition_back(*i);
+					result.add_condition_back(*i);
 				++II;
 				++i;
 			}
 			else {
 				if ((*I).value() == (*i).value())
-					_result.add_condition_back(*i);
+					result.add_condition_back(*i);
 				++I;
 				++i;
 			}
@@ -315,8 +315,8 @@ IC	const typename CAbstractOperator::CSConditionState &CAbstractOperator::apply	
 	}
 	else {
 		for ( ; I != E; ++I)
-			_result.add_condition_back(*I);
-		return	(_result);
+			result.add_condition_back(*I);
+		return	(result);
 	}
 
 	for ( ; i != e; ) {
@@ -328,50 +328,50 @@ IC	const typename CAbstractOperator::CSConditionState &CAbstractOperator::apply	
 		else {
 			VERIFY	((*I).condition() == (*i).condition());
 			if ((*I).value() != (*i).value())
-				_result.add_condition_back(*i);
+				result.add_condition_back(*i);
 			++I;
 			++i;
 		}
 	}
 
-	return		(_result);
+	return		(result);
 }
 
 TEMPLATE_SPECIALIZATION
-IC	const typename CAbstractOperator::CSConditionState &CAbstractOperator::apply	(const CSConditionState &condition, const CSConditionState &self_condition, CSConditionState & _result) const
+IC	const typename CAbstractOperator::CSConditionState &CAbstractOperator::apply	(const CSConditionState &condition, const CSConditionState &self_condition, CSConditionState &result) const
 {
-	_result.clear			();
+	result.clear			();
 	xr_vector<COperatorCondition>::const_iterator	i = self_condition.conditions().begin();
 	xr_vector<COperatorCondition>::const_iterator	e = self_condition.conditions().end();
 	xr_vector<COperatorCondition>::const_iterator	I = condition.conditions().begin();
 	xr_vector<COperatorCondition>::const_iterator	E = condition.conditions().end();
 	for ( ; (I != E) && (i != e); )
 		if ((*I).condition() < (*i).condition()) {
-			_result.add_condition_back(*I);
+			result.add_condition_back(*I);
 			++I;
 		}
 		else
 			if ((*I).condition() > (*i).condition()) {
-				_result.add_condition_back(*i);
+				result.add_condition_back(*i);
 				++i;
 			}
 			else {
 				VERIFY			((*I).condition() == (*i).condition());
-				_result.add_condition_back(*i);
+				result.add_condition_back(*i);
 				++I;
 				++i;
 			}
 
 	if (i == e) {
 		for ( ; I != E; ++I)
-			_result.add_condition_back(*I);
+			result.add_condition_back(*I);
 	}
 	else {
 		for ( ; i != e; ++i)
-			_result.add_condition_back(*i);
+			result.add_condition_back(*i);
 	}
 
-	return					(_result);
+	return					(result);
 }
 
 TEMPLATE_SPECIALIZATION

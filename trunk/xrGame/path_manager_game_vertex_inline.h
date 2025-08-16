@@ -61,14 +61,14 @@ IC	bool CGameVertexPathManager::is_accessible	(const _index_type &vertex_id) con
 	if (!m_start_is_accessible)
 		return				(true);
 
-	typedef _Parameters::VERTEX_TYPES::const_iterator	_const_iterator;
+	typedef _Parameters::VERTEX_TYPES::const_iterator	const_iterator;
 #ifdef DEBUG
 	if (m_evaluator->m_vertex_types->empty()) {
 		Msg					("! warning : empty vertex types");
 	}
 #endif
-	_const_iterator			I = m_evaluator->m_vertex_types->begin();
-	_const_iterator			E = m_evaluator->m_vertex_types->end();
+	const_iterator			I = m_evaluator->m_vertex_types->begin();
+	const_iterator			E = m_evaluator->m_vertex_types->end();
 	for ( ; I != E; ++I)
 		if (graph->mask((*I).tMask,graph->vertex(vertex_id)->vertex_type()))
 			return			(true);

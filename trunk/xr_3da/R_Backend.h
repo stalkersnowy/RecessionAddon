@@ -142,10 +142,10 @@ public:
 	IC	void						set_ZB				(IDirect3DSurface9* ZB);
 
 	IC	void						set_Constants		(R_constant_table* C);
-	IC	void						set_Constants		(ref_ctable& _C)						{ set_Constants(&*_C);			}
+	IC	void						set_Constants		(ref_ctable& C)						{ set_Constants(&*C);			}
 
 		void						set_Textures		(STextureList* T);
-	IC	void						set_Textures		(ref_texture_list& _T)				{ set_Textures(&*_T);			}
+	IC	void						set_Textures		(ref_texture_list& T)				{ set_Textures(&*T);			}
 
 #ifdef _EDITOR
 	IC	void						set_Matrices		(SMatrixList* M);
@@ -186,12 +186,12 @@ public:
 	ICF	ref_constant				get_c				(shared_str&	n)													{ if (ctable)	return ctable->get(n);else return 0;}
 
 	// constants - direct (fast)
-	ICF	void						set_c				(R_constant* _C, const Fmatrix& A)									{ if (_C)		constants.set(_C,A);					}
-	ICF	void						set_c				(R_constant* _C, const Fvector4& A)									{ if (_C)		constants.set(_C,A);					}
-	ICF	void						set_c				(R_constant* _C, float x, float y, float z, float w)				{ if (_C)		constants.set(_C,x,y,z,w);			}
-	ICF	void						set_ca				(R_constant* _C, u32 e, const Fmatrix& A)							{ if (_C)		constants.seta(_C,e,A);				}
-	ICF	void						set_ca				(R_constant* _C, u32 e, const Fvector4& A)							{ if (_C)		constants.seta(_C,e,A);				}
-	ICF	void						set_ca				(R_constant* _C, u32 e, float x, float y, float z, float w)			{ if (_C)		constants.seta(_C,e,x,y,z,w);		}
+	ICF	void						set_c				(R_constant* C, const Fmatrix& A)									{ if (C)		constants.set(C,A);					}
+	ICF	void						set_c				(R_constant* C, const Fvector4& A)									{ if (C)		constants.set(C,A);					}
+	ICF	void						set_c				(R_constant* C, float x, float y, float z, float w)					{ if (C)		constants.set(C,x,y,z,w);			}
+	ICF	void						set_ca				(R_constant* C, u32 e, const Fmatrix& A)							{ if (C)		constants.seta(C,e,A);				}
+	ICF	void						set_ca				(R_constant* C, u32 e, const Fvector4& A)							{ if (C)		constants.seta(C,e,A);				}
+	ICF	void						set_ca				(R_constant* C, u32 e, float x, float y, float z, float w)			{ if (C)		constants.seta(C,e,x,y,z,w);		}
 
 	// constants - LPCSTR (slow)
 	ICF	void						set_c				(LPCSTR n, const Fmatrix& A)										{ if(ctable)	set_c	(&*ctable->get(n),A);		}

@@ -83,10 +83,10 @@ void CActor::OnEvent		(NET_Packet& P, u16 type)
 			} 
 			else 
 			{
-				NET_Packet _P;
-				u_EventGen(_P,GE_OWNERSHIP_REJECT,ID());
-				_P.w_u16(u16(O->ID()));
-				u_EventSend(_P);
+				NET_Packet P;
+				u_EventGen(P,GE_OWNERSHIP_REJECT,ID());
+				P.w_u16(u16(O->ID()));
+				u_EventSend(P);
 			}
 		}
 		break;
@@ -254,10 +254,10 @@ void CActor::OnEvent		(NET_Packet& P, u16 type)
 		}break;
 	case GEG_PLAYER_ATTACH_HOLDER:
 		{
-			u32 _id = P.r_u32();
-			CObject* O	= Level().Objects.net_Find	(_id);
+			u32 id = P.r_u32();
+			CObject* O	= Level().Objects.net_Find	(id);
 			if (!O){
-				Msg("! Error: No object to attach holder [%d]", _id);
+				Msg("! Error: No object to attach holder [%d]", id);
 				break;
 			}
 			VERIFY(m_holder==NULL);
@@ -268,9 +268,9 @@ void CActor::OnEvent		(NET_Packet& P, u16 type)
 	case GEG_PLAYER_DETACH_HOLDER:
 		{
 			if			(!m_holder)	break;
-			u32 _id			= P.r_u32();
+			u32 id			= P.r_u32();
 			CGameObject*	GO	= smart_cast<CGameObject*>(m_holder);
-			VERIFY			(_id==GO->ID());
+			VERIFY			(id==GO->ID());
 			use_Holder		(NULL);
 		}break;
 	case GEG_PLAYER_PLAY_HEADSHOT_PARTICLE:

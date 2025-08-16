@@ -53,10 +53,10 @@ public:
 	virtual bool					applicable_reverse	(const CSConditionState &condition, const CSConditionState &start, const CSConditionState &self_condition) const;
 	
 	template <typename T>
-	IC		const CSConditionState	&apply				(const CSConditionState &condition, const CSConditionState &self_condition, CSConditionState &_result, CSConditionState &current, T &problem_solver) const;
-	virtual const CSConditionState	&apply				(const CSConditionState &condition, const CSConditionState &self_condition, CSConditionState &_result) const;
+	IC		const CSConditionState	&apply				(const CSConditionState &condition, const CSConditionState &self_condition, CSConditionState &result, CSConditionState &current, T &problem_solver) const;
+	virtual const CSConditionState	&apply				(const CSConditionState &condition, const CSConditionState &self_condition, CSConditionState &result) const;
 	
-	virtual bool					apply_reverse		(const CSConditionState &condition, const CSConditionState &start, CSConditionState &_result, const CSConditionState &self_condition) const;
+	virtual bool					apply_reverse		(const CSConditionState &condition, const CSConditionState &start, CSConditionState &result, const CSConditionState &self_condition) const;
 	virtual _edge_value_type		weight				(const CSConditionState &condition0, const CSConditionState &condition1) const;
 };
 

@@ -262,7 +262,7 @@ dGeomID	CPHActivationShape::	dSpacedGeom							()
 }
 void	CPHActivationShape::	get_spatial_params					()															
 {
-	spatialParsFromDGeom(m_geom,spatial.sphere.P,m_AABB,spatial.sphere.R);
+	spatialParsFromDGeom(m_geom,spatial.sphere.P,AABB,spatial.sphere.R);
 }
 
 void	CPHActivationShape::	InitContact							(dContact* c,bool& do_collide,u16 ,u16 )

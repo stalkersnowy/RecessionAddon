@@ -239,7 +239,7 @@ void CPHMovementControl::Calculate(const xr_vector<DetailPathManager::STravelPat
 			m_path_distance=GetPathDir().magnitude();
 			if(m_path_distance>EPS)
 			{
-				_d = GetPathDir();
+				Fvector _d = GetPathDir();
 				_d.mul(1.f/m_path_distance);
 				SetPathDir(_d);
 			}

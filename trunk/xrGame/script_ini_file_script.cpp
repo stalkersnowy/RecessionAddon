@@ -28,7 +28,7 @@ CScriptIniFile *get_constants_ini()
 	return	((CScriptIniFile*)pConstantsSettings);
 }
 
-bool r_line(CScriptIniFile * _self, LPCSTR S, int L,	xr_string &N, xr_string &V)
+bool r_line(CScriptIniFile * self, LPCSTR S, int L,	xr_string &N, xr_string &V)
 {
 	THROW3			(self->section_exist(S),"Cannot find section",S);
 	THROW2			((int)self->line_count(S) > L,"Invalid line number");
@@ -37,7 +37,7 @@ bool r_line(CScriptIniFile * _self, LPCSTR S, int L,	xr_string &N, xr_string &V)
 	V				= "";
 	
 	LPCSTR			n,v;
-	bool			result = !!_self->r_line(S,L,&n,&v);
+	bool			result = !!self->r_line(S,L,&n,&v);
 	if (!result)
 		return		(false);
 
@@ -90,6 +90,6 @@ void CScriptIniFile::script_register(lua_State *L)
 		def("game_ini",				&get_game_ini),
 #endif // XRGAME_EXPORTS
 		def("constants_ini",		&get_constants_ini),
-		def("create_ini_file",		&create_ini_file,	adopt(m_result))
+		def("create_ini_file",		&create_ini_file,	adopt(result))
 	];
 }

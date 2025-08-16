@@ -470,9 +470,9 @@ void CUIMpTradeWnd::ApplyPreset(ETradePreset idx)
 			{
 				if(_one.addon_state)
 				{
-					for(u32 ii=0; i<3; ++i)
+					for(u32 i=0; i<3; ++i)
 					{
-						item_addon_type at		= (ii==0)?at_scope : ((ii==1)?at_glauncher : at_silencer);
+						item_addon_type at		= (i==0)?at_scope : ((i==1)?at_glauncher : at_silencer);
 						
 						if(!(_one.addon_state&at) )	
 							continue;

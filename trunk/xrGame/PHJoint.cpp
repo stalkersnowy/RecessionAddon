@@ -1198,7 +1198,7 @@ void CPHJoint::GetAxisDirDynamic(int num,Fvector& axis)
 	axis.set(result[0],result[1],result[2]);
 }
 
-void CPHJoint::GetAnchorDynamic(Fvector& _anchor)
+void CPHJoint::GetAnchorDynamic(Fvector& anchor)
 {
 	
 	dVector3 result;
@@ -1213,7 +1213,7 @@ void CPHJoint::GetAnchorDynamic(Fvector& _anchor)
 		break;
 	case slider:				R_ASSERT2(false,"position of slider joint is undefinite");
 	}
-	_anchor.set(result[0],result[1],result[2]);
+	anchor.set(result[0],result[1],result[2]);
 }
 
 CPHJoint::SPHAxis::SPHAxis(){

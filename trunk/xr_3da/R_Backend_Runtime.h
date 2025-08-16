@@ -14,22 +14,22 @@ IC void		R_xforms::set_c_wv			(R_constant* C)		{	c_wv	= C;	RCache.set_c(C,m_wv);
 IC void		R_xforms::set_c_vp			(R_constant* C)		{	c_vp	= C;	RCache.set_c(C,m_vp);	};
 IC void		R_xforms::set_c_wvp			(R_constant* C)		{	c_wvp	= C;	RCache.set_c(C,m_wvp);	};
 
-IC void		CBackend::set_xform			(u32 ID, const Fmatrix& _M)
+IC void		CBackend::set_xform			(u32 ID, const Fmatrix& M)
 {
 	stat.xforms			++;
-	CHK_DX				(HW.pDevice->SetTransform((D3DTRANSFORMSTATETYPE)ID,(D3DMATRIX*)&_M));
+	CHK_DX				(HW.pDevice->SetTransform((D3DTRANSFORMSTATETYPE)ID,(D3DMATRIX*)&M));
 }
-IC	void	CBackend::set_xform_world	(const Fmatrix& _M)
+IC	void	CBackend::set_xform_world	(const Fmatrix& M)
 { 
-	xforms.set_W(_M);
+	xforms.set_W(M);	
 }
-IC	void	CBackend::set_xform_view	(const Fmatrix& _M)
+IC	void	CBackend::set_xform_view	(const Fmatrix& M)					
 { 
-	xforms.set_V(_M);
+	xforms.set_V(M);	
 }
-IC	void	CBackend::set_xform_project	(const Fmatrix& _M)
+IC	void	CBackend::set_xform_project	(const Fmatrix& M)
 { 
-	xforms.set_P(_M);
+	xforms.set_P(M);	
 }
 IC	const Fmatrix&	CBackend::get_xform_world	()	{ return xforms.get_W();	}
 IC	const Fmatrix&	CBackend::get_xform_view	()	{ return xforms.get_V();	}
@@ -93,23 +93,23 @@ IC void CBackend::set_Matrices			(SMatrixList*	_M)
 }
 #endif
 
-IC void CBackend::set_Constants			(R_constant_table* _C)
+IC void CBackend::set_Constants			(R_constant_table* C)
 {
 	// caching
-	if (ctable== _C)	return;
-	ctable			= _C;
+	if (ctable==C)	return;
+	ctable			= C;
 	xforms.unmap	();
 	hemi.unmap		();
-	if (0== _C)		return;
+	if (0== C)		return;
 
 	PGO				(Msg("PGO:c-table"));
 
 	// process constant-loaders
-	R_constant_table::c_table::iterator	it	= _C->table.begin();
-	R_constant_table::c_table::iterator	end	= _C->table.end	();
+	R_constant_table::c_table::iterator	it	= C->table.begin();
+	R_constant_table::c_table::iterator	end	= C->table.end	();
 	for (; it!=end; it++)	{
-		R_constant* C_ = &**it;
-		if (C_->handler)	C_->handler->setup(C_);
+		R_constant*		C	= &**it;
+		if (C->handler)	C->handler->setup(C);
 	}
 }
 
@@ -194,23 +194,23 @@ ICF void CBackend::set_Indices			(IDirect3DIndexBuffer9* _ib)
 	}
 }
 
-ICF void CBackend::Render				(D3DPRIMITIVETYPE _T, u32 baseV, u32 startV, u32 countV, u32 startI, u32 PC)
+ICF void CBackend::Render				(D3DPRIMITIVETYPE T, u32 baseV, u32 startV, u32 countV, u32 startI, u32 PC)
 {
 	stat.calls			++;
 	stat.verts			+= countV;
 	stat.polys			+= PC;
 	constants.flush		();
-	CHK_DX				(HW.pDevice->DrawIndexedPrimitive(_T,baseV, startV, countV,startI,PC));
+	CHK_DX				(HW.pDevice->DrawIndexedPrimitive(T,baseV, startV, countV,startI,PC));
 	PGO					(Msg("PGO:DIP:%dv/%df",countV,PC));
 }
 
-ICF void CBackend::Render				(D3DPRIMITIVETYPE _T, u32 startV, u32 PC)
+ICF void CBackend::Render				(D3DPRIMITIVETYPE T, u32 startV, u32 PC)
 {
 	stat.calls			++;
 	stat.verts			+= 3*PC;
 	stat.polys			+= PC;
 	constants.flush		();
-	CHK_DX				(HW.pDevice->DrawPrimitive(_T, startV, PC));
+	CHK_DX				(HW.pDevice->DrawPrimitive(T, startV, PC));
 	PGO					(Msg("PGO:DIP:%dv/%df",3*PC,PC));
 }
 

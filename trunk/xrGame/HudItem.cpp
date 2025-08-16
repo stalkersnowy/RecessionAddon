@@ -300,8 +300,8 @@ void CHudItem::animGet	(MotionSVec& lst, LPCSTR prefix)
 	{
 		string128		sh_anim;
 		sprintf_s			(sh_anim,"%s%d",prefix,i);
-		const MotionID	& _M = m_pHUD->animGet(sh_anim);
-		if (_M)			lst.push_back(_M);
+		const MotionID	&M = m_pHUD->animGet(sh_anim);
+		if (M)			lst.push_back(M);
 	}
 	R_ASSERT2			(!lst.empty(),prefix);
 }

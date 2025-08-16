@@ -105,7 +105,7 @@ CActor::CActor() : CEntityAlive()
 	fPrevCamPos				= 0.0f;
 	vPrevCamDir.set			(0.f,0.f,1.f);
 	fCurAVelocity			= 0.0f;
-	// эффекторы
+	// ���������
 	pCamBobbing				= 0;
 	m_pShootingEffector		= NULL;
 	m_pSleepEffector		= NULL;
@@ -143,7 +143,7 @@ CActor::CActor() : CEntityAlive()
 	Device.seqRender.Add	(this,REG_PRIORITY_LOW);
 #endif
 
-	//разрешить использование пояса в inventory
+	//��������� ������������� ����� � inventory
 	inventory().SetBeltUseful(true);
 
 	m_pPersonWeLookingAt	= NULL;
@@ -330,11 +330,11 @@ void CActor::Load	(LPCSTR section )
 
 	character_physics_support()->in_Load		(section);
 	
-	//загрузить параметры эффектора
+	//��������� ��������� ���������
 	LoadShootingEffector	("shooting_effector");
 	LoadSleepEffector		("sleep_effector");
 
-	//загрузить параметры смещения firepoint
+	//��������� ��������� �������� firepoint
 	m_vMissileOffset	= pSettings->r_fvector3(section,"missile_throw_offset");
 
 	//Weapons				= xr_new<CWeaponList> (this);
@@ -370,7 +370,7 @@ if(!g_dedicated_server)
 	// sheduler
 	shedule.t_min				= shedule.t_max = 1;
 
-	// настройки дисперсии стрельбы
+	// ��������� ��������� ��������
 	m_fDispBase					= pSettings->r_float		(section,"disp_base"		 );
 	m_fDispBase					= deg2rad(m_fDispBase);
 
@@ -450,21 +450,21 @@ void	CActor::Hit							(SHit* pHDS)
 			if (Device.dwFrame != last_hit_frame &&
 				HDS.bone() != BI_NONE)
 			{		
-				// вычислить позицию и направленность партикла
+				// ��������� ������� � �������������� ��������
 				Fmatrix pos; 
 
 				CParticlesPlayer::MakeXFORM(this,HDS.bone(),HDS.dir,HDS.p_in_bone_space,pos);
 
-				// установить particles
-				CParticlesObject* psO = NULL;
+				// ���������� particles
+				CParticlesObject* ps = NULL;
 
 				if (eacFirstEye == cam_active && this == Level().CurrentEntity())
-					psO = CParticlesObject::Create(invincibility_fire_shield_1st,TRUE);
+					ps = CParticlesObject::Create(invincibility_fire_shield_1st,TRUE);
 				else
-					psO = CParticlesObject::Create(invincibility_fire_shield_3rd,TRUE);
+					ps = CParticlesObject::Create(invincibility_fire_shield_3rd,TRUE);
 
-				psO->UpdateParent(pos,Fvector().set(0.f,0.f,0.f));
-				GamePersistent().ps_needtoplay.push_back(psO);
+				ps->UpdateParent(pos,Fvector().set(0.f,0.f,0.f));
+				GamePersistent().ps_needtoplay.push_back(ps);
 			};
 		};
 		 
@@ -769,7 +769,7 @@ void CActor::Die(CObject* who)
 		};
 
 
-		///!!! чистка пояса
+		///!!! ������ �����
 		TIItemContainer &l_blist = inventory().m_belt;
 		while (!l_blist.empty())	
 			inventory().Ruck(l_blist.front());
@@ -996,12 +996,12 @@ void CActor::shedule_Update	(u32 DT)
 {
 	setSVU(OnServer());
 
-	//установить режим показа HUD для текущего активного слота
+	//���������� ����� ������ HUD ��� �������� ��������� �����
 	CHudItem* pHudItem = smart_cast<CHudItem*>(inventory().ActiveItem());	
 	if(pHudItem) 
 		pHudItem->SetHUDmode(HUDview());
 
-	//обновление инвентаря
+	//���������� ���������
 	UpdateInventoryOwner			(DT);
 	if (GameID() == GAME_SINGLE)
 		GameTaskManager().UpdateTasks	();
@@ -1122,7 +1122,7 @@ void CActor::shedule_Update	(u32 DT)
 
 	inherited::shedule_Update	(DT);
 
-	//эффектор включаемый при ходьбе
+	//�������� ���������� ��� ������
 	if (!pCamBobbing)
 	{
 		pCamBobbing = xr_new<CEffectorBobbing>	();
@@ -1130,7 +1130,7 @@ void CActor::shedule_Update	(u32 DT)
 	}
 	pCamBobbing->SetState						(mstate_real, conditions().IsLimping(), IsZoomAimingMode());
 
-	//звук тяжелого дыхания при уталости и хромании
+	//���� �������� ������� ��� �������� � ��������
 	if(this==Level().CurrentControlEntity() && !g_dedicated_server )
 	{
 		if(conditions().IsLimping() && g_Alive())
@@ -1167,10 +1167,10 @@ void CActor::shedule_Update	(u32 DT)
 				m_BloodSnd.stop();
 	}
 	
-	//если в режиме HUD, то сама модель актера не рисуется
+	//���� � ������ HUD, �� ���� ������ ������ �� ��������
 	if(!character_physics_support()->IsRemoved())
 										setVisible				(!HUDview	());
-	//что актер видит перед собой
+	//��� ����� ����� ����� �����
 	collide::rq_result& RQ = HUD().GetCurrentRayQuery();
 	
 
@@ -1242,7 +1242,7 @@ void CActor::shedule_Update	(u32 DT)
 
 	UpdateSleep									();
 
-	//для свойст артефактов, находящихся на поясе
+	//��� ������ ����������, ����������� �� �����
 	UpdateArtefactsOnBeltAndOutfit				();
 	m_pPhysics_support->in_shedule_Update		(DT);
 	Check_for_AutoPickUp						();
@@ -1528,7 +1528,7 @@ void CActor::MoveArtefactBelt(const CArtefact* artefact, bool on_belt)
 {
 	VERIFY(artefact);
 
-	//повесить артефакт на пояс
+	//�������� �������� �� ����
 	if(on_belt)
 	{
 		VERIFY(m_ArtefactsOnBelt.end() == std::find(m_ArtefactsOnBelt.begin(), m_ArtefactsOnBelt.end(), artefact));
@@ -1731,11 +1731,11 @@ bool CActor::can_attach			(const CInventoryItem *inventory_item) const
 	if (!item || /*!item->enabled() ||*/ !item->can_be_attached())
 		return			(false);
 
-	//можно ли присоединять объекты такого типа
+	//����� �� ������������ ������� ������ ����
 	if( m_attach_item_sections.end() == std::find(m_attach_item_sections.begin(),m_attach_item_sections.end(),inventory_item->object().cNameSect()) )
 		return false;
 
-	//если уже есть присоединненый объет такого типа 
+	//���� ��� ���� �������������� ����� ������ ���� 
 	if(attached(inventory_item->object().cNameSect()))
 		return false;
 

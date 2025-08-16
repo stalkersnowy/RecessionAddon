@@ -1567,8 +1567,8 @@ namespace luabind { namespace detail
 
 namespace luabind {	 namespace
 {
-	LUABIND_ANONYMOUS_FIX boost::arg<0> m_return_value;
-	LUABIND_ANONYMOUS_FIX boost::arg<0> m_result;
+	LUABIND_ANONYMOUS_FIX boost::arg<0> return_value;
+	LUABIND_ANONYMOUS_FIX boost::arg<0> result;
 }}
 
 #include <luabind/detail/object_funs.hpp>

@@ -319,8 +319,8 @@ namespace luabind {
 
     namespace {
 
-        LUABIND_ANONYMOUS_FIX detail::self_type m_self;
-        LUABIND_ANONYMOUS_FIX detail::const_self_type m_const_self;
+        LUABIND_ANONYMOUS_FIX detail::self_type self;
+        LUABIND_ANONYMOUS_FIX detail::const_self_type const_self;
 
     } // namespace unnamed
     

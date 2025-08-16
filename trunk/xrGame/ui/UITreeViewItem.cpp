@@ -404,19 +404,19 @@ void CUITreeViewItem::MarkArticleAsRead(bool value)
 
 //////////////////////////////////////////////////////////////////////////
 
-void CUITreeViewItem::CheckParentMark(CUITreeViewItem *_pOwner)
+void CUITreeViewItem::CheckParentMark(CUITreeViewItem *pOwner)
 {
 	// Берем рута, смотрим на его чилдов, и если среди них есть хоть 1
 	// непрочитанный, то маркаем себя как непрочитанный, и  говорим провериться выше.
 	bool f = false;
-	if (_pOwner && _pOwner->IsRoot())
+	if (pOwner && pOwner->IsRoot())
 	{
-		for (SubItems_it it = _pOwner->vSubItems.begin(); it != _pOwner->vSubItems.end(); ++it)
+		for (SubItems_it it = pOwner->vSubItems.begin(); it != pOwner->vSubItems.end(); ++it)
 		{
 			if (!(*it)->IsArticleReaded())
 			{
-				_pOwner->m_bArticleRead = false;
-				_pOwner->SetItemColor();
+				pOwner->m_bArticleRead = false;
+				pOwner->SetItemColor();
 				f = true;
 			}
 		}

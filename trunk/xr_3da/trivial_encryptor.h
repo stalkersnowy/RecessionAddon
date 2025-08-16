@@ -79,11 +79,11 @@ public:
 			m_encrypt_seed     = 24031979;
 		}
 
-		type					*alphabet = (type*)_alloca(sizeof(type)*alphabet_size);
+		type					*m_alphabet = (type*)_alloca(sizeof(type)*alphabet_size);
 
 
 		for (u32 i=0; i<alphabet_size; ++i)
-			alphabet[i]		= (type)i;
+			m_alphabet[i]		= (type)i;
 
 		random32				temp;
 		temp.seed				(m_table_seed);
@@ -93,12 +93,12 @@ public:
 			while (j == k)
 				k				= temp.random(alphabet_size);
 
-			std::swap			(alphabet[j],alphabet[k]);
+			std::swap			(m_alphabet[j],m_alphabet[k]);
 		}
 
 	//#ifdef TRIVIAL_ENCRYPTOR_DECODER
 		for (u32 i=0; i<alphabet_size; ++i)
-			m_alphabet_back[alphabet[i]]	= (type)i;
+			m_alphabet_back[m_alphabet[i]]	= (type)i;
 	//#endif // TRIVIAL_ENCRYPTOR_DECODER
 	}
 
@@ -107,7 +107,7 @@ public:
 	{
 //#	ifndef TRIVIAL_ENCRYPTOR_DECODER
 		static bool m_initialized	= false;
-		auto alphabet = (type*)_alloca(sizeof(type) * alphabet_size);
+		auto m_alphabet = (type*)_alloca(sizeof(type) * alphabet_size);
 //#	endif // TRIVIAL_ENCRYPTOR_DECODER
 		if (!m_initialized) {
 			initialize			();
@@ -120,7 +120,7 @@ public:
 		const u8				*E = (const u8*)source + source_size;
 		u8						*J = (u8*)destination;
 		for ( ; I != E; ++I, ++J)
-			*J					= alphabet[*I] ^ type(temp.random(256) & 0xff);
+			*J					= m_alphabet[*I] ^ type(temp.random(256) & 0xff);
 	}
 //#endif // TRIVIAL_ENCRYPTOR_ENCODER
 
