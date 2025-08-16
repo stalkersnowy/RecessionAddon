@@ -111,8 +111,8 @@ BOOL CMissile::net_Spawn(CSE_Abstract* DC)
 
 void CMissile::net_Destroy() 
 {
-	inherited::net_Destroy();
 	m_fake_missile = 0;
+	inherited::net_Destroy();
 }
 
 void CMissile::OnActiveItem		()
