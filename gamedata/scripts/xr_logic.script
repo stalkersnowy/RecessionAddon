@@ -235,85 +235,111 @@ end
 -- ВНОСЯ ИЗМЕНЕНИЯ В ЭТУ ФУНКЦИЮ, НЕ ЗАБЫВАЙТЕ ДОБАВЛЯТЬ СООТВЕТСТВУЮЩИЕ СТРОКИ И В disable_generic_schemes
 ------------------------------------------------------------------------------------------------------------
 function enable_generic_schemes(ini, npc, stype, section)
+	local field_value --nv150405 reduce unnecessary local usage
+	local get_string = utils.cfg_get_string
 	if stype == modules.stype_stalker then
 		--xr_reactions.set_reactions(npc, ini, "reactions", section)
-		xr_danger.set_danger(npc, ini, "danger", "danger")
+		-- xr_danger.set_danger(npc, ini, "danger", "danger") --executes xr_logic.assign_storage_and_bind(npc, ini, scheme, section)
+		assign_storage_and_bind(npc, ini, "danger", "danger") --quicker in vanilla
 
-		local combat_section = utils.cfg_get_string(ini, section, "on_combat", npc, false, "")
-		xr_combat.set_combat_checker(npc, ini, "combat", combat_section)
+		-- local combat_section
+		field_value = get_string(ini, section, "on_combat", npc, false, "")
+		xr_combat.set_combat_checker(npc, ini, "combat", field_value)
 
-		local use_section = utils.cfg_get_string(ini, section, "on_use", npc, false, "")
-		if use_section then
-			xr_use.set_use_checker(npc, ini, "use", use_section)
-		end
-		local info_section = utils.cfg_get_string(ini, section, "info", npc, false, "")
-		if info_section then
-			stalker_generic.set_npc_info(npc, ini, "info", info_section)
-		end
-
-		local hit_section = utils.cfg_get_string(ini, section, "on_hit", npc, false, "")
-		if hit_section then
-			xr_hit.set_hit_checker(npc, ini, "hit", hit_section)
+		-- local use_section
+		field_value = get_string(ini, section, "on_use", npc, false, "")
+		if field_value then
+			xr_use.set_use_checker(npc, ini, "use", field_value)
 		end
 
-		local actor_dialogs_section = utils.cfg_get_string (ini, section, "actor_dialogs", npc, false, "")
-		if actor_dialogs_section then
-			xr_meet.set_actor_dialogs(npc, ini, "actor_dialogs", actor_dialogs_section)
+		-- local info_section
+		field_value = get_string(ini, section, "info", npc, false, "")
+		if field_value then
+			stalker_generic.set_npc_info(npc, ini, "info", field_value)
 		end
 
-		local wounded_section = utils.cfg_get_string (ini, section, "wounded", npc, false, "")
-		xr_wounded.set_wounded (npc, ini, "wounded", wounded_section)
+		-- local hit_section
+		field_value = get_string(ini, section, "on_hit", npc, false, "")
+		if field_value then
+			xr_hit.set_hit_checker(npc, ini, "hit", field_value)
+		end
+
+		-- local actor_dialogs_section
+		field_value = get_string(ini, section, "actor_dialogs", npc, false, "")
+		if field_value then
+			xr_meet.set_actor_dialogs(npc, ini, "actor_dialogs", field_value)
+		end
+
+		-- local wounded_section
+		field_value = get_string(ini, section, "wounded", npc, false, "")
+		xr_wounded.set_wounded (npc, ini, "wounded", field_value)
 
 		xr_abuse.set_abuse(npc, ini, "abuse", section)
 
-		local meet_section = utils.cfg_get_string (ini, section, "meet", npc, false, "")
-		xr_meet.set_meet (npc, ini, "meet", meet_section)
+		if _z and _z.sanb_enabled and anomaly_evader then
+			anomaly_evader.set_evade(npc,ini,"evader",section)
+		end
 
-		local death_section = utils.cfg_get_string (ini, section, "on_death", npc, false, "")
-		xr_death.set_death (npc, ini, "death", death_section)
+		-- local meet_section
+		field_value = get_string(ini, section, "meet", npc, false, "")
+		xr_meet.set_meet (npc, ini, "meet", field_value)
 
-		local heli_hunter_section = utils.cfg_get_string(ini, section, "heli_hunter", npc, false, "")
-		xr_heli_hunter.set_scheme(npc, ini, "heli_hunter", heli_hunter_section)
+		-- local death_section
+		field_value = get_string(ini, section, "on_death", npc, false, "")
+		xr_death.set_death (npc, ini, "death", field_value)
 
-		local combat_ignore_section = utils.cfg_get_string(ini, section, "combat_ignore", npc, false, "")
-		if combat_ignore_section then
-			--printf("combat_ignore_section= '%s'", combat_ignore_section )
-			xr_combat_ignore.set_combat_ignore_checker(npc, ini, "combat_ignore", combat_ignore_section)
+		-- local heli_hunter_section
+		field_value = get_string(ini, section, "heli_hunter", npc, false, "")
+		-- nv130308 this scheme is not used by 99% of NPCs, but existing games already saved this useless section on each
+		-- if field_value then xr_heli_hunter.set_scheme(npc, ini, "heli_hunter", field_value) end
+		xr_heli_hunter.set_scheme(npc, ini, "heli_hunter", field_value)
+
+		-- local combat_ignore_section
+		field_value = get_string(ini, section, "combat_ignore", npc, false, "")
+		if field_value then
+			-- printf("combat_ignore_section= '%s'", field_value )
+			xr_combat_ignore.set_combat_ignore_checker(npc, ini, "combat_ignore", field_value)
 		end
 
 
 	elseif stype == modules.stype_mobile then
-		local combat_section = utils.cfg_get_string(ini, section, "on_combat", npc, false, "")
-		if combat_section then
-			mob_combat.set_scheme(npc, ini, "mob_combat", combat_section)
+		-- local combat_section
+		field_value = get_string(ini, section, "on_combat", npc, false, "")
+		if field_value then
+			mob_combat.set_scheme(npc, ini, "mob_combat", field_value)
 		end
 
-		local death_section = utils.cfg_get_string(ini, section, "on_death", npc, false, "")
-		mob_death.set_scheme(npc, ini, "mob_death", death_section)
+		-- local death_section
+		field_value = get_string(ini, section, "on_death", npc, false, "")
+		mob_death.set_scheme(npc, ini, "mob_death", field_value)
 
-		local trade_section = utils.cfg_get_string(ini, section, "on_trade", npc, false, "")
-		if trade_section then
-			mob_trade.set_scheme(npc, ini, "mob_trade", trade_section)
+		-- local trade_section
+		field_value = get_string(ini, section, "on_trade", npc, false, "")
+		if field_value then
+			mob_trade.set_scheme(npc, ini, "mob_trade", field_value)
 		end
 
-		local hit_section = utils.cfg_get_string(ini, section, "on_hit", npc, false, "")
-		if hit_section then
-			xr_hit.set_hit_checker(npc, ini, "hit", hit_section)
+		-- local hit_section
+		field_value = get_string(ini, section, "on_hit", npc, false, "")
+		if field_value then
+			xr_hit.set_hit_checker(npc, ini, "hit", field_value)
 		end
 
 		mob_panic.set_scheme(npc, ini, "mob_panic")
 
 	elseif stype == modules.stype_item then
-		local hit_section = utils.cfg_get_string(ini, section, "on_hit", npc, false, "")
-		--printf("HIT SECTION [%s]", tostring(hit_section))
-		if hit_section then
-			ph_on_hit.set_scheme(npc, ini, "ph_on_hit", hit_section)
+		-- local hit_section
+		field_value = get_string(ini, section, "on_hit", npc, false, "")
+		-- printf("HIT SECTION [%s]", tostring(field_value))
+		if field_value then
+			ph_on_hit.set_scheme(npc, ini, "ph_on_hit", field_value)
 		end
 
 	elseif stype == modules.stype_heli then
-		local hit_section = utils.cfg_get_string(ini, section, "on_hit", npc, false, "")
-		if hit_section then
-			xr_hit.set_hit_checker(npc, ini, "hit", hit_section)
+		-- local hit_section
+		field_value = get_string(ini, section, "on_hit", npc, false, "")
+		if field_value then
+			xr_hit.set_hit_checker(npc, ini, "hit", field_value)
 		end
 	end
 end
@@ -360,6 +386,7 @@ function activate_by_section(npc, ini, section, loading)
 		-- Сбросить общие схемы:
 		reset_generic_schemes_on_scheme_switch(npc, scheme, section)
 
+--[[ nv130308 validation is now done (once) when scheme registered in _g.load_scheme()
 		-- schemes[scheme] даст имя файла (модуля), в котором реализована схема
 		-- _G[] даст указатель на неймспейс (таблицу) этого модуля
 		local filename = schemes[scheme]
@@ -371,6 +398,9 @@ function activate_by_section(npc, ini, section, loading)
 			abort("xr_logic: can't call %s.set_scheme() - a nil value", filename)
 		end
 		_G[filename].set_scheme(npc, ini, scheme, section, db.storage[npc_id]["gulag_name"])
+--]]
+		-- if your scheme is nil, it might need to be added to modules.script
+		_G[schemes[scheme]].set_scheme(npc, ini, scheme, section, db.storage[npc_id]["gulag_name"])
 		--printf("DEBUG: activate_by_section: scheme '%s' activated from section '%s'", scheme, section)
 		db.storage[npc_id].active_section = section
 		db.storage[npc_id].active_scheme = scheme

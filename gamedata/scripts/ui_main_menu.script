@@ -6,6 +6,9 @@
 -- Author:      Serhiy Vynnychenko (narrator@gsc-game.kiev.ua)
 -- Version:     0.9
 
+--nv130308 force schemes to load more easily, report errors early
+if not modules then dbglog("Scheme error: modules.script is not valid") end
+
 class "main_menu" (CUIScriptWnd)
 
 function main_menu:__init() super()

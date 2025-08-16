@@ -110,7 +110,7 @@ tips_icons = {
 	monolith = { 0, 658},
     saharov  = { 332, 470},
     prizrak  = { 415, 705},
-    killer   = { 0, 658}
+    killer   = { 332, 517}
 }
 
 tips_captions = {
@@ -127,7 +127,7 @@ tips_captions = {
 	monolith = "monolith",
     saharov  = "yan_saharov_name",
     prizrak  = "yan_ghost_name",
-    killer   = "killer"
+    killer   = "ros_volkodav_name"
 }
 
 

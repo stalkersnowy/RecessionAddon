@@ -294,7 +294,7 @@ function load_ltx(gname, type)
 	return nil
 end
 
-function checkStalker(npc_community, gulag_type, npc_rank, se_obj)
+function checkStalker(npc_community, gulag_type, se_obj)
 	if gulag_type == "dar_military_scout" then
         return se_obj:profile_name() == "dar_military_scout"
     end
@@ -302,7 +302,7 @@ function checkStalker(npc_community, gulag_type, npc_rank, se_obj)
 	return false
 end
 
-function checkMonster(npc_community, gulag_type, npc_rank, se_obj)
+function checkMonster(npc_community, gulag_type, se_obj)
 	if gulag_type == "dar_com_center_poltergeist" then
 		return npc_community == "poltergeist"
 	end

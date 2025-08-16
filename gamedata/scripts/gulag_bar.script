@@ -1331,7 +1331,7 @@ function checkStalker(npc_community, gulag_type)
 	return false
 end
 
-function checkMonster(npc_community, gulag_type, npc_rank, se_obj)
+function checkMonster(npc_community, gulag_type, se_obj)
 		
 	if gulag_type == "bar_arena_monstr" then
 		if npc_community == "arena_enemy" then

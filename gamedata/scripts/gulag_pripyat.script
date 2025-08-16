@@ -97,13 +97,10 @@ function load_ltx(gname, type)
 end
 
 -- Check communities -----------------------------------------------------
-local function checkCommon(npc_community, gulag_type, npc_rank, se_obj, stalker)
+local function checkCommon(npc_community, gulag_type, stalker)
     local g = gulags[gulag_type]
     if g then
         if g.comm then
-            if type(g.comm) == "function" then
-                return g.comm(npc_community, gulag_type, npc_rank, se_obj, stalker)
-            end
             if type(g.comm) == "boolean" then
                 return g.comm == stalker
             end
@@ -120,12 +117,12 @@ local function checkCommon(npc_community, gulag_type, npc_rank, se_obj, stalker)
     return false
 end
 
-function checkStalker(npc_community, gulag_type, npc_rank, se_obj)
-    return checkCommon(npc_community, gulag_type, npc_rank, se_obj, true)
+function checkStalker(npc_community, gulag_type)
+    return checkCommon(npc_community, gulag_type, true)
 end
 
-function checkMonster(npc_community, gulag_type, npc_rank, se_obj)
-    return checkCommon(npc_community, gulag_type, npc_rank, se_obj, false)
+function checkMonster(npc_community, gulag_type)
+    return checkCommon(npc_community, gulag_type, false)
 end
 
 
@@ -1011,7 +1008,11 @@ end
 --end
 
 function m_predicate_s_sniper(npc_info)
-    return npc_info.profile_name == "pri_monolith_specnaz" and npc_info.is_sniper_name == true
+    -- nv150306 this is the only vanilla user of is_sniper_name, so we use the storage only for pri_monolith_specnaz
+	-- return npc_info.profile_name == "pri_monolith_specnaz" and npc_info.is_sniper_name == true
+	if npc_info.profile_name ~= "pri_monolith_specnaz" then return false end
+	if npc_info.is_sniper_name == nil then npc_info.is_sniper_name = string.find(npc_info.name, "sniper") ~= nil end
+	return npc_info.is_sniper_name
 end
 
 function m_predicate_e_rpg(npc_info)

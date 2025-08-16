@@ -12,6 +12,12 @@ schemes = {} -- соответствие схем модулям
 function load_scheme(filename, scheme, stype)
 	schemes[scheme] = filename
 	-- stypes[scheme] = stype -- nv150404 not currently used
+	-- this prefetches the logic and reports problems before loading any save
+	if not _G[filename] then
+		dbglog("[ERROR]: Scheme file %s.script is not valid!", tostring(filename))
+		-- assert(false,"Scheme file "..tostring(filename)..".script is not valid!") -- does not work at game launch
+		get_console():execute("quit")
+	end
 end
 
 ----------------------------------------------------------------------

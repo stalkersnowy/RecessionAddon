@@ -59,6 +59,11 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	xml:InitFrameLine							("gameplay_adv:cap_ui",							_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_g_hud_style")
+	xml:InitStatic								("gameplay_adv:cap_g_hud_style",				_st)
+	xml:InitComboBox							("gameplay_adv:combo_g_hud_style",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_g_hide_motion_icon")
 	xml:InitStatic								("gameplay_adv:cap_g_hide_motion_icon",			_st)
 	xml:InitCheck								("gameplay_adv:check_g_hide_motion_icon",		_st)
@@ -72,11 +77,6 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	handler:SetCapCallbacks						(_st, 									"descr_g_hit_mark_index")
 	xml:InitStatic								("gameplay_adv:cap_g_hit_mark_index",			_st)
 	xml:InitSpinNum								("gameplay_adv:spin_g_hit_mark_index",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_g_hud_style")
-	xml:InitStatic								("gameplay_adv:cap_g_hud_style",				_st)
-	xml:InitComboBox							("gameplay_adv:combo_g_hud_style",				_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_g_more_contact_snds")

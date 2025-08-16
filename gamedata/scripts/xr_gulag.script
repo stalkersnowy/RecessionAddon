@@ -5,9 +5,22 @@
 
 --' в работах поле object хранит id объекта
 
-level_gulags = {gulag_general, gulag_escape, gulag_garbage, gulag_agroprom, gulag_agroprom_underground, gulag_dark_valley, gulag_labx18, gulag_bar,
-                gulag_military, gulag_radar, gulag_radar_u, gulag_yantar, gulag_pripyat, gulag_sarcofag,
-                gulag_deadcity}
+level_gulags = {
+	gen = gulag_general,
+	esc = gulag_escape,
+	gar = gulag_garbage,
+	agr = gulag_agroprom, -- and gulag_agroprom_underground (merged)
+	val = gulag_dark_valley,
+	dar = gulag_labx18,
+	bar = gulag_bar,
+	mil = gulag_military,
+	["rad"] = gulag_radar,
+	bun = gulag_radar_u,
+	yan = gulag_yantar,
+	pri = gulag_pripyat,
+	sar = gulag_sarcofag,
+	cit = gulag_deadcity
+}
 
 level_groups = {l01_escape = 1, l02_garbage = 2, l03_agroprom = 3, l03u_agr_underground = 4,
                 l04_darkvalley = 5, l04u_labx18 = 6, l05_bar = 7, l06_rostok = 8,
@@ -31,14 +44,16 @@ local path_fields = { "path_walk", "path_main", "path_home", "center_point" }
 class "gulag"
 
 -- конструктор
-function gulag:__init(smrttrn, type, squad, groups, npc_info, capacity)
+function gulag:__init(smrttrn) --, type, squad, groups, npc_info, capacity, type_prefix)
+	local gp = smrttrn.gparams
 	self.smrttrn  = smrttrn
 	self.name     = smrttrn:name()
-	self.type     = type
-	self.squad    = squad
-	self.groups   = groups or {}
-	self.npc_info = npc_info
-	self.capacity = capacity     -- общая ёмкость гулага
+	self.type     = gp.type
+	self.squad    = gp.squad
+	self.groups   = gp.groups or {}
+	self.npc_info = smrttrn.npc_info
+	self.capacity = gp.capacity     -- общая ёмкость гулага
+	self.type_prefix = gp.type_prefix --string.sub(type, 1, 3) -- nv140329 reduce downstream work
 --	self.capacity_non_exclusive  -  ёмкость гулага для неэксклюзивных персонажей
 	
 	-- nv130215 init of zero implies camp is empty, falsely changing gulag state
@@ -69,7 +84,15 @@ function gulag:load_jobs()
 	self.Job_avail_in_state_0 = {}
 
 	gulag_tasks.loadJob( self.Job, self.name, self.type, self.squad, self.groups, self )
-	self:init_ltx( self.name, self.type )
+	-- nv140313 replaced call with body of called function
+	-- self:init_ltx( self.name, self.type )
+	-- nv140329 reduce downstream work - see gulag_tasks.script
+	self.ltx, self.ltx_name = gulag_tasks.loadLtx(self.name, self.type, self.type_prefix)
+
+	if self.ltx == nil then
+		self.ltx      = gulag_tasks_ltx
+		self.ltx_name = gulag_tasks_file_name
+	end
 
 	table.sort( self.Job, function(a,b) return a.prior > b.prior end )
 
@@ -138,8 +161,19 @@ function gulag:initialize()
 		sect = "gulag1"
 	end
 
-	self.state_switch_0 = xr_logic.parse_condlist( self.smrttrn, "gulag1", "switch_0", utils.cfg_get_string(ini, sect, "switch_0", self.smrttrn, false, "", "") )
-	self.state_switch_1 = xr_logic.parse_condlist( self.smrttrn, "gulag1", "switch_1", utils.cfg_get_string(ini, sect, "switch_1", self.smrttrn, false, "", "") )
+	-- nv130217 - don't create empty tables if no switches
+	local condlist = utils.cfg_get_string(ini, sect, "switch_0", self.smrttrn, false, "", "")
+	if condlist and condlist ~= "" then
+		self.state_switch_0 = xr_logic.parse_condlist( self.smrttrn, "gulag1", "switch_0", condlist )
+	else
+		self.state_switch_0 = nil -- this is actually already nil
+	end
+	condlist = utils.cfg_get_string(ini, sect, "switch_1", self.smrttrn, false, "", "")
+	if condlist and condlist ~= "" then
+		self.state_switch_1 = xr_logic.parse_condlist( self.smrttrn, "gulag1", "switch_1", condlist )
+	else
+		self.state_switch_1 = nil
+	end
 
 	self.JobLoaded = nil
 end
@@ -174,8 +208,12 @@ function gulag:prepare_jobs()
 
 	for obj_id, jobN in pairs( self.ObjectJob ) do
 		job        = self.Job[jobN]
-		job.object = obj_id
-		self.ObjectJobPathName[obj_id] = job.path_name
+		if job ~= nil then
+			job.object = obj_id
+			self.ObjectJobPathName[obj_id] = job.path_name
+--		else
+--			dbglog("%s: job doesn't exist for jobN = %s",self.name,jobN)
+		end
 	end
 end
 
@@ -212,6 +250,7 @@ function gulag:job_exists_in_state_0( job )
 	return false
 end
 
+--[[ nv140313 folded init_ltx into load_jobs()
 -- подгрузка ltx с секциями логики для работ.
 -- может подгрузить либо динамический ltx, либо статический (gulag_tasks.ltx)
 function gulag:init_ltx(name, type)
@@ -225,6 +264,7 @@ function gulag:init_ltx(name, type)
 		self.ltx_name = gulag_tasks_file_name
 	end
 end
+--]]
 
 function gulag_cfg_get_condlist(ini, section, field)
   local str = ini:r_string(section, field)
@@ -789,7 +829,8 @@ function gulag:try_to_fill_free_high_prior_jobs( jobs, prior_block_start, prior_
 	local obj_id
 
 	for i = prior_block_start, prior_block_end do
-		if not jobs[i].object then
+		-- if not jobs[i].object then
+		if not jobs[i].object and not jobs[i].exclusive then --nv140311 per castl
 			obj_id = self:find_obj_on_jobLow_for_jobHigh( jobs, jobs[i] )
 
 			if obj_id then
@@ -885,12 +926,14 @@ end
 
 -- получить тип объекта (сталкер/монстр)
 function gulag:get_stype( obj_id )
-	if IsStalker( nil, self.npc_info[obj_id].class_id ) then
+	local cls_id = self.npc_info[obj_id].class_id -- nv150306
+	-- if IsStalker( nil, cls_id ) then -- this checks if clsid.script_stalker or clsid.actor, but here it can't be you
+	if cls_id == clsid.script_stalker then 
 		return modules.stype_stalker
-	elseif IsMonster( nil, self.npc_info[obj_id].class_id ) then
+	elseif IsMonster( nil, cls_id ) then
 		return modules.stype_mobile
 	else
-		abort( "[smart_terrain %s] obj=%s clsid=%d: gulag supports stalkers and monsters only!", self.name, self.npc_info[obj_id].name, self.npc_info[obj_id].class_id )
+		abort( "[smart_terrain %s] obj=%s clsid=%d: gulag supports stalkers and monsters only!", self.name, self.npc_info[obj_id].name, cls_id )
 	end
 end
 
@@ -915,7 +958,7 @@ function gulag:setup_squad_and_group( obj_id, job )
 	if self.Object[obj_id] ~= true then
 		local obj = self.Object[obj_id]
 
-		local squad = level_groups[level.name()]
+		-- local squad = level_groups[level.name()] -- nv150306  not needed but once, no need for local
 		if not obj:alive() then
 			--printf("CHANGE TEAM [%s] to [%s][%s][%s]. Object is DEAD, clearing", obj:name(), npc_info.team, squad or npc_info.o_squad, job.group or npc_info.o_group)
 			self:clear_dead(obj_id) --'Затычка против вылета.
@@ -923,7 +966,9 @@ function gulag:setup_squad_and_group( obj_id, job )
 		end
 
 		--printf("CHANGE TEAM [%s] to [%s][%s][%s]", obj:name(), npc_info.team, squad or npc_info.o_squad, job.group or npc_info.o_group )
-		obj:change_team( npc_info.team, squad or npc_info.o_squad, job.group or npc_info.o_group )
+		-- nv150306 this is for VANILLA, change to suit your mod (e.g., vanilla squad is always valid)
+		-- obj:change_team( npc_info.team, squad or npc_info.o_squad, job.group or npc_info.o_group )
+		obj:change_team( npc_info.se_obj:g_team(), level_groups[level.name()], job.group or npc_info.o_group )
 
 		npc_info.squad = obj:squad()
 		npc_info.group = obj:group()
@@ -1160,7 +1205,8 @@ function gulag:set_relation( relation, target_obj )
 	end
 end
 
-function gulag:set_goodwill( relation, target_obj )
+-- function gulag:set_goodwill( relation, target_obj ) --nv140311 per castl
+function gulag:set_goodwill( goodwill, target_obj )
 	for obj_id, obj in pairs( self.Object ) do
 		if obj ~= true and level.object_by_id( obj_id ) ~= nil then
 			obj:set_community_goodwill( goodwill, target_obj )
@@ -1402,22 +1448,11 @@ end
 
 -----------------------------------------------------------------------------------------------------------------
 
-function checkStalker(npc_community, gulag_type, npc_rank, se_obj)
+function checkStalker(npc_community, gulag_type, se_obj)
     --printf ("CHECKSTALKER, COMMUNITY = %s, TYPE = %s", npc_community, gulag_type)
-	if gulag_type == "test" or gulag_type == "test1" or gulag_type == "test_restr_changer" or gulag_type == "test_out"  then
-		return true
-	end
-
-	if gulag_type == "campers" or
-	   gulag_type == "walkers" or
-	   gulag_type == "rest" or
-	   gulag_type == "search"
-	then
-		return npc_community ~= "military"
-	end
-
-	for i, v in pairs( level_gulags ) do
-		if v.checkStalker(npc_community, gulag_type, npc_rank, se_obj) then
+	local lvl_gulags = level_gulags
+	for i, v in pairs( lvl_gulags ) do
+		if v.checkStalker(npc_community, gulag_type, se_obj) then
 			return true
 		end
 	end
@@ -1425,13 +1460,10 @@ function checkStalker(npc_community, gulag_type, npc_rank, se_obj)
 	return false
 end
 
-function checkMonster(npc_community, gulag_type, npc_rank, se_obj)
-	if gulag_type == "test_mob" or gulag_type == "test_mob1" then
-		return true
-	end
-
-    for i, v in pairs( level_gulags ) do
-		if v.checkMonster(npc_community, gulag_type, npc_rank, se_obj) then
+function checkMonster(npc_community, gulag_type, se_obj)
+	local lvl_gulags = level_gulags
+    for i, v in pairs( lvl_gulags ) do
+		if v.checkMonster(npc_community, gulag_type, se_obj) then
 		    return true
 		end
 	end
@@ -1439,12 +1471,15 @@ function checkMonster(npc_community, gulag_type, npc_rank, se_obj)
 	return false
 end
 
-function checkNpc(npc_community, is_stalker, gulag_type, npc_rank, se_obj)
+-- nv140420 eliminated middlemen functions with slow loops
+function checkNpc(npc_community, is_stalker, gulag_params, se_obj) --, npc_rank
 --	printf("COMM %s !! %s", npc_community, gulag_type)
 
+	local gulag_script_obj = level_gulags[gulag_params.type_prefix]
+	if not gulag_script_obj then return false end
 	if is_stalker then
-		return checkStalker(npc_community, gulag_type, npc_rank, se_obj)
+		return gulag_script_obj.checkStalker(npc_community, gulag_params.type, se_obj) --, npc_rank
 	else
-		return checkMonster(npc_community, gulag_type, npc_rank, se_obj)
+		return gulag_script_obj.checkMonster(npc_community, gulag_params.type, se_obj) --, npc_rank
 	end
 end

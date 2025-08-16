@@ -409,7 +409,7 @@ function load_states(gname, type)
 				if gulag.population_comed == 0 then
 					return 0
 				end
-				if xr_logic.pick_section_from_condlist(db.actor, gulag.smrttrn, gulag.state_switch_1) ~= nil then
+				if gulag.state_switch_1 and xr_logic.pick_section_from_condlist(db.actor, gulag.smrttrn, gulag.state_switch_1) ~= nil then
 
 					--level.map_add_object_spot(gulag.smrttrn.id, "alife_presentation_smart_ready", "Ready")	
 		
@@ -473,11 +473,11 @@ function load_states(gname, type)
 end
 
 
-function checkStalker(npc_community, type, npc_rank, se_obj, preset_name)
+function checkStalker(npc_community, type)
 	return type == "general_lager"
 end
 
-function checkMonster(npc_community, type, npc_rank, se_obj, preset_name)
+function checkMonster(npc_community, type)
 	return type == "general_lair"
 end
 

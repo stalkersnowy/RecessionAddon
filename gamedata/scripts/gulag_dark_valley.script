@@ -24,7 +24,7 @@ local gulags = {val_escort = {comm = {"bandit", "dolg"}},
                 val_lager_bandits = {comm = {"bandit"}},
                 val_watchtower = {comm = true},
                 val_soldiers_raid = {comm = {"military"}},
-                offline_group = {}}
+                val_offline_group = {}}
 
 -- Job -------------------------------------------------------------------
 function load_job(sj, gname, type, squad, groups)
@@ -60,34 +60,7 @@ function load_ltx(gname, type)
 end
 
 -- Check communities -----------------------------------------------------
-local function checkCommon(npc_community, gulag_type, npc_rank, se_obj, stalker)
-    local g = gulags[gulag_type]
-    if g then
-        if g.comm then
-            if type(g.comm) == "function" then
-                return g.comm(npc_community, gulag_type, npc_rank, se_obj, stalker)
-            end
-            if type(g.comm) == "boolean" then
-                return g.comm == stalker
-            end
-
-            local i, v = 0, 0
-            for i, v in pairs(g.comm) do
-                if npc_community == v then
-                    return true
-                end
-            end
-            if i > 0 then
-                return false
-            end
-        end
-        return true
-    end
-    return false
-end
-
-function checkStalker(npc_community, gulag_type, npc_rank, se_obj)
-   -- return checkCommon(npc_community, gulag_type, npc_rank, se_obj, true)
+function checkStalker(npc_community, gulag_type)
 if gulag_type == "val_escort" then
 		return npc_community == "dolg" or npc_community == "bandit"
 	end
@@ -112,13 +85,13 @@ if gulag_type == "val_escort" then
 	if gulag_type == "val_soldiers_raid" then
 		return npc_community == "military"
 	end
-	if gulag_type == "offline_group" then
+	if gulag_type == "val_offline_group" then
 		return true
 	end
 	return false
 end
 
-function checkMonster(npc_community, gulag_type, npc_rank, se_obj)
+function checkMonster(npc_community, gulag_type)
 	if gulag_type == "val_sos" then
 		return npc_community == "bloodsucker"
 	end
@@ -1142,7 +1115,7 @@ end
 -- Predicates ------------------------------------------------------------
 
 -- Jobs ------------------------------------------------------------------
-gulags.offline_group.job = function(sj, gname, type, squad, groups)
+gulags.val_offline_group.job = function(sj, gname, type, squad, groups)
     local i, it = 0, 1
     local ltx = ""
     local pname = "offgroup"
@@ -1189,7 +1162,7 @@ gulags.offline_group.job = function(sj, gname, type, squad, groups)
         it = it + 1
     end
 
-    gulags.offline_group.ltx = ltx
+    gulags.val_offline_group.ltx = ltx
 end
 
 
@@ -1282,14 +1255,15 @@ gulags.val_soldiers_raid.job = function(sj, gname, type, squad, groups)
     gulags.val_soldiers_raid.ltx = ltx
 end
 
+-- nv130217 support nil state switches (not really needed here unless functionality changed)
 gulags.val_soldiers_raid.state = function(gulag)
 	if gulag.state == 0 then
-		if xr_logic.pick_section_from_condlist(db.actor, gulag.smrttrn, gulag.state_switch_1) ~= nil then
+		if gulag.state_switch_1 and xr_logic.pick_section_from_condlist(db.actor, gulag.smrttrn, gulag.state_switch_1) ~= nil then
 			return 1
 		end
 		return 0
 	elseif gulag.state == 1 then
-		if xr_logic.pick_section_from_condlist(db.actor, gulag.smrttrn, gulag.state_switch_0) ~= nil then
+		if gulag.state_switch_0 and xr_logic.pick_section_from_condlist(db.actor, gulag.smrttrn, gulag.state_switch_0) ~= nil then
 			return 0
 		end
 		return 1
