@@ -223,7 +223,7 @@ void  CHUDManager::RenderUI()
 	if(!b_online)					return;
 
 	BOOL bAlready					= FALSE;
-	if (psHUD_Flags.test(HUD_DRAW))
+//	if (psHUD_Flags.test(HUD_DRAW))
 	{
 		HitMarker->Render			();
 		bAlready					= ! (pUI && !pUI->Render());

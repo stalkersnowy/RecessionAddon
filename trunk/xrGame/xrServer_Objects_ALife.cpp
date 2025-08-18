@@ -820,11 +820,15 @@ void CSE_ALifeLevelChanger::STATE_Write	(NET_Packet	&tNetPacket)
 void CSE_ALifeLevelChanger::UPDATE_Read	(NET_Packet	&tNetPacket)
 {
 	inherited::UPDATE_Read		(tNetPacket);
+
+	m_bEnabled					= !!tNetPacket.r_u8();
 }
 
 void CSE_ALifeLevelChanger::UPDATE_Write	(NET_Packet	&tNetPacket)
 {
 	inherited::UPDATE_Write		(tNetPacket);
+	
+	tNetPacket.w_u8				(m_bEnabled?1:0);
 }
 
 void CSE_ALifeLevelChanger::FillProps		(LPCSTR pref, PropItemVec& items)

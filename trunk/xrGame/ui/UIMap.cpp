@@ -392,6 +392,8 @@ void CUILevelMap::Init	(shared_str name, CInifile& gameLtx, LPCSTR sh_name)
 		m_bHideMap = m_bHideHint = true;
 	}else if(gameLtx.line_exist(MapName(),"hide_map")){
 		m_bHideMap = true;
+	}else if(gameLtx.line_exist(MapName(),"hide_hint")){
+		m_bHideHint = true;
 	}
 	
 	if(gameLtx.line_exist(MapName(),"hint_rect")){

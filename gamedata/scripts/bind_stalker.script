@@ -237,6 +237,7 @@ local prefix_by_level = {
 	l03_agroprom = "agr",
 	l03u_agr_underground = "kat",
 	l04_darkvalley = "val",
+	k01_darkscape = "ds",
 	l04u_labx18 = "dar",
 	l05_bar = "bar",
 	l06_rostok = "ros",

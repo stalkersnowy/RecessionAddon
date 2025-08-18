@@ -197,8 +197,8 @@ function main_menu:OnButton_load_spawn()
 	end
 	
 	self:GetHolder():start_stop_menu(self.spawn_dlg, true)
-	self:GetHolder():start_stop_menu(self, true) --new
-	self:Show(false)
+--	self:GetHolder():start_stop_menu(self, true) --new
+--	self:Show(false)
 end
 
 function main_menu:OnButton_save_clicked()

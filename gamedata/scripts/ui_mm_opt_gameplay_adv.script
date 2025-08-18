@@ -123,6 +123,11 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	xml:InitCheck								("gameplay_adv:check_r2_true_sun",				_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_specular_rgb")
+	xml:InitStatic								("gameplay_adv:cap_r2_specular_rgb",			_st)
+	xml:InitCheck								("gameplay_adv:check_r2_specular_rgb",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_r__wallmarks_on_skeleton")
 	xml:InitStatic								("gameplay_adv:cap_r__wallmarks_on_skeleton",	_st)
 	xml:InitCheck								("gameplay_adv:check_r__wallmarks_on_skeleton",	_st)
@@ -161,11 +166,6 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	handler:SetCapCallbacks						(_st, 									"descr_r2_old_distort")
 	xml:InitStatic								("gameplay_adv:cap_r2_old_distort",				_st)
 	xml:InitCheck								("gameplay_adv:check_r2_old_distort",			_st)
-
-	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
-	handler:SetCapCallbacks						(_st, 									"descr_r2_specular_rgb")
-	xml:InitStatic								("gameplay_adv:cap_r2_specular_rgb",			_st)
-	xml:InitCheck								("gameplay_adv:check_r2_specular_rgb",			_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_r2_ssao_blur")

@@ -19,7 +19,8 @@ level_gulags = {
 	yan = gulag_yantar,
 	pri = gulag_pripyat,
 	sar = gulag_sarcofag,
-	cit = gulag_deadcity
+	cit = gulag_deadcity,
+	ds_ = gulag_kishka
 }
 
 level_groups = {l01_escape = 1, l02_garbage = 2, l03_agroprom = 3, l03u_agr_underground = 4,

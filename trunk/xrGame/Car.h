@@ -549,6 +549,8 @@ public:
 	virtual	bool			bfAssignMovement			(CScriptEntityAction *tpEntityAction);
 	virtual	bool			bfAssignObject				(CScriptEntityAction *tpEntityAction);
 
+			void			MoveCar						(Fvector NewPos, Fvector NewDir);
+
 	// Network
 	virtual void			net_Export					(NET_Packet& P);				// export to server
 	virtual void			net_Import					(NET_Packet& P);				// import from server

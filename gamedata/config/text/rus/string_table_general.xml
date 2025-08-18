@@ -54,6 +54,9 @@
 	<string id="killer">
 		<text>Наемник</text>
 	</string>
+	<string id="k01_darkscape">
+		<text>Кишка</text>
+	</string>
 	<string id="l01_escape">
 		<text>Кордон</text>
 	</string>

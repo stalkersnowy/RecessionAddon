@@ -1775,3 +1775,8 @@ CCustomOutfit* CActor::GetOutfit() const
 	PIItem _of	= inventory().m_slots[OUTFIT_SLOT].m_pIItem;
 	return _of?smart_cast<CCustomOutfit*>(_of):NULL;
 }
+
+CCar* CActor::CarHolder()
+{
+	return m_holder?smart_cast<CCar*>(m_holder):nullptr;
+}

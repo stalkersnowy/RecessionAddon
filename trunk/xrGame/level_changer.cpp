@@ -190,3 +190,17 @@ void CLevelChanger::update_actor_invitation()
 		}
 	}
 }
+
+void CLevelChanger::net_Export(NET_Packet& P)
+{
+	inherited::net_Export(P);
+	
+	P.w_u8((u8)m_bEnabled);
+}
+
+void CLevelChanger::net_Import(NET_Packet& P)
+{
+	inherited::net_Import(P);
+	
+	m_bEnabled = P.r_u8();
+}

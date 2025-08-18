@@ -435,6 +435,15 @@
 	<string id="CoP">
 		<text>ЗП</text>
 	</string>
+	<string id="bonus">
+		<text>Дополнительно</text>
+	</string>
+	<string id="spawn_all">
+		<text>Основная игра</text>
+	</string>
+	<string id="spawn_ds">
+		<text>Кишка 1 (DarkScape)</text>
+	</string>
 	<string id="ui_mm_r2_dynamic_sun">
 		<text>Динамичное положение солнца</text>
 	</string>

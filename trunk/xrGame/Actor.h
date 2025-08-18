@@ -60,6 +60,8 @@ class CActorStatisticMgr;
 
 class CLocationManager;
 
+class CCar;
+
 class	CActor: 
 	public CEntityAlive, 
 	public IInputReceiver,
@@ -94,6 +96,7 @@ public:
 	virtual	CCharacterPhysicsSupport*	character_physics_support	() const				{return m_pPhysics_support;}
 	virtual CPHDestroyable*				ph_destroyable				()						;
 			CHolderCustom*				Holder						()						{return m_holder;}
+			CCar*						CarHolder					()						;
 public:
 
 	virtual void						Load				( LPCSTR section );

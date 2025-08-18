@@ -3,6 +3,7 @@
 #include "UIDialogHolder.h"
 #include "actor.h"
 #include "level.h"
+#include "car.h"
 
 #include "game_cl_Single.h"
 #include "ui/UIPdaAux.h"
@@ -257,7 +258,11 @@ void CChangeLevelWnd::OnCancel()
 {
 	Game().StartStopMenu					(this, true);
 	if(m_b_position_cancel){
-		Actor()->MoveActor(m_position_cancel, m_angles_cancel);
+		CCar* car = Actor()->CarHolder();
+		if(car)
+			car->MoveCar(m_position_cancel, m_angles_cancel);
+		else
+			Actor()->MoveActor(m_position_cancel, m_angles_cancel);
 	}
 }
 
