@@ -60,6 +60,7 @@
 		<command id="kb_cam_1"						exe="cam_1"/>
 		<command id="kb_cam_2"						exe="cam_2"/>
 		<command id="kb_cam_3"						exe="cam_3"/>
+		<command id="kb_turn_engine"				exe="turn_engine"/>
 	</group>
 	<group name="kb_grp_multiplayer">
 		<command id="kb_artefact"					exe="artefact"/>

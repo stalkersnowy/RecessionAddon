@@ -159,4 +159,6 @@
     <info_portion id="val_x18_conclusion_info">
 	    <article>val_x18_conclusion_art</article>
     </info_portion>
-</game_information_portions>
+	
+    <info_portion id="ds_heli_dead"></info_portion>
+	</game_information_portions>
