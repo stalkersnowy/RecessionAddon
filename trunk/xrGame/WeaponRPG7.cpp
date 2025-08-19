@@ -28,6 +28,11 @@ void CWeaponRPG7::Load	(LPCSTR section)
 	m_sRocketSection		= pSettings->r_string	(section,"rocket_class");
 }
 
+void CWeaponRPG7::FireTrace(const Fvector& P, const Fvector& D)
+{
+	inherited::FireTrace	(P, D);
+	UpdateMissileVisibility	();
+}
 
 void CWeaponRPG7::UpdateMissileVisibility()
 {
@@ -144,6 +149,12 @@ void CWeaponRPG7::switch2_Fire	()
 			u_EventSend						(P);
 		}
 	}
+}
+
+void CWeaponRPG7::PlayAnimReload()
+{
+	VERIFY(GetState()==eReload);
+	m_pHUD->animPlay(random_anim(mhud.mhud_reload),FALSE,this,GetState());
 }
 
 void CWeaponRPG7::OnEvent(NET_Packet& P, u16 type) 

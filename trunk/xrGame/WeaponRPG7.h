@@ -19,6 +19,7 @@ public:
 	virtual void ReloadMagazine	();
 	virtual void Load			(LPCSTR section);
 	virtual void switch2_Fire	();
+	virtual	void FireTrace		(const Fvector& P, const Fvector& D);
 
 	virtual void FireStart		();
 	virtual void SwitchState	(u32 S);
@@ -28,6 +29,8 @@ public:
 
 	virtual void net_Import			( NET_Packet& P);				// import from server
 protected:
+	virtual void	PlayAnimReload	();
+
 	shared_str	m_sGrenadeBoneName;
 	shared_str	m_sHudGrenadeBoneName;
 
