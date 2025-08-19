@@ -252,7 +252,8 @@ local prefix_by_level = {
 	l12_stancia_2 = "aes2",
 	l12u_control_monolith = "mon",
 	l12u_sarcofag = "sar",
-	l23_final_battle = "sar2"
+	l23_final_battle = "sar2",
+	krondor_selo = "kr"
 }
 
 local function manage_autosaves()

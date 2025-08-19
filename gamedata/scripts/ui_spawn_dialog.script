@@ -1,6 +1,7 @@
 local items_table = {
 	                    {name = "spawn_all",	spawn = "all",	new_game = true},
-						{name = "spawn_ds",		spawn = "ds"}
+						{name = "spawn_ds",		spawn = "ds"},
+						{name = "spawn_kr",		spawn = "kr"}
 					}
 
 class "spawn_item" (CUIListItemEx)

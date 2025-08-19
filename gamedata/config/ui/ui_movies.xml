@@ -154,6 +154,7 @@
 			<grab_input>1</grab_input>
 			<sound>intro\intro_kill</sound>
 			<can_be_stopped>off</can_be_stopped>
+			<function_on_start>xr_effects.start_intro_dream</function_on_start>
 			<function_on_stop>xr_effects.end_intro_dream</function_on_stop>
 			<video_wnd x="0" y="0" width="1024" height="768" stretch="1">
 				<texture x="1" y="1" width="1022" height="1022">intro\intro_kill</texture>
