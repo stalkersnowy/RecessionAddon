@@ -17,6 +17,7 @@
 
 		<class>mil_Svoboda_specnaz</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>679</rank>
 		<reputation>110</reputation>
@@ -50,6 +51,7 @@
 
 		<class>mil_Svoboda_specnaz</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>679</rank>
 		<reputation>110</reputation>
@@ -84,6 +86,7 @@
 		
 		<class>mil_Svoboda_engineer</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>896</rank>
 		<reputation>139</reputation>
@@ -121,6 +124,7 @@
 		
 		<class>mil_Svoboda_regular</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>368</rank>
 		<reputation>74</reputation>
@@ -155,6 +159,7 @@
 		
 		<class>mil_Svoboda_regular</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>368</rank>
 		<reputation>74</reputation>
@@ -189,6 +194,7 @@
 		
 		<class>mil_Svoboda_sniper</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0"></money>
 
 		<rank>560</rank>
 		<reputation>81</reputation>
@@ -222,6 +228,7 @@
 		
 		<class>mil_Svoboda_stukach</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0"></money>
 
 		<rank>540</rank>
 		<reputation>58</reputation>
@@ -254,6 +261,7 @@
 		
 		<class>mil_Svoboda_zoneguard</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
         <snd_config>characters_voice\human_03\freedom\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -294,6 +302,7 @@
 		
 		<class>mil_Svoboda_bodyguard</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 		
 		<rank>903</rank>
 		<reputation>101</reputation>
@@ -327,6 +336,7 @@
 
 		<class>mil_Svoboda_leader</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 		
 		<rank>914</rank>
 		<reputation>136</reputation>
@@ -398,6 +408,7 @@
 		
 		<class>mil_Svoboda_master_Max</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		
 		<rank>912</rank>
@@ -431,6 +442,7 @@
 		
 		<class>mil_Svoboda_master</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
         <snd_config>characters_voice\human_02\freedom\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -462,6 +474,7 @@
 		
 		<class>mil_Svoboda_cook</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0"></money>
 
         <snd_config>characters_voice\human_02\freedom\</snd_config>
 		<crouch_type>-1</crouch_type>
@@ -511,6 +524,7 @@
 		
 		<class>mil_Svoboda_blockpost_leader</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>916</rank>
 		<reputation>149</reputation>
@@ -546,6 +560,7 @@
 		
 		<class>mil_Svoboda_master_Ugrumiy</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<snd_config>characters_voice\human_03\freedom\</snd_config>
 		<crouch_type>-1</crouch_type>
@@ -583,6 +598,7 @@
 
 		<class>mil_Dolg_specnaz</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>720</rank>
 		<reputation>96</reputation>
@@ -616,6 +632,7 @@
 
 		<class>mil_Dolg_specnaz_silence</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
         <snd_config>characters_voice\human_03\dolg\</snd_config>
   		<crouch_type>0</crouch_type>
@@ -651,6 +668,7 @@
 
 		<class>mil_Dolg_specnaz_cherep</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>915</rank>
 		<reputation>135</reputation>
@@ -828,6 +846,7 @@
 
 		<class>mil_Stalker_master</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 		
 		<rank>924</rank>
 		<reputation>19</reputation>
@@ -860,6 +879,7 @@
 
 		<class>mil_Stalker_veteran</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 			
 		<rank>856</rank>
 		<reputation>-2</reputation>

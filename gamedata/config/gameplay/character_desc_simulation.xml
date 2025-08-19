@@ -420,6 +420,7 @@
 
 		<class>sim_stalker_novice</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>34</rank>
 		<reputation>6</reputation>
@@ -448,6 +449,7 @@
 
 		<class>sim_stalker_novice</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>142</rank>
 		<reputation>-10</reputation>
@@ -476,6 +478,7 @@
 
 		<class>sim_stalker_novice</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>65</rank>
 		<reputation>18</reputation>
@@ -503,6 +506,7 @@
 
 		<class>sim_stalker_novice</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>112</rank>
 		<reputation>-15</reputation>
@@ -531,6 +535,7 @@
 
 		<class>sim_stalker_novice</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>98</rank>
 		<reputation>19</reputation>
@@ -559,6 +564,7 @@
 
 		<class>sim_stalker_novice</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>12</rank>
 		<reputation>20</reputation>
@@ -590,6 +596,7 @@
 
 		<class>sim_stalker_novice</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>135</rank>
 		<reputation>-20</reputation>
@@ -619,6 +626,7 @@
 
 		<class>sim_stalker_novice</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>78</rank>
 		<reputation>6</reputation>
@@ -650,6 +658,7 @@
 
 			<class>sim_Stalker_general</class>
 			<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+			<money min="600" max="2000" infinitive="0"></money>
 			
 			<rank>305</rank>
 			<reputation>35</reputation>
@@ -682,6 +691,7 @@
 
 		<class>sim_Stalker_general</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0"></money>
 		
 		<rank>360</rank>
 		<reputation>46</reputation>
@@ -713,6 +723,7 @@
 
 		<class>sim_Stalker_general</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0"></money>
 		
 		<rank>435</rank>
 		<reputation>63</reputation>
@@ -744,6 +755,7 @@
 
 		<class>sim_Stalker_general</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0"></money>
 		
 		<rank>365</rank>
 		<reputation>86</reputation>
@@ -775,6 +787,7 @@
 
 		<class>sim_Stalker_general</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0"></money>
 		
 		<rank>426</rank>
 		<reputation>42</reputation>
@@ -806,6 +819,7 @@
 
 		<class>sim_Stalker_general</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0"></money>
 		
 		<rank>399</rank>
 		<reputation>-20</reputation>
@@ -838,6 +852,7 @@
 
 		<class>sim_Stalker_veteran</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 			
 		<rank>630</rank>
 		<reputation>55</reputation>
@@ -869,6 +884,7 @@
 
 		<class>sim_Stalker_veteran</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 			
 		<rank>750</rank>
 		<reputation>101</reputation>
@@ -900,6 +916,7 @@
 
 		<class>sim_Stalker_veteran</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 		
 		<rank>698</rank>
 		<reputation>123</reputation>
@@ -931,6 +948,7 @@
 
 		<class>sim_Stalker_veteran</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 	
 		<rank>763</rank>
 		<reputation>123</reputation>
@@ -962,6 +980,7 @@
 
 		<class>sim_Stalker_veteran</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 			
 		<rank>623</rank>
 		<reputation>-53</reputation>
@@ -995,6 +1014,7 @@
 
 		<class>sim_stalker_master</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 				
 		<rank>920</rank>
 		<reputation>145</reputation>
@@ -1027,6 +1047,7 @@
 
 		<class>sim_stalker_master</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<snd_config>characters_voice\human_03\stalker\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -1060,6 +1081,7 @@
 
 		<class>sim_Stalker_sniper</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 			
 		<rank>732</rank>
 		<reputation>89</reputation>
@@ -1097,6 +1119,7 @@
 
 		<class>sim_Dolg_regular</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0"></money>
 		
 		<rank>360</rank>
 		<reputation>55</reputation>
@@ -1128,6 +1151,7 @@
 
 		<class>sim_Dolg_regular</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0"></money>
 		
 		<rank>420</rank>
 		<reputation>65</reputation>
@@ -1159,6 +1183,7 @@
 		
 		<class>sim_Dolg_regular</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0"></money>
 		
 		<rank>389</rank>
 		<reputation>73</reputation>
@@ -1191,6 +1216,7 @@
 
 		<class>sim_Dolg_specnaz</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>630</rank>
 		<reputation>89</reputation>
@@ -1221,6 +1247,7 @@
 
 		<class>sim_Dolg_specnaz</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>750</rank>
 		<reputation>96</reputation>
@@ -1251,6 +1278,7 @@
 
 		<class>sim_Dolg_specnaz</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>688</rank>
 		<reputation>114</reputation>
@@ -1283,6 +1311,7 @@
 
 		<class>sim_Dolg_specnaz</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>796</rank>
 		<reputation>124</reputation>
@@ -1315,6 +1344,7 @@
 
 		<class>sim_dolg_master</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 		
 		<rank>923</rank>
 		<reputation>136</reputation>
@@ -1345,6 +1375,7 @@
 		
 		<class>sim_dolg_master</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 		
 		<rank>901</rank>
 		<reputation>143</reputation>
@@ -1377,6 +1408,7 @@
 
 		<class>sim_Dolg_sniper</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0"></money>
 		
 		<rank>550</rank>
 		<reputation>64</reputation>
@@ -1408,6 +1440,7 @@
 
 		<class>sim_Dolg_sniper</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 	
 		<rank>640</rank>
 		<reputation>87</reputation>
@@ -1439,6 +1472,7 @@
 
 		<class>sim_Dolg_sniper</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 	
 		<rank>610</rank>
 		<reputation>74</reputation>
@@ -1479,6 +1513,7 @@
 		
 		<class>sim_Svoboda_regular</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0"></money>
 		
 		<rank>321</rank>
 		<reputation>73</reputation>
@@ -1514,6 +1549,7 @@
 		
 		<class>sim_Svoboda_specnaz</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>657</rank>
 		<reputation>113</reputation>
@@ -1546,6 +1582,7 @@
 		
 		<class>sim_Svoboda_master</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
         <snd_config>characters_voice\human_03\freedom\</snd_config>
 		
@@ -1582,6 +1619,7 @@
 		<crouch_type>-1</crouch_type>
 		<class>sim_Svoboda_sniper</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>746</rank>
 		<reputation>125</reputation>
@@ -2108,6 +2146,7 @@
 
 		<class>sim_Ecolog</class>
 		<community>ecolog</community> <terrain_sect>stalker_ecolog_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		
 		<rank>800</rank>
@@ -2137,6 +2176,7 @@
 		
 		<class>sim_Ecolog</class>
 		<community>ecolog</community> <terrain_sect>stalker_ecolog_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 		
 		<rank>789</rank>
 		<reputation>50</reputation>
@@ -2585,6 +2625,7 @@
 
 		<class>sim_Soldier_regular</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>56</rank>
 		<reputation>5</reputation>
@@ -2617,6 +2658,7 @@
 
 		<class>sim_Soldier_regular</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>71</rank>
 		<reputation>10</reputation>
@@ -2649,6 +2691,7 @@
 
 		<class>sim_Soldier_regular</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>86</rank>
 		<reputation>12</reputation>
@@ -2681,6 +2724,7 @@
 
 		<class>sim_Soldier_regular</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>125</rank>
 		<reputation>6</reputation>
@@ -2713,6 +2757,7 @@
 
 		<class>sim_Soldier_regular</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>149</rank>
 		<reputation>21</reputation>
@@ -2748,6 +2793,7 @@
 
 		<class>sim_Soldier_specnaz</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 		
 		<rank>670</rank>
 		<reputation>19</reputation>
@@ -2780,6 +2826,7 @@
 
 		<class>sim_Soldier_specnaz</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 		
 		<rank>765</rank>
 		<reputation>23</reputation>
@@ -2815,6 +2862,7 @@
 
 		<class>sim_Soldier_commander</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 		
 		<rank>860</rank>
 		<reputation>20</reputation>
@@ -2847,6 +2895,7 @@
 
 		<class>sim_Soldier_commander</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 		
 		<rank>910</rank>
 		<reputation>-23</reputation>
@@ -2879,6 +2928,7 @@
 
 		<class>sim_Soldier_sniper</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 		
 		<rank>600</rank>
 		<reputation>0</reputation>
@@ -2911,6 +2961,7 @@
 
 		<class>sim_Soldier_sniper</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 	
 		<rank>603</rank>
 		<reputation>4</reputation>
@@ -2943,6 +2994,7 @@
 
 		<class>sim_Soldier_sniper</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 		
 		<rank>697</rank>
 		<reputation>-9</reputation>
@@ -2978,6 +3030,7 @@
 		
 		<class>sim_Soldier_master</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
         <snd_config>characters_voice\human_03\military\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -3012,6 +3065,7 @@
 		
 		<class>sim_Soldier_master</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
         <snd_config>characters_voice\human_03\military\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -3049,6 +3103,7 @@
 
 		<class>sim_stalker_veteran_gusarov</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 			
 		<rank>789</rank>
 		<reputation>78</reputation>
@@ -3087,6 +3142,7 @@
 
 		<class>sim_Svoboda_specnaz_leshii</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>811</rank>
 		<reputation>113</reputation>
@@ -3117,6 +3173,7 @@
 
 		<class>sim_stalker_master_chuchelo</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 				
 		<rank>920</rank>
 		<reputation>145</reputation>
@@ -3151,6 +3208,7 @@
 
 		<class>sim_stalker_general_upir</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="600" max="2000" infinitive="0"></money>
 		
 		<rank>396</rank>
 		<reputation>-34</reputation>
@@ -3183,6 +3241,7 @@
 
 		<class>sim_stalker_master_diador</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<snd_config>characters_voice\human_03\stalker\</snd_config>
 		
@@ -3217,6 +3276,7 @@
 
 		<class>sim_ecolog_zob</class>
 		<community>stalker</community> <terrain_sect>stalker_ecolog_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>654</rank>
 		<reputation>3</reputation>
@@ -3249,6 +3309,7 @@
 
 		<class>sim_stalker_novice_neumeha</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>167</rank>
 		<reputation>-6</reputation>
@@ -3313,6 +3374,7 @@
 
 		<class>sim_dolg_veteran_barin</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>651</rank>
 		<reputation>-35</reputation>
@@ -3346,6 +3408,7 @@
 
 		<class>sim_stalker_veteran_vorobey</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 			
 		<rank>789</rank>
 		<reputation>78</reputation>
@@ -3379,6 +3442,7 @@
 
 		<class>sim_stalker_master_master</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<snd_config>characters_voice\human_03\stalker\</snd_config>
 		<crouch_type>0</crouch_type>		
@@ -3412,6 +3476,7 @@
 
 		<class>sim_dolg_veteran_prapor</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>667</rank>
 		<reputation>-67</reputation>
@@ -3451,6 +3516,7 @@
 		<crouch_type>-1</crouch_type>		
 		<class>sim_svoboda_specnaz_prut</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<rank>764</rank>
 		<reputation>154</reputation>
@@ -3480,6 +3546,7 @@
 
 		<class>sim_stalker_veteran_umnik</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 			
 		<rank>864</rank>
 		<reputation>110</reputation>
@@ -3545,6 +3612,7 @@
 
 		<class>sim_stalker_master_polkan</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<money min="2000" max="5000" infinitive="0"></money>
 
 		<snd_config>characters_voice\human_03\stalker\</snd_config>
 		<crouch_type>0</crouch_type>		
@@ -3764,6 +3832,7 @@
 
 		<class>bar_arena_stalker_4_4</class>
 		<community>actor_dolg</community> <terrain_sect>stalker_terrain</terrain_sect> 
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>34</rank>
 		<reputation>6</reputation>
@@ -3790,6 +3859,7 @@
 
 		<class>bar_arena_stalker_4_5</class>
 		<community>actor_dolg</community> <terrain_sect>stalker_terrain</terrain_sect> 
+		<money min="200" max="600" infinitive="0"></money>
 		
 		<rank>39</rank>
 		<reputation>8</reputation>
