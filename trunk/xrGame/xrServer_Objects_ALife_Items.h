@@ -84,6 +84,7 @@ SERVER_ENTITY_DECLARE_BEGIN2(CSE_ALifeItem,CSE_ALifeDynamicObjectVisual,CSE_ALif
 	virtual CSE_ALifeInventoryItem	*cast_inventory_item	() {return this;};
 	virtual BOOL					Net_Relevant			();
 	virtual void					OnEvent					(NET_Packet &tNetPacket, u16 type, u32 time, ClientID sender );
+	virtual bool					used_ai_locations		() const {return false;}
 SERVER_ENTITY_DECLARE_END
 add_to_type_list(CSE_ALifeItem)
 #define script_type_list save_type_list(CSE_ALifeItem)

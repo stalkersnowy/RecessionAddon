@@ -78,6 +78,8 @@ public:
 
 public:
 	virtual u32		ef_weapon_type			() const;
+	
+	virtual BOOL	UsedAI_Locations		() {return FALSE;}
 };
 
 #include "inventory_item_inline.h"

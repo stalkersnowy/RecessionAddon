@@ -41,5 +41,7 @@ public:
 	virtual void				renderable_Render		()											; 
 	virtual void				ChangeCondition			(float fDeltaCondition)						{CInventoryItem::ChangeCondition(fDeltaCondition);};
 	virtual void				StartTimerEffects		()											;
+	
+	virtual BOOL				UsedAI_Locations		() {return FALSE;}
 
 };
