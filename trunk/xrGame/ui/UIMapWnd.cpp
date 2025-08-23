@@ -199,34 +199,23 @@ void CUIMapWnd::Init(LPCSTR xml_name, LPCSTR start_from)
 	else
 		sect_name = "level_maps_mp";
 
-if (gameLtx.section_exist(sect_name.c_str())) {
-    xr_set<shared_str> loaded_levels;
-    const GameGraph::LEVEL_MAP& levels = ai().game_graph().header().levels();
-    
-    for (auto I = levels.begin(), E = levels.end(); I != E; ++I) {
-        shared_str level_name = (*I).second.name();
-        xr_strlwr(level_name);
-        loaded_levels.insert(level_name);
-    }
+	if (gameLtx.section_exist(sect_name.c_str())){
+		CInifile::Sect& S		= gameLtx.r_section(sect_name.c_str());
+		CInifile::SectCIt	it	= S.Data.begin(), end = S.Data.end();
+		for (;it!=end; it++){
+			shared_str map_name = it->first;
+			xr_strlwr(map_name);
+			R_ASSERT2	(m_GameMaps.end() == m_GameMaps.find(map_name), "Duplicate level name not allowed");
+			
+			CUICustomMap*& l = m_GameMaps[map_name];
 
-    CInifile::Sect& S = gameLtx.r_section(sect_name.c_str());
-    for (auto it = S.Data.begin(), end = S.Data.end(); it != end; ++it) {
-        shared_str map_name = it->first;
-        xr_strlwr(map_name);
+			l = xr_new<CUILevelMap>(this);
+			
+			l->Init(map_name, gameLtx, "hud\\default");
 
-        if (loaded_levels.find(map_name) == loaded_levels.end()) 
-            continue;
-
-        R_ASSERT2(m_GameMaps.find(map_name) == m_GameMaps.end(), 
-                 "Duplicate level name not allowed");
-
-        CUICustomMap*& l = m_GameMaps[map_name];
-        l = xr_new<CUILevelMap>(this);
-        l->Init(map_name, gameLtx, "hud\\default");
-        l->OptimalFit(m_UILevelFrame->GetWndRect());
-        m_GameMapsOrder.push_back(map_name);
-    }
-}
+			l->OptimalFit( m_UILevelFrame->GetWndRect() );
+		}
+	}
 #ifdef DEBUG
 	GameMaps::iterator it = m_GameMaps.begin();
 	GameMaps::iterator it2;
@@ -259,8 +248,10 @@ void CUIMapWnd::Show(bool status)
 	{
 		m_GlobalMap->Show			(true);
 		m_GlobalMap->SetClipRect	(ActiveMapRect());
-		for(const shared_str& map_name : m_GameMapsOrder)
+		const GameGraph::LEVEL_MAP& levels = ai().game_graph().header().levels();
+		for (auto I = levels.begin(), E = levels.end(); I != E; ++I)
 		{
+			shared_str map_name = (*I).second.name();
 			GameMaps::iterator it = m_GameMaps.find(map_name);
 			if (it!=m_GameMaps.end()) 
 			{
