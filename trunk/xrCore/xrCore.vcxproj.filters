@@ -76,6 +76,9 @@
     <Filter Include="Math\Extensions\buffer_vector">
       <UniqueIdentifier>{66b09904-18f4-4c61-8695-b4c755e61395}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{890c04ed-2d66-4fa8-9de1-96d9581a726d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FTimer.cpp">
@@ -546,6 +549,9 @@
     </ClInclude>
     <ClInclude Include="string_concatenations_inline.h">
       <Filter>Math\Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Noncopyable.hpp">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

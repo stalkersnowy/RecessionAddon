@@ -8,7 +8,7 @@
 #ifndef LINE_EDIT_CONTROL_H_INCLUDED
 #define LINE_EDIT_CONTROL_H_INCLUDED
 
-//#include <boost/noncopyable.hpp>
+//#include "../Common/Noncopyable.hpp"
 
 namespace text_editor
 {

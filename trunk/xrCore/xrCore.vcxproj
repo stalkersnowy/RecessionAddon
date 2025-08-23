@@ -387,6 +387,7 @@
     <ClCompile Include="xrSyncronize.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\Noncopyable.hpp" />
     <ClInclude Include="os_clipboard.h" />
     <ClInclude Include="buffer_vector.h" />
     <ClInclude Include="buffer_vector_inline.h" />
