@@ -550,6 +550,7 @@ public:
 	virtual	bool			bfAssignObject				(CScriptEntityAction *tpEntityAction);
 
 			void			MoveCar						(Fvector NewPos, Fvector NewDir);
+	virtual void			ForceTransform				(const Fmatrix& m);
 
 	// Network
 	virtual void			net_Export					(NET_Packet& P);				// export to server

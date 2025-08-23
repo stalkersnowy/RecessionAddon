@@ -132,7 +132,7 @@ ICF BOOL test_point(xrXRC& xrc, const Fmatrix& xform, const Fmatrix33& mat, cons
 #include "debug_renderer.h"
 void CActor::cam_Update(float dt, float fFOV)
 {
-	if(m_holder)		return;
+	if(m_holder && !Level().Cameras().GetCamEffector(cefDemo))		return;
 
 	if(mstate_real & mcClimb&&cam_active!=eacFreeLook)
 		camUpdateLadder(dt);

@@ -2028,15 +2028,20 @@ Fvector	CCar::		ExitVelocity				()
 
 void CCar::MoveCar(Fvector NewPos, Fvector NewDir)
 {
-    Fmatrix    M = XFORM();
-    M.translate(NewPos);
-    Fvector3 saved_pos = M.c;
-    M.setHPB(NewDir.y, NewDir.x, NewDir.z);
-    M.c.set(saved_pos);
-    XFORM().set(M);
-    PPhysicsShell()->SetGlTransformDynamic(M);
-    Fvector zero_vel{ 0.f, 0.f, 0.f };
-    m_pPhysicsShell->set_LinearVel(zero_vel);// stop car
-    PressBreaks();
-    ReleaseBreaks();
+	Fmatrix	M = XFORM();
+	M.translate(NewPos);
+	Fvector3 saved_pos = M.c;
+	M.setHPB(NewDir.y, NewDir.x, NewDir.z);
+	M.c.set(saved_pos);
+	ForceTransform(M);
+}
+
+void CCar::ForceTransform(const Fmatrix& m)
+{
+	Fvector zero_vel{ 0.f, 0.f, 0.f };
+	m_pPhysicsShell->set_LinearVel(zero_vel);// stop car
+	XFORM().set(m);
+	PPhysicsShell()->SetGlTransformDynamic(m);
+	PressBreaks();
+	ReleaseBreaks();
 }
