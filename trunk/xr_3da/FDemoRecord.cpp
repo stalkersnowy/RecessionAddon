@@ -468,6 +468,15 @@ void CDemoRecord::IR_OnKeyboardHold	(int dik)
 
 }
 
+void CDemoRecord::IR_OnKeyboardRelease(int dik)
+{
+	if (m_b_redirect_input_to_level)
+	{
+		g_pGameLevel->IR_OnKeyboardRelease(dik);
+		return;
+	}
+}
+
 void CDemoRecord::IR_OnMouseMove		(int dx, int dy)
 {
 	if (m_b_redirect_input_to_level)
@@ -499,6 +508,24 @@ void CDemoRecord::IR_OnMouseHold		(int btn)
 	case 1:			vT_delta.z -= 1.0f; break; // Move Forward
 	}
 	update_whith_timescale( m_vT, vT_delta );
+}
+
+void CDemoRecord::IR_OnMousePress(int btn)
+{
+	if (m_b_redirect_input_to_level)
+	{
+		g_pGameLevel->IR_OnMousePress(btn);
+		return;
+	}
+}
+
+void CDemoRecord::IR_OnMouseRelease(int btn)
+{
+	if (m_b_redirect_input_to_level)
+	{
+		g_pGameLevel->IR_OnMouseRelease(btn);
+		return;
+	}
 }
 
 void CDemoRecord::RecordKey			()
