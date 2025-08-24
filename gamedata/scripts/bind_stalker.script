@@ -253,7 +253,10 @@ local prefix_by_level = {
 	l12u_control_monolith = "mon",
 	l12u_sarcofag = "sar",
 	l23_final_battle = "sar2",
-	krondor_selo = "kr"
+	l13_deadmil_r = "dm",
+	k03_milrad_test = "mr",
+	krondor_selo = "kr",
+	m91 = "om"
 }
 
 local function manage_autosaves()

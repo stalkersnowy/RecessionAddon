@@ -439,10 +439,19 @@
 		<text>Дополнительно</text>
 	</string>
 	<string id="spawn_all">
-		<text>Основная игра</text>
+		<text>Основная игра (без интро)</text>
 	</string>
 	<string id="spawn_ds">
-		<text>Кишка 1 (DarkScape)</text>
+		<text>Кишка 1 (k01_darkscape)</text>
+	</string>
+	<string id="spawn_dm">
+		<text>Кишка 2 (l13_deadmil_r)</text>
+	</string>
+	<string id="spawn_mr">
+		<text>Кишка 3 (k03_milrad_test)</text>
+	</string>
+	<string id="spawn_om">
+		<text>Павелецкая (m91)</text>
 	</string>
 	<string id="spawn_kr">
 		<text>krondor_selo</text>

@@ -57,6 +57,12 @@
 	<string id="k01_darkscape">
 		<text>Кишка</text>
 	</string>
+	<string id="l13_deadmil_r">
+		<text>Кишка</text>
+	</string>
+	<string id="k03_milrad_test">
+		<text>Кишка</text>
+	</string>
 	<string id="l01_escape">
 		<text>Кордон</text>
 	</string>
@@ -95,6 +101,9 @@
 	</string>
 	<string id="l12_stancia_2">
 		<text>ЧАЭС</text>
+	</string>
+	<string id="l13_deadmil_r">
+		<text>Кишка</text>
 	</string>
 	<string id="master">
 		<text>мастер</text>
