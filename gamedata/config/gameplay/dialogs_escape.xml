@@ -1562,4 +1562,121 @@
             </phrase>
         </phrase_list>
     </dialog>
+    <dialog id="esc_victor_hello">
+        <phrase_list>
+            <phrase id="3">
+                <text />
+                <has_info>cit_vp_say</has_info>
+                <next>31</next>
+            </phrase>
+            <phrase id="2">
+                <text />
+                <dont_has_info>cit_vp_say</dont_has_info>
+                <has_info>cit_vp_search</has_info>
+                <next>21</next>
+            </phrase>
+            <phrase id="1">
+                <text />
+                <dont_has_info>cit_vp_search</dont_has_info>
+                <next>11</next>
+            </phrase>
+            <phrase id="11">
+                <text>esc_victor_hello_11</text>
+            </phrase>
+            <phrase id="31">
+                <text>esc_victor_hello_31</text>
+            </phrase>
+            <phrase id="21">
+                <text>esc_victor_hello_21</text>
+            </phrase>
+            <phrase id="0">
+                <text />
+                <next>1</next>
+                <next>2</next>
+                <next>3</next>
+            </phrase>
+        </phrase_list>
+    </dialog>
+    <dialog id="esc_victor_quest">
+        <dont_has_info>cit_vp_search</dont_has_info>
+        <phrase_list>
+            <phrase id="1112">
+                <text>esc_victor_quest_1112</text>
+            </phrase>
+            <phrase id="11111">
+                <text>esc_victor_quest_11111</text>
+                <next>111111</next>
+            </phrase>
+            <phrase id="1111">
+                <text>esc_victor_quest_1111</text>
+                <next>11111</next>
+            </phrase>
+            <phrase id="111">
+                <text>esc_victor_quest_111</text>
+                <next>1111</next>
+                <next>1112</next>
+            </phrase>
+            <phrase id="11">
+                <text>esc_victor_quest_11</text>
+                <next>111</next>
+            </phrase>
+            <phrase id="1">
+                <text>esc_victor_quest_1</text>
+                <next>11</next>
+            </phrase>
+            <phrase id="111111">
+                <text>esc_victor_quest_111111</text>
+                <action>dialogs.break_dialog</action>
+                <give_info>cit_vp_search</give_info>
+            </phrase>
+            <phrase id="0">
+                <text>esc_victor_quest_0</text>
+                <next>1</next>
+            </phrase>
+        </phrase_list>
+    </dialog>
+    <dialog id="esc_victor_reward">
+        <has_info>cit_vp_search</has_info>
+        <dont_has_info>cit_vp_say</dont_has_info>
+        <phrase_list>
+            <phrase id="11">
+                <text>esc_victor_reward_11</text>
+                <dont_has_info>cit_vp_find</dont_has_info>
+                <next>111</next>
+            </phrase>
+            <phrase id="131">
+                <text>esc_victor_reward_131</text>
+            </phrase>
+            <phrase id="1">
+                <text>esc_victor_reward_1</text>
+                <next>11</next>
+                <next>12</next>
+                <next>13</next>
+            </phrase>
+            <phrase id="0">
+                <text>esc_victor_reward_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="111">
+                <text>esc_victor_reward_111</text>
+            </phrase>
+            <phrase id="13">
+                <text>esc_victor_reward_13</text>
+                <precondition>deadcity_dialog.not_vp_info</precondition>
+                <has_info>cit_vp_find</has_info>
+                <next>131</next>
+            </phrase>
+            <phrase id="121">
+                <text>esc_victor_reward_121</text>
+            </phrase>
+            <phrase id="12">
+                <text>esc_victor_reward_12</text>
+                <precondition>deadcity_dialog.have_vp_info</precondition>
+                <action>deadcity_dialog.give_vp_pda</action>
+                <give_info>cit_vp_say</give_info>
+                <has_info>cit_vp_find</has_info>
+                <next>121</next>
+            </phrase>
+        </phrase_list>
+    </dialog>
 </game_dialogs>

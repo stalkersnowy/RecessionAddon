@@ -640,6 +640,31 @@ inv_grid_x			= 3
 inv_grid_y			= 19
 cost				= 0
 
+
+[cit_vp_pda]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn 				= "devices\quest_items\pda_vasiliy_petrovicha"
+;$prefetch 			= 32
+class				= II_ATTCH
+cform				= skeleton
+visual				= equipments\item_pda.ogf
+radius				= 1
+;script_binding		= stalker.object_init
+quest_item			= true
+
+description			= cit_vp_pda_descr
+
+inv_name			= cit_vp_pda_name
+inv_name_short		= cit_vp_pda_name
+inv_weight			= 0
+
+inv_grid_width		= 2
+inv_grid_height		= 1
+inv_grid_x			= 6
+inv_grid_y			= 13
+cost				= 0
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Sarcofag
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

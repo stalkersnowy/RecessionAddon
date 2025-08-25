@@ -1043,5 +1043,35 @@
 		<actor_dialog>dm_cool_info_dialog</actor_dialog>
 		<actor_dialog>dm_help_wounded_medkit_dialog</actor_dialog>
 	</specific_character>
+
+	<specific_character id="esc_plemiannik" team_default = "1">
+		<name>esc_plemiannik_name</name>
+		<icon>ui_npc_u_green_stalker_3</icon>
+		<bio>esc_plemiannik_bio</bio>
+
+		<class>esc_plemiannik</class>
+		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
+		
+		<rank>20</rank>
+		<reputation>0</reputation>
+		<money min="200" max="600" infinitive="0"/>
+		
+		<snd_config>characters_voice\human_01\stalker\</snd_config>
+		<crouch_type>-1</crouch_type>
+
+		<visual>actors\novice\green_stalker_3</visual>
+		<supplies>
+			[spawn] \n
+			wpn_pb \n
+			ammo_9x18_fmj = 1 \n
+			device_torch \n
+		</supplies>
+		
+#include "gameplay\character_criticals_3.xml"
+					
+		<start_dialog>esc_victor_hello</start_dialog>
+		<actor_dialog>esc_victor_quest</actor_dialog>
+		<actor_dialog>esc_victor_reward</actor_dialog>
+	</specific_character>
 	
 </xml>

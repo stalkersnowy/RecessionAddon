@@ -470,7 +470,7 @@ victim 			= 10| actor
 victim_wpn 		= 10| actor
 use			= true
 use_wpn		= true
-meet_dialog		= escape_lager_guard_start_dialog
+meet_dialog		= {=npc_profile(esc_plemiannik) +tutorial_wounded_start} esc_victor_hello, escape_lager_guard_start_dialog
 
 
 [logic@esc_lager_zoneguard2]
@@ -489,7 +489,7 @@ victim 			= 10| actor
 victim_wpn 		= 10| actor
 use			= true
 use_wpn		= true
-meet_dialog		= escape_lager_guard_start_dialog
+meet_dialog		= {=npc_profile(esc_plemiannik) +tutorial_wounded_start} esc_victor_hello, escape_lager_guard_start_dialog
 
 
 [logic@esc_lager_walker1]
@@ -793,7 +793,7 @@ radius = 5
 
 
 [meet@lager]
-meet_dialog = esc_lager_no_talk
+meet_dialog = {=npc_profile(esc_plemiannik) +tutorial_wounded_start} esc_victor_hello, esc_lager_no_talk
 
 [actor_dialogs@lager]
 id = esc_stalker_talk_level

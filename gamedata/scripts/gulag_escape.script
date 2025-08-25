@@ -470,7 +470,10 @@ if type == "esc_specnaz" then
 		t = { section = "logic@esc_lager_defend9",
 			idle = 0,
 			prior = 8, state = {2},
-			in_rest = "", out_rest = "esc_lager_guard_kill_zone"
+			in_rest = "", out_rest = "esc_lager_guard_kill_zone",
+			predicate = function(obj_info)
+        					return obj_info.name == "esc_stalker_plemiannik"
+						end
 		}
 		sj[#sj+1] = t
 		t = { section = "logic@esc_lager_defend10",

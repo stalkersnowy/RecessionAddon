@@ -123,4 +123,10 @@
 	<string id="yan_good_psy_helmet_name">
 		<text>Настроенный пси-шлем</text>
 	</string>
+	<string id="cit_vp_pda_descr">
+		<text>Карманный персональный компьютер. Незаменимое устройство в Зоне.</text>
+	</string>
+	<string id="cit_vp_pda_name">
+		<text>КПК Василия Петровича</text>
+	</string>
 </string_table>

@@ -1,6 +1,7 @@
-local anima=0
-local tmp_table = {}
-local k,v = 0,0
+--nv150222 some cleanup
+-- local anima=0
+-- local tmp_table = {}
+-- local k,v = 0,0
 
 --' Анимации персонажа
 --' мы уже находимся в необходимом состоянии?
@@ -168,6 +169,7 @@ end
 function animation:set_state(id, reset)
 --'	printf("[%s] set new animation [%s], current_state [%s]", self.npc:name(), tostring(id), tostring(self.states.target_state))
 
+	local anima
 	local nn = 0
 	local wpn_slot = self:weapon_slot()
 	--' выход из старого состояния
@@ -313,6 +315,7 @@ function animation:set_state(id, reset)
 end
 --' апдейт
 function animation:update()
+	local anima
 --	printf("		time %s", time_global())				
 --	printf("		current state %s", utils.to_str(self.states.current_state))
 --	printf("		target state %s", utils.to_str(self.states.target_state))
@@ -465,7 +468,7 @@ function animation:update()
 			end
 			self.states.anim_level = self.mgr.subanim
 			-- добавляем айдл текущего уровня
-			local anima
+			-- local anima
 			if self.states.anim_level == 0 then
 				anima = self:anim_for_slot(wpn_slot,state_mgr_animation_list.animations[self.states.current_state].idle)
 			else
