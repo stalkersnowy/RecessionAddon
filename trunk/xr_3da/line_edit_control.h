@@ -54,18 +54,22 @@ private:
 	typedef  text_editor::base						Base;
 	typedef  fastdelegate::FastDelegate0<void>	Callback;
 
-//    static constexpr const char* latin_chars = "qwertyuiop[]asdfghjkl;'zxcvbnm,./";
-//    static constexpr const char* russian_chars = "éöóêåíãøùçõúôûâàïğîëäæıÿ÷ñìèòüáş.";
+	bool m_bCyrillic;
+
     static constexpr const char* latin_chars	= "qwertyuiop[]asdfghjkl;'zxcvbnm,./QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>?!@#$%^&";
 	static constexpr const char* russian_chars	= "éöóêåíãøùçõúôûâàïğîëäæıÿ÷ñìèòüáş.ÉÖÓÊÅÍÃØÙÇÕÚÔÛÂÀÏĞÎËÄÆİß×ÑÌÈÒÜÁŞ,!\"¹;%:?";
     
 public:
-			bool is_russian_layout() const {
-				HKL current_layout = GetKeyboardLayout(0);
-				return (LOWORD(current_layout) == 0x0419);
+			bool is_russian_layout(bool for_ui = false) const {
+				if(for_ui || m_bCyrillic){
+					HKL current_layout = GetKeyboardLayout(0);
+					return (LOWORD(current_layout) == 0x0419);
+				}else{
+					return false;
+				}
 			}
 
-					line_edit_control	( u32 str_buffer_size );
+					line_edit_control	( u32 str_buffer_size, bool cyrillic = true );
 			void	init				( u32 str_buffer_size, init_mode mode = im_standart );
 					~line_edit_control	();
 

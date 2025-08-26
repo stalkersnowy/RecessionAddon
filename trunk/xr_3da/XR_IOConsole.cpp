@@ -24,6 +24,7 @@ static u32 const cmd_font_color				= color_rgba(138,	138,	245,	255);
 static u32 const cursor_font_color			= color_rgba(255,	255,	255,	255);
 static u32 const total_font_color			= color_rgba(250,	250,	15,		180);
 static u32 const default_font_color			= color_rgba(250,	250,	250,	250);
+static u32 const help_font_color			= color_rgba(255,	0,		0,		255);
 
 static u32 const back_color					= color_rgba(20,	 20,	 20,	200);
 static u32 const tips_back_color			= color_rgba(20,	 20,	 20,	200);
@@ -86,11 +87,12 @@ bool CConsole::is_mark(Console_mark type)
 CConsole::CConsole()
 :ConsoleShader(NULL),ConsoleShaderG(NULL)
 {
-	m_editor = xr_new<text_editor::line_editor>((u32)CONSOLE_BUF_SIZE);
+	m_editor = xr_new<text_editor::line_editor>((u32)CONSOLE_BUF_SIZE,false);
 	m_cmd_history_max = cmd_history_max;
 	m_disable_tips = false;
 	Register_callbacks();
 	Device.seqResolutionChanged.Add(this);
+	m_show_help = false;
 }
 
 void CConsole::Initialize()
@@ -99,6 +101,7 @@ void CConsole::Initialize()
 	bVisible			= false;
 	pFont				= NULL;
 	pFont2				= NULL;
+	pFontHelp			= NULL;
 	m_mouse_pos.x		= 0;
 	m_mouse_pos.y		= 0;
 	m_last_cmd			= NULL;
@@ -138,6 +141,7 @@ void CConsole::Destroy()
 
 	xr_delete(pFont);
 	xr_delete(pFont2);
+	xr_delete(pFontHelp);
 
 	Commands.clear();
 }
@@ -206,6 +210,7 @@ void CConsole::OnScreenResolutionChanged()
 {
 	xr_delete(pFont);
 	xr_delete(pFont2);
+	xr_delete(pFontHelp);
 }
 
 void CConsole::OnRender	()
@@ -223,6 +228,12 @@ void CConsole::OnRender	()
 	{
 		pFont2 = xr_new<CGameFont>("hud_font_di2", CGameFont::fsDeviceIndependent, false);
 		pFont2->SetHeightI(0.025f);
+	}
+	if (!pFontHelp)
+	{
+		pFontHelp = xr_new<CGameFont>("hud_font_di", CGameFont::fsDeviceIndependent, false);
+		pFontHelp->SetHeightI(0.025f);
+		pFontHelp->SetColor(help_font_color);
 	}
 	if(!ConsoleShader)
 	{
@@ -356,11 +367,28 @@ void CConsole::OnRender	()
 	float fx = 0.95f - 0.03f * qn;
 	pFont->OutI( fx, fMaxY - 2.0f * LDIST, "[%d]", log_line );
 
-	LPCSTR layout = ec().is_russian_layout()? "RU" : "EN";
+	LPCSTR layout = ec().is_russian_layout(true)? "RU" : "EN";
 	pFont->OutI( fx, fMaxY - 3.0f * LDIST, "[%s]", layout );
+	
+	if (!m_show_help)
+	{
+		pFontHelp->SetAligment(CGameFont::alLeft);
+		pFontHelp->OutI(fx, -0.95f, "F1 for help");
+	}
+	else
+	{
+		pFontHelp->SetAligment(CGameFont::alRight);
+		pFontHelp->OutI(1.f, -0.95f, "Page Up/Down to scroll log, hold Ctrl to jump to begin/end");
+		pFontHelp->OutI(1.f, -0.90f, "Tab to autocomplete, hold LShift to cycle backward");
+		pFontHelp->OutI(1.f, -0.85f, "Up/Down arrow to select tip, hold Ctrl to browse command history");
+		pFontHelp->OutI(1.f, -0.80f, "Alt+Home/End to go to first/last tip");
+		pFontHelp->OutI(1.f, -0.75f, "Alt+Page Up/Down to page the tips list");
+		pFontHelp->OutI(1.f, -0.70f, "Enter or Numpad Enter to execute command");
+	}
 		
 	pFont->OnRender();
 	pFont2->OnRender();
+	pFontHelp->OnRender();
 }
 
 void CConsole::DrawBackgrounds( bool bGame )

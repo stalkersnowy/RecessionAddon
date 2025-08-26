@@ -45,7 +45,7 @@ static bool terminate_char( char c, bool check_space = false )
 
 // -------------------------------------------------------------------------------------------------
 
-line_edit_control::line_edit_control( u32 str_buffer_size )
+line_edit_control::line_edit_control( u32 str_buffer_size, bool cyrillic )
 {
 	m_edit_str	= NULL;
 	m_inserted	= NULL;
@@ -54,6 +54,8 @@ line_edit_control::line_edit_control( u32 str_buffer_size )
 	m_buf1		= NULL;
 	m_buf2		= NULL;
 	m_buf3		= NULL;
+
+	m_bCyrillic = cyrillic;
 
 	for ( u32 i = 0; i < DIK_COUNT; ++i )
 	{
@@ -346,7 +348,7 @@ void line_edit_control::assign_char_pairs( init_mode mode )
 	create_char_pair( DIK_W, 'w', 'W', true );
 	create_char_pair( DIK_X, 'x', 'X', true );
 	create_char_pair( DIK_Y, 'y', 'Y', true );
-	create_char_pair( DIK_Z, 'z', 'Z', true );
+	create_char_pair( DIK_Z, 'z', 'Z', m_bCyrillic );
 }
 
 void line_edit_control::create_key_state( u32 const dik, key_state state )

@@ -97,11 +97,13 @@ protected:
 	
 	CGameFont*		pFont;
 	CGameFont*		pFont2;
+	CGameFont*		pFontHelp;
 	ref_shader		ConsoleShader;
 	ref_geom		ConsoleShaderG;
 
 	POINT			m_mouse_pos;
 	bool			m_disable_tips;
+	bool			m_show_help;
 
 private:
 	vecHistory		m_cmd_history;
@@ -225,6 +227,8 @@ protected:
 	void xr_stdcall Show_cmd();
 	void xr_stdcall Hide_cmd();
 	void xr_stdcall Hide_cmd_esc();
+
+	void xr_stdcall Show_help();
 
 	void xr_stdcall GamePause();
 };
