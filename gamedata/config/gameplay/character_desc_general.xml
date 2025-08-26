@@ -42,7 +42,7 @@
 		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_stalker_neytral_hood_9</icon>
 		<map_icon x="1" y="0"></map_icon>
-		<bio>Опытный сталкер. Детальная информация отсутствует.</bio>
+		<bio>sim_stalker_general_bio</bio>
 
 		<class>Stalker_general</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
@@ -68,7 +68,7 @@
 		<name>Osoznanie</name>
 		<icon>ui_npc_u_ucheniy_1_strong</icon>
 		<map_icon x="1" y="0"></map_icon>
-		<bio>Представитель проекта "Осознание".</bio>
+		<bio>osoznanie_bio</bio>
 
 		<class>osoznanie</class>
 		<community>ecolog</community> <terrain_sect>stalker_terrain</terrain_sect>

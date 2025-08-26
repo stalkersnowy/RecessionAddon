@@ -2142,7 +2142,7 @@
 		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_stalker_ecolog</icon>
 		<map_icon x="0" y="6"></map_icon>
-		<bio>Охрана мобильного научного лагеря. Детальная информация отсутствует.</bio>
+		<bio>sim_ecolog_default1_bio</bio>
 
 		<class>sim_Ecolog</class>
 		<community>ecolog</community> <terrain_sect>stalker_ecolog_terrain</terrain_sect>
@@ -2172,7 +2172,7 @@
 		<name>GENERATE_NAME_stalker</name>
 		<icon>ui_npc_u_stalker_ecolog_military</icon>
 		<map_icon x="1" y="6"></map_icon>
-		<bio>Научный работник. Детальная информация отсутствует.</bio>
+		<bio>sim_ecolog_default2_bio</bio>
 		
 		<class>sim_Ecolog</class>
 		<community>ecolog</community> <terrain_sect>stalker_ecolog_terrain</terrain_sect>
@@ -2924,7 +2924,7 @@
 		<name>GENERATE_NAME_sergeant</name>
 		<icon>ui_npc_u_soldier_obichniy</icon>
 		<map_icon x="1" y="2"></map_icon>
-		<bio>Рядовой солдат. Детальная информация отсутствует.</bio>
+		<bio>sim_soldier_sniper_bio</bio>
 
 		<class>sim_Soldier_sniper</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>

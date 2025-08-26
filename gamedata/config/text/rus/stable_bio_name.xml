@@ -925,3 +925,12 @@
 	<string id="esc_plemiannik_name">
 		<text>Витька</text>
 	</string>
+	<string id="osoznanie_bio">
+		<text>Представитель проекта "Осознание".</text>
+	</string>
+	<string id="sim_ecolog_default1_bio">
+		<text>Охрана мобильного научного лагеря. Детальная информация отсутствует.</text>
+	</string>
+	<string id="sim_ecolog_default2_bio">
+		<text>Научный работник. Детальная информация отсутствует.</text>
+	</string>
