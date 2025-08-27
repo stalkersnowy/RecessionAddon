@@ -47,7 +47,7 @@
     </auto_static>
   </wpn_crosshair_rpg>
 
-  <wpn_crosshair_bino x="0" y="0" width="1024" height="768">
+  <wpn_crosshair_bino x="0" y="0" width="1024" height="768" lens="wpn_crosshair_bino_lens">
     <auto_static x="85" y="0" width="854" height="768" stretch="1">
       <texture width="1024" height="1024">wpn\wpn_crosshair_bino</texture>
     </auto_static>
@@ -64,5 +64,11 @@
       <texture>wpn\wpn_crosshair_g36_lens</texture>
     </auto_static>
   </wpn_crosshair_lens>
+  
+  <wpn_crosshair_bino_lens x="0" y="0" width="1024" height="768">
+    <auto_static x="120" y="85" width="783" height="621" stretch="1">
+      <texture>wpn\wpn_crosshair_bino_lens</texture>
+    </auto_static>
+  </wpn_crosshair_bino_lens>
 </w>
 
