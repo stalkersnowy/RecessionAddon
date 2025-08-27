@@ -8,7 +8,7 @@ local state_nowhere = 0 -- схема только что включилась
 local state_inside = 1 -- актер внутри
 local state_outside = 2 -- актер снаружи
 
-allow_sleep = false
+local allow_sleep = false
 
 function load_constants()
 	if constants_ini() ~= nil and constants_ini():line_exist("gameplay", "enable_sleeping") == true and constants_ini():r_bool("gameplay", "enable_sleeping") == true then
@@ -64,7 +64,7 @@ function action_sleep:update(delta)
 end
 
 function action_sleep:switch_state(actor)
-	if allow_sleep then
+	if allow_sleep == true then
 	
 		local state = self.state
 		local need_zone = (dream.active_sleep_zone == nil)

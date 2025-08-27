@@ -38,7 +38,7 @@ local close_visuals = {
 	["actors\\nauchniy\\nauchniy_1"] = true
 }
 
-include_harmonica = false
+local include_harmonica = false
 
 function load_constants()
 	if constants_ini() ~= nil and constants_ini():line_exist("scripts", "harmonica_in_kamps") == true and constants_ini():r_bool("scripts", "harmonica_in_kamps") == true then

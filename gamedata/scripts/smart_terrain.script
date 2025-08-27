@@ -37,6 +37,14 @@ exclusives = {}
 	}
 ]]
 
+local smart_rank_check = true
+
+function load_constants()
+	if constants_ini() ~= nil and constants_ini():line_exist("scripts", "omit_smart_rank_check") == true and constants_ini():r_bool("scripts", "omit_smart_rank_check") == true then
+		smart_rank_check = false
+	end
+end
+
 ----------------------------------------------------------------------------------------------------------------------
 -- Разные полезные функции
 ----------------------------------------------------------------------------------------------------------------------
@@ -471,7 +479,7 @@ function se_smart_terrain:smart_terrain_accepts_obj( obj, obj_agreement )
 --'			printf( "community=%s rank=%d reputation=%d", community, obj:rank(), obj:reputation() )
 --'		end
 	
-		if obj_agreement ~= agreed_exclusive and not self:check_preset( community, obj:rank(), self.gparams.preset_name ) then
+		if smart_rank_check == true and obj_agreement ~= agreed_exclusive and not self:check_preset( community, obj:rank(), self.gparams.preset_name ) then
 			return false
 		end
 

@@ -1304,9 +1304,11 @@ function start_game_callback()
 	treasure_manager.clear_treasure_manager()
 	xr_sound.clear_all_sound_object()
 	dialog_manager.fill_phrase_table()
-	bind_stalker.load_robbery()
+	bind_stalker.load_constants()
 	xr_kamp.load_constants()
 	sr_sleep.load_constants()
+	se_respawn.load_constants()
+	smart_terrain.load_constants()
 end
 
 ammo_section = {}

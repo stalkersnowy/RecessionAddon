@@ -117,9 +117,9 @@ function actor_binder:reinit()
 	self.object:set_callback(callback.take_item_from_box, self.take_item_from_box, self)
 end
 ----------------------------------------------------------------------------------------------------------------------
-camp_stash_robbery = false
+local camp_stash_robbery = false
 
-function load_robbery()
+function load_constants()
 	if constants_ini() ~= nil and constants_ini():line_exist("scripts", "camp_stash_robbery") == true and constants_ini():r_bool("scripts", "camp_stash_robbery") == true then
 		camp_stash_robbery = true
 	end
