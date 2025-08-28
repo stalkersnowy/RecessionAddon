@@ -1317,6 +1317,19 @@ bool CUIXmlInit::InitAlignment(CUIXml& xml_doc, LPCSTR path, int index, float& x
 		result = true;
 	}
 
+	alignStr = xml_doc.ReadAttrib(path, index, "glob_al", "l");
+
+	if (strchr(*alignStr, 'c'))
+	{
+		x += psAddWidth[0];
+		result = true;
+	}
+	else if (strchr(*alignStr, 'r'))
+	{
+		x += psAddWidth[1];
+		result = true;
+	}
+
 	return result;
 }
 

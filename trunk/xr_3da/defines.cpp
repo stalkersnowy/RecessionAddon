@@ -6,6 +6,7 @@
 
 // Video
 float		psBaseWidth			= 1024.f;
+float		psAddWidth[2]		= { 0.f, 0.f};
 u32			psCurrentVidMode[2] = { 0, 0 };
 u32			psCurrentBPP		= 32;
 // release version always has "mt_*" enabled

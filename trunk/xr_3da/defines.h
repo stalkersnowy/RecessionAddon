@@ -46,6 +46,7 @@ constexpr float UI_BASE_WIDTH		= 1024.0f;
 constexpr float UI_BASE_HEIGHT		= 768.0f;
 
 ENGINE_API extern	float		psBaseWidth			;
+ENGINE_API extern	float		psAddWidth[]		;
 ENGINE_API extern	u32			psCurrentVidMode[];
 ENGINE_API extern	u32			psCurrentBPP		;
 ENGINE_API extern	Flags32		psDeviceFlags		;

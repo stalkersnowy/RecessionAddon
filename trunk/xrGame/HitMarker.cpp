@@ -69,7 +69,7 @@ SHitMark::SHitMark		(const ref_shader& sh, const Fvector& dir)
 	m_HitDirection						= dir.getH();
 	m_UIStaticItem						= xr_new<CUIStaticItem>();
 	m_UIStaticItem->SetShader			(sh);
-	m_UIStaticItem->SetPos				(256.0f, 128.0f);
+	m_UIStaticItem->SetPos				(psBaseWidth / 4.f, 128.0f);
 	m_UIStaticItem->SetRect				(.0f, .0f, psBaseWidth / 2.f, psBaseWidth / 2.f);
 }
 

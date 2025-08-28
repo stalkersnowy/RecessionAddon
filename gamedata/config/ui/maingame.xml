@@ -4,7 +4,7 @@
 		<text font="letterica16" r="238" g="224" b="198"/>		
 	</speech_menu>
 	
-	<static_health x="860" y="660" width="155" height="34">
+	<static_health x="860" y="660" width="155" height="34" glob_al="r">
 		<texture>ui_hud_shkala_health</texture>
 		<auto_static x="5" y="10" width="19" height="18">
 			<texture>ui_hud_icon_health</texture>
@@ -18,7 +18,7 @@
 	</progress_bar_health>
 	
 	
-	<static_armor x="860" y="622" width="155" height="38">
+	<static_armor x="860" y="622" width="155" height="38" glob_al="r">
 		<texture>ui_hud_shkala_armor</texture>		
 		<auto_static x="5" y="6" width="19" height="18">
 			<texture>ui_hud_icon_armour</texture>
@@ -31,7 +31,7 @@
 		</progress>
 	</progress_bar_armor>
 	
-	<static_weapon x="860" y="692" width="120" height="65">
+	<static_weapon x="860" y="692" width="120" height="65" glob_al="r">
 		<text complex_mode="0" x="40" y="0" font="letterica16" r="255" g="255" b="255" a="130"/>
 		<texture>ui_hud_frame_patron</texture>
 	</static_weapon>
@@ -44,7 +44,7 @@
 		<text font="graffiti19" r="239" g="154" b="29" a="230"/>
 	</static_wpn_icon>
 
-	<car_panel x="860" y="584" width="150" height="200"/>
+	<car_panel x="860" y="584" width="150" height="200" glob_al="r"/>
 	
 	<static_pda_online x="138" y="167" width="35" height="28" light_anim="ui_pda_contacts" la_cyclic="0" la_texture="0" la_text="1" la_alpha="1">
 		<texture>ui_hud_map_counter</texture>
@@ -52,12 +52,12 @@
 	</static_pda_online>
 	
 	
-	<quick_info x="1" y="700" width="1022" height="50" complex_mode="1" light_anim="ui_btn_hint"  la_cyclic="0" la_texture="0" la_text="1" la_alpha="1">
+	<quick_info x="1" y="700" width="1022" height="50" complex_mode="1" light_anim="ui_btn_hint"  la_cyclic="0" la_texture="0" la_text="1" la_alpha="1" glob_al="c">
 		<text align="c" font="graffiti22" r="225" g="225" b="250" a="255" />
 	</quick_info>
 
 	
-	<icons_scroll_view  x="955" y="100" width="65" height="455" right_ident="2" always_show_scroll="0" vert_interval="18" inverse_dir="1" flip_vert="0"/>
+	<icons_scroll_view  x="955" y="100" width="65" height="455" right_ident="2" always_show_scroll="0" vert_interval="18" inverse_dir="1" flip_vert="0" glob_al="r"/>
 
 	<weapon_jammed_static x="0" y="0" width="64" height="64">
 		<texture>ui_hud_icon_weapon</texture>
@@ -91,7 +91,7 @@
 		<texture>ui_hud_icon_artefact</texture>
 	</artefact_static>
 
-	<disk_io x="1000" y="750" width="16" height="16" stretch="1">
+	<disk_io x="1000" y="750" width="16" height="16" stretch="1" glob_al="r">
 		<texture>ui\ui_disk_io</texture>
 	</disk_io>
 
@@ -101,7 +101,7 @@
 		</flashing_icon>
 	</flashing_icons>
 
-	<pick_up_item x="437" y="400" width="150" height="100"/>
+	<pick_up_item x="437" y="400" width="150" height="100" glob_al="c"/>
 
 	<artefact_panel x="130" y="710" width="730" height="50" cell_width="50" cell_height="50" scale="0.75"/>
 	

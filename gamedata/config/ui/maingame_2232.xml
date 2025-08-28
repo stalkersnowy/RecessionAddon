@@ -4,7 +4,7 @@
 		<text font="letterica16" r="238" g="224" b="198"/>		
 	</speech_menu>
 	
-	<static_health x="860" y="635" width="152" height="200" align="rb">
+	<static_health x="860" y="635" width="152" height="200" align="rb" glob_al="r">
 		<text x="80" y="5" font="small" r="255" g="255" b="255" a="130">health</text>
 		<texture>ui\ui_mn_health</texture>
 	</static_health>
@@ -15,7 +15,7 @@
 	</progress_bar_health>
 	
 	
-	<static_armor x="860" y="590" width="152" height="200" align="rb">
+	<static_armor x="860" y="590" width="152" height="200" align="rb" glob_al="r">
 		<text x="80" y="5" font="small" r="255" g="255" b="255" a="130">armor</text>
 		<texture>ui\ui_mn_health</texture>
 	</static_armor>
@@ -25,7 +25,7 @@
 		<background><texture x="0" y="0" width="120" height="17" >ui\ui_mg_progress_efficiency_empty</texture></background>
 	</progress_bar_armor>
 	
-	<static_weapon x="860" y="685" width="200" height="100" align="rb">
+	<static_weapon x="860" y="685" width="200" height="100" align="rb" glob_al="r">
 		<text x="0" y="4" font="small" r="255" g="255" b="255" a="130" align="c"></text>
 		<texture>ui\ui_mn_weapons</texture>
 	</static_weapon>
@@ -38,7 +38,7 @@
 		<text font="graffiti19" r="239" g="154" b="29" a="230"></text>
 	</static_wpn_icon>
 
-	<car_panel x="860" y="545" width="150" height="200" align="rb"></car_panel>
+	<car_panel x="860" y="545" width="150" height="200" align="rb" glob_al="r"></car_panel>
 	
 	<static_pda_online x="1" y="187" width="200" height="32">
 		<texture>ui\ui_mg_back_pager</texture>
@@ -46,12 +46,12 @@
 	</static_pda_online>
 	
 	
-	<quick_info x="1" y="700" width="1022" height="50" complex_mode="1">
+	<quick_info x="1" y="700" width="1022" height="50" complex_mode="1" glob_al="c">
 		<text align="c"/>
 	</quick_info>
 
 	
-	<icons_scroll_view  x="955" y="100" width="65" height="455" right_ident="2" always_show_scroll="0" vert_interval="18" inverse_dir="1" flip_vert="0"/>
+	<icons_scroll_view  x="955" y="100" width="65" height="455" right_ident="2" always_show_scroll="0" vert_interval="18" inverse_dir="1" flip_vert="0" glob_al="r"/>
 
 	<weapon_jammed_static x="0" y="0" width="64" height="64">
 		<texture>ui_hud_icon_weapon</texture>
@@ -85,7 +85,7 @@
 		<texture>ui_hud_icon_artefact</texture>
 	</artefact_static>
 
-	<disk_io x="1000" y="750" width="16" height="16" stretch="1">
+	<disk_io x="1000" y="750" width="16" height="16" stretch="1" glob_al="r">
 		<texture>ui\ui_disk_io</texture>
 	</disk_io>
 
@@ -95,7 +95,7 @@
 		</flashing_icon>
 	</flashing_icons>
 
-	<pick_up_item x="437" y="400" width="150" height="100"></pick_up_item>
+	<pick_up_item x="437" y="400" width="150" height="100" glob_al="c"></pick_up_item>
 
 	<artefact_panel x="70" y="710" width="790" height="50" scale="0.75" cell_width="50" cell_height="50"></artefact_panel>
 	

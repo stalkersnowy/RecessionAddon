@@ -4,7 +4,7 @@
 		<text font="letterica16" r="238" g="224" b="198"/>		
 	</speech_menu>
 	
-	<static_health x="15" y="693" width="90" height="63" align="lb">
+	<static_health x="15" y="693" width="90" height="63" align="lb" glob_al="r">
 		<texture>ui\hud_health_back</texture>
 	</static_health>
 
@@ -15,7 +15,7 @@
 		<max_color r="0" g="174" b="239"/>
 	</progress_bar_health>
 
-	<progress_bar_armor x="3" y="31" width="84" height="16" horz="1" min="0" max="100" pos="0">
+	<progress_bar_armor x="3" y="31" width="84" height="16" horz="1" min="0" max="100" pos="0" glob_al="r">
 		<progress><texture>ui\hud_health_bar</texture></progress>
 		<min_color r="239" g="0" b="35"/>
 		<middle_color r="255" g="242" b="0"/>
@@ -27,7 +27,7 @@
 		<texture>ui\hud_weapon_back</texture>
 	</static_weapon>
 	
-	<static_ammo x="3" y="2" width="85" height="30">
+	<static_ammo x="3" y="2" width="85" height="30" glob_al="r">
 		<text font="small" a="128">Ammo</text>
 	</static_ammo>
 	
@@ -35,15 +35,15 @@
 		<text font="small" a="128"></text>
 	</static_wpn_icon>
 
-	<car_panel x="860" y="545" width="150" height="200" align="rb"></car_panel>
+	<car_panel x="860" y="545" width="150" height="200" align="rb" glob_al="r"></car_panel>
 	
 	
-	<quick_info x="1" y="700" width="1022" height="50" complex_mode="1">
+	<quick_info x="1" y="700" width="1022" height="50" complex_mode="1" glob_al="c">
 		<text align="c"/>
 	</quick_info>
 
 	
-	<icons_scroll_view  x="955" y="100" width="65" height="455" right_ident="2" always_show_scroll="0" vert_interval="18" inverse_dir="1" flip_vert="0"/>
+	<icons_scroll_view  x="955" y="100" width="65" height="455" right_ident="2" always_show_scroll="0" vert_interval="18" inverse_dir="1" flip_vert="0" glob_al="r"/>
 
 	<weapon_jammed_static x="0" y="0" width="64" height="64">
 		<texture>ui_hud_icon_weapon</texture>
@@ -81,13 +81,13 @@
 		<texture>ui_hud_icon_artefact</texture>
 	</artefact_static>
 
-	<disk_io x="1000" y="750" width="1" height="1"/>
+	<disk_io x="1000" y="750" width="1" height="1" glob_al="r"/>
 
 	<flashing_icons>
 		<flashing_icon x="19" y="220" width="1" height="1" type="pda"/>
 	</flashing_icons>
 
-	<pick_up_item x="437" y="400" width="150" height="100"></pick_up_item>
+	<pick_up_item x="437" y="400" width="150" height="100" glob_al="c"></pick_up_item>
 
 	<artefact_panel x="70" y="710" width="790" height="50" scale="0.75" cell_width="50" cell_height="50"></artefact_panel>
 	
