@@ -256,7 +256,8 @@ local prefix_by_level = {
 	l13_deadmil_r = "dm",
 	k03_milrad_test = "mr",
 	krondor_selo = "kr",
-	m91 = "om"
+	m91 = "om",
+	y_tir = "tir"
 }
 
 local function manage_autosaves()

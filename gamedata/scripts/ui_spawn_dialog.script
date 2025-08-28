@@ -3,6 +3,7 @@ local items_table = {
 						{name = "spawn_ds",		spawn = "ds"},
 						{name = "spawn_dm",		spawn = "dm"},
 						{name = "spawn_mr",		spawn = "mr"},
+						{name = "spawn_tir",	spawn = "tir"},
 						{name = "spawn_om",		spawn = "om"},
 						{name = "spawn_kr",		spawn = "kr"}
 					}

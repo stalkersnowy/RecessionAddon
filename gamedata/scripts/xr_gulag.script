@@ -27,7 +27,7 @@ level_groups = {l01_escape = 1, l02_garbage = 2, l03_agroprom = 3, l03u_agr_unde
                 l04_darkvalley = 5, l04u_labx18 = 6, l05_bar = 7, l06_rostok = 8,
                 l07_military = 9, l08_yantar = 10, l08u_brainlab = 11, l09_deadcity = 12, l10_radar = 13,
                 l10u_bunker = 14, l11_pripyat = 15, l12_stancia = 16, l12u_sarcofag = 17, 
-                l12u_control_monolith = 18, l12_stancia_2 = 19, l23_final_battle = 20, k01_darkscape = 21, l13_deadmil_r = 22, krondor_selo = 100, m91 = 101}
+                l12u_control_monolith = 18, l12_stancia_2 = 19, l23_final_battle = 20, k01_darkscape = 21, l13_deadmil_r = 22, k03_milrad_test = 23, krondor_selo = 100, m91 = 101, y_tir = 102}
 
 local gulag_tasks_file_name  = "misc\\gulag_tasks.ltx"
 local gulag_tasks_ltx        = ini_file( gulag_tasks_file_name )

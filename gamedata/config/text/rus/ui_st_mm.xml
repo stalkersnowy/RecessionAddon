@@ -453,6 +453,9 @@
 	<string id="spawn_om">
 		<text>Павелецкая (m91)</text>
 	</string>
+	<string id="spawn_tir">
+		<text>y_tir</text>
+	</string>
 	<string id="spawn_kr">
 		<text>krondor_selo</text>
 	</string>
