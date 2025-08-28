@@ -81,7 +81,7 @@ float		ps_r__Tree_w_amp			= 0.005f;
 Fvector		ps_r__Tree_Wave				= {.1f, .01f, .11f};
 float		ps_r__Tree_SBC				= 1.5f	;	// scale bias correct
 
-float		ps_r__WallmarkTTL			= 300.f	;
+//float		ps_r__WallmarkTTL			= 300.f	;
 float		ps_r__WallmarkSHIFT			= 0.0001f;
 float		ps_r__WallmarkSHIFT_V		= 0.0001f;
 
@@ -571,7 +571,7 @@ void		xrRender_initconsole	()
 	CMD4(CCC_Float,		"r__ssa_glod_end",		&ps_r__GLOD_ssa_end,		16,		96		);
 	CMD4(CCC_Float,		"r__wallmark_shift_pp",	&ps_r__WallmarkSHIFT,		0.0f,	1.f		);
 	CMD4(CCC_Float,		"r__wallmark_shift_v",	&ps_r__WallmarkSHIFT_V,		0.0f,	1.f		);
-	CMD4(CCC_Float,		"r__wallmark_ttl",		&ps_r__WallmarkTTL,			1.0f,	5.f*60.f);
+//	CMD4(CCC_Float,		"r__wallmark_ttl",		&ps_r__WallmarkTTL,			1.0f,	5.f*60.f);
 	CMD1(CCC_ModelPoolStat,"stat_models"		);
 #endif // DEBUG
 

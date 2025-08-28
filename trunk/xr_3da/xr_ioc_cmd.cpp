@@ -599,6 +599,7 @@ extern int			g_ErrorLineCount;
 
 ENGINE_API int			ps_r__Supersample			= 1;
 ENGINE_API int			ps_r__WallmarksOnSkeleton	= 0;
+ENGINE_API float		ps_r__WallmarkTTL			= 300.f	;
 extern int				ps_r2_DetailBump;
 extern int				ps_r2_DynamicSun;
 void CCC_Register()
@@ -651,6 +652,7 @@ void CCC_Register()
 
 	// Render device states
 	CMD4(CCC_Integer,	"r__supersample",		&ps_r__Supersample,			1,		4		);
+	CMD4(CCC_Float,		"r__wallmark_ttl",		&ps_r__WallmarkTTL,			1.0f,	5.f*60.f);
 	//Bloodmarks on Skeleton
 	CMD4(CCC_Integer,	"r__wallmarks_on_skeleton", &ps_r__WallmarksOnSkeleton,		0, 1	);
 	//Detail bump

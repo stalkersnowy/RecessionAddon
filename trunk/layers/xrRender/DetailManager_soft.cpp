@@ -121,8 +121,6 @@ void CDetailManager::soft_Render	()
 				RCache.Render			(D3DPT_TRIANGLELIST,vBase,0,vCount_Lock,iBase,dwNumPrimitives);
 			}
 		}
-		// Clean up
-		_vis.clear_not_free	();
 	}
 }
 
