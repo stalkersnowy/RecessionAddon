@@ -207,6 +207,8 @@ float		ps_r2_gloss_factor			= 1.0f;
 #include	"../xr_3da/XR_IOConsole.h"
 #include	"../xr_3da/xr_ioc_cmd.h"
 
+int			ps_r1_no_lod = 0;
+
 //-----------------------------------------------------------------------
 class CCC_tf_Aniso		: public CCC_Integer
 {
@@ -612,6 +614,10 @@ void		xrRender_initconsole	()
 
 	// R1-specific
 	CMD4(CCC_Integer,	"r1_glows_per_frame",	&ps_r1_GlowsPerFrame,		2,		32		);
+
+#if RENDER==R_R1
+	CMD4(CCC_Integer,	"r1_no_lod",			&ps_r1_no_lod,				0,		1		);
+#endif
 
 	// R2
 	CMD4(CCC_Float,		"r2_ssa_lod_a",			&ps_r2_ssaLOD_A,			16,		96		);
