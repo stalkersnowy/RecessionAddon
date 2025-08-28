@@ -15,7 +15,7 @@
 CUIDebugFonts::CUIDebugFonts()
 {
 	AttachChild			(&m_background);
-	Init				(0, 0, UI_BASE_WIDTH, UI_BASE_HEIGHT);
+	Init				(0, 0, psBaseWidth, UI_BASE_HEIGHT);
 }
 
 CUIDebugFonts::~CUIDebugFonts()
@@ -52,7 +52,7 @@ void CUIDebugFonts::FillUpList()
 	CFontManager::FONTS_VEC_IT it_e = v.end();
 	Fvector2 pos, sz;
 	pos.set			(0,0);
-	sz.set			(UI_BASE_WIDTH, UI_BASE_HEIGHT);
+	sz.set			(psBaseWidth, UI_BASE_HEIGHT);
 	string256		str;
 	for (; it != it_e; ++it)
 	{

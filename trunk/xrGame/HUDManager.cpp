@@ -241,7 +241,7 @@ void  CHUDManager::RenderUI()
 		LPCSTR _str			= CStringTable().translate("st_game_paused").c_str();
 		
 		Fvector2			_pos;
-		_pos.set			(UI_BASE_WIDTH/2.0f, UI_BASE_HEIGHT/2.0f);
+		_pos.set			(psBaseWidth/2.0f, UI_BASE_HEIGHT/2.0f);
 		UI()->ClientToScreenScaled(_pos);
 		pFont->SetAligment	(CGameFont::alCenter);
 		pFont->Out			(_pos.x, _pos.y, _str);

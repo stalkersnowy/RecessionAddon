@@ -38,7 +38,7 @@ void CUIStatsWnd::Init(LPCSTR XML)
 
 	CUIWindow::Init(CUIXmlInit::ApplyAlignX(0, alCenter),
 					CUIXmlInit::ApplyAlignY(0, alCenter),
-					UI_BASE_WIDTH, UI_BASE_HEIGHT);
+					psBaseWidth, UI_BASE_HEIGHT);
 
 	// Читаем из xml файла параметры окна и контролов
 	AttachChild(&UIFrameWnd);

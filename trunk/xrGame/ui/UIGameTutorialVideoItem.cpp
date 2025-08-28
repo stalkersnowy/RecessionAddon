@@ -74,16 +74,16 @@ void CUISequenceVideoItem::Load(CUIXml* xml, int idx)
 	bool bFullScreen								= (1==xml->ReadAttribInt("video_wnd", 0, "fullscreen", 0));
 	if(!bFullScreen)
 	{
-		m_wnd->SetWndPos								(Fvector2().set(UI_BASE_WIDTH / 2.f, UI_BASE_HEIGHT / 2.f));
+		m_wnd->SetWndPos								(Fvector2().set(psBaseWidth / 2.f, UI_BASE_HEIGHT / 2.f));
 		m_wnd->SetAlignment								(waCenter);
 		Frect texture_coords							= m_wnd->GetUIStaticItem().GetOriginalRect();
 
 		bool is_16_9									= UI()->is_16_9_mode();
-		float kw_image									= UI_BASE_WIDTH / texture_coords.width();
+		float kw_image									= psBaseWidth / texture_coords.width();
 
 		Fvector2										wnd_size;
 
-		wnd_size.x										= UI_BASE_WIDTH;
+		wnd_size.x										= psBaseWidth;
 		wnd_size.y										= texture_coords.height()*kw_image;
 		if(is_16_9)
 			wnd_size.y									/= UI()->get_current_kx();

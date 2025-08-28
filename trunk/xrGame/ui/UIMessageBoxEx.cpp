@@ -20,7 +20,7 @@ CUIMessageBoxEx::~CUIMessageBoxEx()
 
 void CUIMessageBoxEx::Init(LPCSTR xml_template)
 {
-	CUIDialogWnd::Init(0, 0, UI_BASE_WIDTH, UI_BASE_HEIGHT);
+	CUIDialogWnd::Init(0, 0, psBaseWidth, UI_BASE_HEIGHT);
 	m_pMessageBox->Init(xml_template);
 }
 

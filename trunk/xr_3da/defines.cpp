@@ -5,7 +5,7 @@
 #endif
 
 // Video
-//. u32			psCurrentMode		= 1024;
+float		psBaseWidth			= 1024.f;
 u32			psCurrentVidMode[2] = { 0, 0 };
 u32			psCurrentBPP		= 32;
 // release version always has "mt_*" enabled

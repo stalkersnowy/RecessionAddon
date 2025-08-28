@@ -49,13 +49,13 @@ CUITalkWnd::~CUITalkWnd()
 
 void CUITalkWnd::Init()
 {
-	inherited::Init(0, 0, UI_BASE_WIDTH, UI_BASE_HEIGHT);
+	inherited::Init(0, 0, psBaseWidth, UI_BASE_HEIGHT);
 
 	//Меню разговора
 	UITalkDialogWnd = xr_new<CUITalkDialogWnd>();
 	UITalkDialogWnd->SetAutoDelete(true);
 	AttachChild(UITalkDialogWnd);
-	UITalkDialogWnd->Init(0, 0, UI_BASE_WIDTH, UI_BASE_HEIGHT);
+	UITalkDialogWnd->Init(0, 0, psBaseWidth, UI_BASE_HEIGHT);
 
 	/////////////////////////
 	//Меню торговли

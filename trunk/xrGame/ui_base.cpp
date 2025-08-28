@@ -99,7 +99,7 @@ sPoly2D* C2DFrustum::ClipPoly	(sPoly2D& S, sPoly2D& D) const
 
 void ui_core::OnDeviceReset()
 {
-	m_scale_.set		( float(Device.dwWidth)/UI_BASE_WIDTH, float(Device.dwHeight)/UI_BASE_HEIGHT );
+	m_scale_.set		( float(Device.dwWidth)/psBaseWidth, float(Device.dwHeight)/UI_BASE_HEIGHT );
 
 	m_2DFrustum.CreateFromRect	(Frect().set(	0.0f,
 												0.0f,
@@ -132,7 +132,7 @@ void ui_core::ClientToScreenScaledHeight(float& src_and_dest)
 
 Frect ui_core::ScreenRect()
 {
-	static Frect R={0.0f, 0.0f, UI_BASE_WIDTH, UI_BASE_HEIGHT};
+	static Frect R={0.0f, 0.0f, psBaseWidth, UI_BASE_HEIGHT};
 	return R;
 }
 
@@ -147,11 +147,11 @@ void ui_core::PushScissor(const Frect& r_tgt, bool overlapped)
 	if (!result.intersection(r_top,r_tgt))
 			result.set	(0.0f,0.0f,0.0f,0.0f);
 
-	if (!(result.x1>=0&&result.y1>=0&&result.x2<=UI_BASE_WIDTH&&result.y2<=UI_BASE_HEIGHT) )
+	if (!(result.x1>=0&&result.y1>=0&&result.x2<=psBaseWidth&&result.y2<=UI_BASE_HEIGHT) )
 	{
 		Msg("! r_tgt [%.3f][%.3f][%.3f][%.3f]", r_tgt.x1, r_tgt.y1, r_tgt.x2, r_tgt.y2);
 		Msg("! result [%.3f][%.3f][%.3f][%.3f]", result.x1, result.y1, result.x2, result.y2);
-		VERIFY(result.x1>=0&&result.y1>=0&&result.x2<=UI_BASE_WIDTH&&result.y2<=UI_BASE_HEIGHT);
+		VERIFY(result.x1>=0&&result.y1>=0&&result.x2<=psBaseWidth&&result.y2<=UI_BASE_HEIGHT);
 	}
 	m_Scissors.push		(result);
 
@@ -213,7 +213,7 @@ float ui_core::get_current_kx()
 	float h = float(Device.dwHeight);
 	float w = float(Device.dwWidth);
 
-	float res = (h / w) / (UI_BASE_HEIGHT / UI_BASE_WIDTH);
+	float res = (h / w) / (UI_BASE_HEIGHT / psBaseWidth);
 	return res;
 }
 
@@ -227,7 +227,7 @@ void ui_core::pp_start()
 {
 	m_bPostprocess		= true;
 
-	m_pp_scale_.set	( float(::Render->getTarget()->get_width())/float(UI_BASE_WIDTH),	float(::Render->getTarget()->get_height())/float(UI_BASE_HEIGHT) );
+	m_pp_scale_.set	( float(::Render->getTarget()->get_width())/float(psBaseWidth),	float(::Render->getTarget()->get_height())/float(UI_BASE_HEIGHT) );
 	m_2DFrustumPP.CreateFromRect(Frect().set(	0.0f,
 												0.0f,
 												float(::Render->getTarget()->get_width()),
@@ -257,7 +257,7 @@ void ui_core::RenderFont()
 
 bool ui_core::is_16_9_mode()
 {
-	return (Device.dwWidth)/float(Device.dwHeight) > (UI_BASE_WIDTH/UI_BASE_HEIGHT +0.01f);
+	return (Device.dwWidth)/float(Device.dwHeight) > (psBaseWidth/UI_BASE_HEIGHT +0.01f);
 }
 
 shared_str	ui_core::get_xml_name(LPCSTR fn)
@@ -273,9 +273,9 @@ shared_str	ui_core::get_xml_name(LPCSTR fn)
 		{
 			strcpy	(str, fn);
 			*strext(str)	= 0;
-			strcat	(str, "_16.xml");
+			strcat	(str, "_u.xml");
 		}else
-			sprintf_s				(str, "%s_16", fn);
+			sprintf_s				(str, "%s_u", fn);
 
 		if(NULL==FS.exist(str_, "$game_config$", "ui\\" , str) )
 		{

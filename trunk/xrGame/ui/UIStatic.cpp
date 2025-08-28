@@ -601,7 +601,7 @@ Frect CUIStatic::GetSelfClipRect()
 		r.add(GetUIStaticItem().GetPosX(), GetUIStaticItem().GetPosY());
 	}
 	else
-		r.set(0.0f, 0.0f, UI_BASE_WIDTH, UI_BASE_HEIGHT);
+		r.set(0.0f, 0.0f, psBaseWidth, UI_BASE_HEIGHT);
 
 	return r;
 }

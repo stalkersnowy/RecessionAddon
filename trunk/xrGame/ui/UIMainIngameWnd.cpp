@@ -133,7 +133,7 @@ void CUIMainIngameWnd::Init()
 	uiXml.Init					(CONFIG_PATH, UI_PATH, mainingame_xml);
 	
 	CUIXmlInit					xml_init;
-	CUIWindow::Init				(0,0, UI_BASE_WIDTH, UI_BASE_HEIGHT);
+	CUIWindow::Init				(0,0, psBaseWidth, UI_BASE_HEIGHT);
 
 	Enable(false);
 

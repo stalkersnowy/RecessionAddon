@@ -198,6 +198,7 @@ void	CHW::selectResolution	(u32 &dwWidth, u32 &dwHeight, BOOL bWindowed)
 		dwHeight					= psCurrentVidMode[1];
 #endif
 	}
+	psBaseWidth = psCurrentVidMode[0] * UI_BASE_HEIGHT / psCurrentVidMode[1];
 #endif
 
 }

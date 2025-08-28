@@ -122,8 +122,8 @@ public:
 	virtual void			Init(float x, float y, float width, float height)	{m_wndPos.set(x,y);m_wndSize.set(width, height);}
 	virtual void			SetWndPos(const Fvector2& pos)				{m_wndPos.set(pos.x,pos.y);}
 	virtual void			SetWndPos(float x, float y)					{m_wndPos.set(x,y);}
-	virtual void			SetWndPosFromCenter	(const Fvector2& pos)	{ m_wndPos.set(UI_BASE_WIDTH / 2.f + pos.x, UI_BASE_HEIGHT / 2.f + pos.y); }
-	virtual void			SetWndPosFromCenter	(float x, float y)		{ m_wndPos.set(UI_BASE_WIDTH / 2.f + x, UI_BASE_HEIGHT / 2.f + y); }
+	virtual void			SetWndPosFromCenter	(const Fvector2& pos)	{ m_wndPos.set(psBaseWidth / 2.f + pos.x, UI_BASE_HEIGHT / 2.f + pos.y); }
+	virtual void			SetWndPosFromCenter	(float x, float y)		{ m_wndPos.set(psBaseWidth / 2.f + x, UI_BASE_HEIGHT / 2.f + y); }
 	IC		Fvector2		GetWndPos()							const	{return m_wndPos;}
 	virtual void			SetWndSize(const Fvector2& size)			{m_wndSize = size;}
 	IC		Fvector2		GetWndSize()						const	{return m_wndSize;}
