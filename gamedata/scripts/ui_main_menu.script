@@ -24,11 +24,7 @@ end
 function main_menu:InitControls()
 	self:Init(0,0,1024,768)			  
     local xml = CScriptXmlInit()
-	if xml:is_16_9_mode() then
-		xml:ParseFile("ui_mm_main_16.xml")
-	else
-		xml:ParseFile("ui_mm_main.xml")
-	end
+	xml:ParseFile("ui_mm_main_u.xml")
      
     xml:InitStatic("back_movie", self)
     xml:InitStatic("background", self)
@@ -43,6 +39,8 @@ function main_menu:InitControls()
 	_ver:SetText					("ver. " .. mm:GetGSVer())
 	
 	self:NeedCenterCursor(true)
+	
+	self:AdaptRect(1280)
 end
 
 function main_menu:Show(f)

@@ -1,6 +1,6 @@
 <!-- 4x3 -->
 <w>
-	<message_box_no_sleep type="ok" x="200" y="250" width="510" height="206">
+	<message_box_no_sleep type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -20,7 +20,7 @@
 
 	</message_box_no_sleep>
 
-	<message_box_alert type="ok" x="200" y="250" width="510" height="206">
+	<message_box_alert type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -40,7 +40,7 @@
 
 	</message_box_alert>
 
-	<message_box_change_level type="yes_no" x="200" y="250" width="510" height="206">
+	<message_box_change_level type="yes_no" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -66,7 +66,7 @@
 
 	</message_box_change_level>
 	
-	<message_box_change_level_disabled type="ok" x="200" y="250" width="510" height="206">
+	<message_box_change_level_disabled type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -86,7 +86,7 @@
 
 	</message_box_change_level_disabled>
 
-	<message_box_error type="ok" x="200" y="250" width="510" height="206">
+	<message_box_error type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -106,7 +106,7 @@
 
 	</message_box_error>
 
-	<message_box_empty_file_name type="ok" x="200" y="250" width="510" height="206">
+	<message_box_empty_file_name type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -126,7 +126,7 @@
 
 	</message_box_empty_file_name>
 
-	<message_box_delete_file_name type="yes_no" x="200" y="250" width="510" height="206">
+	<message_box_delete_file_name type="yes_no" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -152,7 +152,7 @@
 
 	</message_box_delete_file_name>
 
-	<message_box_file_already_exist type="yes_no" x="200" y="250" width="510" height="206">
+	<message_box_file_already_exist type="yes_no" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -178,7 +178,7 @@
 
 	</message_box_file_already_exist>
 
-	<message_box_buy_spawn type="yes_no" x="200" y="250" width="510" height="206">
+	<message_box_buy_spawn type="yes_no" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -204,7 +204,7 @@
 
 	</message_box_buy_spawn>
 
-	<message_box_direct_ip type="direct_ip" x="200" y="250" width="510" height="206">
+	<message_box_direct_ip type="direct_ip" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -244,7 +244,7 @@
 
 	</message_box_direct_ip>
 
-	<message_box_password type="password" x="200" y="250" width="510" height="206">
+	<message_box_password type="password" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -284,7 +284,7 @@
 
 	</message_box_password>
 
-	<message_box_quit_windows type="quit_windows" x="200" y="250" width="510" height="206">
+	<message_box_quit_windows type="quit_windows" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -310,7 +310,7 @@
 
 	</message_box_quit_windows>
 
-	<message_box_quit_game type="quit_game" x="200" y="250" width="510" height="206">
+	<message_box_quit_game type="quit_game" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -336,7 +336,7 @@
 
 	</message_box_quit_game>
 
-	<message_box_confirm_load_save type="yes_no" x="200" y="250" width="510" height="206">
+	<message_box_confirm_load_save type="yes_no" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -362,7 +362,7 @@
 
 	</message_box_confirm_load_save>
 
-	<message_box_invalid_saved_game type="ok" x="200" y="250" width="510" height="206">
+	<message_box_invalid_saved_game type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -382,7 +382,7 @@
 
 	</message_box_invalid_saved_game>
 
-	<message_box_invalid_host type="ok" x="200" y="250" width="510" height="206">
+	<message_box_invalid_host type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -402,7 +402,7 @@
 
 	</message_box_invalid_host>
 
-	<message_box_invalid_pass type="ok" x="200" y="250" width="510" height="206">
+	<message_box_invalid_pass type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -422,7 +422,7 @@
 
 	</message_box_invalid_pass>
 
-	<message_box_session_full type="ok" x="200" y="250" width="510" height="206">
+	<message_box_session_full type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -442,7 +442,7 @@
 
 	</message_box_session_full>
 
-	<message_box_server_reject type="ok" x="200" y="250" width="510" height="206">
+	<message_box_server_reject type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -462,7 +462,7 @@
 
 	</message_box_server_reject>
 
-	<message_box_cdkey_invalid type="ok" x="200" y="250" width="510" height="206">
+	<message_box_cdkey_invalid type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -482,7 +482,7 @@
 
 	</message_box_cdkey_invalid>
 
-	<message_box_cdkey_in_use type="ok" x="200" y="250" width="510" height="206">
+	<message_box_cdkey_in_use type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -502,7 +502,7 @@
 
 	</message_box_cdkey_in_use>
 
-	<message_box_cdkey_disabled type="ok" x="200" y="250" width="510" height="206">
+	<message_box_cdkey_disabled type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -522,7 +522,7 @@
 
 	</message_box_cdkey_disabled>
 
-	<message_box_different_version type="ok" x="200" y="250" width="510" height="206">
+	<message_box_different_version type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -542,7 +542,7 @@
 
 	</message_box_different_version>
 
-	<message_box_gs_service_not_available type="ok" x="200" y="250" width="510" height="206">
+	<message_box_gs_service_not_available type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -562,7 +562,7 @@
 
 	</message_box_gs_service_not_available>
 
-	<message_box_sb_master_server_connect_failed type="ok" x="200" y="250" width="510" height="206">
+	<message_box_sb_master_server_connect_failed type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -582,7 +582,7 @@
 
 	</message_box_sb_master_server_connect_failed>
 
-	<msg_box_new_patch type="yes_no" x="200" y="250" width="510" height="206">
+	<msg_box_new_patch type="yes_no" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -608,7 +608,7 @@
 
 	</msg_box_new_patch>
 
-	<msg_box_no_new_patch type="ok" x="200" y="250" width="510" height="206">
+	<msg_box_no_new_patch type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -628,7 +628,7 @@
 
 	</msg_box_no_new_patch>
 
-	<cant_vote type="ok" x="200" y="250" width="510" height="206">
+	<cant_vote type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -648,7 +648,7 @@
 
 	</cant_vote>
 
-	<select_map type="ok" x="200" y="250" width="510" height="206">
+	<select_map type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -668,7 +668,7 @@
 
 	</select_map>
 
-	<message_box_restart_game type="ok" x="200" y="250" width="510" height="206">
+	<message_box_restart_game type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -688,7 +688,7 @@
 
 	</message_box_restart_game>
 
-	<message_box_check_r2 type="ok" x="200" y="250" width="510" height="206">
+	<message_box_check_r2 type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -708,7 +708,7 @@
 
 	</message_box_check_r2>
 
-	<msg_box_patch_download_error type="ok" x="200" y="250" width="510" height="206">
+	<msg_box_patch_download_error type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -728,7 +728,7 @@
 
 	</msg_box_patch_download_error>
 
-	<msg_box_patch_download_success type="yes_no" x="200" y="250" width="510" height="206">
+	<msg_box_patch_download_success type="yes_no" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -754,7 +754,7 @@
 
 	</msg_box_patch_download_success>
 
-	<msg_box_connect_to_master_server type="ok" x="200" y="250" width="510" height="206">
+	<msg_box_connect_to_master_server type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -774,7 +774,7 @@
 
 	</msg_box_connect_to_master_server>
 
-	<msg_box_kicked_by_server type="ok" x="200" y="250" width="510" height="206">
+	<msg_box_kicked_by_server type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -794,7 +794,7 @@
 
 	</msg_box_kicked_by_server>
 
-	<msg_box_error_loading type="ok" x="200" y="250" width="510" height="206">
+	<msg_box_error_loading type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -814,7 +814,7 @@
 
 	</msg_box_error_loading>
 
-	<message_box_yes_no type="yes_no" x="200" y="250" width="510" height="206">
+	<message_box_yes_no type="yes_no" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -840,7 +840,7 @@
 
 	</message_box_yes_no>
 
-	<message_box_ok type="ok" x="200" y="250" width="510" height="206">
+	<message_box_ok type="ok" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 
@@ -860,7 +860,7 @@
 
 	</message_box_ok>
 
-	<message_box_download_level type="yes_no_copy" x="200" y="250" width="510" height="206">
+	<message_box_download_level type="yes_no_copy" x="200" y="250" width="510" height="206" glob_al="c">
 
 		<texture>ui_frame_error</texture>
 

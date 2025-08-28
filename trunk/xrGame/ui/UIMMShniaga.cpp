@@ -104,22 +104,14 @@ void CUIMMShniaga::Init(CUIXml& xml_doc, LPCSTR path)
 	m_sound->Init(xml_doc, "menu_sound");
 	m_sound->music_Play();
 
-	m_wheel_size[0]		= m_anims[0]->GetWndSize();
-	
-	m_wheel_size[1].set(m_wheel_size[0]);
+	float wheel_width = m_anims[0]->GetWidth() * UI_BASE_WIDTH / psBaseWidth;
+	m_anims[0]->SetWidth(wheel_width);
+	m_anims[1]->SetWidth(wheel_width);
 }
 
 void CUIMMShniaga::OnDeviceReset()
 {
-	if(UI()->is_16_9_mode())
-	{
-		m_anims[0]->SetWndSize(m_wheel_size[1]);
-		m_anims[1]->SetWndSize(m_wheel_size[1]);
-	}else
-	{
-		m_anims[0]->SetWndSize(m_wheel_size[0]);
-		m_anims[1]->SetWndSize(m_wheel_size[0]);
-	}
+	m_mag_pos = m_magnifier->GetWndPos().x;
 }
 
 extern CActor*		g_actor;
@@ -362,7 +354,7 @@ void CUIMMShniaga::SetVisibleMagnifier(bool f)
 	if (f)
 		pos.x = m_mag_pos;
 	else
-		pos.x = 1025;
+		pos.x = psBaseWidth + 1.f;
 	m_magnifier->SetWndPos(pos);
 }
 

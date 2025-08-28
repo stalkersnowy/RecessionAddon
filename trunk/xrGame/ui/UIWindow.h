@@ -206,6 +206,10 @@ public:
 
 	IC bool					CursorOverWindow	() const					{ return m_bCursorOverWindow; }
 
+	void					AdaptRect			(float max_width);
+	void					AdaptRectAll		(float k);
+	void					AdaptChildRect		(float k);
+
 protected:
 	IC void					SafeRemoveChild(CUIWindow* child)				{WINDOW_LIST_it it = std::find(m_ChildWndList.begin(),m_ChildWndList.end(),child); if(it!=m_ChildWndList.end())m_ChildWndList.erase(it);};
 

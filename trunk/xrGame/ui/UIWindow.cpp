@@ -643,3 +643,32 @@ void CUIWindow::ShowChildren(bool show){
 			(*it)->Show(show);
 //.	m_dbg_flag.set(512,FALSE);
 }
+
+void CUIWindow::AdaptRect(float max_width)
+{
+	if(psBaseWidth >= max_width){
+		float k = psBaseWidth / UI_BASE_WIDTH;
+		AdaptRectAll(k);
+	}else{
+		float k = max_width / UI_BASE_WIDTH;
+		AdaptRectAll(k);
+		Fvector2 pos = GetWndPos();
+		pos.x -= (max_width - psBaseWidth) * .5f;
+		SetWndPos(pos);
+	}
+}
+
+void CUIWindow::AdaptRectAll(float k)
+{
+	AdaptChildRect(k);
+	for(WINDOW_LIST_it it = m_ChildWndList.begin(); m_ChildWndList.end()!=it; ++it)		
+		(*it)->AdaptRectAll(k);
+}
+
+void CUIWindow::AdaptChildRect(float k)
+{
+	Fvector2 pos = GetWndPos();
+	float new_width = GetWidth() * k;
+	pos.x *= k;
+	SetWndRect(pos.x,pos.y,new_width,GetHeight());
+}

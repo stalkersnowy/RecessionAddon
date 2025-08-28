@@ -131,7 +131,9 @@ void CUIWindow::script_register(lua_State *L)
 		.def("SetPPMode",				&CUIWindow::SetPPMode)
 		.def("ResetPPMode",				&CUIWindow::ResetPPMode)
 
-		.def("CursorOverWindow",		&CUIWindow::CursorOverWindow),
+		.def("CursorOverWindow",		&CUIWindow::CursorOverWindow)
+
+		.def("AdaptRect",				(void (CUIWindow::*)(float)) &CUIWindow::AdaptRect),
 
 //		.def("",						&CUIWindow::)
 		
