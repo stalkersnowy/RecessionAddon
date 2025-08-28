@@ -8,6 +8,7 @@
 #include "alife_simulator_header.h"
 #include "level_graph.h"
 #include "../xr_3da/FDemoRecord.h"
+#include "../xr_3da/CameraManager.h"
 #include "level.h"
 #include "xr_level_controller.h"
 #include "game_cl_base.h"
@@ -287,7 +288,7 @@ void CLevel::IR_OnKeyboardPress	(int key)
 
 #endif
 	case DIK_DIVIDE:
-		if( CheatsEnabled() && OnServer() ){
+		if( CheatsEnabled() && OnServer() && !Level().Cameras().GetCamEffector(cefDemo) ){
 //			float NewTimeFactor				= pSettings->r_float("alife","time_factor");
 			
 			if (GameID() == GAME_SINGLE)
@@ -300,7 +301,7 @@ void CLevel::IR_OnKeyboardPress	(int key)
 		}
 		break;	
 	case DIK_MULTIPLY:
-		if( CheatsEnabled() && OnServer() ){
+		if( CheatsEnabled() && OnServer() && !Level().Cameras().GetCamEffector(cefDemo) ){
 			float NewTimeFactor				= 1000.f;
 			if (GameID() == GAME_SINGLE)
 				Server->game->SetGameTimeFactor(NewTimeFactor);
