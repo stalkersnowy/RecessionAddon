@@ -43,6 +43,8 @@
 #include "../../../ai_space.h"
 #include "../../../script_engine.h"
 
+BOOL g_bUseHitFX = FALSE;
+
 CBaseMonster::CBaseMonster()
 {
 	m_pPhysics_support=xr_new<CCharacterPhysicsSupport>(CCharacterPhysicsSupport::etBitting,this);

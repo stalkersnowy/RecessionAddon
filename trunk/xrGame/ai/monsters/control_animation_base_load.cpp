@@ -1,6 +1,14 @@
 #include "stdafx.h"
 #include "control_animation_base.h"
 
+void CControlAnimationBase::AddAnim(EMotionAnim ma, LPCSTR tn, int s_id, SVelocityParam *vel, EPState p_s, BOOL use_fx, LPCSTR fx_front, LPCSTR fx_back, LPCSTR fx_left, LPCSTR fx_right)
+{
+	if(use_fx)
+		AddAnim(ma,tn,s_id,vel,p_s,fx_front,fx_back,fx_left,fx_right);
+	else
+		AddAnim(ma,tn,s_id,vel,p_s);
+}
+
 void CControlAnimationBase::AddAnim(EMotionAnim ma, LPCSTR tn, int s_id, SVelocityParam *vel, EPState p_s, LPCSTR fx_front, LPCSTR fx_back, LPCSTR fx_left, LPCSTR fx_right)
 {
 	SAnimItem *new_item		= xr_new<SAnimItem>();

@@ -5,6 +5,7 @@
 #include "../monster_velocity_space.h"
 #include "../control_animation_base.h"
 #include "../control_movement_base.h"
+#include "GameConstants.h"
 
 
 CAI_Flesh::CAI_Flesh()
@@ -14,6 +15,9 @@ CAI_Flesh::CAI_Flesh()
 	m_fEyeShiftYaw		= PI_DIV_6;
 
 	CControlled::init_external(this);
+
+	if(GameConstants::GetOldMutants())
+		com_man().add_ability(ControlCom::eControlRotationJump);
 }
 
 CAI_Flesh::~CAI_Flesh()
@@ -50,34 +54,38 @@ void CAI_Flesh::Load(LPCSTR section)
 	SVelocityParam &velocity_drag		= move().get_velocity(MonsterMovement::eVelocityParameterDrag);
 
 	// define animation set
-	anim().AddAnim(eAnimStandIdle,		"stand_idle_",			-1, &velocity_none,		PS_STAND);
-	anim().AddAnim(eAnimStandTurnLeft,	"stand_turn_ls_",		-1, &velocity_turn,		PS_STAND);
-	anim().AddAnim(eAnimStandTurnRight,	"stand_turn_rs_",		-1, &velocity_turn,		PS_STAND);
+	anim().AddAnim(eAnimStandIdle,		"stand_idle_",			-1, &velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimStandTurnLeft,	"stand_turn_ls_",		-1, &velocity_turn,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimStandTurnRight,	"stand_turn_rs_",		-1, &velocity_turn,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
 
-	anim().AddAnim(eAnimLieIdle,			"lie_idle_",			-1, &velocity_none,		PS_LIE);
-	anim().AddAnim(eAnimSleep,			"lie_idle_",			-1, &velocity_none,		PS_LIE);
+	anim().AddAnim(eAnimLieIdle,			"lie_idle_",			-1, &velocity_none,		PS_LIE, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimSleep,			"lie_idle_",			-1, &velocity_none,		PS_LIE, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
 
-	anim().AddAnim(eAnimWalkFwd,			"stand_walk_fwd_",		-1, &velocity_walk,		PS_STAND);
-	anim().AddAnim(eAnimWalkDamaged,		"stand_walk_fwd_dmg_",	-1, &velocity_walk_dmg,	PS_STAND);
+	anim().AddAnim(eAnimWalkFwd,			"stand_walk_fwd_",		-1, &velocity_walk,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimWalkDamaged,		"stand_walk_fwd_dmg_",	-1, &velocity_walk_dmg,	PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
 
-	anim().AddAnim(eAnimRun,				"stand_run_",			-1,	&velocity_run,		PS_STAND);
-	anim().AddAnim(eAnimRunDamaged,		"stand_run_dmg_",		-1,	&velocity_run_dmg,	PS_STAND);
+	anim().AddAnim(eAnimRun,				"stand_run_",			-1,	&velocity_run,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimRunDamaged,		"stand_run_dmg_",		-1,	&velocity_run_dmg,	PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
 
-	anim().AddAnim(eAnimAttack,			"stand_attack_",		-1, &velocity_turn,		PS_STAND);
-	anim().AddAnim(eAnimAttackFromBack,	"stand_attack_back_",	-1, &velocity_none,		PS_STAND);
-	anim().AddAnim(eAnimCheckCorpse,	"stand_check_corpse_",	 1,	&velocity_none,		PS_STAND);
+	anim().AddAnim(eAnimAttack,			"stand_attack_",		-1, &velocity_turn,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimAttackFromBack,	"stand_attack_back_",	-1, &velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimCheckCorpse,	"stand_check_corpse_",	 1,	&velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
 
-	anim().AddAnim(eAnimEat,				"stand_eat_",			-1, &velocity_none,		PS_STAND);
-	anim().AddAnim(eAnimDie,				"stand_die_",			-1, &velocity_none,		PS_STAND);
+	anim().AddAnim(eAnimEat,				"stand_eat_",			-1, &velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimDie,				"stand_die_",			-1, &velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
 
-	anim().AddAnim(eAnimStandLieDown,	"stand_lie_down_",		-1, &velocity_none,		PS_STAND);
-	anim().AddAnim(eAnimLieStandUp,		"lie_stand_up_",		-1, &velocity_none,		PS_LIE);
+	anim().AddAnim(eAnimStandLieDown,	"stand_lie_down_",		-1, &velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimLieStandUp,		"lie_stand_up_",		-1, &velocity_none,		PS_LIE, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
 
-	anim().AddAnim(eAnimSteal,			"stand_crawl_",			-1, &velocity_steal,	PS_STAND);
-	anim().AddAnim(eAnimDragCorpse,		"stand_drag_",			-1, &velocity_drag,		PS_STAND);
+	anim().AddAnim(eAnimSteal,			"stand_crawl_",			-1, &velocity_steal,	PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimDragCorpse,		"stand_drag_",			-1, &velocity_drag,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
 
-	anim().AddAnim(eAnimScared,			"stand_scared_",		-1,	&velocity_none,		PS_STAND);
-	anim().AddAnim(eAnimThreaten,		"stand_threaten_",		-1,	&velocity_none,		PS_STAND);
+	anim().AddAnim(eAnimScared,			"stand_scared_",		-1,	&velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimThreaten,		"stand_threaten_",		-1,	&velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+
+	anim().AddAnim(eAnimLookAround,		"stand_look_around_",	-1, &velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimJumpLeft,		"stand_jump_left_",		-1, &velocity_turn,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimJumpRight,		"stand_jump_right_",	-1, &velocity_turn,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
 
 	// define transitions
 	anim().AddTransition(PS_STAND,	PS_LIE,		eAnimStandLieDown,		false);
@@ -117,7 +125,14 @@ void CAI_Flesh::CheckSpecParams(u32 spec_params)
 		com_man().seq_run(anim().get_motion_id(eAnimAttackFromBack));
 	}
 
-	if ((spec_params & ASP_THREATEN) == ASP_THREATEN) anim().SetCurAnim(eAnimThreaten);
+	if ((spec_params & ASP_THREATEN) == ASP_THREATEN) {
+		anim().SetCurAnim(eAnimThreaten);
+		return;
+	}
+
+	if ((spec_params & ASP_STAND_SCARED) == ASP_STAND_SCARED) {
+		anim().SetCurAnim(eAnimScared);
+	}
 }
 
 
@@ -154,4 +169,11 @@ bool CAI_Flesh::ConeSphereIntersection(Fvector ConeVertex, float ConeAngle, Fvec
 	} 
 	
 	return false;
+}
+
+void CAI_Flesh::reinit()
+{
+	inherited::reinit();
+	if(!GameConstants::GetOldMutants() || CCustomMonster::use_simplified_visual())	return;
+	com_man().add_rotation_jump_data("stand_jump_left_0",0,"stand_jump_right_0",0, PI - PI_DIV_6, SControlRotationJumpData::eStopAtOnce | SControlRotationJumpData::eRotateOnce);
 }

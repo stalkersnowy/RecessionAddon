@@ -44,6 +44,8 @@ class CMonsterCoverManager;
 
 class CMonsterHome;
 
+extern BOOL g_bUseHitFX;
+
 class CBaseMonster : public CCustomMonster, public CStepManager, public CInventoryOwner 
 {
 	typedef	CCustomMonster								inherited;

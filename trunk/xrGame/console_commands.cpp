@@ -1894,6 +1894,7 @@ void CCC_RegisterCommands()
 
 	CMD4(CCC_Integer,		"g_use_ik",			&g_bUseIK, 0,1);
 	CMD4(CCC_Integer,		"g_use_smart_hits",	&g_bUseSmartHits, 0,1);
+	CMD4(CCC_Integer,		"g_use_hit_fx",		&g_bUseHitFX, 0,1);
 	CMD4(CCC_Integer,		"g_use_lens",		&g_bUseLens, 0,1);
 	
 	CMD3(CCC_Token,			"g_hud_style",		&g_hud_style, g_hud_style_token);

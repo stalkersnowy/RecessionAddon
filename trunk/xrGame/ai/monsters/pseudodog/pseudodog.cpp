@@ -8,6 +8,7 @@
 #include "../monster_velocity_space.h"
 #include "../control_animation_base.h"
 #include "../control_movement_base.h"
+#include "GameConstants.h"
 
 #ifdef _DEBUG
 #	include <dinput.h>
@@ -61,6 +62,10 @@ void CAI_PseudoDog::Load(LPCSTR section)
 	anim().accel_load			(section);
 	anim().accel_chain_add		(eAnimWalkFwd,		eAnimRun);
 	anim().accel_chain_add		(eAnimWalkDamaged,	eAnimRunDamaged);
+	if(GameConstants::GetOldMutants()){
+		anim().accel_chain_add	(eAnimWalkFwd,		eAnimRunTurnLeft);
+		anim().accel_chain_add	(eAnimWalkFwd,		eAnimRunTurnRight);
+	}
 
 	m_anger_hunger_threshold	= pSettings->r_float(section, "anger_hunger_threshold");
 	m_anger_loud_threshold		= pSettings->r_float(section, "anger_loud_threshold");
@@ -76,36 +81,37 @@ void CAI_PseudoDog::Load(LPCSTR section)
 
 
 	// define animation set
-	anim().AddAnim(eAnimStandIdle,		"stand_idle_",			-1, &velocity_none,		PS_STAND);
-	anim().AddAnim(eAnimStandTurnLeft,	"stand_turn_ls_",		-1, &velocity_turn,		PS_STAND);
-	anim().AddAnim(eAnimStandTurnRight,	"stand_turn_rs_",		-1, &velocity_turn,		PS_STAND);
-	anim().AddAnim(eAnimEat,			"stand_eat_",			-1, &velocity_none,		PS_STAND);
-	anim().AddAnim(eAnimSleep,			"lie_sleep_",			-1, &velocity_none,		PS_LIE);
-	anim().AddAnim(eAnimLieIdle,		"lie_idle_",			-1, &velocity_none,		PS_LIE);
-	anim().AddAnim(eAnimSitIdle,		"sit_idle_",			-1, &velocity_none,		PS_SIT);
-	anim().AddAnim(eAnimAttack,			"stand_attack_",		-1, &velocity_turn,		PS_STAND);
-	anim().AddAnim(eAnimWalkFwd,		"stand_walk_fwd_",		-1, &velocity_walk,		PS_STAND);
-	anim().AddAnim(eAnimWalkDamaged,	"stand_walk_dmg_",		-1, &velocity_walk_dmg,	PS_STAND);
-	anim().AddAnim(eAnimRun,			"stand_run_",			-1,	&velocity_run,		PS_STAND);
-	anim().AddAnim(eAnimRunDamaged,		"stand_run_dmg_",		-1, &velocity_run_dmg,	PS_STAND);
-	anim().AddAnim(eAnimCheckCorpse,	"stand_check_corpse_",	-1,	&velocity_none,		PS_STAND);
-	anim().AddAnim(eAnimDragCorpse,		"stand_drag_",			-1, &velocity_drag,		PS_STAND);
-	anim().AddAnim(eAnimSniff,			"stand_sniff_",			-1, &velocity_none,		PS_STAND);
-	anim().AddAnim(eAnimHowling,		"stand_howling_",		-1,	&velocity_none,		PS_STAND);
-	anim().AddAnim(eAnimJumpGlide,		"jump_glide_",			-1, &velocity_none,		PS_STAND);
-	anim().AddAnim(eAnimSteal,			"stand_steal_",			-1, &velocity_steal,	PS_STAND);
-	anim().AddAnim(eAnimDie,			"stand_die_",			-1, &velocity_none,		PS_STAND);
-	anim().AddAnim(eAnimSitLieDown,		"sit_lie_down_",		-1, &velocity_none,		PS_SIT);
-	anim().AddAnim(eAnimStandSitDown,	"stand_sit_down_",		-1, &velocity_none,		PS_STAND);	
-	anim().AddAnim(eAnimSitStandUp,		"sit_stand_up_",		-1, &velocity_none,		PS_SIT);
-	anim().AddAnim(eAnimLieToSleep,		"lie_to_sleep_",		-1,	&velocity_none,		PS_LIE);
-	anim().AddAnim(eAnimSleepStandUp,	"lie_to_stand_up_",		-1, &velocity_none,		PS_LIE);
-	anim().AddAnim(eAnimAttackPsi,		"stand_psi_attack_",	-1, &velocity_turn,		PS_STAND);
-	anim().AddAnim(eAnimThreaten,		"stand_idle_threaten_",	-1,	&velocity_none,		PS_STAND);
+	anim().AddAnim(eAnimStandIdle,		"stand_idle_",			-1, &velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimStandTurnLeft,	"stand_turn_ls_",		-1, &velocity_turn,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimStandTurnRight,	"stand_turn_rs_",		-1, &velocity_turn,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimEat,			"stand_eat_",			-1, &velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimSleep,			"lie_sleep_",			-1, &velocity_none,		PS_LIE, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimLieIdle,		"lie_idle_",			-1, &velocity_none,		PS_LIE, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimSitIdle,		"sit_idle_",			-1, &velocity_none,		PS_SIT, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimAttack,			"stand_attack_",		-1, &velocity_turn,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimWalkFwd,		"stand_walk_fwd_",		-1, &velocity_walk,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimWalkDamaged,	"stand_walk_dmg_",		-1, &velocity_walk_dmg,	PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimRun,			"stand_run_",			-1,	&velocity_run,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimRunDamaged,		"stand_run_dmg_",		-1, &velocity_run_dmg,	PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimCheckCorpse,	"stand_check_corpse_",	-1,	&velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimDragCorpse,		"stand_drag_",			-1, &velocity_drag,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimSniff,			"stand_sniff_",			-1, &velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimHowling,		"stand_howling_",		-1,	&velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimJumpGlide,		"jump_glide_",			-1, &velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimSteal,			"stand_steal_",			-1, &velocity_steal,	PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimDie,			"stand_die_",			-1, &velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimSitLieDown,		"sit_lie_down_",		-1, &velocity_none,		PS_SIT, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimStandSitDown,	"stand_sit_down_",		-1, &velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");	
+	anim().AddAnim(eAnimSitStandUp,		"sit_stand_up_",		-1, &velocity_none,		PS_SIT, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimLieToSleep,		"lie_to_sleep_",		-1,	&velocity_none,		PS_LIE, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimSleepStandUp,	"lie_to_stand_up_",		-1, &velocity_none,		PS_LIE, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimAttackPsi,		"stand_psi_attack_",	-1, &velocity_turn,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimThreaten,		"stand_idle_threaten_",	-1,	&velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
 	
-	anim().AddAnim(eAnimRunTurnLeft,	"stand_run_turn_left_",	-1, &velocity_run,		PS_STAND);
-	anim().AddAnim(eAnimRunTurnRight,	"stand_run_turn_right_",-1, &velocity_run,		PS_STAND);
+	anim().AddAnim(eAnimRunTurnLeft,	"stand_run_turn_left_",	-1, &velocity_run,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimRunTurnRight,	"stand_run_turn_right_",-1, &velocity_run,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
 
+	anim().AddAnim(eAnimScared,			"stand_idle_scared_",	-1, &velocity_none,		PS_STAND, g_bUseHitFX, "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");	
 
 	// define transitions
 	// order : 1. [anim -> anim]	2. [anim->state]	3. [state -> anim]		4. [state -> state]
@@ -157,8 +163,17 @@ void CAI_PseudoDog::CheckSpecParams(u32 spec_params)
 		com_man().seq_run(anim().get_motion_id(eAnimAttackPsi));
 	}
 
+	if ((spec_params & ASP_CHECK_CORPSE) == ASP_CHECK_CORPSE) {
+		com_man().seq_run(anim().get_motion_id(eAnimCheckCorpse));
+	}
+
 	if ((spec_params & ASP_THREATEN) == ASP_THREATEN) {
 		anim().SetCurAnim(eAnimThreaten);
+		return;
+	}
+
+	if ((spec_params & ASP_STAND_SCARED) == ASP_STAND_SCARED) {
+		anim().SetCurAnim(eAnimScared);
 	}
 }
 

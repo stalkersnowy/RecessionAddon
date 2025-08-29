@@ -4,6 +4,7 @@
 #include "../monster_velocity_space.h"
 #include "../control_animation_base.h"
 #include "../control_movement_base.h"
+#include "GameConstants.h"
 
 #ifdef _DEBUG
 #	include <dinput.h>
@@ -27,7 +28,8 @@ CAI_Dog::~CAI_Dog()
 void CAI_Dog::Load(LPCSTR section)
 {
 	inherited::Load	(section);
-	
+
+	if(GameConstants::GetOldMutants())	anim().AddReplacedAnim(&m_bDamaged, eAnimStandIdle, eAnimStandDamaged);
 	anim().AddReplacedAnim(&m_bDamaged,			eAnimRun,		eAnimRunDamaged);
 	anim().AddReplacedAnim(&m_bDamaged,			eAnimWalkFwd,	eAnimWalkDamaged);
 	anim().AddReplacedAnim(&m_bRunTurnLeft,		eAnimRun,		eAnimRunTurnLeft);
@@ -83,6 +85,9 @@ void CAI_Dog::Load(LPCSTR section)
 	anim().AddAnim(eAnimJumpLeft,		"stand_jump_left_",		-1, &velocity_none,		PS_STAND);
 	anim().AddAnim(eAnimJumpRight,		"stand_jump_right_",	-1, &velocity_none,		PS_STAND);
 
+	anim().AddAnim(eAnimScared,			"stand_scared_",		-1, &velocity_none,		PS_STAND);	
+	anim().AddAnim(eAnimStandDamaged,	"stand_idle_dmg_",		-1, &velocity_none,		PS_STAND);
+
 	// define transitions
 	// order : 1. [anim -> anim]	2. [anim->state]	3. [state -> anim]		4. [state -> state]
 	anim().AddTransition(PS_SIT,		PS_LIE,		eAnimSitLieDown,		false);
@@ -133,6 +138,11 @@ void CAI_Dog::CheckSpecParams(u32 spec_params)
 	
 	if ((spec_params & ASP_THREATEN) == ASP_THREATEN) {
 		anim().SetCurAnim(eAnimThreaten);
+		return;
+	}
+
+	if ((spec_params & ASP_STAND_SCARED) == ASP_STAND_SCARED) {
+		anim().SetCurAnim(eAnimScared);
 	}
 }
 

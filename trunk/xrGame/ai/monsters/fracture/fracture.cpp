@@ -54,6 +54,7 @@ void CFracture::Load(LPCSTR section)
 	anim().AddAnim(eAnimStandSitDown,	"stand_sit_down_",		-1, &velocity_none,				PS_STAND);
 	anim().AddAnim(eAnimLookAround,		"stand_look_around_",	-1, &velocity_none,				PS_STAND);
 	anim().AddAnim(eAnimEat,				"sit_eat_",				-1, &velocity_none,				PS_SIT);
+	anim().AddAnim(eAnimScared,			"stand_scared_",		-1, &velocity_none,		PS_STAND);	
 
 	anim().AddTransition(PS_STAND,		PS_SIT,		eAnimStandSitDown,	false);
 	anim().AddTransition(PS_SIT,			PS_STAND,	eAnimSitStandUp,	false);
@@ -85,7 +86,7 @@ void CFracture::CheckSpecParams(u32 spec_params)
 	}
 
 	if ((spec_params & ASP_STAND_SCARED) == ASP_STAND_SCARED) {
-		anim().SetCurAnim(eAnimLookAround);
+		anim().SetCurAnim(eAnimScared);
 		return;
 	}
 }

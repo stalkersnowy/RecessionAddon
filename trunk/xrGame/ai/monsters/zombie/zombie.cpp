@@ -9,6 +9,8 @@
 #include "../control_animation_base.h"
 #include "../control_movement_base.h"
 
+#include "GameConstants.h"
+
 #ifdef _DEBUG
 #include <dinput.h>
 #endif
@@ -29,6 +31,8 @@ CZombie::~CZombie()
 void CZombie::Load(LPCSTR section)
 {
 	inherited::Load	(section);
+
+	bool old_mutants = GameConstants::GetOldMutants();
 
 	anim().accel_load			(section);
 	anim().accel_chain_add		(eAnimWalkFwd,		eAnimRun);
@@ -54,19 +58,38 @@ void CZombie::Load(LPCSTR section)
 	anim().AddAnim(eAnimAttack,			"stand_attack_",		-1, &velocity_turn,		PS_STAND,	"fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
 	anim().AddAnim(eAnimDie,				"stand_die_",			0, &velocity_none,		PS_STAND,	"fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
 
+	anim().AddAnim(eAnimStandSitDown,	"stand_idle_to_sit_down_",	-1, &velocity_none,		PS_STAND,	"fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimSitIdle,		"sit_idle_",				-1, &velocity_none,		PS_SIT,		"fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimSitStandUp,		"sit_idle_to_stand_up_",	-1, &velocity_none,		PS_SIT,		"fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimSitToSleep,		"sit_idle_to_sleep_down_",	-1, &velocity_none,		PS_SIT,		"fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimSleep,			"sleep_idle_",				-1, &velocity_none,		PS_LIE,	  	"fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimLieSitUp,		"sleep_idle_to_sit_up_",	-1, &velocity_none,		PS_LIE,		"fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimLookAround,		"stand_look_around_",		-1, &velocity_none,		PS_STAND,	"fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+
+	EMotionAnim sit_anim;
+	if(old_mutants){
+		anim().AddTransition(PS_STAND,	PS_SIT,		eAnimStandSitDown,	false);
+		anim().AddTransition(PS_SIT,	PS_STAND,	eAnimSitStandUp,	false);
+		anim().AddTransition(eAnimStandSitDown,	eAnimSleep,	eAnimSitToSleep,	false);
+		anim().AddTransition(eAnimSleep,	eAnimSitStandUp, eAnimLieSitUp,	false);
+		sit_anim = eAnimSitIdle;
+	}else{
+		sit_anim = eAnimStandIdle;
+	}
+
 	anim().LinkAction(ACT_STAND_IDLE,	eAnimStandIdle);
-	anim().LinkAction(ACT_SIT_IDLE,		eAnimStandIdle);
-	anim().LinkAction(ACT_LIE_IDLE,		eAnimStandIdle);
+	anim().LinkAction(ACT_SIT_IDLE,		sit_anim);
+	anim().LinkAction(ACT_LIE_IDLE,		sit_anim);
 	anim().LinkAction(ACT_WALK_FWD,		eAnimWalkFwd);
 	anim().LinkAction(ACT_WALK_BKWD,		eAnimWalkFwd);
 	anim().LinkAction(ACT_RUN,			eAnimRun);
 	anim().LinkAction(ACT_EAT,			eAnimStandIdle);
-	anim().LinkAction(ACT_SLEEP,			eAnimStandIdle);
-	anim().LinkAction(ACT_REST,			eAnimStandIdle);
-	anim().LinkAction(ACT_DRAG,			eAnimStandIdle);
+	anim().LinkAction(ACT_SLEEP,			eAnimSleep);
+	anim().LinkAction(ACT_REST,			sit_anim);
+	anim().LinkAction(ACT_DRAG,			eAnimWalkFwd);
 	anim().LinkAction(ACT_ATTACK,		eAnimAttack);
 	anim().LinkAction(ACT_STEAL,			eAnimWalkFwd);
-	anim().LinkAction(ACT_LOOK_AROUND,	eAnimStandIdle);
+	anim().LinkAction(ACT_LOOK_AROUND,	eAnimLookAround);
 
 #ifdef DEBUG	
 	anim().accel_chain_test		();

@@ -14,6 +14,7 @@
 #include "../control_animation_base.h"
 #include "../control_movement_base.h"
 #include "burer_fast_gravi.h"
+#include "GameConstants.h"
 
 bool CBurer::can_scan = true;
 
@@ -131,8 +132,19 @@ void CBurer::Load(LPCSTR section)
 	anim().AddAnim(eAnimSitStandUp,		"sit_stand_up_",		-1, &velocity_none,				PS_SIT, 	"fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");	
 	anim().AddAnim(eAnimStandSitDown,	"stand_sit_down_",		-1, &velocity_none,				PS_STAND, 	"fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
 
+	anim().AddAnim(eAnimLookAround,		"stand_idle_look_around_", -1, &velocity_none,	PS_STAND, 	"fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimSitToSleep,		"sleep_down_",			-1, &velocity_none,		PS_SIT,		"fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimSleep,			"sleep_idle_",			-1, &velocity_none,		PS_LIE,	  	"fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+	anim().AddAnim(eAnimLieSitUp,		"sleep_stand_up_",		-1, &velocity_none,		PS_LIE,		"fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
+
 	anim().AddTransition(PS_SIT,		PS_STAND,		eAnimSitStandUp,	false);
 	anim().AddTransition(PS_STAND,		PS_SIT,			eAnimStandSitDown,	false);
+	bool old_mutants = GameConstants::GetOldMutants();
+	if(old_mutants){
+		anim().AddTransition(eAnimStandSitDown,	eAnimSleep,		eAnimSitToSleep,	false);
+		anim().AddTransition(PS_STAND,			eAnimSleep,		eAnimStandSitDown,	true);
+		anim().AddTransition(eAnimSleep,		eAnimSitStandUp, eAnimLieSitUp,		false);
+	}
 
 	anim().LinkAction(ACT_STAND_IDLE,	eAnimStandIdle);
 	anim().LinkAction(ACT_SIT_IDLE,		eAnimSitIdle);
@@ -141,12 +153,12 @@ void CBurer::Load(LPCSTR section)
 	anim().LinkAction(ACT_WALK_BKWD,	eAnimWalkFwd);
 	anim().LinkAction(ACT_RUN,			eAnimRun);
 	anim().LinkAction(ACT_EAT,			eAnimEat);
-	anim().LinkAction(ACT_SLEEP,		eAnimSitIdle);
+	anim().LinkAction(ACT_SLEEP,		old_mutants?eAnimSleep:eAnimSitIdle);
 	anim().LinkAction(ACT_REST,			eAnimSitIdle);
 	anim().LinkAction(ACT_DRAG,			eAnimWalkFwd);
 	anim().LinkAction(ACT_ATTACK,		eAnimAttack);
 	anim().LinkAction(ACT_STEAL,		eAnimSteal);
-	anim().LinkAction(ACT_LOOK_AROUND,	eAnimScared);
+	anim().LinkAction(ACT_LOOK_AROUND,	eAnimLookAround);
 
 #ifdef DEBUG	
 	anim().accel_chain_test		();
@@ -166,6 +178,9 @@ void CBurer::shedule_Update(u32 dt)
 
 void CBurer::CheckSpecParams(u32 spec_params)
 {
+	if ((spec_params & ASP_STAND_SCARED) == ASP_STAND_SCARED) {
+		anim().SetCurAnim(eAnimScared);
+	}
 }
 
 void CBurer::UpdateGraviObject()

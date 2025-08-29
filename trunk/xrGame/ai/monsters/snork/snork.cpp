@@ -51,7 +51,7 @@ void CSnork::Load(LPCSTR section)
 	SVelocityParam &velocity_walk_dmg	= move().get_velocity(MonsterMovement::eVelocityParameterWalkDamaged);
 	SVelocityParam &velocity_run_dmg	= move().get_velocity(MonsterMovement::eVelocityParameterRunDamaged);
 	SVelocityParam &velocity_steal		= move().get_velocity(MonsterMovement::eVelocityParameterSteal);
-	//SVelocityParam &velocity_drag		= move().get_velocity(MonsterMovement::eVelocityParameterDrag);
+	SVelocityParam &velocity_drag		= move().get_velocity(MonsterMovement::eVelocityParameterDrag);
 
 	anim().AddAnim(eAnimStandIdle,		"stand_idle_",			-1, &velocity_none,		PS_STAND);
 	anim().AddAnim(eAnimStandDamaged,	"stand_idle_damaged_",	-1, &velocity_none,		PS_STAND);
@@ -67,6 +67,8 @@ void CSnork::Load(LPCSTR section)
 	anim().AddAnim(eAnimSteal,			"stand_steal_",			-1, &velocity_steal,	PS_STAND);
 	anim().AddAnim(eAnimEat,			"stand_eat_",			-1, &velocity_none,		PS_STAND);
 	anim().AddAnim(eAnimCheckCorpse,	"stand_check_corpse_",	-1,	&velocity_none,		PS_STAND);
+	anim().AddAnim(eAnimScared,			"stand_scared_",		-1, &velocity_none,		PS_STAND);	
+	anim().AddAnim(eAnimDragCorpse,		"stand_drag_",			-1, &velocity_drag,		PS_STAND);
 
 
 	anim().LinkAction(ACT_STAND_IDLE,	eAnimStandIdle);
@@ -237,7 +239,7 @@ void CSnork::CheckSpecParams(u32 spec_params)
 	}
 
 	if ((spec_params & ASP_STAND_SCARED) == ASP_STAND_SCARED) {
-		anim().SetCurAnim(eAnimLookAround);
+		anim().SetCurAnim(eAnimScared);
 		return;
 	}
 }

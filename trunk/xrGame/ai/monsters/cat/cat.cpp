@@ -59,7 +59,10 @@ void CCat::Load(LPCSTR section)
 	
 	anim().AddAnim(eAnimJumpLeft,		"stand_jump_ls_",		-1, &velocity_none,				PS_STAND);
 	anim().AddAnim(eAnimJumpRight,		"stand_jump_rs_",		-1, &velocity_none,				PS_STAND);
-	
+
+	anim().AddAnim(eAnimThreaten,		"stand_threaten_",		-1, &velocity_none,				PS_STAND);
+	anim().AddAnim(eAnimScared,			"stand_scared_",		-1, &velocity_none,				PS_STAND);	
+
 	anim().AddTransition(PS_LIE,		PS_STAND,	eAnimLieStandUp,		false);
 	anim().AddTransition(PS_STAND,	PS_LIE,		eAnimStandLieDown,		false);
 
@@ -112,36 +115,14 @@ void CCat::CheckSpecParams(u32 spec_params)
 		com_man().seq_run(anim().get_motion_id(eAnimCheckCorpse));
 	}
 
-	if ((spec_params & ASP_ROTATION_JUMP) == ASP_ROTATION_JUMP) {
-		//float yaw, pitch;
-		//Fvector().sub(EnemyMan.get_enemy()->Position(), Position()).getHP(yaw,pitch);
-		//yaw *= -1;
-		//yaw = angle_normalize(yaw);
-
-		//EMotionAnim anim = eAnimJumpLeft;
-		//if (from_right(yaw,movement().m_body.current.yaw)) {
-		//	anim = eAnimJumpRight;
-		//	yaw = angle_normalize(yaw + PI / 20);	
-		//} else yaw = angle_normalize(yaw - PI / 20);
-
-		//anim().Seq_Add(anim);
-		//anim().Seq_Switch();
-
-		//movement().stop_linear		();
-		//movement().m_body.target.yaw = yaw;
-
-		//// calculate angular speed
-		//float new_angular_velocity; 
-		//float delta_yaw = angle_difference(yaw,movement().m_body.current.yaw);
-		//float time = anim().GetCurAnimTime();
-		//new_angular_velocity = delta_yaw / time; 
-
-		//anim().ForceAngularSpeed(new_angular_velocity);
-
-		//return;
+	if ((spec_params & ASP_THREATEN) == ASP_THREATEN) {
+		anim().SetCurAnim(eAnimThreaten);
+		return;
 	}
 
-
+	if ((spec_params & ASP_STAND_SCARED) == ASP_STAND_SCARED) {
+		anim().SetCurAnim(eAnimScared);
+	}
 }
 
 void CCat::UpdateCL()

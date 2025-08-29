@@ -48,6 +48,8 @@ public:
 	virtual void	Load				(LPCSTR section);
 	virtual void	reinit				();
 
+	virtual void	CheckSpecParams		(u32 spec_params);
+
 	virtual bool	ability_earthquake	() {return true;}
 	virtual void	event_on_step		();
 
