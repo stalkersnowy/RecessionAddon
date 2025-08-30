@@ -131,7 +131,7 @@ Flags32		ps_r2_ls_flags				= { R2FLAG_SUN
 	| R2FLAG_USE_SUNMASK
 	};	// r2-only
 
-Flags32		ps_r2_ls_flags_ext			= {
+Flags32		ps_r2_ls_flags_ext			= { R2FLAGEXT_IMPL_MASK
 	};
 float		ps_r2_df_parallax_h			= 0.02f;
 float		ps_r2_df_parallax_range		= 75.f;
@@ -743,6 +743,7 @@ void		xrRender_initconsole	()
 	CMD3(CCC_Mask,		"r2_use_sunmask",				&ps_r2_ls_flags,			R2FLAG_USE_SUNMASK);
 	
 	CMD3(CCC_Mask,		"r__ss_tga",					&ps_r2_ls_flags_ext,		R2FLAGEXT_SS_TGA);
+	CMD3(CCC_Mask,		"r2_impl_mask",					&ps_r2_ls_flags_ext,		R2FLAGEXT_IMPL_MASK);
 }
 
 void	xrRender_apply_tf		()

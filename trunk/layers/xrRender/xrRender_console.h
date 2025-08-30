@@ -175,6 +175,7 @@ enum
 	R2FLAGEXT_SSAO_HBAO				= (1<<3),
 
 	R2FLAGEXT_SS_TGA				= (1<<4),
+	R2FLAGEXT_IMPL_MASK				= (1<<5),
 };
 
 extern void						xrRender_initconsole	();

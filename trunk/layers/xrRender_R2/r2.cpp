@@ -236,6 +236,8 @@ void					CRender::create					()
 		o.ssao_opt_data = false;
 		o.ssao_hbao = false;
 	}
+	
+	o.impl_mask			= !!ps_r2_ls_flags_ext.test(R2FLAGEXT_IMPL_MASK);
 
 	// constants
 	::Device.Resources->RegisterConstantSetup	("parallax",	&binder_parallax);
@@ -959,6 +961,18 @@ HRESULT	CRender::shader_compile			(
 	if (psShaderGamma)
 	{
 		defines[def_it].Name		=	"SHADER_GAMMA";
+		defines[def_it].Definition	=	"1";
+		def_it						++;
+		sh_name[len]='1'; ++len;
+	}
+	else
+	{
+		sh_name[len]='0'; ++len;
+	}
+
+	if (o.impl_mask)
+	{
+		defines[def_it].Name		=	"USE_4_DETAIL";
 		defines[def_it].Definition	=	"1";
 		def_it						++;
 		sh_name[len]='1'; ++len;

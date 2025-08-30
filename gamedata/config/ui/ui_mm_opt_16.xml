@@ -1091,6 +1091,13 @@
 			<options_item entry="r2_hemi_cube" group="mm_opt_gameplay_adv" depend="restart"/>
 		</check_r2_hemi_cube>
 
+		<cap_r2_impl_mask x="17" y="10" width="119" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_r2_impl_mask</text>
+		</cap_r2_impl_mask>
+		<check_r2_impl_mask x="225" y="10" width="27" height="21" stretch="1">
+			<options_item entry="r2_impl_mask" group="mm_opt_gameplay_adv" depend="restart"/>
+		</check_r2_impl_mask>
+
 		<cap_r2_indoor_lighting x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_r2_indoor_lighting</text>
 		</cap_r2_indoor_lighting>
