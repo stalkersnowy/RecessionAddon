@@ -229,13 +229,15 @@ extern ECORE_API float r_ssaDISCARD;
 
 void CDetailManager::UpdateVisibleM()
 {
-	Fvector		EYE				= Device.vCameraPosition;
-	
-	CFrustum	View;
-//	View.CreateFromMatrix		(Device.mFullTransform, FRUSTUM_P_LRTB + FRUSTUM_P_FAR);
-	/* KD: there is some bug: frustrum created from full transform matrix seems to be broken in some frames, so we should use saved frustrum from render interface*/
-	View = RImplementation.ViewBase;
+	Fvector		EYE				= Device.vCameraPosition_saved;
 
+	CFrustum	View;
+	View.CreateFromMatrix		(Device.mFullTransform_saved, FRUSTUM_P_LRTB + FRUSTUM_P_FAR);
+	
+ 	CFrustum	View_old;
+ 	Fmatrix		Viewm_old = Device.mFullTransform;
+ 	View_old.CreateFromMatrix		(Viewm_old, FRUSTUM_P_LRTB + FRUSTUM_P_FAR);
+	
 	float fade_limit			= dm_fade;	fade_limit=fade_limit*fade_limit;
 	float fade_start			= 1.f;		fade_start=fade_start*fade_start;
 	float fade_range			= fade_limit-fade_start;
@@ -259,7 +261,10 @@ void CDetailManager::UpdateVisibleM()
 			u32 res				= View.testSAABB		(MS.vis.sphere.P,MS.vis.sphere.R,MS.vis.box.data(),mask);
 			if (fcvNone==res)						 	continue;	// invisible-view frustum
 			// test slots
-			for (int _i=0; _i<dm_cache1_count*dm_cache1_count; _i++){
+			
+			u32 dwCC = dm_cache1_count*dm_cache1_count;
+
+			for (int _i=0; _i < dwCC ; _i++){
 				Slot*	PS		= *MS.slots[_i];
 				Slot& 	S 		= *PS;
 
@@ -360,7 +365,7 @@ void __stdcall	CDetailManager::MT_CALC		()
 	if (m_frame_calc!=Device.dwFrame)	
 		if ((m_frame_rendered+1)==Device.dwFrame) //already rendered
 		{
-			Fvector		EYE				= Device.vCameraPosition;
+			Fvector		EYE				= Device.vCameraPosition_saved;
 			int s_x	= iFloor			(EYE.x/dm_slot_size+.5f);
 			int s_z	= iFloor			(EYE.z/dm_slot_size+.5f);
 
