@@ -50,6 +50,9 @@ end
 function is_not_wounded(first_speaker, second_speaker)
 	return not this.is_wounded(first_speaker, second_speaker)
 end
+function is_not_wounded_for_actor_dialog(first_speaker, second_speaker)
+	return not this.is_wounded(second_speaker, first_speaker)
+end
 function actor_have_medkit(first_speaker, second_speaker)
 	return first_speaker:object("medkit") ~= nil or
 		   first_speaker:object("medkit_army") ~= nil or

@@ -1037,6 +1037,13 @@
 			<options_item entry="g_use_smart_hits" group="mm_opt_gameplay_adv"/>
 		</check_g_use_smart_hits>
 
+		<cap_g_use_hit_fx x="17" y="10" width="119" height="21">
+			<text font="letterica16" color="ui_6">ui_mm_g_use_hit_fx</text>
+		</cap_g_use_hit_fx>
+		<check_g_use_hit_fx x="225" y="10" width="27" height="21" stretch="1">
+			<options_item entry="g_use_hit_fx" group="mm_opt_gameplay_adv" depend="restart"/>
+		</check_g_use_hit_fx>
+
 		<cap_keypress_on_start x="17" y="10" width="119" height="21">
 			<text font="letterica16" color="ui_6">ui_mm_keypress_on_start</text>
 		</cap_keypress_on_start>

@@ -1367,3 +1367,12 @@ function can_send_tutorial(actor, npc, p)
 	end
 	return true
 end
+
+function no_blokpost_pass (actor, npc)
+     if has_alife_info("gar_free_pass") or
+          has_alife_info("gar_kill_boars_request")
+     then
+          return false
+     end
+     return true
+end

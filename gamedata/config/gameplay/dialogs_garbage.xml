@@ -78,7 +78,7 @@
     </dialog>
     <dialog id="gar_stalker_about_level">
         <precondition>dialogs.level_garbage</precondition>
-        <precondition>dialogs.is_not_wounded</precondition>
+        <precondition>dialogs.is_not_wounded_for_actor_dialog</precondition>
         <phrase_list>
             <phrase id="1">
                 <text>gar_stalker_about_level_1</text>

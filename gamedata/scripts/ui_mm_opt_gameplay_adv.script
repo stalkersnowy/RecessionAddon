@@ -50,6 +50,11 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	xml:InitCheck								("gameplay_adv:check_g_use_smart_hits",			_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_g_use_hit_fx")
+	xml:InitStatic								("gameplay_adv:cap_g_use_hit_fx",				_st)
+	xml:InitCheck								("gameplay_adv:check_g_use_hit_fx",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_keypress_on_start")
 	xml:InitStatic								("gameplay_adv:cap_keypress_on_start",			_st)
 	xml:InitCheck								("gameplay_adv:check_keypress_on_start",		_st)

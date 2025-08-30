@@ -420,6 +420,9 @@
 	<string id="ui_mm_g_use_smart_hits">
 		<text>Анимации попадания по НПС</text>
 	</string>
+	<string id="ui_mm_g_use_hit_fx">
+		<text>Анимации попадания по мутантам</text>
+	</string>
 	<string id="ui_mm_keypress_on_start">
 		<text>Пауза при загрузке</text>
 	</string>
@@ -572,6 +575,9 @@
 	</string>
 	<string id="descr_g_use_smart_hits">
 		<text>Анимации реакции НПС на попадание по ним (дёргание при попадании в какую-либо часть тела) из исходников ТЧ с дефайном PRIQUEL - такие анимации появились начиная с билда 3120</text>
+	</string>
+	<string id="descr_g_use_hit_fx">
+		<text>Анимации реакции мутантов на попадание по ним (дёргание при попадании в какую-либо часть тела) - в оригинале у ряда мутантов имеются такие анимации, но подключены не у всех</text>
 	</string>
 	<string id="descr_keypress_on_start">
 		<text>Переход к игре после загрузки по нажатию клавиши как в ЗП</text>

@@ -28,7 +28,7 @@
     </dialog>
     <dialog id="agr_stalker_talk_about_ratcatcher1">
         <precondition>dialogs.level_agroprom</precondition>
-        <precondition>dialogs.is_not_wounded</precondition>
+        <precondition>dialogs.is_not_wounded_for_actor_dialog</precondition>
         <phrase_list>
             <phrase id="3">
                 <text>agr_stalker_talk_about_ratcatcher1_3</text>
@@ -136,7 +136,7 @@
     </dialog>
     <dialog id="agr_stalker_talk_about_ratcatcher" priority="6">
         <precondition>dialogs.level_agroprom</precondition>
-        <precondition>dialogs.is_not_wounded</precondition>
+        <precondition>dialogs.is_not_wounded_for_actor_dialog</precondition>
         <phrase_list>
             <phrase id="131">
                 <text>agr_stalker_talk_about_ratcatcher_131</text>
@@ -195,7 +195,7 @@
     </dialog>
     <dialog id="agr_stalker_talk_level" priority="5">
         <precondition>dialogs.level_agroprom</precondition>
-        <precondition>dialogs.is_not_wounded</precondition>
+        <precondition>dialogs.is_not_wounded_for_actor_dialog</precondition>
         <phrase_list>
             <phrase id="2">
                 <text>agr_stalker_talk_level_2</text>
@@ -369,7 +369,7 @@
     </dialog>
     <dialog id="agr_factory_stalker_about">
         <precondition>dialogs.dialog_allowed</precondition>
-        <precondition>dialogs.is_not_wounded</precondition>
+        <precondition>dialogs.is_not_wounded_for_actor_dialog</precondition>
         <phrase_list>
             <phrase id="1">
                 <text>agr_factory_stalker_about_1</text>
