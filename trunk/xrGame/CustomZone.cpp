@@ -1219,7 +1219,20 @@ void CCustomZone::BornArtefact()
 
 	if(::Random.randF(0.f, 1.f)> m_fArtefactSpawnProbability) return;
 	
-	if(!GameConstants::GetBornArtefacts())	PrefetchArtefacts();
+	if (!GameConstants::GetBornArtefacts()) {
+		PrefetchArtefacts();
+	}else{
+		bool allow_birth = false;
+		for(OBJECT_INFO_VEC_IT it = m_ObjectInfoMap.begin(); m_ObjectInfoMap.end() != it; ++it){
+			SZoneObjectInfo& info = (*it);
+			if(!info.small_object){
+				allow_birth = true;
+				break;
+			}
+		}
+		if(!allow_birth) return;
+	}
+
 	CArtefact* pArtefact					= m_SpawnedArtefacts.back(); VERIFY(pArtefact);
 	m_SpawnedArtefacts.pop_back				();
 
