@@ -463,7 +463,7 @@
 		</cap_detail_density>
 
 		<track_detail_density x="162" y="10" width="200" height="21" invert="1" step="0.02">
-			<options_item entry="r__detail_density" group="mm_opt_video_adv"/>
+			<options_item entry="r__detail_density" group="mm_opt_video_adv" depend="vid"/>
 		</track_detail_density>
 
 		<cap_texture_lod x="17" y="10" width="119" height="21" >
@@ -1179,7 +1179,7 @@
 			<text font="letterica16" color="ui_6">ui_mm_r__detail_radius</text>
 		</cap_r__detail_radius>
 		<track_r__detail_radius x="162" y="10" width="200" height="21" step="1" is_integer="1" slider_text="1">
-			<options_item entry="r__detail_radius" group="mm_opt_gameplay_adv"/>
+			<options_item entry="r__detail_radius" group="mm_opt_gameplay_adv" depend="restart"/>
 		</track_r__detail_radius>
 
 		<cap_r__shader_gamma x="17" y="10" width="119" height="21">
