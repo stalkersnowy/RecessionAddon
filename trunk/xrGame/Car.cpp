@@ -612,6 +612,7 @@ void CCar::detach_Actor()
 	//H_SetParent(NULL);
 	HandBreak();
 	processing_deactivate();
+	if (m_car_weapon) { Action(CCarWeapon::eWpnActivate, 0); };
 #ifdef DEBUG
 	DBgClearPlots();
 #endif
@@ -640,6 +641,7 @@ bool CCar::attach_Actor(CGameObject* actor)
 //	VisualUpdate();
 	processing_activate();
 	ReleaseHandBreak();
+	if (m_car_weapon) { Action(CCarWeapon::eWpnActivate, 1); };
 //	HUD().GetUI()->UIMainIngameWnd->CarPanel().Show(true);
 //	HUD().GetUI()->UIMainIngameWnd->CarPanel().SetCarHealth(fEntityHealth/100.f);
 	//HUD().GetUI()->UIMainIngameWnd.ShowBattery(true);
