@@ -24,6 +24,7 @@ bool	m_bOldLuminosityBar					= false;
 bool	m_bRussianPDATexture				= false;
 bool	m_bMinimapZoom						= false;
 bool	m_bSeparateAmmoCount				= false;
+bool	m_bMinimapClock						= false;
 
 namespace GameConstants
 {
@@ -53,6 +54,7 @@ namespace GameConstants
 		m_bRussianPDATexture				= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "russian_pda_texture", m_bRussianPDATexture);
 		m_bMinimapZoom						= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "minimap_zoom", m_bMinimapZoom);
 		m_bSeparateAmmoCount				= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "separate_ammo_count", m_bSeparateAmmoCount);
+		m_bMinimapClock						= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "minimap_clock", m_bMinimapClock);
 
 		Msg("# GameConstants are loaded");
 	}
@@ -146,5 +148,10 @@ namespace GameConstants
 	bool GetSeparateAmmoCount()
 	{
 		return m_bSeparateAmmoCount;
+	}
+
+	bool GetMinimapClock()
+	{
+		return m_bMinimapClock;
 	}
 }

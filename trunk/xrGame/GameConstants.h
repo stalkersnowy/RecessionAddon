@@ -23,4 +23,5 @@ namespace GameConstants
 	bool GetRussianPDATexture				();
 	bool GetMinimapZoom						();
 	bool GetSeparateAmmoCount				();
+	bool GetMinimapClock					();
 };

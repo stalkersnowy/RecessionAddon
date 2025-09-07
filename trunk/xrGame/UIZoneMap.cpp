@@ -19,6 +19,7 @@
 #include "ui/UIXmlInit.h"
 
 #include "GameConstants.h"
+#include "ui/UIInventoryUtilities.h"
 
 #define MAX_SCALE		8.f
 #define MIN_SCALE		1.f
@@ -116,12 +117,16 @@ void CUIZoneMap::UpdateRadar		(Fvector pos)
 	m_activeMap->SetActivePoint( pos );
 
 	if(m_bMode < 3 && IsGameTypeSingle()){
-		if(m_activeMap->GetPointerDistance()>0.5f){
-			string64	str;
-			sprintf_s		(str,"%.1f m.",m_activeMap->GetPointerDistance());
-			m_pointerDistanceText.SetText(str);
+		if(GameConstants::GetMinimapClock()){
+			m_pointerDistanceText.SetText(*InventoryUtilities::GetGameTimeAsString(InventoryUtilities::etpTimeToMinutes));
 		}else{
-			m_pointerDistanceText.SetText("");
+			if(m_activeMap->GetPointerDistance()>0.5f){
+				string64	str;
+				sprintf_s		(str,"%.1f m.",m_activeMap->GetPointerDistance());
+				m_pointerDistanceText.SetText(str);
+			}else{
+				m_pointerDistanceText.SetText("");
+			}
 		}
 	}
 
