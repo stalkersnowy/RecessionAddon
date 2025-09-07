@@ -20,7 +20,6 @@ namespace GameConstants
 	bool GetNumBeforeAnswersShowing			();
 	bool GetSatietyBarInInventoryShowing	();
 	bool GetOldLuminosityBar				();
-	bool GetRussianPDATexture				();
 	bool GetMinimapZoom						();
 	bool GetSeparateAmmoCount				();
 	bool GetMinimapClock					();

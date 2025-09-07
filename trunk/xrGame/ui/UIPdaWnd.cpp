@@ -31,7 +31,7 @@
 
 #define		PDA_XML					"pda.xml"
 u32			g_pda_info_state		= 0;
-BOOL		g_old_pda				= FALSE;
+extern u32	g_pda_style;
 
 void RearrangeTabButtons(CUITabControl* pTab, xr_vector<Fvector2>& vec_sign_places);
 
@@ -79,7 +79,7 @@ void CUIPdaWnd::Init()
 
 	UIMainPdaFrame			= xr_new<CUIStatic>(); UIMainPdaFrame->SetAutoDelete(true);
 	AttachChild				(UIMainPdaFrame);
-	xml_init.InitStatic		(uiXml, "background_static", g_old_pda?2:GameConstants::GetRussianPDATexture()?1:0, UIMainPdaFrame);
+	xml_init.InitStatic		(uiXml, "background_static", g_pda_style, UIMainPdaFrame);
 
 	//Элементы автоматического добавления
 	xml_init.InitAutoStatic	(uiXml, "auto_static", this);
@@ -130,7 +130,7 @@ void CUIPdaWnd::Init()
 	xml_init.InitTabControl		(uiXml, "tab", 0, UITabControl);
 	UITabControl->SetMessageTarget(this);
 
-	if(g_old_pda){
+	if(g_pda_style == 3){
 		// Off button
 		UIOffButton						= xr_new<CUIButton>(); UIOffButton->SetAutoDelete(true);
 		UIMainPdaFrame->AttachChild		(UIOffButton);

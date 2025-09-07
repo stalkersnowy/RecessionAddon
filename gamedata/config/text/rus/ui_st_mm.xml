@@ -399,14 +399,14 @@
 	<string id="ui_mm_g_hud_style">
 		<text>Стиль интерфейса худа</text>
 	</string>
+	<string id="ui_mm_g_pda_style">
+		<text>Стиль интерфейса ПДА</text>
+	</string>
 	<string id="ui_mm_g_more_contact_snds">
 		<text>Больше звуков контакта с НПС</text>
 	</string>
 	<string id="ui_mm_g_old_hit_anim">
 		<text>Усиленный эффект попадания по ГГ</text>
-	</string>
-	<string id="ui_mm_g_old_pda">
-		<text>Старая текстура ПДА</text>
 	</string>
 	<string id="ui_mm_g_shooting_eff">
 		<text>Старый эффектор попадания по ГГ</text>
@@ -437,6 +437,9 @@
 	</string>
 	<string id="CoP">
 		<text>ЗП</text>
+	</string>
+	<string id="RU_PDA">
+		<text>ТЧ (СНГ)</text>
 	</string>
 	<string id="bonus">
 		<text>Дополнительно</text>
@@ -558,14 +561,14 @@
 	<string id="descr_g_hud_style">
 		<text>Стиль худа за разные периоды: ТЧ (релизный), 2571 (отличается только шрифтом распознавания НПС), 2232 (позднебилдовский) и 1472 (раннебилдовский)</text>
 	</string>
+	<string id="descr_g_pda_style">
+		<text>Текстуры ПДА за разные периоды: оригинал из ТЧ, неиспользуемая СНГ-текстура из ТЧ, 2588 и 2571 (ранний вариант)</text>
+	</string>
 	<string id="descr_g_more_contact_snds">
 		<text>Девять вариантов звука контакта с НПС как в билде 2571 (в релизе из них осталось два звука)</text>
 	</string>
 	<string id="descr_g_old_hit_anim">
 		<text>Усиленное шатание камеры при попадании по ГГ как в ранних билдах</text>
-	</string>
-	<string id="descr_g_old_pda">
-		<text>Старая текстура ПДА образца билда 2571 и ранее с кнопкой выключения</text>
 	</string>
 	<string id="descr_g_shooting_eff">
 		<text>Покраснение экрана при попадании по ГГ из билдов</text>

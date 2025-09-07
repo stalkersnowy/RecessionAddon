@@ -21,7 +21,6 @@ bool	m_bShowTrackBarValues				= true;
 bool	m_bShowNumBeforeAnswers				= true;
 bool	m_bShowSatietyInInventory			= false;
 bool	m_bOldLuminosityBar					= false;
-bool	m_bRussianPDATexture				= false;
 bool	m_bMinimapZoom						= false;
 bool	m_bSeparateAmmoCount				= false;
 bool	m_bMinimapClock						= false;
@@ -51,7 +50,6 @@ namespace GameConstants
 		m_bShowNumBeforeAnswers				= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_numbers_before_answers", m_bShowNumBeforeAnswers);
 		m_bShowSatietyInInventory			= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "show_satiety_bar_in_inventory", m_bShowSatietyInInventory);
 		m_bOldLuminosityBar					= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "old_luminosity_bar", m_bOldLuminosityBar);
-		m_bRussianPDATexture				= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "russian_pda_texture", m_bRussianPDATexture);
 		m_bMinimapZoom						= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "minimap_zoom", m_bMinimapZoom);
 		m_bSeparateAmmoCount				= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "separate_ammo_count", m_bSeparateAmmoCount);
 		m_bMinimapClock						= READ_IF_EXISTS(pConstantsSettings, r_bool, "ui_settings", "minimap_clock", m_bMinimapClock);
@@ -133,11 +131,6 @@ namespace GameConstants
 	bool GetOldLuminosityBar()
 	{
 		return m_bOldLuminosityBar;
-	}
-
-	bool GetRussianPDATexture()
-	{
-		return m_bRussianPDATexture;
 	}
 
 	bool GetMinimapZoom()

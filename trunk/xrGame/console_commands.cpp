@@ -102,12 +102,20 @@ xr_token		g_hud_style_token[] = {
 	{ 0,		0 }
 };
 
+u32				g_pda_style = 0;
+xr_token		g_pda_style_token[] = {
+	{ "SoC",		0 },
+	{ "RU_PDA",		1 },
+	{ "2588",		2 },
+	{ "2571",		3 },
+	{ 0,			0 }
+};
+
 int				g_dof_mode = 0;
 
 int				g_keypress_on_start = 0;
 
 BOOL			g_bMoreContactSnds = FALSE;
-extern BOOL		g_old_pda;
 
 
 void register_mp_console_commands();
@@ -1898,9 +1906,9 @@ void CCC_RegisterCommands()
 	CMD4(CCC_Integer,		"g_use_lens",		&g_bUseLens, 0,1);
 	
 	CMD3(CCC_Token,			"g_hud_style",		&g_hud_style, g_hud_style_token);
+	CMD3(CCC_Token,			"g_pda_style",		&g_pda_style, g_pda_style_token);
 
 	CMD4(CCC_Integer,		"g_more_contact_snds",	&g_bMoreContactSnds,	0,1);
-	CMD4(CCC_Integer,		"g_old_pda",			&g_old_pda,				0,1);
 	CMD4(CCC_Integer,		"g_shooting_eff",		&g_bShootingEffector,	0,1);
 	CMD4(CCC_Integer,		"g_old_hit_anim",		&g_bOldHitAnim,			0,1);
 	
