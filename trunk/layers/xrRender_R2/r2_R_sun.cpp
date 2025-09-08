@@ -21,6 +21,11 @@ static Fvector3		corners [8]			= {
 	{ +1, -1, +1},		{ +1, -1,  0}
 };
 static int			facetable[6][4]		= {
+	{ 0, 3, 5, 7 },		{ 1, 2, 3, 0 },
+	{ 6, 7, 5, 4 },		{ 4, 2, 1, 6 },
+	{ 3, 2, 4, 5 },		{ 1, 0, 7, 6 },
+};
+static int			facetable_cascade[6][4]		= {
 	{ 6, 7, 5, 4 },		{ 1, 0, 7, 6 },
 	{ 1, 2, 3, 0 },		{ 3, 2, 4, 5 },		
 	// near and far planes
@@ -1513,8 +1518,8 @@ void CRender::render_sun_cascade ( u32 cascade_ind )
 				Fvector3				near_p, edge_vec;
 				for	(int p=0; p < 4; p++)	
 				{
-					near_p		= wform		(fullxform_inv,corners[facetable[4][p]]);
-					edge_vec	= wform		(fullxform_inv,corners[facetable[5][p]]);
+					near_p		= wform		(fullxform_inv,corners[facetable_cascade[4][p]]);
+					edge_vec	= wform		(fullxform_inv,corners[facetable_cascade[5][p]]);
 					edge_vec.sub(near_p);
 					edge_vec.normalize();
 
@@ -1563,7 +1568,7 @@ void CRender::render_sun_cascade ( u32 cascade_ind )
 		for (int plane=0; plane < 4; plane++)	
 			for (int pt=0; pt < 4; pt++)	
 			{
-				int asd = facetable[plane][pt];
+				int asd = facetable_cascade[plane][pt];
 				light_cuboid.light_cuboid_polys[plane].points[pt] = asd;
 			}
 

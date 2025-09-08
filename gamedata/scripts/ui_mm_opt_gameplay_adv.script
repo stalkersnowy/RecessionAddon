@@ -118,6 +118,11 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	xml:InitComboBox							("gameplay_adv:combo_r2_bloom_mode",			_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_sun_cascades")
+	xml:InitStatic								("gameplay_adv:cap_r2_sun_cascades",			_st)
+	xml:InitCheck								("gameplay_adv:check_r2_sun_cascades",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_r2_hemi_cube")
 	xml:InitStatic								("gameplay_adv:cap_r2_hemi_cube",				_st)
 	xml:InitCheck								("gameplay_adv:check_r2_hemi_cube",				_st)
@@ -181,6 +186,16 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	handler:SetCapCallbacks						(_st, 									"descr_r2_impl_mask")
 	xml:InitStatic								("gameplay_adv:cap_r2_impl_mask",				_st)
 	xml:InitCheck								("gameplay_adv:check_r2_impl_mask",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_sun_focus")
+	xml:InitStatic								("gameplay_adv:cap_r2_sun_focus",				_st)
+	xml:InitCheck								("gameplay_adv:check_r2_sun_focus",				_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	handler:SetCapCallbacks						(_st, 									"descr_r2_sun_tsm")
+	xml:InitStatic								("gameplay_adv:cap_r2_sun_tsm",					_st)
+	xml:InitCheck								("gameplay_adv:check_r2_sun_tsm",				_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_r2_tonemap")

@@ -797,10 +797,11 @@ void CRenderTarget::accum_direct_volumetric	(u32 sub_phase, const u32 Offset, co
 
 		// setup
 
-		
+		BOOL cascades = RImplementation.o.sun_cascades;
 
 		RCache.set_Element			(s_accum_direct_volumetric_cascade->E[0]);
-		RCache.set_CullMode			(CULL_CCW); 
+		if(cascades)	
+			RCache.set_CullMode		(CULL_CCW); 
 
 		RCache.set_c				("Ldynamic_dir",		L_dir.x,L_dir.y,L_dir.z,0 );
 		RCache.set_c				("Ldynamic_color",		L_clr.x,L_clr.y,L_clr.z,0);
@@ -822,7 +823,7 @@ void CRenderTarget::accum_direct_volumetric	(u32 sub_phase, const u32 Offset, co
 			zMax = ps_r2_sun_near;
 		} else {
 			extern float	OLES_SUN_LIMIT_27_01_07;
-			zMin = 0; /////*****************************************************************************************
+			zMin = cascades?0:ps_r2_sun_near;
 			zMax = OLES_SUN_LIMIT_27_01_07;
 		}
 
@@ -848,7 +849,7 @@ void CRenderTarget::accum_direct_volumetric	(u32 sub_phase, const u32 Offset, co
 			if (SE_SUN_NEAR==sub_phase)
 				HW.pDevice->SetRenderState( D3DRS_ZFUNC, D3DCMP_GREATER);
 			else
-				HW.pDevice->SetRenderState( D3DRS_ZFUNC, D3DCMP_ALWAYS);
+				HW.pDevice->SetRenderState( D3DRS_ZFUNC, cascades?D3DCMP_ALWAYS:D3DCMP_LESSEQUAL);
 		}
 
 		// Fetch4 : enable
@@ -861,7 +862,10 @@ void CRenderTarget::accum_direct_volumetric	(u32 sub_phase, const u32 Offset, co
 		// setup stencil: we have to draw to both lit and unlit pixels
 		//RCache.set_Stencil			(TRUE,D3DCMP_LESSEQUAL,dwLightMarkerID,0xff,0x00);
 
-		RCache.Render				(D3DPT_TRIANGLELIST,Offset,0,8,0,16);
+		if(cascades)
+			RCache.Render				(D3DPT_TRIANGLELIST,Offset,0,8,0,16);
+		else
+			RCache.Render				(D3DPT_TRIANGLELIST,Offset,0,4,0,2);
 
 		// Fetch4 : disable
 		if (RImplementation.o.HW_smap_FETCH4)	{

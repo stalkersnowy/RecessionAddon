@@ -6,6 +6,9 @@
 extern ECORE_API	u32			ps_r_sun_shafts;	//=	0;
 extern ECORE_API	xr_token	qsun_shafts_token[];
 
+extern ECORE_API	u32			ps_r_sun_quality;	//	=	0;
+extern ECORE_API	xr_token	qsun_quality_token[];
+
 extern ECORE_API	int			ps_r_ssao_mode;
 
 extern ENGINE_API	int			ps_r__Supersample;
@@ -161,7 +164,7 @@ enum
 	R2FLAG_OLD_DISTORT			= (1<<25),
 	R2FLAG_OLD_AREF				= (1<<26),
 	
-	R2FLAG_SUN_HIGH				= (1<<27),
+//	R2FLAG_SUN_HIGH				= (1<<27),
 	R2FLAG_DETAIL_BUMP			= (1<<28),
 	R2FLAG_TRUE_SUN				= (1<<29),
 	R2FLAG_USE_SUNMASK			= (1<<30),
@@ -176,6 +179,7 @@ enum
 
 	R2FLAGEXT_SS_TGA				= (1<<4),
 	R2FLAGEXT_IMPL_MASK				= (1<<5),
+	R2FLAGEXT_SUN_NEW				= (1<<6),
 };
 
 extern void						xrRender_initconsole	();

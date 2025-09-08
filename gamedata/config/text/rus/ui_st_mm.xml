@@ -498,6 +498,15 @@
 	<string id="ui_mm_r2_ssao_blur">
 		<text>Размытие SSAO</text>
 	</string>
+	<string id="ui_mm_r2_sun_cascades">
+		<text>Улучшенные солнечные тени</text>
+	</string>
+	<string id="ui_mm_r2_sun_focus">
+		<text>Фокусировка солнечных теней</text>
+	</string>
+	<string id="ui_mm_r2_sun_tsm">
+		<text>Стабилизация солнечных теней</text>
+	</string>
 	<string id="ui_mm_r2_tonemap">
 		<text>Tonemap</text>
 	</string>
@@ -529,7 +538,7 @@
 		<text>Раскачка оружия</text>
 	</string>
 	<string id="ui_mm_r2_sun_quality">
-		<text>Высокое качество солнца</text>
+		<text>Качество солнца</text>
 	</string>
 	<string id="ui_mm_r2_detail_bump">
 		<text>Детальный рельеф</text>
@@ -627,6 +636,15 @@
 	<string id="descr_r2_ssao_blur">
 		<text>Размытие SSAO (команда r2_ssao_blur)</text>
 	</string>
+	<string id="descr_r2_sun_cascades">
+		<text>Улучшенные каскады солнечных теней из ЗП 1.6.02 - выглядят чётче и качественнее старых каскадов</text>
+	</string>
+	<string id="descr_r2_sun_focus">
+		<text>Оригинальный r2_sun_focus - корректирует распределение теней на теневой карте, чтобы выделить большее качество теням, ближайшим к камере</text>
+	</string>
+	<string id="descr_r2_sun_tsm">
+		<text>Оригинальный r2_sun_tsm - борется с мерцанием теней при движении камеры</text>
+	</string>
 	<string id="descr_r2_tonemap">
 		<text>Оригинальный r2_tonemap - собственно, включает тонмаппинг (влияет на яркость отдельных элементов изображения)</text>
 	</string>
@@ -643,7 +661,7 @@
 		<text>В оригинале ползунки гаммы, яркости и контраста работали только в полноэкранном режиме и не влияли на результат скриншотов и записи - опция переносит их влияние в шейдеры</text>
 	</string>
 	<string id="descr_r__smapsize">
-		<text>Аналог ключей из оригинала - регулирует качество теней от солнца (в оригинале по умолчанию - 2048)</text>
+		<text>Аналог ключей из оригинала - регулирует качество теневой карты и качество теней (в оригинале по умолчанию - 2048)</text>
 	</string>
 	<string id="descr_r__ss_tga">
 		<text>Сохранение скриншотов в высоком качестве без сжатия в формате .tga (аналог ключа -ss_tga из оригинала)</text>

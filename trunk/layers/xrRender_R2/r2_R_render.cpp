@@ -388,14 +388,14 @@ void CRender::Render		()
 	// Directional light - fucking sun
 	if (bSUN)	{
 		RImplementation.stats.l_visible		++;
-//		if( !ps_r2_ls_flags_ext.is(R2FLAGEXT_SUN_OLD))
+		if(RImplementation.o.sun_cascades)
 			render_sun_cascades					();
-/*		else
+		else
 		{
 			render_sun_near						();
 			render_sun							();
 			render_sun_filtered					();
-		}*/
+		}
 		Target->accum_direct_blend			();
 	}
 

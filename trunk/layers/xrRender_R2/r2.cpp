@@ -238,6 +238,7 @@ void					CRender::create					()
 	}
 	
 	o.impl_mask			= !!ps_r2_ls_flags_ext.test(R2FLAGEXT_IMPL_MASK);
+	o.sun_cascades		= !!ps_r2_ls_flags_ext.test(R2FLAGEXT_SUN_NEW);
 
 	// constants
 	::Device.Resources->RegisterConstantSetup	("parallax",	&binder_parallax);
@@ -246,6 +247,8 @@ void					CRender::create					()
 
 	c_lmaterial					= "L_material";
 	c_sbase						= "s_base";
+
+	if(o.sun_cascades)			init_cacades();
 
 	Target						= xr_new<CRenderTarget>		();	// Main target
 
@@ -483,7 +486,6 @@ void					CRender::rmNormal			()
 CRender::CRender()
 :m_bFirstFrameAfterReset(false)
 {
-	init_cacades();
 }
 
 CRender::~CRender()
@@ -641,6 +643,7 @@ HRESULT	CRender::shader_compile			(
 	char							c_bloommode		[32];
 	char							c_ssao			[32];
 	char							c_sun_shafts	[32];
+	char							c_sun_quality	[32];
 	char	sh_name[MAX_PATH] = "";
 	u32 len	= 0;
 
@@ -757,132 +760,128 @@ HRESULT	CRender::shader_compile			(
 	sh_name[len]='0'+char(o.forceskinw); ++len;
 	
 	//	Igor: need restart options
-	if (RImplementation.o.advancedpp){
-		if (ps_r2_ls_flags.test(R2FLAG_SOFT_WATER))
-		{
-			defines[def_it].Name		=	"USE_SOFT_WATER";
+	BOOL advanced = RImplementation.o.advancedpp;
+	if (advanced && ps_r2_ls_flags.test(R2FLAG_SOFT_WATER))
+	{
+		defines[def_it].Name		=	"USE_SOFT_WATER";
+		defines[def_it].Definition	=	"1";
+		def_it						++;
+		sh_name[len]='1'; ++len;
+	}
+	else
+	{
+		sh_name[len]='0'; ++len;
+	}
+
+	if (advanced && ps_r2_ls_flags.test(R2FLAG_SOFT_PARTICLES))
+	{
+		defines[def_it].Name		=	"USE_SOFT_PARTICLES";
+		defines[def_it].Definition	=	"1";
+		def_it						++;
+		sh_name[len]='1'; ++len;
+	}
+	else
+	{
+		sh_name[len]='0'; ++len;
+	}
+
+	if (advanced && ps_r_ssao)
+	{
+		xr_sprintf					(c_ssao,"%d",ps_r_ssao);
+		defines[def_it].Name		=	"SSAO_QUALITY";
+		defines[def_it].Definition	=	c_ssao;
+		def_it						++;
+		sh_name[len]='0'+char(ps_r_ssao); ++len;
+	}
+	else
+	{
+		sh_name[len]='0'; ++len;
+	}
+
+	if (advanced && o.ssao_blur_on)
+	{
+		defines[def_it].Name		=	"USE_SSAO_BLUR";
+		defines[def_it].Definition	=	"1";
+		def_it						++;
+		sh_name[len]='1'; ++len;
+	}
+	else
+	{
+		sh_name[len]='0'; ++len;
+	}
+
+	if (advanced && o.ssao_hbao)
+	{
+		defines[def_it].Name		=	"USE_HBAO";
+		defines[def_it].Definition	=	"1";
+		def_it						++;
+		sh_name[len]='1'; ++len;
+	}
+	else
+	{
+		sh_name[len]='0'; ++len;
+	}
+
+	if (advanced && o.ssao_opt_data)
+	{
+		defines[def_it].Name		=	"SSAO_OPT_DATA";
+		if (o.ssao_half_data)
+			defines[def_it].Definition	=	"2";
+		else
 			defines[def_it].Definition	=	"1";
-			def_it						++;
-			sh_name[len]='1'; ++len;
-		}
-		else
-		{
-			sh_name[len]='0'; ++len;
-		}
+		def_it						++;
+	}	
+	sh_name[len]='0'+char(o.ssao_opt_data ? (o.ssao_half_data ? 2 : 1) : 0); ++len;
 
-		if (ps_r2_ls_flags.test(R2FLAG_SOFT_PARTICLES))
-		{
-			defines[def_it].Name		=	"USE_SOFT_PARTICLES";
-			defines[def_it].Definition	=	"1";
-			def_it						++;
-			sh_name[len]='1'; ++len;
-		}
-		else
-		{
-			sh_name[len]='0'; ++len;
-		}
+	if (advanced && ps_r2_ls_flags.test(R2FLAG_STEEP_PARALLAX))
+	{
+		defines[def_it].Name		=	"ALLOW_STEEPPARALLAX";
+		defines[def_it].Definition	=	"1";
+		def_it						++;
+		sh_name[len]='1'; ++len;
+	}
+	else
+	{
+		sh_name[len]='0'; ++len;
+	}
+	
 
-		if (ps_r_ssao_mode)
-		{
-			if (ps_r_ssao)
-			{
-				xr_sprintf					(c_ssao,"%d",ps_r_ssao);
-				defines[def_it].Name		=	"SSAO_QUALITY";
-				defines[def_it].Definition	=	c_ssao;
-				def_it						++;
-				sh_name[len]='0'+char(ps_r_ssao); ++len;
-			}
-			else
-			{
-				sh_name[len]='0'; ++len;
-			}
+	if (advanced && ps_r2_ls_flags.test(R2FLAG_DOF))
+	{
+		defines[def_it].Name		=	"USE_DOF";
+		defines[def_it].Definition	=	"1";
+		def_it						++;
+		sh_name[len]='1'; ++len;
+	}
+	else
+	{
+		sh_name[len]='0'; ++len;
+	}
 
-			if (o.ssao_blur_on)
-			{
-				defines[def_it].Name		=	"USE_SSAO_BLUR";
-				defines[def_it].Definition	=	"1";
-				def_it						++;
-				sh_name[len]='1'; ++len;
-			}
-			else
-			{
-				sh_name[len]='0'; ++len;
-			}
-
-			if (o.ssao_hbao)
-			{
-				defines[def_it].Name		=	"USE_HBAO";
-				defines[def_it].Definition	=	"1";
-				def_it						++;
-				sh_name[len]='1'; ++len;
-			}
-			else
-			{
-				sh_name[len]='0'; ++len;
-			}
-
-			if (o.ssao_opt_data)
-			{
-				defines[def_it].Name		=	"SSAO_OPT_DATA";
-				if (o.ssao_half_data)
-					defines[def_it].Definition	=	"2";
-				else
-					defines[def_it].Definition	=	"1";
-				def_it						++;
-			}	
-			sh_name[len]='0'+char(o.ssao_opt_data ? (o.ssao_half_data ? 2 : 1) : 0); ++len;
-
-		}
-
-		if (ps_r2_ls_flags.test(R2FLAG_STEEP_PARALLAX))
-		{
-			defines[def_it].Name		=	"ALLOW_STEEPPARALLAX";
-			defines[def_it].Definition	=	"1";
-			def_it						++;
-			sh_name[len]='1'; ++len;
-		}
-		else
-		{
-			sh_name[len]='0'; ++len;
-		}
-		
-
-		if (ps_r2_ls_flags.test(R2FLAG_DOF))
-		{
-			defines[def_it].Name		=	"USE_DOF";
-			defines[def_it].Definition	=	"1";
-			def_it						++;
-			sh_name[len]='1'; ++len;
-		}
-		else
-		{
-			sh_name[len]='0'; ++len;
-		}
-
-		if (ps_r_sun_shafts)
-		{
-			xr_sprintf					(c_sun_shafts,"%d",ps_r_sun_shafts);
-			defines[def_it].Name		=	"SUN_SHAFTS_QUALITY";
-			defines[def_it].Definition	=	c_sun_shafts;
-			def_it						++;
-			sh_name[len]='0'+char(ps_r_sun_shafts); ++len;
-		}
-		else
-		{
-			sh_name[len]='0'; ++len;
-		}
-		
-		if (ps_r2_ls_flags.test(R2FLAG_SUN_HIGH))
-		{
-			defines[def_it].Name		=	"SUN_QUALITY";
-			defines[def_it].Definition	=	"1";
-			def_it						++;
-			sh_name[len]='1'; ++len;
-		}
-		else
-		{
-			sh_name[len]='0'; ++len;
-		}
+	if (advanced && ps_r_sun_shafts)
+	{
+		xr_sprintf					(c_sun_shafts,"%d",ps_r_sun_shafts);
+		defines[def_it].Name		=	"SUN_SHAFTS_QUALITY";
+		defines[def_it].Definition	=	c_sun_shafts;
+		def_it						++;
+		sh_name[len]='0'+char(ps_r_sun_shafts); ++len;
+	}
+	else
+	{
+		sh_name[len]='0'; ++len;
+	}
+	
+	if (advanced && ps_r_sun_quality)
+	{
+		xr_sprintf					(c_sun_quality,"%d",ps_r_sun_quality);
+		defines[def_it].Name		=	"SUN_QUALITY";
+		defines[def_it].Definition	=	c_sun_quality;
+		def_it						++;
+		sh_name[len]='0'+char(ps_r_sun_quality); ++len;
+	}
+	else
+	{
+		sh_name[len]='0'; ++len;
 	}
 
 	if (ps_BloomMode)
@@ -973,6 +972,18 @@ HRESULT	CRender::shader_compile			(
 	if (o.impl_mask)
 	{
 		defines[def_it].Name		=	"USE_4_DETAIL";
+		defines[def_it].Definition	=	"1";
+		def_it						++;
+		sh_name[len]='1'; ++len;
+	}
+	else
+	{
+		sh_name[len]='0'; ++len;
+	}
+
+	if (o.sun_cascades)
+	{
+		defines[def_it].Name		=	"SUN_CASCADES";
 		defines[def_it].Definition	=	"1";
 		def_it						++;
 		sh_name[len]='1'; ++len;

@@ -42,6 +42,7 @@ public:
 		u32		ssao_hbao			: 1;
 		
 		u32		impl_mask			: 1;
+		u32		sun_cascades		: 1;
 
 		u32		smapsize			: 16;
 		u32		depth16				: 1;

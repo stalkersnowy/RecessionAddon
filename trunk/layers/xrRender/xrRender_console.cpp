@@ -64,6 +64,14 @@ xr_token							qaa_token							[ ]={
 	{ 0,							0												}
 };
 
+u32			ps_r_sun_quality		=	1;			//	=	0;
+xr_token							qsun_quality_token							[ ]={
+	{ "st_opt_low",					0												},
+	{ "st_opt_medium",				1												},
+	{ "st_opt_high",				2												},
+	{ 0,							0												}
+};
+
 int			ps_r_ssao_mode			=	1;
 
 // Common
@@ -728,7 +736,7 @@ void		xrRender_initconsole	()
 	CMD3(CCC_Mask,		"r2_steep_parallax",			&ps_r2_ls_flags,			R2FLAG_STEEP_PARALLAX);
 	CMD3(CCC_Token,		"r2_sun_shafts",				&ps_r_sun_shafts,			qsun_shafts_token);
 	CMD3(CCC_Mask,		"r2_volumetric_lights",			&ps_r2_ls_flags,			R2FLAG_VOLUMETRIC_LIGHTS);
-	CMD3(CCC_Mask,		"r2_sun_quality",				&ps_r2_ls_flags,			R2FLAG_SUN_HIGH);
+	CMD3(CCC_Token,		"r2_sun_quality",				&ps_r_sun_quality,			qsun_quality_token);
 	
 	CMD3(CCC_Token,		"r__smapsize",					&ps_Smapsize,				qsmapsize_token );
 
@@ -744,6 +752,7 @@ void		xrRender_initconsole	()
 	
 	CMD3(CCC_Mask,		"r__ss_tga",					&ps_r2_ls_flags_ext,		R2FLAGEXT_SS_TGA);
 	CMD3(CCC_Mask,		"r2_impl_mask",					&ps_r2_ls_flags_ext,		R2FLAGEXT_IMPL_MASK);
+	CMD3(CCC_Mask,		"r2_sun_cascades",				&ps_r2_ls_flags_ext,		R2FLAGEXT_SUN_NEW);
 }
 
 void	xrRender_apply_tf		()
