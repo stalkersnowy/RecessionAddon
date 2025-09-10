@@ -895,21 +895,21 @@
 			<header_1 x="0" y="0" width="229" height="17">
 				<texture>ui_table_button_e</texture>
 				<auto_static x="2" y="0" width="229" height="17">
-					<text font="arial_14" color="ui_6" x="2" y="2" align="l" vert_align="c" complex_mode="0">ui_mm_action</text>
+					<text font="letterica16" r="215" g="195" b="170" x="2">ui_mm_action</text>
 				</auto_static>
 			</header_1>
 
 			<header_2 x="229" y="0" width="102" height="17">
 				<texture>ui_table_button_e</texture>
 				<auto_static x="2" y="0" width="102" height="17">
-					<text font="arial_14" color="ui_6" x="2" y="2" align="l" vert_align="c" complex_mode="0">ui_mm_key</text>
+					<text font="letterica16" r="215" g="195" b="170" x="2">ui_mm_key</text>
 				</auto_static>
 			</header_2>
 
 			<header_3 x="330" y="0" width="102" height="17">
 				<texture>ui_table_button_e</texture>
 				<auto_static x="2" y="0" width="102" height="17">
-					<text font="arial_14" color="ui_6" x="2" y="2" align="l" vert_align="c" complex_mode="0">ui_mm_alternative</text>
+					<text font="letterica16" r="215" g="195" b="170" x="2">ui_mm_alternative</text>
 				</auto_static>
 			</header_3>
 

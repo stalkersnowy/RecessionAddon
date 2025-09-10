@@ -822,7 +822,8 @@ HRESULT	CRender::shader_compile			(
 		sh_name[len]='0'; ++len;
 	}
 
-	if (advanced && o.ssao_opt_data)
+	BOOL opt_data = advanced && o.ssao_opt_data;
+	if (opt_data)
 	{
 		defines[def_it].Name		=	"SSAO_OPT_DATA";
 		if (o.ssao_half_data)
@@ -831,7 +832,7 @@ HRESULT	CRender::shader_compile			(
 			defines[def_it].Definition	=	"1";
 		def_it						++;
 	}	
-	sh_name[len]='0'+char(o.ssao_opt_data ? (o.ssao_half_data ? 2 : 1) : 0); ++len;
+	sh_name[len]='0'+char(opt_data ? (o.ssao_half_data ? 2 : 1) : 0); ++len;
 
 	if (advanced && ps_r2_ls_flags.test(R2FLAG_STEEP_PARALLAX))
 	{
