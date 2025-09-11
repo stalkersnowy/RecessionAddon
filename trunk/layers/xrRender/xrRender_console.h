@@ -164,7 +164,7 @@ enum
 	R2FLAG_OLD_DISTORT			= (1<<25),
 	R2FLAG_OLD_AREF				= (1<<26),
 	
-//	R2FLAG_SUN_HIGH				= (1<<27),
+	R2FLAG_SUN_FAR_100			= (1<<27),
 	R2FLAG_DETAIL_BUMP			= (1<<28),
 	R2FLAG_TRUE_SUN				= (1<<29),
 	R2FLAG_USE_SUNMASK			= (1<<30),

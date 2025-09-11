@@ -387,6 +387,9 @@
 	<string id="ui_mm_g_cop_dof">
 		<text>Режим DoF</text>
 	</string>
+	<string id="ui_mm_r2_sun_far">
+		<text>Дальность солнечных теней</text>
+	</string>
 	<string id="ui_mm_g_hide_motion_icon">
 		<text>Скрыть индикатор состояния ГГ</text>
 	</string>
@@ -557,6 +560,9 @@
 	</string>
 	<string id="descr_g_cop_dof">
 		<text>Выбор режима применения глубины резкости для оружия: из ЧН (при перезарядке и статичный фокус в прицеле) или из ЗП (динамичный фокус в прицеле)</text>
+	</string>
+	<string id="descr_r2_sun_far">
+		<text>Выбор расстояния, вплоть до которого отрисовываются солнечные тени на старых каскадах: 180 как в ТЧ или 100 как в ЧН/ЗП</text>
 	</string>
 	<string id="descr_g_hide_motion_icon">
 		<text>Скрыть индикатор состояния ГГ (силуэт и шкалы шума и заметности) как в ЧН</text>

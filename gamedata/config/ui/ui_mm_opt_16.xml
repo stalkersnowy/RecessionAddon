@@ -1291,6 +1291,27 @@
 			</button>
 		</radio_tab_g_cop_dof>
 
+        <cap_r2_sun_far x="17" y="10" width="119" height="21">
+            <text font="letterica16" color="ui_6">ui_mm_r2_sun_far</text>
+        </cap_r2_sun_far>
+		<radio_tab_r2_sun_far x="225" y="10" width="108" height="92" radio="1">
+			<options_item entry="r2_sun_far" group="mm_opt_gameplay_adv"/>
+			<button x="0" y="0" width="27" height="21" id="180" stretch="1">
+				<text font="letterica16">180</text>
+	            <text_color>
+					<e r="216" g="186" b="140"/>
+					<d color="ui_gray"/>
+	            </text_color>
+			</button>
+			<button x="0" y="25" width="27" height="21" id="100" stretch="1">
+				<text font="letterica16">100</text>
+	            <text_color>
+					<e r="216" g="186" b="140"/>
+					<d color="ui_gray"/>
+	            </text_color>
+			</button>
+		</radio_tab_r2_sun_far>
+
 		<btn_to_simply x="265" y="325" width="111" height="29">
 			<text align="c" font="letterica16" r="227" g="199" b="178">ui_mm_simply</text>
 			<texture>ui_button_ordinary</texture>

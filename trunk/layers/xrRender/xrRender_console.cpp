@@ -73,6 +73,7 @@ xr_token							qsun_quality_token							[ ]={
 };
 
 int			ps_r_ssao_mode			=	1;
+int			ps_r2_sun_far			=	0;
 
 // Common
 //int		ps_r__Supersample			= 1		;
@@ -502,7 +503,7 @@ public:
 class	CCC_SSAO_Mode		: public CCC_Integer
 {
 public:
-	CCC_SSAO_Mode(LPCSTR N, int* V, int _min=0, int _max=999) : CCC_Integer(N,V,_min,_max)	{}	;
+	CCC_SSAO_Mode(LPCSTR N, int* V) : CCC_Integer(N,V,0,2)	{}	;
 
 	virtual void	Execute	(LPCSTR args)	{
 		CCC_Integer::Execute	(args);
@@ -531,6 +532,33 @@ public:
 				}
 				ps_r2_ls_flags_ext.set(R2FLAGEXT_SSAO_HBAO, 1);
 				ps_r2_ls_flags_ext.set(R2FLAGEXT_SSAO_OPT_DATA, 1);
+				break;
+			}
+		}
+	}
+};
+
+class	CCC_Sun_Far		: public CCC_Integer
+{
+public:
+	CCC_Sun_Far(LPCSTR N, int* V) : CCC_Integer(N,V,0,1)	{}	;
+
+	virtual void	Execute	(LPCSTR args)	{
+		CCC_Integer::Execute	(args);
+		switch	(*value)
+		{
+			case 0:
+			{
+				ps_r2_ls_flags.set(R2FLAG_SUN_FAR_100, 0);
+				break;
+			}
+			case 1:
+			{
+				ps_r2_ls_flags.set(R2FLAG_SUN_FAR_100, 1);
+#if RENDER==R_R2
+				extern float OLES_SUN_LIMIT_27_01_07;
+				OLES_SUN_LIMIT_27_01_07 = 100.f;
+#endif
 				break;
 			}
 		}
@@ -730,13 +758,15 @@ void		xrRender_initconsole	()
 	//	Igor: need restart
 	CMD3(CCC_Mask,		"r2_soft_water",				&ps_r2_ls_flags,			R2FLAG_SOFT_WATER);
 	CMD3(CCC_Mask,		"r2_soft_particles",			&ps_r2_ls_flags,			R2FLAG_SOFT_PARTICLES);
-	CMD4(CCC_SSAO_Mode,	"r2_ssao_mode",					&ps_r_ssao_mode,			0, 2);
+	CMD2(CCC_SSAO_Mode,	"r2_ssao_mode",					&ps_r_ssao_mode);
 	CMD3(CCC_Token,		"r2_ssao",						&ps_r_ssao,					qssao_token);
 	CMD3(CCC_Mask,		"r2_ssao_blur",                 &ps_r2_ls_flags_ext,		R2FLAGEXT_SSAO_BLUR);//Need restart
 	CMD3(CCC_Mask,		"r2_steep_parallax",			&ps_r2_ls_flags,			R2FLAG_STEEP_PARALLAX);
 	CMD3(CCC_Token,		"r2_sun_shafts",				&ps_r_sun_shafts,			qsun_shafts_token);
 	CMD3(CCC_Mask,		"r2_volumetric_lights",			&ps_r2_ls_flags,			R2FLAG_VOLUMETRIC_LIGHTS);
 	CMD3(CCC_Token,		"r2_sun_quality",				&ps_r_sun_quality,			qsun_quality_token);
+	
+	CMD2(CCC_Sun_Far,	"r2_sun_far",					&ps_r2_sun_far);
 	
 	CMD3(CCC_Token,		"r__smapsize",					&ps_Smapsize,				qsmapsize_token );
 

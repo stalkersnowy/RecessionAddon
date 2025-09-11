@@ -994,6 +994,18 @@ HRESULT	CRender::shader_compile			(
 		sh_name[len]='0'; ++len;
 	}
 
+	if (ps_r2_ls_flags.test(R2FLAG_SUN_FAR_100))
+	{
+		defines[def_it].Name		=	"SUN_FAR_100";
+		defines[def_it].Definition	=	"1";
+		def_it						++;
+		sh_name[len]='1'; ++len;
+	}
+	else
+	{
+		sh_name[len]='0'; ++len;
+	}
+
 	// skinning
 	if (m_skinning<0)		{
 		defines[def_it].Name		=	"SKIN_NONE";

@@ -158,6 +158,7 @@ half 	shadowtest_sun 	(float4 tc, float4 tcJ)			// jittered sampling
 //	const 	float 	scale 	= (2.0f/float(SMAP_size));
 	const 	float 	scale 	= (0.7f/float(SMAP_size));
 	
+#ifdef SUN_CASCADES
 	float2 	tc_J	= frac(tc.xy/tc.w*SMAP_size/4.0f )*.5f;
 	half4	J0 	= tex2D	(jitter0,tc_J)*scale;
 	//half4	J1 	= tex2D	(jitter1,tc_J)*scale;
@@ -167,6 +168,15 @@ half 	shadowtest_sun 	(float4 tc, float4 tcJ)			// jittered sampling
 	r.y 	= test 	(tc, J0.wz+half2( k,-k)).y;
 	r.z		= test	(tc,-J0.xy+half2(-k, k)).z;
 	r.w		= test	(tc,-J0.wz+half2( k, k)).x;
+#else
+	half4	J0 	= tex2D	(jitter0,tcJ)*scale;
+	half4	J1 	= tex2D	(jitter1,tcJ)*scale;
+
+		r.x 	= test 	(tc,J0.xy).x;
+		r.y 	= test 	(tc,J0.wz).y;
+		r.z		= test	(tc,J1.xy).z;
+		r.w		= test	(tc,J1.wz).x;
+#endif
 
 	return	dot(r,1.h/4.h);
 }

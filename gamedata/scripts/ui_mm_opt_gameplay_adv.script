@@ -158,6 +158,12 @@ function opt_gameplay_adv:InitControls(x, y, xml, handler)
 	xml:InitTrackBar							("gameplay_adv:track_r2_mblur_power",			_st)
 
 	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
+	_st:SetWndSize								(vector2():set(_st:GetWidth(), 56))
+	handler:SetCapCallbacks						(_st, 									"descr_r2_sun_far")
+	xml:InitStatic								("gameplay_adv:cap_r2_sun_far",					_st)
+	xml:InitTab									("gameplay_adv:radio_tab_r2_sun_far",			_st)
+
+	_st				= xml:InitStatic			("gameplay_adv:templ_item",				self.scroll_v)
 	handler:SetCapCallbacks						(_st, 									"descr_r2_ls_bloom_fast")
 	xml:InitStatic								("gameplay_adv:cap_r2_ls_bloom_fast",			_st)
 	xml:InitCheck								("gameplay_adv:check_r2_ls_bloom_fast",			_st)
