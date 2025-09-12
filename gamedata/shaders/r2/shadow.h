@@ -155,8 +155,11 @@ half 	shadowtest_sun 	(float4 tc, float4 tcJ)			// jittered sampling
 {
 	half4	r;
 
-//	const 	float 	scale 	= (2.0f/float(SMAP_size));
+#ifdef SUN_FAR_100
 	const 	float 	scale 	= (0.7f/float(SMAP_size));
+#else
+	const 	float 	scale 	= (2.0f/float(SMAP_size));
+#endif
 	
 #ifdef SUN_CASCADES
 	float2 	tc_J	= frac(tc.xy/tc.w*SMAP_size/4.0f )*.5f;

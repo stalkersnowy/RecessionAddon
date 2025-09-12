@@ -579,13 +579,10 @@ extern u32 g_hud_style;
 void CUIMiniMap::Init(shared_str name, CInifile& gameLtx, LPCSTR sh_name)
 {
 	inherited::Init(name, gameLtx, sh_name);
-	switch(g_hud_style){
-	case 2:
-		CUIStatic::SetTextureColor(0x7fffffff);
-		break;
-	case 3:
+	if(g_hud_style==3)
 		CUIStatic::SetTextureColor(0x00ffffff);
-	}
+	else
+		CUIStatic::SetTextureColor(0x7fffffff);
 }
 
 void CUIMiniMap::UpdateSpots()

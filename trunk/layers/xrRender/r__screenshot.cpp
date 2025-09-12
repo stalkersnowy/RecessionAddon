@@ -34,6 +34,11 @@ void CRender::Screenshot		(IRender_interface::ScreenshotMode mode, LPCSTR name)
 {
 	if (!Device.b_is_Ready)			return;
 
+	if (mode == IRender_interface::SM_FOR_GAMESAVE && name && FS.exist(name)) //delete old file before creating new one
+	{
+		FS.file_delete(0, name);
+	}
+
 	// Create temp-surface
 	IDirect3DSurface9*	pFB;
 	D3DLOCKED_RECT		D;
