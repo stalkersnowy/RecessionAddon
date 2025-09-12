@@ -100,8 +100,15 @@ bool CUIEditKeyBind::OnMouseDown(int mouse_btn)
 		return					true;
 	}
 
-	if (mouse_btn==MOUSE_1)
+	if (mouse_btn == MOUSE_1)
+	{
 		m_bEditMode = m_bCursorOverWindow;
+	}
+	else if (mouse_btn == MOUSE_2 && m_bCursorOverWindow)
+	{
+		SetText(nullptr);
+		m_keyboard = nullptr;
+	}
 
 	return CUILabel::OnMouseDown(mouse_btn);
 }
