@@ -401,6 +401,8 @@ function CRandomTask:task_complete(p1, p2)
 	if p2 == 0 then
 		if not sel_task.need_return and sel_task.status == "completed" then
 			self.task_info[self.active_task_by_type[p1]].last_task_time = game.get_game_time()
+			self.task_info[self.active_task_by_type[p1]].status = "rewarded"
+			self:task_reward_no_return(sel_task)
 			return true
 		end
 		if sel_task.status == "rewarded" then
@@ -800,6 +802,31 @@ function CRandomTask:task_reward_storyline(task)
 	local task_desc = self.task_info[task:get_id()]
 	if task_desc == nil or task_desc.type ~= "storyline" then
 		return
+	end
+
+	if task_desc.reward_reputation ~= nil then
+		db.actor:change_character_reputation(task_desc.reward_reputation)
+	end
+
+	if task_desc.reward_relation ~= nil then
+		for kk,vv in pairs(task_desc.reward_relation) do
+			relation_registry.change_community_goodwill (kk, db.actor:id(), tonumber(vv))
+		end
+	end
+
+	if task_desc.reward_rank ~= nil then
+		actor_stats.add_points("quests", task_desc.name, 1, task_desc.reward_rank)
+		db.actor:set_character_rank(db.actor:character_rank() + task_desc.reward_rank)
+	end
+end
+--' Функция, в которой будет выдаваться заочная награда за квесты с need_return = false
+function CRandomTask:task_reward_no_return(task_desc)
+	if task_desc == nil or task_desc.need_return then
+		return
+	end
+				
+	if task_desc.reward_money ~= nil then
+		dialogs.relocate_money(db.actor, task_desc.reward_money, "in")
 	end
 
 	if task_desc.reward_reputation ~= nil then

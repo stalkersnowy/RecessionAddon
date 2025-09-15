@@ -219,7 +219,7 @@ void CUICharacterInfo::InitCharacter(u16 id)
 	}
 
 	m_bForceUpdate	= true;
-	for(int i = eUIIcon; i<eMaxCaption; ++i)
+	for(int i = eUIName; i<eMaxCaption; ++i)
 		if(m_icons[i])m_icons[i]->Show(true);
 }
 
@@ -299,7 +299,8 @@ void CUICharacterInfo::ClearInfo()
 	m_ownerID = u16(-1);
 	ResetAllStrings	();
 
-	for(int i = eUIIcon; i<eMaxCaption; ++i)
+	if(m_icons[eUIIcon])m_icons[eUIIcon]->InitTexture("ui_npc_u_stranger");
+	for(int i = eUIName; i<eMaxCaption; ++i)
 		if(m_icons[i])m_icons[i]->Show(false);
 }
 

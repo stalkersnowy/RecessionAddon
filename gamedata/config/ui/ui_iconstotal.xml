@@ -48,7 +48,7 @@
     <texture id="ui_iconsTotal_yan_kill_brain_task" x="166" y="0" width="83" height="47" />
     <texture id="ui_iconsTotal_mil_kill_sniper" x="166" y="47" width="83" height="47" />
     <texture id="ui_iconsTotal_mil_kill_lukash" x="166" y="94" width="83" height="47" />
-    <texture id="ui_iconsTotal_kill_mil_hunters_task" x="166" y="141" width="83" height="47" />
+    <texture id="ui_iconsTotal_mil_hunters_task" x="166" y="141" width="83" height="47" />
     <texture id="ui_iconsTotal_mil_kill_controller" x="166" y="188" width="83" height="47" />
     <texture id="ui_iconsTotal_mil_lukash_job" x="166" y="235" width="83" height="47" />
     <texture id="ui_iconsTotal_mil_mad_job" x="166" y="282" width="83" height="47" />
@@ -89,14 +89,12 @@
 	<texture id="ui_iconsTotal_rad_get_to_aes" x="249" y="799" width="83" height="47" />
 	
     <texture id="ui_iconsTotal_agroprom_find_gunslinger_cache" x="0" y="658" width="83" height="47" />
-    <texture id="ui_iconsTotal_agr_find_ghost" x="0" y="658" width="83" height="47" />
     <texture id="ui_iconsTotal_agr_help_stalkers" x="0" y="376" width="83" height="47" />
 	<texture id="ui_iconsTotal_bar_barman_job_1" x="249" y="658" width="83" height="47" />
 	<texture id="ui_iconsTotal_bar_barman_job_2" x="249" y="658" width="83" height="47" />
 	<texture id="ui_iconsTotal_bar_barman_job_3" x="249" y="658" width="83" height="47" />
 	<texture id="ui_iconsTotal_val_come_to_trader" x="249" y="611" width="83" height="47" />
     <texture id="ui_iconsTotal_esc_flash_task" x="83" y="94" width="83" height="47" />
-    <texture id="ui_iconsTotal_mil_hunters_task" x="166" y="141" width="83" height="47" />
     <texture id="ui_iconsTotal_yan_find_ghost_task" x="0" y="705" width="83" height="47" />
     <texture id="ui_iconsTotal_cit_doctor_task" x="0" y="705" width="83" height="47" />
 	

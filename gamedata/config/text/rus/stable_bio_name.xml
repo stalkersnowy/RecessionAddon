@@ -934,3 +934,36 @@
 	<string id="sim_ecolog_default2_bio">
 		<text>Научный работник. Детальная информация отсутствует.</text>
 	</string>
+	<string id="bar_arena_stalker_1_name">
+		<text>Мясо</text>
+	</string>
+	<string id="bar_arena_stalker_2_name">
+		<text>Трупоед</text>
+	</string>
+	<string id="bar_arena_stalker_3_1_name">
+		<text>Эстонец</text>
+	</string>
+	<string id="bar_arena_stalker_3_2_name">
+		<text>Финн</text>
+	</string>
+	<string id="bar_arena_stalker_4_1_name">
+		<text>Макаронник</text>
+	</string>
+	<string id="bar_arena_stalker_4_2_name">
+		<text>Гнилой ствол</text>
+	</string>
+	<string id="bar_arena_stalker_4_3_name">
+		<text>Мушка</text>
+	</string>
+	<string id="bar_arena_stalker_4_4_name">
+		<text>Зося</text>
+	</string>
+	<string id="bar_arena_stalker_4_5_name">
+		<text>Зуко</text>
+	</string>
+	<string id="bar_arena_stalker_5_1_name">
+		<text>Сарж</text>
+	</string>
+	<string id="bar_arena_stalker_5_2_name">
+		<text>Дед</text>
+	</string>

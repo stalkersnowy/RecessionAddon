@@ -3641,7 +3641,7 @@
 
 <!---------------------------STALKER 1---------------------->
 	<specific_character id="bar_arena_stalker_1" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>bar_arena_stalker_1_name</name>
 		<icon>ui_npc_u_green_stalker_2</icon>
 		<map_icon x="0" y="0"></map_icon>
 		<bio>bar_arena_stalker</bio>
@@ -3668,7 +3668,7 @@
 
 ;-----------------STALKER 2----------------------------------
 <specific_character id="bar_arena_stalker_2" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>bar_arena_stalker_2_name</name>
 		<icon>ui_npc_u_stalker_neytral_hood_9</icon>
 		<map_icon x="1" y="0"></map_icon>
 		<bio>bar_arena_stalker</bio>
@@ -3694,7 +3694,7 @@
 
 ;--------------------STALKER 3_1 and 3_2----------------------
 <specific_character id="bar_arena_stalker_3_1" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>bar_arena_stalker_3_1_name</name>
 		<icon>ui_npc_u_stalker_neytral_rukzak_2</icon>
 		<map_icon x="1" y="0"></map_icon>
 		<bio>bar_arena_stalker</bio>
@@ -3719,7 +3719,7 @@
 	</specific_character>
 
 <specific_character id="bar_arena_stalker_3_2" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>bar_arena_stalker_3_2_name</name>
 		<icon>ui_npc_u_stalker_neytral_hood_9</icon>
 		<map_icon x="1" y="0"></map_icon>
 		<bio>bar_arena_stalker</bio>
@@ -3748,7 +3748,7 @@
 
 ;---enemy---
 <specific_character id="bar_arena_stalker_4_1" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>bar_arena_stalker_4_1_name</name>
 		<icon>ui_npc_u_stalker_neytral_hood_9</icon>
 		<map_icon x="1" y="0"></map_icon>
 		<bio>bar_arena_stalker</bio>
@@ -3773,7 +3773,7 @@
 	</specific_character>
 
 <specific_character id="bar_arena_stalker_4_2" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>bar_arena_stalker_4_2_name</name>
 		<icon>ui_npc_u_stalker_neytral_rukzak_2</icon>
 		<map_icon x="1" y="0"></map_icon>
 		<bio>bar_arena_stalker</bio>
@@ -3798,7 +3798,7 @@
 	</specific_character>
 
 <specific_character id="bar_arena_stalker_4_3" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>bar_arena_stalker_4_3_name</name>
 		<icon>ui_npc_u_stalker_neytral_nauchniy</icon>
 		<map_icon x="1" y="0"></map_icon>
 		<bio>bar_arena_stalker</bio>
@@ -3825,7 +3825,7 @@
 ;----friends----
 
 	<specific_character id="bar_arena_stalker_4_4" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>bar_arena_stalker_4_4_name</name>
 		<icon>ui_npc_u_green_stalker_4</icon>
 		<map_icon x="0" y="0"></map_icon>
 		<bio>bar_arena_stalker</bio>
@@ -3852,7 +3852,7 @@
 	</specific_character>
 
 	<specific_character id="bar_arena_stalker_4_5" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>bar_arena_stalker_4_5_name</name>
 		<icon>ui_npc_u_green_stalker_3</icon>
 		<map_icon x="0" y="0"></map_icon>
 		<bio>bar_arena_stalker</bio>
@@ -3882,7 +3882,7 @@
 ;------------STALKER 5_1,5_2-------------------------
 
 	<specific_character id="bar_arena_stalker_5_1" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>bar_arena_stalker_5_1_name</name>
 		<icon>ui_npc_u_stalker_militari_antigas_2</icon>
 		<map_icon x="2" y="2"></map_icon>
 		<bio>bar_arena_stalker</bio>
@@ -3908,7 +3908,7 @@
 	</specific_character>
 
 	<specific_character id="bar_arena_stalker_5_2" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>bar_arena_stalker_5_2_name</name>
 		<icon>ui_npc_u_stalker_militari_antigas_2</icon>
 		<map_icon x="2" y="2"></map_icon>
 		<bio>bar_arena_stalker</bio>
