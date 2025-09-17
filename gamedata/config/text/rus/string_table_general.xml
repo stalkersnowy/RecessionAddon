@@ -4,12 +4,15 @@
 		<text>Одиночка</text>
 	</string>
 	<string id="actor_dolg">
-		<text>Долг</text>
+		<text>Одиночка</text>
 	</string>
 	<string id="actor_freedom">
 		<text>Свобода</text>
 	</string>
 	<string id="arena_enemy">
+		<text>Противник</text>
+	</string>
+	<string id="stranger">
 		<text>Противник</text>
 	</string>
 	<string id="bad">

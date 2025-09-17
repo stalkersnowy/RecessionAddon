@@ -3937,7 +3937,7 @@
 ;---------------STALKER 6_1,6_2,6_3,6_4,6_5,6_6-------------
 
 <specific_character id="bar_arena_stalker_6_1" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>GENERATE_NAME_bandit</name>
 		<icon>ui_npc_u_stalker_bandit_3</icon>
 		<map_icon x="3" y="2"></map_icon>
 		<bio>sim_bandit_general_bio</bio>
@@ -3962,7 +3962,7 @@
 	</specific_character>
 
 <specific_character id="bar_arena_stalker_6_2" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>GENERATE_NAME_bandit</name>
 		<icon>ui_npc_u_stalker_bandit_4</icon>
 		<map_icon x="3" y="2"></map_icon>
 		<bio>sim_bandit_general_bio</bio>
@@ -3987,7 +3987,7 @@
 	</specific_character>
 
 <specific_character id="bar_arena_stalker_6_3" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>GENERATE_NAME_bandit</name>
 		<icon>ui_npc_u_stalker_bandit_4</icon>
 		<map_icon x="3" y="2"></map_icon>
 		<bio>sim_bandit_general_bio</bio>
@@ -4012,7 +4012,7 @@
 	</specific_character>
 	
 <specific_character id="bar_arena_stalker_6_4" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>GENERATE_NAME_bandit</name>
 		<icon>ui_npc_u_stalker_bandit_5</icon>
 		<map_icon x="3" y="2"></map_icon>
 		<bio>sim_bandit_general_bio</bio>
@@ -4037,7 +4037,7 @@
 	</specific_character>
 	
 <specific_character id="bar_arena_stalker_6_5" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>GENERATE_NAME_bandit</name>
 		<icon>ui_npc_u_stalker_bandit_master</icon>
 		<map_icon x="3" y="2"></map_icon>
 		<bio>sim_bandit_general_bio</bio>
@@ -4062,7 +4062,7 @@
 	</specific_character>
 	
 <specific_character id="bar_arena_stalker_6_6" team_default = "1">
-		<name>GENERATE_NAME_stalker</name>
+		<name>GENERATE_NAME_bandit</name>
 		<icon>ui_npc_u_stalker_bandit_master</icon>
 		<map_icon x="3" y="2"></map_icon>
 		<bio>sim_bandit_general_bio</bio>
@@ -4127,7 +4127,7 @@
 		<bio>sim_stalker_master_bio</bio>
 
 		<class>bar_arena_stalker_8_1</class>
-		<community>arena_enemy</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<community>stranger</community> <terrain_sect>stalker_terrain</terrain_sect>
 				
 		<rank>931</rank>
 		<reputation>126</reputation>
@@ -4152,7 +4152,7 @@
 		<bio>sim_stalker_master_bio</bio>
 
 		<class>bar_arena_stalker_8_2</class>
-		<community>military</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<community>stranger</community> <terrain_sect>stalker_terrain</terrain_sect>
 				
 		<rank>919</rank>
 		<reputation>111</reputation>
@@ -4177,7 +4177,7 @@
 		<bio>sim_stalker_master_bio</bio>
 
 		<class>bar_arena_stalker_8_3</class>
-		<community>bandit</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<community>stranger</community> <terrain_sect>stalker_terrain</terrain_sect>
 				
 		<rank>906</rank>
 		<reputation>-364</reputation>
@@ -4202,7 +4202,7 @@
 		<bio>sim_stalker_master_bio</bio>
 
 		<class>bar_arena_stalker_8_4</class>
-		<community>monolith</community> <terrain_sect>stalker_terrain</terrain_sect>
+		<community>stranger</community> <terrain_sect>stalker_terrain</terrain_sect>
 				
 		<rank>923</rank>
 		<reputation>-654</reputation>

@@ -1371,3 +1371,4 @@ quest_section["wpn_walther_coll"]	= true
 quest_section["susat_anom"]			= true
 quest_section["wpn_svd_m1"]			= true
 quest_section["cit_vp_pda"]			= true
+quest_section["wpn_deserteagle_coll"] = true

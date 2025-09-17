@@ -197,6 +197,8 @@ function motivator_binder:death_callback(victim, who)
 		if community == "zombied" or
 		   community == "monolith" or
 		   community == "arena_enemy" or
+		   community == "stranger" or
+		   community == "actor_dolg" or
 		   community == "military" or
 		   community == "killer"
 		then

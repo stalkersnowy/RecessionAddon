@@ -655,4 +655,10 @@
 		обычный		5,45x39 мм,\n
 		бронебойный 5,45x39 мм БП.</text>
 	</string>
+	<string id="wpn-deserteagle_coll">
+		<text>Черный ястреб Гордона</text>
+	</string>
+    <string id="enc_weapons1_wpn-desert-eagle_coll">
+        <text>Черный ястреб с дарственной надписью "Лучшему агенту нового света".</text>
+    </string>
 </string_table>
