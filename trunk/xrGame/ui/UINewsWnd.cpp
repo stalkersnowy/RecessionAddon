@@ -89,7 +89,7 @@ void CUINewsWnd::AddNewsItem(GAME_NEWS_DATA& news_data)
 		case GAME_NEWS_DATA::eTalk:{
 			CUINewsItemWnd* _itm		= xr_new<CUINewsItemWnd>();
 			_itm->Init					(NEWS_XML,"talk_item");
-			_itm->Setup					(news_data);
+			_itm->Setup					(news_data, true);
 			itm							= _itm;					   
 		}break;
 	};

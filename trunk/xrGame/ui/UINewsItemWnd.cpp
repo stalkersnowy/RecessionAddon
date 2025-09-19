@@ -44,7 +44,7 @@ void CUINewsItemWnd::Init				(LPCSTR xml_name, LPCSTR start_from)
 
 }
 
-void CUINewsItemWnd::Setup			(GAME_NEWS_DATA& news_data)
+void CUINewsItemWnd::Setup			(GAME_NEWS_DATA& news_data, bool for_talk)
 {
 	m_UIText->SetTextST				(news_data.news_text.c_str());
 	m_UIText->AdjustHeightToText	();
@@ -60,7 +60,10 @@ void CUINewsItemWnd::Setup			(GAME_NEWS_DATA& news_data)
 	float h2						= m_UITextDate->GetWndPos().y + m_UITextDate->GetHeight();
 
 	m_UIImage->InitTexture			(*news_data.texture_name);
-	m_UIImage->SetOriginalRect		(news_data.tex_rect.x1,news_data.tex_rect.y1,news_data.tex_rect.x2,news_data.tex_rect.y2);
+	if(for_talk)
+		m_UIImage->SetOriginalRect	(news_data.tex_rect.x1+10.f,news_data.tex_rect.y1+4.f,news_data.tex_rect.x2-20.f,news_data.tex_rect.y2-26.f);
+	else
+		m_UIImage->SetOriginalRect	(news_data.tex_rect.x1,news_data.tex_rect.y1,news_data.tex_rect.x2,news_data.tex_rect.y2);
 	float h3						= m_UIImage->GetWndPos().y + m_UIImage->GetHeight();
 	h1								= _max(h1,h2);
 	h1								= _max(h1,h3);

@@ -113,7 +113,7 @@ xr_token		g_pda_style_token[] = {
 
 int				g_dof_mode = 0;
 
-int				g_keypress_on_start = 0;
+int				g_keypress_on_start = 1;
 
 BOOL			g_bMoreContactSnds = FALSE;
 
