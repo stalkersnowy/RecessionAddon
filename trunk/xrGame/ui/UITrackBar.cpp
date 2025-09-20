@@ -76,6 +76,7 @@ bool CUITrackBar::OnMouseAction(float x, float y, EUIMessages mouse_action)
 			}
 
 			UpdatePos();
+			SaveValue();
 
 			GetMessageTarget()->SendMessage(this, TRACK_MOVE, NULL);
 		}break;
@@ -96,6 +97,7 @@ bool CUITrackBar::OnMouseAction(float x, float y, EUIMessages mouse_action)
 			}
 
 			UpdatePos();
+			SaveValue();
 
 			GetMessageTarget()->SendMessage(this, TRACK_MOVE, NULL);
 		}break;
@@ -403,6 +405,7 @@ void CUITrackBar::UpdatePosRelativeToMouse()
 	GetMessageTarget()->SendMessage(this, BUTTON_CLICKED, NULL);
 
 	UpdatePos();
+	SaveValue();
 }
 
 void CUITrackBar::SetTokenValues(xr_token* tokens)
@@ -465,7 +468,6 @@ void CUITrackBar::UpdatePos()
 		pos.x					= free_space - pos.x;
 
 	m_pSlider->SetWndPos		(pos);
-	SaveValue					();
 }
 
 void CUITrackBar::OnMessage(const char* message)
