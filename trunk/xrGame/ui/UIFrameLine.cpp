@@ -155,7 +155,7 @@ void CUIFrameLine::SetElementsRect( CUIStaticItem& item, int idx )
 	}
 
 	if( bHorizontalOrientation && (idx==flSecond) && UI()->is_16_9_mode() )
-		srtch_width			/= 1.2f;
+		srtch_width			*= UI()->get_current_kx();
 
 	item.SetRect( Frect().set( 0.0f, 0.0f, srtch_width, srtch_height ) );
 }
