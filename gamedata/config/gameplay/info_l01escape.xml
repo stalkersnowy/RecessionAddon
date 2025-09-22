@@ -202,8 +202,8 @@
 	
 	<!-- trader bandits on factory -->
 	<info_portion id="esc_kill_bandits_quest_have">
-	<!--	<task>esc_dinamit_to_volk</task>
-		<article>kill_factory_bandits</article> -->
+		<task>esc_dinamit_to_volk</task>
+		<article>kill_factory_bandits</article>
 	</info_portion>
 	<info_portion id="esc_kill_bandits_quest_kill"></info_portion>
 	<info_portion id="esc_kill_bandits_noquest_kill"></info_portion>

@@ -1597,12 +1597,12 @@
             <phrase id="4000">
                 <text />
                 <dont_has_info>mil_fblockpost_quest</dont_has_info>
-                <give_info>mil_freedom_commander_talk</give_info>
-                <give_info>mil_fblockpost_quest</give_info>
                 <next>4003</next>
             </phrase>
             <phrase id="4003">
                 <text>mil_freedom_commander_4003</text>
+                <give_info>mil_freedom_commander_talk</give_info>
+                <give_info>mil_fblockpost_quest</give_info>
                 <next>1004</next>
             </phrase>
             <phrase id="3002">

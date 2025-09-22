@@ -469,7 +469,7 @@ function CKampManager:proceedRole(npc, director)
 		end
 
 		self.npc[npc_id].begin = time_global()
-		state = temp[math.random(#temp)]
+		state = (#temp > 0) and temp[math.random(#temp)] or "sleep_sit"
 		self.npc[npc_id].state_selected = state
 		self.npc[npc_id].state_idle = math.random(15000,20000)		
 	else

@@ -106,6 +106,9 @@
 	<string id="tutorial_help_wounded">
 		<text>Забрать информацию у разведчика</text>
 	</string>
+	<string id="esc_flash_task">
+		<text>Забрать информацию у разведчика</text>
+	</string>
 	<string id="tutorial_help_wounded_0">
 		<text>Принести информацию торговцу</text>
 	</string>

@@ -32,8 +32,8 @@ vf main (vv v)
 #ifdef	USE_SOFT_PARTICLES
 	o.tctexgen 	= mul( mVPTexgen, v.P);
 	o.tctexgen.z	= o.hpos.z;
-    o.fog = saturate(calc_fogging(v.P)); // fog, input in world coords
 #endif	//	USE_SOFT_PARTICLES
+    o.fog = saturate(calc_fogging(v.P)); // fog, input in world coords
 
 	return o;
 }
