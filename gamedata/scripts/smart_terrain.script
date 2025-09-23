@@ -217,7 +217,7 @@ end
 --   xr_gulag.get_gulag_by_sid()
 function se_smart_terrain:initialize_if_needed()
 	if not self.initialized then
---		sim_statistic.update()
+		sim_statistic.update()
 
 		self:get_se_objs()
 
@@ -256,7 +256,7 @@ function se_smart_terrain:get_se_objs()
 			abort( "[smart_terrain %s] can't get server object id=%d", self:name(), id )
 		end
 
---		sim_statistic.add( obj )
+		sim_statistic.add( obj )
 
 		self:fill_npc_info( obj, v )
 	end
@@ -683,7 +683,7 @@ function se_smart_terrain:register_npc( obj )
 
 	self.gulag:addObject( obj.id )
 
---	sim_statistic.add( obj )
+	sim_statistic.add( obj )
 
 	self.gulag:update()
 
@@ -729,17 +729,17 @@ function se_smart_terrain:unregister_npc( obj )
 
 	obj:clear_smart_terrain()
 
---	sim_statistic.remove( obj )
+	sim_statistic.remove( obj )
 
---'	if sim_statistic.show_stalker_spot == true and obj:alive() then
---'		local community, rank = sim_statistic.getNpcType(obj)
---'		local spot = "alife_presentation_monstr"
---'		if IsStalker(obj) then
---'			spot = "alife_presentation_"..community
---'		end
---'		local str = obj:name().." "..self:name().."\\n".."<<removed>>"
---'		level.map_change_spot_hint(obj.id, spot, str)		
---'	end
+	if sim_statistic.show_stalker_spot == true and obj:alive() then
+		local community, rank = sim_statistic.getNpcType(obj)
+		local spot = "alife_presentation_monstr"
+		if IsStalker(obj) then
+			spot = "alife_presentation_"..community
+		end
+		local str = obj:name().." "..self:name().."\\n".."<<removed>>"
+		level.map_change_spot_hint(obj.id, spot, str)		
+	end
 
 	--printf( "[smart_terrain %s] removed %s from gulag type=%s, strn_id=%s", self:name(), obj:name() or "<<<nil>>>", self.gparams.type, obj:smart_terrain_id())
 end
@@ -783,16 +783,16 @@ function se_smart_terrain:task( obj )
 
 --'	printf("SEETING TASK PATH %s = %s", obj:name(), path_name)
 	--' Пробуем проапдейтить типс чувака на карте
---'	if sim_statistic.show_stalker_spot == true and obj:alive() then
---'		local community, rank = sim_statistic.getNpcType(obj)
---'		local spot = "alife_presentation_monstr"
---'		if IsStalker(obj) then
---'			spot = "alife_presentation_"..community
---'		end
---'		local str = obj:name().." "..self:name().."\\n"..path_name
+	if sim_statistic.show_stalker_spot == true and obj:alive() then
+		local community, rank = sim_statistic.getNpcType(obj)
+		local spot = "alife_presentation_monstr"
+		if IsStalker(obj) then
+			spot = "alife_presentation_"..community
+		end
+		local str = obj:name().." "..self:name().."\\n"..path_name
 
---'		level.map_change_spot_hint(obj.id, spot, str)		
---'	end
+		level.map_change_spot_hint(obj.id, spot, str)		
+	end
 
 	return CALifeSmartTerrainTask( path_name )
 end
@@ -801,13 +801,13 @@ end
 function se_smart_terrain:is_gulag_available()
 	if self.gparams.cond then
 		local bb = xr_logic.pick_section_from_condlist( db.actor_proxy, self, self.gparams.cond ) ~= nil
---'		self:show_smart_debug_spot(bb)
+		self:show_smart_debug_spot(bb)
 --'		if self:name() == "gar_bandit_agr" then
 --'			printf("[smartterrain %s] is_gulag_available = %s", self:name(), tostring(bb))
 --'		end
 		return bb
 	else
---'		self:show_smart_debug_spot(true)
+		self:show_smart_debug_spot(true)
 --'		if self:name() == "gar_bandit_agr" then
 --'			printf("[smartterrain %s] is_gulag_available = %s extra", self:name(), tostring(true))
 --'		end
@@ -905,7 +905,7 @@ function se_smart_terrain:remove_gulag( disable )
 	self.gulag_working = false
 
 	self.gulag.capacity_non_exclusive = self.gulag.capacity_non_exclusive - self.exclusives
---'	self:show_smart_debug_spot(false)
+	self:show_smart_debug_spot(false)
 end
 
 -- заполняет таблицу monster_classes
@@ -1013,7 +1013,7 @@ function se_smart_terrain:register_if_needed()
 		self.gulag:initialize()
 	end
 
---	sim_statistic.reinit()
+	sim_statistic.reinit()
 
 	-- Регистрация в таскменеджере
 	task_manager.get_random_task():register_target(self)
