@@ -34,8 +34,8 @@ local close_visuals = {
 	["actors\\monolit\\stalker_mo_hood_9"] = true,
 	["actors\\monolit\\stalker_mo_nauchniy"] = true,
 	["actors\\stalker_zombi\\zombie_exoskeleton"] = true,
-	["actors\\nauchniy\\nauchniy_0"] = true,
-	["actors\\nauchniy\\nauchniy_1"] = true
+	["actors\\ecolog\\stalker_ecolog"] = true,
+	["actors\\ecolog\\stalker_ecolog_military"] = true
 }
 
 local include_harmonica = false
