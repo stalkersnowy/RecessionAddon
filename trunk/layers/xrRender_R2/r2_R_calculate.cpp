@@ -24,7 +24,7 @@ void CRender::Calculate		()
 	r_ssaGLOD_start					=	_sqr(ps_r__GLOD_ssa_start/3)/g_fSCREEN;
 	r_ssaGLOD_end					=	_sqr(ps_r__GLOD_ssa_end/3)	/g_fSCREEN;
 	r_ssaHZBvsTEX					=	_sqr(ps_r__ssaHZBvsTEX/3)	/g_fSCREEN;
-	r_dtex_range					=	ps_r2_df_parallax_range * g_fSCREEN / (psBaseWidth * UI_BASE_HEIGHT);
+	r_dtex_range					=	ps_r2_df_parallax_range * g_fSCREEN / (UI_BASE_WIDTH * UI_BASE_HEIGHT);
 	
 	// Detect camera-sector
 	if (!vLastCameraPos.similar(Device.vCameraPosition,EPS_S)) 

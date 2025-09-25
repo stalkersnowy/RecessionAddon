@@ -392,6 +392,7 @@ class CCC_VidMode : public CCC_Token
 public :
 					CCC_VidMode(LPCSTR N) : CCC_Token(N, &_dummy, NULL) { bEmptyArgsHandled = FALSE; };
 	virtual void	Execute(LPCSTR args){
+		if(true) return;
 		u32 _w, _h;
 		int cnt = sscanf		(args,"%dx%d",&_w,&_h);
 		if(cnt==2){
