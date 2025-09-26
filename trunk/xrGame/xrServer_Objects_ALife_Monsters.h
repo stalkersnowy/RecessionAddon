@@ -39,6 +39,7 @@ SERVER_ENTITY_DECLARE_BEGIN0(CSE_ALifeTraderAbstract)
 	void							set_character_profile	(shared_str);
 	shared_str			specific_character		();
 	void							set_specific_character	(shared_str);
+	shared_str						icon_name				();
 #endif
 
 	CHARACTER_COMMUNITY_INDEX		m_community_index;
@@ -58,7 +59,8 @@ SERVER_ENTITY_DECLARE_BEGIN0(CSE_ALifeTraderAbstract)
 #endif
 
 	shared_str						m_sCharacterProfile;
-	shared_str			m_SpecificCharacter;
+	shared_str						m_SpecificCharacter;
+	shared_str						m_sIconName;
 
 	//буферный вектор проверенных персонажей
 	xr_vector<shared_str> m_CheckedCharacters;

@@ -132,6 +132,8 @@ CSE_ALifeTraderAbstract::CSE_ALifeTraderAbstract(LPCSTR caSection)
 
 	m_trader_flags.zero			();
 	m_trader_flags.set			(eTraderFlagInfiniteAmmo,FALSE);
+
+	m_sIconName					= "ui_npc_u_stranger";
 }
 
 CSE_Abstract *CSE_ALifeTraderAbstract::init	()
@@ -172,6 +174,8 @@ void CSE_ALifeTraderAbstract::STATE_Write	(NET_Packet &tNetPacket)
 	tNetPacket.w_s32			(NO_REPUTATION);
 #endif
 	save_data					(m_character_name, tNetPacket);
+	
+	tNetPacket.w_stringZ		(m_sIconName);
 }
 
 void CSE_ALifeTraderAbstract::STATE_Read	(NET_Packet &tNetPacket, u16 size)
@@ -232,6 +236,10 @@ void CSE_ALifeTraderAbstract::STATE_Read	(NET_Packet &tNetPacket, u16 size)
 
 		if (m_wVersion > 104) {
 			load_data			(m_character_name, tNetPacket);
+		}
+
+		if (m_wVersion > 119) {
+			tNetPacket.r_stringZ(m_sIconName);
 		}
 	}
 
@@ -375,8 +383,29 @@ void CSE_ALifeTraderAbstract::set_specific_character	(shared_str new_spec_char)
 	if(selected_char.Visual())
 	{
 		CSE_Visual* visual = smart_cast<CSE_Visual*>(base()); VERIFY(visual);
-		if(xr_strlen(selected_char.Visual())>0)
-			visual->set_visual(selected_char.Visual());
+		if(xr_strlen(selected_char.Visual())>0){
+			LPCSTR gen_vis = "GENERATE_VISUAL_";
+			if (strstr(selected_char.Visual(), gen_vis)) {
+				xr_string subset = selected_char.Visual()+xr_strlen(gen_vis);
+
+				string_path			t1;
+				strconcat			(sizeof(t1),t1,"stalker_visuals_",subset.c_str());
+				LPCSTR				names = pSettings->r_string(t1,"names");
+				u32					count = _GetItemCount(names);
+
+				xr_string vis_path	= pSettings->r_string(t1,"path");
+				string32 vis_name;
+				vis_path			+= _GetItem(names, ::Random.randI(count), vis_name);
+				visual->set_visual(vis_path.c_str());
+
+				string64			t2;
+				strconcat			(sizeof(t2),t2,"ui_npc_u_",vis_name);
+				m_sIconName._set	(t2);
+			}else{
+				visual->set_visual(selected_char.Visual());
+				m_sIconName._set	(selected_char.IconName());
+			}
+		}
 	}
 
 #ifdef XRGAME_EXPORTS
@@ -502,6 +531,11 @@ void CSE_ALifeTraderAbstract::UPDATE_Write	(NET_Packet &tNetPacket)
 void CSE_ALifeTraderAbstract::UPDATE_Read	(NET_Packet &tNetPacket)
 {
 };
+
+shared_str CSE_ALifeTraderAbstract::icon_name()
+{
+	return m_sIconName;
+}
 
 
 ////////////////////////////////////////////////////////////////////////////

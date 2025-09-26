@@ -69,7 +69,7 @@ void CUIPdaMsgListItem::InitCharacter(CInventoryOwner* pInvOwner)
 	sprintf_s(str, "name: %s", pInvOwner->Name());
 	UIName.SetText			(str);
 
-	UIIcon.InitTexture		( pInvOwner->CharacterInfo().IconName().c_str() );
+	UIIcon.InitTexture		( pInvOwner->Icon() );
 /*
 	UIIcon.SetShader(GetCharIconsShader());
 	UIIcon.GetUIStaticItem().SetOriginalRect(

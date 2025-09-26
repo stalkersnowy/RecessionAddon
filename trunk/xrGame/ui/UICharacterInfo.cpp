@@ -199,7 +199,7 @@ void CUICharacterInfo::InitCharacter(u16 id)
 		m_icons[eUICommunity]->SetText(str);
 	}
 
-	m_texture_name										= chInfo.IconName().c_str();
+	m_texture_name										= T->icon_name().c_str();
 	m_icons[eUIIcon]->InitTexture						( m_texture_name.c_str() );
 	m_icons[eUIIcon]->SetStretchTexture					(true);
 
