@@ -802,6 +802,7 @@
     <Image Include="stalker.ico">
       <DeploymentContent>true</DeploymentContent>
     </Image>
+    <Image Include="ui_splash2.bmp" />
     <Image Include="ui_splash3.bmp" />
   </ItemGroup>
   <ItemGroup>

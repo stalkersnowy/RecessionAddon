@@ -931,6 +931,7 @@
     <Image Include="ui_splash3.bmp">
       <Filter>General\Resources</Filter>
     </Image>
+    <Image Include="ui_splash2.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ClientServer.txt" />
