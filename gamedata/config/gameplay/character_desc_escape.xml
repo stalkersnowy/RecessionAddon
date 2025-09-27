@@ -106,6 +106,7 @@
 		
 		<rank>338</rank>
 		<reputation>-3</reputation>
+		<money min="600" max="2000" infinitive="0"/>
 		
 		<snd_config>characters_voice\human_01\stalker\</snd_config>
 		<crouch_type>-1</crouch_type>
@@ -625,6 +626,7 @@
 		
 		<snd_config>characters_voice\human_02\military\</snd_config>
 		<crouch_type>0</crouch_type>
+		<money min="2000" max="5000" infinitive="0"/>
 
 		<visual>actors\soldier\soldier_beret_1</visual>		
 		<supplies>
@@ -654,6 +656,7 @@
 		
 		<rank>223</rank>
 		<reputation>6</reputation>
+		<money min="200" max="600" infinitive="0"/>
 		
 		<snd_config>characters_voice\human_01\military\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -684,6 +687,7 @@
 		
 		<rank>476</rank>
 		<reputation>9</reputation>
+		<money min="600" max="2000" infinitive="0"/>
 		
 		<snd_config>characters_voice\human_02\military\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -715,6 +719,7 @@
 		
 		<rank>207</rank>
 		<reputation>10</reputation>
+		<money min="200" max="600" infinitive="0"/>
 		
 		<snd_config>characters_voice\human_01\military\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -745,6 +750,7 @@
 		
 		<rank>263</rank>
 		<reputation>-18</reputation>
+		<money min="200" max="600" infinitive="0"/>
 		
 		<snd_config>characters_voice\human_02\military\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -777,6 +783,7 @@
 		
 		<rank>481</rank>
 		<reputation>12</reputation>
+		<money min="600" max="2000" infinitive="0"/>
 		
 		<snd_config>characters_voice\human_01\military\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -808,6 +815,7 @@
 		
 		<rank>906</rank>
 		<reputation>20</reputation>
+		<money min="5000" max="10000" infinitive="0"/>
 		
 		<snd_config>characters_voice\human_02\military\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -837,6 +845,7 @@
 		
 		<rank>205</rank>
 		<reputation>0</reputation>
+		<money min="200" max="600" infinitive="0"/>
 		
 		<snd_config>characters_voice\human_01\military\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -867,6 +876,7 @@
 		
 		<rank>237</rank>
 		<reputation>-6</reputation>
+		<money min="200" max="600" infinitive="0"/>
 		
 		<snd_config>characters_voice\human_01\military\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -898,6 +908,7 @@
 		
 		<rank>355</rank>
 		<reputation>11</reputation>
+		<money min="600" max="2000" infinitive="0"/>
 		
 		<snd_config>characters_voice\human_01\military\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -928,6 +939,7 @@
 		
 		<rank>809</rank>
 		<reputation>0</reputation>
+		<money min="2000" max="5000" infinitive="0"/>
 		
 		<snd_config>characters_voice\human_02\military\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -958,6 +970,7 @@
 		
 		<rank>830</rank>
 		<reputation>-4</reputation>
+		<money min="2000" max="5000" infinitive="0"/>
 		
 		<snd_config>characters_voice\human_02\military\</snd_config>
 		<crouch_type>0</crouch_type>

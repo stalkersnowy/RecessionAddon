@@ -1014,7 +1014,7 @@
 
 		<class>sim_stalker_master</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
-		<money min="2000" max="5000" infinitive="0"></money>
+		<money min="5000" max="10000" infinitive="0"/>
 				
 		<rank>920</rank>
 		<reputation>145</reputation>
@@ -1047,7 +1047,7 @@
 
 		<class>sim_stalker_master</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
-		<money min="2000" max="5000" infinitive="0"></money>
+		<money min="5000" max="10000" infinitive="0"/>
 
 		<snd_config>characters_voice\human_03\stalker\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -1344,7 +1344,7 @@
 
 		<class>sim_dolg_master</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
-		<money min="2000" max="5000" infinitive="0"></money>
+		<money min="5000" max="10000" infinitive="0"/>
 		
 		<rank>923</rank>
 		<reputation>136</reputation>
@@ -1375,7 +1375,7 @@
 		
 		<class>sim_dolg_master</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
-		<money min="2000" max="5000" infinitive="0"></money>
+		<money min="5000" max="10000" infinitive="0"/>
 		
 		<rank>901</rank>
 		<reputation>143</reputation>
@@ -1582,7 +1582,7 @@
 		
 		<class>sim_Svoboda_master</class>
 		<community>freedom</community> <terrain_sect>stalker_freedom_terrain</terrain_sect>
-		<money min="2000" max="5000" infinitive="0"></money>
+		<money min="5000" max="10000" infinitive="0"/>
 
         <snd_config>characters_voice\human_03\freedom\</snd_config>
 		
@@ -2895,7 +2895,7 @@
 
 		<class>sim_Soldier_commander</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
-		<money min="2000" max="5000" infinitive="0"></money>
+		<money min="5000" max="10000" infinitive="0"/>
 		
 		<rank>910</rank>
 		<reputation>-23</reputation>
@@ -3030,7 +3030,7 @@
 		
 		<class>sim_Soldier_master</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
-		<money min="2000" max="5000" infinitive="0"></money>
+		<money min="5000" max="10000" infinitive="0"/>
 
         <snd_config>characters_voice\human_03\military\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -3065,7 +3065,7 @@
 		
 		<class>sim_Soldier_master</class>
 		<community>military</community> <terrain_sect>stalker_military_terrain</terrain_sect>
-		<money min="2000" max="5000" infinitive="0"></money>
+		<money min="5000" max="10000" infinitive="0"/>
 
         <snd_config>characters_voice\human_03\military\</snd_config>
 		<crouch_type>0</crouch_type>
@@ -3173,7 +3173,7 @@
 
 		<class>sim_stalker_master_chuchelo</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
-		<money min="2000" max="5000" infinitive="0"></money>
+		<money min="5000" max="10000" infinitive="0"/>
 				
 		<rank>920</rank>
 		<reputation>145</reputation>
@@ -3241,7 +3241,7 @@
 
 		<class>sim_stalker_master_diador</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
-		<money min="2000" max="5000" infinitive="0"></money>
+		<money min="5000" max="10000" infinitive="0"/>
 
 		<snd_config>characters_voice\human_03\stalker\</snd_config>
 		
@@ -3442,7 +3442,7 @@
 
 		<class>sim_stalker_master_master</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
-		<money min="2000" max="5000" infinitive="0"></money>
+		<money min="5000" max="10000" infinitive="0"/>
 
 		<snd_config>characters_voice\human_03\stalker\</snd_config>
 		<crouch_type>0</crouch_type>		

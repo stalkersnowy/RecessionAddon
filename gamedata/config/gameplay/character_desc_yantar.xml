@@ -161,6 +161,7 @@
 		
 		<rank>10</rank>
 		<reputation>50</reputation>
+		<money min="200" max="600" infinitive="0"/>
 
 		<visual>actors\ecolog\stalker_ecolog</visual>
 		<snd_config>characters_voice\human_03\ecolog\</snd_config>
@@ -187,6 +188,7 @@
 		
 		<rank>10</rank>
 		<reputation>50</reputation>
+		<money min="200" max="600" infinitive="0"/>
 
 		<visual>actors\ecolog\stalker_ecolog_military</visual>
 		<snd_config>characters_voice\human_03\ecolog\</snd_config>

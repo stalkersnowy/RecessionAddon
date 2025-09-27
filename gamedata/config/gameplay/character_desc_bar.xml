@@ -574,7 +574,7 @@
 
 		<class>bar_arena_savage</class>
 		<community>arena_enemy</community>
-		<money min="2000" max="5000" infinitive="0"></money>
+		<money min="5000" max="10000" infinitive="0"/>
 		
 		<rank>930</rank>
 		<reputation>0</reputation>
@@ -855,7 +855,7 @@
 
 		<class>bar_killer_ambush_tiran</class>
 		<community>killer</community> <terrain_sect>stalker_killer_terrain</terrain_sect>
-		<money min="2000" max="5000" infinitive="0"></money>
+		<money min="5000" max="10000" infinitive="0"/>
 		
 		<rank>910</rank>
 		<reputation>40</reputation>
@@ -1340,7 +1340,7 @@
 
 		<class>bar_Dolg_master</class>
 		<community>dolg</community> <terrain_sect>stalker_dolg_terrain</terrain_sect>
-		<money min="2000" max="5000" infinitive="0"></money>
+		<money min="5000" max="10000" infinitive="0"/>
 		
 		<rank>914</rank>
 		<reputation>60</reputation>

@@ -755,6 +755,7 @@
 		
 		<rank>250</rank>
 		<reputation>-145</reputation>
+		<money min="200" max="600" infinitive="0"/>
 		
 		<snd_config>characters_voice\human_01\bandit\</snd_config>
 		<crouch_type>1</crouch_type>
