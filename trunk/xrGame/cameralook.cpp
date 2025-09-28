@@ -141,6 +141,6 @@ void CCameraLook2::Load(LPCSTR section)
 {
 	CCameraLook::Load		(section);
 	m_cam_offset = Fvector().set(0.314f, 0.2f, 0.0f);
-	dist = 1.4f;
+	dist = lim_zoom[0];
 	prev_d = 0.0f;
 }

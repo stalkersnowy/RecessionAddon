@@ -5,10 +5,10 @@
 class CCameraLook	: public CCameraBase
 {
 	typedef CCameraBase inherited;
-
+	
+protected:
 	Fvector2		lim_zoom;
 
-protected:
 	float			dist, prev_d;
 public:
 					CCameraLook		( CObject* p, u32 flags=0);
