@@ -67,12 +67,16 @@ BOOL CLevel::Load_GameSpecific_After()
 			IReader *F				= FS.r_open	(fn_game);
 			::Sound->set_geometry_env(F);
 			FS.r_close				(F);
+		}else{
+			::Sound->reset_geometry_env();
 		}
 		// loading SOM
 		if (FS.exist(fn_game, "$level$", "level.som")) {
 			IReader *F				= FS.r_open	(fn_game);
 			::Sound->set_geometry_som(F);
 			FS.r_close				(F);
+		}else{
+			::Sound->reset_geometry_som();
 		}
 
 		// loading random (around player) sounds
