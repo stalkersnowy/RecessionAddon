@@ -102,7 +102,7 @@
 		</objective>		
 		<objective>
 			<text>esc_dinamit_to_volk_2</text>
-			<map_location_type hint="escape_dinamit">green_location</map_location_type>
+			<map_location_type hint="esc_dinamit_to_volk">green_location</map_location_type>
 			<object_story_id>esc_bandits_factory</object_story_id>
 			<infoportion_complete>esc_kill_bandits_quest_kill</infoportion_complete>
 		</objective>

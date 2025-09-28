@@ -1065,7 +1065,7 @@
 		<class>esc_plemiannik</class>
 		<community>stalker</community> <terrain_sect>stalker_terrain</terrain_sect>
 		
-		<rank>20</rank>
+		<rank>200</rank>
 		<reputation>0</reputation>
 		<money min="200" max="600" infinitive="0"/>
 		
