@@ -50,9 +50,15 @@ void CUIButton::Reset()
 	inherited::Reset			();
 }
 
+void CUIButton::Show(bool status)
+{
+	SetVisible(status);
+	if (!status)
+		m_bCursorOverWindow = false;
+}
 
-
-void CUIButton::Enable(bool status){
+void CUIButton::Enable(bool status)
+{
 	CUIStatic::Enable			(status);
 
 	if (!status)
