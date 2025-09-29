@@ -173,6 +173,7 @@
 			<text>yan_find_ghost</text>
 			<map_location_type hint="yan_find_ghost">green_location</map_location_type>
 			<object_story_id>yan_ghost</object_story_id>
+			<map_location_hidden>1</map_location_hidden>
 			<function_complete>yantar_tasks.has_labx16_documents</function_complete>
 		</objective>
 </game_task>
