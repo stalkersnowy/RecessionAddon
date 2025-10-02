@@ -64,7 +64,7 @@
       ammo_5.56x45_ap = 1 \n
 	  wpn_beretta \n
       ammo_9x19_pbp = 1 \n
-      #include "gameplay\character_items.xml"\n
+#include "gameplay\character_items.xml"\n
 #include "gameplay\character_food.xml" \n
 #include "gameplay\character_drugs.xml"
     </supplies>
@@ -129,7 +129,7 @@
       ammo_9x19_fmj = 1 \n
       wpn_svd \n
       ammo_7.62x54_ap = 1 \n
-      #include "gameplay\character_items.xml"\n
+#include "gameplay\character_items.xml"\n
 #include "gameplay\character_food.xml" \n
 #include "gameplay\character_drugs.xml"
     </supplies>
@@ -164,7 +164,7 @@
       ammo_9x19_fmj = 1 \n
       wpn_gauss \n
       ammo_gauss = 1 \n
-      #include "gameplay\character_items.xml"\n
+#include "gameplay\character_items.xml"\n
 #include "gameplay\character_food.xml" \n
 #include "gameplay\character_drugs.xml"
     </supplies>
@@ -200,7 +200,7 @@
 	  ammo_11.43x23_hydro = 1 \n
       wpn_g36 \n
       ammo_5.56x45_ss190 = 1 \n
-      #include "gameplay\character_items.xml"\n
+#include "gameplay\character_items.xml"\n
 #include "gameplay\character_food.xml" \n
 #include "gameplay\character_drugs.xml"
     </supplies>

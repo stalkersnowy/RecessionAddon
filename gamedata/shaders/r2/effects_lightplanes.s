@@ -1,4 +1,4 @@
-/*
+--[[
 function normal		(shader, t_base, t_second, t_detail)
 	shader:begin	("dumb","dumb")
 			: fog		(false)
@@ -8,12 +8,12 @@ function normal		(shader, t_base, t_second, t_detail)
 			: sorting	(2, false)
 	shader:sampler	("s_base")      :texture	(t_base)
 end
-*/
+]]
 
 function normal		(shader, t_base, t_second, t_detail)
 	shader:begin	("base_lplanes","base_lplanes")
 			: fog		(false)
-//			: fog		(true)
+--			: fog		(true)
 			: zb 		(true,false)
 			: blend		(true,blend.srcalpha,blend.one)
 			: aref 		(true,0)

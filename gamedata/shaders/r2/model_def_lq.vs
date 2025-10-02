@@ -5,7 +5,7 @@ struct vf
 {
 	float4 hpos	: POSITION;
 	float2 tc0	: TEXCOORD0;		// base
-	float3 c0	: COLOR0;		// color
+	float4 c0	: COLOR0;		// color
 	float  fog	: FOG;
 };
 
@@ -19,8 +19,8 @@ vf 	_main (v_model v)
 
 	o.hpos 		= mul			(m_WVP, pos);		// xform, input in world coords
 	o.tc0		= v.tc.xy;					// copy tc
-	o.c0 		= calc_model_lq_lighting(norm_w);
 	o.fog 		= saturate(calc_fogging 		(float4(pos_w,1)));	// fog, input in world coords
+	o.c0 		= half4(calc_model_lq_lighting(norm_w), o.fog);
 
 	return o;
 }

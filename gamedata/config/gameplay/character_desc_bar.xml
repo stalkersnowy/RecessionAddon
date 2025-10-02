@@ -699,7 +699,7 @@
 #include "gameplay\character_criticals_6.xml"
 		
 		<start_dialog>bar_dolg_ivancov_start</start_dialog>
-		#include "gameplay\character_dialogs.xml"
+#include "gameplay\character_dialogs.xml"
 	</specific_character>	
 
 	<!---------------------------DOLG Начальник Охраны---------------------->
