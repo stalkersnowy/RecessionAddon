@@ -30,15 +30,22 @@
   </wpn_crosshair_bino>
   
   <wpn_crosshair_lens x="0" y="0" width="1024" height="768">
-    <auto_static x="183" y="75" width="648" height="648" stretch="1">
+    <auto_static x="183" y="75" width="648" height="648" stretch="1" glob_al="c">
       <texture>wpn\wpn_crosshair_g36_lens</texture>
     </auto_static>
   </wpn_crosshair_lens>
   
   <wpn_crosshair_bino_lens x="0" y="0" width="1024" height="768">
-    <auto_static x="42" y="85" width="939" height="621" stretch="1">
+    <auto_static x="42" y="85" width="939" height="621" stretch="1" glob_al="c">
       <texture>wpn\wpn_crosshair_bino_lens</texture>
     </auto_static>
   </wpn_crosshair_bino_lens>
+  
+  <wpn_crosshair_add x="0" y="0" width="102" height="768" stretch="1">
+    <texture width="102" height="768">wpn\wpn_crosshair</texture>
+  </wpn_crosshair_add>
+  <wpn_crosshair_add x="1023" y="0" width="102" height="768" stretch="1" glob_al="c">
+    <texture width="102" height="768">wpn\wpn_crosshair</texture>
+  </wpn_crosshair_add>
 </w>
 

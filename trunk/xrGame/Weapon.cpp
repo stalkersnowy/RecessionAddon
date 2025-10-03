@@ -92,6 +92,8 @@ CWeapon::CWeapon(LPCSTR name)
 	m_ef_main_weapon_type	= u32(-1);
 	m_ef_weapon_type		= u32(-1);
 	m_UIScope				= NULL;
+	m_UIScope16[0]			= NULL;
+	m_UIScope16[1]			= NULL;
 	m_UILens				= NULL;
 	m_set_next_ammoType_on_reload = u32(-1);
 }
@@ -99,6 +101,8 @@ CWeapon::CWeapon(LPCSTR name)
 CWeapon::~CWeapon		()
 {
 	xr_delete	(m_UIScope);
+	xr_delete	(m_UIScope16[0]);
+	xr_delete	(m_UIScope16[1]);
 	xr_delete	(m_UILens);
 }
 
@@ -1296,6 +1300,14 @@ void CWeapon::InitAddons()
 					pWpnScopeXml->Init		(CONFIG_PATH, UI_PATH, "scopes.xml");
 				}
 				CUIXmlInit::InitWindow	(*pWpnScopeXml, scope_tex_name.c_str(), 0, m_UIScope);
+				
+				for(int i=0;i<2;i++){
+					m_UIScope16[i]			= xr_new<CUIStatic>();
+					CUIXmlInit::InitStatic	(*pWpnScopeXml, "wpn_crosshair_add", i, m_UIScope16[i]);
+				}
+				float width = psAddWidth[0]+1.f;
+				m_UIScope16[0]->SetWidth(width);
+				m_UIScope16[1]->SetWidth(width+1.f);
 
 				LPCSTR lens_tex_name = pWpnScopeXml->ReadAttrib(scope_tex_name.c_str(), 0, "lens", NULL);
 				if (lens_tex_name)
@@ -1320,6 +1332,14 @@ void CWeapon::InitAddons()
 					pWpnScopeXml->Init		(CONFIG_PATH, UI_PATH, "scopes.xml");
 				}
 				CUIXmlInit::InitWindow	(*pWpnScopeXml, scope_tex_name.c_str(), 0, m_UIScope);
+
+				for(int i=0;i<2;i++){
+					m_UIScope16[i]			= xr_new<CUIStatic>();
+					CUIXmlInit::InitStatic	(*pWpnScopeXml, "wpn_crosshair_add", i, m_UIScope16[i]);
+				}
+				float width = psAddWidth[0]+1.f;
+				m_UIScope16[0]->SetWidth(width);
+				m_UIScope16[1]->SetWidth(width+1.f);
 				
 				LPCSTR lens_tex_name = pWpnScopeXml->ReadAttrib(scope_tex_name.c_str(), 0, "lens", NULL);
 				if (lens_tex_name)
@@ -1334,6 +1354,8 @@ void CWeapon::InitAddons()
 	else
 	{
 		if (m_UIScope)	xr_delete(m_UIScope);
+		if (m_UIScope16[0])	xr_delete(m_UIScope16[0]);
+		if (m_UIScope16[1])	xr_delete(m_UIScope16[1]);
 		if (m_UILens)	xr_delete(m_UILens);
 
 		if (IsZoomEnabled())
@@ -1723,6 +1745,12 @@ void CWeapon::OnDrawUI()
 	bool zoom = ZoomTexture() && !IsRotatingToZoom();
 	if(IsZoomed() && ZoomHideCrosshair()){
 		if(zoom){
+			for(auto add_txt : m_UIScope16)
+				if (add_txt) {
+					add_txt->Update	();
+					add_txt->Draw	();
+				}
+
 			ZoomTexture()->Update	();
 			ZoomTexture()->Draw		();
 

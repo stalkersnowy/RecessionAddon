@@ -93,6 +93,8 @@ bool CUIXmlInit::InitWindow(CUIXml& xml_doc, LPCSTR path, int index, CUIWindow* 
 	float y = xml_doc.ReadAttribFlt(path, index, "y");
 	InitAlignment(xml_doc, path, index, x, y, pWnd);
 	float width = xml_doc.ReadAttribFlt(path, index, "width");
+	if (fsimilar(width, -1.f))
+		width = psBaseWidth;
 	float height = xml_doc.ReadAttribFlt(path, index, "height");
 	pWnd->SetCenterFromScreen(xml_doc.ReadAttribInt(path, index, "center_from_screen", 0) == 1);
 	CUIStatic* pStatic = smart_cast<CUIStatic*>(pWnd);
