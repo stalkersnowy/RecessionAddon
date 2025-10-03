@@ -95,6 +95,12 @@ float4 	main (float2 tc : TEXCOORD0, float4 tcJ : TEXCOORD1 ) : COLOR
 
 	res		*= fSturation;
 
-	return res*Ldynamic_color;
+	// Use fog near/far to fade the sun rays
+	float fog = saturate(length(P) * fog_params.w + fog_params.x);
+
+	// Fade from "res" to "max_density" using squared fog to get a nice curve
+	float3 result = lerp(Ldynamic_color * max_density * fSturation, Ldynamic_color * res, 1.0f - fog * fog);
+
+	return float4(result, 0);
 #endif	//	SUN_SHAFTS_QUALITY
 }
