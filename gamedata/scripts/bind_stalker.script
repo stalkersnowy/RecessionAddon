@@ -17,12 +17,14 @@ lasthealth  = 0
 lasttime	= 0
 post_process = 0
 local weapon_hide = false
+local weather_manager           = nil
+local last_level_name           = nil
 ----------------------------------------------------------------------------------------------------------------------
 class "actor_binder" (object_binder)
 ----------------------------------------------------------------------------------------------------------------------
 function actor_binder:__init (obj) super(obj)
 	self.bCheckStart = false
-	self.weather_manager = level_weathers.WeatherManager()
+	weather_manager = level_weathers.get_weather_manager()
 	self.actor_detector = xr_detector.actor_detector()
 end
 ----------------------------------------------------------------------------------------------------------------------
@@ -50,7 +52,10 @@ function actor_binder:net_spawn(data)
 		level.enable_input()
 	end
 
-	self.weather_manager:reset()
+	if last_level_name ~= level.name() then
+		weather_manager:reset()
+	end
+	
 --	game_stats.initialize ()
 
 	if(actor_stats.add_to_ranking~=nil)then
@@ -302,9 +307,6 @@ function actor_binder:update(delta)
 	
 		-- nv 100521 moved this below to reduce processing
 	-- game_stats.update (delta, self.object)
-
-	-- апдейт погоды
-	self.weather_manager:update()
 	
 		-- nv 100521 moved this below to reduce processing
 	-- апдейт схемы детектора
@@ -359,6 +361,8 @@ function actor_binder:update(delta)
 		bind_restrictor.actor_update(delta)
 
 		self.next_restrictors_update_time = time + 200
+
+		weather_manager:update() -- moved from above, no need to run this every update
 
 		-- nv 100521 moved these here to reduce processing
 		-- game_stats.update (delta, self.object) --used only for debugging
@@ -429,6 +433,15 @@ function actor_binder:update(delta)
 
 		level_tasks.add_lchanger_location()
 
+		if last_level_name == nil then
+			last_level_name = level.name()
+		else
+			local level_name = level.name()
+			if level_name ~= last_level_name then
+				last_level_name = level_name
+			end
+		end
+
 		self.bCheckStart = false		
 	end		
 end
@@ -457,7 +470,7 @@ function actor_binder:save(packet)
 	end
 
 	xr_logic.pstor_save_all(self.object, packet)
-	self.weather_manager:save(packet)
+	weather_manager:save(packet)
 
 	sr_psy_antenna.save( packet )
 	
@@ -467,6 +480,8 @@ function actor_binder:save(packet)
 
 	task_manager.save(packet)
 	self.actor_detector:save(packet)	
+
+	packet:w_stringZ(tostring(last_level_name))
 	
 	xr_statistic.save(packet)
 end
@@ -498,7 +513,7 @@ function actor_binder:load(reader)
 	end
 
 	xr_logic.pstor_load_all(self.object, reader)
-	self.weather_manager:load(reader)
+	weather_manager:load(reader)
 
 	sr_psy_antenna.load(reader)
 	
@@ -508,7 +523,12 @@ function actor_binder:load(reader)
 
 	
 	task_manager.load(reader)
-	self.actor_detector:load(reader)	
+	self.actor_detector:load(reader)
+
+	n = reader:r_stringZ()
+	if n ~= "nil" then
+		last_level_name = n
+	end
 	
 	xr_statistic.load(reader)
 end

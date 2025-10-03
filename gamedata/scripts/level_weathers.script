@@ -1,70 +1,135 @@
+--[[
+
+Weather transitions are only ever initiated by the engine on the hour. Thus, if we call
+level.set_weather(weather_name, false) at 13:01, it will take 59 minutes for the transition to
+weather_name to begin, and then 1 more hour before the transition is complete at 15:00.
+
+In vanilla, dynamic weather transitions are requested right after the hour. In the SRP, they are
+requested on the first actor binder update after 59 minutes past the hour. That way, they will be
+initiated by the engine within one game minute of being requested by level.set_weather().
+
+]]
+
+local weather_manager = nil
+
 class "WeatherManager"
+
 function WeatherManager:__init()
-	--printf					("WeatherManager:WeatherManager()")
-	self.weather_change_day = 0
-	self.update_time = 0
-	self.update_level = ""
+	self.current_weather     = "default"
+	self.target_weather      = "default"
+	self.need_hourly_update  = false
+	self.graphs              = {}
+	self.graphs_ini          = ini_file("weathers\\weather_dynamic_graphs.ltx") or abort("[WeatherManager:__init]: Invalid weather_dynamic_graphs.ltx")
+	local ini                = ini_file("game_maps_single.ltx") or abort("[WeatherManager:__init]: Invalid game_maps_single.ltx")
+	local weathers           = utils.cfg_get_string(ini, level.name(), "weathers", nil, false, "", "default")
+	self.weather_condlist    = xr_logic.parse_condlist(nil, nil, nil, weathers)
 end
 
 function WeatherManager:reset()
-	--printf					("WeatherManager:WeatherManager():Reset()")
-	-- Загрузить кондлист с погодой.
-	local ini = game_ini() --KRodin: так быстрее же, чем через ini_file().
-	local weather = utils.cfg_get_string(ini, level.name(), "weathers", db.actor, false, "", "default")
-	local postprocess = utils.cfg_get_string(ini, level.name(), "postprocess", db.actor, false, "")
-	if postprocess ~= nil then
-		--printf("LEVEL POSTPROCESS: level: [%s], postprocess: [%s]", level.name(), postprocess)
-		level.add_pp_effector(postprocess, 999, true)	
-	else
-		--printf("LEVEL POSTPROCESS: level: [%s], postprocess: [none]", level.name())
-		level.remove_pp_effector(999)
-	end	
-
-	if weather == "default" then
-		-- сетим дефолтовую погоду
-		self.weather_list = xr_logic.parse_condlist(db.actor, level.name(), "weather", "default")
-	else		
-		self.weather_list = xr_logic.parse_condlist(db.actor, level.name(), "weather", weather)
-	end	
 	self:select_weather(true)
 end
 
-function WeatherManager:select_weather(now)
-	self.weather_change_day = level.get_time_days()
-	self.update_level = level.name()
-	local weather = xr_logic.pick_section_from_condlist(db.actor, db.actor, self.weather_list)
-	--printf("WEATHER: '%s' now '%s'", weather, tostring(now))
-	--printf("WEATHER: '%s' now '%s'", weather, tostring(now))
-
-	--KRodin: из-за фикса солнца в движке, погоду нужно устанавливать не ранее, чем на первом апдейте!
-	-- https://www.amk-team.ru/forum/topic/10538-x-ray-extensions/?page=51&tab=comments#comment-976375
-	level.add_call(
-		function() return true end,
-		function() level.set_weather(weather, now) end
-	)
+function WeatherManager:update()
+	if level.get_time_minutes() < 59 then
+		self.need_hourly_update = true
+	elseif self.need_hourly_update then
+		self:select_weather(false)
+		self.need_hourly_update = false
+	end
 end
 
-function WeatherManager:load(F)
-	self.update_level 		= F:r_stringZ();
-	self.update_time 		= F:r_u32();
+local function get_next_state(graph)
+	local sum = 0
+	for _, prob in pairs (graph) do
+		sum = sum + prob
+	end
+	local rnd = math.random() * sum
+	local next_state
+	for state, prob in pairs (graph) do
+		next_state = state
+		rnd = rnd - prob
+		if rnd <= 0 then
+			break
+		end
+	end
+	return next_state
+end
+
+function WeatherManager:select_weather(now)
+
+	local weather_name = xr_logic.pick_section_from_condlist(db.actor, db.actor, self.weather_condlist)
+	local graph = self:get_graph_by_name(weather_name)
+	local weather_section = graph == nil and weather_name or "default_"..get_next_state(graph)
+
+	level.add_call(
+		function() return true end,
+		function() level.set_weather(weather_section, now) end
+	)
+
+	self.current_weather = now and weather_section or self.target_weather
+	self.target_weather = weather_section
+end
+
+function WeatherManager:set_state_from_string(state_string)
+	level.add_call(
+		function() return true end,
+		function() level.set_weather(state_string, true) end
+	)
+	self.current_weather = state_string
+	self.target_weather = state_string
+end
+
+function WeatherManager:get_state_as_string()
+	if level.get_time_minutes() >= 30 and self.need_hourly_update then
+		return self.target_weather
+	end
+	return self.current_weather
+end
+
+--выпарсиваем секцию инифайла в табличку
+function parse_ini_section_to_array(ini,section)
+	local tmp=nil
+	if ini and ini:section_exist(section) then
+		tmp={}
+		local result, id, value = nil, nil, nil
+		for a=0,ini:line_count(section)-1 do
+			result, id, value = ini:r_line(section,a,"","")
+			if id~=nil and trim(id)~="" and trim(id)~=nil then
+				tmp[trim(id)]=trim(value)
+			end
+		end
+	end
+	return tmp
+end
+
+--обрезаем пробельные символы в начале и в конце строки
+function trim (s)
+	return (string.gsub(s, "^%s*(.-)%s*$", "%1"))
+end
+
+function WeatherManager:get_graph_by_name(name)
+	if not self.graphs[name] then
+		self.graphs[name] = parse_ini_section_to_array(self.graphs_ini, name) -- xr_s
+	end
+	return self.graphs[name]
 end
 
 function WeatherManager:save(F)
-	F:w_stringZ				(self.update_level);
-	F:w_u32					(self.update_time);
+--	set_save_marker(F, "save", false, "WeatherManager")
+	F:w_stringZ(self:get_state_as_string())
+--	set_save_marker(F, "save", true, "WeatherManager")
 end
 
-function WeatherManager:update()
-	if self.update_time <= time_global() then
-		--printf("weather_update day [%s]", level.get_time_days())
-		
-		if self.update_level ~= level.name() then
-			self:select_weather(true)			
-		end
-		
-		if self.weather_change_day ~= level.get_time_days() then
-			self:select_weather(false)
-		end
-		self.update_time = self.update_time + 10000
+function WeatherManager:load(F)
+--	set_save_marker(F, "load", false, "WeatherManager")
+	local state_string = F:r_stringZ()
+	self:set_state_from_string(state_string)
+--	set_save_marker(F, "load", true, "WeatherManager")
+end
+
+function get_weather_manager()
+	if weather_manager == nil then
+		weather_manager = WeatherManager()
 	end
+	return weather_manager
 end
