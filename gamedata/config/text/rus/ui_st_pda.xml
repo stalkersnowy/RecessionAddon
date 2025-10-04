@@ -9,6 +9,9 @@
 	<string id="Contacts">
 		<text>Контакты</text>
 	</string>
+	<string id="Details">
+		<text># /детали</text>
+	</string>
 	<string id="Encyclopedia">
 		<text>Справка</text>
 	</string>

@@ -65,6 +65,9 @@
             </auto_static>
             <right_frame_header x="7" y="17" width="359" height="32" stretch="1">
                 <texture>ui_string_03</texture>
+				<title x="8" y="1" width="362" height="18">
+					<text font="letterica16" r="255" g="255" b="255" complex_mode="0"/>
+				</title>
             </right_frame_header>
             <work_area x="7" y="33" width="371" height="485">
                 <scroll_view x="0" y="10" width="362" height="426" right_ident="10" scroll_profile="pda"/>

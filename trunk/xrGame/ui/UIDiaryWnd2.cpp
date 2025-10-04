@@ -15,7 +15,7 @@
 #include "../actor.h"
 #include "../alife_registry_wrappers.h"
 #include "../encyclopedia_article.h"
-//#include "UIVideoPlayerWnd.h"
+#include "string_table.h"
 #include "UIPdaAux.h"
 
 extern u32			g_pda_info_state;
@@ -95,6 +95,7 @@ void CUIDiaryWnd::Init()
 	m_UIRightHeader					= xr_new<CUIFrameLineWnd>();	m_UIRightHeader->SetAutoDelete(true);
 	xml_init.InitFrameLine			(uiXml, "main_wnd:right_frame:right_frame_header", 0, m_UIRightHeader);
 	m_UIRightFrame->AttachChild		(m_UIRightHeader);
+	m_UIRightHeader->UITitleText.SetElipsis(CUIStatic::eepBegin, 20);
 
 	m_UIRightWnd						= xr_new<CUIWindow>(); m_UIRightWnd->SetAutoDelete(true);
 	xml_init.InitWindow				(uiXml, "main_wnd:right_frame:work_area", 0, m_UIRightWnd);
@@ -176,6 +177,8 @@ void CUIDiaryWnd::UnloadJournalTab		()
 	m_DescrView->Show			(false);
 	delete_data					(m_ArticlesDB);
 	m_DescrView->Clear			();
+	
+	m_UIRightHeader->UITitleText.SetText("");
 }
 
 void CUIDiaryWnd::LoadJournalTab			(ARTICLE_DATA::EArticleType _type)
@@ -245,9 +248,18 @@ void CUIDiaryWnd::OnSrcListItemClicked	(CUIWindow* w,void* p)
 	m_DescrView->Clear	();
 	if (!pSelItem->IsRoot())
 	{
+		CEncyclopediaArticle* A = m_ArticlesDB[pSelItem->GetValue()];
+		xr_string caption		= ALL_PDA_HEADER_PREFIX;
+		caption					+= "/";
+		caption					+= CStringTable().translate(A->data()->group).c_str();
+		caption					+= "/";
+		caption					+= CStringTable().translate(A->data()->name).c_str();
+
+		m_UIRightHeader->UITitleText.SetText(caption.c_str());
+
 		CUIEncyclopediaArticleWnd*	article_info = xr_new<CUIEncyclopediaArticleWnd>();
 		article_info->Init			("encyclopedia_item.xml","encyclopedia_wnd:objective_item");
-		article_info->SetArticle	(m_ArticlesDB[pSelItem->GetValue()]);
+		article_info->SetArticle	(A);
 		m_DescrView->AddWindow		(article_info, true);
 
 		// Пометим как прочитанную
@@ -259,7 +271,7 @@ void CUIDiaryWnd::OnSrcListItemClicked	(CUIWindow* w,void* p)
 					it != Actor()->encyclopedia_registry->registry().objects().end(); it++)
 				{
 					if (ARTICLE_DATA::eJournalArticle == it->article_type &&
-						m_ArticlesDB[pSelItem->GetValue()]->Id() == it->article_id)
+						A->Id() == it->article_id)
 					{
 						it->readed = true;
 						break;
@@ -267,6 +279,15 @@ void CUIDiaryWnd::OnSrcListItemClicked	(CUIWindow* w,void* p)
 				}
 			}
 		}
+	}else
+	{
+		CEncyclopediaArticle* A = m_ArticlesDB[pSelItem->vSubItems[0]->GetValue()];
+
+		xr_string caption		= ALL_PDA_HEADER_PREFIX;
+		caption					+= "/";
+		caption					+= CStringTable().translate(A->data()->group).c_str();
+
+		m_UIRightHeader->UITitleText.SetText(caption.c_str());
 	}
 }
 

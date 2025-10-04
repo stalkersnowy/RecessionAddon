@@ -14,6 +14,9 @@
         <texture>ui_pda_frame_sub</texture>
     </right_frame_window>
     <right_frame_line x="7" y="17" width="234" height="32" stretch="1">
+        <title x="8" y="2" width="454" height="440">
+            <text font="letterica16" r="225" g="225" b="250">Details</text>
+        </title>
         <texture>ui_string_03</texture>
     </right_frame_line>
     <list x="17" y="53" width="352" height="416" always_show_scroll="1" can_select="1" scroll_profile="pda"/>
