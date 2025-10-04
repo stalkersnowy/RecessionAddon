@@ -104,22 +104,12 @@ void STorsoWpn::Create(CKinematicsAnimated* K, LPCSTR base0, LPCSTR base1)
 {
 	char			buf[128];
 	if (!xr_strcmp(base1, "_0"))
-	{
-		if (xr_strcmp(base0, "norm"))
-			moving[eIdle] = K->ID_Cycle_Safe(strconcat(sizeof(buf), buf, base0, "_torso", base1, "_aim_1"));
-		else
-			moving[eIdle] = K->ID_Cycle_Safe(strconcat(sizeof(buf), buf, base0, "_torso", base1, "_idle_1"));
-		moving[eWalk] = K->ID_Cycle_Safe(strconcat(sizeof(buf), buf, base0, "_torso", base1, "_walk_1"));
-		moving[eRun] = K->ID_Cycle_Safe(strconcat(sizeof(buf), buf, base0, "_torso", base1, "_run_1"));
-		moving[eSprint] = K->ID_Cycle_Safe(strconcat(sizeof(buf), buf, base0, "_torso", base1, "_escape_0"));
-	}
+		moving[eIdle]	= K->ID_Cycle_Safe(strconcat(sizeof(buf), buf, base0, "_torso", base1, "_aim_0"));
 	else
-	{
-		moving[eIdle] = K->ID_Cycle_Safe(strconcat(sizeof(buf), buf, base0, "_torso", base1, "_aim_1"));
-		moving[eWalk] = K->ID_Cycle_Safe(strconcat(sizeof(buf), buf, base0, "_torso", base1, "_aim_2"));
-		moving[eRun] = K->ID_Cycle_Safe(strconcat(sizeof(buf), buf, base0, "_torso", base1, "_aim_3"));
-		moving[eSprint] = K->ID_Cycle_Safe(strconcat(sizeof(buf), buf, base0, "_torso", base1, "_escape_0"));
-	}
+		moving[eIdle]	= K->ID_Cycle_Safe(strconcat(sizeof(buf), buf, base0, "_torso", base1, "_aim_1"));
+	moving[eWalk]	= K->ID_Cycle_Safe(strconcat(sizeof(buf), buf, base0, "_torso", base1, "_aim_2"));
+	moving[eRun]	= K->ID_Cycle_Safe(strconcat(sizeof(buf), buf, base0, "_torso", base1, "_aim_3"));
+	moving[eSprint] = K->ID_Cycle_Safe(strconcat(sizeof(buf), buf, base0, "_torso", base1, "_escape_0"));
 
 	zoom			= K->ID_Cycle_Safe(strconcat(sizeof(buf),buf,base0,"_torso",base1,"_aim_0"));
 	holster			= K->ID_Cycle_Safe(strconcat(sizeof(buf),buf,base0,"_torso",base1,"_holster_0"));
@@ -363,44 +353,14 @@ void CActor::g_SetAnimation( u32 mstate_rl )
 	//если мы просто стоим на месте
 	bool is_standing = false;
 
-	CInventoryItem* _i = inventory().ActiveItem();
-
 	// Legs
 	if		(mstate_rl&mcLanding)	M_legs	= ST->landing[0];
 	else if (mstate_rl&mcLanding2)	M_legs	= ST->landing[1];
-	else if ((mstate_rl&mcTurn) && !(mstate_rl&mcClimb))
-	{
-		if (!_i & !(mstate_rl&mcCrouch))
-		{
-			M_legs = smart_cast<CKinematicsAnimated*>(Visual())->ID_Cycle("norm_turn_right_1");
-		}
-		else
-		{
-			M_legs = ST->legs_turn;
-		}
-	}
-
+	else if ((mstate_rl&mcTurn)&&
+			!(mstate_rl&mcClimb))	M_legs	= ST->legs_turn;
 	else if (mstate_rl&mcFall)		M_legs	= ST->jump_idle;
 	else if (mstate_rl&mcJump)		M_legs	= ST->jump_begin;
-	else if (mstate_rl&mcFwd)
-	{
-		if (!_i & !(mstate_rl&mcCrouch) & !(mstate_rl&mcClimb))
-		{
-			if (bAccelerated)
-			{
-				M_legs = smart_cast<CKinematicsAnimated*>(Visual())->ID_Cycle("norm_run_fwd_1");
-			}
-			else
-			{
-				M_legs = smart_cast<CKinematicsAnimated*>(Visual())->ID_Cycle("norm_walk_fwd_1");
-			}
-		}
-		else
-		{
-			M_legs = AS->legs_fwd;
-		}
-	}
-
+	else if (mstate_rl&mcFwd)		M_legs	= AS->legs_fwd;
 	else if (mstate_rl&mcBack)		M_legs	= AS->legs_back;
 	else if (mstate_rl&mcLStrafe)	M_legs	= AS->legs_ls;
 	else if (mstate_rl&mcRStrafe)	M_legs	= AS->legs_rs;
@@ -428,7 +388,8 @@ void CActor::g_SetAnimation( u32 mstate_rl )
 		else if (mstate_rl&mcLStrafe)	M_torso	= AS->legs_ls;
 		else if (mstate_rl&mcRStrafe)	M_torso	= AS->legs_rs;
 	}
-
+	
+	CInventoryItem* _i = inventory().ActiveItem();
 	CHudItem		*H = smart_cast<CHudItem*>(_i);
 	
 	if (!M_torso)
@@ -568,10 +529,8 @@ void CActor::g_SetAnimation( u32 mstate_rl )
 		{
 			M_legs=smart_cast<CKinematicsAnimated*>(Visual())->ID_Cycle("cr_idle_1");
 		}
-		else if (!_i & !(mstate_rl&mcCrouch) & !(mstate_rl&mcClimb))
-			M_legs = smart_cast<CKinematicsAnimated*>(Visual())->ID_Cycle("norm_idle_1");
-		else
-			M_legs = ST->legs_idle; //norm_idle_0/ cl_idle_1
+		else 
+			M_legs	= ST->legs_idle;
 	}
 	if (!M_head)					M_head	= ST->m_head_idle;
 	if (!M_torso){				
