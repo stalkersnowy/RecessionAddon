@@ -338,7 +338,11 @@ function Cmeet_manager:process_use()
 	end
 
 	if t == "true" then
-		self.npc:enable_talk()
+		if xr_help_wounded.is_under_help_wounded(self.npc) then
+			self.npc:disable_talk()
+		else
+			self.npc:enable_talk()
+		end
 	elseif t == "false" then
 		self.npc:disable_talk()
 		if is_talking then

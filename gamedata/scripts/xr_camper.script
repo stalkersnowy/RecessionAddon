@@ -502,6 +502,7 @@ function add_to_binder(object, ini, scheme, section, storage)
 	   	local manager = object:motivation_action_manager()
 
 		operators["patrol"]			= xr_actions_id.stohe_camper_base + 1
+		operators["help_wounded"]	= xr_actions_id.wounded_exist
 	
 		properties["end"]			= xr_evaluators_id.stohe_camper_base + 1
 		properties["can_fight"]		= xr_evaluators_id.sidor_wounded_base + 1
@@ -524,6 +525,9 @@ function add_to_binder(object, ini, scheme, section, storage)
 		xr_logic.subscribe_action_for_events(object, storage, action)
 
 		action = manager:action (xr_actions_id.alife)	
+		action:add_precondition	(world_property(properties["end"],			true))
+
+		action = manager:action (operators["help_wounded"])
 		action:add_precondition	(world_property(properties["end"],			true))
 
 		action = manager:action (stalker_ids.action_combat_planner)

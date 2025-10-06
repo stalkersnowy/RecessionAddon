@@ -769,6 +769,14 @@ animations = {
 									[4]	= {"cr_raciya_4_talk_0"},
 									[8]	= {"cr_raciya_8_talk_0"},
 									[9]	= {"cr_raciya_9_talk_0"},
-									[10]= {"cr_raciya_10_talk_0"} } }
+									[10]= {"cr_raciya_10_talk_0"} } },
+
+		help_wounded	 = {prop	= { maxidle = 1,
+									sumidle = 1,
+									rnd 	= 100 },
+						into 	= {	[0]	= {	"dinamit_1", {f=xr_help_wounded.help_wounded} }},
+						out		= nil,
+						rnd		= nil,
+						idle	= nil}
 
 	}

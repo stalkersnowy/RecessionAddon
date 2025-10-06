@@ -73,7 +73,7 @@ function motivator_binder:net_spawn(sobject)
 --		alife():object(self.object:id()).dont_spawn_online = true
 --	end
 
---	db.add_obj(self.object)
+	db.add_obj(self.object)
 
 	-- Все CALLBACK-и ставить здесь:
 	self.object:set_patrol_extrapolate_callback(motivator_binder.extrapolate_callback, self)
@@ -421,4 +421,5 @@ function addCommonPrecondition(action)
 	action:add_precondition (world_property(xr_evaluators_id.sidor_wounded_base + 0,  false))
 	action:add_precondition (world_property(xr_evaluators_id.chugai_heli_hunter_base, false))
 	action:add_precondition (world_property(xr_evaluators_id.abuse_base, false))
+	action:add_precondition (world_property(xr_evaluators_id.wounded_exist, false))
 end

@@ -1309,6 +1309,7 @@ function start_game_callback()
 	sr_sleep.load_constants()
 	se_respawn.load_constants()
 	smart_terrain.load_constants()
+	xr_help_wounded.load_constants()
 end
 
 ammo_section = {}

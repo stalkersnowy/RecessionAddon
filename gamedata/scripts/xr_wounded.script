@@ -14,7 +14,7 @@ end
 function evaluator_wound:evaluate ()
 	if self.a.wounded_set ~= true then return false end
 	
---'	self.a.wound_manager:update()
+	self.a.wound_manager:update()
 	if self.mgr == nil then
 		self.mgr = self.object:motivation_action_manager()
 	end
@@ -80,6 +80,26 @@ function action_wounded:execute ()
 		end
 	end
 
+	-- Проверяем возможность скушать аптечку.
+	if self.a.autoheal == true then
+		if wound_manager.can_use_medkit ~= true then
+			local begin_wounded = xr_logic.pstor_retrieve(self.object, "begin_wounded")
+			local current_time = time_global()
+			if begin_wounded == nil then
+				xr_logic.pstor_store(self.object, "begin_wounded", current_time)
+--[[
+			elseif current_time - begin_wounded > 60000 then
+				local npc = self.object
+				sim:create("medkit",
+						    npc:position(),
+							npc:level_vertex_id(),
+							npc:game_vertex_id(),
+							npc:id())
+				wound_manager:unlock_medkit()
+]]
+			end
+		end
+	end
 	
 	if self.object:relation(db.actor) == game_object.enemy and self.a.help_start_dialog == nil then
 		self.object:disable_talk()
@@ -209,13 +229,22 @@ function Cwound_manager:eat_medkit()
 		elseif self.npc:object("medkit_scientic") ~= nil then
 			self.npc:eat(self.npc:object("medkit_scientic"))
 		end
-		local sps = self.a.thanx_snd
-		if sps ~= nil then
-			xr_sound.set_sound_play(self.npc, self.a.thanx_snd)
+		
+		local begin_wounded = xr_logic.pstor_retrieve(self.npc, "begin_wounded")
+--		local current_time = time_global()
+		if begin_wounded ~= nil then -- and current_time - begin_wounded <= 60000 then
+			local sps = self.a.thanx_snd
+			if sps ~= nil then
+				xr_sound.set_sound_play(self.npc, self.a.thanx_snd)
+			end
 		end
+		
+		xr_logic.pstor_store(self.npc, "begin_wounded", nil)
+		
+		self.can_use_medkit = false
+		db.storage[self.npc:id()].wounded_already_selected = nil
+		self:update()
 	end
-	self.can_use_medkit = false
-	self:update()
 end
 function Cwound_manager:process_fight(hp)
 	local key
@@ -410,6 +439,7 @@ function init_wounded(npc, ini, section, st, scheme)
 		def.help_start_dialog	= nil
 		def.use_medkit			= false
 		def.thanx_snd			= nil
+		def.not_for_help		= true
 		
 	elseif npc_community == "zombied" then
 		def.hp_state			= "40|wounded_zombie@nil"
@@ -423,6 +453,7 @@ function init_wounded(npc, ini, section, st, scheme)
 		def.help_start_dialog	= nil
 		def.use_medkit			= false
 		def.thanx_snd			= nil
+		def.not_for_help		= true
 		
 	else
 		local state = wounded_by_state[math.mod(npc:id(), 3)]
@@ -437,6 +468,7 @@ function init_wounded(npc, ini, section, st, scheme)
 		def.help_start_dialog	= nil
 		def.use_medkit			= true
 		def.thanx_snd			= "help_thanx"
+		def.not_for_help		= false
 	end		
 
 
@@ -453,6 +485,8 @@ function init_wounded(npc, ini, section, st, scheme)
 		st.help_start_dialog = nil
 		st.use_medkit   = def.use_medkit
 		st.thanx_snd	= def.thanx_snd
+		st.autoheal		= true
+		st.not_for_help	= def.not_for_help
 	else
 		st.hp_state		= xr_meet.parse_data(npc, utils.cfg_get_string(ini, section, "hp_state", npc, false, "", def.hp_state))
 		st.hp_state_see	= xr_meet.parse_data(npc, utils.cfg_get_string(ini, section, "hp_state_see", npc, false, "", def.hp_state_see))
@@ -465,6 +499,8 @@ function init_wounded(npc, ini, section, st, scheme)
 		st.help_start_dialog = utils.cfg_get_string(ini, section, "help_start_dialog", npc, false, "", nil)
 		st.use_medkit   = utils.cfg_get_bool(ini, section, "use_medkit", npc, false, def.use_medkit)
 		st.thanx_snd	= nil
+		st.autoheal		= false
+		st.not_for_help	= true
 	end
 	
 	-- флажок, что функция хотя бы раз вызывалась
@@ -480,14 +516,13 @@ end
 
 
 function is_wounded(npc)
-	if db.storage[npc:id()].wounded ~= nil then	
---'		if npc:object("medkit") ~= nil and
---'		   db.storage[npc:id()].wounded.wound_manager.can_use_medkit == true
---'		then
---'			return false
---'		end
-
-		return tostring(db.storage[npc:id()].wounded.wound_manager.state) ~= "nil"
+	local npc_storage = db.storage[npc:id()]
+	if npc_storage == nil then
+		return false
+	end
+	
+	if npc_storage.wounded ~= nil then
+		return tostring(npc_storage.wounded.wound_manager.state) ~= "nil"
 	end
 	return false
 end

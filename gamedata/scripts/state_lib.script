@@ -766,5 +766,13 @@ states = {
 				bodystate = move.standing,
 				animstate = "stand",
 				animation = "oso_flying"
+			},
+
+	help_wounded = {weapon = "strapped",
+				movement = move.stand,
+				mental = anim.danger,
+				bodystate = move.crouch,
+				animstate = "stand",
+				animation = "help_wounded"
 			}
 }
