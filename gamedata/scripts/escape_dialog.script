@@ -136,6 +136,10 @@ function trader_dont_has_job(first_speaker, second_speaker)
 	return false
 end
 
+function is_not_wounded_tolik(first_speaker, second_speaker)
+	return not has_alife_info("tutorial_wounded_help") or dialogs.is_not_wounded(first_speaker, second_speaker)
+end
+
 
 --' Escape tutorial artefact
 function have_tutorial_artefact(first_speaker, second_speaker)
@@ -166,6 +170,10 @@ function give_weapon_to_actor (trader, actor)
     dialogs.relocate_item_section(trader, "ammo_9x18_fmj", "in")
 	dialogs.relocate_item_section(trader, "ammo_9x18_fmj", "in")
     dialogs.relocate_item_section(trader, "wpn_knife", "in")     
+end
+
+function is_not_wounded_fox(first_speaker, second_speaker)
+	return not has_alife_info("escape_fox_heal") or dialogs.is_not_wounded(first_speaker, second_speaker)
 end
 
 

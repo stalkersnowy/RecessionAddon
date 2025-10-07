@@ -1034,7 +1034,7 @@
 
 #include "gameplay\character_criticals_6.xml"
 #include "gameplay\character_dialogs.xml"
-		<actor_dialog>bar_dolg_base_guard_acces</actor_dialog>	
+		<!--actor_dialog>bar_dolg_base_guard_acces</actor_dialog-->	
 	</specific_character>
 
 	<specific_character id="bar_dolg_regular_default2" team_default = "1">
@@ -1067,7 +1067,7 @@
 
 #include "gameplay\character_criticals_6.xml"
 #include "gameplay\character_dialogs.xml"		
-		<actor_dialog>bar_dolg_base_guard_acces</actor_dialog>
+		<!--actor_dialog>bar_dolg_base_guard_acces</actor_dialog-->
 	</specific_character>
 
 	<specific_character id="bar_dolg_regular_default3" team_default = "1">
@@ -1100,7 +1100,7 @@
 
 #include "gameplay\character_criticals_6.xml"
 #include "gameplay\character_dialogs.xml"
-		<actor_dialog>bar_dolg_base_guard_acces</actor_dialog>
+		<!--actor_dialog>bar_dolg_base_guard_acces</actor_dialog-->
 	</specific_character>
 
 <!---------------------------DOLG SNIPER---------------------->

@@ -381,6 +381,7 @@
         </phrase_list>
     </dialog>
     <dialog id="agr_krot_help">
+        <precondition>dialogs.is_not_wounded</precondition>
         <dont_has_info>agr_help_krot_done</dont_has_info>
         <phrase_list>
             <phrase id="0">

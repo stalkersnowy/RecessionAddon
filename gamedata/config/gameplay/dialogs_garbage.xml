@@ -21,6 +21,7 @@
         </phrase_list>
     </dialog>
     <dialog id="gar_dramm_novice_start">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="1">
                 <text>gar_dramm_novice_start_1</text>
@@ -90,6 +91,7 @@
         </phrase_list>
     </dialog>
     <dialog id="gar_hellcar_start">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="111121">
                 <text>gar_hellcar_start_111121</text>
@@ -140,6 +142,7 @@
                 <text>gar_hellcar_start_11111</text>
                 <precondition>xr_conditions.gar_not_damaged_bandits</precondition>
                 <give_info>gar_hellcar_help</give_info>
+                <give_info>gar_hellcar_talked</give_info>
                 <give_info>gar_bandits_raid</give_info>
                 <next>111111</next>
             </phrase>
@@ -154,6 +157,7 @@
                 <text>gar_hellcar_start_11113</text>
                 <precondition>xr_conditions.gar_damaged_bandits</precondition>
                 <give_info>gar_bandits_damaged</give_info>
+                <give_info>gar_hellcar_talked</give_info>
                 <next>111131</next>
             </phrase>
             <phrase id="1111">
@@ -235,6 +239,7 @@
                 <text />
                 <has_info>gar_hellcar_help</has_info>
                 <has_info>gar_bandits_killed</has_info>
+                <dont_has_info>gar_bandits_damaged</dont_has_info>
                 <next>31</next>
             </phrase>
             <phrase id="31">
@@ -281,6 +286,7 @@
         </phrase_list>
     </dialog>
     <dialog id="gar_seriy_start">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="1">
                 <precondition>xr_conditions.gar_bandits_seryi_not_die</precondition>
@@ -378,6 +384,7 @@
         </phrase_list>
     </dialog>
     <dialog id="gar_dolg_blokpost">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="111122">
                 <text>gar_dolg_blokpost_111122</text>

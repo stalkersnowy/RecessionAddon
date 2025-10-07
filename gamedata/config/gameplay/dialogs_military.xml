@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="windows-1251" ?>
 <game_dialogs>
     <dialog id="mil_screw_dialog">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="0">
                 <text />
@@ -957,6 +958,7 @@
         </phrase_list>
     </dialog>
     <dialog id="mil_max_dialog">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="3005">
                 <text>mil_max_dialog_3005</text>
@@ -2392,6 +2394,7 @@
         </phrase_list>
     </dialog>
     <dialog id="mil_trader_dialog">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="1006">
                 <text>mil_trader_dialog_1006</text>

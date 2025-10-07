@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="windows-1251" ?>
 <game_dialogs>
     <dialog id="tutorial_wounded_give_medkit">
+        <precondition>escape_dialog.is_not_wounded_tolik</precondition>
         <phrase_list>
             <phrase id="3">
                 <text>tutorial_wounded_give_medkit_3</text>
@@ -93,6 +94,7 @@
         </phrase_list>
     </dialog>
     <dialog id="escape_factory_assault_start">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="311">
                 <text>escape_factory_assault_start_311</text>
@@ -261,6 +263,7 @@
         </phrase_list>
     </dialog>
     <dialog id="esc_provodnik_start">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="2">
                 <text />
@@ -373,6 +376,7 @@
         </phrase_list>
     </dialog>
     <dialog id="escape_lager_leader_hello">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="21">
                 <text>escape_lager_leader_hello_21</text>
@@ -520,6 +524,7 @@
         </phrase_list>
     </dialog>
     <dialog id="escape_shustryi_start">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="21">
                 <text>escape_shustryi_start_21</text>
@@ -1148,6 +1153,7 @@
         </phrase_list>
     </dialog>
     <dialog id="escape_fox_hello_dialog">
+        <precondition>escape_dialog.is_not_wounded_fox</precondition>
         <phrase_list>
             <phrase id="21">
                 <text>escape_fox_hello_dialog_21</text>
@@ -1407,6 +1413,7 @@
         </phrase_list>
     </dialog>
     <dialog id="escape_lager_volk_talk">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="111111121">
                 <text>escape_lager_volk_talk_111111121</text>
@@ -1563,6 +1570,7 @@
         </phrase_list>
     </dialog>
     <dialog id="esc_victor_hello">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="3">
                 <text />

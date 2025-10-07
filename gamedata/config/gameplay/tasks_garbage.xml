@@ -76,7 +76,7 @@
 			<icon>ui_iconsTotal_gar_car_graveyard_quest</icon>
 			<map_location_type hint="gar_hellcar_alive">green_location</map_location_type>
 			<object_story_id>gar_hellcar</object_story_id>
-			<infoportion_complete>gar_hellcar_help</infoportion_complete>
+			<infoportion_complete>gar_hellcar_talked</infoportion_complete>
     	<infoportion_fail>gar_hellcar_reject</infoportion_fail>
 			<function_fail>garbage_tasks.task_hellcar_fail2</function_fail>
 			<article>help_for_hellcar</article>

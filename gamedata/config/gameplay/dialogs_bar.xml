@@ -1248,7 +1248,7 @@
                 <next>1</next>
             </phrase>
             <phrase id="5">
-                <text>bar_bar_barmen_talk_info_5bar_bar_barmen_talk_info_5</text>
+                <text>bar_bar_barmen_talk_info_5</text>
                 <next>51</next>
             </phrase>
         </phrase_list>
@@ -1454,6 +1454,7 @@
         </phrase_list>
     </dialog>
     <dialog id="bar_dolg_zastava">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="0">
                 <text />
@@ -1696,6 +1697,7 @@
         </phrase_list>
     </dialog>
     <dialog id="bar_ecolog_crush_professor_start">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="21">
                 <text>bar_ecolog_crush_professor_start_21</text>
@@ -1913,6 +1915,7 @@
         </phrase_list>
     </dialog>
     <dialog id="bar_arena_man_start">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="31">
                 <text>bar_arena_man_start_31</text>
@@ -2629,6 +2632,7 @@
         </phrase_list>
     </dialog>
     <dialog id="bar_dolg_petrenko_start">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="11">
                 <text>bar_dolg_petrenko_start_11</text>
@@ -2732,6 +2736,7 @@
         </phrase_list>
     </dialog>
     <dialog id="bar_dolg_base_guard_start">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="21">
                 <text>bar_dolg_base_guard_start_21</text>
@@ -3816,6 +3821,7 @@
         </phrase_list>
     </dialog>
     <dialog id="bar_dolg_ivancov_start">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="11">
                 <text>bar_dolg_ivancov_start_11</text>
@@ -3989,6 +3995,7 @@
         </phrase_list>
     </dialog>
     <dialog id="bar_dolg_leader_start">
+        <precondition>dialogs.is_not_wounded</precondition>
         <phrase_list>
             <phrase id="8">
                 <text></text>
