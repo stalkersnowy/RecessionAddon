@@ -41,14 +41,14 @@
 			<texture>ui_scroll_PDA_back</texture>
 		</back>		
 		<back_v width="17" height="17">
-			<texture>ui_scroll_PDA_back</texture>
+			<texture>ui_scroll_PDA_back_v</texture>
 		</back_v>
 		
 		<box>
 			<texture>ui_scroll_PDA_move</texture>
 		</box>
 		<box_v> <!-- 17x17 -->
-			<texture>ui_scroll_PDA_move</texture>
+			<texture>ui_scroll_PDA_move_v</texture>
 		</box_v>	
 	</pda>
 </scroll_bar>

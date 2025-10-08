@@ -65,7 +65,7 @@
 	</mp_self_level_spot>
 	
 	<mp_friend_radio_level_spot width="32" height="32" stretch = "1" alignment="c" light_anim="ui_mp_minimap_af_friend"> 
-		<texture x="525" y="904" width="32" height="32">ui\ui_common</texture>
+		<texture>ui_icons_mapPDA_persBig_h</texture>
 	</mp_friend_radio_level_spot>
 	
 	<mp_af_friend_level_spot width="13" height="15" alignment="c" light_anim="ui_mp_minimap_af_friend"> 
@@ -117,7 +117,7 @@
 
 	
 	<mp_hit_sector_mini_spot x="0" y="0" width="80" height="256" heading="1" alignment="c"> 
-		<texture x="305" y="762" width="80" height="256">ui\ui_hud</texture>
+		<texture x="850" y="10" width="80" height="256">ui\ui_hud</texture>
 	</mp_hit_sector_mini_spot>
 	<mp_hit_sector_mini_spot_old x="0" y="0" width="256" height="256" heading="1" alignment="c"> 
 		<texture x="0" y="0" width="256" height="256">ui\ui_mp_minimap_hit_sector</texture>

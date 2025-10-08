@@ -70,9 +70,7 @@ void CUIStaticItem::Render()
 		CHK_DX(HW.pDevice->SetRenderState(D3DRS_ALPHAREF, alpha_ref));
 	// convert&set pos
 	Fvector2		bp;
-	UI()->ClientToScreenScaled	(bp, float(iPos.x), float(iPos.y));
-	bp.x						= (float)iFloor(bp.x);
-	bp.y						= (float)iFloor(bp.y);
+	UI()->ClientToScreenScaled	(bp, iPos.x, iPos.y);
 
 	// actual rendering
 	u32							vOffset = 0;

@@ -96,21 +96,21 @@ pda_tips = xr_sound.get_safe_sound_object([[device\pda\pda_tip]])
 pda_task = xr_sound.get_safe_sound_object([[device\pda\pda_objective]])
 
 tips_icons = {
-	default  = { 0, 658},
-	trader	 = { 332, 893},
-	dolg     = { 0, 658},
-	freedom  = { 0, 658},
-	ecolog   = { 498, 0},
-	arena    = { 332, 141},
-	stalker  = { 0, 658},
-	krot     = { 332, 47},
-	barman   = { 332, 235},
-	wolf	 = { 332, 940},
-	o_soznanie = { 498, 893},
-	monolith = { 0, 658},
-    saharov  = { 332, 470},
-    prizrak  = { 415, 705},
-    killer   = { 332, 517}
+	default  = { 416, 109},
+	trader	 = { 252, 637},
+	dolg     = { 416, 109},
+	freedom  = { 416, 109},
+	ecolog   = { 168, 218},
+	arena    = { 168, 938},
+	stalker  = { 416, 109},
+	krot     = { 168, 842},
+	barman   = { 336, 301},
+	wolf	 = { 252, 685},
+	o_soznanie = { 672, 397},
+	monolith = { 416, 109},
+    saharov  = { 756, 301},
+    prizrak  = { 420, 397},
+    killer   = { 840, 301}
 }
 
 tips_captions = {
