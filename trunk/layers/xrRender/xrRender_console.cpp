@@ -72,7 +72,7 @@ xr_token							qsun_quality_token							[ ]={
 	{ 0,							0												}
 };
 
-int			ps_r_ssao_mode			=	1;
+int			ps_r_ssao_mode			=	0;
 int			ps_r2_sun_far			=	0;
 
 // Common
@@ -503,33 +503,28 @@ public:
 class	CCC_SSAO_Mode		: public CCC_Integer
 {
 public:
-	CCC_SSAO_Mode(LPCSTR N, int* V) : CCC_Integer(N,V,0,2)	{}	;
+	CCC_SSAO_Mode(LPCSTR N, int* V) : CCC_Integer(N,V,0,1)	{}	;
 
 	virtual void	Execute	(LPCSTR args)	{
 		CCC_Integer::Execute	(args);
+		
+		if (ps_r_ssao==0)
+		{
+			ps_r2_ls_flags_ext.set(R2FLAGEXT_SSAO_HBAO, 0);
+			ps_r2_ls_flags_ext.set(R2FLAGEXT_SSAO_OPT_DATA, 0);
+			return;
+		}
 				
 		switch	(*value)
 		{
 			case 0:
 			{
 				ps_r2_ls_flags_ext.set(R2FLAGEXT_SSAO_HBAO, 0);
+				ps_r2_ls_flags_ext.set(R2FLAGEXT_SSAO_OPT_DATA, 0);
 				break;
 			}
 			case 1:
 			{
-				if (ps_r_ssao==0)
-				{
-					ps_r_ssao = 1;
-				}
-				ps_r2_ls_flags_ext.set(R2FLAGEXT_SSAO_HBAO, 0);
-				break;
-			}
-			case 2:
-			{
-				if (ps_r_ssao==0)
-				{
-					ps_r_ssao = 1;
-				}
 				ps_r2_ls_flags_ext.set(R2FLAGEXT_SSAO_HBAO, 1);
 				ps_r2_ls_flags_ext.set(R2FLAGEXT_SSAO_OPT_DATA, 1);
 				break;

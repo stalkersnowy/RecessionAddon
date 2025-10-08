@@ -106,7 +106,7 @@ function opt_video_adv:InitControls(x, y, xml, handler)
 	handler.m_preconditions[ctl]				= only_25_mode
 
 	_st 			= xml:InitStatic			("video_adv:templ_item",				self.scroll_v)
-	_st:SetWndSize								(vector2():set(_st:GetWidth(), 81))
+	_st:SetWndSize								(vector2():set(_st:GetWidth(), 56))
 	xml:InitStatic								("video_adv:cap_ao", 					_st)
 	ctl 		= xml:InitTab					("video_adv:radio_tab_ao_options", 		_st)
 	handler.m_preconditions[ctl]				= only_25_mode
