@@ -855,12 +855,12 @@
 			<text font="letterica16" color="ui_6">ui_mm_crouch_toggle</text>
 		</check_crouch_toggle>
 
-		<check_important_save x="17" y="230" width="27" height="21" stretch="1">
+		<check_important_save x="17" y="205" width="27" height="21" stretch="1">
 			<options_item entry="g_important_save" group="mm_opt_gameplay"/>
 			<text font="letterica16" color="ui_6">ui_mm_important_save</text>
 		</check_important_save>
 
-		<check_hud_draw x="17" y="205" width="27" height="21" stretch="1">
+		<check_hud_draw x="17" y="230" width="27" height="21" stretch="1">
 			<options_item entry="hud_draw" group="mm_opt_gameplay"/>
 			<text font="letterica16" color="ui_6">ui_st_disable_hud</text>
 		</check_hud_draw>

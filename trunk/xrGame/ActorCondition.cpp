@@ -13,7 +13,6 @@
 #include "script_game_object.h"
 #include "game_object_space.h"
 #include "ui\UIVideoPlayerWnd.h"
-#include "script_callback_ex.h"
 #include "object_broker.h"
 #include "weapon.h"
 
@@ -25,7 +24,7 @@
 BOOL	GodMode	()	
 { 
 	if (GameID() == GAME_SINGLE) 
-		return psActorFlags.test(AF_GODMODE); 
+		return psActorFlags.test(AF_GODMODE|AF_GODMODE_RT); 
 	return FALSE;	
 }
 
@@ -238,7 +237,7 @@ void CActorCondition::UpdateSatiety()
 	//сытость увеличивает здоровье только если нет открытых ран
 	if(!m_bIsBleeding)
 	{
-		m_fDeltaHealth += CanBeHarmed() ? 
+		m_fDeltaHealth += CanBeHarmed() && !psActorFlags.test(AF_GODMODE_RT) ? 
 					(m_fV_SatietyHealth*(m_fSatiety>0.0f?1.f:-1.f)*m_fDeltaTime)
 					: 0;
 	}

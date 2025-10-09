@@ -83,7 +83,7 @@ static Fbox		bbCrouchBox;
 static Fvector	vFootCenter;
 static Fvector	vFootExt;
 
-Flags32			psActorFlags={0};
+Flags32			psActorFlags={AF_GODMODE_RT|AF_IMPORTANT_SAVE};
 
 
 
@@ -1133,7 +1133,7 @@ void CActor::shedule_Update	(u32 DT)
 	//���� �������� ������� ��� �������� � ��������
 	if(this==Level().CurrentControlEntity() && !g_dedicated_server )
 	{
-		if(conditions().IsLimping() && g_Alive())
+		if(conditions().IsLimping() && g_Alive() && !psActorFlags.test(AF_GODMODE_RT))
 		{
 			if(!m_HeavyBreathSnd._feedback())
 			{

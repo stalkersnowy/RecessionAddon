@@ -169,9 +169,9 @@ void CLevel::IR_OnKeyboardPress	(int key)
 		string_path					saved_game,command;
 
 		if (last_quick < 1)
-			strconcat(sizeof(saved_game), saved_game, Core.UserName, "_quicksave");
+			strconcat(sizeof(saved_game), saved_game, Core.UserName, " - quicksave");
 		else
-			xr_sprintf(saved_game, "%s_quicksave_%d", Core.UserName, last_quick-1);
+			xr_sprintf(saved_game, "%s - quicksave %d", Core.UserName, last_quick-1);
 
 		if (!CSavedGameWrapper::valid_saved_game(saved_game))
 			return;

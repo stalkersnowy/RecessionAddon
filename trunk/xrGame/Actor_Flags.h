@@ -7,9 +7,10 @@ enum{
 		AF_UNLIMITEDAMMO	=(1<<3),
 		AF_RUN_BACKWARD		=(1<<4),
 		AF_AUTOPICKUP		=(1<<5),
-		AF_RIGHT_SHOULDER	=(1<<6),
+		AF_IMPORTANT_SAVE	=(1<<6),
 		AF_WPN_BOBBING		=(1<<7),
 		AF_IGNORE_ACTOR		=(1<<8),
+		AF_GODMODE_RT		=(1<<9),
 };
 
 extern Flags32 psActorFlags;

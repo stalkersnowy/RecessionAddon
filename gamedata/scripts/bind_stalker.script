@@ -78,7 +78,7 @@ function actor_binder:net_destroy()
     sr_light.clean_up ()
 
 	self.object:set_callback(callback.inventory_info, nil)
---	self.object:set_callback(callback.article_info, nil)
+	self.object:set_callback(callback.article_info, nil)
 	self.object:set_callback(callback.on_item_take, nil)
 	self.object:set_callback(callback.on_item_drop, nil)
 	--self.object:set_callback(callback.actor_sleep, nil)
@@ -110,7 +110,7 @@ function actor_binder:reinit()
 	self.next_restrictors_update_time = -10000
 
 	self.object:set_callback(callback.inventory_info, self.info_callback, self)
---	self.object:set_callback(callback.article_info, self.article_callback, self)
+	self.object:set_callback(callback.article_info, self.article_callback, self)
 	self.object:set_callback(callback.on_item_take, self.on_item_take, self)
 	self.object:set_callback(callback.on_item_drop, self.on_item_drop, self)
 	self.object:set_callback(callback.trade_sell_buy_item, self.on_trade, self) -- for game stats
@@ -190,11 +190,14 @@ end
 function actor_binder:article_callback(npc, group, name)
 	--printf("article_callback [%s][%s]", group, name)
 	if device().precache_frame >1 then return end
-	
-	if group == "Diary" then
-		news_manager.send_encyclopedy("diary", group)
-	else
-		news_manager.send_encyclopedy("encyclopedy", group)
+
+	if group == "Found_PDA" then
+		news_manager.send_encyclopedy(name)
+	elseif group == "memuars" then
+		if IsImportantSave() then
+			local save_param = user_name().." - "..game.translate_string(name)
+			get_console():execute("save "..save_param)
+		end
 	end
 end
 ----------------------------------------------------------------------------------------------------------------------
@@ -268,7 +271,8 @@ local prefix_by_level = {
 local function manage_autosaves()
 	local fs = getFS()
 	local fs_path = "$game_saves$"
-	local autosave = string.lower(user_name()).."_autosave"
+	local username = string.lower(user_name())
+	local autosave = username.." - autosave"
 	local autosave_sav = autosave..".sav"
 	if fs:exist(fs_path, autosave_sav) then
 		local sg = CSavedGameWrapper(autosave)
@@ -276,8 +280,8 @@ local function manage_autosaves()
 		if level_name == sg:level_name() then
 			-- update_path info per fluffy22
 			local savedir = fs:update_path(fs_path, "")
-			local level_prefix = prefix_by_level[level_name] or user_name()
-			local lvl_autosave = level_prefix.."_autosave"
+			local level_prefix = prefix_by_level[level_name] or username
+			local lvl_autosave = username.." - "..level_prefix.."_autosave"
 			local lvl_autosave_sav = lvl_autosave..".sav"
 			local lvl_autosave_start = lvl_autosave.."_start"
 			local lvl_autosave_start_sav = lvl_autosave_start..".sav"
@@ -416,8 +420,10 @@ function actor_binder:update(delta)
 --			_G.g_start_avi = true
 			--printf("*AVI* RUN START AVI")			
 		end
-
-		manage_autosaves()
+		
+		if IsImportantSave() then
+			manage_autosaves()
+		end
 
 --		if not has_alife_info("encyclopedy") then
 --			self.object:give_info_portion("encyclopedy")

@@ -670,9 +670,9 @@ public:
 #endif
 		if (!xr_strlen(S)){
 			if (last_quick < 1 && quick_save_counter == 0)
-				strconcat(sizeof(S), S, Core.UserName, "_quicksave");
+				strconcat(sizeof(S), S, Core.UserName, " - quicksave");
 			else
-				xr_sprintf(S, "%s_quicksave_%d", Core.UserName, last_quick);
+				xr_sprintf(S, "%s - quicksave %d", Core.UserName, last_quick);
 			NET_Packet			net_packet;
 			net_packet.w_begin	(M_SAVE_GAME);
 			net_packet.w_stringZ(S);
@@ -1820,6 +1820,7 @@ void CCC_RegisterCommands()
 	}
 
 	CMD3(CCC_Mask,		"g_autopickup",			&psActorFlags,	AF_AUTOPICKUP);
+	CMD3(CCC_Mask,		"g_important_save",		&psActorFlags,	AF_IMPORTANT_SAVE);
 	
 	CMD4(CCC_Integer,	"keypress_on_start",	&g_keypress_on_start, 0, 1);
 

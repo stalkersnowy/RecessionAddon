@@ -36,6 +36,11 @@ LPCSTR command_line	()
 	return		(Core.Params);
 }
 
+bool IsImportantSave()
+{
+	return !!psActorFlags.test(AF_IMPORTANT_SAVE);
+}
+
 #ifdef DEBUG
 void check_object(CScriptGameObject *object)
 {
@@ -259,12 +264,16 @@ void hide_indicators()
 
 	HUD().GetUI()->HideGameIndicators();
 	HUD().GetUI()->HideCrosshair();
+
+	psActorFlags.set(AF_GODMODE_RT, TRUE);
 }
 
 void show_indicators()
 {
 	HUD().GetUI()->ShowGameIndicators();
 	HUD().GetUI()->ShowCrosshair();
+
+	psActorFlags.set(AF_GODMODE_RT, FALSE);
 }
 
 
@@ -635,7 +644,8 @@ void CLevel::script_register(lua_State *L)
 	module(L)
 	[
 		def("command_line",						&command_line),
-		def("IsGameTypeSingle",					&IsGameTypeSingle)
+		def("IsGameTypeSingle",					&IsGameTypeSingle),
+		def("IsImportantSave",					&IsImportantSave)
 	];
 
 	module(L,"relation_registry")
