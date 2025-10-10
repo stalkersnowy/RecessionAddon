@@ -318,7 +318,11 @@ void	CBlender_Compile::SetMapping	()
 	r_Constant				("hemi_cube_neg_faces",			&binder_hemi_cube_neg_faces);
 
 	// detail
-	if (bDetail	&& detail_scaler)
+	//if (bDetail	&& detail_scaler)
+	//	Igor: bDetail can be overridden by no_detail_texture option.
+	//	But shader can be deatiled implicitly, so try to set this parameter
+	//	anyway.
+	if (detail_scaler)
 		r_Constant			("dt_params",		detail_scaler);
 
 	// other common

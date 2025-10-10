@@ -687,4 +687,7 @@
 	<string id="ui_mm_important_save">
 		<text>Автосохранение</text>
 	</string>
+	<string id="ui_mm_r1_detail_textures">
+		<text>Детальные текстуры</text>
+	</string>
 </string_table>

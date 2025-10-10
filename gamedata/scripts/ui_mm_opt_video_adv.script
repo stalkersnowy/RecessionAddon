@@ -86,6 +86,11 @@ function opt_video_adv:InitControls(x, y, xml, handler)
 	xml:InitCheck								("video_adv:check_npc_torch",			_st)
 
 	_st				= xml:InitStatic			("video_adv:templ_item",				self.scroll_v)
+	xml:InitStatic								("video_adv:cap_r1_detail_textures",	_st)
+	ctl				= xml:InitCheck				("video_adv:check_r1_detail_textures",	_st)
+	handler.m_preconditions[ctl]				= only_0_mode
+
+	_st				= xml:InitStatic			("video_adv:templ_item",				self.scroll_v)
 	xml:InitStatic								("video_adv:cap_r2_detail_bump",		_st)
 	ctl				= xml:InitCheck				("video_adv:check_r2_detail_bump",		_st)
 	handler.m_preconditions[ctl]				= only_25_mode

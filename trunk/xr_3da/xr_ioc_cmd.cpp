@@ -600,6 +600,7 @@ extern int			g_ErrorLineCount;
 ENGINE_API int			ps_r__Supersample			= 1;
 ENGINE_API int			ps_r__WallmarksOnSkeleton	= 0;
 ENGINE_API float		ps_r__WallmarkTTL			= 300.f	;
+extern int				ps_r1_Detail;
 extern int				ps_r2_DetailBump;
 extern int				ps_r2_DynamicSun;
 void CCC_Register()
@@ -656,6 +657,7 @@ void CCC_Register()
 	//Bloodmarks on Skeleton
 	CMD4(CCC_Integer,	"r__wallmarks_on_skeleton", &ps_r__WallmarksOnSkeleton,		0, 1	);
 	//Detail bump
+	CMD4(CCC_Integer,	"r1_detail_textures",	&ps_r1_Detail, 0, 1);
 	CMD4(CCC_Integer,	"r2_detail_bump",		&ps_r2_DetailBump, 0, 1);
 	//Detail bump
 	CMD4(CCC_Integer,	"r2_dynamic_sun",		&ps_r2_DynamicSun, 0, 1);

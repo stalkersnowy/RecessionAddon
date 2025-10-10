@@ -33,8 +33,10 @@ CBlender_Compile::CBlender_Compile		()
 CBlender_Compile::~CBlender_Compile		()
 {
 }
+int ps_r1_Detail = 1;
 int ps_r2_DetailBump = 1;
 extern BOOL r2_advanced_pp;
+extern u32 renderer_value;
 void	CBlender_Compile::_cpp_Compile	(ShaderElement* _SH)
 {
 	SH =			_SH;
@@ -64,6 +66,10 @@ void	CBlender_Compile::_cpp_Compile	(ShaderElement* _SH)
 	// Validate for R1 or R2
 	bDetail_Diffuse	= FALSE;
 	bDetail_Bump	= FALSE;
+
+	if (renderer_value==0 && !ps_r1_Detail)
+		bDetail = FALSE;
+
 	if(bDetail)
 	{
 		Device.Resources->m_textures_description.GetTextureUsage(base, bDetail_Diffuse, bDetail_Bump);
