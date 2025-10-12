@@ -149,7 +149,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>libvorbis_static.lib;libogg_static.lib;OpenAL32.lib;libvorbisfile_static.lib;libtheora_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
       <GenerateMapFile>false</GenerateMapFile>
       <MapFileName />

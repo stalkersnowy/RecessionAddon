@@ -37,7 +37,7 @@
 		<name>ros_kruglov_name</name>
 		<icon>ui_npc_u_stalker_ecolog_military</icon>
 		<map_icon x="0" y="6"></map_icon>
-		<bio>yan_kruglov_bio</bio>
+		<bio>ros_kruglov_bio</bio>
 
 		<class>yan_ecolog_help</class>
 		<community>ecolog</community> <terrain_sect>stalker_ecolog_terrain</terrain_sect>

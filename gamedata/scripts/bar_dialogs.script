@@ -377,7 +377,7 @@ end
 function give_lucky_pda(first_speaker, second_speaker)
 	local lucky_pda = first_speaker:object("bar_lucky_pda")
 	if lucky_pda then
-		dialogs.relocate_item(second_speaker, lucky_pda, "out")
+		dialogs.relocate_item_section(second_speaker, "bar_lucky_pda", "out")
 		dialogs.relocate_money(second_speaker, 6000, "in")
 	end
 end
@@ -390,7 +390,7 @@ end
 function give_bar_tiran_pda(first_speaker, second_speaker)
 	local bar_tiran_pda = first_speaker:object("bar_tiran_pda")
 	if bar_tiran_pda then
-		dialogs.relocate_item(second_speaker, bar_tiran_pda, "out")
+		dialogs.relocate_item_section(second_speaker, "bar_tiran_pda", "out")
 		dialogs.relocate_money(second_speaker, 7000, "in")
 	end
 end

@@ -88,7 +88,7 @@ end
 
 function transfer_vodka (player, stalker)
     if player:object ("vodka") == nil then return end
-    dialogs.relocate_item (stalker, player:object ("vodka"), "out")
+    dialogs.relocate_item_section (stalker, "vodka", "out")
 end    
 
 function have_a_vodka (stalker, player)
