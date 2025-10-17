@@ -327,14 +327,14 @@
             <phrase id="2">
                 <text />
                 <precondition>xr_conditions.gar_bandits_seryi_die</precondition>
-                <dont_has_info>agr_krot_band_start</dont_has_info>
+                <dont_has_info>agr_can_ask_krot_about_gunslinger</dont_has_info>
                 <has_info>gar_seryi_meet</has_info>
                 <next>22</next>
             </phrase>
             <phrase id="3">
                 <text />
                 <precondition>xr_conditions.gar_bandits_seryi_die</precondition>
-                <dont_has_info>agr_krot_band_start</dont_has_info>
+                <dont_has_info>agr_can_ask_krot_about_gunslinger</dont_has_info>
                 <dont_has_info>gar_seryi_meet</dont_has_info>
                 <next>33</next>
             </phrase>
@@ -358,7 +358,7 @@
             <phrase id="4">
                 <text />
                 <precondition>xr_conditions.gar_bandits_seryi_die</precondition>
-                <has_info>agr_krot_band_start</has_info>
+                <has_info>agr_can_ask_krot_about_gunslinger</has_info>
                 <next>44</next>
             </phrase>
             <phrase id="0">

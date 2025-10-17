@@ -690,4 +690,13 @@
 	<string id="ui_mm_r1_detail_textures">
 		<text>Детальные текстуры</text>
 	</string>
+	<string id="sl_beginning_save">
+		<text>Начало игры</text>
+	</string>
+	<string id="agr_krot_secret_info_name_save">
+        <text>Тайник Стрелка</text>
+	</string>
+	<string id="journal_bar_x16_documents_name_save">
+		<text>Выжигатель</text>
+	</string>
 </string_table>

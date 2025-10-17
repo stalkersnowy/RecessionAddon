@@ -187,6 +187,11 @@ function actor_binder:on_trade (item, sell_bye, money)
     end   
 end
 ----------------------------------------------------------------------------------------------------------------------
+local save_names = {
+	sl_beginning 					= "sl_beginning_save",
+	agr_krot_secret_info_name 		= "agr_krot_secret_info_name_save",
+	journal_bar_x16_documents_name	= "journal_bar_x16_documents_name_save"
+}
 function actor_binder:article_callback(npc, group, name)
 	--printf("article_callback [%s][%s]", group, name)
 	if device().precache_frame >1 then return end
@@ -195,7 +200,8 @@ function actor_binder:article_callback(npc, group, name)
 		news_manager.send_encyclopedy(name)
 	elseif group == "memuars" then
 		if IsImportantSave() then
-			local save_param = user_name().." - "..game.translate_string(name)
+			local save_name = save_names[name] or name
+			local save_param = user_name().." - "..game.translate_string(save_name)
 			get_console():execute("save "..save_param)
 		end
 	end

@@ -19,7 +19,7 @@ function load_item:__init() super()
 	self:AttachChild        (self.fn)
 	self.fn:SetFont         (GetFontLetterica18Russian())
 	self.fn:SetBaseTextColor    (ca, cr, cg, cb)
-	self.fn:SetElipsis      (2, 2)
+--	self.fn:SetElipsis      (2, 2)
 
 	self.fage               = CUIStatic()
 	self.fage:SetAutoDelete (true)
@@ -167,7 +167,7 @@ function load_dialog:OnListItemClicked()
 	local item_text = item.fn:GetText()
 
 	self.file_caption:SetText(item_text)
-	self.file_caption:SetElipsis(2, 2)
+--	self.file_caption:SetElipsis(2, 2)
 
 	local fs = getFS()
 
