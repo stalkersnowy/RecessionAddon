@@ -712,6 +712,8 @@ public:
 #ifdef DEBUG
 		Msg						("Screenshot overhead : %f milliseconds",timer.GetElapsed_sec()*1000.f);
 #endif
+
+		Console->Execute("cfg_save");
 	}
 
 	virtual void fill_tips(vecTips& tips, u32 mode)

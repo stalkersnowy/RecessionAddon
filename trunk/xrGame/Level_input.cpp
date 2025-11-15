@@ -166,18 +166,7 @@ void CLevel::IR_OnKeyboardPress	(int key)
 		FS.get_path					("$game_scripts$")->m_Flags.set(FS_Path::flNeedRescan, TRUE);
 		FS.rescan_pathes			();
 #endif // DEBUG
-		string_path					saved_game,command;
-
-		if (last_quick < 1)
-			strconcat(sizeof(saved_game), saved_game, Core.UserName, " - quicksave");
-		else
-			xr_sprintf(saved_game, "%s - quicksave %d", Core.UserName, last_quick-1);
-
-		if (!CSavedGameWrapper::valid_saved_game(saved_game))
-			return;
-
-		strconcat					(sizeof(command),command,"load ",saved_game);
-		Console->Execute			(command);
+		Console->Execute			("load_last_save");
 		return;
 	}
 
