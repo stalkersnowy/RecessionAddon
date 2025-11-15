@@ -259,6 +259,8 @@ SERVER_ENTITY_DECLARE_BEGIN2(CSE_ALifeMonsterAbstract,CSE_ALifeCreatureAbstract,
 	int									m_rank;
 
 	ALife::_TIME_ID						m_stay_after_death_time_interval;
+public:
+	ALife::_OBJECT_ID				m_group_id;
 
 public:
 									CSE_ALifeMonsterAbstract(LPCSTR					caSection);
@@ -291,6 +293,8 @@ public:
 			void					vfCheckForPopulationChanges();
 	virtual	void					add_online				(const bool &update_registries);
 	virtual	void					add_offline				(const xr_vector<ALife::_OBJECT_ID> &saved_children, const bool &update_registries);
+	virtual void					on_register				();
+	virtual void					on_unregister			();
 	virtual Fvector					draw_level_position		() const;
 	virtual	bool					redundant				() const;
 #endif
@@ -414,8 +418,7 @@ add_to_type_list(CSE_ALifePsyDogPhantom)
 
 //-------------------------------
 SERVER_ENTITY_DECLARE_BEGIN2(CSE_ALifeHumanAbstract,CSE_ALifeTraderAbstract,CSE_ALifeMonsterAbstract)
-public:
-	ALife::_OBJECT_ID				m_group_id;
+
 
 public:
 									CSE_ALifeHumanAbstract	(LPCSTR caSection);

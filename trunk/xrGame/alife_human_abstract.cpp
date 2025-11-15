@@ -12,7 +12,7 @@
 #include "alife_human_object_handler.h"
 #include "ai_space.h"
 #include "alife_simulator.h"
-#include "alife_group_registry.h"
+#include "relation_registry.h"
 
 void CSE_ALifeHumanAbstract::update									()
 {
@@ -65,16 +65,13 @@ CSE_ALifeItemWeapon *CSE_ALifeHumanAbstract::tpfGetBestWeapon		(ALife::EHitType 
 void CSE_ALifeHumanAbstract::on_register							()
 {
 	inherited2::on_register					();
-	brain().on_register						();
 	// because we need to load profile to setup graph vertex masks
 	specific_character						();
 }
 
 void CSE_ALifeHumanAbstract::on_unregister							()
 {
-	brain().on_unregister					();
-	if (m_group_id != 0xffff)
-		ai().alife().groups().object(m_group_id).unregister_member	(ID);
+	inherited2::on_unregister()	;
 }
 
 void CSE_ALifeHumanAbstract::spawn_supplies							()

@@ -100,7 +100,7 @@ void RELATION_REGISTRY::Action (CEntityAlive* from, CEntityAlive* to, ERelationA
 			{
 				//учитывать ATTACK и FIGHT_HELP, только если прошло время
 				//min_attack_delta_time 
-				FIGHT_DATA* fight_data_from = FindFight (from->ID(), true);
+				FIGHT_DATA* fight_data_from = FindFight (from->ID(), true, to->ID());
 				if(Device.dwTimeGlobal - fight_data_from->attack_time < min_attack_delta_time)
 					break;
 
@@ -108,14 +108,17 @@ void RELATION_REGISTRY::Action (CEntityAlive* from, CEntityAlive* to, ERelationA
 
 				//если мы атаковали персонажа или монстра, который 
 				//кого-то атаковал, то мы помогли тому, кто защищался
-				FIGHT_DATA* fight_data = FindFight (to->ID(),true);
-				if(fight_data)
+				FIGHT_VECTOR& fights = fight_registry();
+				for(FIGHT_VECTOR_IT it = fights.begin(); it != fights.end(); it++)
 				{
-					CAI_Stalker* defending_stalker = smart_cast<CAI_Stalker*>(Level().Objects.net_Find(fight_data->defender));
-					if(defending_stalker)	
+					FIGHT_DATA& fight_data = *it;
+					if(to->ID() == fight_data.attacker)
 					{
-						CAI_Stalker*	attacking_stalker = smart_cast<CAI_Stalker*>(Level().Objects.net_Find(fight_data->attacker));
-						Action(actor, defending_stalker, attacking_stalker?FIGHT_HELP_HUMAN:FIGHT_HELP_MONSTER);
+						CAI_Stalker* defending_stalker = smart_cast<CAI_Stalker*>(Level().Objects.net_Find(fight_data.defender));
+						if(defending_stalker)	
+						{
+							Action(actor, defending_stalker, stalker?FIGHT_HELP_HUMAN:FIGHT_HELP_MONSTER);
+						}
 					}
 				}
 			}
@@ -182,7 +185,7 @@ void RELATION_REGISTRY::Action (CEntityAlive* from, CEntityAlive* to, ERelationA
 		{
 			if(stalker)
 			{
-				FIGHT_DATA* fight_data_from = FindFight (from->ID(), true);	
+				FIGHT_DATA* fight_data_from = FindFight (from->ID(), true, to->ID());	
 				
 				//мы помним то, какое отношение обороняющегося к атакующему
 				//было перед началом драки
