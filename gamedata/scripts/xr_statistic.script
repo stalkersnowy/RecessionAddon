@@ -151,7 +151,11 @@ function save(package)
 			table.insert(afs, k)
 		end
 	end
-	package:w_u16(#afs)
+	local n = 0
+	for k,v in pairs(afs) do
+		n = n + 1
+	end
+	package:w_u16(n)
 	for k,v in pairs(afs) do
 		package:w_u32(v)
 	end
@@ -159,7 +163,7 @@ end
 
 function load(package)
 	taken_artefacts = {}
-	n = package:r_u16()
+	local n = package:r_u16()
 	for i = 1,n do
 		local k = package:r_u32()
 		taken_artefacts[k] = k
