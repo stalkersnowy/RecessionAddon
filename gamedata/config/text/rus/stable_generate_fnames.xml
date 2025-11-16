@@ -92,7 +92,7 @@
 		<text>Димон</text>
 	</string>
 	<string id="name_bandit_2">
-		<text>Леха</text>
+		<text>Лёха</text>
 	</string>
 	<string id="name_bandit_20">
 		<text>Димуха</text>
@@ -134,7 +134,7 @@
 		<text>Петруха</text>
 	</string>
 	<string id="name_bandit_32">
-		<text>Степка</text>
+		<text>Стёпка</text>
 	</string>
 	<string id="name_bandit_33">
 		<text>Степуха</text>
@@ -323,7 +323,7 @@
 		<text>Вовка</text>
 	</string>
 	<string id="name_stalker_3">
-		<text>Леня</text>
+		<text>Лёня</text>
 	</string>
 	<string id="name_stalker_30">
 		<text>Сева</text>
@@ -389,7 +389,7 @@
 		<text>Женя</text>
 	</string>
 	<string id="name_stalker_5">
-		<text>Лешка</text>
+		<text>Лёшка</text>
 	</string>
 	<string id="name_stalker_50">
 		<text>Женька</text>
@@ -428,7 +428,7 @@
 		<text>Лева</text>
 	</string>
 	<string id="name_stalker_61">
-		<text>Леня</text>
+		<text>Лёня</text>
 	</string>
 	<string id="name_stalker_62">
 		<text>Ленька</text>
@@ -521,7 +521,7 @@
 		<text>Тимка</text>
 	</string>
 	<string id="name_stalker_9">
-		<text>Артем</text>
+		<text>Артём</text>
 	</string>
 	<string id="name_stalker_90">
 		<text>Фёдор</text>
