@@ -49,7 +49,14 @@ surface_bumped                sload_i         ( p_bumped I)
    		fDelta2 = ((fCurrentBound + fStepSize) - fPrevHeight);
    		fDelta1 = (fCurrentBound - fCurrHeight);
    		fParallaxAmount = (fCurrentBound * fDelta2 - (fCurrentBound + fStepSize) * fDelta1 ) / ( fDelta2 - fDelta1 );
+#if BLOOM_MODE == 0
+		const float fParallaxStartFade = 8.0f;
+		const float fParallaxStopFade = 12.0f;
+		float	fParallaxFade 	= smoothstep(fParallaxStopFade, fParallaxStartFade, I.position.z);
+		vParallaxOffset = vDelta * ((1- fParallaxAmount )*fParallaxFade);
+#else
    		vParallaxOffset = vDelta * (1- fParallaxAmount );
+#endif
    		vTexCoord = I.tcdh + vParallaxOffset;
         float4       Nu      =       tex2D		(s_bump,         vTexCoord);                // IN:  normal.gloss
         float4       NuE     =       tex2D      	(s_bumpX,       vTexCoord);                // IN:         normal_error.height
