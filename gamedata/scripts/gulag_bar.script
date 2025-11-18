@@ -135,25 +135,25 @@ function load_job(sj, gname, type, squad, groups)
 		}
 		sj[#sj+1] = t		    
 		t = { section = "logic@bar_visitors_walker",
-			idle = 0, timeout = math.random(10,20)*60*1000,
+			idle = 0, timeout = math.random(10,20)*60,
 			prior = 7, state = {0}, squad = squad, group = groups[1],
 			in_rest = "", out_rest = ""
 		}
 		sj[#sj+1] = t		    
 		t = { section = "logic@bar_visitors_walker",
-			idle = 0, timeout = math.random(10,20)*60*1000,
+			idle = 0, timeout = math.random(10,20)*60,
 			prior = 7, state = {0}, squad = squad, group = groups[1],
 			in_rest = "", out_rest = ""
 		}
 		sj[#sj+1] = t		    
 		t = { section = "logic@bar_visitors_walker",
-			idle = 0, timeout = math.random(10,20)*60*1000,
+			idle = 0, timeout = math.random(10,20)*60,
 			prior = 7, state = {0}, squad = squad, group = groups[1],
 			in_rest = "", out_rest = ""
 		}
 		sj[#sj+1] = t		    
 		t = { section = "logic@bar_visitors_walker",
-			idle = 0, timeout = math.random(10,20)*60*1000,
+			idle = 0, timeout = math.random(10,20)*60,
 			prior = 7, state = {0}, squad = squad, group = groups[1],
 			in_rest = "", out_rest = ""
 		}
@@ -273,14 +273,14 @@ function load_job(sj, gname, type, squad, groups)
 
 
 		t = { section = "logic5@bar_dolg_general_patrol1", 
-			idle = 5*60*60*1000,
+			idle = 5*60*60,
 			prior = 6, state = {0}, squad = squad, group = groups[2],
 			in_rest = "", out_rest = "",
 					online = "{=actor_in_zone(bar_dolg_online_restrictor)}"
 		}
 		sj[#sj+1] = t
 		t = { section = "logic6@bar_dolg_general_patrol2", 
-			idle = 5*60*60*1000,
+			idle = 5*60*60,
 			prior = 6, state = {0}, squad = squad, group = groups[2],
 			in_rest = "", out_rest = "",
 					online = "{=actor_in_zone(bar_dolg_online_restrictor)}"

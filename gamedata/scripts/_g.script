@@ -314,6 +314,32 @@ end
 -- іонстанта, которуі использовать в местах, где нужно задать неограниченное время действия
 time_infinite = 100000000
 
+local time_table =
+{
+	isdst = false,
+	year  = 0,
+	month = 0,
+	day   = 0,
+	hour  = 0,
+	min   = 0,
+	sec   = 0,
+}
+
+function get_game_time_in_seconds()
+
+	local Y, M, D, h, m, s, ms = 0, 0, 0, 0, 0, 0, 0
+	      Y, M, D, h, m, s, ms = game.get_game_time():get(Y, M, D, h, m, s, ms)
+
+	time_table.year  = Y
+	time_table.month = M
+	time_table.day   = D
+	time_table.hour  = h
+	time_table.min   = m
+	time_table.sec   = s
+
+	return os.time(time_table)
+end
+
 -- =азвание скрипта, которvй в даннvй момент находится в отладке
 -- (в этом скрипте будут срабатvвать вvзовv функции debug_log)
 debug_script_name = ""

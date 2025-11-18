@@ -125,6 +125,7 @@ void CScriptStorage::reinit	()
 	luaopen_table			(lua());
 	luaopen_string			(lua());
 	luaopen_math			(lua());
+	luaopen_os				(lua());
 
 #ifdef DEBUG
 	luaopen_debug			(lua());
