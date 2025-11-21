@@ -259,9 +259,6 @@
 	<string id="name_stalker_102">
 		<text>Яра</text>
 	</string>
-	<string id="name_stalker_103">
-		<text>Слава</text>
-	</string>
 	<string id="name_stalker_11">
 		<text>Боря</text>
 	</string>
@@ -428,7 +425,7 @@
 		<text>Лева</text>
 	</string>
 	<string id="name_stalker_61">
-		<text>Лёня</text>
+		<text>Слава</text>
 	</string>
 	<string id="name_stalker_62">
 		<text>Ленька</text>
@@ -552,4 +549,18 @@
 	</string>
 	<string id="name_stalker_99">
 		<text>Яша</text>
+	</string>
+	
+	<string id="name_bandit_38">
+		<text>Сашок</text>
+	</string>
+	
+	<string id="name_stalker_103">
+		<text>Марк</text>
+	</string>
+	<string id="name_stalker_104">
+		<text>Кирюха</text>
+	</string>
+	<string id="name_stalker_105">
+		<text>Русик</text>
 	</string>
