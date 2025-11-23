@@ -21,7 +21,7 @@ struct vertBoned1W			// (3+3+3+3+2+1)*4 = 15*4 = 60 bytes
 	Fvector	B;
 	float	u,v;
 	u32		matrix;
-	void	get_pos( Fvector& p ) { p.set(P); }
+	void	get_pos( Fvector& p ) const { p.set(P); }
 };
 struct vertBoned2W			// (1+3+3 + 1+3+3 + 2)*4 = 16*4 = 64 bytes
 {
@@ -33,7 +33,29 @@ struct vertBoned2W			// (1+3+3 + 1+3+3 + 2)*4 = 16*4 = 64 bytes
 	Fvector	B;
 	float	w;
 	float	u,v;
-	void	get_pos( Fvector& p ) { p.set(P); }
+	void	get_pos( Fvector& p ) const { p.set(P); }
+};
+struct vertBoned3W          // 70 bytes
+{
+	u16		m		[3];
+	Fvector	P;
+	Fvector	N;
+	Fvector	T;
+	Fvector	B;
+	float	w		[2];
+	float	u,v;
+	void	get_pos( Fvector& p ) const { p.set(P); }
+};
+struct vertBoned4W       //76 bytes
+{
+	u16		m		[4];
+	Fvector	P;
+	Fvector	N;
+	Fvector	T;
+	Fvector	B;
+	float	w		[3];
+	float	u,v;
+	void	get_pos( Fvector& p ) const { p.set(P); }
 };
 struct vertRender			// T&B are not skinned, because in R2 skinning occurs always in hardware
 {
@@ -48,11 +70,13 @@ class ENGINE_API	CSkeletonX
 {
 protected:
 	enum					{ vertRenderFVF = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1		};
-	enum					{ RM_SKINNING_SOFT, RM_SINGLE, RM_SKINNING_1B, RM_SKINNING_2B	};
+	enum					{ RM_SKINNING_SOFT, RM_SINGLE, RM_SKINNING_1B, RM_SKINNING_2B, RM_SKINNING_3B, RM_SKINNING_4B	};
 
 	CKinematics*			Parent		;		// setted up by parent
 	ref_smem<vertBoned1W>	Vertices1W	;		// shared
 	ref_smem<vertBoned2W>	Vertices2W	;		// shared
+	ref_smem<vertBoned3W>	Vertices3W	;		// shared
+	ref_smem<vertBoned4W>	Vertices4W	;		// shared
 	ref_smem<u16>			BonesUsed	;		// actual bones which have influence on vertices
 
 	u16						RenderMode	;	
@@ -79,14 +103,20 @@ protected:
 
 	void					_FillVerticesSoft1W	(const Fmatrix& view, CSkeletonWallmark& wm, const Fvector& normal, float size, u16* indices, CBoneData::FacesVec& faces);
 	void					_FillVerticesSoft2W	(const Fmatrix& view, CSkeletonWallmark& wm, const Fvector& normal, float size, u16* indices, CBoneData::FacesVec& faces);
+	void                    _FillVerticesSoft3W (const Fmatrix& view, CSkeletonWallmark& wm, const Fvector& normal, float size, u16* indices, CBoneData::FacesVec& faces);
+	void                    _FillVerticesSoft4W (const Fmatrix& view, CSkeletonWallmark& wm, const Fvector& normal, float size, u16* indices, CBoneData::FacesVec& faces);
 	virtual void			_FillVerticesHW1W	(const Fmatrix& view, CSkeletonWallmark& wm, const Fvector& normal, float size, Fvisual* V, u16* indices, CBoneData::FacesVec& faces)	=0;
 	virtual void			_FillVerticesHW2W	(const Fmatrix& view, CSkeletonWallmark& wm, const Fvector& normal, float size, Fvisual* V, u16* indices, CBoneData::FacesVec& faces)	=0;
+	virtual void			_FillVerticesHW3W	(const Fmatrix& view, CSkeletonWallmark& wm, const Fvector& normal, float size, Fvisual* V, u16* indices, CBoneData::FacesVec& faces)	=0;
+	virtual void			_FillVerticesHW4W	(const Fmatrix& view, CSkeletonWallmark& wm, const Fvector& normal, float size, Fvisual* V, u16* indices, CBoneData::FacesVec& faces)	=0;
 	virtual void			_FillVertices		(const Fmatrix& view, CSkeletonWallmark& wm, const Fvector& normal, float size, Fvisual* V, u16 bone_id, u32 iBase, u32 iCount)			=0;
 
 	BOOL					_PickBoneSoft1W		(Fvector& normal, float& range, const Fvector& S, const Fvector& D, u16* indices, CBoneData::FacesVec& faces);
 	BOOL					_PickBoneSoft2W		(Fvector& normal, float& range, const Fvector& S, const Fvector& D,	u16* indices, CBoneData::FacesVec& faces);
 	virtual BOOL			_PickBoneHW1W		(Fvector& normal, float& range, const Fvector& S, const Fvector& D, Fvisual* V, u16* indices, CBoneData::FacesVec& faces)				=0;
 	virtual BOOL			_PickBoneHW2W		(Fvector& normal, float& range, const Fvector& S, const Fvector& D, Fvisual* V, u16* indices, CBoneData::FacesVec& faces)				=0;
+	virtual BOOL			_PickBoneHW3W		(Fvector& normal, float& range, const Fvector& S, const Fvector& D, Fvisual* V, u16* indices, CBoneData::FacesVec& faces)				=0;
+	virtual BOOL			_PickBoneHW4W		(Fvector& normal, float& range, const Fvector& S, const Fvector& D, Fvisual* V, u16* indices, CBoneData::FacesVec& faces)				=0;
 	virtual BOOL			_PickBone			(Fvector& normal, float& range, const Fvector& S, const Fvector& D, Fvisual* V, u16 bone_id, u32 iBase, u32 iCount)						=0;
 public:
 	BOOL					has_visible_bones	();

@@ -1039,6 +1039,20 @@ HRESULT	CRender::shader_compile			(
 	}
 	sh_name[len]='0'+char(2==m_skinning); ++len;
 
+	if (3==m_skinning)		{
+		defines[def_it].Name		=	"SKIN_3";
+		defines[def_it].Definition	=	"1";
+		def_it						++;
+	}
+	sh_name[len]='0'+char(3==m_skinning); ++len;
+
+	if (4==m_skinning)		{
+		defines[def_it].Name		=	"SKIN_4";
+		defines[def_it].Definition	=	"1";
+		def_it						++;
+	}
+	sh_name[len]='0'+char(4==m_skinning); ++len;
+
 	// finish
 	defines[def_it].Name			=	0;
 	defines[def_it].Definition		=	0;

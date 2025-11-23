@@ -15,10 +15,16 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 }
 
 extern xrSkin1W			xrSkin1W_x86;
-extern xrSkin1W			xrSkin1W_3DNow;
-// extern xrSkin1W		xrSkin1W_SSE;
 extern xrSkin2W			xrSkin2W_x86;
-extern xrSkin2W			xrSkin2W_SSE;
+extern xrSkin3W			xrSkin3W_x86;
+extern xrSkin4W			xrSkin4W_x86;
+
+//extern xrSkin1W		xrSkin1W_SSE;
+//extern xrSkin2W		xrSkin2W_SSE;
+//extern xrSkin3W		xrSkin3W_SSE;
+//extern xrSkin4W		xrSkin4W_SSE;
+
+extern xrSkin1W			xrSkin1W_3DNow;
 extern xrSkin2W			xrSkin2W_3DNow;
 //extern xrBoneLerp		xrBoneLerp_x86;
 //extern xrBoneLerp		xrBoneLerp_3DNow;
@@ -42,6 +48,8 @@ extern "C" {
 		// generic
 		T->skin1W	= xrSkin1W_x86;
 		T->skin2W	= xrSkin2W_x86;
+		T->skin3W	= xrSkin3W_x86;
+		T->skin4W	= xrSkin4W_x86;
 		// T->blerp	= xrBoneLerp_x86;
 		T->m44_mul	= xrM44_Mul_x86;
 		T->transfer = xrTransfer_x86;
