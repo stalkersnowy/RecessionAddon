@@ -53,6 +53,7 @@ void load_attack_goodwill()
 	gw_free.load("free_");
 }
 
+typedef std::pair<int, std::pair<int, int>> GroupKey;
 void RELATION_REGISTRY::Action (CEntityAlive* from, CEntityAlive* to, ERelationAction action)
 {
 	static CHARACTER_GOODWILL friend_kill_goodwill				= pSettings->r_s32(ACTIONS_POINTS_SECT, "friend_kill_goodwill");
@@ -108,6 +109,7 @@ void RELATION_REGISTRY::Action (CEntityAlive* from, CEntityAlive* to, ERelationA
 
 				//если мы атаковали персонажа или монстра, который 
 				//кого-то атаковал, то мы помогли тому, кто защищался
+				xr_set<GroupKey> processed_groups;
 				FIGHT_VECTOR& fights = fight_registry();
 				for(FIGHT_VECTOR_IT it = fights.begin(); it != fights.end(); it++)
 				{
@@ -117,7 +119,13 @@ void RELATION_REGISTRY::Action (CEntityAlive* from, CEntityAlive* to, ERelationA
 						CAI_Stalker* defending_stalker = smart_cast<CAI_Stalker*>(Level().Objects.net_Find(fight_data.defender));
 						if(defending_stalker)	
 						{
-							Action(actor, defending_stalker, stalker?FIGHT_HELP_HUMAN:FIGHT_HELP_MONSTER);
+							GroupKey current_group = std::make_pair(defending_stalker->g_Team(), 
+													std::make_pair(defending_stalker->g_Squad(), 
+													defending_stalker->g_Group()));
+							if (processed_groups.find(current_group) == processed_groups.end()) {
+								processed_groups.insert(current_group);
+								Action(actor, defending_stalker, stalker?FIGHT_HELP_HUMAN:FIGHT_HELP_MONSTER);
+							}
 						}
 					}
 				}
