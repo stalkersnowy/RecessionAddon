@@ -761,8 +761,16 @@ BOOL CSkeletonX_ext::_PickBone		(Fvector& normal, float& dist, const Fvector& st
 	BOOL result			= FALSE;
 	switch	(RenderMode){
 case RM_SKINNING_SOFT:
-	if (*Vertices1W)result = _PickBoneSoft1W	(normal,dist,start,dir,indices+iBase,*faces);
-	else			result = _PickBoneSoft2W	(normal,dist,start,dir,indices+iBase,*faces);
+	if		(*Vertices1W)		
+				result = _PickBoneSoft1W	(normal,dist,start,dir,indices+iBase,*faces);
+	else if	(*Vertices2W)		
+				result = _PickBoneSoft2W	(normal,dist,start,dir,indices+iBase,*faces);
+	else if	(*Vertices3W)		
+				result = _PickBoneSoft3W	(normal,dist,start,dir,indices+iBase,*faces);
+	else {
+				VERIFY(!!(*Vertices4W));
+				result = _PickBoneSoft4W	(normal,dist,start,dir,indices+iBase,*faces);
+		}
 	break;
 case RM_SINGLE:
 case RM_SKINNING_1B:	result = _PickBoneHW1W	(normal,dist,start,dir,V,indices+iBase,*faces); break;

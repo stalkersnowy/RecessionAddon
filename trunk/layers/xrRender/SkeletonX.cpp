@@ -583,8 +583,7 @@ BOOL	CSkeletonX::_PickBoneSoft1W	(Fvector& normal, float& dist, const Fvector& S
 		u32 idx			= (*it)*3;
 		for (u32 k=0; k<3; k++){
 			vertBoned1W& vert		= Vertices1W[indices[idx+k]];
-			const Fmatrix& xform	= Parent->LL_GetBoneInstance((u16)vert.matrix).mRenderTransform; 
-			xform.transform_tiny	(p[k],vert.P);
+			get_pos_bones(vert, p[k], Parent);
 		}
 		float u,v,range	= flt_max;
 		if (CDB::TestRayTri(S,D,p,u,v,range,true)&&(range<dist)){
@@ -604,13 +603,50 @@ BOOL CSkeletonX::_PickBoneSoft2W	(Fvector& normal, float& dist, const Fvector& S
 		Fvector			p[3];
 		u32 idx			= (*it)*3;
 		for (u32 k=0; k<3; k++){
-			Fvector		P0,P1;
 			vertBoned2W& vert		= Vertices2W[indices[idx+k]];
-			Fmatrix& xform0			= Parent->LL_GetBoneInstance(vert.matrix0).mRenderTransform; 
-			Fmatrix& xform1			= Parent->LL_GetBoneInstance(vert.matrix1).mRenderTransform; 
-			xform0.transform_tiny	(P0,vert.P);
-			xform1.transform_tiny	(P1,vert.P);
-			p[k].lerp				(P0,P1,vert.w);
+			get_pos_bones(vert, p[k], Parent);
+		}
+		float u,v,range	= flt_max;
+		if (CDB::TestRayTri(S,D,p,u,v,range,true)&&(range<dist)){
+			normal.mknormal(p[0],p[1],p[2]);
+			dist		= range;
+			intersect	= TRUE;
+		}
+	}
+	return intersect;
+}
+
+BOOL CSkeletonX::_PickBoneSoft3W	(Fvector& normal, float& dist, const Fvector& S, const Fvector& D, u16* indices, CBoneData::FacesVec& faces)
+{
+	VERIFY				(*Vertices3W);
+	bool intersect		= FALSE;
+	for (CBoneData::FacesVecIt it=faces.begin(); it!=faces.end(); it++){
+		Fvector			p[3];
+		u32 idx			= (*it)*3;
+		for (u32 k=0; k<3; k++){
+			vertBoned3W& vert		= Vertices3W[indices[idx+k]];
+			get_pos_bones(vert, p[k], Parent);
+		}
+		float u,v,range	= flt_max;
+		if (CDB::TestRayTri(S,D,p,u,v,range,true)&&(range<dist)){
+			normal.mknormal(p[0],p[1],p[2]);
+			dist		= range;
+			intersect	= TRUE;
+		}
+	}
+	return intersect;
+}
+
+BOOL CSkeletonX::_PickBoneSoft4W	(Fvector& normal, float& dist, const Fvector& S, const Fvector& D, u16* indices, CBoneData::FacesVec& faces)
+{
+	VERIFY				(*Vertices4W);
+	bool intersect		= FALSE;
+	for (CBoneData::FacesVecIt it=faces.begin(); it!=faces.end(); it++){
+		Fvector			p[3];
+		u32 idx			= (*it)*3;
+		for (u32 k=0; k<3; k++){
+			vertBoned4W& vert		= Vertices4W[indices[idx+k]];
+			get_pos_bones(vert, p[k], Parent);
 		}
 		float u,v,range	= flt_max;
 		if (CDB::TestRayTri(S,D,p,u,v,range,true)&&(range<dist)){
