@@ -9,7 +9,6 @@ by Stohe (ƒиденко –услан)
 -- local section_name = "respawn" --nv150313 moved to the only function that uses it
 -- local i,k,v = 0,0,0
 
---[[ -- nv 090129 remove unused code
 -- “аблица ограничений на спаун: всего в симул€ции не должно быть больше, чем указано.
 local simMaxCount = {
 	stalker_novice = 43, stalker_regular = 48, stalker_veteran = 43, stalker_master = 20,
@@ -37,7 +36,6 @@ local simMaxCount = {
 	burer_weak = 20,
 	bloodsucker_weak = 7, bloodsucker_normal = 40, bloodsucker_strong = 15	
 }
---]]
 
 local idle_spawn_preset = {
 	seldom = 60*60,
@@ -46,10 +44,16 @@ local idle_spawn_preset = {
 }
 
 local different_respawn_presets = false
+local old_respawn_system 		= false
 
 function load_constants()
-	if constants_ini() ~= nil and constants_ini():line_exist("scripts", "different_respawn_presets") == true and constants_ini():r_bool("scripts", "different_respawn_presets") == true then
-		different_respawn_presets = true
+	if constants_ini() ~= nil then
+		if constants_ini():line_exist("scripts", "different_respawn_presets") == true and constants_ini():r_bool("scripts", "different_respawn_presets") == true then
+			different_respawn_presets = true
+		end
+		if constants_ini():line_exist("scripts", "old_respawn_system") == true and constants_ini():r_bool("scripts", "old_respawn_system") == true then
+			old_respawn_system = true
+		end
 	end
 end
 
@@ -356,38 +360,50 @@ function se_respawn:create(prob)
 		local sum = 0
 		-- ѕроизводим рандомную взвешенную выборку
 		-- с учетом уже заспавленного количества человек.
-		for k,v in pairs(self.respawn_section) do
---'			local tt = self.sectSpawnProps[v.section]
---'			local community_rank = tt.community.."_"..tt.rank
---'			local s_count = simMaxCount[community_rank]
---'			if s_count == nil then
---'				s_count = 0
---'			end
---'			if tt.check == false or
---'			   self.item_spawn == true or
---'			   sim_statistic.simNpcCount(tt.community, tt.rank) < s_count
---'			then	
+		if old_respawn_system == true and self.item_spawn == false then
+			for k,v in pairs(self.respawn_section) do
+				local tt = self.sectSpawnProps[v.section]
+				local community_rank = tt.community.."_"..tt.rank
+				local s_count = simMaxCount[community_rank]
+				if s_count == nil then
+					s_count = 0
+				end
+				if tt.check == false or
+				   sim_statistic.simNpcCount(tt.community, tt.rank) < s_count
+				then	
+					sum = sum + v.prob
+				end
+			end
+			sum = math.random(0, sum)
+			for k,v in pairs(self.respawn_section) do
+				local tt = self.sectSpawnProps[v.section]
+				local community_rank = tt.community.."_"..tt.rank
+				local s_count = simMaxCount[community_rank]
+				if s_count == nil then
+					s_count = 0
+				end			
+				if tt.check == false or
+				   sim_statistic.simNpcCount(tt.community, tt.rank) < s_count 
+				then	
+					sum = sum - v.prob			
+					if sum <= 0 then
+						spawn_section = v.section
+						break
+					end
+				end
+			end
+		else
+			for k,v in pairs(self.respawn_section) do
 				sum = sum + v.prob
---'			end
-		end
-		sum = math.random(0, sum)
-		for k,v in pairs(self.respawn_section) do
---'			local tt = self.sectSpawnProps[v.section]
---'			local community_rank = tt.community.."_"..tt.rank
---'			local s_count = simMaxCount[community_rank]
---'			if s_count == nil then
---'				s_count = 0
---'			end			
---'			if tt.check == false or
---'			   self.item_spawn == true or
---'			   sim_statistic.simNpcCount(tt.community, tt.rank) < s_count 
---'			then	
+			end
+			sum = math.random(0, sum)
+			for k,v in pairs(self.respawn_section) do
 				sum = sum - v.prob			
 				if sum <= 0 then
 					spawn_section = v.section
 					break
 				end
---'			end
+			end
 		end
 		
 		if spawn_section == "" then
