@@ -6,6 +6,7 @@
 #include "thunderbolt.h"
 #include "rain.h"
 #include "resourcemanager.h"
+#include "../xrGame/object_broker.h"
 
 //-----------------------------------------------------------------------------
 // Environment modifier
@@ -42,23 +43,57 @@ float	CEnvModifier::sum	(CEnvModifier& M, Fvector3& view)
 //-----------------------------------------------------------------------------
 // Environment ambient
 //-----------------------------------------------------------------------------
+void CEnvAmbient::SSndChannel::load(LPCSTR sect)
+{
+	if(_GetItemCount(pSettings->r_string(sect,"sound_period")) == 4){
+		Fvector4 t		= pSettings->r_fvector4	(sect,"sound_period");
+		m_sound_period.set(iFloor(t.x*1000.f),iFloor(t.y*1000.f),iFloor(t.z*1000.f),iFloor(t.w*1000.f));
+	}else{
+		Fvector2 t		= pSettings->r_fvector2	(sect,"sound_period");
+		Ivector2 p;		p.set(iFloor(t.x*1000.f),iFloor(t.y*1000.f));
+		m_sound_period.set(p.x,p.y,p.x,p.y);
+	}
+	m_sound_dist	= pSettings->r_fvector2	(sect,"sound_dist"); if (m_sound_dist[0]>m_sound_dist[1]) std::swap(m_sound_dist[0],m_sound_dist[1]);
+	LPCSTR snds		= pSettings->r_string	(sect,"sounds");
+	u32 cnt			= _GetItemCount(snds);
+	string_path		tmp;
+	if (cnt){
+		m_sounds.resize(cnt);
+		for (u32 k=0; k<cnt; ++k)
+			m_sounds[k].create(_GetItem(snds,k,tmp),st_Effect,sg_SourceType);
+	}
+}
+
+CEnvAmbient::SSndChannel* CEnvAmbient::create_sound_channel	(LPCSTR id)
+{
+	SSndChannel*			result = xr_new<SSndChannel>();
+	result->load			(id);
+	return					(result);
+}
+
+CEnvAmbient::~CEnvAmbient						()
+{
+	destroy					();
+}
+
+void CEnvAmbient::destroy ()
+{
+	delete_data				(m_sound_channels);
+}
+
 void CEnvAmbient::load(const shared_str& sect)
 {
 	section				= sect;
 	string_path			tmp;
 	// sounds
-	if (pSettings->line_exist(sect,"sounds")){
-		Fvector2 t		= pSettings->r_fvector2	(sect,"sound_period");
-		sound_period.set(iFloor(t.x*1000.f),iFloor(t.y*1000.f));
-		sound_dist		= pSettings->r_fvector2	(sect,"sound_dist"); if (sound_dist[0]>sound_dist[1]) std::swap(sound_dist[0],sound_dist[1]);
-		LPCSTR snds		= pSettings->r_string	(sect,"sounds");
-		u32 cnt			= _GetItemCount(snds);
-		if (cnt){
-			sounds.resize(cnt);
-			for (u32 k=0; k<cnt; ++k)
-				sounds[k].create(_GetItem(snds,k,tmp),st_Effect,sg_SourceType);
-		}
-	}
+	LPCSTR channels			= pSettings->line_exist(sect,"snd_channels")?pSettings->r_string(sect,"snd_channels"):"";
+	u32 cnt					= _GetItemCount(channels);
+	BOOL main				= pSettings->line_exist	(sect,"sounds");
+	m_sound_channels.resize	(cnt+main);
+	if (main)
+		m_sound_channels[0]	= create_sound_channel(sect.c_str());
+	for (u32 i=main; i<cnt; ++i)
+		m_sound_channels[i]	= create_sound_channel(_GetItem(channels,i,tmp));
 	// effects
 	if (pSettings->line_exist(sect,"effects")){
 		Fvector2 t		= pSettings->r_fvector2	(sect,"effect_period");
@@ -120,6 +155,9 @@ CEnvDescriptor::CEnvDescriptor()
 	tb_id				= -1;
     
 	env_ambient			= NULL;
+
+	outdoor				= true;
+	priquel				= false;
 }
 
 #define	C_CHECK(C)	if (C.x<0 || C.x>2 || C.y<0 || C.y>2 || C.z<0 || C.z>2)	{ Msg("! Invalid '%s' in env-section '%s'",#C,S);}
@@ -169,7 +207,11 @@ void CEnvDescriptor::load	(LPCSTR exec_tm, LPCSTR S, CEnvironment* parent)
 	if (pSettings->line_exist(S,"water_intensity"))
 		m_fWaterIntensity = pSettings->r_float(S,"water_intensity");
 
-	outdoor					= pSettings->line_exist(S,"outdoor")?pSettings->r_bool(S,"outdoor"):true;
+	if (pSettings->line_exist(S,"outdoor"))
+		outdoor				= pSettings->r_bool(S,"outdoor");
+
+	if (pSettings->line_exist(S,"priquel"))
+		priquel				= pSettings->r_bool(S,"priquel");
 
 	C_CHECK					(clouds_color);
 	C_CHECK					(sky_color	);
@@ -282,6 +324,12 @@ void CEnvDescriptorMixer::lerp	(CEnvironment* , CEnvDescriptor& A, CEnvDescripto
 	sun_dir.lerp			(A.sun_dir,B.sun_dir,f).normalize();
 	VERIFY2					(sun_dir.y<0,"Invalid sun direction settings while lerp");
 	outdoor					= A.outdoor && B.outdoor;
+	Fvector3 hemi3; 
+	hemi3.set				(hemi_color.x,hemi_color.y,hemi_color.z);
+	if(A.priquel != B.priquel)
+		env_color.lerp		(A.priquel?hemi3:sky_color,B.priquel?hemi3:sky_color,f);
+	else
+		env_color.set		(A.priquel?hemi3:sky_color);
 
 }
 

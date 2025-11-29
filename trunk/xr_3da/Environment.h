@@ -63,21 +63,39 @@ public:
 		float			wind_gust_factor;
 	};
 	DEFINE_VECTOR(SEffect,EffectVec,EffectVecIt);
+	struct SSndChannel
+	{
+		shared_str				m_load_section;
+		Fvector2				m_sound_dist;
+		Ivector4				m_sound_period;
+
+		typedef xr_vector<ref_sound>	sounds_type;
+
+		void					load					(LPCSTR sect);
+		ref_sound&				get_rnd_sound			()	{return sounds()[Random.randI(sounds().size())];}
+		u32						get_rnd_sound_time		()	{return (m_sound_period.z < m_sound_period.w) ? Random.randI(m_sound_period.z,m_sound_period.w) : 0;}
+		u32						get_rnd_sound_first_time()	{return (m_sound_period.x < m_sound_period.y) ? Random.randI(m_sound_period.x,m_sound_period.y) : 0;}
+		float					get_rnd_sound_dist		()	{return (m_sound_dist.x < m_sound_dist.y) ? Random.randF(m_sound_dist.x, m_sound_dist.y) : 0;}
+		inline sounds_type&		sounds					()  {return m_sounds;}
+
+	protected:
+		xr_vector<ref_sound>	m_sounds;
+	};
+	DEFINE_VECTOR(SSndChannel*,SSndChannelVec,SSndChannelVecIt);
 protected:
 	shared_str			section;
+	SSndChannelVec		m_sound_channels;
 	EffectVec			effects;
-	xr_vector<ref_sound>sounds;
-	Fvector2			sound_dist;
-	Ivector2			sound_period;
 	Ivector2			effect_period;
 public:
 	void				load				(const shared_str& section);
-	IC SEffect*			get_rnd_effect		(){return effects.empty()?0:&effects[Random.randI(effects.size())];}
-	IC ref_sound*		get_rnd_sound		(){return sounds.empty()?0:&sounds[Random.randI(sounds.size())];}
 	IC const shared_str&name				(){return section;}
-	IC u32				get_rnd_sound_time	(){return Random.randI(sound_period.x,sound_period.y);}
-	IC float			get_rnd_sound_dist	(){return Random.randF(sound_dist.x,sound_dist.y);}
+	IC SEffect*			get_rnd_effect		(){return effects.empty()?0:&effects[Random.randI(effects.size())];}
 	IC u32				get_rnd_effect_time (){return Random.randI(effect_period.x,effect_period.y);}
+	SSndChannel*		create_sound_channel(LPCSTR id);
+						~CEnvAmbient		();
+	void				destroy				();
+	inline SSndChannelVec& get_snd_channels() { return m_sound_channels; }
 };
 
 class ENGINE_API	CEnvDescriptor
@@ -126,6 +144,7 @@ public:
 	CEnvAmbient*		env_ambient;
 	
 	bool				outdoor;
+	bool				priquel;
 
 #ifdef DEBUG
 	shared_str			sect_name;
@@ -155,6 +174,8 @@ public:
 
 	float				fog_near;		
 	float				fog_far;		
+
+	Fvector3			env_color;
 public:
 	void				lerp			(CEnvironment* parent, CEnvDescriptor& A, CEnvDescriptor& B, float f, CEnvModifier& M, float m_power);
 	void				clear			();
