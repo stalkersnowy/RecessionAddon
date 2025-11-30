@@ -189,6 +189,8 @@ public:
 			void						HitSector		(CObject* who, CObject* weapon);
 			void						HitMark			(float P, Fvector dir,			CObject* who, s16 element, Fvector position_in_bone_space, float impulse,  ALife::EHitType hit_type);
 
+			void						Feel_Grenade_Update( float rad );
+
 	virtual float						GetMass				() ;
 	virtual float						Radius				() const;
 	virtual void						g_PerformDrop		();
@@ -415,6 +417,9 @@ protected:
 
 	//режим подбирания предметов
 	bool					m_bPickupMode;
+	//расстояние (в метрах) на котором актер чувствует гранату (любую)
+	float					m_fFeelGrenadeRadius;
+	float					m_fFeelGrenadeTime; 	//время гранаты (сек) после которого актер чувствует гранату
 	//расстояние подсветки предметов
 	float					m_fPickupInfoRadius;
 

@@ -47,6 +47,7 @@ namespace StalkerDecisionSpace {
 		eWorldPropertyWoundedEnemyAimed,
 		eWorldPropertyPausedAfterKill,
 		eWorldPropertyKilledWounded,
+		eWorldPropertyStartedToThrowGrenade,
 
 		eWorldPropertyDangerUnknown,
 		eWorldPropertyDangerInDirection,
@@ -60,6 +61,8 @@ namespace StalkerDecisionSpace {
 
 		eWorldPropertyAnomaly,
 		eWorldPropertyInsideAnomaly,
+
+		eWorldPropertyShouldThrowGrenade,
 
 		eWorldPropertyScript,
 		eWorldPropertyDummy			= u32(-1),
@@ -115,6 +118,7 @@ namespace StalkerDecisionSpace {
 		eWorldOperatorCriticallyWounded,
 		eWorldOperatorKillEnemyIfCriticallyWounded,
 		eWorldOperatorPauseAfterKill,
+		eWorldOperatorThrowGrenade,
 
 // danger
 		eWorldOperatorDangerUnknownPlanner,

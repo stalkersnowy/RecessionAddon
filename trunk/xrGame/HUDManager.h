@@ -76,4 +76,7 @@ public:
 	virtual void			OnDisconnected		();
 	virtual void			OnConnected			();
 	virtual void			net_Relcase			(CObject *object);
+
+			bool			AddGrenade_ForMark	( CGrenade* grn );
+			void			Update_GrenadeView	( Fvector& pos_actor );
 };

@@ -256,3 +256,42 @@ void CActor::feel_sound_new(CObject* who, int type, CSound_UserDataPtr user_data
 	if(who == this)
 		m_snd_noise = _max(m_snd_noise,power);
 }
+
+void CActor::Feel_Grenade_Update( float rad )
+{
+	if ( !IsGameTypeSingle() )
+	{
+		return;
+	}
+	// Find all nearest objects
+	Fvector pos_actor;
+	Center( pos_actor );
+
+	q_nearest.clear_not_free();
+	g_pGameLevel->ObjectSpace.GetNearest( q_nearest, pos_actor, rad, NULL );
+
+	xr_vector<CObject*>::iterator	it_b = q_nearest.begin();
+	xr_vector<CObject*>::iterator	it_e = q_nearest.end();
+
+	// select only grenade
+	for ( ; it_b != it_e; ++it_b )
+	{
+		if ( (*it_b)->getDestroy() ) continue;					// Don't touch candidates for destroy
+
+		CGrenade* grn = smart_cast<CGrenade*>( *it_b );
+		if( !grn || grn->Initiator() == ID() || grn->Useful() )
+		{
+			continue;
+		}
+		if ( grn->time_from_begin_throw() < m_fFeelGrenadeTime )
+		{
+			continue;
+		}
+		if ( HUD().AddGrenade_ForMark( grn ) )
+		{
+			//.	Msg("__ __ Add new grenade! id = %d ", grn->ID() );
+		}
+	}// for it
+
+	HUD().Update_GrenadeView( pos_actor );
+}

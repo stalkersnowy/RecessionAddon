@@ -134,6 +134,7 @@ protected:
 public:
 	virtual u32				ef_weapon_type			() const;
 	IC		u32				destroy_time			() const {return m_dwDestroyTime;};
+	IC		int				time_from_begin_throw	() const { return (Device.dwTimeGlobal + m_dwDestroyTimeMax - m_dwDestroyTime); }
 	static	void			ExitContactCallback		(bool& do_colide,bool bo1,dContact& c,SGameMtl * /*material_1*/,SGameMtl * /*material_2*/);
 	virtual u16				bone_count_to_synchronize	() const;
 };

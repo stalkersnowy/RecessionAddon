@@ -324,6 +324,17 @@ void CHUDManager::OnConnected()
 
 void CHUDManager::net_Relcase	(CObject *object)
 {
+	HitMarker->net_Relcase		(object);
 	VERIFY						(m_pHUDTarget);
 	m_pHUDTarget->net_Relcase	(object);
+}
+
+bool CHUDManager::AddGrenade_ForMark( CGrenade* grn )
+{
+	return HitMarker->AddGrenade_ForMark( grn );
+}
+
+void CHUDManager::Update_GrenadeView( Fvector& pos_actor )
+{
+	HitMarker->Update_GrenadeView( pos_actor );
 }
