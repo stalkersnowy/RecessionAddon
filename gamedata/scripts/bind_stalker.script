@@ -252,36 +252,6 @@ end
 -- nv111103/nv130223: level-specific autosaves
 -- Decane 18.08.2014: adapted for CS with minor tweaks
 --        21.06.2015: unique autosaves for freeplay
--- SNW: таблица с префиксами уровней
-local prefix_by_level = {
-	l01_escape = "esc",
-	l02_garbage = "gar",
-	l03_agroprom = "agr",
-	l03u_agr_underground = "kat",
-	l04_darkvalley = "val",
-	k01_darkscape = "ds",
-	l04u_labx18 = "dar",
-	l05_bar = "bar",
-	l06_rostok = "ros",
-	l07_military = "mil",
-	l08_yantar = "yan",
-	l08u_brainlab = "x16",
-	l09_deadcity = "cit",
-	l10_radar = "rad",
-	l10u_bunker = "bun",
-	l11_pripyat = "pri",
-	l12_stancia = "aes",
-	l12_stancia_2 = "aes2",
-	l12u_control_monolith = "mon",
-	l12u_sarcofag = "sar",
-	l23_final_battle = "sar2",
-	l13_deadmil_r = "dm",
-	k03_milrad_test = "mr",
-	krondor_selo = "kr",
-	m91 = "om",
-	y_tir = "tir"
-}
-
 local function manage_autosaves()
 	local fs = getFS()
 	local fs_path = "$game_saves$"
@@ -294,10 +264,10 @@ local function manage_autosaves()
 		if level_name == sg:level_name() then
 			-- update_path info per fluffy22
 			local savedir = fs:update_path(fs_path, "")
-			local level_prefix = prefix_by_level[level_name] or username
-			local lvl_autosave = username.." - "..level_prefix.."_autosave"
+			local lvl_autosave_base = username.." - "..game.translate_string(level_name)
+			local lvl_autosave = lvl_autosave_base.." (auto)"
 			local lvl_autosave_sav = lvl_autosave..".sav"
-			local lvl_autosave_start = lvl_autosave.."_start"
+			local lvl_autosave_start = lvl_autosave_base.." (start)"
 			local lvl_autosave_start_sav = lvl_autosave_start..".sav"
 			if not fs:exist(fs_path, lvl_autosave_start_sav) and not fs:exist(fs_path, lvl_autosave_sav) then
 				fs:file_rename(savedir..autosave_sav, savedir..lvl_autosave_start_sav, true)
