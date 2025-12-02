@@ -545,3 +545,11 @@ void CScriptGameObject::set_visual_name						(LPCSTR visual)
 LPCSTR CScriptGameObject::get_visual_name				() const {
 	return object().cNameVisual().c_str();
 }
+
+u16 CScriptGameObject::GetAmmoCount()
+{
+	const CWeaponAmmo *ammo = smart_cast<const CWeaponAmmo*>(&object());
+	if (!ammo)
+		return		(0);
+	return			(ammo->m_boxCurr);
+}

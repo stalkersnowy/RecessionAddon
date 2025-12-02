@@ -123,10 +123,16 @@ function actor_binder:reinit()
 end
 ----------------------------------------------------------------------------------------------------------------------
 local camp_stash_robbery = false
+local ammo_repack = false
 
 function load_constants()
-	if constants_ini() ~= nil and constants_ini():line_exist("scripts", "camp_stash_robbery") == true and constants_ini():r_bool("scripts", "camp_stash_robbery") == true then
-		camp_stash_robbery = true
+	if constants_ini() ~= nil then
+		if constants_ini():line_exist("scripts", "camp_stash_robbery") == true and constants_ini():r_bool("scripts", "camp_stash_robbery") == true then
+			camp_stash_robbery = true
+		end
+		if constants_ini():line_exist("scripts", "ammo_repack") == true and constants_ini():r_bool("scripts", "ammo_repack") == true then
+			ammo_repack = true
+		end
 	end
 end
 
@@ -213,6 +219,8 @@ function actor_binder:on_item_take (obj)
 	
 	if isArtefact(obj) then
 		xr_statistic.addArtefactFound(obj)
+	elseif ammo_repack == true and obj:clsid() == clsid.wpn_ammo then
+		dunin_ammo.on_take(obj)
 	end
 end
 ----------------------------------------------------------------------------------------------------------------------
@@ -365,6 +373,10 @@ function actor_binder:update(delta)
 			self.weapon_hide = false
 		end
 	end	
+
+	if ammo_repack == true then
+		dunin_ammo.on_update()
+	end
 
 	-- обновление рестрикторов, которые под логикой, срабатывает через интервалы времени
 	if self.next_restrictors_update_time < time then

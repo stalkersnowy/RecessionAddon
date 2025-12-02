@@ -362,6 +362,8 @@ public:
 			const CDangerObject	*GetBestDanger		();
 			CScriptGameObject	*GetBestItem		();
 
+			u16					GetAmmoCount		();
+
 	_DECLARE_FUNCTION10			(GetActionCount,u32);
 	
 			const				CScriptEntityAction	*GetActionByIndex(u32 action_index = 0);

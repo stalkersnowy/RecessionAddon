@@ -148,6 +148,8 @@ class_<CScriptGameObject> &script_register_game_object1(class_<CScriptGameObject
 		.def("best_item",					&CScriptGameObject::GetBestItem)
 		.def("action_count",				&CScriptGameObject::GetActionCount)
 		.def("action_by_index",				&CScriptGameObject::GetActionByIndex)
+
+		.def("get_ammo_count",				&CScriptGameObject::GetAmmoCount)
 		
 		//.def("set_hear_callback",			(void (CScriptGameObject::*)(const luabind::object &, LPCSTR))(&CScriptGameObject::SetSoundCallback))
 		//.def("set_hear_callback",			(void (CScriptGameObject::*)(const luabind::functor<void> &))(&CScriptGameObject::SetSoundCallback))
