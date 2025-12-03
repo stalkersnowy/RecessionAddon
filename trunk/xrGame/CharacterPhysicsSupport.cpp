@@ -31,6 +31,9 @@
 BOOL g_bUseSmartHits = false;
 BOOL g_bUseIK = false;
 
+constexpr float IK_CALC_DIST = 100.f;
+constexpr float IK_ALWAYS_CALC_DIST = 20.f;
+
 void  NodynamicsCollide(bool& do_colide,bool bo1,dContact& c,SGameMtl * /*material_1*/,SGameMtl * /*material_2*/)
 {
 	dBodyID body1=dGeomGetBody(c.geom.g1);
@@ -453,6 +456,7 @@ IC		void	CCharacterPhysicsSupport::						UpdateDeathAnims				()
 
 	if(!m_flags.test(fl_death_anim_on) && !is_imotion(m_interactive_motion))//!m_flags.test(fl_use_death_motion)//!b_death_anim_on&&m_pPhysicsShell->isFullActive()
 	{
+		DestroyIKController( );
 		smart_cast<CKinematicsAnimated*>(m_EntityAlife.Visual())->PlayCycle("death_init");
 		m_flags.set(fl_death_anim_on,TRUE);
 	}
@@ -482,8 +486,25 @@ void CCharacterPhysicsSupport::in_UpdateCL( )
 	{
 		ActivateShell( NULL );
 		m_PhysicMovementControl->DestroyCharacter( );
-	} else if( ik_controller( ) )
-		ik_controller( )->Update();
+	} 
+	else if (ik_controller())
+	{
+		CFrustum& view_frust = ::Render->ViewBase;
+		vis_data& vis = m_EntityAlife.Visual()->vis;
+		Fvector p;
+
+		m_EntityAlife.XFORM().transform_tiny(p, vis.sphere.P);
+
+		float dist = Device.vCameraPosition.distance_to(p);
+
+		if (dist < IK_CALC_DIST)
+		{
+			if (view_frust.testSphere_dirty(p, vis.sphere.R) || dist < IK_ALWAYS_CALC_DIST)
+			{
+				ik_controller()->Update();
+			}
+		}
+	}
 
 
 #ifdef DEBUG
@@ -737,6 +758,11 @@ void CCharacterPhysicsSupport::ActivateShell			( CObject* who )
 }
 void CCharacterPhysicsSupport::in_ChangeVisual()
 {
+	if(m_ik_controller)
+	{
+		DestroyIKController();
+		CreateIKController();
+	}
 	
 	if(!m_physics_skeleton&&!m_pPhysicsShell) return;
 
@@ -753,11 +779,6 @@ void CCharacterPhysicsSupport::in_ChangeVisual()
 		if(m_pPhysicsShell)m_pPhysicsShell->Deactivate();
 		xr_delete(m_pPhysicsShell);
 		ActivateShell(NULL);
-	}
-	if(m_ik_controller)
-	{
-		DestroyIKController();
-		CreateIKController();
 	}
 }
 

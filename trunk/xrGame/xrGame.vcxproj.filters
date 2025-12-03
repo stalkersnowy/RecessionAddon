@@ -6579,6 +6579,38 @@
     <ClInclude Include="ShootingHitEffector.h">
       <Filter>Core\Client\Effectors\Actor</Filter>
     </ClInclude>
+    <ClInclude Include="ik_calculate_data.h">
+      <Filter>Physics\IK</Filter>
+    </ClInclude>
+    <ClInclude Include="ik_calculate_state.h">
+      <Filter>Physics\IK</Filter>
+    </ClInclude>
+    <ClInclude Include="ik_collide_data.h">
+      <Filter>Physics\IK</Filter>
+    </ClInclude>
+    <ClInclude Include="ik_dbg_matrix.h">
+      <Filter>Physics\IK</Filter>
+    </ClInclude>
+    <ClInclude Include="ik_foot_collider.h">
+      <Filter>Physics\IK</Filter>
+    </ClInclude>
+    <ClInclude Include="ik_limb_state.h">
+      <Filter>Physics\IK</Filter>
+    </ClInclude>
+    <ClInclude Include="ik_limb_state_predict.h">
+      <Filter>Physics\IK</Filter>
+    </ClInclude>
+    <ClInclude Include="ik_object_shift.h">
+      <Filter>Physics\IK</Filter>
+    </ClInclude>
+    <ClInclude Include="IKFoot.h">
+      <Filter>Physics\IK</Filter>
+    </ClInclude>
+    <ClInclude Include="IKFoot_inl.h">
+      <Filter>Physics\IK</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix_utils.h" />
+    <ClInclude Include="pose_extrapolation.h" />
     <ClInclude Include="ui\UIMultiEditBox.h">
       <Filter>UI\UIWindows\EditBox</Filter>
     </ClInclude>
@@ -9747,9 +9779,6 @@
       <Filter>Core\Client\Effectors\Actor</Filter>
     </ClCompile>
     <ClCompile Include="ai\monsters\poltergeist\poltergeist_ambidexter.cpp" />
-    <ClCompile Include="ui\UIMultiEditBox.cpp">
-      <Filter>UI\UIWindows\EditBox</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="graph_abstract.h">

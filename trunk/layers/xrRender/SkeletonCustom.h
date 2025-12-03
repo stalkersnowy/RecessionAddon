@@ -183,6 +183,12 @@ public:
 	virtual void				OnCalculateBones	(){}
 public:
 	typedef xr_vector<std::pair<shared_str,u16> >	accel;
+	struct	pick_result
+	{
+		Fvector	normal;
+		float	dist;
+		Fvector	tri[3];
+	};
 public:
 	IRender_Visual*				m_lod;
 protected:
@@ -228,7 +234,7 @@ public:
 	void						ClearWallmarks		();
 public:
 				
-				bool			PickBone			(const Fmatrix &parent_xform, Fvector& normal, float& dist, const Fvector& start, const Fvector& dir, u16 bone_id);
+				bool			PickBone			(const Fmatrix &parent_xform, CKinematics::pick_result &r, float dist, const Fvector& start, const Fvector& dir, u16 bone_id);
 	virtual		void			EnumBoneVertices	(SEnumVerticesCallback &C, u16 bone_id);
 public:
 								CKinematics			();

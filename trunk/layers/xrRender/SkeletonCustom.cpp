@@ -577,7 +577,7 @@ void CKinematics::EnumBoneVertices	(SEnumVerticesCallback &C, u16 bone_id)
 
 DEFINE_VECTOR(Fobb,OBBVec,OBBVecIt);
 
-bool	CKinematics::	PickBone			(const Fmatrix &parent_xform,  Fvector& normal, float& dist, const Fvector& start, const Fvector& dir, u16 bone_id)
+bool	CKinematics::	PickBone			(const Fmatrix &parent_xform, pick_result &r, float dist, const Fvector& start, const Fvector& dir, u16 bone_id)
 {
 	Fvector S,D;//normal		= {0,0,0}
 	// transform ray from world to model
@@ -585,9 +585,12 @@ bool	CKinematics::	PickBone			(const Fmatrix &parent_xform,  Fvector& normal, fl
 	P.transform_tiny		(S,start);
 	P.transform_dir			(D,dir);
 	for (u32 i=0; i<children.size(); i++)
-			if (LL_GetChild(i)->PickBone(normal,dist,S,D,bone_id))
+			if (LL_GetChild(i)->PickBone(r,dist,S,D,bone_id))
 			{
-				parent_xform.transform_dir			(normal);
+				parent_xform.transform_dir			(r.normal);
+				parent_xform.transform_tiny			(r.tri[0]);
+				parent_xform.transform_tiny			(r.tri[1]);
+				parent_xform.transform_tiny			(r.tri[2]);
 				return true;
 			}
 	return false;
@@ -607,7 +610,7 @@ void CKinematics::AddWallmark(const Fmatrix* parent_xform, const Fvector3& start
 	DEFINE_VECTOR			(Fobb,OBBVec,OBBVecIt);
 	OBBVec					cache_obb;
 	cache_obb.resize		(LL_BoneCount());
-
+	pick_result r;r.normal = normal; r.dist = dist;
 	for (u16 k=0; k<LL_BoneCount(); k++){
 		CBoneData& BD		= LL_GetData(k);
 		if (LL_GetBoneVisible(k)&&!BD.shape.flags.is(SBoneShape::sfNoPickable)){
@@ -615,11 +618,19 @@ void CKinematics::AddWallmark(const Fmatrix* parent_xform, const Fvector3& start
 			obb.transform	(BD.obb,LL_GetBoneInstance(k).mTransform);
 			if (CDB::TestRayOBB(S,D, obb))
 				for (u32 i=0; i<children.size(); i++)
-					if (LL_GetChild(i)->PickBone(normal,dist,S,D,k)) picked=TRUE;
+				{
+					if (LL_GetChild(i)->PickBone(r,dist,S,D,k)) 
+					{
+						picked=TRUE;
+						dist	= r.dist;
+						normal	= r.normal;
+						//dynamics set wallmarks bug fix
+					}
+				}
 		}
 	}
 	if (!picked) return; 
- 
+	
 	// calculate contact point
 	Fvector cp;	cp.mad		(S,D,dist); 
  

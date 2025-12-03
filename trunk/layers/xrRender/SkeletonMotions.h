@@ -96,12 +96,15 @@ private:
 	STORAGE			intervals;	
 public:
 	shared_str		name;
-	void			Load			(IReader*);
+	void			Load				(IReader*);
 
 #ifdef _EDITOR
-	void			Save			(IWriter*);
+	void			Save				(IWriter*);
 #endif
-	bool			pick_mark		(const float& t) const;
+	bool			is_empty			() const { return intervals.empty(); }
+	const interval*	pick_mark			(float const &t) const;
+	bool			is_mark_between		(float const &t0, float const &t1) const;
+	float			time_to_next_mark	(float time) const;
 };
 
 
