@@ -29,7 +29,7 @@
 		<texture>ui_hud_soldier_sprint</texture>
 	</state_sprint>
 
-	<power_progress  x="24" y="94" width="43" height="7" horz="1" min="0" max="100" pos="50">
+	<power_progress  x="24" y="95" width="43" height="7" horz="1" min="0" max="100" pos="50">
 		<progress stretch="1">
 			<texture>ui_hud_shk_stamina</texture>
 		</progress>
