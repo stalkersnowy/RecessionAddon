@@ -71,13 +71,13 @@ IC			void			SetWndSize_inline							(const Fvector2& wnd_size);
 			int				m_iCursorPos;
 			void			IncCursorPos								();
 			void			DecCursorPos								();
+		float				GetIndentByAlign							()												const;
+		float				GetVIndentByAlign							();
 protected:
 			Ivector2		m_cursor_pos;
 			void			UpdateCursor								();
 				// %c[255,255,255,255]
 		u32					GetColorFromText							(const xr_string& str)							const;
-		float				GetIndentByAlign							()												const;
-		float				GetVIndentByAlign							();
 		void				CutFirstColoredTextEntry					(xr_string& entry, u32& color,xr_string& text)	const;
 	CUILine*				ParseTextToColoredLine						(const xr_string& str);
 

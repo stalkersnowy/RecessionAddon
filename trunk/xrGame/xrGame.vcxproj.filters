@@ -6579,6 +6579,9 @@
     <ClInclude Include="ShootingHitEffector.h">
       <Filter>Core\Client\Effectors\Actor</Filter>
     </ClInclude>
+    <ClInclude Include="ui\UIMultiEditBox.h">
+      <Filter>UI\UIWindows\EditBox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="damage_manager.cpp">
@@ -9744,6 +9747,9 @@
       <Filter>Core\Client\Effectors\Actor</Filter>
     </ClCompile>
     <ClCompile Include="ai\monsters\poltergeist\poltergeist_ambidexter.cpp" />
+    <ClCompile Include="ui\UIMultiEditBox.cpp">
+      <Filter>UI\UIWindows\EditBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="graph_abstract.h">

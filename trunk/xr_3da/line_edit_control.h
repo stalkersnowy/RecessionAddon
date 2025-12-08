@@ -70,7 +70,7 @@ public:
 			}
 
 					line_edit_control	( u32 str_buffer_size, bool cyrillic = true );
-			void	init				( u32 str_buffer_size, init_mode mode = im_standart );
+			void	init				( u32 str_buffer_size, init_mode mode = im_standart, bool multiline_mode = false );
 					~line_edit_control	();
 
 			void	clear_states		();
@@ -99,6 +99,11 @@ public:
 		void		set_selected_mode	( bool status )		{ m_unselected_mode = !status; }
 		bool		get_selected_mode	() const			{ return !m_unselected_mode; }
 
+		void		set_multiline		( bool enable )		{ m_bMultiLine = enable; }
+		bool		is_multiline		() const			{ return m_bMultiLine; }
+		int			get_cursor_pos		()					{ return m_cur_pos;}
+		void		set_cursor_pos		(int pos)			{ m_cur_pos = pos;}
+
 private:
 					line_edit_control	( line_edit_control const& );
 	line_edit_control const& operator=	( line_edit_control const& );
@@ -126,6 +131,10 @@ private:
 	void xr_stdcall	delete_word_back	();
 	void xr_stdcall	delete_word_forward	();
 	void xr_stdcall SwitchKL			();
+	void xr_stdcall move_pos_up			();
+	void xr_stdcall move_pos_down		();
+
+			int		normalize_cursor_pos(int pos, bool move_left) const;
 			
 			void	assign_char_pairs	( init_mode mode );
 			void	create_key_state	( u32 const dik, key_state state );
@@ -176,6 +185,7 @@ private:
 	bool			m_cursor_view;
 	bool			m_need_update;
 	bool			m_unselected_mode;
+	bool			m_bMultiLine;
 }; // class line_edit_control
 
 } // namespace text_editor

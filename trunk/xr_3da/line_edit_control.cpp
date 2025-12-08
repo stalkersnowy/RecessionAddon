@@ -56,6 +56,7 @@ line_edit_control::line_edit_control( u32 str_buffer_size, bool cyrillic )
 	m_buf3		= NULL;
 
 	m_bCyrillic = cyrillic;
+	m_bMultiLine = false;
 
 	for ( u32 i = 0; i < DIK_COUNT; ++i )
 	{
@@ -167,10 +168,11 @@ void line_edit_control::clear_states()
 	update_key_states	( );
 }
 
-void line_edit_control::init( u32 str_buffer_size, init_mode mode )
+void line_edit_control::init( u32 str_buffer_size, init_mode mode, bool multiline_mode )
 {
 	m_buffer_size = str_buffer_size;
 	clamp( m_buffer_size, (int)MIN_BUF_SIZE, (int)MAX_BUF_SIZE );
+	m_bMultiLine = multiline_mode;
 
 	xr_free( m_edit_str );	m_edit_str = (LPSTR)xr_malloc( m_buffer_size * sizeof(char) );
 	xr_free( m_inserted );	m_inserted = (LPSTR)xr_malloc( m_buffer_size * sizeof(char) );
@@ -241,6 +243,12 @@ void line_edit_control::init( u32 str_buffer_size, init_mode mode )
 	create_key_state( DIK_RCONTROL, ks_RCtrl  );
 	create_key_state( DIK_LALT    , ks_LAlt   );
 	create_key_state( DIK_RALT    , ks_RAlt   );
+
+	if (m_bMultiLine)
+	{
+		assign_callback(DIK_UP	  , ks_free, Callback(this, &line_edit_control::move_pos_up));
+		assign_callback(DIK_DOWN  , ks_free, Callback(this, &line_edit_control::move_pos_down));
+	}
 }
 
 void line_edit_control::assign_char_pairs( init_mode mode )
@@ -580,7 +588,7 @@ void line_edit_control::add_inserted_text()
 	int old_edit_size = (int)xr_strlen( m_edit_str );
 	for ( int i = 0; i < old_edit_size; ++i )
 	{
-		if ( ( m_edit_str[i] == '\n' ) || ( m_edit_str[i] == '\t' ) )
+		if ( !m_bMultiLine && ( m_edit_str[i] == '\n' ) || ( m_edit_str[i] == '\t' ) )
 		{
 			m_edit_str[i]=' ';
 		}
@@ -732,12 +740,42 @@ void line_edit_control::move_pos_end()
 
 void line_edit_control::move_pos_left()
 {
-	--m_cur_pos;
+	if (m_cur_pos <= 0)
+		return;
+
+	// сн€тие выделени€ как раньше Ц по желанию
+	if (m_p1 != m_p2 && !get_key_state(ks_Shift))
+	{
+		m_cur_pos = _min(m_p1, m_p2);
+		m_select_start = m_cur_pos;
+		m_mark = false;
+	}
+	else
+	{
+		--m_cur_pos;
+	}
+
+	m_cur_pos = normalize_cursor_pos(m_cur_pos, true);
 }
 
 void line_edit_control::move_pos_right()
 {
-	++m_cur_pos;
+	int len = (int)xr_strlen(m_edit_str);
+	if (m_cur_pos >= len)
+		return;
+
+	if (m_p1 != m_p2 && !get_key_state(ks_Shift))
+	{
+		m_cur_pos = _max(m_p1, m_p2);
+		m_select_start = m_cur_pos;
+		m_mark = false;
+	}
+	else
+	{
+		++m_cur_pos;
+	}
+
+	m_cur_pos = normalize_cursor_pos(m_cur_pos, false);
 }
 
 void line_edit_control::move_pos_left_word()
@@ -789,6 +827,456 @@ void line_edit_control::clamp_cur_pos()
 void line_edit_control::SwitchKL()
 {
 	ActivateKeyboardLayout( (HKL)HKL_NEXT, 0 );
+}
+
+static bool is_newline_token(const char* txt, int len, int pos_start, int& tok_start, int& tok_end)
+{
+	// "\n" = '\' 'n'
+	if (pos_start < 0 || pos_start + 1 >= len)
+		return false;
+
+	if (txt[pos_start] == '\\' && txt[pos_start + 1] == 'n')
+	{
+		tok_start = pos_start;
+		tok_end = pos_start + 1; // включительно
+		return true;
+	}
+	return false;
+}
+
+static bool find_newline_token_at_pos(const char* txt, int len, int pos, int& tok_start, int& tok_end)
+{
+	// pos Ч "позици€ между символами": 0..len
+	// недопустима€ позици€ дл€ каретки Ч между '\' и 'n', то есть pos == tok_start + 1
+	for (int i = 0; i + 1 < len; ++i)
+	{
+		if (txt[i] == '\\' && txt[i + 1] == 'n')
+		{
+			if (pos == i + 1)
+			{
+				tok_start = i;
+				tok_end = i + 1;
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+static bool find_color_token_at_pos(const char* txt, int len, int pos, int& tok_start, int& tok_end)
+{
+	// токен: %c[ ... ]
+	// допустимые позиции дл€ каретки: tok_start (перед '%') и tok_end+1 (после ']')
+	// недопустимые: (tok_start < pos && pos <= tok_end+1)
+
+	int i = 0;
+	while (i < len)
+	{
+		if (txt[i] == '%' && i + 2 < len && txt[i + 1] == 'c' && txt[i + 2] == '[')
+		{
+			int j = i + 3;
+			while (j < len && txt[j] != ']')
+				++j;
+
+			if (j >= len)
+				break; // незакрытый тег Ц считаем обычным текстом
+
+			int start = i;
+			int end = j;   // индекс ']'
+
+			// pos Ц позици€ между символами: 0..len
+			// символы тега занимают индексы [start .. end]
+			// недопустимо: start < pos && pos <= end+1
+			if (pos > start && pos <= end + 1)
+			{
+				tok_start = start;
+				tok_end = end;
+				return true;
+			}
+
+			i = end + 1;
+		}
+		else
+		{
+			++i;
+		}
+	}
+
+	return false;
+}
+
+int line_edit_control::normalize_cursor_pos(int pos, bool move_left) const
+{
+	LPCSTR txt = m_edit_str;
+	int len = (int)xr_strlen(txt);
+
+	if (pos < 0)   pos = 0;
+	if (pos > len) pos = len;
+
+	int tok_start, tok_end;
+
+	// сначала провер€ем \n
+	if (find_newline_token_at_pos(txt, len, pos, tok_start, tok_end))
+	{
+		// pos == tok_start+1 Ч между '\' и 'n'
+		if (move_left)
+			pos = tok_start;     // встать перед токеном
+		else
+			pos = tok_end + 1;   // встать после токена
+		return pos;
+	}
+
+	// затем цвет
+	if (find_color_token_at_pos(txt, len, pos, tok_start, tok_end))
+	{
+		if (move_left)
+			pos = tok_start;
+		else
+			pos = tok_end + 1;
+		return pos;
+	}
+
+	return pos;
+}
+
+void line_edit_control::move_pos_up()
+{
+	if (!m_bMultiLine)
+		return;
+
+	LPCSTR txt = m_edit_str;
+	int len = (int)xr_strlen(txt);
+	if (len <= 0)
+		return;
+
+	int cur = m_cur_pos;
+	if (cur < 0)   cur = 0;
+	if (cur > len) cur = len;
+
+	struct LineInfo
+	{
+		int start;
+		int end;
+		int visual_len;
+	};
+
+	xr_vector<LineInfo> lines;
+	lines.reserve(32);
+
+	int line_start = 0;
+	int visual_len = 0;
+	int i = 0;
+
+	// 1) –азбиваем текст на логические строки по "\n" или '\n'
+	while (i < len)
+	{
+		int tok_len = 0;
+
+		// перенос строки: "\n" (два символа) или насто€щий '\n'
+		if (txt[i] == '\\' && i + 1 < len && txt[i + 1] == 'n')
+		{
+			tok_len = 2;
+		}
+		else if (txt[i] == '\n')
+		{
+			tok_len = 1;
+		}
+
+		if (tok_len > 0)
+		{
+			LineInfo li;
+			li.start = line_start;
+			li.end = i;
+			li.visual_len = visual_len;
+			lines.push_back(li);
+
+			i += tok_len;
+			line_start = i;
+			visual_len = 0;
+			continue;
+		}
+
+		// цветовой тег: %c[ ... ]
+		if (txt[i] == '%' && i + 2 < len && txt[i + 1] == 'c' && txt[i + 2] == '[')
+		{
+			int j = i + 3;
+			while (j < len && txt[j] != ']')
+				++j;
+			if (j < len && txt[j] == ']')
+				++j; // позици€ после ']'
+
+			i = j;
+			continue;
+		}
+
+		// обычный видимый символ
+		++visual_len;
+		++i;
+	}
+
+	// последн€€ строка
+	{
+		LineInfo li;
+		li.start = line_start;
+		li.end = len;
+		li.visual_len = visual_len;
+		lines.push_back(li);
+	}
+
+	if (lines.empty())
+		return;
+
+	// 2) Ќаходим, в какой строке сейчас курсор
+	int cur_line = 0;
+	for (u32 li = 0; li < lines.size(); ++li)
+	{
+		const LineInfo& L = lines[li];
+		if (cur >= L.start && cur <= L.end)
+			cur_line = (int)li;
+		if (cur < L.start)
+			break;
+	}
+
+	if (cur_line <= 0)
+		return; // уже на первой строке
+
+	const LineInfo& Lcur = lines[cur_line];
+
+	// 3) —читаем Ђвидимуюї колонку в текущей строке
+	int col = 0;
+	i = Lcur.start;
+	while (i < cur)
+	{
+		// переносы внутри строки здесь не ожидаютс€, но на вс€кий случай выходим
+		if ((txt[i] == '\\' && i + 1 < len && txt[i + 1] == 'n') || txt[i] == '\n')
+			break;
+
+		// цветовой тег
+		if (txt[i] == '%' && i + 2 < len && txt[i + 1] == 'c' && txt[i + 2] == '[')
+		{
+			int j = i + 3;
+			while (j < len && txt[j] != ']')
+				++j;
+			if (j < len && txt[j] == ']')
+				++j;
+
+			i = j;
+			continue;
+		}
+
+		++col;
+		++i;
+	}
+
+	// 4) ѕереносим эту колонку на предыдущую строку
+	const LineInfo& Lprev = lines[cur_line - 1];
+	int target_col = col;
+	if (target_col > Lprev.visual_len)
+		target_col = Lprev.visual_len;
+
+	int new_pos = Lprev.start;
+	int cur_col = 0;
+	i = Lprev.start;
+	while (i < Lprev.end)
+	{
+		if ((txt[i] == '\\' && i + 1 < len && txt[i + 1] == 'n') || txt[i] == '\n')
+			break;
+
+		// цветовой тег
+		if (txt[i] == '%' && i + 2 < len && txt[i + 1] == 'c' && txt[i + 2] == '[')
+		{
+			int j = i + 3;
+			while (j < len && txt[j] != ']')
+				++j;
+			if (j < len && txt[j] == ']')
+				++j;
+
+			i = j;
+			continue;
+		}
+
+		if (cur_col == target_col)
+		{
+			new_pos = i;
+			break;
+		}
+
+		++cur_col;
+		++i;
+	}
+
+	if (target_col == Lprev.visual_len)
+		new_pos = Lprev.end;
+
+	m_cur_pos = new_pos;
+}
+
+void line_edit_control::move_pos_down()
+{
+	if (!m_bMultiLine)
+		return;
+
+	LPCSTR txt = m_edit_str;
+	int len = (int)xr_strlen(txt);
+	if (len <= 0)
+		return;
+
+	int cur = m_cur_pos;
+	if (cur < 0)   cur = 0;
+	if (cur > len) cur = len;
+
+	struct LineInfo
+	{
+		int start;
+		int end;
+		int visual_len;
+	};
+
+	xr_vector<LineInfo> lines;
+	lines.reserve(32);
+
+	int line_start = 0;
+	int visual_len = 0;
+	int i = 0;
+
+	// 1) –азбиваем текст на строки
+	while (i < len)
+	{
+		int tok_len = 0;
+
+		if (txt[i] == '\\' && i + 1 < len && txt[i + 1] == 'n')
+		{
+			tok_len = 2;
+		}
+		else if (txt[i] == '\n')
+		{
+			tok_len = 1;
+		}
+
+		if (tok_len > 0)
+		{
+			LineInfo li;
+			li.start = line_start;
+			li.end = i;
+			li.visual_len = visual_len;
+			lines.push_back(li);
+
+			i += tok_len;
+			line_start = i;
+			visual_len = 0;
+			continue;
+		}
+
+		// цветовой тег
+		if (txt[i] == '%' && i + 2 < len && txt[i + 1] == 'c' && txt[i + 2] == '[')
+		{
+			int j = i + 3;
+			while (j < len && txt[j] != ']')
+				++j;
+			if (j < len && txt[j] == ']')
+				++j;
+
+			i = j;
+			continue;
+		}
+
+		++visual_len;
+		++i;
+	}
+
+	{
+		LineInfo li;
+		li.start = line_start;
+		li.end = len;
+		li.visual_len = visual_len;
+		lines.push_back(li);
+	}
+
+	if (lines.empty())
+		return;
+
+	// 2) Ќаходим текущую строку
+	int cur_line = 0;
+	for (u32 li = 0; li < lines.size(); ++li)
+	{
+		const LineInfo& L = lines[li];
+		if (cur >= L.start && cur <= L.end)
+			cur_line = (int)li;
+		if (cur < L.start)
+			break;
+	}
+
+	if (cur_line >= (int)lines.size() - 1)
+		return; // уже на последней строке
+
+	const LineInfo& Lcur = lines[cur_line];
+
+	// 3) —читаем колонку в текущей строке
+	int col = 0;
+	i = Lcur.start;
+	while (i < cur)
+	{
+		if ((txt[i] == '\\' && i + 1 < len && txt[i + 1] == 'n') || txt[i] == '\n')
+			break;
+
+		// цветовой тег
+		if (txt[i] == '%' && i + 2 < len && txt[i + 1] == 'c' && txt[i + 2] == '[')
+		{
+			int j = i + 3;
+			while (j < len && txt[j] != ']')
+				++j;
+			if (j < len && txt[j] == ']')
+				++j;
+
+			i = j;
+			continue;
+		}
+
+		++col;
+		++i;
+	}
+
+	// 4) ѕереносим эту колонку на следующую строку
+	const LineInfo& Lnext = lines[cur_line + 1];
+	int target_col = col;
+	if (target_col > Lnext.visual_len)
+		target_col = Lnext.visual_len;
+
+	int new_pos = Lnext.start;
+	int cur_col = 0;
+	i = Lnext.start;
+	while (i < Lnext.end)
+	{
+		if ((txt[i] == '\\' && i + 1 < len && txt[i + 1] == 'n') || txt[i] == '\n')
+			break;
+
+		// цветовой тег
+		if (txt[i] == '%' && i + 2 < len && txt[i + 1] == 'c' && txt[i + 2] == '[')
+		{
+			int j = i + 3;
+			while (j < len && txt[j] != ']')
+				++j;
+			if (j < len && txt[j] == ']')
+				++j;
+
+			i = j;
+			continue;
+		}
+
+		if (cur_col == target_col)
+		{
+			new_pos = i;
+			break;
+		}
+
+		++cur_col;
+		++i;
+	}
+
+	if (target_col == Lnext.visual_len)
+		new_pos = Lnext.end;
+
+	m_cur_pos = new_pos;
 }
 
 // -------------------------------------------------------------------------------------------------

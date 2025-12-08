@@ -5,7 +5,7 @@
 #include "../gametask.h"
 #include "../string_table.h"
 #include "UIEventsWnd.h"
-#include "UIEditBoxEx.h"
+#include "UIMultiEditBox.h"
 #include "UIEditBox.h"
 #include "UIInventoryUtilities.h"
 #include "../map_location.h"
@@ -520,7 +520,7 @@ void CUIUserTaskEditWnd::Init					()
 	AddCallback			(m_btnCancel->WindowName(),BUTTON_CLICKED,CUIWndCallback::void_function(this,&CUIUserTaskEditWnd::OnCancel));
 
 	m_editCaption		= xr_new<CUIEditBox>();			m_editCaption->SetAutoDelete(true);		m_background->AttachChild(m_editCaption);
-	m_editDescription	= xr_new<CUIEditBoxEx>();		m_editDescription->SetAutoDelete(true); m_background->AttachChild(m_editDescription);
+	m_editDescription	= xr_new<CUIMultiEditBox>();	m_editDescription->SetAutoDelete(true); m_background->AttachChild(m_editDescription);
 
 
 	CUIXmlInit xml_init;
