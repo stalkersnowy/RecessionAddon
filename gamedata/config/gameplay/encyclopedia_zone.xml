@@ -269,7 +269,7 @@
 
     <!-------------------------------- Time ----------------------------->
 
-    <article id="zone_anomalies_time" name="Time" group="Anomalies">
+    <article id="zone_anomalies_time" name="Time_machine" group="Anomalies">
         <texture x="500" y="150" width="100" height="100">ui\ui_icon_photo</texture>
         <text>enc_zone_anomalies_time</text>
     </article>

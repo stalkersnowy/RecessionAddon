@@ -8,14 +8,12 @@
 
 #pragma once
 
-#include "UIWindow.h"
+#include "UIFrameWindow.h"
 #include "../encyclopedia_article_defs.h"
 
 class CEncyclopediaArticle;
-class CUIFrameWindow;
 class CUIFrameLineWnd;
 class CUIAnimatedStatic;
-class CUIStatic;
 class CUIListWnd;
 class CUIEncyclopediaCore;
 class CUIScrollView;
@@ -64,6 +62,8 @@ protected:
 
 	CUIListWnd*				UIIdxList;
 	CUIScrollView*			UIInfoList;
+	
+	CUIFrameWindow			UIImgMask;
 
 	void				SetCurrentArtice(CUITreeViewItem *pTVItem);
 };

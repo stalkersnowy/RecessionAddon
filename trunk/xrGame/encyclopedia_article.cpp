@@ -99,20 +99,27 @@ void CEncyclopediaArticle::load_shared	(LPCSTR)
 		data()->image.SetAutoDelete(false);
 
 		const int minSize = 65;
+		bool too_small = false;
 
-		// Сначала устанавливаем если надо минимально допустимые размеры иконки
+		float mul = 1.f;
 		if (r.width() < minSize)
 		{
-			float dx = minSize - r.width();
-			r.x2 += dx;
-			data()->image.SetBaseTextureOffset(dx / 2, data()->image.GetBaseTextureOffset()[1]);
+			mul = minSize / r.width();
+			too_small = true;
 		}
-
+	
 		if (r.height() < minSize)
 		{
-			float dy = minSize - r.height();
-			r.y2 += dy;
-			data()->image.SetBaseTextureOffset(data()->image.GetBaseTextureOffset()[0], dy / 2);
+			mul = _max(mul, minSize / r.height());
+			too_small = true;
+		}
+
+		if (too_small)
+		{
+			r.x2 = r.x1 + r.width() * mul;
+			r.y2 = r.y1 + r.height() * mul;
+			float mul2 = mul * .5f;
+			data()->image.SetBaseTextureOffset(mul2, mul2);
 		}
 
 		data()->image.SetWndRect(0, 0, r.width()*UI()->get_current_kx(), r.height());

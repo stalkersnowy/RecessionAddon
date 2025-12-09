@@ -1,0 +1,579 @@
+<?xml version='1.0' encoding="windows-1251"?>
+
+<game_information_portions>
+
+<info_portion id="encyclopedy">
+  <article>weapons1_ammo_ammo-9x18-fmj</article>
+  <article>weapons1_ammo_ammo-9x18-pmm</article>
+  <article>weapons1_ammo_ammo-9x19-fmj</article>
+  <article>weapons1_ammo_ammo-9x19-pbp</article>
+  <article>weapons1_ammo_ammo-11.43x23-fmj</article>
+  <article>weapons1_ammo_ammo-11.43x23-hydro</article>
+  <article>weapons1_ammo_ammo-5.45x39-fmj</article>
+  <article>weapons1_ammo_ammo-5.45x39-ap</article>
+  <article>weapons1_ammo_ammo-9x39-pab9</article>
+  <article>weapons1_ammo_ammo-9x39-ap</article>
+  <article>weapons1_ammo_ammo-9x39-sp5</article>
+  <article>weapons1_ammo_ammo-5.56x45-ss190</article>
+  <article>weapons1_ammo_ammo-5.56x45-ap</article>
+  <article>weapons1_ammo_ammo-7.62x54-7h1</article>
+  <article>weapons1_ammo_ammo-7.62x54-ap</article>
+  <article>weapons1_ammo_ammo-7.62x54-7h14</article>
+  <article>weapons1_ammo_ammo-12x70-buck</article>
+  <article>weapons1_ammo_ammo-12x76-zhekan</article>
+  <article>weapons1_ammo_ammo-12x76-dart</article>
+  <article>weapons1_ammo_ammo-m209</article>
+  <article>weapons1_ammo_ammo-vog-25</article>
+  <article>weapons1_ammo_ammo-vog-25p</article>
+  <article>weapons1_ammo_ammo-og-7b</article>
+  <article>weapons1_ammo_ammo-gauss</article>
+  <article>weapons1_wpn-pm</article>
+  <article>weapons1_wpn-pb</article>
+  <article>weapons1_wpn-fort</article>
+  <article>weapons1_wpn-hpsa</article>
+  <article>weapons1_wpn-walther</article>
+  <article>weapons1_wpn-beretta</article>
+  <article>weapons1_wpn-sig220</article>
+  <article>weapons1_wpn-colt1911</article>
+  <article>weapons1_wpn-usp</article>
+  <article>weapons1_wpn-desert-eagle</article>
+  <article>weapons1_wpn-toz34</article>
+  <article>weapons1_wpn-bm16</article>
+  <article>weapons1_wpn-spas12</article>
+  <article>weapons1_wpn-wincheaster1300</article>
+  <article>weapons1_wpn-mp5</article>
+  <article>weapons1_wpn-ak74</article>
+  <article>weapons1_wpn-ak74u</article>
+  <article>weapons1_wpn-vintorez</article>
+  <article>weapons1_wpn-val</article>
+  <article>weapons1_wpn-groza</article>
+  <article>weapons1_wpn-abakan</article>
+  <article>weapons1_wpn-lr300</article>
+  <article>weapons1_wpn-fn2000</article>
+  <article>weapons1_wpn-l85</article>
+  <article>weapons1_wpn-sig550</article>
+  <article>weapons1_wpn-g36</article>
+  <article>weapons1_wpn-svd</article>
+  <article>weapons1_wpn-svu</article>
+  <article>weapons1_wpn-gauss</article>
+  <article>weapons1_wpn-addon-grenade-launcher</article>
+  <article>weapons1_wpn-addon-grenade-launcher-m203</article>
+  <article>weapons1_wpn-rg-6</article>
+  <article>weapons1_wpn-rpg7</article>
+  <article>weapons1_grenade-f1</article>
+  <article>weapons1_grenade-rgd5</article>
+  <article>equipment_food_bread1</article>
+  <article>equipment_food_kolbasa1</article>
+  <article>equipment_food_conserva1</article>
+  <article>equipment_food_vodka1</article>
+  <article>equipment_food_energy_drink1</article>
+  <article>equipment_medi_antirad1</article>
+  <article>equipment_medi_medkit1</article>
+  <article>equipment_medi_medkit2</article>
+  <article>equipment_medi_medkit3</article>
+  <article>equipment_medi_bandage1</article>
+  <article>equipment_devic_device-pda1</article>
+  <article>equipment_devic_device-torch1</article>
+  <article>equipment_devic_detect1</article>
+  <article>equipment_devic_binocul1</article>
+  
+  <article>zone_artifact_af-medusa</article>
+  <article>zone_artifact_af-cristall-flower</article>
+  <article>zone_artifact_af-night-star</article>
+  <article>zone_artifact_af-vyvert</article>
+  <article>zone_artifact_af-gravi</article>
+  <article>zone_artifact_af-gold-fish</article>
+  <article>zone_artifact_af-blood</article>
+  <article>zone_artifact_af-mincer-meat</article>
+  <article>zone_artifact_af-soul</article>
+  <article>zone_artifact_af-drops</article>
+  <article>zone_artifact_af-fireball</article>
+  <article>zone_artifact_af-cristall</article>
+  <article>zone_artifact_af-electra-sparkler</article>
+  <article>zone_artifact_af-electra-flash</article>
+  <article>zone_artifact_af-electra-moonlight</article>
+  <article>zone_artifact_af-rusty-thorn</article>
+  <article>zone_artifact_af-rusty-kristall</article>
+  <article>zone_artifact_af-rusty-sea-urchin</article>
+  <article>zone_artifact_af-fuzz-kolobok</article>
+  <article>zone_artifact_af-ameba-slime</article>
+  <article>zone_artifact_af-ameba-slug</article>
+  <article>zone_artifact_af-ameba-mica</article>
+  <article>zone_artifact_af-dummy-glassbeads</article>
+  <article>zone_artifact_af-dummy-pellicle</article>
+  <article>zone_artifact_af-dummy-battery</article>
+  <article>zone_artifact_af-dummy-dummy</article>
+  <article>zone_artifact_af-dummy-spring</article>
+  <article>zone_zone-story_story-2006</article>
+  <article>zone_zone-story_story-2008</article>
+  <article>zone_zone-story_story-2010</article>
+  <article>zone_zone-story_story-raid</article>
+  <article>zone_anomalies_bald</article>
+  <article>zone_anomalies_gravi</article>
+  <article>zone_anomalies_meat</article>
+  <article>zone_anomalies_zharka</article>
+  <article>zone_anomalies_electra</article>
+  <article>zone_anomalies_fuzz</article>
+  <article>zone_anomalies_radioactive</article>
+  <article>zone_anomalies_ameba</article>
+  <article>zone_anomalies_time</article>
+  <article>zone_anomalies_lift</article>
+  <article>zone_locations_escape</article>
+  <article>zone_locations_garbage</article>
+  <article>zone_locations_agroprom</article>
+  <article>zone_locations_darkdolina</article>
+  <article>zone_locations_bar</article>
+  <article>zone_locations_rostok</article>
+  <article>zone_locations_yantar</article>
+  <article>zone_locations_military-loc</article>
+  <article>zone_locations_radar</article>
+  <article>zone_locations_pripiat</article>
+  <article>zone_locations_stancia</article>
+  <article>mutant_crow_general</article>
+  <article>mutant_flesh_general</article>
+  <article>mutant_blind_general</article>
+  <article>mutant_tushkano</article>
+  <article>mutant_boar_general</article>
+  <article>mutant_pseudodog_general</article>
+  <article>mutant_bloodsucker_general</article>
+  <article>mutant_pseudogiant_general</article>
+  <article>mutant_poltergeist_general</article>
+  <article>mutant_snork_general</article>
+  <article>social_military_army</article>
+  <article>social_military_milstalkers</article>
+  <article>social_scientists_mobile-labs</article>
+  <article>social_stalker-clans_duty</article>
+  <article>social_stalker-clans_freedom</article>
+  <article>social_stalker-clans_monolith</article>
+  <article>social_stalker-clans_zomstalkers</article>
+  <article>social_stalker-clans_bandits</article>
+  <article>social_stalker-clans_killers</article>
+  <article>social_stalker-clans_loners</article>
+
+	<article>tutorial_binocular</article>
+	<article>tutorial_crouch</article>
+	<article>tutorial_hide_weapon</article>
+	<article>tutorial_jump</article>
+	<article>tutorial_overload</article>
+	<article>tutorial_radiation</article>
+	<article>tutorial_relation</article>
+	<article>tutorial_sprint</article>
+	<article>tutorial_weakness</article>
+	<article>tutorial_weapon</article>
+	<article>tutorial_wound</article>
+</info_portion>
+  
+  <info_portion id="encyclopedy_zone_artifact_af-medusa">
+	<article>zone_artifact_af-medusa</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-cristall-flower">
+	<article>zone_artifact_af-cristall-flower</article>
+ </info_portion>
+ 
+  <info_portion id="encyclopedy_zone_artifact_af-night-star">
+	<article>zone_artifact_af-night-star</article>
+ </info_portion>
+  
+  <info_portion id="encyclopedy_zone_artifact_af-vyvert">
+	<article>zone_artifact_af-vyvert</article>
+ </info_portion>
+  
+   <info_portion id="encyclopedy_zone_artifact_af-gravi">
+	<article>zone_artifact_af-gravi</article>
+ </info_portion>
+  
+    <info_portion id="encyclopedy_zone_artifact_af-gold-fish">
+	<article>zone_artifact_af-gold-fish</article>
+ </info_portion>
+ 
+  <info_portion id="encyclopedy_zone_artifact_af-blood">
+	<article>zone_artifact_af-blood</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-mincer-meat">
+	<article>zone_artifact_af-mincer-meat</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-soul">
+	<article>zone_artifact_af-soul</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-drops">
+	<article>zone_artifact_af-drops</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-fireball">
+	<article>zone_artifact_af-fireball</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-cristall">
+	<article>zone_artifact_af-cristall</article>
+ </info_portion>
+ 
+ <info_portion id="encyclopedy_zone_artifact_af-electra-sparkler">
+	<article>zone_artifact_af-electra-sparkler</article>
+ </info_portion>
+ 
+  <info_portion id="encyclopedy_zone_artifact_af-electra-flash">
+	<article>zone_artifact_af-electra-flash</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-electra-moonlight">
+	<article>zone_artifact_af-electra-moonlight</article>
+ </info_portion>
+ 
+  <info_portion id="encyclopedy_zone_artifact_af-rusty-thorn">
+	<article>zone_artifact_af-rusty-thorn</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-rusty-kristall">
+	<article>zone_artifact_af-rusty-kristall</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-rusty-sea-urchin">
+	<article>zone_artifact_af-rusty-sea-urchin</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-fuzz-kolobok">
+	<article>zone_artifact_af-fuzz-kolobok</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-ameba-slime">
+	<article>zone_artifact_af-ameba-slime</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-ameba-slug">
+	<article>zone_artifact_af-ameba-slug</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-ameba-mica">
+	<article>zone_artifact_af-ameba-mica</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-dummy-glassbeads">
+	<article>zone_artifact_af-dummy-glassbeads</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-dummy-pellicle">
+	<article>zone_artifact_af-dummy-pellicle</article>
+ </info_portion>
+ 
+  <info_portion id="encyclopedy_zone_artifact_af-dummy-battery">
+	<article>zone_artifact_af-dummy-battery</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_artifact_af-dummy-dummy">
+	<article>zone_artifact_af-dummy-dummy</article>
+ </info_portion>
+ 
+  <info_portion id="encyclopedy_zone_artifact_af-dummy-spring">
+	<article>zone_artifact_af-dummy-spring</article>
+ </info_portion>
+ 
+  <info_portion id="encyclopedy_zone_zone-story_story-2006">
+	<article>zone_zone-story_story-2006</article>
+ </info_portion>
+ 
+  <info_portion id="encyclopedy_zone_zone-story_story-2008">
+	<article>zone_zone-story_story-2008</article>
+ </info_portion>
+ 
+  <info_portion id="encyclopedy_zone_zone-story_story-2010">
+	<article>zone_zone-story_story-2010</article>
+ </info_portion>
+ 
+ <info_portion id="encyclopedy_zone_zone-story_story-raid">
+	<article>zone_zone-story_story-raid</article>
+ </info_portion>
+ 
+  <info_portion id="encyclopedy_zone_anomalies_bald">
+	<article>zone_anomalies_bald</article>
+ </info_portion>
+ 
+  <info_portion id="encyclopedy_zone_anomalies_gravi">
+	<article>zone_anomalies_gravi</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_anomalies_meat">
+	<article>zone_anomalies_meat</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_anomalies_zharka">
+	<article>zone_anomalies_zharka</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_anomalies_electra">
+	<article>zone_anomalies_electra</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_anomalies_fuzz">
+	<article>zone_anomalies_fuzz</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_anomalies_radioactive">
+	<article>zone_anomalies_radioactive</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_anomalies_ameba">
+	<article>zone_anomalies_ameba</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_anomalies_time">
+	<article>zone_anomalies_time</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_anomalies_lift">
+	<article>zone_anomalies_lift</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_locations_escape">
+	<article>zone_locations_escape</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_locations_garbage">
+	<article>zone_locations_garbage</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_locations_agroprom">
+	<article>zone_locations_agroprom</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_locations_darkdolina">
+	<article>zone_locations_darkdolina</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_locations_bar">
+	<article>zone_locations_bar</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_locations_rostok">
+	<article>zone_locations_rostok</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_locations_yantar">
+	<article>zone_locations_yantar</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_locations_military-loc">
+	<article>zone_locations_military-loc</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_locations_radar">
+	<article>zone_locations_radar</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_locations_pripiat">
+	<article>zone_locations_pripiat</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_zone_locations_stancia">
+	<article>zone_locations_stancia</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_mutant_crow_general">
+	<article>mutant_crow_general</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_mutant_rat_general">
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_mutant_flesh_general">
+	<article>mutant_flesh_general</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_mutant_blind_general">
+	<article>mutant_blind_general</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_mutant_tushkano">
+	<article>mutant_tushkano</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_mutant_boar_general">
+	<article>mutant_boar_general</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_mutant_pseudodog_general">
+	<article>mutant_pseudodog_general</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_mutant_bloodsucker_general">
+	<article>mutant_bloodsucker_general</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_mutant_burer_general">
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_mutant_pseudogiant_general">
+	<article>mutant_pseudogiant_general</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_mutant_poltergeist_general">
+	<article>mutant_poltergeist_general</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_mutant_controller_general">
+	<article>mutant_controller_general</article>
+</info_portion>
+ 
+   <info_portion id="encyclopedy_mutant_snork_general">
+	<article>mutant_snork_general</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_social_military_army">
+	<article>social_military_army</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_social_military_milstalkers">
+	<article>social_military_milstalkers</article>
+ </info_portion>
+ 
+    <info_portion id="encyclopedy_social_scientists_mobile-labs">
+	<article>social_scientists_mobile-labs</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_social_stalker-clans_duty">
+	<article>social_stalker-clans_duty</article>
+ </info_portion>
+ 
+  <info_portion id="encyclopedy_social_stalker-clans_freedom">
+	<article>social_stalker-clans_freedom</article>
+ </info_portion>
+  
+  <info_portion id="encyclopedy_social_stalker-clans_monolith">
+	<article>social_stalker-clans_monolith</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_social_stalker-clans_zomstalkers">
+	<article>social_stalker-clans_zomstalkers</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_social_stalker-clans_bandits">
+	<article>social_stalker-clans_bandits</article>
+ </info_portion>
+ 
+   <info_portion id="encyclopedy_social_stalker-clans_killers">
+	<article>social_stalker-clans_killers</article>
+ </info_portion>
+  
+   <info_portion id="encyclopedy_social_stalker-clans_loners">
+	<article>social_stalker-clans_loners</article>
+ </info_portion>
+ 
+	<info_portion id="encyclopedy_tutorial_binocular">
+		<article>tutorial_binocular</article>
+	</info_portion>
+	<info_portion id="encyclopedy_tutorial_crouch">
+		<article>tutorial_crouch</article>
+	</info_portion>
+	<info_portion id="encyclopedy_tutorial_hide_weapon">
+		<article>tutorial_hide_weapon</article>
+	</info_portion>
+	<info_portion id="encyclopedy_tutorial_jump">
+		<article>tutorial_jump</article>
+	</info_portion>
+	<info_portion id="encyclopedy_tutorial_overload">
+		<article>tutorial_overload</article>
+	</info_portion>
+	<info_portion id="encyclopedy_tutorial_radiation">
+		<article>tutorial_radiation</article>
+	</info_portion>
+	<info_portion id="encyclopedy_tutorial_relation">
+		<article>tutorial_relation</article>
+	</info_portion>
+	<info_portion id="encyclopedy_tutorial_sprint">
+		<article>tutorial_sprint</article>
+	</info_portion>
+	<info_portion id="encyclopedy_tutorial_weakness">
+		<article>tutorial_weakness</article>
+	</info_portion>
+	<info_portion id="encyclopedy_tutorial_weapon">
+		<article>tutorial_weapon</article>
+	</info_portion>
+	<info_portion id="encyclopedy_tutorial_wound">
+		<article>tutorial_wound</article>
+	</info_portion>
+
+	<info_portion id="encyclopedy_tutorial_diary"></info_portion>
+	
+	<info_portion id="encyclopedy_ammo_9x18_fmj"><article>weapons1_ammo_ammo-9x18-fmj</article></info_portion>
+	<info_portion id="encyclopedy_ammo_9x18_pmm"><article>weapons1_ammo_ammo-9x18-pmm</article></info_portion>
+	<info_portion id="encyclopedy_ammo_9x19_fmj"><article>weapons1_ammo_ammo-9x19-fmj</article></info_portion>
+	<info_portion id="encyclopedy_ammo_9x19_pbp"><article>weapons1_ammo_ammo-9x19-pbp</article></info_portion>
+	<info_portion id="encyclopedy_ammo_11.43x23_fmj"><article>weapons1_ammo_ammo-11.43x23-fmj</article></info_portion>
+	<info_portion id="encyclopedy_ammo_11.43x23_hydro"><article>weapons1_ammo_ammo-11.43x23-hydro</article></info_portion>
+	<info_portion id="encyclopedy_ammo_5.45x39_fmj"><article>weapons1_ammo_ammo-5.45x39-fmj</article></info_portion>
+	<info_portion id="encyclopedy_ammo_5.45x39_ap"><article>weapons1_ammo_ammo-5.45x39-ap</article></info_portion>
+	<info_portion id="encyclopedy_ammo_9x39_pab9"><article>weapons1_ammo_ammo-9x39-pab9</article></info_portion>
+	<info_portion id="encyclopedy_ammo_9x39_ap"><article>weapons1_ammo_ammo-9x39-ap</article></info_portion>
+	<info_portion id="encyclopedy_ammo_9x39_sp5"><article>weapons1_ammo_ammo-9x39-sp5</article></info_portion>
+	<info_portion id="encyclopedy_ammo_5.56x45_ss190"><article>weapons1_ammo_ammo-5.56x45-ss190</article></info_portion>
+	<info_portion id="encyclopedy_ammo_5.56x45_ap"><article>weapons1_ammo_ammo-5.56x45-ap</article></info_portion>
+	<info_portion id="encyclopedy_ammo_7.62x54_7h1"><article>weapons1_ammo_ammo-7.62x54-7h1</article></info_portion>
+	<info_portion id="encyclopedy_ammo_7.62x54_ap"><article>weapons1_ammo_ammo-7.62x54-ap</article></info_portion>
+	<info_portion id="encyclopedy_ammo_7.62x54_7h14"><article>weapons1_ammo_ammo-7.62x54-7h14</article></info_portion>
+	<info_portion id="encyclopedy_ammo_12x70_buck"><article>weapons1_ammo_ammo-12x70-buck</article></info_portion>
+	<info_portion id="encyclopedy_ammo_12x76_zhekan"><article>weapons1_ammo_ammo-12x76-zhekan</article></info_portion>
+	<info_portion id="encyclopedy_ammo_12x76_dart"><article>weapons1_ammo_ammo-12x76-dart</article></info_portion>
+	<info_portion id="encyclopedy_ammo_m209"><article>weapons1_ammo_ammo-m209</article></info_portion>
+	<info_portion id="encyclopedy_ammo_vog_25"><article>weapons1_ammo_ammo-vog-25</article></info_portion>
+	<info_portion id="encyclopedy_ammo_vog_25p"><article>weapons1_ammo_ammo-vog-25p</article></info_portion>
+	<info_portion id="encyclopedy_ammo_og_7b"><article>weapons1_ammo_ammo-og-7b</article></info_portion>
+	<info_portion id="encyclopedy_ammo_gauss"><article>weapons1_ammo_ammo-gauss</article></info_portion>
+	<info_portion id="encyclopedy_wpn-pm"><article>weapons1_wpn-pm</article></info_portion>
+	<info_portion id="encyclopedy_wpn-pb"><article>weapons1_wpn-pb</article></info_portion>
+	<info_portion id="encyclopedy_wpn-fort"><article>weapons1_wpn-fort</article></info_portion>
+	<info_portion id="encyclopedy_wpn-hpsa"><article>weapons1_wpn-hpsa</article></info_portion>
+	<info_portion id="encyclopedy_wpn-walther"><article>weapons1_wpn-walther</article></info_portion>
+	<info_portion id="encyclopedy_wpn-beretta"><article>weapons1_wpn-beretta</article></info_portion>
+	<info_portion id="encyclopedy_wpn-sig220"><article>weapons1_wpn-sig220</article></info_portion>
+	<info_portion id="encyclopedy_wpn-colt1911"><article>weapons1_wpn-colt1911</article></info_portion>
+	<info_portion id="encyclopedy_wpn-usp"><article>weapons1_wpn-usp</article></info_portion>
+	<info_portion id="encyclopedy_wpn-desert-eagle"><article>weapons1_wpn-desert-eagle</article></info_portion>
+	<info_portion id="encyclopedy_wpn-toz34"><article>weapons1_wpn-toz34</article></info_portion>
+	<info_portion id="encyclopedy_wpn-bm16"><article>weapons1_wpn-bm16</article></info_portion>
+	<info_portion id="encyclopedy_wpn-spas12"><article>weapons1_wpn-spas12</article></info_portion>
+	<info_portion id="encyclopedy_wpn-wincheaster1300"><article>weapons1_wpn-wincheaster1300</article></info_portion>
+	<info_portion id="encyclopedy_wpn-mp5"><article>weapons1_wpn-mp5</article></info_portion>
+	<info_portion id="encyclopedy_wpn-ak74"><article>weapons1_wpn-ak74</article></info_portion>
+	<info_portion id="encyclopedy_wpn-ak74u"><article>weapons1_wpn-ak74u</article></info_portion>
+	<info_portion id="encyclopedy_wpn-vintorez"><article>weapons1_wpn-vintorez</article></info_portion>
+	<info_portion id="encyclopedy_wpn-val"><article>weapons1_wpn-val</article></info_portion>
+	<info_portion id="encyclopedy_wpn-groza"><article>weapons1_wpn-groza</article></info_portion>
+	<info_portion id="encyclopedy_wpn-abakan"><article>weapons1_wpn-abakan</article></info_portion>
+	<info_portion id="encyclopedy_wpn-lr300"><article>weapons1_wpn-lr300</article></info_portion>
+	<info_portion id="encyclopedy_wpn-fn2000"><article>weapons1_wpn-fn2000</article></info_portion>
+	<info_portion id="encyclopedy_wpn-l85"><article>weapons1_wpn-l85</article></info_portion>
+	<info_portion id="encyclopedy_wpn-sig550"><article>weapons1_wpn-sig550</article></info_portion>
+	<info_portion id="encyclopedy_wpn-g36"><article>weapons1_wpn-g36</article></info_portion>
+	<info_portion id="encyclopedy_wpn-svd"><article>weapons1_wpn-svd</article></info_portion>
+	<info_portion id="encyclopedy_wpn-svu"><article>weapons1_wpn-svu</article></info_portion>
+	<info_portion id="encyclopedy_wpn-gauss"><article>weapons1_wpn-gauss</article></info_portion>
+	<info_portion id="encyclopedy_wpn-addon-grenade-launcher"><article>weapons1_wpn-addon-grenade-launcher</article></info_portion>
+	<info_portion id="encyclopedy_wpn-addon-grenade-launcher-m203"><article>weapons1_wpn-addon-grenade-launcher-m203</article></info_portion>
+	<info_portion id="encyclopedy_wpn-rg-6"><article>weapons1_wpn-rg-6</article></info_portion>
+	<info_portion id="encyclopedy_wpn-rpg7"><article>weapons1_wpn-rpg7</article></info_portion>
+	<info_portion id="encyclopedy_grenade-f1"><article>weapons1_grenade-f1</article></info_portion>
+	<info_portion id="encyclopedy_grenade-rgd5"><article>weapons1_grenade-rgd5</article></info_portion>
+	<info_portion id="encyclopedy_food_bread1"><article>equipment_food_bread1</article></info_portion>
+	<info_portion id="encyclopedy_food_kolbasa1"><article>equipment_food_kolbasa1</article></info_portion>
+	<info_portion id="encyclopedy_food_conserva1"><article>equipment_food_conserva1</article></info_portion>
+	<info_portion id="encyclopedy_food_vodka1"><article>equipment_food_vodka1</article></info_portion>
+	<info_portion id="encyclopedy_energy_drink1"><article>equipment_food_energy_drink1</article></info_portion>
+	<info_portion id="encyclopedy_medi_antirad1"><article>equipment_medi_antirad1</article></info_portion>
+	<info_portion id="encyclopedy_medi_medkit1"><article>equipment_medi_medkit1</article></info_portion>
+	<info_portion id="encyclopedy_medi_medkit2"><article>equipment_medi_medkit2</article></info_portion>
+	<info_portion id="encyclopedy_medi_medkit3"><article>equipment_medi_medkit3</article></info_portion>
+	<info_portion id="encyclopedy_medi_bandage1"><article>equipment_medi_bandage1</article></info_portion>
+	<info_portion id="encyclopedy_device-pda1"><article>equipment_devic_device-pda1</article></info_portion>
+	<info_portion id="encyclopedy_device-torch1"><article>equipment_devic_device-torch1</article></info_portion>
+	<info_portion id="encyclopedy_devic_detect1"><article>equipment_devic_detect1</article></info_portion>
+	<info_portion id="encyclopedy_devic_binocul1"><article>equipment_devic_binocul1</article></info_portion>
+
+	<info_portion id="tr_escape_broken_car">
+		<article>tr_escape_broken_car</article>
+	</info_portion>
+
+ 
+</game_information_portions>

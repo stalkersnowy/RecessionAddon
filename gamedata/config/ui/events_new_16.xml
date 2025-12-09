@@ -55,7 +55,7 @@
                 </src_list>
             </work_area>
         </left_frame>
-        <right_frame x="261" y="0" width="373" height="475" stretch="1">
+        <right_frame x="261" y="0" width="373" height="475" a="90" stretch="1">
             <texture>ui_pda_frame_sub</texture>
             <auto_static x="7" y="45" width="3" height="460" stretch="1">
                 <texture>ui\ui_pda_vertical_line_r_l</texture>

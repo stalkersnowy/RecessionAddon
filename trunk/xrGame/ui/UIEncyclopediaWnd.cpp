@@ -90,6 +90,8 @@ void CUIEncyclopediaWnd::Init()
 
 	xml_init.InitAutoStatic(uiXml, "left_auto_static", UIEncyclopediaInfoBkg);
 	xml_init.InitAutoStatic(uiXml, "right_auto_static", UIEncyclopediaIdxBkg);
+	
+	xml_init.InitFrameWindow(uiXml, "mask_frame_window", 0, &UIImgMask);
 }
 
 #include "../string_table.h"
@@ -100,25 +102,37 @@ void CUIEncyclopediaWnd::SendMessage(CUIWindow *pWnd, s16 msg, void* pData)
 		CUITreeViewItem *pTVItem = static_cast<CUITreeViewItem*>(pData);
 		R_ASSERT		(pTVItem);
 		
+		xr_string tmp;
 		if( pTVItem->vSubItems.size() )
 		{
-			CEncyclopediaArticle* A = m_ArticlesDB[pTVItem->vSubItems[0]->GetValue()];
-
 			xr_string caption		= ALL_PDA_HEADER_PREFIX;
-			caption					+= "/";
-			caption					+= CStringTable().translate(A->data()->group).c_str();
+			caption					+= pTVItem->GetHierarchyAsText().c_str();
 
-			UIEncyclopediaInfoHeader->UITitleText.SetText(caption.c_str());
-			UIArticleHeader->SetTextST(*(A->data()->group));
+			LPCSTR gr_path = caption.c_str();
+			UIEncyclopediaInfoHeader->UITitleText.SetText(gr_path);
+
+			u32 cnt = _GetItemCount(gr_path, '/');
+			if(cnt)
+				UIArticleHeader->SetText(_GetItem(gr_path, cnt-1, tmp, '/'));
+			else
+				UIArticleHeader->SetText(pTVItem->GetText());
 			SetCurrentArtice		(NULL);
 		}else
 		{
-			CEncyclopediaArticle* A = m_ArticlesDB[pTVItem->GetValue()];
+			int idx = pTVItem->GetValue();
+			if (idx == -1) return;
+			CEncyclopediaArticle* A = m_ArticlesDB[idx];
+
 			xr_string caption		= ALL_PDA_HEADER_PREFIX;
 			caption					+= "/";
-			caption					+= CStringTable().translate(A->data()->group).c_str();
-			caption					+= "/";
-			caption					+= CStringTable().translate(A->data()->name).c_str();
+
+			LPCSTR gr_path = A->data()->group.c_str();
+			u32 cnt = _GetItemCount(gr_path, '/');
+			for (int i = 0; i < cnt; ++i){
+				caption += CStringTable().translate(_GetItem(gr_path, i, tmp, '/')).c_str();
+				caption += "/";
+			}
+			caption += CStringTable().translate(A->data()->name).c_str();
 
 			UIEncyclopediaInfoHeader->UITitleText.SetText(caption.c_str());
 			SetCurrentArtice		(pTVItem);
@@ -199,6 +213,13 @@ void CUIEncyclopediaWnd::SetCurrentArtice(CUITreeViewItem *pTVItem)
 		CUIEncyclopediaArticleWnd*	article_info = xr_new<CUIEncyclopediaArticleWnd>();
 		article_info->Init			("encyclopedia_item.xml","encyclopedia_wnd:objective_item");
 		article_info->SetArticle	(m_ArticlesDB[pTVItem->GetValue()]);
+		
+		if(UIImgMask.GetParent())
+			UIImgMask.GetParent()->DetachChild(&UIImgMask);
+		
+		if(article_info->GetImage()->TextureAvailable())
+			article_info->GetImage()->SetMask(&UIImgMask);
+
 		UIInfoList->AddWindow		(article_info, true);
 
 		// Пометим как прочитанную
