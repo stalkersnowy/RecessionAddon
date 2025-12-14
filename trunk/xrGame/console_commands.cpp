@@ -55,8 +55,6 @@
 #include "GameConstants.h"
 
 string_path		g_last_saved_game;
-int				quick_save_counter = 0;
-extern u32		last_quick;
 
 extern void show_smart_cast_stats		();
 extern void clear_smart_cast_stats		();
@@ -669,17 +667,20 @@ public:
 		timer.Start				();
 #endif
 		if (!xr_strlen(S)){
-			if (last_quick < 1 && quick_save_counter == 0)
+			if (psActorQuickSaveNumberCurrent >= psActorQuickSaveNumberMax || psActorQuickSaveNumberCurrent < 1 )
+				psActorQuickSaveNumberCurrent = 1;
+			else
+				++psActorQuickSaveNumberCurrent;
+			
+			if (psActorQuickSaveNumberMax <= 1)
 				strconcat(sizeof(S), S, Core.UserName, " - quicksave");
 			else
-				xr_sprintf(S, "%s - quicksave %d", Core.UserName, last_quick);
+				xr_sprintf(S, "%s - quicksave %d", Core.UserName, psActorQuickSaveNumberCurrent);
 			NET_Packet			net_packet;
 			net_packet.w_begin	(M_SAVE_GAME);
 			net_packet.w_stringZ(S);
 			net_packet.w_u8		(0);
 			Level().Send		(net_packet,net_flags(TRUE));
-			if (last_quick < quick_save_counter && quick_save_counter > 0) last_quick++;
-			else last_quick = 0;
 		}else{
 			if(!valid_file_name(S)){
 				Msg("invalid file name");
@@ -1937,8 +1938,9 @@ void CCC_RegisterCommands()
 	*g_last_saved_game	= 0;
 
 	CMD4(CCC_Integer,	"g_hit_mark_index",	&m_HitMarkIndex,	-1, 18);
-
-	CMD4(CCC_Integer,	"quick_save_counter",		&quick_save_counter,	0, 25);
+	
+	CMD4(CCC_Integer,	"quick_save_counter_current",	&psActorQuickSaveNumberCurrent,	0, 25);
+	CMD4(CCC_Integer,	"quick_save_counter",			&psActorQuickSaveNumberMax, 1, 25);
 
 //	register_mp_console_commands					();
 }

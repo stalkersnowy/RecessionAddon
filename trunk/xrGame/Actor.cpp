@@ -85,6 +85,9 @@ static Fvector	vFootExt;
 
 Flags32			psActorFlags={AF_GODMODE_RT|AF_IMPORTANT_SAVE};
 
+int				psActorQuickSaveNumberCurrent = 0;
+int				psActorQuickSaveNumberMax = 1;
+
 
 
 CActor::CActor() : CEntityAlive()

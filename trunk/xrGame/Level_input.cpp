@@ -39,7 +39,6 @@
 
 bool g_bDisableAllInput = false;
 extern	float	g_fTimeFactor;
-u32	last_quick = 0;
 
 #define CURRENT_ENTITY()	(game?((GameID() == GAME_SINGLE) ? CurrentEntity() : CurrentControlEntity()):NULL)
 
@@ -166,7 +165,21 @@ void CLevel::IR_OnKeyboardPress	(int key)
 		FS.get_path					("$game_scripts$")->m_Flags.set(FS_Path::flNeedRescan, TRUE);
 		FS.rescan_pathes			();
 #endif // DEBUG
-		Console->Execute			("load_last_save");
+		string_path					saved_game,command;
+		
+		string16 Q;
+		sprintf_s(Q, "%d", psActorQuickSaveNumberCurrent);
+
+		if (psActorQuickSaveNumberMax <= 1)
+			strconcat(sizeof(saved_game), saved_game, Core.UserName, " - quicksave");
+		else
+			xr_sprintf(saved_game, "%s - quicksave %d", Core.UserName, psActorQuickSaveNumberCurrent);
+
+		if (!CSavedGameWrapper::valid_saved_game(saved_game))
+			return;
+
+		strconcat					(sizeof(command),command,"load ",saved_game);
+		Console->Execute			(command);
 		return;
 	}
 

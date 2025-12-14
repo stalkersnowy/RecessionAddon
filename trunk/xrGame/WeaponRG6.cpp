@@ -55,6 +55,9 @@ void CWeaponRG6::FireStart ()
 	if(GetState() == eIdle	&& getRocketCount() ) 
 	{
 		inheritedSG::FireStart ();
+
+		if (!iAmmoElapsed)
+			return;
 	
 		Fvector p1, d; 
 		p1.set(get_LastFP()); 
