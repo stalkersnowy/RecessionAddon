@@ -75,7 +75,6 @@ public:
 	float			speed;
 
 	BOOL			playing;
-	BOOL			stop_at_end_callback;
 	BOOL			stop_at_end;
 	BOOL			fall_at_end;
 	PlayCallback	Callback;
@@ -280,10 +279,10 @@ IC void CBlend::update_play( float dt, PlayCallback _Callback )
 	if( !update_time( dt ) )//reached end 
 		return;
 
-	if ( _Callback &&  stop_at_end_callback )	
+	if ( _Callback &&  playing )	
 		_Callback( this );		// callback only once
 
-	stop_at_end_callback		= FALSE;
+	playing		= FALSE;
 
 	if( fall_at_end )
 	{
