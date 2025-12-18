@@ -145,7 +145,7 @@
 			[spawn] \n
 			wpn_pm \n
 			ammo_9x18_fmj \n
-			wpn_ak74u = 1, 0, 1, 0 \n
+			wpn_ak74u = 1, silencer \n
 			ammo_5.45x39_fmj = 1 \n
 			device_torch \n
 #include "gameplay\character_food.xml"
@@ -175,7 +175,7 @@
 			[spawn] \n
 			wpn_pm \n
 			ammo_9x18_fmj \n
-			wpn_ak74u = 1, 0, 1, 0 \n
+			wpn_ak74u = 1, silencer \n
 			ammo_5.45x39_fmj = 1 \n
 			device_torch \n
 #include "gameplay\character_food.xml"
@@ -333,7 +333,7 @@
 			[spawn] \n
 			wpn_beretta \n
 			ammo_9x19_pbp = 1 \n		
-			wpn_ak74 = 1, 1, 1, 0 \n
+			wpn_ak74 = 1, scope silencer \n
 			ammo_5.45x39_fmj = 1 \n
 			device_torch \n
 #include "gameplay\character_items.xml"			
@@ -365,7 +365,7 @@
 			[spawn] \n
 			wpn_sig220 \n
 			ammo_11.43x23_hydro \n	
-			wpn_l85 = 1, 0, 1, 0 \n
+			wpn_l85 = 1, silencer \n
 			ammo_5.56x45_ap = 1 \n
 			device_torch \n
 #include "gameplay\character_items.xml"			
@@ -397,7 +397,7 @@
 			[spawn] \n
 			wpn_sig220 \n
 			ammo_11.43x23_hydro \n	
-			wpn_lr300 = 1, 1, 1, 0 \n
+			wpn_lr300 = 1, scope silencer \n
 			ammo_5.56x45_ap = 1 \n
 			device_torch \n
 #include "gameplay\character_items.xml"			
@@ -3789,7 +3789,7 @@
 		<crouch_type>-1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_ak74_arena = 1, 0, 1, 0 \n
+			wpn_ak74_arena = 1, silencer \n
 			ammo_5.45x39_ap = 1 \n
 #include "gameplay\character_drugs.xml"
 		</supplies>
@@ -3814,7 +3814,7 @@
 		<crouch_type>-1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_ak74_arena = 1, 0, 1, 0 \n
+			wpn_ak74_arena = 1, silencer \n
 			ammo_5.45x39_ap = 1 \n
 #include "gameplay\character_drugs.xml"
 		</supplies>
@@ -4053,7 +4053,7 @@
 		<crouch_type>-1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_ak74_arena = 1, 0, 1, 0 \n
+			wpn_ak74_arena = 1, silencer \n
 			ammo_5.45x39_ap = 1 \n
 #include "gameplay\character_drugs.xml"
 		</supplies>
@@ -4078,7 +4078,7 @@
 		<crouch_type>-1</crouch_type>
 		<supplies>
 			[spawn] \n
-			wpn_ak74_arena = 1, 0, 1, 0 \n
+			wpn_ak74_arena = 1, silencer \n
 			ammo_5.45x39_ap = 1 \n
 #include "gameplay\character_drugs.xml"
 		</supplies>
@@ -4137,7 +4137,7 @@
 		<visual>actors\neytral\stalker_neytral_exoskeleton</visual>
 		<supplies>
 			[spawn] \n
-			wpn_ak74 = 1, 0, 1, 0 \n
+			wpn_ak74 = 1, silencer \n
 			ammo_5.45x39_ap = 1 \n
 #include "gameplay\character_drugs.xml"
 		</supplies>
@@ -4162,7 +4162,7 @@
 		<visual>actors\neytral\stalker_neytral_exoskeleton</visual>
 		<supplies>
 			[spawn] \n
-			wpn_ak74 = 1, 0, 1, 0 \n
+			wpn_ak74 = 1, silencer \n
 			ammo_5.45x39_ap = 1 \n
 #include "gameplay\character_drugs.xml"
 		</supplies>
@@ -4187,7 +4187,7 @@
 		<visual>actors\neytral\stalker_neytral_exoskeleton</visual>
 		<supplies>
 			[spawn] \n
-			wpn_ak74 = 1, 0, 1, 0 \n
+			wpn_ak74 = 1, silencer \n
 			ammo_5.45x39_ap = 1 \n
 #include "gameplay\character_drugs.xml"
 		</supplies>
@@ -4212,7 +4212,7 @@
 		<visual>actors\neytral\stalker_neytral_exoskeleton</visual>
 		<supplies>
 			[spawn] \n
-			wpn_ak74 = 1, 0, 1, 0 \n
+			wpn_ak74 = 1, silencer \n
 			ammo_5.45x39_ap = 1 \n
 #include "gameplay\character_drugs.xml"
 		</supplies>

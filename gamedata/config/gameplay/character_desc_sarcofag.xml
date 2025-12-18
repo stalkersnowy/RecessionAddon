@@ -726,7 +726,7 @@
         <snd_config>characters_voice\human_02\bandit\</snd_config>
         <supplies>
 			[spawn] \n
-			wpn_l85 = 1, 0, 1, 0 \n
+			wpn_l85 = 1, silencer \n
 			ammo_5.56x45_ap = 2 \n
         </supplies>
 					

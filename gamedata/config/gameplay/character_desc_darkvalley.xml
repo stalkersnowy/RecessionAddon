@@ -255,7 +255,7 @@
 			[spawn] \n
 			wpn_hpsa \n
 			ammo_9x19_pbp = 1 \n
-			wpn_ak74 = 1, 0, 1, 0 \n
+			wpn_ak74 = 1, silencer \n
 			ammo_5.45x39_ap = 1 \n
 			device_torch \n
 #include "gameplay\character_food.xml"
@@ -285,7 +285,7 @@
 			[spawn] \n
 			wpn_hpsa \n
 			ammo_9x19_pbp = 1 \n
-			wpn_ak74 = 1, 0, 1, 0 \n
+			wpn_ak74 = 1, silencer \n
 			ammo_5.45x39_ap = 1 \n
 			device_torch \n
 #include "gameplay\character_food.xml"
