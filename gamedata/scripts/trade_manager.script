@@ -9,9 +9,9 @@ local trade_manager = {
 
 function trade_init(npc, cfg)
 	--printf("TRADE INIT[%s]", npc:name())
---'	if trade_manager[npc:id()] == nil then
+	if trade_manager[npc:id()] == nil then
 		trade_manager[npc:id()] = {}
---'	end
+	end
 
 	trade_manager[npc:id()].cfg_ltx = cfg
 	trade_manager[npc:id()].config = ini_file(cfg)
@@ -45,11 +45,11 @@ function update(npc)
 		return
 	end
 
-	if tt.update_time ~= nil and tt.update_time < time_global() then
+	if tt.update_time ~= nil and game.get_game_time():diffSec(tt.update_time) < 3600 then
 		return
 	end
-	tt.update_time = time_global() + 3600000
-	
+	tt.update_time = game.get_game_time()
+
 	local str = xr_logic.pick_section_from_condlist(db.actor, npc, tt.buy_condition)
 	if tt.current_buy_condition ~= str then
 		--printf("TRADE [%s]: buy condition = %s", npc:name(), str)
@@ -69,15 +69,20 @@ function update(npc)
 	end
 
 	str = xr_logic.pick_section_from_condlist(db.actor, npc, tt.buy_supplies)
-	if tt.current_buy_supplies ~= str then
-		if tt.resuply_time ~= nil and tt.resuply_time < time_global() then
-			return
-		end
+	if tt.resupply_status == nil and tt.current_buy_supplies ~= str then
+		tt.resupply_status = false
+	end
+	if tt.resupply_status == false or tt.resuply_time == nil or game.get_game_time():diffSec(tt.resuply_time) >= 86400 then
 		--printf("TRADE [%s]: buy_supplies = %s", npc:name(), str)
 		npc:buy_supplies(tt.config, str)
 		tt.current_buy_supplies = str
-		tt.resuply_time = time_global() + 24*3600000
-	end	
+		tt.resuply_time = game.get_game_time()
+		if tt.resupply_status == false then
+			tt.resupply_status = true
+		else
+			tt.resupply_status = nil
+		end
+	end
 end
 
 
@@ -116,18 +121,25 @@ function save(obj, packet)
 		packet:w_stringZ(tt.current_buy_supplies)
 	end
 
-	local cur_tm = time_global()
-
 	if tt.update_time == nil then
-		packet:w_s32(-1)
+		packet:w_u8(0)
 	else
-	 	packet:w_s32(tt.update_time - cur_tm)
+		packet:w_u8(1)
+		utils.w_CTime(packet, tt.update_time)
 	end
 
 	if tt.resuply_time == nil then
-		packet:w_s32(-1)
+		packet:w_u8(0)
 	else
-	 	packet:w_s32(tt.resuply_time - cur_tm)
+		packet:w_u8(1)
+		utils.w_CTime(packet, tt.resuply_time)
+	end
+
+	if tt.resupply_status == nil then
+		packet:w_u8(0)
+	else
+		packet:w_u8(1)
+		packet:w_bool(tt.resupply_status)
 	end
 end
 
@@ -167,15 +179,18 @@ function load(obj, packet)
 		tt.current_buy_supplies = a	
 	end
 
-	local cur_tm = time_global()
-
-	a = packet:r_s32()
-	if a ~= -1 then
-		tt.update_time = cur_tm + a
+	a = packet:r_u8()
+	if a == 1 then
+		tt.update_time = utils.r_CTime(packet)
 	end
 
-	a = packet:r_s32()
-	if a ~= -1 then
-		tt.resuply_time = cur_tm + a
+	a = packet:r_u8()
+	if a == 1 then
+		tt.resuply_time = utils.r_CTime(packet)
+	end
+
+	a = packet:r_u8()
+	if a == 1 then
+		tt.resupply_status = packet:r_bool()
 	end
 end
