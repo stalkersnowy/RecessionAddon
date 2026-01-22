@@ -913,6 +913,9 @@
     <ClCompile Include="..\layers\blenders\Blender_Palette.cpp" />
     <ClCompile Include="..\layers\blenders\Blender_Recorder.cpp" />
     <ClCompile Include="R_Backend_hemi.cpp" />
+    <ClCompile Include="trivial_encryptor.cpp">
+      <Filter>General</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="OutOfVirtError.RES">

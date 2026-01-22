@@ -539,7 +539,7 @@ int DecodePosition(void)
 /* compression */
 void Encode(void)  /* compression */
 {
-    int  i, c, len, r, s, last_match_length;
+    int  i, c, _len, r, s, last_match_length;
 	
     textsize = fs.InputSize();
 	fs.Init_Output(textsize);
@@ -556,15 +556,15 @@ void Encode(void)  /* compression */
     r = N - F;
     for (i = s; i < r; i++)
         text_buf[i] = 0x20;
-    for (len = 0; len < F && (c = fs._getb()) != EOF; len++)
-        text_buf[r + len] = (unsigned char)c;
-    textsize = len;
+    for (_len = 0; _len < F && (c = fs._getb()) != EOF; _len++)
+        text_buf[r + _len] = (unsigned char)c;
+    textsize = _len;
     for (i = 1; i <= F; i++)
         InsertNode(r - i);
     InsertNode(r);
     do {
-        if (match_length > len)
-            match_length = len;
+        if (match_length > _len)
+            match_length = _len;
         if (match_length <= THRESHOLD) {
             match_length = 1;
 			// textsize==56158    - FATAL :(
@@ -589,14 +589,14 @@ void Encode(void)  /* compression */
             DeleteNode(s);
             s = (s + 1) & (N - 1);
             r = (r + 1) & (N - 1);
-            if (--len) InsertNode(r);
+            if (--_len) InsertNode(r);
         }
-    } while (len > 0);
+    } while (_len > 0);
     fs.PutFlush();
 	tim_size = textsize;
 }
 
-void Decode(void)  /* recover */
+bool Decode(int total_size)  /* recover */
 {
     int  i, j, k, r, c;
     unsigned int  count;
@@ -605,7 +605,10 @@ void Decode(void)  /* recover */
     textsize |= (fs._getb() << 8);
     textsize |= (fs._getb() << 16);
     textsize |= (fs._getb() << 24);
-    if (textsize == 0) return;
+    if (textsize == 0)
+        return false;
+    if (total_size != -1 && textsize > total_size)
+        return false;
 	
 	fs.Init_Output(textsize);
 	
@@ -633,6 +636,7 @@ void Decode(void)  /* recover */
         }
     }
 	tim_size = count;
+	return true;
 }
 
 unsigned _writeLZ	(int hf, void* d, unsigned size)
@@ -658,13 +662,16 @@ void _compressLZ	(u8** dest, unsigned* dest_sz, void* src, unsigned src_sz)
 	*dest_sz	= fs.OutSize();
 }
 
-void _decompressLZ	(u8** dest, unsigned* dest_sz, void* src, unsigned src_sz)
+bool _decompressLZ	(u8** dest, unsigned* dest_sz, void* src, unsigned src_sz, int total_size /*= -1*/)
 {
 	u8*	start = (u8*) src;
 	fs.Init_Input(start,start+src_sz);
-    Decode();
+    if (!Decode(total_size))
+		return false;
 	*dest		= fs.OutPointer();
 	*dest_sz	= fs.OutSize();
+
+	return true;
 }
 
 unsigned _readLZ	(int hf, void* &d, unsigned size)
@@ -676,7 +683,7 @@ unsigned _readLZ	(int hf, void* &d, unsigned size)
 	fs.Init_Input(data,data+size);
 	
 	// Actual compression
-    Decode();
+    Decode(-1);
 	
 	// Flush cache
 	xr_free	(data);

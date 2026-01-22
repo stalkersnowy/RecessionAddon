@@ -265,6 +265,9 @@
     <ClCompile Include="string_concatenations.cpp">
       <Filter>Math\Extensions</Filter>
     </ClCompile>
+    <ClCompile Include="..\xr_3da\trivial_encryptor.cpp">
+      <Filter>FS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FTimer.h">
@@ -552,6 +555,9 @@
     </ClInclude>
     <ClInclude Include="..\Common\Noncopyable.hpp">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\xr_3da\trivial_encryptor.h">
+      <Filter>FS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
