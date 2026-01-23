@@ -14,7 +14,7 @@ public:
 class recvItem{
 public:
 	enum{	eCrosshair		= (1<<0),
-			eIndicators		= (1<<1),};
+			eIndicators		= (1<<1)};
 	recvItem		(CUIDialogWnd*);
 	CUIDialogWnd*	m_item;
 	Flags8			m_flags;
@@ -25,7 +25,8 @@ class CDialogHolder :public ISheduled,public pureFrame
 	//dialogs
 	xr_vector<recvItem>										m_input_receivers;
 	xr_vector<dlgItem>										m_dialogsToRender;
-
+	xr_vector<dlgItem>										m_dialogsToRender_new;
+	bool													m_b_in_update;
 
 	void					StartMenu						(CUIDialogWnd* pDialog, bool bDoHideIndicators);
 	void					StopMenu						(CUIDialogWnd* pDialog);
@@ -42,6 +43,7 @@ public:
 	virtual bool			shedule_Needed					()				{return true;};
 
 	//dialogs
+	void					OnExternalHideIndicators		();
 	CUIDialogWnd*			MainInputReceiver				();
 	virtual void			StartStopMenu					(CUIDialogWnd* pDialog, bool bDoHideIndicators);
 	void					AddDialogToRender				(CUIWindow* pDialog);
