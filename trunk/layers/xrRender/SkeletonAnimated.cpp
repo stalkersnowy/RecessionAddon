@@ -81,18 +81,6 @@ LPCSTR CKinematicsAnimated::LL_MotionDefName_dbg	(LPVOID ptr)
 */
 #endif
 
-u32	CKinematicsAnimated::LL_PartBlendsCount	( u32 bone_part_id )
-{
-	return blend_cycle(bone_part_id).size();
-}
-
-CBlend*	CKinematicsAnimated::LL_PartBlend	( u32 bone_part_id, u32 n  )
-{
-	if( LL_PartBlendsCount(bone_part_id)<=n )
-		return 0;
-	return blend_cycle(bone_part_id)[ n ];
-}
-
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -376,74 +364,107 @@ IC bool UpdateFalloffBlend(CBlend &B,float dt)
 	B.blendAmount 		-= dt*B.blendFalloff*B.blendPower;
 	return B.blendAmount<=0;
 }
-
-void CKinematicsAnimated::LL_UpdateTracks( float dt, bool b_force, bool leave_blends )
+void CKinematicsAnimated::UpdateTracks	()
 {
+	_DBG_SINGLE_USE_MARKER;
+	if (Update_LastTime==Device.dwTimeGlobal) return;
+	u32 DT	= Device.dwTimeGlobal-Update_LastTime;
+	if (DT>66) DT=66;
+	float dt = float(DT)/1000.f;
+	Update_LastTime 	= Device.dwTimeGlobal;
+
 	BlendSVecIt I,E;
+
 	// Cycles
-	for (u16 part=0; part<MAX_PARTS; part++)
-	{
-		if (0==m_Partition->part(part).Name)
-			continue;
+	for (u16 part=0; part<MAX_PARTS; part++){
+		if (0==m_Partition->part(part).Name)	continue;
+
 		I = blend_cycles[part].begin(); E = blend_cycles[part].end();
 		for (; I!=E; I++)
 		{
 			CBlend& B = *(*I);
-			if ( !b_force && B.dwFrame == Device.dwFrame )
-					continue;
-			B.dwFrame = Device.dwFrame;
-			if( B.update( dt, B.Callback ) && !leave_blends )
+			if (B.dwFrame==Device.dwFrame)	continue;
+			B.dwFrame		=	Device.dwFrame;
+			UpdateBlendTime(B,dt);
+			switch (B.blend) 
 			{
-				DestroyCycle( B );
-				blend_cycles[part].erase( I );
-				E = blend_cycles[part].end(); I--; 
+			case CBlend::eFREE_SLOT: 
+				NODEFAULT;
+/*
+			case CBlend::eFixed:	
+				if(UpdatePlayBlend(B,dt)&&B.fall_at_end)
+				{
+						B.blend = CBlend::eFalloff;
+						B.blendFalloff = 2.f;
+				}
+				break;
+*/
+			case CBlend::eAccrue:
+
+				if( UpdatePlayBlend( B, dt ) )
+				{
+					if(B.fall_at_end)
+					{
+						B.blend = CBlend::eFalloff;
+						B.blendFalloff = 2.f;
+					} //else if(B.blendAmount==B.blendPower)
+						//B.blend			= CBlend::eFixed;
+				}
+
+				break;
+			case CBlend::eFalloff:
+				if(UpdateFalloffBlend(B,dt))
+				{
+					DestroyCycle(B);
+					blend_cycles[part].erase(I);
+					E = blend_cycles[part].end(); I--; 
+				}
+				break;
+			default: 
+				NODEFAULT;
 			}
-			//else{
-			//	CMotionDef* m_def						= m_Motions[B.motionID.slot].motions.motion_def(B.motionID.idx);
-			//	float timeCurrent						= B.timeCurrent;
-			//	xr_vector<motion_marks>::iterator it	= m_def->marks.begin();
-			//	xr_vector<motion_marks>::iterator it_e	= m_def->marks.end();
-			//	for(;it!=it_e; ++it)
-			//	{
-			//		if( (*it).pick_mark(timeCurrent) )
-			//	}
-			//}
 		}
 	}
 	
-	LL_UpdateFxTracks(dt);
-}
-void	CKinematicsAnimated::LL_UpdateFxTracks( float dt )
-{
-		// FX
-	BlendSVecIt I,E;
+	// FX
 	I = blend_fx.begin(); E = blend_fx.end();
 	for (; I!=E; I++)
 	{
 		CBlend& B = *(*I);
-		if ( !B.playing) continue;
-		//B.timeCurrent += dt*B.speed;
-		B.update_time( dt );
+		if (!B.playing)	continue;
+		B.timeCurrent += dt*B.speed;
 		switch (B.blend) 
 		{
 		case CBlend::eFREE_SLOT: 
 			NODEFAULT;
-
+/*
+		case CBlend::eFixed:
+			{
+//				B.blendAmount = B.blendPower; 
+//				// calc time to falloff
+//				float time2falloff = B.timeTotal - 1/(B.blendFalloff*B.speed);
+//				if (B.timeCurrent >= time2falloff) {
+//					// switch to falloff
+//					B.blend		= CBlend::eFalloff;
+//				}
+//
+				B.blend		= CBlend::eFalloff;
+			}
+			break;
+*/
 		case CBlend::eAccrue:
             B.blendAmount 	+= dt*B.blendAccrue*B.blendPower*B.speed;
 			if (B.blendAmount>=B.blendPower) {
 				// switch to fixed
 				B.blendAmount	= B.blendPower;
-				//B.blend			= CBlend::eFalloff;//CBlend::eFixed;
-				B.set_falloff_state();
+				B.blend			= CBlend::eFalloff;//CBlend::eFixed;
 			}
 			break;
 		case CBlend::eFalloff:
 			B.blendAmount 	-= dt*B.blendFalloff*B.blendPower*B.speed;
 			if (B.blendAmount<=0) {
 				// destroy fx
-				//B.blend = CBlend::eFREE_SLOT;
-				B.set_free_state();
+				B.blend = CBlend::eFREE_SLOT;
 				Bone_Motion_Stop((*bones)[B.bone_or_part],*I);
 				blend_fx.erase(I); 
 				E=blend_fx.end(); I--; 
@@ -452,18 +473,6 @@ void	CKinematicsAnimated::LL_UpdateFxTracks( float dt )
 		default: NODEFAULT;
 		}
 	}
-}
-
-void CKinematicsAnimated::UpdateTracks	()
-{
-	_DBG_SINGLE_USE_MARKER;
-	if (Update_LastTime==Device.dwTimeGlobal) return;
-	u32 DT	= Device.dwTimeGlobal-Update_LastTime;
-	if (DT>66) DT=66;
-	float dt = float(DT)/1000.f;
-	
-	Update_LastTime 	= Device.dwTimeGlobal;
-	LL_UpdateTracks	( dt, false, false );
 }
 
 void CKinematicsAnimated::Release()

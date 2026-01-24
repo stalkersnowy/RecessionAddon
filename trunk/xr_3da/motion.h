@@ -120,8 +120,7 @@ enum ESMFlags{
     esmFX		= 1<<0,
     esmStopAtEnd= 1<<1,
     esmNoMix	= 1<<2,
-    esmSyncPart	= 1<<3,
-	esmIdle     = 1<<6,
+    esmSyncPart	= 1<<3
 };
 
 #ifdef _EDITOR

@@ -279,68 +279,20 @@ bool CMotionDef::StopAtEnd()
 	return !!(flags&esmStopAtEnd);
 }
 
-const motion_marks::interval* motion_marks::pick_mark(const float& t) const
+bool motion_marks::pick_mark(const float& t) const
 {
 	C_ITERATOR	it		= intervals.begin();
 	C_ITERATOR	it_e	= intervals.end();
 
 	for( ;it!=it_e; ++it)
 	{
-		const interval& I = (*it);
-		if( I.first<=t && I.second>=t )
-			return &I;
+		if( (*it).first<=t && (*it).second>=t )
+			return true;
 		
-		if(I.first>t)
+		if((*it).first>t)
 			break;
 	}
-	return NULL;
-}
-
-bool motion_marks::is_mark_between	(float const &t0, float const &t1) const
-{
-	VERIFY				(t0 <= t1);
-
-	C_ITERATOR			i = intervals.begin();
-	C_ITERATOR			e = intervals.end();
-	for ( ; i != e; ++i) {
-		VERIFY			((*i).first <= (*i).second);
-
-		if ((*i).first == t0)
-			return		(true);
-
-		if ((*i).first > t0) {
-			if ((*i).second <= t1)
-				return	(true);
-
-			if ((*i).first <= t1)
-				return	(true);
-
-			return		(false);
-		}
-
-		if ((*i).second < t0)
-			continue;
-
-		if ((*i).second == t0)
-			return		(true);
-
-		return			(true);
-	}
-
-	return				(false);
-}
-
-float	motion_marks::	time_to_next_mark	(float time) const
-{
-	C_ITERATOR			i = intervals.begin();
-	C_ITERATOR			e = intervals.end();
-	float result_dist = FLT_MAX;
-	for ( ; i != e; ++i) {
-		float dist = (*i).first - time;
-		if( dist > 0.f && dist < result_dist )
-			result_dist = dist;
-	}
-	return result_dist;
+	return false;
 }
 
 void motion_marks::Load(IReader* R)
