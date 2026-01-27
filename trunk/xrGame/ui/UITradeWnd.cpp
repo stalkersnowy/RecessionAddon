@@ -578,8 +578,13 @@ void CUITradeWnd::SetCurrentItem(CUICellItem* itm)
 		m_pCurrentCellItem->m_selected	= true;
 	UIItemInfo.InitItem	(CurrentIItem());
 	
-	if (!m_pCurrentCellItem)
+	if (!m_pCurrentCellItem){
 		return;
+	}else{
+		HUD().GetUI()->UIGame()->RemoveCustomStatic("not_enough_money_mine");
+		HUD().GetUI()->UIGame()->RemoveCustomStatic("not_enough_money_other");
+		UIDealMsg				= NULL;
+	}
 
 	CUIDragDropListEx* owner	= itm->OwnerList();
 	bool bBuying				= (owner == &UIOurBagList) || (owner == &UIOurTradeList);
