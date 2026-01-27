@@ -26,6 +26,7 @@ function actor_binder:__init (obj) super(obj)
 	self.bCheckStart = false
 	weather_manager = level_weathers.get_weather_manager()
 	self.actor_detector = xr_detector.actor_detector()
+	self.delayed_save = nil
 end
 ----------------------------------------------------------------------------------------------------------------------
 function actor_binder:net_spawn(data)
@@ -106,6 +107,8 @@ function actor_binder:reinit()
 
 	self.st = db.storage[npc_id]
 	self.st.pstor = nil
+	
+	self.delayed_save = nil
 
 	self.next_restrictors_update_time = -10000
 
@@ -204,12 +207,8 @@ function actor_binder:article_callback(npc, group, name)
 
 	if group == "Found_PDA" then
 		news_manager.send_encyclopedy(name)
-	elseif group == "memuars" then
-		if IsImportantSave() then
-			local save_name = save_names[name] or name
-			local save_param = user_name().." - "..game.translate_string(save_name)
-			get_console():execute("save "..save_param)
-		end
+	elseif group == "memuars" and IsImportantSave() then
+		self.delayed_save = save_names[name] or name
 	end
 end
 ----------------------------------------------------------------------------------------------------------------------
@@ -331,8 +330,10 @@ function actor_binder:update(delta)
 	end
 ]]	
 
+	local is_talking = self.object:is_talking()
+
 	-- Апдейт прятание оружия игрока во время диалога
-	if weapon_hide == true or self.object:is_talking() then
+	if weapon_hide == true or is_talking then
 		if self.weapon_hide == false then
 			self.object:hide_weapon()
 			self.weapon_hide = true
@@ -353,6 +354,11 @@ function actor_binder:update(delta)
 		bind_restrictor.actor_update(delta)
 
 		self.next_restrictors_update_time = time + 200
+		
+		if self.delayed_save and not is_talking then
+			get_console():execute("save "..user_name().." - "..game.translate_string(self.delayed_save))
+			self.delayed_save = nil
+		end
 
 		weather_manager:update() -- moved from above, no need to run this every update
 
