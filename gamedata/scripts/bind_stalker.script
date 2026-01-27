@@ -265,9 +265,9 @@ local function manage_autosaves()
 			-- update_path info per fluffy22
 			local savedir = fs:update_path(fs_path, "")
 			local lvl_autosave_base = username.." - "..game.translate_string(level_name)
-			local lvl_autosave = lvl_autosave_base.." (auto)"
+			local lvl_autosave = lvl_autosave_base.." - auto"
 			local lvl_autosave_sav = lvl_autosave..".sav"
-			local lvl_autosave_start = lvl_autosave_base.." (start)"
+			local lvl_autosave_start = lvl_autosave_base.." - start"
 			local lvl_autosave_start_sav = lvl_autosave_start..".sav"
 			if not fs:exist(fs_path, lvl_autosave_start_sav) and not fs:exist(fs_path, lvl_autosave_sav) then
 				fs:file_rename(savedir..autosave_sav, savedir..lvl_autosave_start_sav, true)
