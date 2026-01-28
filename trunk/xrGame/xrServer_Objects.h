@@ -152,8 +152,9 @@
 // 118 - CALifeHumanBrain				removed property m_tpKnownCustomers, sad but true
 // 119 - SNW CSE_ALifeLevelChanger		enabling/disablind lchangers
 // 120 - SNW CSE_ALifeTraderAbstract	saving icon name
+// 121 - SNW CSE_ALifeTraderAbstract	reworked icon saving
 //------------------------------------------------------------------------------
-#define SPAWN_VERSION	u16(120)
+#define SPAWN_VERSION	u16(121)
 
 SERVER_ENTITY_DECLARE_BEGIN2(CSE_Shape,ISE_Shape,CShapeData)
 public:

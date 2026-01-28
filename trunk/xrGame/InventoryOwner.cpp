@@ -138,7 +138,7 @@ BOOL CInventoryOwner::net_Spawn		(CSE_Abstract* DC)
 			dialog_manager->SetDefaultStartDialog(CharacterInfo().StartDialog());
 		}
 		m_game_name			= pTrader->m_character_name;
-		m_game_icon			= pTrader->icon_name().c_str();
+		m_game_icon			= pTrader->m_character_icon;
 	}
 	else
 	{

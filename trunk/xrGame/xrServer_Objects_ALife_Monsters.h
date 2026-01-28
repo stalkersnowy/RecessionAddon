@@ -46,6 +46,7 @@ SERVER_ENTITY_DECLARE_BEGIN0(CSE_ALifeTraderAbstract)
 	CHARACTER_REPUTATION_VALUE		m_reputation;
 	CHARACTER_RANK_VALUE			m_rank;
 	xr_string						m_character_name;
+	xr_string						m_character_icon;
 		
 #ifdef XRGAME_EXPORTS
 	//для работы с relation system
@@ -60,7 +61,6 @@ SERVER_ENTITY_DECLARE_BEGIN0(CSE_ALifeTraderAbstract)
 
 	shared_str						m_sCharacterProfile;
 	shared_str						m_SpecificCharacter;
-	shared_str						m_sIconName;
 
 	//буферный вектор проверенных персонажей
 	xr_vector<shared_str> m_CheckedCharacters;

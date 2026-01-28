@@ -132,8 +132,8 @@ CSE_ALifeTraderAbstract::CSE_ALifeTraderAbstract(LPCSTR caSection)
 
 	m_trader_flags.zero			();
 	m_trader_flags.set			(eTraderFlagInfiniteAmmo,FALSE);
-
-	m_sIconName					= "ui_npc_u_stranger";
+	
+	m_character_icon			= "ui_npc_u_stranger";
 }
 
 CSE_Abstract *CSE_ALifeTraderAbstract::init	()
@@ -175,7 +175,7 @@ void CSE_ALifeTraderAbstract::STATE_Write	(NET_Packet &tNetPacket)
 #endif
 	save_data					(m_character_name, tNetPacket);
 	
-	tNetPacket.w_stringZ		(m_sIconName);
+	save_data					(m_character_icon, tNetPacket);
 }
 
 void CSE_ALifeTraderAbstract::STATE_Read	(NET_Packet &tNetPacket, u16 size)
@@ -238,8 +238,13 @@ void CSE_ALifeTraderAbstract::STATE_Read	(NET_Packet &tNetPacket, u16 size)
 			load_data			(m_character_name, tNetPacket);
 		}
 
-		if (m_wVersion > 119) {
-			tNetPacket.r_stringZ(m_sIconName);
+		if (m_wVersion == 120) {
+			shared_str			tmp;
+			tNetPacket.r_stringZ(tmp);
+			m_character_icon	= tmp.c_str();
+		}
+		else if (m_wVersion > 120) {
+			load_data			(m_character_icon, tNetPacket);
 		}
 	}
 
@@ -400,10 +405,10 @@ void CSE_ALifeTraderAbstract::set_specific_character	(shared_str new_spec_char)
 
 				string64			t2;
 				strconcat			(sizeof(t2),t2,"ui_npc_u_",vis_name);
-				m_sIconName._set	(t2);
+				m_character_icon	= t2;
 			}else{
 				visual->set_visual(selected_char.Visual());
-				m_sIconName._set	(selected_char.IconName());
+				m_character_icon	= selected_char.IconName().c_str();
 			}
 		}
 	}
@@ -531,11 +536,6 @@ void CSE_ALifeTraderAbstract::UPDATE_Write	(NET_Packet &tNetPacket)
 void CSE_ALifeTraderAbstract::UPDATE_Read	(NET_Packet &tNetPacket)
 {
 };
-
-shared_str CSE_ALifeTraderAbstract::icon_name()
-{
-	return m_sIconName;
-}
 
 
 ////////////////////////////////////////////////////////////////////////////
