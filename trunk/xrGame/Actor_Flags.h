@@ -11,6 +11,7 @@ enum{
 		AF_WPN_BOBBING		=(1<<7),
 		AF_IGNORE_ACTOR		=(1<<8),
 		AF_GODMODE_RT		=(1<<9),
+		AF_SHOW_ENEMIES		=(1<<10),
 };
 
 extern Flags32 psActorFlags;

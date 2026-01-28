@@ -622,7 +622,7 @@ bool CRelationMapLocation::Update()
 bool CRelationMapLocation::IsVisible	()
 {
 	bool res = true;
-	if(m_last_relation==ALife::eRelationTypeEnemy || m_last_relation==ALife::eRelationTypeWorstEnemy){
+	if((m_last_relation==ALife::eRelationTypeEnemy || m_last_relation==ALife::eRelationTypeWorstEnemy) && !psActorFlags.test(AF_SHOW_ENEMIES)){
 
 		CObject* _object_ = Level().Objects.net_Find(m_pInvOwnerEntityID);
 		if(_object_){
