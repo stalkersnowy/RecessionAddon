@@ -299,7 +299,10 @@ void CUICharacterInfo::ClearInfo()
 	m_ownerID = u16(-1);
 	ResetAllStrings	();
 
-	if(m_icons[eUIIcon])m_icons[eUIIcon]->InitTexture("ui_npc_u_stranger");
+	if(m_icons[eUIIcon]){
+		m_icons[eUIIcon]->InitTexture("ui_npc_u_stranger");
+		m_icons[eUIIcon]->SetStretchTexture(true);
+	}
 	for(int i = eUIName; i<eMaxCaption; ++i)
 		if(m_icons[i])m_icons[i]->Show(false);
 }
