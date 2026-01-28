@@ -54,7 +54,7 @@ void CActor::UpdateSleep()
 	if(Level().GetGameTime()>m_dwWakeUpTime){
 		Level().Server->game->SetGameTimeFactor(m_fOldTimeFactor);
 
-		if( !conditions().m_actor_sleep_wnd->IsPlaying())
+		//if( !conditions().m_actor_sleep_wnd->IsPlaying())
 			conditions().Awoke();
 	}
 }

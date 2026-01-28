@@ -634,8 +634,7 @@ void get_files_list(xr_vector<shared_str>& files, LPCSTR dir, LPCSTR file_ext)
 }
 
 
-#include "UIGameCustom.h"
-#include "HUDManager.h"
+#include "actorcondition.h"
 class CCC_ALifeSave : public IConsole_Command {
 public:
 	CCC_ALifeSave(LPCSTR N) : IConsole_Command(N)  { bEmptyArgsHandled = true; };
@@ -654,6 +653,11 @@ public:
 		if(!g_actor || !Actor()->g_Alive())
 		{
 			Msg("cannot make saved game because actor is dead :(");
+			return;
+		}
+		if(Actor()->conditions().IsSleeping())
+		{
+			Msg("cannot make saved game because actor is asleep ):");
 			return;
 		}
 

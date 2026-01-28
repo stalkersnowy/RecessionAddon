@@ -408,43 +408,26 @@ void CActorCondition::Awoke()
 //ïðîâåðêà ìîæåì ëè ìû ñïàòü íà ýòîì ìåñòå
 EActorSleep CActorCondition::CanSleepHere()
 {
-	if( m_can_sleep_callback && *m_can_sleep_callback)
-		return (*m_can_sleep_callback)();
-	
-	R_ASSERT		(0);
-	if(0 != object().mstate_real) return "cant_sleep_not_on_solid_ground";
+	if(m_can_sleep_callback && *m_can_sleep_callback){
+		if(!stricmp((*m_can_sleep_callback)(), easCanSleepResult)){
+			Fvector pos;
+			pos.set(object().Position());
+			pos.y += 0.1f;
 
-	collide::rq_result RQ;
+			xr_vector<CObject*> NearestList;
+			Level().ObjectSpace.GetNearest	(NearestList, pos, ENEMIES_RADIUS, &object()); 
 
-	Fvector pos, dir;
-	pos.set(object().Position());
-	pos.y += 0.1f;
-	dir.set(0, -1.f, 0);
-	BOOL				result = 
-		Level().ObjectSpace.RayPick(
-			pos,
-			dir,
-			0.3f, 
-			collide::rqtBoth,
-			RQ,
-			&object()
-		);
-	
-	//àêòåð ñòîèò íà äèíàìè÷åñêîì îáúåêòå èëè âîîáùå ïàäàåò - 
-	//ñïàòü íåëüçÿ
-	if(!result || RQ.O)	
-		return "cant_sleep_not_on_solid_ground";
-
-	xr_vector<CObject*> NearestList;	// = Level().ObjectSpace.q_nearest; 
-	Level().ObjectSpace.GetNearest	(NearestList, pos, ENEMIES_RADIUS, &object()); 
-
-	for(xr_vector<CObject*>::iterator it = NearestList.begin();
-									NearestList.end() != it;
-									it++)
-	{
-		CEntityAlive* entity = smart_cast<CEntityAlive*>(*it);
-		if(entity && entity->g_Alive() && entity->is_relation_enemy(m_object))
-			return "cant_sleep_near_enemies";
+			for(xr_vector<CObject*>::iterator it = NearestList.begin();
+											NearestList.end() != it;
+											it++)
+			{
+				CEntityAlive* entity = smart_cast<CEntityAlive*>(*it);
+				if(entity && entity->g_Alive() && entity->is_relation_enemy(m_object))
+					return "cant_sleep_near_enemies";
+			}
+			
+			return easCanSleepResult;
+		}else return (*m_can_sleep_callback)();
 	}
 
 	return easCanSleepResult;
