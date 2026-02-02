@@ -174,10 +174,14 @@ function motivator_binder:death_callback(victim, who)
 	sr_territory.issue_event(self_object, "death_callback", victim, who)
 
 	sr_light.check_light(self_object)
+	
+	local obj_id = self_object:id()
 
-	smart_terrain.on_death( self_object:id() )
+	smart_terrain.on_death( obj_id )
 	
 	death_manager.drop_manager(self_object):create_release_item()
+	
+	trade_manager.clear(obj_id)
 
 	self:clear_callbacks()
 
@@ -204,7 +208,7 @@ function motivator_binder:death_callback(victim, who)
 		then
 			return
 		end
-		actor_stats.remove_from_ranking(self_object:id())
+		actor_stats.remove_from_ranking(obj_id)
 	end
 
 end

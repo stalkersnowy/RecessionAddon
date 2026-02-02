@@ -194,3 +194,7 @@ function load(obj, packet)
 		tt.resupply_status = packet:r_bool()
 	end
 end
+
+function clear(npc_id)
+	trade_manager[npc_id] = {}
+end
